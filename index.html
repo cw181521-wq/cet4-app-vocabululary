@@ -9,12 +9,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0f766e">
   <!-- PWA 独立清单与多端桌面图标 -->
-    <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="词根终端">
-  <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20512%20512%27%20width%3D%27512%27%20height%3D%27512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27108%27%20fill%3D%27%25230f766e%27/%3E%3Ctext%20x%3D%27256%27%20y%3D%27345%27%20font-family%3D%27system-ui%2C%20-apple-system%2C%20sans-serif%27%20font-size%3D%27290%27%20font-weight%3D%27900%27%20fill%3D%27%2523ffffff%27%20text-anchor%3D%27middle%27%3EM%3C/text%3E%3C/svg%3E">
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%20%22CET-4%20%E7%A7%91%E5%AD%A6%E8%AF%8D%E6%A0%B9%E4%B8%8E%E5%8F%A5%E6%B3%95%E5%85%A8%E8%83%BD%E7%BB%88%E7%AB%AF%22%2C%20%22short_name%22%3A%20%22%E8%AF%8D%E6%A0%B9%E7%BB%88%E7%AB%AF%22%2C%20%22start_url%22%3A%20%22./%22%2C%20%22scope%22%3A%20%22./%22%2C%20%22display%22%3A%20%22standalone%22%2C%20%22background_color%22%3A%20%22%23eef3f2%22%2C%20%22theme_color%22%3A%20%22%230f766e%22%2C%20%22icons%22%3A%20%5B%7B%22src%22%3A%20%22data%3Aimage/svg%2Bxml%3Bcharset%3Dutf-8%2C%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20512%20512%27%20width%3D%27512%27%20height%3D%27512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27108%27%20fill%3D%27%25230f766e%27/%3E%3Ctext%20x%3D%27256%27%20y%3D%27345%27%20font-family%3D%27system-ui%2C%20-apple-system%2C%20sans-serif%27%20font-size%3D%27290%27%20font-weight%3D%27900%27%20fill%3D%27%2523ffffff%27%20text-anchor%3D%27middle%27%3EM%3C/text%3E%3C/svg%3E%22%2C%20%22sizes%22%3A%20%22192x192%22%2C%20%22type%22%3A%20%22image/svg%2Bxml%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%2C%20%7B%22src%22%3A%20%22data%3Aimage/svg%2Bxml%3Bcharset%3Dutf-8%2C%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20512%20512%27%20width%3D%27512%27%20height%3D%27512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27108%27%20fill%3D%27%25230f766e%27/%3E%3Ctext%20x%3D%27256%27%20y%3D%27345%27%20font-family%3D%27system-ui%2C%20-apple-system%2C%20sans-serif%27%20font-size%3D%27290%27%20font-weight%3D%27900%27%20fill%3D%27%2523ffffff%27%20text-anchor%3D%27middle%27%3EM%3C/text%3E%3C/svg%3E%22%2C%20%22sizes%22%3A%20%22512x512%22%2C%20%22type%22%3A%20%22image/svg%2Bxml%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%5D%7D">
+  <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#0f766e">
   <link rel="apple-touch-icon" href="./icon-192.png">
 
@@ -11970,6 +11965,594 @@
     window.pullFromGitHubGist = () => Views.Manage.pull();
     window.rollbackToPreviousGistBackup = () => Views.Manage.rollback();
 
+        window.triggerPwaInstall = () => {
+      if (!deferredInstall) return;
+      deferredInstall.prompt();
+      deferredInstall.userChoice.then(r => {
+        if (r.outcome === 'accepted') {
+          const btn = document.getElementById('pwa-install-btn');
+          if (btn) btn.style.display = 'none';
+          Services.Sync.showToast('🎉 正在安装到系统独立窗口！', 'success', 2500);
+        }
+        deferredInstall = null;
+      });
+    };
+
+    window.openShortcutModal = () => {
+      const m = document.getElementById('shortcut-modal');
+      if (m) {
+        m.style.display = 'flex';
+        KeyRouter.pushModal({
+          element: m,
+          onEscape: () => { window.closeShortcutModal(); }
+        });
+      }
+    };
+    window.closeShortcutModal = () => {
+      const m = document.getElementById('shortcut-modal');
+      if (m) {
+        m.style.display = 'none';
+        KeyRouter.popModal(m);
+      }
+    };
+
+    window.toggleModeNavAccordion = function(forceState = null) {
+      const acc = document.getElementById('mode-nav-accordion');
+      const chev = document.getElementById('capsule-chevron');
+      if (!acc) return;
+      const isCurrentlyCollapsed = acc.classList.contains('is-collapsed');
+      const shouldCollapse = (forceState !== null) ? forceState : !isCurrentlyCollapsed;
+      acc.classList.toggle('is-collapsed', shouldCollapse);
+      if (chev) {
+        chev.innerText = shouldCollapse ? '▾ 点击展开其他模式' : '▴ 点击收起模式栏';
+      }
+    };
+
+    window.toggleUtilityPanel = () => {
+      const panels = [document.getElementById('utility-control-panel'), document.getElementById('utility-nav-panel')].filter(Boolean);
+      const collapsed = panels.some(p => !p.classList.contains('is-collapsed'));
+      panels.forEach(p => p.classList.toggle('is-collapsed', collapsed));
+      const btn = document.getElementById('utility-toggle-btn');
+      if (btn) {
+        btn.setAttribute('aria-expanded', String(!collapsed));
+        btn.innerText = collapsed ? '⚙️ 展开设置面板' : '⚙️ 收起设置面板';
+      }
+      localStorage.setItem('morpho_utility_collapsed', collapsed ? '1' : '0');
+    };
+
+    window.toggleCompanionPanel = (forceState = null) => {
+      const panel = document.getElementById('desktop-companion-panel');
+      const layout = document.querySelector('.workspace-layout');
+      if (!panel) return;
+      const isCollapsed = (forceState !== null) ? Boolean(forceState) : !panel.classList.contains('is-collapsed');
+      panel.classList.toggle('is-collapsed', isCollapsed);
+      if (layout) {
+        layout.classList.toggle('companion-collapsed', isCollapsed);
+      }
+      const btn = document.getElementById('companion-toggle-btn');
+      if (btn) {
+        btn.setAttribute('aria-expanded', String(!isCollapsed));
+        btn.innerText = isCollapsed ? '▣ 展开辅助栏' : '▣ 收起辅助栏';
+      }
+      localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
+    };
+
+    window.toggleMobileToolsSheet = function(open) {
+      const sheet = document.getElementById('mobile-tools-sheet');
+      if (!sheet) return;
+      if (open) {
+        syncSheetControls();
+        sheet.classList.add('open');
+        if (typeof KeyRouter !== 'undefined') KeyRouter.pushModal(sheet, () => toggleMobileToolsSheet(false));
+      } else {
+        sheet.classList.remove('open');
+        if (typeof KeyRouter !== 'undefined') KeyRouter.popModal(sheet);
+      }
+    };
+
+    window.syncSheetControls = function() {
+      if (typeof document === 'undefined') return;
+      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
+      if (chkSheet) chkSheet.checked = AppState.get('flashcardSpeakZh');
+
+      const dueCount = document.getElementById('top-due-count')?.innerText || '0';
+      const sheetDue = document.getElementById('sheet-due-badge');
+      if (sheetDue) sheetDue.innerText = `${dueCount} 词`;
+
+      const dailyCount = document.getElementById('daily-count')?.innerText || '0';
+      const dailyTarget = document.getElementById('daily-target-num')?.innerText || '50';
+      const dailyUnique = document.getElementById('daily-unique-count')?.innerText || '0';
+      const barFill = document.getElementById('daily-bar-fill');
+
+      const sCount = document.getElementById('sheet-daily-count');
+      const sTarget = document.getElementById('sheet-daily-target');
+      const sUnique = document.getElementById('sheet-daily-unique');
+      const sBar = document.getElementById('sheet-daily-bar-fill');
+
+      if (sCount) sCount.innerText = dailyCount;
+      if (sTarget) sTarget.innerText = dailyTarget;
+      if (sUnique) sUnique.innerText = dailyUnique;
+      if (sBar && barFill) sBar.style.width = barFill.style.width || '0%';
+
+      const targetSel = document.getElementById('daily-target-select');
+      const sheetTargetSel = document.getElementById('sheet-daily-target-select');
+      if (targetSel && sheetTargetSel) sheetTargetSel.value = targetSel.value;
+
+      const newLimitSel = document.getElementById('daily-new-limit-select');
+      const sheetNewLimitSel = document.getElementById('sheet-daily-new-limit-select');
+      if (newLimitSel && sheetNewLimitSel) sheetNewLimitSel.value = newLimitSel.value;
+
+      const themeSel = document.getElementById('theme-select');
+      const sheetThemeSel = document.getElementById('sheet-theme-select');
+      if (themeSel && sheetThemeSel) sheetThemeSel.value = themeSel.value;
+
+      const isFocus = (typeof AppState !== 'undefined') ? AppState.get('focusMode') : false;
+      const sheetFocusBtn = document.getElementById('sheet-focus-btn');
+      if (sheetFocusBtn) sheetFocusBtn.innerText = isFocus ? '↩️ 退出专注' : '🎯 专注模式';
+    };
+
+    window.updateMobileNavBarVisibility = function() {
+      if (typeof document === 'undefined') return;
+      const navBar = document.getElementById('stage-nav-bar');
+      if (!navBar) return;
+      const nextBtn = document.getElementById('next-btn');
+      const prevBtn = document.getElementById('prev-btn');
+      const feedback = document.getElementById('feedback');
+      const stageArea = document.getElementById('stage-area');
+
+      const hasNext = nextBtn && nextBtn.style.display !== 'none';
+      const hasPrev = prevBtn && prevBtn.style.display !== 'none';
+      const hasFeedback = feedback && feedback.innerText.trim().length > 0;
+
+      const isActive = Boolean(hasNext || hasPrev || hasFeedback);
+      navBar.classList.toggle('has-active-action', isActive);
+      if (stageArea) {
+        stageArea.classList.toggle('has-active-bottom-bar', isActive);
+      }
+    };
+
+    window.toggleFocusMode = () => {
+      const cur = !AppState.get('focusMode');
+      AppState.update('focusMode', cur);
+      document.body.classList.toggle('focus-mode', cur);
+      localStorage.setItem('morpho_focus_mode', cur ? '1' : '0');
+      const btn = document.getElementById('focus-mode-btn');
+      if (btn) btn.innerText = cur ? '↩️ 退出专注模式' : '🎯 专注模式';
+    };
+
+    window.switchWordPack = (id) => App.switchWordPack(id);
+    function switchTheme(theme) {
+      const validThemes = ['light', 'dark', 'sepia'];
+      const targetTheme = validThemes.includes(theme) ? theme : 'light';
+
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      try {
+        localStorage.setItem('morpho_theme', targetTheme);
+      } catch (_) {}
+
+      const topSelect = document.getElementById('theme-select');
+      if (topSelect && topSelect.value !== targetTheme) {
+        topSelect.value = targetTheme;
+      }
+
+      const sheetSelect = document.getElementById('sheet-theme-select');
+      if (sheetSelect && sheetSelect.value !== targetTheme) {
+        sheetSelect.value = targetTheme;
+      }
+    }
+    window.switchTheme = switchTheme;
+
+    function updateDailyProgressUI() {
+      const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
+      const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
+      const testedToday = act[todayStr] || 0;
+
+      const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
+      const uniqueList = dailyUniqueMap[todayStr] || [];
+      const uniqueToday = uniqueList.length;
+
+      const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
+      const pct = Math.min(100, Math.round((testedToday / target) * 100));
+
+      const dCount = document.getElementById('daily-count');
+      const dTarget = document.getElementById('daily-target-num');
+      const dUnique = document.getElementById('daily-unique-count');
+      const dFill = document.getElementById('daily-bar-fill');
+
+      if (dCount) dCount.innerText = testedToday;
+      if (dTarget) dTarget.innerText = target;
+      if (dUnique) dUnique.innerText = uniqueToday;
+      if (dFill) dFill.style.width = `${pct}%`;
+
+      const sCount = document.getElementById('sheet-daily-count');
+      const sTarget = document.getElementById('sheet-daily-target');
+      const sUnique = document.getElementById('sheet-daily-unique');
+      const sFill = document.getElementById('sheet-daily-bar-fill');
+
+      if (sCount) sCount.innerText = testedToday;
+      if (sTarget) sTarget.innerText = target;
+      if (sUnique) sUnique.innerText = uniqueToday;
+      if (sFill) sFill.style.width = `${pct}%`;
+    }
+    window.updateDailyProgressUI = updateDailyProgressUI;
+
+    window.changeVoiceRate = (v) => AppState.update('currentVoiceRate', parseFloat(v));
+    window.changeTypingSfx = (m) => {
+      AppState.update('typingSfxMode', m);
+      localStorage.setItem('morpho_typing_sfx', m);
+      const sel = document.getElementById('typing-sfx-select');
+      if (sel && sel.value !== m) sel.value = m;
+      Services.Sfx.triggerAuditionDebounced(m);
+      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
+        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
+      }
+    };
+
+    window.handleTypingVolumeInput = function(val) {
+      const volInt = parseInt(val, 10);
+      const factor = volInt / 100;
+      AppState.update('typingSfxVolume', factor);
+      const label = document.getElementById('typing-sfx-vol-label');
+      const icon = document.getElementById('typing-vol-icon');
+
+      if (label) label.innerText = `${volInt}%`;
+      if (icon) {
+        if (volInt === 0) icon.innerText = '🔇';
+        else if (volInt < 40) icon.innerText = '🔉';
+        else if (volInt <= 100) icon.innerText = '🔊';
+        else icon.innerText = '📢';
+      }
+
+      if (typeof Services !== 'undefined' && Services.Sfx && Services.Sfx.setMasterVolume) {
+        Services.Sfx.setMasterVolume(factor);
+      }
+    };
+
+    window.handleTypingVolumeChange = function(val) {
+      const volInt = parseInt(val, 10);
+      const factor = volInt / 100;
+      AppState.update('typingSfxVolume', factor);
+      localStorage.setItem('morpho_typing_sfx_volume', String(factor));
+      if (volInt > 0) {
+        AppState.update('typingLastNonZeroVolume', factor);
+        localStorage.setItem('morpho_typing_last_nonzero_vol', String(factor));
+      }
+      if (typeof Services !== 'undefined' && Services.Sfx && Services.Sfx.triggerAuditionDebounced) {
+        Services.Sfx.triggerAuditionDebounced(AppState.get('typingSfxMode'));
+      }
+      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
+        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
+      }
+    };
+
+    window.toggleTypingSfxMute = function() {
+      const curVol = AppState.get('typingSfxVolume') || 0;
+      if (curVol > 0.01) {
+        AppState.update('typingLastNonZeroVolume', curVol);
+        localStorage.setItem('morpho_typing_last_nonzero_vol', String(curVol));
+        const slider = document.getElementById('typing-sfx-volume');
+        if (slider) slider.value = '0';
+        handleTypingVolumeInput(0);
+        handleTypingVolumeChange(0);
+      } else {
+        const lastVol = parseFloat(localStorage.getItem('morpho_typing_last_nonzero_vol') || '0.7');
+        const targetVol = Math.max(0.05, Math.min(2.0, isNaN(lastVol) ? 0.7 : lastVol));
+        const targetInt = Math.round(targetVol * 100);
+        const slider = document.getElementById('typing-sfx-volume');
+        if (slider) slider.value = String(targetInt);
+        handleTypingVolumeInput(targetInt);
+        handleTypingVolumeChange(targetInt);
+      }
+      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
+        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
+      }
+    };
+
+    window.changeDailyTarget = (v) => {
+      const val = Math.max(1, parseInt(v, 10) || 50);
+      localStorage.setItem('morpho_daily_target', String(val));
+      App.initDailyActivity();
+    };
+
+    window.changeDailyNewLimit = (v) => {
+      const val = parseInt(v, 10) || 20;
+      AppState.update('dailyNewLimit', val);
+      localStorage.setItem('morpho_daily_new_limit', String(val));
+      const sel = document.getElementById('daily-new-limit-select');
+      if (sel && sel.value !== String(val)) sel.value = String(val);
+      Services.Sync.showToast(`每日新词配额已设为: ${val >= 9999 ? '不设上限' : val + ' 词/日'}`, 'info', 1500);
+      App.nextQuestion();
+    };
+
+    window.changeOrderMode = (m) => {
+      AppState.update('orderMode', m);
+      const pool = App.getEffectivePool();
+      if (m === 'shuffle') AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(pool.length));
+      else if (m === 'sequential') AppState.update('sequentialIndex', -1);
+      AppState.update('questionHistory', []);
+      AppState.update('historyCursor', -1);
+      App.nextQuestion();
+    };
+
+    window.changeLeitnerMode = (m) => {
+      AppState.update('leitnerMode', m);
+      localStorage.setItem('morpho_leitner_mode', m);
+    };
+
+    window.toggleMistakeMode = () => App.nextQuestion();
+    window.toggleUnexpectedMode = () => {
+      const chk = document.getElementById('unexpected-only-chk');
+      if (chk?.checked) {
+        const mChk = document.getElementById('mistake-only-chk');
+        if (mChk) mChk.checked = false;
+      }
+      const pool = App.getEffectivePool();
+      AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(pool.length));
+      AppState.update('sequentialIndex', -1);
+      AppState.update('questionHistory', []);
+      AppState.update('historyCursor', -1);
+      App.nextQuestion();
+    };
+
+    window.toggleSoundEffects = (checked) => {
+      AppState.update('soundEffectsEnabled', checked);
+      localStorage.setItem('morpho_sfx_enabled', checked ? '1' : '0');
+    };
+
+    window.changeSfxStyle = (v) => {
+      AppState.update('feedbackSfxStyle', v);
+      localStorage.setItem('morpho_sfx_style', v);
+      Services.Sfx.playFeedbackSound(true, v);
+    };
+
+    window.toggleAutoAdvance = (c) => {
+      AppState.update('autoAdvanceEnabled', c);
+      localStorage.setItem('morpho_auto_advance', c ? '1' : '0');
+    };
+
+    window.changeAutoAdvanceDelay = (v) => AppState.update('autoAdvanceDelay', parseFloat(v));
+    window.saveVoiceSetting = () => {
+      const v = document.getElementById('accent-select')?.value || 'en-GB';
+      AppState.update('voiceAccent', v);
+      localStorage.setItem('morpho_voice', v);
+    };
+
+    window.toggleSpeakEn = (checked) => {
+      AppState.update('speakEnabledEn', checked);
+      localStorage.setItem('morpho_speak_en', checked ? '1' : '0');
+    };
+    window.toggleSpeakZh = (checked) => {
+      AppState.update('speakEnabledZh', checked);
+      localStorage.setItem('morpho_speak_zh', checked ? '1' : '0');
+    };
+
+    window.toggleFlashcardSpeakZh = function(checked = null) {
+      const current = AppState.get('flashcardSpeakZh');
+      const target = (checked !== null) ? Boolean(checked) : !current;
+
+      AppState.update('flashcardSpeakZh', target);
+      localStorage.setItem('morpho_flashcard_speak_zh', target ? '1' : '0');
+
+      const chkDesk = document.getElementById('flashcard-speak-zh-chk');
+      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
+      if (chkDesk) chkDesk.checked = target;
+      if (chkSheet) chkSheet.checked = target;
+
+      Services.Sync.showToast(target ? '🔊 已开启闪卡翻转读中文' : '🔇 已关闭闪卡翻转读中文', 'info', 1200);
+    };
+
+    window.toggleTypingShowAnalysis = (checked) => {
+      AppState.update('typingShowAnalysis', checked);
+      localStorage.setItem('morpho_typing_show_analysis', checked ? '1' : '0');
+      if (typeof Views !== 'undefined' && Views.Typing && Views.Typing.updateRootTipVisibility) {
+        Views.Typing.updateRootTipVisibility();
+      }
+    };
+    window.toggleTypingShowPhonetic = (checked) => {
+      AppState.update('typingShowPhonetic', checked);
+      localStorage.setItem('morpho_typing_show_phonetic', checked ? '1' : '0');
+      const el = document.getElementById('typing-phonetic');
+      if (el) el.style.display = checked ? '' : 'none';
+    };
+
+    window.changeTypingHintThreshold = (v) => {
+      if (v === '0' || v === 'off' || v === 'false') {
+        AppState.update('typingHintOnMistake', false);
+        localStorage.setItem('morpho_typing_hint_on_mistake', '0');
+        localStorage.setItem('morpho_typing_hint_threshold', '0');
+      } else {
+        const n = parseInt(v, 10) || 3;
+        AppState.update('typingHintOnMistake', true);
+        AppState.update('typingHintMistakeThreshold', n);
+        localStorage.setItem('morpho_typing_hint_on_mistake', '1');
+        localStorage.setItem('morpho_typing_hint_threshold', String(n));
+      }
+      const sel = document.getElementById('typing-hint-threshold-select');
+      if (sel) sel.value = AppState.get('typingHintOnMistake') ? String(AppState.get('typingHintMistakeThreshold')) : '0';
+      const chk = document.getElementById('typing-hint-mistake-chk');
+      if (chk) chk.checked = AppState.get('typingHintOnMistake');
+    };
+    window.toggleTypingHintOnMistake = (checked) => {
+      AppState.update('typingHintOnMistake', checked);
+      localStorage.setItem('morpho_typing_hint_on_mistake', checked ? '1' : '0');
+      const sel = document.getElementById('typing-hint-threshold-select');
+      if (sel) {
+        sel.value = checked ? String(AppState.get('typingHintMistakeThreshold') || 3) : '0';
+      }
+    };
+
+    function buildLimitedTypingPool(customSeed = null) {
+      const currentPackId = AppState.get('currentPackId');
+      const allPacks = AppState.get('allPacks') || {};
+      const packWords = allPacks[currentPackId]?.words || [];
+      const limit = AppState.get('typingPoolLimit') || 60;
+
+      if (packWords.length === 0) return [];
+      if (limit >= 9999 || packWords.length <= limit) {
+        const seed = customSeed || (typeof Views !== 'undefined' && Views.Typing && Views.Typing.shuffleSeed) || Date.now();
+        if (typeof Views !== 'undefined' && Views.Typing) Views.Typing.shuffleSeed = seed;
+        return Algorithms.Shuffle.deterministicShuffle([...packWords], seed);
+      }
+
+      let stDict = {};
+      if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
+        stDict = App.getAggregatedStatsForTotal();
+      } else {
+        stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
+      }
+
+      const mistakeWords = packWords.filter(w => {
+        const st = stDict[w.word];
+        return (st?.typingMistakes > 0) || (st?.mistakes > 0) || (st?.level <= 1);
+      });
+
+      let selected = [];
+      if (mistakeWords.length >= limit) {
+        selected = [...mistakeWords].sort(() => 0.5 - Math.random()).slice(0, limit);
+      } else {
+        const mistakeSet = new Set(mistakeWords);
+        const normalWords = packWords.filter(w => !mistakeSet.has(w)).sort(() => 0.5 - Math.random());
+        const needed = limit - mistakeWords.length;
+        selected = [...mistakeWords].concat(normalWords.slice(0, needed));
+      }
+
+      return selected.sort(() => 0.5 - Math.random());
+    }
+
+    function changeTypingPoolLimit(val) {
+      const limit = parseInt(val, 10) || 60;
+      const oldLimit = AppState.get('typingPoolLimit') || 60;
+      AppState.update('typingPoolLimit', limit);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('morpho_typing_pool_limit', String(limit));
+      }
+
+      const sel = document.getElementById('typing-pool-limit-select');
+      if (sel && sel.value !== String(limit)) {
+        sel.value = String(limit);
+      }
+
+      if (AppState.get('currentMode') === 'typing' && !AppState.get('isTypingDrillActive')) {
+        const currentPackId = AppState.get('currentPackId');
+        const allPacks = AppState.get('allPacks') || {};
+        const packWords = allPacks[currentPackId]?.words || [];
+        const isFullPack = (limit >= 9999 || limit >= packWords.length);
+        const effectiveLimit = isFullPack ? packWords.length : Math.min(limit, packWords.length || limit);
+
+        const completedCount = (typeof Views !== 'undefined' && Views.Typing && Views.Typing.completedUniqueWords)
+          ? Views.Typing.completedUniqueWords.size
+          : 0;
+
+        if (typeof Views !== 'undefined' && Views.Typing) {
+          if (!Views.Typing.typingMasterQueue || Views.Typing.typingMasterQueue.length === 0) {
+            Views.Typing.typingMasterQueue = [...(Views.Typing.typingTargetQueue || [])];
+          }
+
+          if (completedCount < effectiveLimit) {
+            Views.Typing.totalTargetCount = effectiveLimit;
+
+            let targetQueue = Views.Typing.typingTargetQueue || [];
+            const completedSet = Views.Typing.completedUniqueWords || new Set();
+            const currentWord = AppState.get('currentWord');
+
+            if (targetQueue.length < effectiveLimit) {
+              const currentSet = new Set(targetQueue.map(w => w.word));
+              const available = packWords.filter(w => !currentSet.has(w.word));
+
+              let additional = [];
+              if (isFullPack) {
+                const seed = Views.Typing.shuffleSeed || Date.now();
+                Views.Typing.shuffleSeed = seed;
+                additional = Algorithms.Shuffle.deterministicShuffle(available, seed);
+              } else {
+                let stDict = {};
+                if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
+                  stDict = App.getAggregatedStatsForTotal();
+                } else {
+                  stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
+                }
+
+                const mistakes = available.filter(w => (stDict[w.word]?.typingMistakes > 0) || (stDict[w.word]?.mistakes > 0));
+                const reviewDue = available.filter(w => !mistakes.includes(w) && ((stDict[w.word]?.level <= 1) || (stDict[w.word]?.nextReviewDate && stDict[w.word]?.nextReviewDate <= Date.now())));
+                const normals = available.filter(w => !mistakes.includes(w) && !reviewDue.includes(w));
+
+                const needed = effectiveLimit - targetQueue.length;
+                const prioritized = [
+                  ...mistakes.sort(() => 0.5 - Math.random()),
+                  ...reviewDue.sort(() => 0.5 - Math.random()),
+                  ...normals.sort(() => 0.5 - Math.random())
+                ];
+                additional = prioritized.slice(0, needed);
+              }
+
+              targetQueue = targetQueue.concat(additional);
+              Views.Typing.typingMasterQueue = [...targetQueue];
+            } else if (targetQueue.length > effectiveLimit) {
+              const preserved = targetQueue.filter(w => completedSet.has(w.word) || (currentWord && w.word === currentWord.word));
+              const remaining = targetQueue.filter(w => !completedSet.has(w.word) && (!currentWord || w.word !== currentWord.word));
+              const needed = Math.max(0, effectiveLimit - preserved.length);
+              targetQueue = preserved.concat(remaining.slice(0, needed));
+            }
+
+            Views.Typing.typingTargetQueue = targetQueue;
+            Views.Typing.saveLocalSession();
+            Views.Typing.updateHUD();
+
+            if (typeof Services !== 'undefined' && Services.Sync) {
+              Services.Sync.showToast(`🎯 练习题量已调整为 ${effectiveLimit} 词 (当前进度 ${completedCount}/${effectiveLimit})`, 'info', 1600);
+            }
+          } else {
+            Views.Typing.showGoalReachedModal(completedCount, effectiveLimit, oldLimit);
+          }
+        }
+      }
+    }
+
+    window.mulberry32 = Algorithms.Shuffle.mulberry32;
+    window.deterministicShuffle = Algorithms.Shuffle.deterministicShuffle;
+    window.buildLimitedTypingPool = buildLimitedTypingPool;
+    window.changeTypingPoolLimit = changeTypingPoolLimit;
+    App.buildLimitedTypingPool = buildLimitedTypingPool;
+    App.changeTypingPoolLimit = changeTypingPoolLimit;
+
+    window.changeTypingRevealThreshold = (v) => {
+      if (v === '0' || v === 'off' || v === 'false') {
+        AppState.update('typingRevealEnabled', false);
+        localStorage.setItem('morpho_typing_reveal_enabled', '0');
+        localStorage.setItem('morpho_typing_reveal_threshold', '0');
+      } else {
+        const n = parseInt(v, 10) || 6;
+        AppState.update('typingRevealEnabled', true);
+        AppState.update('typingRevealThreshold', n);
+        localStorage.setItem('morpho_typing_reveal_enabled', '1');
+        localStorage.setItem('morpho_typing_reveal_threshold', String(n));
+      }
+      const sel = document.getElementById('typing-reveal-threshold-select');
+      if (sel) sel.value = AppState.get('typingRevealEnabled') ? String(AppState.get('typingRevealThreshold')) : '0';
+      const chk = document.getElementById('typing-reveal-enabled-chk');
+      if (chk) chk.checked = AppState.get('typingRevealEnabled');
+    };
+    window.toggleTypingRevealEnabled = (checked) => {
+      AppState.update('typingRevealEnabled', checked);
+      localStorage.setItem('morpho_typing_reveal_enabled', checked ? '1' : '0');
+      const sel = document.getElementById('typing-reveal-threshold-select');
+      if (sel) {
+        sel.value = checked ? String(AppState.get('typingRevealThreshold') || 6) : '0';
+      }
+    };
+
+    window.saveCloudSyncConfig = (silent = false) => {
+      const token = document.getElementById('gist-token')?.value.trim() || '';
+      const gistId = document.getElementById('gist-id')?.value.trim() || '';
+      localStorage.setItem('morpho_gist_token', token);
+      localStorage.setItem('morpho_gist_id', gistId);
+      if (!silent) Services.Sync.showToast('☁️ 同步凭证已保存在本地', 'success', 1800);
+    };
+
+    window.uploadToGitHubGist = () => Views.Manage.upload();
+    window.pullFromGitHubGist = () => Views.Manage.pull();
+    window.rollbackToPreviousGistBackup = () => Views.Manage.rollback();
+
     window.triggerPwaInstall = () => {
       if (!deferredInstall) {
         if (App.isStandaloneMode()) {
@@ -12181,54 +12764,19 @@
 
     function registerOfflineServiceWorker() {
       if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
-      const isSecure = (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1');
-      if (!isSecure) {
-        console.info('[PWA] 当前处于非安全上下文 (如 file:// 或非 localhost 的 http://)，现代浏览器安全机制限制 PWA 安装与 Service Worker 注册。');
-        return;
-      }
 
       const register = () => {
-        // 1. 优先尝试注册同目录下的外部 sw.js
+        // 使用相对路径 ./sw.js，完美兼容 GitHub Pages 项目子路径
         navigator.serviceWorker.register('./sw.js', { scope: './' })
           .then((registration) => {
-            console.log('[PWA] 外部 sw.js 注册就绪，Scope:', registration.scope);
+            console.log('[PWA] Service Worker 注册就绪，Scope:', registration.scope);
           })
           .catch((err) => {
-            console.warn('[PWA] 外部 sw.js 未能加载，自动无缝切换至内嵌式 Service Worker (Blob 模式)...', err);
-            try {
-              const swCode = "const CACHE_NAME = 'morpho-pwa-v7';" +
-                "const APP_SHELL = ['./', 'index.html'];" +
-                "self.addEventListener('install', (e) => {" +
-                "  self.skipWaiting();" +
-                "  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(APP_SHELL)).catch(() => {}));" +
-                "});" +
-                "self.addEventListener('activate', (e) => {" +
-                "  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => clients.claim()));" +
-                "});" +
-                "self.addEventListener('fetch', (e) => {" +
-                "  if (e.request.method !== 'GET') return;" +
-                "  const u = new URL(e.request.url);" +
-                "  if (u.hostname.includes('github.com') || u.hostname.includes('githubusercontent.com')) return;" +
-                "  if (u.hostname.includes('dictvoice') || u.hostname.includes('gstatic.com') || u.pathname.endsWith('.mp3')) {" +
-                "    e.respondWith(fetch(e.request).then(resp => { if (resp && resp.status === 200) { const c = resp.clone(); caches.open(CACHE_NAME).then(cache => cache.put(e.request, c)); } return resp; }).catch(() => caches.match(e.request)));" +
-                "    return;" +
-                "  }" +
-                "  e.respondWith(fetch(e.request).then(net => { if (net && net.status === 200) { const c = net.clone(); caches.open(CACHE_NAME).then(cache => cache.put(e.request, c)); } return net; }).catch(() => caches.match(e.request).then(cached => { if (cached) return cached; if (e.request.mode === 'navigate') return caches.match('./') || caches.match('index.html'); })));" +
-                "});";
-
-              const blob = new Blob([swCode], { type: 'application/javascript' });
-              const blobUrl = URL.createObjectURL(blob);
-              navigator.serviceWorker.register(blobUrl, { scope: './' })
-                .then(reg => console.log('[PWA] 内联 Service Worker (Blob) 注册成功:', reg.scope))
-                .catch(() => {
-                  const b64 = btoa(unescape(encodeURIComponent(swCode)));
-                  navigator.serviceWorker.register('data:application/javascript;base64,' + b64, { scope: './' })
-                    .catch(e => console.warn('[PWA] Service Worker 最终降级注册未完成:', e));
-                });
-            } catch (_) {}
+            console.warn('[PWA] Service Worker 注册失败:', err);
           });
       };
 
+      // 修复漏洞：若当前 document 已经处于 complete 状态，直接注册，防止 load 监听落空
       if (document.readyState === 'complete') {
         register();
       } else {
