@@ -827,30 +827,95 @@
         gap: 10px !important;
       }
 
-      /* 模块二：顶栏精简与三等分控制条 */
+      /* 模块二：顶栏精简、自适应双层布局（严格限定在手机端 ≤768px 生效） */
       .header {
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--border) !important;
         padding-bottom: 8px !important;
-        gap: 6px !important;
+        gap: 8px !important;
         flex-direction: column !important;
         align-items: stretch !important;
-      }
-      .header .top-actions {
-        display: none !important;
       }
       .header .logo-area {
         width: 100% !important;
         display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 6px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+      }
+      .header .logo-area .app-title {
+        font-size: 1.05rem !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      .header .logo-area .app-title::before {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 0.8rem !important;
+        margin-right: 6px !important;
+      }
+      .header .logo-area .pack-selector {
+        flex: 1 1 auto !important;
+        max-width: 55% !important;
+        font-size: 0.78rem !important;
+        padding: 4px 6px !important;
+        box-sizing: border-box !important;
       }
       .header .logo-area .utility-toggle-btn {
         display: none !important;
       }
-      .header .logo-area .pack-selector {
+
+      /* 手机端操作区：启用单行通栏布局（展示刷题/独立词胶囊 + 主题切换下拉框） */
+      .header .top-actions {
+        display: flex !important;
         width: 100% !important;
-        max-width: 100% !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-wrap: nowrap !important;
+        margin-top: 2px !important;
+      }
+      /* 屏蔽桌面端专属按钮，防止在手机端拥挤折行或撑破视口 */
+      .header .top-actions #top-due-btn,
+      .header .top-actions #pwa-install-btn,
+      .header .top-actions #auto-sync-badge,
+      .header .top-actions #shortcut-btn,
+      .header .top-actions .plan-controls {
+        display: none !important;
+      }
+
+      /* 今日刷题与独立词进度胶囊 */
+      .header .top-actions .daily-target-box {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 5px 10px !important;
+        font-size: 0.74rem !important;
+        height: 32px !important;
+        border-radius: 999px !important;
+        box-sizing: border-box !important;
+      }
+      .header .top-actions .daily-target-box span {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      .header .top-actions .daily-bar-wrap {
+        width: 42px !important;
+        height: 6px !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* 主题切换下拉选择器 */
+      .header .top-actions .theme-select {
+        flex: 0 0 auto !important;
+        padding: 4px 8px !important;
+        font-size: 0.75rem !important;
+        height: 32px !important;
+        border-radius: 8px !important;
         box-sizing: border-box !important;
       }
       .utility-toggle-row {
@@ -1360,6 +1425,9 @@
       <label class="ctrl-label" style="margin-left: 4px;" title="控制自动朗读环节是否播放中文释义">
         <input type="checkbox" id="speak-zh-chk" checked onchange="toggleSpeakZh(this.checked)"> 朗读中文
       </label>
+      <label class="ctrl-label" style="margin-left: 4px;" title="闪卡翻转展开后自动朗读核心中文释义（自适应代理网络环境）">
+        <input type="checkbox" id="flashcard-speak-zh-chk" checked onchange="toggleFlashcardSpeakZh(this.checked)"> 闪卡读中文
+      </label>
     </div>
   </div>
 
@@ -1468,6 +1536,15 @@
                 <option value="9999">新词不设上限</option>
               </select>
             </div>
+          </div>
+        </div>
+
+        <!-- 闪卡语音朗读开关 -->
+        <div style="background:var(--card-subtle); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
+          <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px;">🔊 闪卡自动发音</div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.78rem; font-weight:600; color:var(--text);">翻转展开后自动读中文</span>
+            <input type="checkbox" id="sheet-flashcard-speak-zh" checked onchange="toggleFlashcardSpeakZh(this.checked)">
           </div>
         </div>
 
@@ -2909,6 +2986,7 @@
       voiceAccent: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_voice') : null) || 'en-GB',
       speakEnabledEn: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_speak_en') !== '0' : true),
       speakEnabledZh: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_speak_zh') !== '0' : true),
+      flashcardSpeakZh: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_flashcard_speak_zh') !== '0' : true),
 
       typingPoolLimit: parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_typing_pool_limit') : null) || '60', 10) || 60,
       typingSfxMode: (function() {
@@ -4777,6 +4855,211 @@
           } catch (_) {
             proceedToEnglish();
           }
+        },
+
+        // =========================================================================
+        // 闪卡专属代理自适应中文发音引擎 (含 Strict Local 判定与全球 CDN 竞速)
+        // =========================================================================
+        cleanChineseMeaningForSpeech(meaningStr) {
+          if (!meaningStr) return '';
+          let s = String(meaningStr).trim();
+          s = s.replace(/^(?:[a-zA-Z]+\.\s*(?:&|\/|\+)?\s*)+/g, '').trim();
+          s = s.replace(/[\[\(\{（【][^\]\)\}）】]*[\]\)\}）】]/g, '').trim();
+          for (const delimiter of ['；', ';', '，', ',', '／', '/']) {
+            if (s.includes(delimiter)) {
+              s = s.split(delimiter)[0].trim();
+            }
+          }
+          s = s.replace(/[^\u4e00-\u9fa5]/g, '').trim();
+          return s || String(meaningStr).replace(/[^\u4e00-\u9fa5]/g, '').slice(0, 6);
+        },
+
+        playFlashcardMeaningZh(meaningStr) {
+          if (typeof window === 'undefined') return;
+          const zhText = this.cleanChineseMeaningForSpeech(meaningStr);
+          if (!zhText) return;
+
+          this.stopAll();
+          const thisEpoch = currentEpoch;
+
+          const usedLocal = this._playZhViaStrictLocalSpeech(zhText, thisEpoch, () => {
+            if (thisEpoch === currentEpoch) {
+              this._playZhViaAdaptiveCdn(zhText, thisEpoch);
+            }
+          });
+
+          if (!usedLocal && thisEpoch === currentEpoch) {
+            this._playZhViaAdaptiveCdn(zhText, thisEpoch);
+          }
+        },
+
+        _playZhViaStrictLocalSpeech(zhText, requestEpoch, onFallback) {
+          if (!('speechSynthesis' in window)) return false;
+
+          if (!cachedVoices || cachedVoices.length === 0) refreshVoices();
+          const localZhVoice = cachedVoices.find(v =>
+            (v.lang === 'zh-CN' || v.lang === 'zh' || (v.lang && v.lang.startsWith('zh'))) && v.localService === true
+          );
+
+          if (!localZhVoice) return false;
+
+          try {
+            if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+            window.speechSynthesis.cancel();
+          } catch (_) {}
+
+          const utter = new SpeechSynthesisUtterance(zhText);
+          utter.voice = localZhVoice;
+          utter.lang = 'zh-CN';
+          utter.rate = 1.08;
+
+          let hasStarted = false;
+          const startWatchdog = setTimeout(() => {
+            if (!hasStarted && requestEpoch === currentEpoch) {
+              console.warn('[Audio] Local WebSpeech start watchdog timeout (320ms) - switching to CDN');
+              try { window.speechSynthesis.cancel(); } catch (_) {}
+              if (onFallback) onFallback();
+            }
+          }, 320);
+
+          utter.onstart = () => {
+            hasStarted = true;
+            clearTimeout(startWatchdog);
+            if (requestEpoch !== currentEpoch) {
+              try { window.speechSynthesis.cancel(); } catch (_) {}
+            }
+          };
+
+          utter.onend = () => {
+            clearTimeout(startWatchdog);
+          };
+
+          utter.onerror = () => {
+            clearTimeout(startWatchdog);
+            if (requestEpoch === currentEpoch && onFallback) onFallback();
+          };
+
+          try {
+            window.speechSynthesis.speak(utter);
+            return true;
+          } catch (_) {
+            clearTimeout(startWatchdog);
+            return false;
+          }
+        },
+
+        _playZhViaAdaptiveCdn(zhText, requestEpoch) {
+          const AudioCtor = (typeof window !== 'undefined' && window.Audio) ? window.Audio : null;
+          if (!AudioCtor) return;
+
+          const encoded = encodeURIComponent(zhText);
+
+          const domesticYoudao = {
+            name: 'youdao_cn',
+            isDomestic: true,
+            url: `https://dict.youdao.com/dictvoice?audio=${encoded}&le=zh`
+          };
+
+          const domesticBaidu = {
+            name: 'baidu_cn',
+            isDomestic: true,
+            url: `https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=${encoded}`
+          };
+
+          const globalGoogle = {
+            name: 'google_anycast',
+            isDomestic: false,
+            url: `https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=${encoded}`
+          };
+
+          let candidateList = [];
+          if (networkTrackScore >= 0) {
+            candidateList = [domesticYoudao, globalGoogle, domesticBaidu];
+          } else {
+            candidateList = [globalGoogle, domesticYoudao, domesticBaidu];
+          }
+
+          let currentIndex = 0;
+          let hasPlaying = false;
+          let bufferWatchdog = null;
+
+          const cleanupWatchdog = () => {
+            if (bufferWatchdog) { clearTimeout(bufferWatchdog); bufferWatchdog = null; }
+          };
+
+          const attemptStream = (index) => {
+            if (requestEpoch !== currentEpoch || index >= candidateList.length) {
+              cleanupWatchdog();
+              return;
+            }
+
+            const currentCandidate = candidateList[index];
+            const aud = new AudioCtor();
+            aud.preload = 'auto';
+            aud.src = currentCandidate.url;
+            activeAudio = aud;
+
+            cleanupWatchdog();
+            bufferWatchdog = setTimeout(() => {
+              if (!hasPlaying && requestEpoch === currentEpoch) {
+                console.warn(`[Audio] Stream buffering timeout (500ms) on: ${currentCandidate.name}`);
+                if (currentCandidate.isDomestic) {
+                  networkTrackScore = Math.max(-3, networkTrackScore - 1);
+                }
+                neutralizeAudio(aud);
+                attemptStream(index + 1);
+              }
+            }, 500);
+
+            aud.onplaying = () => {
+              hasPlaying = true;
+              cleanupWatchdog();
+              if (requestEpoch !== currentEpoch) {
+                neutralizeAudio(aud);
+                return;
+              }
+              if (currentCandidate.isDomestic) {
+                networkTrackScore = Math.min(3, networkTrackScore + 1);
+              } else {
+                networkTrackScore = Math.max(-3, networkTrackScore - 1);
+              }
+            };
+
+            aud.onended = () => {
+              cleanupWatchdog();
+              if (activeAudio === aud) activeAudio = null;
+            };
+
+            aud.onerror = () => {
+              cleanupWatchdog();
+              neutralizeAudio(aud);
+              if (currentCandidate.isDomestic) {
+                networkTrackScore = Math.max(-3, networkTrackScore - 1);
+              }
+              if (requestEpoch === currentEpoch && !hasPlaying) {
+                attemptStream(index + 1);
+              }
+            };
+
+            try {
+              const p = aud.play();
+              if (p !== undefined) {
+                p.catch(err => {
+                  if (err.name === 'AbortError' || requestEpoch !== currentEpoch) return;
+                  cleanupWatchdog();
+                  neutralizeAudio(aud);
+                  if (requestEpoch === currentEpoch && !hasPlaying) {
+                    attemptStream(index + 1);
+                  }
+                });
+              }
+            } catch (_) {
+              cleanupWatchdog();
+              attemptStream(index + 1);
+            }
+          };
+
+          attemptStream(0);
         }
       };
     })();
@@ -7027,6 +7310,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const word = AppState.get('currentWord');
         if (word) {
           App.showWordDetails(word);
+
+          // ★ 触发自适应中文朗读
+          if (AppState.get('flashcardSpeakZh')) {
+            Services.Audio.playFlashcardMeaningZh(word.meaning);
+          }
         }
       },
 
@@ -7035,6 +7323,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (this.isTransitioning) return;
         this.isTransitioning = true;
         this.isSwiping = true;
+
+        // ★ 立即切断正在进行的任何发音流与缓冲看门狗
+        Services.Audio.stopAll();
 
         // ★ 关键防线 1：主动解除被点击按钮的系统焦点，重定位到主舞台卡片，切断 WebKit 自动滚回顶部的行为
         const mainCard = document.getElementById('main-card');
@@ -7267,6 +7558,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       cleanup() {
+        // ★ 模式切换或组件重绘时彻底静音
+        Services.Audio.stopAll();
+
         if (this.actionTimer) {
           LifecycleScheduler.clearTimeout(this.actionTimer);
           this.actionTimer = null;
@@ -9137,12 +9431,16 @@ Gist ID: ${curId}
       },
 
       switchTheme(theme) {
-        if (typeof document !== 'undefined') {
-          document.documentElement.setAttribute('data-theme', theme);
-          const sel = document.getElementById('theme-select');
-          if (sel) sel.value = theme;
+        if (typeof switchTheme === 'function') {
+          switchTheme(theme);
+        } else {
+          if (typeof document !== 'undefined') {
+            document.documentElement.setAttribute('data-theme', theme);
+            const sel = document.getElementById('theme-select');
+            if (sel) sel.value = theme;
+          }
+          if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_theme', theme);
         }
-        if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_theme', theme);
       },
 
       restorePreferences() {
@@ -9215,6 +9513,11 @@ Gist ID: ${curId}
 
         const speakZhChk = document.getElementById('speak-zh-chk');
         if (speakZhChk) speakZhChk.checked = AppState.get('speakEnabledZh');
+
+        const flashcardSpeakZhChk = document.getElementById('flashcard-speak-zh-chk');
+        if (flashcardSpeakZhChk) flashcardSpeakZhChk.checked = AppState.get('flashcardSpeakZh');
+        const sheetFlashcardSpeakZh = document.getElementById('sheet-flashcard-speak-zh');
+        if (sheetFlashcardSpeakZh) sheetFlashcardSpeakZh.checked = AppState.get('flashcardSpeakZh');
 
         const typingShowAnalysisChk = document.getElementById('typing-show-analysis-chk');
         if (typingShowAnalysisChk) typingShowAnalysisChk.checked = AppState.get('typingShowAnalysis');
@@ -9294,6 +9597,9 @@ Gist ID: ${curId}
         }
 
         this.initDailyActivity();
+        if (typeof updateDailyProgressUI === 'function') {
+          updateDailyProgressUI();
+        }
       },
 
       initCloudConfig() {
@@ -10722,6 +11028,9 @@ Gist ID: ${curId}
 
     window.syncSheetControls = function() {
       if (typeof document === 'undefined') return;
+      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
+      if (chkSheet) chkSheet.checked = AppState.get('flashcardSpeakZh');
+
       const dueCount = document.getElementById('top-due-count')?.innerText || '0';
       const sheetDue = document.getElementById('sheet-due-badge');
       if (sheetDue) sheetDue.innerText = `${dueCount} 词`;
@@ -10788,7 +11097,66 @@ Gist ID: ${curId}
     };
 
     window.switchWordPack = (id) => App.switchWordPack(id);
-    window.switchTheme = (t) => App.switchTheme(t);
+    function switchTheme(theme) {
+  const validThemes = ['light', 'dark', 'sepia'];
+  const targetTheme = validThemes.includes(theme) ? theme : 'light';
+
+  document.documentElement.setAttribute('data-theme', targetTheme);
+  try {
+    localStorage.setItem('morpho_theme', targetTheme);
+  } catch (_) {}
+
+  // 同步顶栏选择框
+  const topSelect = document.getElementById('theme-select');
+  if (topSelect && topSelect.value !== targetTheme) {
+    topSelect.value = targetTheme;
+  }
+
+  // 同步手机专属快捷抽屉的选择框
+  const sheetSelect = document.getElementById('sheet-theme-select');
+  if (sheetSelect && sheetSelect.value !== targetTheme) {
+    sheetSelect.value = targetTheme;
+  }
+}
+window.switchTheme = switchTheme;
+
+function updateDailyProgressUI() {
+  const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
+  const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
+  const testedToday = act[todayStr] || 0;
+
+  // 统计独立词去重数
+  const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
+  const uniqueList = dailyUniqueMap[todayStr] || [];
+  const uniqueToday = uniqueList.length;
+
+  // 计算进度条百分比
+  const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
+  const pct = Math.min(100, Math.round((testedToday / target) * 100));
+
+  // 1. 同步顶栏（桌面及移动端）
+  const dCount = document.getElementById('daily-count');
+  const dTarget = document.getElementById('daily-target-num');
+  const dUnique = document.getElementById('daily-unique-count');
+  const dFill = document.getElementById('daily-bar-fill');
+
+  if (dCount) dCount.innerText = testedToday;
+  if (dTarget) dTarget.innerText = target;
+  if (dUnique) dUnique.innerText = uniqueToday;
+  if (dFill) dFill.style.width = `${pct}%`;
+
+  // 2. 同步手机专属抽屉 (#mobile-tools-sheet)
+  const sCount = document.getElementById('sheet-daily-count');
+  const sTarget = document.getElementById('sheet-daily-target');
+  const sUnique = document.getElementById('sheet-daily-unique');
+  const sFill = document.getElementById('sheet-daily-bar-fill');
+
+  if (sCount) sCount.innerText = testedToday;
+  if (sTarget) sTarget.innerText = target;
+  if (sUnique) sUnique.innerText = uniqueToday;
+  if (sFill) sFill.style.width = `${pct}%`;
+}
+window.updateDailyProgressUI = updateDailyProgressUI;
     window.changeVoiceRate = (v) => AppState.update('currentVoiceRate', parseFloat(v));
     window.changeTypingSfx = (m) => {
       AppState.update('typingSfxMode', m);
@@ -10937,6 +11305,21 @@ Gist ID: ${curId}
     window.toggleSpeakZh = (checked) => {
       AppState.update('speakEnabledZh', checked);
       localStorage.setItem('morpho_speak_zh', checked ? '1' : '0');
+    };
+
+    window.toggleFlashcardSpeakZh = function(checked = null) {
+      const current = AppState.get('flashcardSpeakZh');
+      const target = (checked !== null) ? Boolean(checked) : !current;
+
+      AppState.update('flashcardSpeakZh', target);
+      localStorage.setItem('morpho_flashcard_speak_zh', target ? '1' : '0');
+
+      const chkDesk = document.getElementById('flashcard-speak-zh-chk');
+      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
+      if (chkDesk) chkDesk.checked = target;
+      if (chkSheet) chkSheet.checked = target;
+
+      Services.Sync.showToast(target ? '🔊 已开启闪卡翻转读中文' : '🔇 已关闭闪卡翻转读中文', 'info', 1200);
     };
 
     window.toggleTypingShowAnalysis = (checked) => {
@@ -11418,6 +11801,12 @@ Gist ID: ${curId}
       } catch (err) {
         console.error("App.init failed:", err);
       }
+
+      try {
+        const savedTheme = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_theme') : null) || 'light';
+        switchTheme(savedTheme);
+        updateDailyProgressUI();
+      } catch (_) {}
 
       document.addEventListener('click', (e) => {
         if (AppState.get('currentMode') === 'typing') {
