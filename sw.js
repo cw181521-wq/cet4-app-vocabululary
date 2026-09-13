@@ -1,4 +1,4 @@
-const CACHE_NAME = 'morpho-pwa-v7';
+const CACHE_NAME = 'morpho-pwa-v8';
 
 // 核心离线静态资源列表
 const STATIC_ASSETS = [
