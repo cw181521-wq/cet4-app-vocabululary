@@ -1679,6 +1679,19 @@
   <div id="stage-area">
     <div class="workspace-layout">
       <div class="workspace-main">
+        <!-- 抗遗忘冲刺会话实时状态条 -->
+        <div id="due-sprint-bar" style="display:none; justify-content:space-between; align-items:center; background:linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%); border:1.5px solid rgba(239, 68, 68, 0.35); border-radius:12px; padding:8px 14px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.1rem; line-height:1;">⚡</span>
+            <div>
+              <span id="due-sprint-title" style="font-weight:800; font-size:0.84rem; color:var(--error);">抗遗忘冲刺中</span>
+              <span id="due-sprint-desc" style="font-size:0.72rem; color:var(--muted); margin-left:4px;">(消灭临界遗忘词)</span>
+            </div>
+            <span class="badge-mini" id="due-sprint-badge" style="background:#ef4444; color:#fff; font-weight:800; font-size:0.75rem;">剩余 0 词</span>
+          </div>
+          <button class="btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.74rem;" onclick="exitDueReviewSession(true)" title="退出冲刺并返回原主线题库">退出冲刺 ✕</button>
+        </div>
+
         <!-- 艾宾浩斯五盒动态记忆罗盘 -->
         <div class="leitner-compass-wrap" id="leitner-compass-wrap">
           <div class="compass-nodes-bar">
@@ -2297,6 +2310,25 @@
       <button class="btn btn-primary" onclick="Views.Typing.startNewRound()">🔄 开始下一批新词 (Enter)</button>
       <button class="btn btn-secondary" id="tm-drill-btn" onclick="Views.Typing.drillMistakesFromMilestone()">🎯 集中复盘本轮错题 (M)</button>
       <button class="btn btn-mini" style="margin-top:4px;" data-role="cancel" onclick="Views.Typing.dismissMilestone()">返回查看当前词 (Esc)</button>
+    </div>
+  </div>
+</div>
+
+<!-- 抗遗忘冲刺通关 Milestone 仪式卡片弹窗 -->
+<div class="typing-milestone-overlay" id="due-milestone-overlay" style="display:none;">
+  <div class="typing-milestone-card" role="dialog" aria-modal="true">
+    <div class="tm-trophy">⚡</div>
+    <h3 class="tm-title">恭喜完成今日抗遗忘冲刺！</h3>
+    <p class="tm-sub" id="due-tm-sub">已全部阻断临界遗忘点</p>
+    <div class="tm-stats-grid">
+      <div class="tm-stat-box"><span class="tm-label">耗时</span><span class="tm-val" id="due-tm-time">01:45</span></div>
+      <div class="tm-stat-box"><span class="tm-label">通关词数</span><span class="tm-val" id="due-tm-words" style="color:var(--primary);">15 词</span></div>
+      <div class="tm-stat-box"><span class="tm-label">一次性掌握</span><span class="tm-val" id="due-tm-perfect" style="color:#10b981;">12 词</span></div>
+      <div class="tm-stat-box tm-stat-wide"><span class="tm-label">循环巩固</span><span class="tm-val" id="due-tm-cycled" style="color:#f59e0b;">3 词</span></div>
+      <div class="tm-stat-box tm-stat-wide"><span class="tm-label">剩余到期词</span><span class="tm-val" id="due-tm-remain" style="color:#10b981;">0 词</span></div>
+    </div>
+    <div class="tm-actions">
+      <button class="btn btn-primary" onclick="dismissDueMilestone()">🎉 圆满完成，返回主线学习 (Enter)</button>
     </div>
   </div>
 </div>
@@ -2945,7 +2977,6 @@
       }
     };
   })();
-
   // =========================================================================
   // ★ 模块 2：集中式状态管理中心 (AppState - Closure Store)
   // =========================================================================
@@ -2963,6 +2994,18 @@
       shufflePointer: 0,
       questionHistory: [],
       historyCursor: -1,
+
+      dueReviewSession: {
+        isActive: false,
+        scopeBoxId: null,
+        scopeName: '',
+        queue: [],
+        totalInitial: 0,
+        passedWords: new Set(),
+        mistakeWords: new Set(),
+        roundStartTime: 0,
+        backupContext: null
+      },
 
       packStats: {},
       roundTotal: 0,
@@ -3189,7 +3232,6 @@
           const mastery = (wordStat && typeof wordStat.masteryScore === 'number' && !isNaN(wordStat.masteryScore)) ? wordStat.masteryScore : 35;
           const streak = (wordStat && typeof wordStat.streak === 'number' && !isNaN(wordStat.streak)) ? Math.max(0, wordStat.streak) : 0;
 
-          // 核心数学模型修复 1：稳定性短时基准保底提升至 0.25 (退火保护)
           let baseStability;
           if (tested < 3) {
             const shortTermS = 0.15 + (tested * 0.18) + (streak * 0.12);
@@ -3230,7 +3272,6 @@
           const currentMode = context.mode || (typeof AppState !== 'undefined' ? AppState.get('currentMode') : 'choice') || 'choice';
           const T_base = this.getBaseResponseTime(currentMode, wordLen);
 
-          // 反应时间跨题型归一化偏离比值
           const rawRespTime = (wordStat && typeof wordStat.lastResponseTime === 'number' && !isNaN(wordStat.lastResponseTime) && wordStat.lastResponseTime > 0)
             ? wordStat.lastResponseTime
             : T_base;
@@ -3244,7 +3285,6 @@
           const nextReview = (wordStat && typeof wordStat.nextReviewDate === 'number' && !isNaN(wordStat.nextReviewDate)) ? wordStat.nextReviewDate : 0;
           const lastReviewed = (wordStat && typeof wordStat.lastReviewed === 'number' && !isNaN(wordStat.lastReviewed)) ? wordStat.lastReviewed : 0;
 
-          // 核心性能优化 4：启发式快速剪枝（Heuristic Sound Pruning），非逾期熟词直接赋予极轻底分
           const isSafeMature = (
             tested >= 3 &&
             mastery >= 80 &&
@@ -3284,7 +3324,6 @@
             };
           }
 
-          // 核心数学模型修复 1：短时有效稳定性动态退火保底函数
           let baseStability;
           if (tested < 3) {
             const shortTermS = 0.15 + (tested * 0.18) + (streak * 0.12);
@@ -3293,7 +3332,6 @@
             baseStability = Math.max(0.8, 1.0 + 1.6 * streak + Math.pow(Math.max(0, mastery) / 28.0, 2.1));
           }
 
-          // 迟疑阻尼与动态软保底: S_eff = max(S_base / (1 + 0.5*(lambda-1)), 0.25 + 0.15*tested)
           const effDamping = 1.0 + 0.5 * (lambda - 1.0);
           const softFloor = 0.25 + 0.15 * Math.min(tested, 5);
           const S_eff = Math.max(softFloor, baseStability / Math.max(0.1, effDamping));
@@ -3301,12 +3339,10 @@
           const baseRiskInfo = this.calculateMemoryRisk(wordStat, baseStability);
           const riskInfo = this.calculateMemoryRisk(wordStat, S_eff);
 
-          // 解除双重放大：迟疑加分平滑线性化，上限强制截断至 12.0
           const pHesitation = (lambda > 1.0) ? Math.min(12.0, (lambda - 1.0) * 12.0) : 0.0;
 
           let P = (riskInfo.risk * 0.45) + (Math.min(mistakes, 6) * 15.0 * 0.35) + ((100.0 - mastery) * 0.20) + isFlagged + pHesitation;
 
-          // 词根认知盲区加成（O(1) 只读哈希表加速）
           let familyErrorRate = 0.0;
           if (context && typeof context.familyErrorRate === 'number' && !isNaN(context.familyErrorRate)) {
             familyErrorRate = context.familyErrorRate;
@@ -3322,7 +3358,6 @@
             P += pRootBoost;
           }
 
-          // 莱特纳逾期倍率阶跃
           let rOverdue = -1.0;
           let dueMultiplier = 1.0;
           if (lastReviewed > 0 && nextReview > 0) {
@@ -3337,7 +3372,6 @@
             }
           }
 
-          // 最近出题冷却惩罚
           let recencyPenalty = 0.0;
           let recencyStep = -1;
           if (recentBuffer && recentBuffer.length > 0 && wordObj && wordObj.word) {
@@ -3384,6 +3418,13 @@
         getConfig(boxId) {
           const safeId = Math.max(1, Math.min(5, parseInt(boxId, 10) || 1));
           return LEITNER_BOX_CONFIG[safeId - 1];
+        },
+        isWordDue(st, now = Date.now()) {
+          if (!st) return false;
+          const lastReviewed = (typeof st.lastReviewed === 'number') ? st.lastReviewed : 0;
+          if (lastReviewed <= 0) return false;
+          const nextReview = (typeof st.nextReviewDate === 'number') ? st.nextReviewDate : 0;
+          return now >= nextReview;
         },
         calculateAdvance(oldBox, isCorrect, leitnerMode = 'instant', lastReviewed = 0, nextReviewDate = 0) {
           const now = Date.now();
@@ -3479,7 +3520,6 @@
       }
     };
   })();
-
   // =========================================================================
   // ★ 模块 4：基础设施服务层 (Services - Storage, Sfx, Audio, Sync)
   // =========================================================================
@@ -4857,9 +4897,6 @@
           }
         },
 
-        // =========================================================================
-        // 闪卡专属代理自适应中文发音引擎 (含 Strict Local 判定与全球 CDN 竞速)
-        // =========================================================================
         cleanChineseMeaningForSpeech(meaningStr) {
           if (!meaningStr) return '';
           let s = String(meaningStr).trim();
@@ -5667,7 +5704,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
   })();
   if (typeof window !== 'undefined') window.Services = Services;
-
   // =========================================================================
   // ★ 模块 5：视图控制器层 (Views - Lifecycle standard: render & cleanup)
   // =========================================================================
@@ -6165,7 +6201,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         });
         input.addEventListener('compositionend', () => {
           KeyRouter.setComposing(false);
-          // 清空输入框内累积的非 ASCII 字符
           input.value = '';
         });
       },
@@ -7152,13 +7187,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     // [5.4 Flashcard View - 智能闪卡：雾化展开重构与绝对零跳动视口控制引擎]
     // -----------------------------------------------------------------------
     const Flashcard = {
-      isTransitioning: false, // 动画与状态互斥锁，防高速连击
-      isSwiping: false,       // 兼容外部状态判断
+      isTransitioning: false,
+      isSwiping: false,
       direction: 'next',
       actionTimer: null,
       revealTimer: null,
       touchAbortController: null,
-      pinnedScrollY: null,     // 视口坐标快照记录器
+      pinnedScrollY: null,
 
       touch: {
         startX: 0,
@@ -7177,7 +7212,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         return (window.innerWidth <= 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
       },
 
-      // 1. 视口坐标捕获与绝对锁定引擎
       captureScrollPosition() {
         this.pinnedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
       },
@@ -7185,14 +7219,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       restoreScrollPosition() {
         if (this.pinnedScrollY !== null && typeof this.pinnedScrollY === 'number') {
           const targetY = this.pinnedScrollY;
-          // 阶段 1：首帧瞬间对准，阻断物理 Clamp 带来的视口位移
           window.scrollTo({
             top: targetY,
             left: 0,
             behavior: 'instant'
           });
 
-          // 阶段 2：在布局引擎完成 DOM 重绘后的下一帧实施二次纠偏闭环
           requestAnimationFrame(() => {
             window.scrollTo({
               top: targetY,
@@ -7203,7 +7235,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
-      // 2. 核心渲染入口
       render(word) {
         this.cleanup();
         AppState.update('isCardFlipped', false);
@@ -7212,7 +7243,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const isMobile = this.isTouchDevice();
 
         if (mainCard) {
-          // 保持焦点驻留在卡片舞台，避免聚焦在消失的子元素上引发视口寻焦滚屏
           mainCard.setAttribute('tabindex', '-1');
           mainCard.classList.add('liquid-glass', 'flashcard-stable-stage');
           if (isMobile) mainCard.classList.add('flashcard-touch-surface');
@@ -7234,7 +7264,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (termEl) termEl.innerText = word.word;
         if (subEl) subEl.innerText = word.phonetic || '';
 
-        // 渲染背面结构（确保具备 inner 容器以支持 CSS Grid 风琴自适应展开）
         if (backEl) {
           backEl.style.display = 'grid';
           backEl.classList.remove('is-revealed');
@@ -7262,7 +7291,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           `;
         }
 
-        // 严密清理底部干扰状态，隔离移动端通用吸底条
         const nextBtn = document.getElementById('next-btn');
         const prevBtn = document.getElementById('prev-btn');
         const fb = document.getElementById('feedback');
@@ -7271,7 +7299,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (fb) fb.innerHTML = '';
         if (typeof updateMobileNavBarVisibility === 'function') updateMobileNavBarVisibility();
 
-        // 渲染完成，立即执行滚动锁定还原
         this.restoreScrollPosition();
 
         if (isMobile && mainCard) {
@@ -7279,7 +7306,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
-      // 3. 动效重构：由 3D 侧翻替换为「物理自适应雾化风琴舒展」
       flip() {
         if (AppState.get('isCardFlipped') || this.isTransitioning) return;
         AppState.update('isCardFlipped', true);
@@ -7293,14 +7319,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           setTimeout(() => { if (hintEl) hintEl.style.display = 'none'; }, 180);
         }
 
-        // 展开背面并触发雾化展开动效（CSS Grid rows 0fr -> 1fr）
         if (backEl) {
           requestAnimationFrame(() => {
             backEl.classList.add('is-revealed');
           });
         }
 
-        // 操作按钮同步浮现
         if (actionsEl) {
           requestAnimationFrame(() => {
             actionsEl.classList.add('is-revealed');
@@ -7311,23 +7335,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (word) {
           App.showWordDetails(word);
 
-          // ★ 触发自适应中文朗读
           if (AppState.get('flashcardSpeakZh')) {
             Services.Audio.playFlashcardMeaningZh(word.meaning);
           }
         }
       },
 
-      // 4. 决策处理与视口绝对悬停闭环控制
       handleSwipeDecision(known, isTouchExit = false) {
         if (this.isTransitioning) return;
         this.isTransitioning = true;
         this.isSwiping = true;
 
-        // ★ 立即切断正在进行的任何发音流与缓冲看门狗
         Services.Audio.stopAll();
 
-        // ★ 关键防线 1：主动解除被点击按钮的系统焦点，重定位到主舞台卡片，切断 WebKit 自动滚回顶部的行为
         const mainCard = document.getElementById('main-card');
         if (document.activeElement && typeof document.activeElement.blur === 'function') {
           document.activeElement.blur();
@@ -7336,11 +7356,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           try { mainCard.focus({ preventScroll: true }); } catch (_) {}
         }
 
-        // ★ 关键防线 2：捕获当前的精准视口 Y 坐标快照
         this.captureScrollPosition();
 
         if (mainCard) {
-          // ★ 关键防线 3：动态获取并锁定卡片当前高度作为临时稳定垫片，杜绝文档流高度坍塌
           const currentHeight = mainCard.getBoundingClientRect().height;
           if (currentHeight > 80) {
             mainCard.style.minHeight = `${Math.round(currentHeight)}px`;
@@ -7363,14 +7381,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           Services.Sfx.playFeedbackSound(known, AppState.get('feedbackSfxStyle'));
         }
 
-        // 执行记忆数据核算
         try {
           App.recordAnswer(known);
         } catch (e) {
           console.error('[Flashcard] recordAnswer error:', e);
         }
 
-        // 200ms 抛脱动效结束后切题并恢复视口
         this.actionTimer = LifecycleScheduler.setTimeout(() => {
           this.actionTimer = null;
           try {
@@ -7378,7 +7394,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           } finally {
             this.isTransitioning = false;
             this.isSwiping = false;
-            // 切题完成后的下一帧，平滑渐进退火释放高度垫片
             requestAnimationFrame(() => {
               if (mainCard) {
                 mainCard.style.minHeight = '';
@@ -7393,7 +7408,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         return this.handleSwipeDecision(known);
       },
 
-      // 5. 触屏手势平滑接入
       bindMobileTouchGestures(card) {
         if (this.touchAbortController) {
           this.touchAbortController.abort();
@@ -7558,7 +7572,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       cleanup() {
-        // ★ 模式切换或组件重绘时彻底静音
         Services.Audio.stopAll();
 
         if (this.actionTimer) {
@@ -7739,8 +7752,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           App.recordAnswer(false);
 
           if (lives <= 0) {
-            alert(`💥 极速挑战结束！最终得分: ${AppState.get('speedScore')}
-已自动保存本次训练成果。`);
+            alert(`💥 极速挑战结束！最终得分: ${AppState.get('speedScore')}\n已自动保存本次训练成果。`);
             AppState.update('speedLives', 3);
             AppState.update('speedScore', 0);
             App.switchMode('choice');
@@ -8286,7 +8298,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             <div class="weak-root-meta" style="font-size:0.72rem; color:var(--muted); border-top:1px dashed var(--border); padding-top:4px;">
               <span>薄弱指数: <strong style="color:var(--primary);">${item.weightedScore}</strong></span>
             </div>
-            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\'"))}', ${isGlobal})">🎯 专练此族</button>
+            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\\'"))}', ${isGlobal})">🎯 专练此族</button>
           `;
           fragment.appendChild(card);
         });
@@ -8588,10 +8600,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const ok = await Services.Sync.upload('manual');
         if (ok) {
           const curId = localStorage.getItem('morpho_gist_id');
-          alert(`🎉 备份成功！
-已成功同步至 GitHub Gist。
-Gist ID: ${curId}
-多设备填入相同 Token 与 Gist ID 即可接力！`);
+          alert(`🎉 备份成功！\n已成功同步至 GitHub Gist。\nGist ID: ${curId}\n多设备填入相同 Token 与 Gist ID 即可接力！`);
           this.updateSyncTimeUI();
         }
       },
@@ -8684,7 +8693,7 @@ Gist ID: ${curId}
           }
           const cleanFront = front.replace(/\t/g, ' ').replace(/\n/g, ' ');
           const cleanBack = back.replace(/\t/g, ' ').replace(/\n/g, ' ');
-          tsvLines.push(`${cleanFront}	${cleanBack}`);
+          tsvLines.push(`${cleanFront}\t${cleanBack}`);
         });
 
         const blob = new Blob([tsvLines.join('\n')], { type: 'text/tab-separated-values;charset=utf-8;' });
@@ -8884,8 +8893,7 @@ Gist ID: ${curId}
           const inThisBox = packWords.filter(w => (stDict[w.word]?.box ?? 1) === cfg.id);
           const dueInThisBox = inThisBox.filter(w => {
             const st = stDict[w.word];
-            if (!st || !st.lastReviewed || st.lastReviewed === 0) return true;
-            return now >= (st.nextReviewDate || 0);
+            return Algorithms.Leitner.isWordDue(st, now);
           });
 
           if (cfg.id === 5) gradCount = inThisBox.length;
@@ -8947,30 +8955,7 @@ Gist ID: ${curId}
       },
 
       filterDueWords(boxId, boxName) {
-        const currentPackId = AppState.get('currentPackId');
-        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
-        const stDict = AppState.get('packStats')[currentPackId] || {};
-        const now = Date.now();
-
-        const filtered = packWords.filter(w => {
-          const b = stDict[w.word]?.box ?? 1;
-          if (b !== boxId) return false;
-          const st = stDict[w.word];
-          if (!st || !st.lastReviewed || st.lastReviewed === 0) return true;
-          return now >= (st.nextReviewDate || 0);
-        });
-
-        if (filtered.length === 0) {
-          alert(`当前【${boxName}】暂无到期词！`);
-          return;
-        }
-
-        AppState.update('activePool', filtered);
-        AppState.update('questionHistory', []);
-        AppState.update('historyCursor', -1);
-        App.switchMode('choice');
-        alert(`已锁定【${boxName} 到期待复习词】，共 ${filtered.length} 个单词，开始抗遗忘冲刺！`);
-        App.nextQuestion();
+        App.startDueReviewSession({ boxId: boxId, boxName: boxName });
       },
 
       filterBoxExact(boxId, boxName) {
@@ -9024,7 +9009,7 @@ Gist ID: ${curId}
 
         wordsInBox.forEach(w => {
           const st = stDict[w.word];
-          const isDue = (!st || !st.lastReviewed || st.lastReviewed === 0 || now >= (st.nextReviewDate || 0));
+          const isDue = Algorithms.Leitner.isWordDue(st, now);
           const tag = document.createElement('span');
           tag.className = `drawer-word-tag ${isDue ? 'due-word' : ''}`;
           tag.title = `${Utils.escapeHTML(w.pos || '')} ${Utils.escapeHTML(w.meaning)} (点击朗读发音)`;
@@ -9125,7 +9110,6 @@ Gist ID: ${curId}
       Companion
     };
   })();
-
   // =========================================================================
   // ★ 模块 6：应用主控制器 (App Orchestrator & Global Facades)
   // =========================================================================
@@ -9548,7 +9532,6 @@ Gist ID: ${curId}
           document.body.classList.add('focus-mode');
         }
 
-        // 恢复辅助栏折叠状态
         if (localStorage.getItem('morpho_companion_collapsed') === '1') {
           const panel = document.getElementById('desktop-companion-panel');
           const layout = document.querySelector('.workspace-layout');
@@ -9614,6 +9597,11 @@ Gist ID: ${curId}
       },
 
       switchWordPack(packId) {
+        // 切换词库时若处于冲刺会话，安全注销以防止跨词库词池污染
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
+
         AppState.update('currentPackId', packId);
         this.statUndoStack = [];
         this.adaptiveStepCounter = 0;
@@ -9732,6 +9720,217 @@ Gist ID: ${curId}
 
       adaptiveStepCounter: 0,
 
+      // =========================================================================
+      // ★ 抗遗忘专享冲刺会话控制器 (Due Review Session State Machine)
+      // =========================================================================
+      startDueReviewSession(options = {}) {
+        const boxId = options.boxId !== undefined ? options.boxId : null;
+        const boxName = options.boxName || (boxId ? `Box ${boxId} 到期复习` : '今日全盒抗遗忘冲刺');
+        const now = Date.now();
+        const currentPackId = AppState.get('currentPackId');
+        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
+        const stDict = AppState.get('packStats')[currentPackId] || {};
+
+        // 严格已学到期判定：必须学过(lastReviewed > 0)且到达复习临界点(now >= nextReviewDate)
+        const dueWords = packWords.filter(w => {
+          const st = stDict[w.word];
+          if (boxId !== null && (st?.box ?? 1) !== boxId) return false;
+          return Algorithms.Leitner.isWordDue(st, now);
+        });
+
+        if (dueWords.length === 0) {
+          const msg = boxId !== null ? `当前【${boxName}】暂无到期单词！` : '🎉 太棒了！今日暂无到期需要复习的单词，请继续背诵新词！';
+          alert(msg);
+          return false;
+        }
+
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
+
+        // 备份当前主线上下文
+        const backupContext = {
+          activePool: [...AppState.get('activePool')],
+          orderMode: AppState.get('orderMode'),
+          questionHistory: [...AppState.get('questionHistory')],
+          historyCursor: AppState.get('historyCursor'),
+          sequentialIndex: AppState.get('sequentialIndex'),
+          shuffleQueue: [...(AppState.get('shuffleQueue') || [])],
+          shufflePointer: AppState.get('shufflePointer'),
+          currentMode: AppState.get('currentMode')
+        };
+
+        const session = {
+          isActive: true,
+          scopeBoxId: boxId,
+          scopeName: boxName,
+          queue: [...dueWords],
+          totalInitial: dueWords.length,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: now,
+          backupContext: backupContext
+        };
+
+        AppState.update('dueReviewSession', session);
+
+        // 若当前处于管理/图谱等非题型面板，自动切入核心测试
+        const curMode = AppState.get('currentMode');
+        const isQuestionMode = ['choice', 'flashcard', 'spell', 'speed_blitz', 'audio_clo', 'confusables'].includes(curMode);
+        if (!isQuestionMode) {
+          this.switchMode('choice');
+        }
+
+        this.updateDueSprintUI();
+        this.nextQuestion();
+        Services.Sync.showToast(`⚡ 已开启【${boxName}】，共 ${dueWords.length} 词待冲刺！`, 'info', 2000);
+        return true;
+      },
+
+      exitDueReviewSession(restore = true) {
+        const session = AppState.get('dueReviewSession');
+        if (!session || !session.isActive) return;
+
+        if (restore && session.backupContext) {
+          AppState.batchUpdate({
+            activePool: session.backupContext.activePool,
+            orderMode: session.backupContext.orderMode,
+            questionHistory: session.backupContext.questionHistory,
+            historyCursor: session.backupContext.historyCursor,
+            sequentialIndex: session.backupContext.sequentialIndex,
+            shuffleQueue: session.backupContext.shuffleQueue,
+            shufflePointer: session.backupContext.shufflePointer
+          });
+        }
+
+        AppState.update('dueReviewSession', {
+          isActive: false,
+          scopeBoxId: null,
+          scopeName: '',
+          queue: [],
+          totalInitial: 0,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: 0,
+          backupContext: null
+        });
+
+        this.updateDueSprintUI();
+        this.updateDueBadge();
+        this.renderCurrentView();
+        Services.Sync.showToast('已退出抗遗忘冲刺，返回主线学习', 'info', 1500);
+      },
+
+      updateDueSprintUI() {
+        const session = AppState.get('dueReviewSession');
+        const bar = document.getElementById('due-sprint-bar');
+        const title = document.getElementById('due-sprint-title');
+        const desc = document.getElementById('due-sprint-desc');
+        const badge = document.getElementById('due-sprint-badge');
+        const progEl = document.getElementById('order-progress');
+
+        if (!session || !session.isActive) {
+          if (bar) bar.style.display = 'none';
+          return;
+        }
+
+        if (bar) bar.style.display = 'flex';
+        if (title) title.innerText = `${session.scopeName || '抗遗忘冲刺'}`;
+        if (desc) desc.innerText = `(已消灭 ${session.passedWords.size} / 初始 ${session.totalInitial} 词)`;
+        if (badge) badge.innerText = `剩余 ${session.queue.length} 词`;
+
+        if (progEl) {
+          const passed = session.passedWords.size;
+          const total = session.totalInitial;
+          progEl.innerText = `⚡ [抗遗忘] 剩余 ${session.queue.length} / 共 ${total} 词 (已消灭 ${passed} 词)`;
+          progEl.title = `抗遗忘冲刺专属调度队列：
+• 冲刺范围: ${session.scopeName}
+• 初始待复习总词数: ${total}
+• 已成功内化消除: ${passed}
+• 队列剩余待测: ${session.queue.length} (答错将循环至末尾直至全部消灭)`;
+        }
+      },
+
+      showDueMilestoneModal() {
+        const session = AppState.get('dueReviewSession');
+        if (!session) return;
+
+        const overlay = document.getElementById('due-milestone-overlay');
+        const elapsedMs = Math.max(1000, Date.now() - (session.roundStartTime || Date.now()));
+        const elapsedSec = Math.floor(elapsedMs / 1000);
+        const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+        const s = String(elapsedSec % 60).padStart(2, '0');
+
+        const total = session.totalInitial;
+        const cycledCount = session.mistakeWords.size;
+        const perfectCount = Math.max(0, total - cycledCount);
+
+        const timeEl = document.getElementById('due-tm-time');
+        const wordsEl = document.getElementById('due-tm-words');
+        const perfectEl = document.getElementById('due-tm-perfect');
+        const cycledEl = document.getElementById('due-tm-cycled');
+        const remainEl = document.getElementById('due-tm-remain');
+
+        if (timeEl) timeEl.innerText = `${m}:${s}`;
+        if (wordsEl) wordsEl.innerText = `${total} 词`;
+        if (perfectEl) perfectEl.innerText = `${perfectCount} 词`;
+        if (cycledEl) cycledEl.innerText = `${cycledCount} 词`;
+        if (remainEl) remainEl.innerText = `0 词`;
+
+        // 恢复主线状态
+        if (session.backupContext) {
+          AppState.batchUpdate({
+            activePool: session.backupContext.activePool,
+            orderMode: session.backupContext.orderMode,
+            questionHistory: session.backupContext.questionHistory,
+            historyCursor: session.backupContext.historyCursor,
+            sequentialIndex: session.backupContext.sequentialIndex,
+            shuffleQueue: session.backupContext.shuffleQueue,
+            shufflePointer: session.backupContext.shufflePointer
+          });
+        }
+
+        AppState.update('dueReviewSession', {
+          isActive: false,
+          scopeBoxId: null,
+          scopeName: '',
+          queue: [],
+          totalInitial: 0,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: 0,
+          backupContext: null
+        });
+
+        this.updateDueSprintUI();
+        this.updateDueBadge();
+        Views.Compass.markBoxesDirty();
+        Views.Compass.markMatrixDirty();
+        Views.Compass.renderBoxes();
+
+        if (overlay) {
+          overlay.style.display = 'flex';
+          KeyRouter.pushModal({
+            element: overlay,
+            onEscape: () => this.dismissDueMilestone(),
+            onEnter: () => this.dismissDueMilestone()
+          });
+        }
+
+        if (AppState.get('soundEffectsEnabled')) {
+          Services.Sfx.playFeedbackSound(true, 'arcade');
+        }
+      },
+
+      dismissDueMilestone() {
+        const overlay = document.getElementById('due-milestone-overlay');
+        if (overlay) {
+          overlay.style.display = 'none';
+          KeyRouter.popModal(overlay);
+        }
+        this.nextQuestion();
+      },
+
       pickNextWord(direction = 1) {
         const pool = this.getEffectivePool();
         if (pool.length === 0) return null;
@@ -9740,13 +9939,11 @@ Gist ID: ${curId}
         const curPack = AppState.get('currentPackId');
         const stDict = AppState.get('packStats')[curPack] || {};
 
-        // 核心机制修复 2：双轨动态探索与配额状态机 (Dual-Track Quota Engine)
         if (mode === 'adaptive') {
           const mistakeOnly = (typeof document !== 'undefined' ? document.getElementById('mistake-only-chk')?.checked : false) || false;
           const dailyNewLimit = AppState.get('dailyNewLimit') ?? 20;
           const todayNewCount = this.getTodayNewLearnedCount(curPack);
 
-          // 分流划分生词探索池与强化复习池
           const unlearnedPool = [];
           const reviewPool = [];
           pool.forEach(w => {
@@ -9765,16 +9962,12 @@ Gist ID: ${curId}
           let activeTrack = 'review';
 
           if (mistakeOnly) {
-            // 用户开启了仅背错词模式，强制复习轨
             activeTrack = 'review';
           } else if (isReviewEmpty) {
-            // 冷启动保护：复习池为空，全量进入生词探索轨
             activeTrack = 'discovery';
           } else if (isQuotaFull || isUnlearnedEmpty) {
-            // 熔断切换：新词配额已满或生词耗尽，平滑切回 100% 强化/复习轨
             activeTrack = 'review';
           } else {
-            // 双轨动态协同：8:2 配比平滑插题 (每 5 题固定插入 1 题新词)
             this.adaptiveStepCounter = (this.adaptiveStepCounter || 0) + 1;
             if (this.adaptiveStepCounter % 5 === 0) {
               activeTrack = 'discovery';
@@ -9785,9 +9978,6 @@ Gist ID: ${curId}
 
           const recentBuf = AppState.get('recentQuestionBuffer') || [];
 
-          // ---------------------------------------------------------------
-          // 轨道 A：新词探索轨 (Discovery Track) - 原书自然顺序推进
-          // ---------------------------------------------------------------
           if (activeTrack === 'discovery' && unlearnedPool.length > 0) {
             const candidate = unlearnedPool.find(w => !recentBuf.includes(w.word)) || unlearnedPool[0];
             const targetIndex = pool.indexOf(candidate);
@@ -9805,9 +9995,6 @@ Gist ID: ${curId}
             return candidate;
           }
 
-          // ---------------------------------------------------------------
-          // 轨道 B：强化/复习轨 (Review Track) - 艾宾浩斯动力学打分 + Softmax
-          // ---------------------------------------------------------------
           const candidateReviewPool = reviewPool.length > 0 ? reviewPool : (unlearnedPool.length > 0 ? unlearnedPool : pool);
           const familyStatsMap = Algorithms.RootAnalytics.getPrecomputedFamilyMap(pool, stDict, curPack);
           const currentMode = AppState.get('currentMode');
@@ -9961,6 +10148,33 @@ Gist ID: ${curId}
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
         const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
+        // ★ 抗遗忘专享冲刺通道拦截 (短路自适应打分，彻底杜绝回退全库黑洞与微池死锁)
+        const dueSession = AppState.get('dueReviewSession');
+        if (dueSession && dueSession.isActive) {
+          if (dueSession.queue.length === 0) {
+            this.showDueMilestoneModal();
+            return;
+          }
+          const nextWord = dueSession.queue[0];
+          let history = AppState.get('questionHistory');
+          history.push(nextWord.word);
+          if (history.length > 100) history.shift();
+          AppState.update('questionHistory', history);
+          AppState.update('historyCursor', history.length - 1);
+          AppState.update('currentWord', nextWord);
+
+          this.renderCurrentView();
+          this.updateDueSprintUI();
+
+          if (isFlashcard && lockedScrollY !== null) {
+            window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
+            requestAnimationFrame(() => {
+              window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
+            });
+          }
+          return;
+        }
+
         const pool = AppState.get('activePool') || [];
         if (pool.length > 0 && pool[0]?.isGhost) {
           const ghostWord = pool.shift();
@@ -10063,11 +10277,34 @@ Gist ID: ${curId}
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
         const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
+        // ★ 抗遗忘专享冲刺会话撤销回滚流
+        const dueSession = AppState.get('dueReviewSession');
+        if (dueSession && dueSession.isActive && cursor > 0) {
+          const prevWordName = history[cursor - 1];
+          const curPack = AppState.get('currentPackId');
+          const packWords = AppState.get('allPacks')[curPack]?.words || [];
+          const prevWordObj = packWords.find(w => w.word === prevWordName);
+
+          if (prevWordObj) {
+            if (dueSession.passedWords.has(prevWordName)) {
+              dueSession.passedWords.delete(prevWordName);
+              dueSession.queue.unshift(prevWordObj);
+            } else {
+              const lastIdx = dueSession.queue.map(w => w.word).lastIndexOf(prevWordName);
+              if (lastIdx !== -1) {
+                dueSession.queue.splice(lastIdx, 1);
+                dueSession.queue.unshift(prevWordObj);
+              }
+            }
+            AppState.update('dueReviewSession', dueSession);
+            this.updateDueSprintUI();
+          }
+        }
+
         if (cursor > 0) {
           const targetWordName = history[cursor - 1];
           const curMode = AppState.get('currentMode');
 
-          // 闪卡模式下触发原子级掌握度快照事务回滚 (Stat Undo Stack Rollback)
           if (curMode === 'flashcard' && this.statUndoStack && this.statUndoStack.length > 0) {
             const top = this.statUndoStack[this.statUndoStack.length - 1];
             if (top && top.wordName === targetWordName) {
@@ -10193,6 +10430,14 @@ Gist ID: ${curId}
         try { Views.Companion.render(word); } catch (e) { console.warn(e); }
         try { this.updateDueBadge(); } catch (e) { console.warn(e); }
         try { updateMobileNavBarVisibility(); } catch (_) {}
+
+        const dueSession = AppState.get('dueReviewSession');
+        if (dueSession && dueSession.isActive) {
+          this.updateDueSprintUI();
+        } else {
+          const bar = typeof document !== 'undefined' ? document.getElementById('due-sprint-bar') : null;
+          if (bar) bar.style.display = 'none';
+        }
 
         try {
           if (mode === 'speed_blitz') Views.SpeedBlitz.render(word);
@@ -10392,6 +10637,25 @@ Gist ID: ${curId}
           eventId: null
         };
 
+        // ★ 抗遗忘专享冲刺会话队列消费与闭环推进流
+        const dueSession = AppState.get('dueReviewSession');
+        if (dueSession && dueSession.isActive && dueSession.queue.length > 0) {
+          const head = dueSession.queue[0];
+          if (head && head.word === wordName) {
+            if (isCorrect) {
+              dueSession.passedWords.add(wordName);
+              dueSession.queue.shift(); // 顺利出队
+            } else {
+              dueSession.mistakeWords.add(wordName);
+              // Anki 闭环循环：移出队头，推入队尾，直到全部消灭
+              const failed = dueSession.queue.shift();
+              dueSession.queue.push(failed);
+            }
+            AppState.update('dueReviewSession', dueSession);
+            this.updateDueSprintUI();
+          }
+        }
+
         AppState.update('roundTotal', r => r + 1);
         if (isCorrect) AppState.update('roundCorrect', r => r + 1);
         AppState.update('sessionAnswered', s => s + 1);
@@ -10438,13 +10702,11 @@ Gist ID: ${curId}
         this.updateStats();
         this.bumpDailyActivity(wordName);
 
-        // ★ 方案重构核心防护：打上脏标记，实现完全惰性化按需更新，避免摧毁当前模式的滚动锚定与掉帧
         Views.Compass.markBoxesDirty();
         Views.Compass.markMatrixDirty();
         Views.MistakesCenter.markDirty();
         Algorithms.RootAnalytics.markFamilyCacheDirty();
 
-        // 仅在当前处于该面板时才进行同步 DOM 刷新
         if (AppState.get('currentMode') === 'leitner_box') {
           Views.Compass.renderBoxes();
         } else if (AppState.get('currentMode') === 'mistakes_center') {
@@ -10518,7 +10780,7 @@ Gist ID: ${curId}
           const words = AppState.get('allPacks')[curPack]?.words || [];
           sDue.innerText = words.filter(w => {
             const st = stDict[w.word];
-            return !st || !st.lastReviewed || now >= (st.nextReviewDate || 0);
+            return Algorithms.Leitner.isWordDue(st, now);
           }).length;
         }
       },
@@ -10533,7 +10795,7 @@ Gist ID: ${curId}
         let dueCount = 0;
         packWords.forEach(w => {
           const st = stDict[w.word];
-          if (!st || !st.lastReviewed || st.lastReviewed === 0 || now >= (st.nextReviewDate || 0)) {
+          if (Algorithms.Leitner.isWordDue(st, now)) {
             dueCount++;
           }
         });
@@ -10550,13 +10812,14 @@ Gist ID: ${curId}
             badge.style.background = '#10b981';
           }
         }
+
+        const sheetDue = document.getElementById('sheet-due-badge');
+        if (sheetDue) sheetDue.innerText = `${dueCount} 词`;
       },
 
       switchMode(mode) {
         const prevMode = AppState.get('currentMode');
-        // 沙箱化一键熔断注销：清理上个模式的 Timer/Interval/RAF/Audio/悬挂 Promise
         LifecycleScheduler.teardown();
-        // 临界安全强刷通道：离开前同步将脏数据序列化落盘
         Services.Storage.flushAll();
 
         AppState.update('currentMode', mode);
@@ -10754,6 +11017,9 @@ Gist ID: ${curId}
       },
 
       filterByGroup(groupName) {
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
         const curPack = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[curPack]?.words || [];
         const filtered = packWords.filter(w => w.group === groupName);
@@ -10772,6 +11038,11 @@ Gist ID: ${curId}
       },
 
       clearScopeFilter() {
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(true);
+          return;
+        }
+
         const curPack = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[curPack]?.words || [];
         const input = typeof document !== 'undefined' ? document.getElementById('search-input') : null;
@@ -10880,7 +11151,6 @@ Gist ID: ${curId}
   // =========================================================================
 
   if (typeof window !== 'undefined') {
-    // 统一交由 KeyRouter 处理优先级调度与焦点陷阱
     window.addEventListener('keydown', (e) => {
       KeyRouter.handleKeyDown(e);
     });
@@ -10947,7 +11217,9 @@ Gist ID: ${curId}
     window.finishMockExam = () => Views.MockExam.finish();
     window.graduateCurrentWord = () => Views.Compass.jumpBox(5);
     window.resetCurrentWordToBox1 = () => Views.Compass.jumpBox(1);
-    window.startLeitnerDueReview = () => Views.Compass.filterDueWords(1, '抗遗忘到期');
+    window.startLeitnerDueReview = () => App.startDueReviewSession({ boxId: null, boxName: '今日全盒抗遗忘' });
+    window.exitDueReviewSession = (restore = true) => App.exitDueReviewSession(restore);
+    window.dismissDueMilestone = () => App.dismissDueMilestone();
     window.closeLeitnerDrawer = () => Views.Compass.closeDrawer();
     window.jumpBoxFromCompass = (b) => Views.Compass.jumpBox(b);
 
@@ -11010,9 +11282,6 @@ Gist ID: ${curId}
       localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
     };
 
-    // -----------------------------------------------------------------------
-    // [移动端专属优化支持] 快捷工具抽屉与底部交互栏智能响应
-    // -----------------------------------------------------------------------
     window.toggleMobileToolsSheet = function(open) {
       const sheet = document.getElementById('mobile-tools-sheet');
       if (!sheet) return;
@@ -11098,65 +11367,60 @@ Gist ID: ${curId}
 
     window.switchWordPack = (id) => App.switchWordPack(id);
     function switchTheme(theme) {
-  const validThemes = ['light', 'dark', 'sepia'];
-  const targetTheme = validThemes.includes(theme) ? theme : 'light';
+      const validThemes = ['light', 'dark', 'sepia'];
+      const targetTheme = validThemes.includes(theme) ? theme : 'light';
 
-  document.documentElement.setAttribute('data-theme', targetTheme);
-  try {
-    localStorage.setItem('morpho_theme', targetTheme);
-  } catch (_) {}
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      try {
+        localStorage.setItem('morpho_theme', targetTheme);
+      } catch (_) {}
 
-  // 同步顶栏选择框
-  const topSelect = document.getElementById('theme-select');
-  if (topSelect && topSelect.value !== targetTheme) {
-    topSelect.value = targetTheme;
-  }
+      const topSelect = document.getElementById('theme-select');
+      if (topSelect && topSelect.value !== targetTheme) {
+        topSelect.value = targetTheme;
+      }
 
-  // 同步手机专属快捷抽屉的选择框
-  const sheetSelect = document.getElementById('sheet-theme-select');
-  if (sheetSelect && sheetSelect.value !== targetTheme) {
-    sheetSelect.value = targetTheme;
-  }
-}
-window.switchTheme = switchTheme;
+      const sheetSelect = document.getElementById('sheet-theme-select');
+      if (sheetSelect && sheetSelect.value !== targetTheme) {
+        sheetSelect.value = targetTheme;
+      }
+    }
+    window.switchTheme = switchTheme;
 
-function updateDailyProgressUI() {
-  const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
-  const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
-  const testedToday = act[todayStr] || 0;
+    function updateDailyProgressUI() {
+      const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
+      const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
+      const testedToday = act[todayStr] || 0;
 
-  // 统计独立词去重数
-  const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
-  const uniqueList = dailyUniqueMap[todayStr] || [];
-  const uniqueToday = uniqueList.length;
+      const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
+      const uniqueList = dailyUniqueMap[todayStr] || [];
+      const uniqueToday = uniqueList.length;
 
-  // 计算进度条百分比
-  const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
-  const pct = Math.min(100, Math.round((testedToday / target) * 100));
+      const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
+      const pct = Math.min(100, Math.round((testedToday / target) * 100));
 
-  // 1. 同步顶栏（桌面及移动端）
-  const dCount = document.getElementById('daily-count');
-  const dTarget = document.getElementById('daily-target-num');
-  const dUnique = document.getElementById('daily-unique-count');
-  const dFill = document.getElementById('daily-bar-fill');
+      const dCount = document.getElementById('daily-count');
+      const dTarget = document.getElementById('daily-target-num');
+      const dUnique = document.getElementById('daily-unique-count');
+      const dFill = document.getElementById('daily-bar-fill');
 
-  if (dCount) dCount.innerText = testedToday;
-  if (dTarget) dTarget.innerText = target;
-  if (dUnique) dUnique.innerText = uniqueToday;
-  if (dFill) dFill.style.width = `${pct}%`;
+      if (dCount) dCount.innerText = testedToday;
+      if (dTarget) dTarget.innerText = target;
+      if (dUnique) dUnique.innerText = uniqueToday;
+      if (dFill) dFill.style.width = `${pct}%`;
 
-  // 2. 同步手机专属抽屉 (#mobile-tools-sheet)
-  const sCount = document.getElementById('sheet-daily-count');
-  const sTarget = document.getElementById('sheet-daily-target');
-  const sUnique = document.getElementById('sheet-daily-unique');
-  const sFill = document.getElementById('sheet-daily-bar-fill');
+      const sCount = document.getElementById('sheet-daily-count');
+      const sTarget = document.getElementById('sheet-daily-target');
+      const sUnique = document.getElementById('sheet-daily-unique');
+      const sFill = document.getElementById('sheet-daily-bar-fill');
 
-  if (sCount) sCount.innerText = testedToday;
-  if (sTarget) sTarget.innerText = target;
-  if (sUnique) sUnique.innerText = uniqueToday;
-  if (sFill) sFill.style.width = `${pct}%`;
-}
-window.updateDailyProgressUI = updateDailyProgressUI;
+      if (sCount) sCount.innerText = testedToday;
+      if (sTarget) sTarget.innerText = target;
+      if (sUnique) sUnique.innerText = uniqueToday;
+      if (sFill) sFill.style.width = `${pct}%`;
+    }
+    window.updateDailyProgressUI = updateDailyProgressUI;
+
     window.changeVoiceRate = (v) => AppState.update('currentVoiceRate', parseFloat(v));
     window.changeTypingSfx = (m) => {
       AppState.update('typingSfxMode', m);
@@ -11740,7 +12004,6 @@ window.updateDailyProgressUI = updateDailyProgressUI;
       if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
 
       const register = () => {
-        // 使用相对路径 ./sw.js，完美兼容 GitHub Pages 项目子路径
         navigator.serviceWorker.register('./sw.js', { scope: './' })
           .then((registration) => {
             console.log('[PWA] Service Worker 注册就绪，Scope:', registration.scope);
@@ -11750,7 +12013,6 @@ window.updateDailyProgressUI = updateDailyProgressUI;
           });
       };
 
-      // 修复漏洞：若当前 document 已经处于 complete 状态，直接注册，防止 load 监听落空
       if (document.readyState === 'complete') {
         register();
       } else {
@@ -11764,7 +12026,7 @@ window.updateDailyProgressUI = updateDailyProgressUI;
       let startX = 0, startY = 0, startTime = 0;
 
       card.addEventListener('touchstart', (e) => {
-        if (AppState.get('currentMode') === 'flashcard') return; // 闪卡模式独占自适应触控架构，避免双重手势监听冲突
+        if (AppState.get('currentMode') === 'flashcard') return;
         if (e.touches.length !== 1) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
@@ -11772,7 +12034,7 @@ window.updateDailyProgressUI = updateDailyProgressUI;
       }, { passive: true });
 
       card.addEventListener('touchend', (e) => {
-        if (AppState.get('currentMode') === 'flashcard') return; // 闪卡模式独占自适应触控架构
+        if (AppState.get('currentMode') === 'flashcard') return;
         if (!e.changedTouches || e.changedTouches.length !== 1) return;
         const dx = e.changedTouches[0].clientX - startX;
         const dy = e.changedTouches[0].clientY - startY;
