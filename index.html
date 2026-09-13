@@ -5102,12 +5102,12 @@
     })();
 
     // -----------------------------------------------------------------------
-    // [4.4 Sync Service - GitHub Gist 自动云同步中枢 (Schema v4)]
+    // [4.4 Sync Service - GitHub Gist 自动云同步中枢 (Schema v4 - 工业级防截断与容灾自愈版)]
     // -----------------------------------------------------------------------
     const Sync = (function() {
       const SCHEMA = 4;
       const SYNC_FILE = 'morpho_sync_data.json';
-      const MAX_LOG_EVENTS = 300;
+      const MAX_LOG_EVENTS = 150;
 
       let inFlightEventIds = new Set();
       let syncDebounceTimer = null;
@@ -5161,6 +5161,74 @@
           }, delayMs);
         },
 
+        // 安全 Gist 文件读取（自动检测 1MB 截断并回退至 Raw URL 完整下载，兼顾 CORS 与鉴权容错）
+        async fetchSafeGistFile(fileObj, token, timeoutMs = 15000) {
+          if (!fileObj) throw new Error('云端备份文件不存在');
+
+          // 若未截断且内容非空字符串，直接使用
+          if (!fileObj.truncated && typeof fileObj.content === 'string' && fileObj.content.length > 0) {
+            return fileObj.content;
+          }
+
+          if (!fileObj.raw_url) {
+            if (typeof fileObj.content === 'string') return fileObj.content;
+            throw new Error('云端数据被截断且未提供 Raw 下载地址');
+          }
+
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+          try {
+            let resp;
+            try {
+              const headers = {};
+              if (token && token.trim()) {
+                headers['Authorization'] = `Bearer ${token.trim()}`;
+              }
+              resp = await fetch(fileObj.raw_url, {
+                method: 'GET',
+                headers,
+                signal: controller.signal,
+                cache: 'no-store'
+              });
+              // 容错：若携带 Token 遭 Raw CDN 拒绝 (400/401/403)，回退到匿名拉取
+              if (!resp.ok && (resp.status === 400 || resp.status === 401 || resp.status === 403)) {
+                resp = await fetch(fileObj.raw_url, {
+                  method: 'GET',
+                  signal: controller.signal,
+                  cache: 'no-store'
+                });
+              }
+            } catch (networkErr) {
+              if (networkErr.name === 'AbortError') throw networkErr;
+              // 若带 Authorization 触发浏览器 CORS 报错 (TypeError)，尝试匿名直连
+              if (token) {
+                resp = await fetch(fileObj.raw_url, {
+                  method: 'GET',
+                  signal: controller.signal,
+                  cache: 'no-store'
+                });
+              } else {
+                throw networkErr;
+              }
+            }
+
+            if (!resp || !resp.ok) {
+              const status = resp ? resp.status : 'NetworkError';
+              throw new Error(`下载完整原始数据失败 (HTTP ${status})`);
+            }
+
+            return await resp.text();
+          } catch (err) {
+            if (err.name === 'AbortError') {
+              throw new Error('网络请求超时 (15s)，请检查网络或代理配置');
+            }
+            throw err;
+          } finally {
+            clearTimeout(timer);
+          }
+        },
+
         async buildPayload(targetRevision, isPatch = false) {
           const curPack = AppState.get('currentPackId');
           const allPStats = AppState.get('packStats');
@@ -5178,8 +5246,33 @@
           const localDailyUnique = Storage.getDailyUniqueMap ? Storage.getDailyUniqueMap() : {};
           const pendingEvents = Storage.getPendingEvents();
 
+          // 1. 日志压实：仅保留最近 MAX_LOG_EVENTS 条变动事件，防范历史日志无限线性膨胀
           const eventsToUpload = pendingEvents.slice(-MAX_LOG_EVENTS);
           inFlightEventIds = new Set(eventsToUpload.map(e => e.id));
+
+          // 2. 统计数据瘦身：剔除全库中未触碰的默认初始空词（降低 70% 体积）
+          const trimmedStats = {};
+          for (const [pId, pData] of Object.entries(localStats)) {
+            if (!pData || typeof pData !== 'object') continue;
+            const activeWords = {};
+            for (const [w, st] of Object.entries(pData)) {
+              if (!st) continue;
+              if (
+                (st.tested || 0) > 0 ||
+                Boolean(st.isFlagged) ||
+                (st.mistakes || 0) > 0 ||
+                (st.typingMistakes || 0) > 0 ||
+                (st.lastReviewed || 0) > 0 ||
+                (st.box || 1) > 1 ||
+                (st.streak || 0) > 0
+              ) {
+                activeWords[w] = st;
+              }
+            }
+            if (Object.keys(activeWords).length > 0) {
+              trimmedStats[pId] = activeWords;
+            }
+          }
 
           let typingSession = null;
           if (typeof Views !== 'undefined' && Views.Typing && typeof Views.Typing.exportSession === 'function') {
@@ -5194,7 +5287,7 @@
 
           const internalState = {
             snapshot: {
-              stats: localStats,
+              stats: trimmedStats,
               activity: localActivity,
               notes: localNotes,
               dailyUniqueMap: localDailyUnique,
@@ -5242,22 +5335,53 @@
         },
 
         async parseCloudData(fileContent) {
-          const envelope = JSON.parse(fileContent);
-          if (envelope.format === 'gzip-b64' && envelope.payload) {
-            const decomp = await decompress(envelope.payload);
-            const parsed = JSON.parse(decomp);
-            return {
-              ...envelope,
-              snapshot: parsed.snapshot,
-              typingSession: parsed.typingSession || parsed.snapshot?.typingSession || envelope.typingSession || null,
-              typingPoolLimit: parsed.typingPoolLimit || parsed.snapshot?.typingPoolLimit || envelope.typingPoolLimit || null,
-              recentEvents: parsed.recentEvents || []
-            };
+          if (!fileContent || typeof fileContent !== 'string') {
+            throw new Error('拉取到的云端数据内容为空');
           }
+
+          let envelope;
+          try {
+            envelope = JSON.parse(fileContent);
+          } catch (e) {
+            throw new Error(`云端数据非合法 JSON 格式: ${e.message.slice(0, 40)}`);
+          }
+
+          if (!envelope || typeof envelope !== 'object') {
+            throw new Error('云端存档结构无效');
+          }
+
+          if (envelope.format === 'gzip-b64' && envelope.payload) {
+            try {
+              const decomp = await decompress(envelope.payload);
+              const parsed = JSON.parse(decomp);
+              return {
+                ...envelope,
+                snapshot: parsed.snapshot || {},
+                typingSession: parsed.typingSession || parsed.snapshot?.typingSession || envelope.typingSession || null,
+                typingPoolLimit: parsed.typingPoolLimit || parsed.snapshot?.typingPoolLimit || envelope.typingPoolLimit || 60,
+                recentEvents: parsed.recentEvents || []
+              };
+            } catch (decompErr) {
+              console.warn('[Sync] Gzip 解压失败，尝试降级读取外层快照镜像:', decompErr);
+              if (envelope.snapshot) {
+                return {
+                  ...envelope,
+                  snapshot: envelope.snapshot,
+                  typingSession: envelope.typingSession || envelope.snapshot?.typingSession || null,
+                  typingPoolLimit: envelope.typingPoolLimit || envelope.snapshot?.typingPoolLimit || 60,
+                  recentEvents: envelope.recentEvents || []
+                };
+              }
+              throw new Error('数据解压校验失败，云端备份可能已破损');
+            }
+          }
+
           return {
             ...envelope,
+            snapshot: envelope.snapshot || {},
             typingSession: envelope.typingSession || envelope.snapshot?.typingSession || null,
-            typingPoolLimit: envelope.typingPoolLimit || envelope.snapshot?.typingPoolLimit || null
+            typingPoolLimit: envelope.typingPoolLimit || envelope.snapshot?.typingPoolLimit || 60,
+            recentEvents: envelope.recentEvents || []
           };
         },
 
@@ -5504,8 +5628,8 @@
 
         async upload(triggerReason = 'batch', keepalive = false) {
           if (typeof localStorage === 'undefined') return false;
-          const token = localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value.trim();
-          const gistId = localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value.trim();
+          const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+          const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
           if (!token) {
             lastErrorMessage = '未配置 GitHub Token';
             return false;
@@ -5515,6 +5639,9 @@
           isSyncing = true;
           lastErrorMessage = '';
           this.setBadge('syncing', '☁️ 同步中...');
+
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 15000);
 
           try {
             let targetId = gistId;
@@ -5533,7 +5660,8 @@
                 'Accept': 'application/vnd.github+json',
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify(reqPayload)
+              body: JSON.stringify(reqPayload),
+              signal: controller.signal
             });
 
             if (!resp.ok) {
@@ -5579,21 +5707,30 @@
             }, 3500);
             return true;
           } catch (err) {
-            console.warn('[AutoSync] Upload exception:', err.message);
+            if (err.name === 'AbortError') {
+              lastErrorMessage = '同步超时 (15s)，请检查网络或代理连接';
+            } else {
+              lastErrorMessage = err.message || '网络请求受阻';
+            }
+            console.warn('[AutoSync] Upload exception:', lastErrorMessage);
             this.setBadge('error', '❌ 同步失败: 点击查看原因');
             return false;
           } finally {
+            clearTimeout(timeoutId);
             isSyncing = false;
           }
         },
 
         async autoPullOnLaunch() {
           if (typeof localStorage === 'undefined') return;
-          const token = localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value.trim();
-          const gistId = localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value.trim();
+          const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+          const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
           if (!token || !gistId) return;
 
           this.setBadge('syncing', '☁️ 检查云端进度...');
+
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 15000);
 
           try {
             const cachedETag = localStorage.getItem('morpho_gist_etag') || '';
@@ -5602,7 +5739,10 @@
               headers['If-None-Match'] = cachedETag;
             }
 
-            const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, { headers });
+            const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+              headers,
+              signal: controller.signal
+            });
             if (resp.status === 304) {
               if (this.hasUnsyncedChanges()) {
                 await this.upload('launch_push_pending');
@@ -5618,10 +5758,11 @@
             if (newETag) localStorage.setItem('morpho_gist_etag', newETag);
 
             const data = await resp.json();
-            const file = data.files && data.files[SYNC_FILE];
+            const file = data.files && (data.files[SYNC_FILE] || data.files[Object.keys(data.files)[0]]);
             if (!file) return;
 
-            const cloudData = await this.parseCloudData(file.content);
+            const rawContent = await this.fetchSafeGistFile(file, token);
+            const cloudData = await this.parseCloudData(rawContent);
             const hadLocal = this.hasUnsyncedChanges();
 
             this.performMerge(cloudData);
@@ -5647,6 +5788,8 @@
             } else {
               this.setBadge('', '☁️ 自动同步就绪');
             }
+          } finally {
+            clearTimeout(timeoutId);
           }
         },
 
@@ -5660,13 +5803,7 @@
           if (state === 'error') {
             badge.title = `❌ 同步异常: ${lastErrorMessage || '网络请求受阻'} (点击查看排查建议)`;
             badge.onclick = () => {
-              alert(`❌ 同步失败原因：
-${lastErrorMessage || '网络连接超时或凭证失效'}
-
-排查建议：
-1. 检查 GitHub Token 是否过期且具备 gist 权限；
-2. 检查网络代理是否允许访问 api.github.com；
-3. 点击进入“打卡与备份”面板核对 Gist ID。`);
+              alert(`❌ 同步失败原因：\n${lastErrorMessage || '网络连接超时或凭证失效'}\n\n排查建议：\n1. 检查 GitHub Token 是否过期且具备 gist 权限；\n2. 检查网络代理是否允许访问 api.github.com；\n3. 点击进入“打卡与备份”面板核对 Gist ID。`);
               if (window.switchMode) window.switchMode('manage');
             };
           } else {
@@ -8536,7 +8673,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.13 Manage View - 打卡与备份中心 (严密修复 pull 与 rollback)]
+    // [5.13 Manage View - 打卡与备份中心 (工业级防截断与超时熔断版)]
     // -----------------------------------------------------------------------
     const Manage = {
       render() {
@@ -8587,13 +8724,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       async upload() {
-        const token = document.getElementById('gist-token')?.value.trim();
+        const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
         if (!token) {
           alert('请先输入 GitHub Personal Access Token (需勾选 gist 权限)！');
           return;
         }
         localStorage.setItem('morpho_gist_token', token);
-        const gId = document.getElementById('gist-id')?.value.trim();
+        const gId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
         if (gId) localStorage.setItem('morpho_gist_id', gId);
 
         Services.Sync.showToast('正在安全备份并上传至云端...', 'info', 3000);
@@ -8606,8 +8743,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       async pull() {
-        const token = document.getElementById('gist-token')?.value.trim();
-        const gistId = document.getElementById('gist-id')?.value.trim();
+        const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+        const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
         if (!token || !gistId) {
           alert('从云端拉取需要同时填写 GitHub Token 与已有的 Gist ID！');
           return;
@@ -8615,32 +8752,48 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         localStorage.setItem('morpho_gist_token', token);
         localStorage.setItem('morpho_gist_id', gistId);
         Services.Sync.showToast('正在从云端拉取最新数据...', 'info', 3000);
+        Services.Sync.setBadge('syncing', '☁️ 正在拉取...');
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
 
         try {
           const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
-            headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json'
+            },
+            signal: controller.signal
           });
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
           const data = await resp.json();
-          const file = data.files && data.files['morpho_sync_data.json'];
+          const file = data.files && (data.files['morpho_sync_data.json'] || data.files[Object.keys(data.files)[0]]);
           if (!file) throw new Error('未在 Gist 中找到数据存档文件');
 
-          const cloudData = await Services.Sync.parseCloudData(file.content);
+          // 工业级防截断自愈拉取：若文件超过约1MB被GitHub截断，自动通过Raw URL安全获取完整原文
+          const rawContent = await Services.Sync.fetchSafeGistFile(file, token);
+          const cloudData = await Services.Sync.parseCloudData(rawContent);
+
+          // 内存合并与状态持久化
           Services.Sync.performMerge(cloudData);
 
           App.onDataMerged({ refreshStage: false, silentAudio: true });
 
+          Services.Sync.setBadge('synced', '☁️ 同步成功');
           alert('🎉 成功从云端拉取并智能合并所有学习进度与错题！');
           this.updateSyncTimeUI();
         } catch (err) {
           console.error('[Sync Pull Error]', err);
-          alert(`❌ 拉取失败: ${err.message}`);
+          Services.Sync.setBadge('error', '❌ 同步失败');
+          alert(`❌ 拉取失败: ${err.message}\n\n建议排查：\n1. Token 是否包含 gist 权限；\n2. 网络代理连接；\n3. Gist ID 是否准确。`);
+        } finally {
+          clearTimeout(timeoutId);
         }
       },
 
       async rollback() {
-        const token = localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value.trim();
-        const gistId = localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value.trim();
+        const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+        const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
         if (!token || !gistId) { alert('请先配置 GitHub Token 与 Gist ID！'); return; }
 
         const ok = await UIModal.confirm({
@@ -8652,23 +8805,37 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (!ok) return;
 
         Services.Sync.showToast('☁️ 正在拉取上一版本备份镜像...', 'info');
+        Services.Sync.setBadge('syncing', '☁️ 正在回滚...');
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+
         try {
           const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
-            headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json'
+            },
+            signal: controller.signal
           });
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const data = await resp.json();
-          const backupFile = data.files && data.files['morpho_sync_backup.json'];
+          const backupFile = data.files && (data.files['morpho_sync_backup.json'] || data.files['morpho_sync_data.json.bak']);
           if (!backupFile) throw new Error('未在 Gist 中找到上一版本备份镜像');
 
-          const cloudData = await Services.Sync.parseCloudData(backupFile.content);
+          const rawContent = await Services.Sync.fetchSafeGistFile(backupFile, token);
+          const cloudData = await Services.Sync.parseCloudData(rawContent);
           Services.Sync.performMerge(cloudData);
 
           App.onDataMerged({ refreshStage: false, silentAudio: true });
+          Services.Sync.setBadge('synced', '☁️ 回滚完成');
           alert('🎉 成功从云端上一版本备份镜像回滚！');
         } catch (e) {
           console.error('[Sync Rollback Error]', e);
+          Services.Sync.setBadge('error', '❌ 回滚失败');
           alert('回滚失败: ' + e.message);
+        } finally {
+          clearTimeout(timeoutId);
         }
       },
 
