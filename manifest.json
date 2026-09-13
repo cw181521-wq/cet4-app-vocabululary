@@ -1,0 +1,36 @@
+{
+  "id": "./",
+  "name": "CET-4 科学词根与句法全能终端 Pro",
+  "short_name": "词根终端",
+  "description": "基于艾宾浩斯自适应算法的四级科学词根背诵终端",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef3f2",
+  "theme_color": "#0f766e",
+  "categories": [
+    "education",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
