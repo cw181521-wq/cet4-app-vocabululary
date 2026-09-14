@@ -3595,7 +3595,287 @@
       { id: 5, name: "盒 5 · 终极毕业", icon: "🏆", days: 15, ms: 15 * 86400000, desc: "永久记忆，形成直觉级条件反射", color: "#10b981" }
     ];
 
+    // =========================================================================
+    // ★ 下一代自适应认知动力学引擎 (NDRE v2 + CRSE + BayesianRoot)
+    // =========================================================================
+    const AdaptiveEngine = {
+      MotorProfiling: {
+        CONSTANTS: {
+          TOUCH_OVERHEAD: 320,
+          KEYBOARD_CHOICE_OVERHEAD: 140,
+          TYPING_BASE_OVERHEAD: 180,
+          TYPING_PER_CHAR: 150
+        },
+
+        getDevicePriors(isTouch) {
+          return isTouch
+            ? { mean: 1100, variance: 176400 } // 触屏基准 1100ms, 标准差 420ms
+            : { mean: 850, variance: 122500 };  // 电脑键盘 850ms, 标准差 350ms
+        },
+
+        getProfile(mode = 'choice', isTouch = false) {
+          const key = `morpho_user_profile_${mode}_${isTouch ? 'touch' : 'pc'}`;
+          try {
+            if (typeof localStorage !== 'undefined') {
+              const data = JSON.parse(localStorage.getItem(key));
+              if (data && typeof data.mean === 'number' && typeof data.variance === 'number') {
+                return data;
+              }
+            }
+          } catch (_) {}
+          const priors = this.getDevicePriors(isTouch);
+          return { mean: priors.mean, variance: priors.variance, sampleCount: 0 };
+        },
+
+        saveProfile(mode, isTouch, profile) {
+          try {
+            if (typeof localStorage !== 'undefined') {
+              const key = `morpho_user_profile_${mode}_${isTouch ? 'touch' : 'pc'}`;
+              localStorage.setItem(key, JSON.stringify(profile));
+            }
+          } catch (_) {}
+        },
+
+        extractCognitiveTime(rawRtMs, mode = 'choice', wordLength = 5, isTouch = false) {
+          let motor = 0;
+          if (mode === 'typing' || mode === 'spell') {
+            motor = this.CONSTANTS.TYPING_BASE_OVERHEAD + wordLength * this.CONSTANTS.TYPING_PER_CHAR;
+          } else {
+            motor = isTouch ? this.CONSTANTS.TOUCH_OVERHEAD : this.CONSTANTS.KEYBOARD_CHOICE_OVERHEAD;
+          }
+          return Math.max(80, rawRtMs - motor);
+        },
+
+        updateProfile(cognitiveMs, mode = 'choice', isTouch = false) {
+          const p = this.getProfile(mode, isTouch);
+          const prevMean = p.mean || (isTouch ? 1100 : 850);
+
+          // 双边自适应 Winsorized 截断滤波（抗发呆走神拉偏均值）
+          const filteredMs = Math.min(Math.max(120, cognitiveMs), Math.max(1800, Math.min(3.0 * prevMean, 5000)));
+
+          const n = p.sampleCount + 1;
+          const alpha = n < 15 ? (1.0 / n) : 0.08; // 前15题快速贴合，后续平滑滤波
+
+          const delta = filteredMs - p.mean;
+          p.mean = Math.round(p.mean + alpha * delta);
+          const delta2 = filteredMs - p.mean;
+          p.variance = Math.round(Math.max(22500, (1 - alpha) * p.variance + alpha * delta * delta2));
+          p.sampleCount = Math.min(2000, n);
+
+          this.saveProfile(mode, isTouch, p);
+          return p;
+        },
+
+        calculateFluencyFactor(cognitiveMs, mode = 'choice', isTouch = false, sessionCount = 0) {
+          const p = this.getProfile(mode, isTouch);
+          const priors = this.getDevicePriors(isTouch);
+
+          // 经验贝叶斯冷启动融合（前15题平滑收缩）
+          const N0 = 10;
+          const effMean = (N0 * priors.mean + p.sampleCount * p.mean) / (N0 + p.sampleCount);
+          const effVar = (N0 * priors.variance + p.sampleCount * p.variance) / (N0 + p.sampleCount);
+
+          // 生理疲劳自适应补偿（会话超过30题后，每增加题目提供对数平缓补偿）
+          const fatigueFactor = sessionCount > 30 ? (1 + 0.04 * Math.log(1 + (sessionCount - 30) / 25)) : 1.0;
+          const compensatedMean = effMean * fatigueFactor;
+
+          const stdDev = Math.max(150, Math.sqrt(effVar));
+          const z = (cognitiveMs - compensatedMean) / stdDev;
+
+          // 连续 Sigmoid 阻尼系数：范围 [0.50, 1.30]
+          const factor = 0.50 + 0.80 / (1.0 + Math.exp(1.2 * z));
+
+          return {
+            zScore: Math.round(z * 100) / 100,
+            factor: Math.round(factor * 1000) / 1000,
+            cognitiveMs: Math.round(cognitiveMs),
+            mean: Math.round(compensatedMean),
+            stdDev: Math.round(stdDev),
+            fatigueCompensated: sessionCount > 30
+          };
+        }
+      },
+
+      BayesianRoot: {
+        PRIOR: { alpha: 2.0, beta: 8.0 },
+
+        computeFamilyPosterior(group, packWords, packStats) {
+          if (!group) return 0.20;
+          let totalTested = 0;
+          let totalMistakes = 0;
+
+          if (Array.isArray(packWords)) {
+            for (let i = 0; i < packWords.length; i++) {
+              const w = packWords[i];
+              if (w.group === group) {
+                const st = packStats?.[w.word];
+                if (st) {
+                  totalTested += (st.tested || 0);
+                  totalMistakes += (st.mistakes || 0);
+                }
+              }
+            }
+          }
+
+          return (totalMistakes + this.PRIOR.alpha) / (totalTested + this.PRIOR.alpha + this.PRIOR.beta);
+        },
+
+        calculatePercolationBoost(group, wordTested, posteriorRate) {
+          if (posteriorRate <= 0.25) return 0.0;
+          const severity = (posteriorRate - 0.25) / 0.75;
+          const wordImmunity = wordTested / (wordTested + 2.5);
+          return Math.round(32.0 * severity * (1.0 - wordImmunity) * 10) / 10;
+        }
+      },
+
+      CRSE: {
+        evaluateMemoryState(wordStat, effectiveStability = null) {
+          const now = Date.now();
+          const lastReviewed = wordStat?.lastReviewed || 0;
+          const stability = (effectiveStability !== null && typeof effectiveStability === 'number')
+            ? effectiveStability
+            : (wordStat?.stability || (0.65 * Math.pow(1.6, (wordStat?.box || 1) - 1)));
+
+          if (!lastReviewed || lastReviewed <= 0) {
+            return { recall: 15, risk: 85, stability: Math.round(stability * 100) / 100 };
+          }
+
+          const daysPassed = Math.max(0, (now - lastReviewed) / 86400000);
+          const recall = Math.exp(-daysPassed / Math.max(0.15, stability));
+          const safeRecall = Math.max(0.01, Math.min(0.99, isNaN(recall) ? 0.15 : recall));
+
+          return {
+            recall: Math.round(safeRecall * 100),
+            risk: Math.round((1 - safeRecall) * 100),
+            stability: Math.round(stability * 100) / 100
+          };
+        },
+
+        mapStabilityToBox(s) {
+          if (s < 1.5) return 1;
+          if (s < 3.5) return 2;
+          if (s < 7.5) return 3;
+          if (s < 15.0) return 4;
+          return 5;
+        },
+
+        applyRecallTransition(wordStat, isCorrect, rawRtMs, context = {}) {
+          const mode = context.mode || 'choice';
+          const wordLen = context.wordLen || 5;
+          const isTouch = Boolean(context.isTouch);
+          const sessionCount = context.sessionCount || 0;
+          const now = Date.now();
+
+          const cogTime = AdaptiveEngine.MotorProfiling.extractCognitiveTime(rawRtMs, mode, wordLen, isTouch);
+          const fluency = AdaptiveEngine.MotorProfiling.calculateFluencyFactor(cogTime, mode, isTouch, sessionCount);
+          AdaptiveEngine.MotorProfiling.updateProfile(cogTime, mode, isTouch);
+
+          let s = wordStat.stability || (0.65 * Math.pow(1.6, (wordStat.box || 1) - 1));
+          let d = wordStat.difficulty || (5.0 + Math.min(5.0, (wordStat.mistakes || 0) * 0.4));
+          let streak = wordStat.streak || 0;
+          let mistakes = wordStat.mistakes || 0;
+          let tested = wordStat.tested || 0;
+
+          const memState = this.evaluateMemoryState(wordStat, s);
+          const r = memState.recall / 100.0;
+
+          let isPromoted = false;
+
+          if (isCorrect) {
+            streak += 1;
+            d = Math.max(1.0, d - 0.15 * fluency.factor);
+
+            const desirableDifficulty = Math.exp(1.0 - r);
+            const streakBonus = 1.0 + Math.log(1.0 + 0.35 * streak);
+            const difficultyDamping = (11.0 - d) / 10.0;
+
+            const growth = 0.45 * desirableDifficulty * streakBonus * difficultyDamping * fluency.factor;
+            s = s * (1.0 + growth);
+            isPromoted = (fluency.zScore <= 0.2);
+          } else {
+            streak = 0;
+            mistakes += 1;
+            d = Math.min(10.0, d + 0.8);
+            s = Math.max(0.25, s * 0.22 * Math.pow(r, 0.2));
+            isPromoted = false;
+          }
+
+          const jitter = 0.92 + Math.random() * 0.16;
+          const nextIntervalMs = Math.round(s * 86400000 * jitter);
+          const nextReviewDate = now + nextIntervalMs;
+
+          const newBox = this.mapStabilityToBox(s);
+          const masteryScore = Math.min(100, Math.max(5, Math.round((Math.atan(s / 4.0) / (Math.PI / 2)) * 100)));
+
+          return {
+            stability: Math.round(s * 100) / 100,
+            difficulty: Math.round(d * 10) / 10,
+            streak,
+            mistakes,
+            box: newBox,
+            tested: tested + 1,
+            lastReviewed: now,
+            lastResponseTime: rawRtMs,
+            nextReviewDate,
+            masteryScore,
+            isPromoted,
+            fluency
+          };
+        }
+      },
+
+      calculatePriority(wordObj, wordStat = {}, context = {}) {
+        const now = Date.now();
+        const st = wordStat;
+        const s = st.stability || (0.65 * Math.pow(1.6, (st.box || 1) - 1));
+        const memState = this.CRSE.evaluateMemoryState(st, s);
+        const risk = memState.risk;
+
+        let overdueMultiplier = 1.0;
+        if (st.nextReviewDate && st.nextReviewDate > 0) {
+          const delta = now - st.nextReviewDate;
+          if (delta > 0) {
+            const overdueRatio = delta / (s * 86400000);
+            overdueMultiplier = 1.4 + Math.min(2.6, overdueRatio * 1.5);
+          }
+        }
+
+        let rootBoost = 0;
+        if (wordObj.group && context.packWords && context.packStats) {
+          const postRate = this.BayesianRoot.computeFamilyPosterior(wordObj.group, context.packWords, context.packStats);
+          rootBoost = this.BayesianRoot.calculatePercolationBoost(wordObj.group, st.tested || 0, postRate);
+        }
+
+        let recencyDamping = 0;
+        const recentBuffer = context.recentBuffer || [];
+        const wordName = wordObj.word;
+        if (recentBuffer.length > 0) {
+          const lastIdx = recentBuffer.lastIndexOf(wordName);
+          if (lastIdx !== -1) {
+            const step = recentBuffer.length - lastIdx;
+            recencyDamping = Math.max(0, 180.0 * Math.exp(-(step - 1) / 2.8));
+          }
+        }
+
+        const basePriority = (risk * 0.50) +
+                             (Math.min(st.mistakes || 0, 6) * 12.0) +
+                             ((100 - (st.masteryScore || 35)) * 0.25) +
+                             rootBoost;
+
+        const finalScore = Math.max(0.01, (basePriority * overdueMultiplier) - recencyDamping);
+
+        return {
+          score: Math.round(finalScore * 100) / 100,
+          risk,
+          rootBoost,
+          overdueMultiplier: Math.round(overdueMultiplier * 100) / 100,
+          recencyDamping: Math.round(recencyDamping * 10) / 10
+        };
+      }
+    };
+
     return {
+      AdaptiveEngine,
       RootAnalytics: {
         familyStatsCache: new Map(),
         isCacheDirty: true,
@@ -3702,6 +3982,16 @@
         },
 
         calculateMemoryRisk(wordStat, effectiveStability = null) {
+          if (wordStat && typeof wordStat.stability === 'number' && wordStat.stability > 0) {
+            const res = Algorithms.AdaptiveEngine.CRSE.evaluateMemoryState(wordStat, effectiveStability || wordStat.stability);
+            return {
+              recall: res.recall,
+              risk: res.risk,
+              stability: res.stability,
+              rawStability: res.stability,
+              effectiveStability: res.stability
+            };
+          }
           const tested = (wordStat && typeof wordStat.tested === 'number' && !isNaN(wordStat.tested)) ? Math.max(0, wordStat.tested) : 0;
           const mastery = (wordStat && typeof wordStat.masteryScore === 'number' && !isNaN(wordStat.masteryScore)) ? wordStat.masteryScore : 35;
           const streak = (wordStat && typeof wordStat.streak === 'number' && !isNaN(wordStat.streak)) ? Math.max(0, wordStat.streak) : 0;
@@ -10460,14 +10750,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           currentMode: AppState.get('currentMode')
         };
 
-        // 构建深拷贝沙箱上下文与 WordSessionProfile 契约 (支持四轨双阶梯复核)
+        // 构建深拷贝沙箱上下文与 WordSessionProfile 契约 (支持投机确权与错题双相重构)
         const profileMap = {};
         targetWords.forEach(w => {
+          const st = stDict[w.word] || {};
+          const s = st.stability || (0.65 * Math.pow(1.6, boxId - 1));
           profileMap[w.word] = {
             word: w.word,
             wordObj: w,
             initialBox: boxId,
             currentBox: boxId,
+            initialStability: s,
+            currentStability: s,
+            tentativeStabilityDelta: 0, // ★ 投机增量暂存
             firstPassDone: false,
             firstPassResult: null,
             firstPassRT: 0,
@@ -10665,13 +10960,16 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           session.promotableRemaining = Math.max(0, session.promotableRemaining - 1);
 
           if (!isCorrect) {
-            // 首碰做错：一票降级，吊销晋升，开启阶梯 1 初次纠偏 (4~7 题，整体后移 1 题)
+            // 首碰做错：双相半衰期重构阶段 1 (赋予微稳定度 S_recon1)
             profile.sessionMistakes++;
             profile.canPromote = false;
             profile.verificationStatus = 'DEMOTED';
             profile.cognitiveState = 'DEMOTED';
             profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.currentBox);
             profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+
+            profile.currentStability = Math.max(0.20, profile.initialStability * 0.20);
+            profile.tentativeStabilityDelta = 0;
 
             const mistakeGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
             session.mistakeQueue.push({
@@ -10681,10 +10979,15 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           } else {
             profile.sessionSuccesses++;
             if (evalRes.state === 'PROMOTION_ELIGIBLE') {
-              // 首碰秒答达标：进入 Lane 2 秒答待复核池 (16~24 题)
+              // 首碰秒答达标：暂存投机增长增量 ΔS_spec，挂起等待二次确权
               profile.verificationStatus = 'NEEDS_VERIFY';
               profile.cognitiveState = 'NEEDS_VERIFY';
               profile.canPromote = false;
+
+              // 预估理论增量 ΔS_spec
+              const cogTime = Algorithms.AdaptiveEngine.MotorProfiling.extractCognitiveTime(rtMs, AppState.get('currentMode'), wordName.length, isTouch);
+              const fluency = Algorithms.AdaptiveEngine.MotorProfiling.calculateFluencyFactor(cogTime, AppState.get('currentMode'), isTouch);
+              profile.tentativeStabilityDelta = profile.initialStability * 0.45 * fluency.factor;
 
               const totalWords = session.totalCount || 0;
               let targetEligibleIndex;
@@ -10702,11 +11005,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                 eligibleAtQuestionIndex: targetEligibleIndex
               });
             } else {
-              // 首碰超时做对：确认为原盒稳固，无需二次复核
+              // 首碰超时做对：确认为原盒稳固，微增稳定度
               profile.verificationStatus = 'CONSOLIDATED';
               profile.cognitiveState = evalRes.state;
               profile.canPromote = false;
               profile.currentBox = profile.initialBox;
+              profile.currentStability = profile.initialStability * 1.15;
+              profile.tentativeStabilityDelta = 0;
             }
           }
         } else if (isVerifyPass && profile.verificationStatus === 'NEEDS_VERIFY') {
@@ -10716,13 +11021,16 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           profile.lastEncounterIndex = curQ;
 
           if (!isCorrect) {
-            // 复核做错：一票降级，转入错题阶梯 1 初次纠偏 (4~7 题)
+            // 复核做错：投机增量作废清零，一票降级并入错题阶梯 1
             profile.sessionMistakes++;
             profile.canPromote = false;
             profile.verificationStatus = 'DEMOTED';
             profile.cognitiveState = 'DEMOTED';
             profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.initialBox);
             profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+
+            profile.currentStability = Math.max(0.20, profile.initialStability * 0.20);
+            profile.tentativeStabilityDelta = 0;
 
             const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
             session.mistakeQueue.push({
@@ -10732,24 +11040,28 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           } else {
             profile.sessionSuccesses++;
             if (evalRes.state === 'PROMOTION_ELIGIBLE') {
-              // ★ 二次复核再次秒答达标：正式确权晋级！
+              // ★ 二次复核再次秒答达标：正式确权固化稳定度跃升！
               profile.verificationStatus = 'VERIFIED_SUCCESS';
               profile.cognitiveState = 'PROMOTION_ELIGIBLE';
               profile.canPromote = true;
               profile.currentBox = Math.min(5, profile.initialBox + 1);
+
+              const cogTime = Algorithms.AdaptiveEngine.MotorProfiling.extractCognitiveTime(rtMs, AppState.get('currentMode'), wordName.length, isTouch);
+              const fluency = Algorithms.AdaptiveEngine.MotorProfiling.calculateFluencyFactor(cogTime, AppState.get('currentMode'), isTouch);
+              profile.currentStability = profile.initialStability + (profile.tentativeStabilityDelta * fluency.factor);
             } else {
-              // 二次复核答对但超时：转为原盒加固稳固
+              // 二次复核答对但超时：投机增量削减 80%，转为原盒稳固保守微增
               profile.verificationStatus = 'VERIFY_HELD';
               profile.cognitiveState = evalRes.state;
               profile.canPromote = false;
               profile.currentBox = profile.initialBox;
+              profile.currentStability = profile.initialStability + (profile.tentativeStabilityDelta * 0.20);
             }
           }
         } else if (isMR) {
           // ==================== 阶段 3：错题阶梯 1 初次纠偏 (Lane 3 Remediation) ====================
           profile.lastEncounterIndex = curQ;
           if (!isCorrect) {
-            // 阶梯 1 再次做错：继续留在阶梯 1 (重新预约 4~7 题)
             profile.sessionMistakes++;
             profile.mistakeRemediationStatus = 'NEEDS_RETEST';
             const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
@@ -10758,9 +11070,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               eligibleAtQuestionIndex: curQ + mGap
             });
           } else {
-            // 阶梯 1 初纠成功：推进至阶梯 2 深度复核池 (13~17 题，整体后移 1 题)
+            // 阶梯 1 初纠做对：双相半衰期重构阶段 2
             profile.sessionSuccesses++;
             profile.mistakeRemediationStatus = 'NEEDS_DEEP_VERIFY';
+            profile.currentStability = profile.currentStability * 1.6;
+
             const deepGap = Math.round(13 + Math.random() * 4); // 13 ~ 17 题
             session.mistakeVerifyQueue.push({
               wordObj: profile.wordObj,
@@ -10771,19 +11085,21 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           // ==================== 阶段 4：错题阶梯 2 深度复核 (Lane 4 Deep Verification) ====================
           profile.lastEncounterIndex = curQ;
           if (!isCorrect) {
-            // 深度复核失败：判定仍未掌握，打回阶梯 1 重新排队 (4~7 题)
             profile.sessionMistakes++;
             profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+            profile.currentStability = Math.max(0.20, profile.initialStability * 0.20);
+
             const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
             session.mistakeQueue.push({
               wordObj: profile.wordObj,
               eligibleAtQuestionIndex: curQ + mGap
             });
           } else {
-            // ★ 深度复核成功：突触真正稳固修复，准许回血至原盒！
+            // ★ 深度复核成功：突触完全修复，稳定度平滑回血至原盒基线！
             profile.sessionSuccesses++;
             profile.mistakeRemediationStatus = 'REMEDIATED';
-            profile.currentBox = profile.initialBox; // 成功回血原盒
+            profile.currentBox = profile.initialBox;
+            profile.currentStability = Math.min(profile.initialStability, 0.85 * profile.initialStability + 0.15 * profile.currentStability);
           }
         }
 
@@ -11180,9 +11496,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const targetPack = normalizedPacks[curPack] ? curPack : (normalizedPacks['all_2257'] ? 'all_2257' : Object.keys(normalizedPacks)[0]);
         this.switchWordPack(targetPack, { skipHistoryPush: true });
 
-        // 异步存入 IndexedDB 本地离线自愈缓存
+        // 异步存入 IndexedDB 本地离线自愈缓存 (★ 严禁把 <= 20 词的内置轻量垫底包存入缓存造成永久污染)
         try {
-          if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.cachePacksToDB) {
+          const totalWordsCount = Object.values(normalizedPacks).reduce((sum, p) => sum + (p.words ? p.words.length : 0), 0);
+          if (totalWordsCount > 20 && typeof Services !== 'undefined' && Services.Storage && Services.Storage.cachePacksToDB) {
             Services.Storage.cachePacksToDB(normalizedPacks);
           }
         } catch (_) {}
@@ -11193,36 +11510,18 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       startVocabularyAutoHeal() {
         if (typeof window === 'undefined') return;
 
-        // 1. 尝试从 IndexedDB 提取离线自愈词库
-        if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.loadPacksFromDB) {
-          Services.Storage.loadPacksFromDB().then((cachedPacks) => {
-            if (cachedPacks && typeof cachedPacks === 'object' && Object.keys(cachedPacks).length > 0) {
-              const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
-              if (currentTotal <= 20) {
-                this.hydrateExternalPacks(cachedPacks, '本地离线缓存');
-                Services.Sync.showToast('⚡ 已从本地离线自愈缓存成功恢复全量词库！', 'success', 2000);
-              }
-            }
-          }).catch(() => {});
-        }
-
-        // 2. 轮询检测 window.VOCABULARY_PACKS 或 window.WORDS_DATA (针对大文件异步时序差)
-        let attempts = 0;
-        const maxAttempts = 50; // 50 * 80ms = 4秒
-        const timer = setInterval(() => {
-          attempts++;
+        const tryHydrateGlobal = () => {
           const packs = window.VOCABULARY_PACKS;
-          const rawWords = window.WORDS_DATA || window.__PRELOADED_WORDS__;
+          const rawWords = window.WORDS_DATA || window.__PRELOADED_WORDS__ || window.words;
 
           if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
-            clearInterval(timer);
             const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
             if (currentTotal <= 20 || Object.keys(AppState.get('allPacks')).length <= 1) {
               this.hydrateExternalPacks(packs, '外载词库');
               Services.Sync.showToast(`🎉 外载词库已成功挂载！收录 ${packs.all_2257?.words?.length || '全量'} 词。`, 'success', 2500);
+              return true;
             }
           } else if (rawWords && Array.isArray(rawWords) && rawWords.length > 20) {
-            clearInterval(timer);
             const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
             if (currentTotal <= 20) {
               const singlePack = {
@@ -11235,20 +11534,77 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               };
               this.hydrateExternalPacks(singlePack, '外载词库');
               Services.Sync.showToast(`🎉 外载词库已成功挂载！共 ${rawWords.length} 词。`, 'success', 2500);
+              return true;
             }
           }
+          return false;
+        };
 
-          if (attempts >= maxAttempts) {
+        // 即刻尝试一次全局直读
+        if (tryHydrateGlobal()) return;
+
+        // 1. 尝试从 IndexedDB 提取离线自愈词库 (仅恢复 > 20 词的真实词库)
+        if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.loadPacksFromDB) {
+          Services.Storage.loadPacksFromDB().then((cachedPacks) => {
+            if (cachedPacks && typeof cachedPacks === 'object') {
+              const cachedTotal = Object.values(cachedPacks).reduce((sum, p) => sum + (p.words ? p.words.length : 0), 0);
+              if (cachedTotal > 20) {
+                const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
+                if (currentTotal <= 20) {
+                  this.hydrateExternalPacks(cachedPacks, '本地离线缓存');
+                  Services.Sync.showToast(`⚡ 已从本地离线自愈缓存成功恢复全量词库 (${cachedTotal} 词)！`, 'success', 2000);
+                }
+              }
+            }
+          }).catch(() => {});
+        }
+
+        // 2. 轮询检测 window.VOCABULARY_PACKS 或 window.WORDS_DATA (扩大轮询窗口至 8 秒)
+        let attempts = 0;
+        const maxAttempts = 100;
+        const timer = setInterval(() => {
+          attempts++;
+          if (tryHydrateGlobal() || attempts >= maxAttempts) {
             clearInterval(timer);
           }
         }, 80);
 
-        // 3. 监听全局脚本就绪通知
+        // 3. 监听全局脚本就绪通知 (同时兼顾 VOCABULARY_PACKS 与 WORDS_DATA)
         window.addEventListener('morphoWordsLoaded', () => {
-          if (window.VOCABULARY_PACKS) {
-            this.hydrateExternalPacks(window.VOCABULARY_PACKS, '外载词库');
-          }
-        }, { once: true });
+          tryHydrateGlobal();
+        });
+
+        // 4. 主动异步 Fetch 探测同目录 words_data.js (防止标签解析被静默拦截)
+        if (typeof fetch !== 'undefined') {
+          setTimeout(() => {
+            const curTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
+            if (curTotal <= 20) {
+              fetch('./words_data.js', { cache: 'no-store' })
+                .then(r => r.ok ? r.text() : null)
+                .then(txt => {
+                  if (txt && typeof parseWordsFileContent === 'function') {
+                    const parsed = parseWordsFileContent(txt);
+                    if (parsed.packs && Object.keys(parsed.packs).length > 0) {
+                      this.hydrateExternalPacks(parsed.packs, 'words_data.js');
+                      Services.Sync.showToast(`🎉 已主动探测并挂载 words_data.js！`, 'success', 2200);
+                    } else if (parsed.words && parsed.words.length > 20) {
+                      const sp = {
+                        all_2257: {
+                          id: "all_2257",
+                          category: "四级核心全库",
+                          title: "CET-4 核心高频词汇",
+                          words: parsed.words.map(normalizeWord).filter(Boolean)
+                        }
+                      };
+                      this.hydrateExternalPacks(sp, 'words_data.js');
+                      Services.Sync.showToast(`🎉 已主动探测并挂载 words_data.js！`, 'success', 2200);
+                    }
+                  }
+                })
+                .catch(() => {});
+            }
+          }, 350);
+        }
       },
 
       init() {
@@ -12643,13 +12999,27 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         let newStreak = isCorrect ? (oldStreak + 1) : 0;
         let newMistakes = isCorrect ? Math.max(0, oldMistakes - 1) : (oldMistakes + 1);
 
-        const delta = Algorithms.Scoring.calculateMasteryDelta(isCorrect, responseTimeMs, oldStreak, daysSinceLastReview, mode);
-        const newMastery = Math.min(100, Math.max(0, oldMastery + delta));
-        const newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+        const isTouch = (typeof Views !== 'undefined' && Views.Flashcard && typeof Views.Flashcard.isTouchDevice === 'function')
+          ? Views.Flashcard.isTouchDevice()
+          : false;
 
-        const leitnerResult = Algorithms.Leitner.calculateAdvance(oldBox, isCorrect, AppState.get('leitnerMode'), now, baseStat?.nextReviewDate || 0);
-        const newBox = leitnerResult.box;
-        const newNextReviewDate = leitnerResult.nextReviewDate;
+        // ★ 全面接入连续动力学状态转移引擎 (CRSE + NDRE v2)
+        const transition = Algorithms.AdaptiveEngine.CRSE.applyRecallTransition(
+          baseStat || {},
+          isCorrect,
+          responseTimeMs,
+          {
+            mode,
+            wordLen: wordName.length,
+            isTouch,
+            sessionCount: AppState.get('sessionAnswered') || 0
+          }
+        );
+
+        const newBox = transition.box;
+        const newNextReviewDate = transition.nextReviewDate;
+        const newMastery = transition.masteryScore;
+        const newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
 
         this.broadcastWordStatUpdate(currentPackId, wordName, (st) => {
           st.tested = newTested;
@@ -12658,6 +13028,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           st.box = newBox;
           st.level = newLevel;
           st.masteryScore = newMastery;
+          st.stability = transition.stability;
+          st.difficulty = transition.difficulty;
           st.lastReviewed = now;
           st.lastResponseTime = responseTimeMs;
           st.nextReviewDate = newNextReviewDate;
@@ -12875,7 +13247,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             Views.Manage.render();
           } else if (mode === 'typing') {
             document.body.classList.add('typing-mode-active');
-            window.toggleModeNavAccordion(true);
+            if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') window.toggleModeNavAccordion(true);
             const ctrlPanel = document.getElementById('utility-control-panel');
             if (ctrlPanel) ctrlPanel.classList.add('is-collapsed');
 
@@ -12936,7 +13308,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               AppState.update('historyCursor', -1);
             }
             document.body.classList.remove('typing-mode-active');
-            window.toggleModeNavAccordion(false);
+            if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') window.toggleModeNavAccordion(false);
             if (localStorage.getItem('morpho_utility_collapsed') !== '1') {
               const ctrlPanel = document.getElementById('utility-control-panel');
               if (ctrlPanel) ctrlPanel.classList.remove('is-collapsed');
@@ -13905,61 +14277,75 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     function parseWordsFileContent(content) {
-      content = (content || '').trim();
+      if (!content || typeof content !== 'string') return { packs: null, words: null };
+      // 1. 自动剥离 UTF-8 BOM 头
+      content = content.replace(/^\ufeff/, '').trim();
       let packs = null;
       let words = null;
 
-      // 1. 尝试直接 JSON 结构探测
+      // 2. 尝试直接 JSON 解析
       try {
         const json = JSON.parse(content);
         if (json && typeof json === 'object') {
           if (json.all_2257 && json.all_2257.words) packs = json;
           else if (Array.isArray(json)) words = json;
           else if (Array.isArray(json.words)) words = json.words;
+          else {
+            const hasPacks = Object.values(json).some(v => v && Array.isArray(v.words));
+            if (hasPacks) packs = json;
+          }
         }
       } catch (_) {}
 
-      // 2. 尝试正则抓取 VOCABULARY_PACKS 对象
-      if (!packs && !words) {
-        try {
-          const match = content.match(/VOCABULARY_PACKS\s*=\s*(\{[\s\S]*\});?\s*$/m) ||
-                        content.match(/VOCABULARY_PACKS\s*=\s*(\{[\s\S]*\})/);
-          if (match) {
-            try {
-              packs = JSON.parse(match[1]);
-            } catch (_) {
-              packs = new Function('return ' + match[1])();
-            }
-          }
-        } catch (_) {}
-      }
+      // 3. 剥离模块导出声明 (export default / module.exports =)
+      let cleanJs = content
+        .replace(/^export\s+default\s+/m, '')
+        .replace(/^export\s+(const|let|var)\s+/m, '$1 ')
+        .replace(/^module\.exports\s*=\s*/m, '');
 
-      // 3. 尝试正则抓取 WORDS_DATA 数组
+      // 4. 模拟 window 全局沙箱执行提取
       if (!packs && !words) {
         try {
-          const match = content.match(/WORDS_DATA\s*=\s*(\[[\s\S]*\]);?\s*$/m) ||
-                        content.match(/WORDS_DATA\s*=\s*(\[[\s\S]*\])/);
-          if (match) {
-            try {
-              words = JSON.parse(match[1]);
-            } catch (_) {
-              words = new Function('return ' + match[1])();
-            }
-          }
-        } catch (_) {}
-      }
+          const sandbox = { window: {}, global: {}, self: {}, globalThis: {} };
+          sandbox.window = sandbox;
+          sandbox.global = sandbox;
+          sandbox.self = sandbox;
+          sandbox.globalThis = sandbox;
 
-      // 4. 模拟 window 沙箱执行提取
-      if (!packs && !words) {
-        try {
-          const sandbox = {};
-          const fn = new Function('window', 'global', content);
-          fn(sandbox, sandbox);
+          const fn = new Function('window', 'global', 'self', 'globalThis', cleanJs);
+          fn(sandbox, sandbox, sandbox, sandbox);
+
           if (sandbox.VOCABULARY_PACKS && typeof sandbox.VOCABULARY_PACKS === 'object') {
             packs = sandbox.VOCABULARY_PACKS;
           } else if (sandbox.WORDS_DATA && Array.isArray(sandbox.WORDS_DATA)) {
             words = sandbox.WORDS_DATA;
+          } else if (sandbox.words && Array.isArray(sandbox.words)) {
+            words = sandbox.words;
           }
+        } catch (_) {}
+      }
+
+      // 5. 顶层全局 DOM Script 注入终极自愈 (最适合本地大体积 words_data.js)
+      if (!packs && !words && typeof document !== 'undefined') {
+        try {
+          const prevPacks = window.VOCABULARY_PACKS;
+          const prevWords = window.WORDS_DATA;
+          window.VOCABULARY_PACKS = undefined;
+          window.WORDS_DATA = undefined;
+
+          const scriptEl = document.createElement('script');
+          scriptEl.textContent = cleanJs;
+          document.head.appendChild(scriptEl);
+          scriptEl.remove();
+
+          if (window.VOCABULARY_PACKS && typeof window.VOCABULARY_PACKS === 'object') {
+            packs = window.VOCABULARY_PACKS;
+          } else if (window.WORDS_DATA && Array.isArray(window.WORDS_DATA)) {
+            words = window.WORDS_DATA;
+          }
+
+          if (!window.VOCABULARY_PACKS && prevPacks) window.VOCABULARY_PACKS = prevPacks;
+          if (!window.WORDS_DATA && prevWords) window.WORDS_DATA = prevWords;
         } catch (_) {}
       }
 
@@ -13971,8 +14357,14 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     window.handleLocalWordsFile = function(e) {
       const file = e.target.files?.[0];
       if (!file) return;
+
+      const resetInput = () => {
+        try { e.target.value = ''; } catch (_) {}
+      };
+
       const reader = new FileReader();
       reader.onload = function(evt) {
+        resetInput();
         const text = evt.target.result;
         try {
           const parsed = parseWordsFileContent(text);
@@ -13980,9 +14372,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const words = parsed.words;
 
           if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
-            App.hydrateExternalPacks(packs, file.name);
-            Services.Sync.showToast(`🎉 成功载入完整词库包【${file.name}】！收录 ${packs.all_2257?.words?.length || Object.keys(packs).length} 词。`, 'success', 2800);
-            return;
+            const ok = App.hydrateExternalPacks(packs, file.name);
+            if (ok) {
+              const totalCount = Object.values(packs).reduce((sum, p) => sum + (p.words ? p.words.length : 0), 0);
+              Services.Sync.showToast(`🎉 成功载入完整词库包【${file.name}】！收录 ${totalCount} 词。`, 'success', 2800);
+              return;
+            }
           }
 
           if (words && Array.isArray(words) && words.length > 0) {
@@ -13994,20 +14389,27 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                 words: words.map(App.normalizeWord).filter(Boolean)
               }
             };
-            App.hydrateExternalPacks(singlePack, file.name);
-            Services.Sync.showToast(`🎉 成功载入本地词库！共 ${words.length} 个单词。`, 'success', 2800);
-          } else {
-            UIModal.alert({
-              title: '词库解析失败',
-              message: '未能从选定文件中解析出有效词库数据。请确保选定的是包含 VOCABULARY_PACKS 或 WORDS_DATA 的 words_data.js 或 JSON 词库文件。'
-            });
+            const ok = App.hydrateExternalPacks(singlePack, file.name);
+            if (ok) {
+              Services.Sync.showToast(`🎉 成功载入本地词库！共 ${words.length} 个单词。`, 'success', 2800);
+              return;
+            }
           }
+
+          UIModal.alert({
+            title: '词库解析失败',
+            message: '未能从选定文件中解析出有效词库数据。请确保选定的是包含 VOCABULARY_PACKS 或 WORDS_DATA 的 words_data.js 或 JSON 词库文件。'
+          });
         } catch (err) {
           UIModal.alert({
             title: '读取异常',
             message: '文件读取解析异常: ' + err.message
           });
         }
+      };
+      reader.onerror = function() {
+        resetInput();
+        UIModal.alert({ title: '读取错误', message: '无法读取选定的本地文件，请检查文件权限。' });
       };
       reader.readAsText(file, 'utf-8');
     };
