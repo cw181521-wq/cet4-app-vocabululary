@@ -1,5 +1,5 @@
 // MorphoSyntax Pro - Service Worker (PWA Offline Engine)
-const CACHE_NAME = 'morpho-pwa-v1.0.1';
+const CACHE_NAME = 'morpho-pwa-v1.0.2';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
