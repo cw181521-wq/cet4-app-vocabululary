@@ -1290,6 +1290,133 @@
       transform: rotate(6deg);
     }
 
+    /* === 单盒全面强化专属 UI 样式 (Yield Capsule & Intermission & Retrospective) === */
+    .reinforce-capsule-wrap {
+      width: 100%;
+      border-radius: 14px;
+      padding: 10px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.84rem;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      will-change: transform, background, border-color;
+    }
+    /* 形态 A：尚有晋级潜力 */
+    .reinforce-capsule-wrap.state-active {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%);
+      border: 1.5px solid rgba(15, 118, 110, 0.35);
+    }
+    /* 形态 B：晋级封顶高亮脉冲 */
+    .reinforce-capsule-wrap.state-capped {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.12) 100%);
+      border: 1.5px solid rgba(245, 158, 11, 0.55);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.2);
+      animation: capsulePulse 2s infinite ease-in-out;
+    }
+    @keyframes capsulePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 14px rgba(245, 158, 11, 0.2); }
+      50% { transform: scale(1.008); box-shadow: 0 0 22px rgba(245, 158, 11, 0.35); }
+    }
+    .capsule-info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .capsule-badge-pill {
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-promotable {
+      background: rgba(16, 185, 129, 0.18);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-capped {
+      background: rgba(245, 158, 11, 0.22);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .badge-demoted {
+      background: rgba(239, 68, 68, 0.15);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* 阶段战报选择岔路口非阻塞卡片 */
+    .smart-intermission-card {
+      background: var(--card-bg);
+      border: 2px dashed #f59e0b;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.12);
+      animation: modalSlideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    .intermission-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      color: #d97706;
+      font-size: 0.95rem;
+    }
+    .intermission-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+    }
+    .intermission-stat-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .intermission-stat-pill strong {
+      font-size: 1.15rem;
+      font-family: monospace;
+    }
+    .intermission-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    /* 3秒流利度作答即时耗时反馈徽章 */
+    .rt-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.2px;
+    }
+    .rt-fluent { background: var(--success-light); color: var(--success); border: 1px solid rgba(22, 163, 74, 0.3); }
+    .rt-consolidated { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(15, 118, 110, 0.3); }
+    .rt-hesitant { background: var(--accent-light); color: var(--accent); border: 1px solid rgba(217, 119, 6, 0.3); }
+    .rt-wrong { background: var(--error-light); color: var(--error); border: 1px solid rgba(220, 76, 76, 0.3); }
+
     /* 契约 D: 减弱动效偏好无障碍兜底 (prefers-reduced-motion) */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1706,6 +1833,18 @@
           <button class="btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.74rem;" onclick="exitDueReviewSession(true)" title="退出冲刺并返回原主线题库">退出冲刺 ✕</button>
         </div>
 
+        <!-- 单盒全面强化专享收益胶囊栏 (Yield Capsule - 契约 D: 120 FPS 弹性动画) -->
+        <div id="box-reinforce-capsule" class="reinforce-capsule-wrap state-active" style="display:none;">
+          <div class="capsule-info-row">
+            <span id="capsule-title" style="font-weight:800; color:var(--text); font-size:0.9rem;">⚡ [Box 2 全盒强化]</span>
+            <span id="capsule-promotable-pill" class="capsule-badge-pill badge-promotable">🎯 待晋级潜力: 0 词</span>
+            <span id="capsule-stats-summary" style="font-size:0.78rem; color:var(--muted);">已晋级: 0 · 稳固: 0 · 降级: 0</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button id="capsule-action-btn" class="btn btn-mini" style="background:var(--card-bg); border:1.5px solid var(--border); color:var(--text); font-weight:700; cursor:pointer;" onclick="App.handleBoxReinforceExit(false)" title="随时自由退出并安全落盘 (快捷键: Esc)">退出并安全落盘 ✕</button>
+          </div>
+        </div>
+
         <!-- 艾宾浩斯五盒动态记忆罗盘 -->
         <div class="leitner-compass-wrap" id="leitner-compass-wrap">
           <div class="compass-nodes-bar">
@@ -1828,8 +1967,41 @@
           <div class="flashcard-hint" id="flashcard-hint" style="display:none;">点击卡片或按 Space 翻转查看释义与词根</div>
         </div>
 
-        <!-- 四选一 / 盲听 / 形近辨析容器 -->
+        <!-- 四选一 / 盲听 / 形近辨析 / 单盒强化纯认读选择容器 -->
         <div id="view-choice" class="options-grid"></div>
+
+        <!-- 收益封顶阶段战报选择岔路口 (Smart Intermission Card) -->
+        <div id="smart-intermission-card" class="smart-intermission-card" style="display:none;">
+          <div class="intermission-head">
+            <span>💡 阶段战报：本轮最大晋级收益已全部达成！</span>
+            <span class="badge-mini" style="background:#fef3c7; color:#d97706; font-weight:800;">晋级已封顶</span>
+          </div>
+          <p style="font-size:0.84rem; color:var(--muted); margin:0;">
+            全盒单词均已完成首次直觉考查，本轮已无法产生新的升盒收益。错题已触发安全降级保护，可随时收工。
+          </p>
+          <div class="intermission-metrics-row">
+            <div class="intermission-stat-pill">
+              <span style="font-size:0.72rem; color:var(--muted);">🚀 锁定晋级</span>
+              <strong id="intermission-promoted-val" style="color:var(--success);">0 词</strong>
+            </div>
+            <div class="intermission-stat-pill">
+              <span style="font-size:0.72rem; color:var(--muted);">🛡️ 原盒加固</span>
+              <strong id="intermission-consolidated-val" style="color:var(--primary);">0 词</strong>
+            </div>
+            <div class="intermission-stat-pill">
+              <span style="font-size:0.72rem; color:var(--muted);">⚠️ 待消灭错题</span>
+              <strong id="intermission-demoted-val" style="color:var(--error);">0 词</strong>
+            </div>
+          </div>
+          <div class="intermission-btn-group">
+            <button class="btn btn-primary" style="flex:1.2; padding:9px 14px; background:linear-gradient(135deg, #f59e0b, #d97706); border:none;" onclick="App.handleBoxReinforceIntermissionChoice('commit')">
+              🎉 立即结算并收工 (推荐)
+            </button>
+            <button class="btn" style="flex:1; padding:9px 14px; background:var(--bg); border:1.5px solid var(--border); color:var(--text); font-weight:700;" onclick="App.handleBoxReinforceIntermissionChoice('continue')">
+              🎯 继续消灭错题直至清零
+            </button>
+          </div>
+        </div>
 
         <!-- 拼写输入容器 -->
         <div id="view-spell" style="display: none;">
@@ -2347,6 +2519,56 @@
   </div>
 </div>
 
+<!-- 单盒全面强化终极战报结算卡片 (Session Retrospective Modal - 契约 D: 120 FPS 动画) -->
+<div class="typing-milestone-overlay" id="box-reinforce-retrospective-overlay" style="display:none;">
+  <div class="typing-milestone-card" role="dialog" aria-modal="true" style="max-width:560px;">
+    <div class="tm-trophy">🏆</div>
+    <h3 class="tm-title" id="retro-modal-title">本轮单盒强化成果结算</h3>
+    <p class="tm-sub" id="retro-modal-sub">本次会话挑战完成，已执行保守排程与局部安全落盘</p>
+    <div class="tm-stats-grid" style="grid-template-columns: repeat(2, 1fr); gap:12px;">
+      <div class="tm-stat-box" style="border-left:4px solid var(--success); text-align:left; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tm-label">🚀 稳健晋级 (Box +1)</span>
+          <span class="badge-mini" style="background:var(--success-light); color:var(--success);">≤1.8s 直觉</span>
+        </div>
+        <span class="tm-val" id="retro-promoted-count" style="color:var(--success); font-size:1.45rem;">0 词</span>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:2px;">首碰秒答提取，成功晋级下盒</div>
+      </div>
+      <div class="tm-stat-box" style="border-left:4px solid var(--primary); text-align:left; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tm-label">🛡️ 原盒加固 (守住盒位)</span>
+          <span class="badge-mini" style="background:var(--primary-light); color:var(--primary);">加深稳固</span>
+        </div>
+        <span class="tm-val" id="retro-consolidated-count" style="color:var(--primary); font-size:1.45rem;">0 词</span>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:2px;">思考深入/排除推断，锁定原盒+1天延保</div>
+      </div>
+      <div class="tm-stat-box" style="border-left:4px solid var(--error); text-align:left; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tm-label">🎯 精准排雷 (降级保护)</span>
+          <span class="badge-mini" style="background:var(--error-light); color:var(--error);">周期折半</span>
+        </div>
+        <span class="tm-val" id="retro-demoted-count" style="color:var(--error); font-size:1.45rem;">0 词</span>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:2px;">暴露真实遗忘，降级快速重检</div>
+      </div>
+      <div class="tm-stat-box" style="border-left:4px solid var(--border); text-align:left; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tm-label">⏸️ 未学保留 (原封不动)</span>
+          <span class="badge-mini" style="background:var(--bg); color:var(--muted);">零改动</span>
+        </div>
+        <span class="tm-val" id="retro-untested-count" style="color:var(--muted); font-size:1.45rem;">0 词</span>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:2px;">未遭遇词汇保留原时间戳与盒号</div>
+      </div>
+    </div>
+    <div style="font-size:0.78rem; color:var(--muted); width:100%; text-align:left; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; margin-top:4px;">
+      <span>⏱️ 实际总耗时: <strong id="retro-total-time" style="color:var(--text);">00:00</strong> ｜ 平均单题耗时: <strong id="retro-avg-rt" style="color:var(--text);">0.0s</strong></span>
+    </div>
+    <div class="tm-actions" style="margin-top:8px;">
+      <button class="btn btn-primary" onclick="App.finishBoxReinforceSessionCommit()">🎉 确定并返回五盒看板 (Enter)</button>
+      <button class="btn btn-secondary" onclick="App.exportBoxReinforceDetails()">📜 导出本次强化变动详情 (JSON/TXT)</button>
+    </div>
+  </div>
+</div>
+
 <!-- 全键盘快捷键秘籍毛玻璃弹窗 -->
 <div class="shortcut-modal-overlay" id="shortcut-modal" onclick="if(event.target===this) closeShortcutModal()">
   <div class="shortcut-modal-card" role="dialog" aria-modal="true">
@@ -2366,7 +2588,7 @@
       <div class="shortcut-row"><kbd>N</kbd><span>焦点定位到个人助记便签</span></div>
       <div class="shortcut-row"><kbd>H</kbd><span>拼写模式下首尾字母提示</span></div>
       <div class="shortcut-row"><kbd>?</kbd><span>打开 / 关闭本快捷键弹窗</span></div>
-      <div class="shortcut-row"><kbd>Esc</kbd><span>退出便签焦点 / 关闭弹窗</span></div>
+      <div class="shortcut-row"><kbd>Esc</kbd><span>退出便签焦点 / 关闭弹窗 / 退出单盒强化</span></div>
     </div>
     <div style="text-align:right; border-top:1px solid var(--border); padding-top:10px;">
       <button class="btn btn-primary" onclick="closeShortcutModal()" style="padding:6px 16px;">掌握了，开启极速背词</button>
@@ -2471,7 +2693,6 @@
       }
     };
   })();
-
 
   // =========================================================================
   // ★ 规范契约 A：宏观路由与双轨状态机 (HistoryRouter)
@@ -2756,6 +2977,16 @@
         }
 
         if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+        // L1.5: 单盒全面强化专享键盘拦截 (Esc 主动结算与退出)
+        const reinforceSession = AppState.get('boxReinforceSession');
+        if (reinforceSession && reinforceSession.isActive) {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            App.handleBoxReinforceExit(true);
+            return;
+          }
+        }
 
         // L2: 盲打工作台专属输入管道
         const curMode = AppState.get('currentMode');
@@ -3203,7 +3434,6 @@
       }
     };
   })();
-
   // =========================================================================
   // ★ 模块 2：集中式状态管理中心 (AppState - Closure Store)
   // =========================================================================
@@ -3233,6 +3463,22 @@
         roundStartTime: 0,
         backupContext: null
       },
+
+      // 单盒全面强化专属事务沙箱状态机
+      boxReinforceSession: {
+        isActive: false,
+        boxId: null,
+        boxName: '',
+        startTime: 0,
+        totalCount: 0,
+        primaryQueue: [],
+        mistakeQueue: [],
+        profileMap: {},
+        promotableRemaining: 0,
+        intermissionShown: false,
+        backupContext: null
+      },
+      boxReinforcePendingCommitData: null,
 
       packStats: {},
       roundTotal: 0,
@@ -3669,6 +3915,64 @@
             else newBox = 1;
             const cfg = LEITNER_BOX_CONFIG[newBox - 1];
             return { box: newBox, nextReviewDate: now + cfg.ms, streakDelta: 0, isPromoted: false };
+          }
+        }
+      },
+
+      // ★ 单盒全面强化专属纯函数决策算法 (3秒流利度门控 & 保护性排程)
+      BoxReinforce: {
+        evaluateCognitiveState(responseTimeMs, isCorrect, firstPassDone, oldCanPromote) {
+          if (!isCorrect) {
+            return {
+              state: 'DEMOTED',
+              label: '❌ 作答错误',
+              canPromote: false,
+              cssClass: 'rt-wrong'
+            };
+          }
+          const sec = responseTimeMs / 1000;
+          if (sec <= 1.8) {
+            return {
+              state: 'PROMOTION_ELIGIBLE',
+              label: `⚡ ${sec.toFixed(1)}s 秒答直觉`,
+              canPromote: !firstPassDone ? true : oldCanPromote,
+              cssClass: 'rt-fluent'
+            };
+          } else if (sec <= 3.0) {
+            return {
+              state: 'CONSOLIDATED',
+              label: `🛡️ ${sec.toFixed(1)}s 熟练思考`,
+              canPromote: false,
+              cssClass: 'rt-consolidated'
+            };
+          } else {
+            return {
+              state: 'HELD_BACK',
+              label: `⏳ ${sec.toFixed(1)}s 犹豫排除`,
+              canPromote: false,
+              cssClass: 'rt-hesitant'
+            };
+          }
+        },
+
+        calculateDemotedBox(currBox) {
+          if (currBox >= 4) return currBox - 2;
+          return Math.max(1, currBox - 1);
+        },
+
+        calculateScheduledDate(initialBox, finalBox, oldNextReviewDate, sessionMistakes) {
+          const now = Date.now();
+          if (finalBox > initialBox) {
+            const cfg = Algorithms.Leitner.getConfig(finalBox);
+            const jitter = 0.9 + Math.random() * 0.2; // ±10% Jitter
+            return Math.round(now + cfg.ms * jitter);
+          } else if (finalBox < initialBox || sessionMistakes > 0) {
+            const cfg = Algorithms.Leitner.getConfig(finalBox);
+            return Math.round(now + cfg.ms * 0.5); // 快速重检，周期折半
+          } else {
+            const cfg = Algorithms.Leitner.getConfig(initialBox);
+            const safeOldDate = (oldNextReviewDate && oldNextReviewDate > 0) ? oldNextReviewDate : now;
+            return Math.min(safeOldDate + 86400000, now + cfg.ms); // 原盒稳固：轻度+1天延保
           }
         }
       },
@@ -4486,7 +4790,7 @@
     })();
 
     // -----------------------------------------------------------------------
-    // [4.3 Audio Service - 高可用弹性多源网络与本地双轨音频引擎 (契约 C)]
+    // [4.3 Audio Service - 高可用弹性多源网络与本地双轨音频引擎]
     // -----------------------------------------------------------------------
     const AudioService = (function() {
       const NETWORK_WATCHDOG_TIMEOUT_MS = 850;
@@ -5131,8 +5435,8 @@
               s = s.split(delimiter)[0].trim();
             }
           }
-          s = s.replace(/[^\u4e00-\u9fa5]/g, '').trim();
-          return s || String(meaningStr).replace(/[^\u4e00-\u9fa5]/g, '').slice(0, 6);
+          s = s.replace(/[^一-龥]/g, '').trim();
+          return s || String(meaningStr).replace(/[^一-龥]/g, '').slice(0, 6);
         },
 
         playFlashcardMeaningZh(meaningStr) {
@@ -5659,9 +5963,10 @@
                   st.typingKeyErrors = Math.max(st.typingKeyErrors || 0, ev.d.typingKeyErrors || 0);
                 }
                 st.lastReviewed = Math.max(st.lastReviewed || 0, ev.t || 0);
-              } else if (ev.type === 'BOX') {
+              } else if (ev.type === 'BOX' || ev.type === 'BOX_REINFORCE_COMMIT') {
                 st.box = ev.d?.box || st.box || 1;
                 if (ev.d?.mastery) st.masteryScore = ev.d.mastery;
+                if (ev.d?.nextReviewDate) st.nextReviewDate = ev.d.nextReviewDate;
                 st.level = Algorithms.Scoring.getMasteryLevel(st.masteryScore || (st.box * 20));
                 st.lastReviewed = Math.max(st.lastReviewed || 0, ev.t || 0);
               } else if (ev.type === 'FLAG') {
@@ -6066,6 +6371,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       Sync
     };
   })();
+
   // =========================================================================
   // ★ 规范契约 A：路由分发与容错纠偏 (RouteDispatcher)
   // =========================================================================
@@ -6156,13 +6462,22 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     let autoAdvanceTimeout = null;
 
     // -----------------------------------------------------------------------
-    // [5.1 Choice View - 四选一测试]
+    // [5.1 Choice View - 四选一测试 (集成单盒强化排除法对抗与3秒流利度门控)]
     // -----------------------------------------------------------------------
     const Choice = {
       render(word, optionsOverride = null) {
         this.cleanup();
         AppState.update('hasAnsweredChoice', false);
-        const isReverse = document.getElementById('reverse-mode-chk')?.checked || false;
+
+        const reinforceSession = AppState.get('boxReinforceSession');
+        const isReinforcing = Boolean(reinforceSession && reinforceSession.isActive);
+
+        // 单盒强化规范：30% 概率中选英，70% 英选中
+        let isReverse = document.getElementById('reverse-mode-chk')?.checked || false;
+        if (isReinforcing) {
+          isReverse = (Math.random() < 0.30);
+        }
+
         const currentPackId = AppState.get('currentPackId');
         const allPacks = AppState.get('allPacks');
         const currentPackWords = allPacks[currentPackId]?.words || [];
@@ -6184,9 +6499,51 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         let options = optionsOverride;
         if (!options) {
-          const distractors = currentPackWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
-          options = [word, ...distractors].sort(() => 0.5 - Math.random());
+          if (isReinforcing) {
+            // ★ 单盒强化排除法对抗机制：
+            // 2 个干扰项来自本盒，1 个干扰项强制从高阶毕业库 (Box 4 或 Box 5) 抽取！
+            const stDict = AppState.get('packStats')[currentPackId] || {};
+            const boxId = reinforceSession.boxId || 1;
+
+            // 1. 本盒干扰项
+            const sameBoxWords = currentPackWords.filter(w => (stDict[w.word]?.box ?? 1) === boxId && w.word !== word.word);
+            const boxDistractors = sameBoxWords.sort(() => 0.5 - Math.random()).slice(0, 2);
+
+            // 2. 跨盒高阶干扰项 (Box 4 或 Box 5)
+            const highBoxWords = currentPackWords.filter(w => {
+              const b = stDict[w.word]?.box ?? 1;
+              return (b >= 4) && w.word !== word.word && !boxDistractors.some(d => d.word === w.word);
+            });
+            let highDistractor = null;
+            if (highBoxWords.length > 0) {
+              highDistractor = highBoxWords[Math.floor(Math.random() * highBoxWords.length)];
+            } else {
+              // 兜底从全库其他盒抽取
+              const otherWords = currentPackWords.filter(w => (stDict[w.word]?.box ?? 1) !== boxId && w.word !== word.word);
+              if (otherWords.length > 0) {
+                highDistractor = otherWords[Math.floor(Math.random() * otherWords.length)];
+              }
+            }
+
+            const chosenDistractors = [...boxDistractors];
+            if (highDistractor) chosenDistractors.push(highDistractor);
+
+            // 若不够3个干扰项，从全库补齐
+            if (chosenDistractors.length < 3) {
+              const existingSet = new Set([word.word, ...chosenDistractors.map(d => d.word)]);
+              const fills = currentPackWords.filter(w => !existingSet.has(w.word)).sort(() => 0.5 - Math.random()).slice(0, 3 - chosenDistractors.length);
+              chosenDistractors.push(...fills);
+            }
+
+            options = [word, ...chosenDistractors.slice(0, 3)].sort(() => 0.5 - Math.random());
+          } else {
+            const distractors = currentPackWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
+            options = [word, ...distractors].sort(() => 0.5 - Math.random());
+          }
         }
+
+        // 记录高精度渲染时间戳，用于 3 秒流利度判定
+        AppState.update('currentQuestionRenderTime', performance.now());
 
         options.forEach((opt, idx) => {
           const btn = document.createElement('button');
@@ -6241,7 +6598,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
             AppState.update('hasAnsweredChoice', true);
             const isCorrect = (opt.word === word.word);
-            App.recordAnswer(isCorrect);
+
+            // 高精度作答反应时计算
+            const renderTime = AppState.get('currentQuestionRenderTime') || performance.now();
+            const rtMs = Math.max(80, Math.round(performance.now() - renderTime));
 
             options.forEach((o, oIdx) => {
               const el = document.getElementById(`opt-btn-${oIdx}`);
@@ -6274,10 +6634,38 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             }
 
             const feedbackEl = document.getElementById('feedback');
-            if (isCorrect) {
-              if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+
+            // ★ 分支处理：单盒全面强化专享 3 秒流利度裁决 与 常规答题
+            if (isReinforcing) {
+              const profile = reinforceSession.profileMap[word.word] || {
+                firstPassDone: false,
+                canPromote: false
+              };
+              const evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
+                rtMs, isCorrect, profile.firstPassDone, profile.canPromote
+              );
+
+              if (isCorrect) {
+                if (feedbackEl) {
+                  feedbackEl.innerHTML = `<span style="color:var(--success); font-weight:800;">✓ 正确！</span> <span class="rt-badge ${evalRes.cssClass}">${evalRes.label}</span> <span style="font-size:0.76rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+                }
+              } else {
+                if (feedbackEl) {
+                  feedbackEl.innerHTML = `<span style="color:var(--error); font-weight:800;">✗ 错误！</span> <span class="rt-badge rt-wrong">❌ 触发降级保护</span> <span style="font-size:0.78rem; color:var(--text);">正确答案: ${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                }
+              }
+
+              // 调用单盒强化专属记录核心
+              App.recordBoxReinforceAnswer(word.word, isCorrect, rtMs);
+
             } else {
-              if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+              // 常规主线记录
+              App.recordAnswer(isCorrect);
+              if (isCorrect) {
+                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+              } else {
+                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+              }
             }
 
             App.showWordDetails(word);
@@ -6289,8 +6677,14 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             }
 
             if (isCorrect && AppState.get('autoAdvanceEnabled')) {
-              if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--primary); font-weight:700;">0.8s后自动下一题 (点击选项取消)</span>`;
-              autoAdvanceTimeout = LifecycleScheduler.setTimeout(() => { App.nextQuestion(); }, 850);
+              const currentIntermission = document.getElementById('smart-intermission-card');
+              const isIntermissionVisible = currentIntermission && currentIntermission.style.display !== 'none';
+              if (!isIntermissionVisible) {
+                if (feedbackEl) {
+                  feedbackEl.innerHTML += ` <span style="font-size:0.78rem; color:var(--primary); font-weight:700;">(0.8s自动切题)</span>`;
+                }
+                autoAdvanceTimeout = LifecycleScheduler.setTimeout(() => { App.nextQuestion(); }, 850);
+              }
             }
           };
 
@@ -7583,7 +7977,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         AppState.update('activePool', pool);
       }
     };
-
     // -----------------------------------------------------------------------
     // [5.3 Spell View - 拼写填空]
     // -----------------------------------------------------------------------
@@ -7662,7 +8055,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.4 Flashcard View - 智能闪卡：雾化展开重构与绝对零跳动视口控制引擎]
+    // [5.4 Flashcard View - 智能闪卡]
     // -----------------------------------------------------------------------
     const Flashcard = {
       isTransitioning: false,
@@ -8114,7 +8507,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.5 SpeedBlitz View - 三秒极速心跳挑战 (沙箱化防幽灵计时器)]
+    // [5.5 SpeedBlitz View - 三秒极速心跳挑战]
     // -----------------------------------------------------------------------
     const SpeedBlitz = {
       timerId: null,
@@ -8723,7 +9116,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       }
     };
-
     // -----------------------------------------------------------------------
     // [5.11 MistakesCenter View - 错题大本营]
     // -----------------------------------------------------------------------
@@ -9025,7 +9417,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.13 Manage View - 打卡与备份中心 (平台安全无阻塞)]
+    // [5.13 Manage View - 打卡与备份中心]
     // -----------------------------------------------------------------------
     const Manage = {
       render() {
@@ -9091,9 +9483,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const curId = localStorage.getItem('morpho_gist_id');
           UIModal.alert({
             title: '🎉 备份成功',
-            message: `已成功同步至 GitHub Gist。
-Gist ID: ${curId}
-多设备填入相同 Token 与 Gist ID 即可接力！`
+            message: `已成功同步至 GitHub Gist。\nGist ID: ${curId}\n多设备填入相同 Token 与 Gist ID 即可接力！`
           });
           this.updateSyncTimeUI();
         }
@@ -9142,12 +9532,7 @@ Gist ID: ${curId}
           Services.Sync.setBadge('error', '❌ 同步失败');
           UIModal.alert({
             title: '❌ 拉取失败',
-            message: `错误原因: ${err.message}
-
-建议排查：
-1. Token 是否包含 gist 权限；
-2. 网络代理连接；
-3. Gist ID 是否准确。`
+            message: `错误原因: ${err.message}\n\n建议排查：\n1. Token 是否包含 gist 权限；\n2. 网络代理连接；\n3. Gist ID 是否准确。`
           });
         } finally {
           clearTimeout(timeoutId);
@@ -9488,23 +9873,9 @@ Gist ID: ${curId}
         App.startDueReviewSession({ boxId: boxId, boxName: boxName });
       },
 
+      // ★ 全面接入单盒强化事务沙箱 (遵从规范要求)
       filterBoxExact(boxId, boxName) {
-        const currentPackId = AppState.get('currentPackId');
-        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
-        const stDict = AppState.get('packStats')[currentPackId] || {};
-
-        const filtered = packWords.filter(w => (stDict[w.word]?.box ?? 1) === boxId);
-        if (filtered.length === 0) {
-          Services.Sync.showToast(`当前【${boxName}】暂时没有单词！`, 'info', 2000);
-          return;
-        }
-
-        AppState.update('activePool', filtered);
-        AppState.update('questionHistory', []);
-        AppState.update('historyCursor', -1);
-        App.switchMode('choice');
-        Services.Sync.showToast(`已锁定【${boxName} 全量词单】，共 ${filtered.length} 个单词开始专练！`, 'info', 2500);
-        App.nextQuestion();
+        App.startBoxReinforceSession(boxId, boxName);
       },
 
       toggleDrawer(boxId, boxName) {
@@ -9558,7 +9929,7 @@ Gist ID: ${curId}
     };
 
     // -----------------------------------------------------------------------
-    // [5.15 Companion View - 桌面大屏辅助栏与闭环折叠控制]
+    // [5.15 Companion View - 桌面大屏辅助栏]
     // -----------------------------------------------------------------------
     const Companion = {
       render(word) {
@@ -9641,7 +10012,6 @@ Gist ID: ${curId}
       Companion
     };
   })();
-
   // =========================================================================
   // ★ 模块 6：应用主控制器 (App Orchestrator & Global Facades)
   // =========================================================================
@@ -9854,6 +10224,569 @@ Gist ID: ${curId}
         AppState.update('packStats', pStats);
       },
 
+      // =========================================================================
+      // ★ 单盒全面强化完整学习逻辑核心控制器 (Box Reinforcement Engine)
+      // =========================================================================
+      startBoxReinforceSession(boxId, boxName) {
+        const currentPackId = AppState.get('currentPackId');
+        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
+        const stDict = AppState.get('packStats')[currentPackId] || {};
+
+        const targetWords = packWords.filter(w => (stDict[w.word]?.box ?? 1) === boxId);
+        if (targetWords.length === 0) {
+          Services.Sync.showToast(`当前【${boxName}】暂时没有单词！`, 'info', 2000);
+          return false;
+        }
+
+        // 若当前有其他正在运行的会话，优雅退出
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
+
+        // 备份当前全局上下文环境，供退出/结算时无损恢复
+        const backupContext = {
+          activePool: [...AppState.get('activePool')],
+          orderMode: AppState.get('orderMode'),
+          sequentialIndex: AppState.get('sequentialIndex'),
+          shuffleQueue: [...(AppState.get('shuffleQueue') || [])],
+          shufflePointer: AppState.get('shufflePointer'),
+          questionHistory: [...AppState.get('questionHistory')],
+          historyCursor: AppState.get('historyCursor'),
+          currentMode: AppState.get('currentMode')
+        };
+
+        // 构建深拷贝沙箱上下文与 WordSessionProfile 契约
+        const profileMap = {};
+        targetWords.forEach(w => {
+          profileMap[w.word] = {
+            word: w.word,
+            wordObj: w,
+            initialBox: boxId,
+            currentBox: boxId,
+            firstPassDone: false,
+            firstPassResult: null,
+            firstPassRT: 0,
+            canPromote: false,
+            cognitiveState: 'PENDING',
+            sessionMistakes: 0,
+            sessionSuccesses: 0
+          };
+        });
+
+        // 首碰队列：确定性打乱重排
+        const primaryQueue = Algorithms.Shuffle.deterministicShuffle([...targetWords], Date.now());
+
+        const session = {
+          isActive: true,
+          boxId: boxId,
+          boxName: boxName,
+          startTime: Date.now(),
+          totalCount: targetWords.length,
+          primaryQueue: primaryQueue,
+          mistakeQueue: [],
+          profileMap: profileMap,
+          promotableRemaining: targetWords.length,
+          intermissionShown: false,
+          backupContext: backupContext
+        };
+
+        AppState.update('boxReinforceSession', session);
+
+        // 切换到选择题舞台
+        this.switchMode('choice', { skipHistoryPush: true });
+
+        // 显示收益胶囊栏并刷新文案
+        this.updateBoxReinforceCapsuleUI();
+
+        // 隐藏不必要的通用组件，打造沉浸专注心流
+        const compassWrap = document.getElementById('leitner-compass-wrap');
+        if (compassWrap) compassWrap.style.display = 'none';
+
+        // 推进第一题
+        this.nextQuestion();
+
+        Services.Sync.showToast(`⚡ 已开启【${boxName} 全盒强化】，流利度门控已就绪！`, 'info', 2200);
+        return true;
+      },
+
+      updateBoxReinforceCapsuleUI() {
+        const session = AppState.get('boxReinforceSession');
+        const capsule = document.getElementById('box-reinforce-capsule');
+        if (!session || !session.isActive) {
+          if (capsule) capsule.style.display = 'none';
+          const compassWrap = document.getElementById('leitner-compass-wrap');
+          if (compassWrap) compassWrap.style.display = 'flex';
+          return;
+        }
+
+        if (capsule) capsule.style.display = 'flex';
+
+        // 计算实时统计指标
+        let promotedCount = 0;
+        let consolidatedCount = 0;
+        let demotedCount = 0;
+
+        Object.values(session.profileMap).forEach(p => {
+          if (!p.firstPassDone) return;
+          if (p.currentBox > p.initialBox) promotedCount++;
+          else if (p.currentBox < p.initialBox) demotedCount++;
+          else consolidatedCount++;
+        });
+
+        const titleEl = document.getElementById('capsule-title');
+        const pillEl = document.getElementById('capsule-promotable-pill');
+        const summaryEl = document.getElementById('capsule-stats-summary');
+        const actionBtn = document.getElementById('capsule-action-btn');
+
+        if (titleEl) titleEl.innerText = `⚡ [${session.boxName} 强化]`;
+
+        if (session.promotableRemaining > 0) {
+          // 形态 A：尚有晋级潜力
+          if (capsule) {
+            capsule.className = 'reinforce-capsule-wrap state-active';
+          }
+          if (pillEl) {
+            pillEl.className = 'capsule-badge-pill badge-promotable';
+            pillEl.innerText = `🎯 待晋级潜力: ${session.promotableRemaining} 词`;
+            pillEl.title = '全盒首碰仍在进行中，≤1.8s 秒答提取的单词将发放晋升门票';
+          }
+          if (actionBtn) {
+            actionBtn.innerText = '退出并安全落盘 ✕';
+            actionBtn.className = 'btn btn-mini';
+            actionBtn.style.background = 'var(--card-bg)';
+            actionBtn.style.color = 'var(--text)';
+          }
+        } else {
+          // 形态 B：晋级已封顶，微弹性脉冲高亮
+          if (capsule) {
+            capsule.className = 'reinforce-capsule-wrap state-capped';
+          }
+          if (pillEl) {
+            pillEl.className = 'capsule-badge-pill badge-capped';
+            pillEl.innerText = `🏁 晋级已封顶 (待消灭错题: ${session.mistakeQueue.length} 词)`;
+            pillEl.title = '全盒单词已全部完成首次流利度检验，本轮不会再产生新升级。错题已触发安全降级保护。';
+          }
+          if (actionBtn) {
+            actionBtn.innerText = '🎉 立即结算落盘';
+            actionBtn.className = 'btn btn-mini';
+            actionBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            actionBtn.style.color = '#ffffff';
+          }
+        }
+
+        if (summaryEl) {
+          summaryEl.innerHTML = `已晋级: <strong style="color:var(--success);">${promotedCount}</strong> · 稳固: <strong style="color:var(--primary);">${consolidatedCount}</strong> · 降级: <strong style="color:var(--error);">${demotedCount}</strong>`;
+        }
+
+        const progEl = document.getElementById('order-progress');
+        if (progEl) {
+          const testedCount = Object.values(session.profileMap).filter(p => p.firstPassDone).length;
+          progEl.innerText = `⚡ [${session.boxName}] 进度: ${testedCount} / ${session.totalCount} 词 (错题池: ${session.mistakeQueue.length})`;
+        }
+      },
+
+      recordBoxReinforceAnswer(wordName, isCorrect, rtMs) {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+
+        const profile = session.profileMap[wordName];
+        if (!profile) return;
+
+        // 3秒流利度纯函数判定
+        const evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
+          rtMs, isCorrect, profile.firstPassDone, profile.canPromote
+        );
+
+        // 1. 首碰定上限律（First-Pass Cap Rule）
+        if (!profile.firstPassDone) {
+          profile.firstPassDone = true;
+          profile.firstPassResult = isCorrect ? 'correct' : 'wrong';
+          profile.firstPassRT = rtMs;
+          profile.canPromote = evalRes.canPromote;
+          profile.cognitiveState = evalRes.state;
+          session.promotableRemaining = Math.max(0, session.promotableRemaining - 1);
+        }
+
+        // 2. 升降级与纠偏回血边界逻辑
+        if (isCorrect) {
+          profile.sessionSuccesses++;
+
+          if (profile.canPromote) {
+            // 准许升盒，单次封顶至多晋升 1 级 (Box_init + 1)
+            profile.currentBox = Math.min(5, profile.initialBox + 1);
+            profile.cognitiveState = 'PROMOTION_ELIGIBLE';
+          } else {
+            // 不具备升级门票
+            if (profile.currentBox < profile.initialBox) {
+              // 纠偏回血，但封顶边界强制为 Box_init！
+              profile.currentBox = Math.min(profile.initialBox, profile.currentBox + 1);
+            } else {
+              profile.currentBox = profile.initialBox;
+            }
+            if (profile.cognitiveState !== 'DEMOTED') {
+              profile.cognitiveState = evalRes.state;
+            }
+          }
+
+          // 若在错题队列中，成功做对后移出错题队列
+          const mIdx = session.mistakeQueue.findIndex(w => w.word === wordName);
+          if (mIdx !== -1) {
+            session.mistakeQueue.splice(mIdx, 1);
+          }
+        } else {
+          // 3. 一票降级律（Strict Demotion Rule）
+          profile.sessionMistakes++;
+          profile.canPromote = false; // 终身吊销晋升门票
+          profile.cognitiveState = 'DEMOTED';
+
+          // 降级计算
+          profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.currentBox);
+
+          // 加入错题闭环队列
+          if (!session.mistakeQueue.some(w => w.word === wordName)) {
+            session.mistakeQueue.push(profile.wordObj);
+          }
+        }
+
+        // 4. 检查是否刚刚触发“收益封顶”
+        if (session.promotableRemaining === 0 && session.mistakeQueue.length > 0 && !session.intermissionShown) {
+          session.intermissionShown = true;
+          this.showBoxReinforceIntermissionCard();
+        }
+
+        // 刷新胶囊状态与打卡
+        this.updateBoxReinforceCapsuleUI();
+        this.bumpDailyActivity(wordName);
+        this.updateStats();
+      },
+
+      showBoxReinforceIntermissionCard() {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+
+        let pCount = 0, cCount = 0, dCount = 0;
+        Object.values(session.profileMap).forEach(p => {
+          if (!p.firstPassDone) return;
+          if (p.currentBox > p.initialBox) pCount++;
+          else if (p.currentBox < p.initialBox) dCount++;
+          else cCount++;
+        });
+
+        const card = document.getElementById('smart-intermission-card');
+        const pVal = document.getElementById('intermission-promoted-val');
+        const cVal = document.getElementById('intermission-consolidated-val');
+        const dVal = document.getElementById('intermission-demoted-val');
+
+        if (pVal) pVal.innerText = `${pCount} 词`;
+        if (cVal) cVal.innerText = `${cCount} 词`;
+        if (dVal) dVal.innerText = `${session.mistakeQueue.length} 词`;
+
+        if (card) {
+          card.style.display = 'flex';
+          requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+        }
+
+        // 提示音效
+        if (AppState.get('soundEffectsEnabled')) {
+          Services.Sfx.playFeedbackSound(true, 'chime');
+        }
+      },
+
+      handleBoxReinforceIntermissionChoice(choice) {
+        const card = document.getElementById('smart-intermission-card');
+        if (card) card.style.display = 'none';
+
+        if (choice === 'commit') {
+          this.commitBoxReinforceSession();
+        } else {
+          Services.Sync.showToast('🎯 留守沙箱：正在为您轮转错题，逐一纠偏消除！', 'info', 1800);
+          this.nextQuestion();
+        }
+      },
+
+      async handleBoxReinforceExit(isEsc = false) {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+
+        let pCount = 0, cCount = 0, dCount = 0, uCount = 0;
+        Object.values(session.profileMap).forEach(p => {
+          if (!p.firstPassDone) {
+            uCount++;
+          } else {
+            if (p.currentBox > p.initialBox) pCount++;
+            else if (p.currentBox < p.initialBox) dCount++;
+            else cCount++;
+          }
+        });
+
+        const ok = await UIModal.confirm({
+          title: '退出并安全落盘确认',
+          message: `按当前实际进度为您即刻结算：
+• 🚀 顺利晋升：${pCount} 词
+• 🛡️ 原盒加固：${cCount} 词
+• 🎯 精准排雷：${dCount} 词
+• ⏸️ 未学保留：${uCount} 词 (原封不动保存在原盒，绝不丢数据)
+
+是否立即执行安全落盘？`,
+          confirmText: '确定结算落盘',
+          cancelText: '继续强化'
+        });
+
+        if (ok) {
+          this.commitBoxReinforceSession();
+        }
+      },
+
+      commitBoxReinforceSession() {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+
+        const now = Date.now();
+        const currentPackId = AppState.get('currentPackId');
+        const stDict = AppState.get('packStats')[currentPackId] || {};
+
+        const promoted = [];
+        const consolidated = [];
+        const demoted = [];
+        const untested = [];
+        let totalRT = 0;
+        let testedCount = 0;
+
+        // 执行裁决引擎遍历与保护性排程
+        for (const [word, p] of Object.entries(session.profileMap)) {
+          if (!p.firstPassDone) {
+            untested.push(p);
+            continue; // 未遭遇词原封不动，零改动
+          }
+
+          testedCount++;
+          totalRT += (p.firstPassRT || 2000);
+
+          const oldStat = stDict[word] || {};
+          const oldNextReview = oldStat.nextReviewDate || 0;
+          const oldMastery = oldStat.masteryScore ?? 35;
+          const oldStreak = oldStat.streak || 0;
+          const oldTested = oldStat.tested || 0;
+          const oldMistakes = oldStat.mistakes || 0;
+
+          // 保守排程时间戳
+          const scheduledDate = Algorithms.BoxReinforce.calculateScheduledDate(
+            p.initialBox, p.currentBox, oldNextReview, p.sessionMistakes
+          );
+
+          if (p.currentBox > p.initialBox) {
+            // 晋升
+            promoted.push(p);
+            this.broadcastWordStatUpdate(currentPackId, word, (st) => {
+              st.box = p.currentBox;
+              st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
+              st.streak = oldStreak + 1;
+              st.masteryScore = Math.min(100, oldMastery + 10);
+              st.level = Algorithms.Scoring.getMasteryLevel(st.masteryScore);
+              st.lastReviewed = now;
+              st.nextReviewDate = scheduledDate;
+            });
+          } else if (p.currentBox < p.initialBox) {
+            // 降级
+            demoted.push(p);
+            this.broadcastWordStatUpdate(currentPackId, word, (st) => {
+              st.box = p.currentBox;
+              st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
+              st.mistakes = oldMistakes + p.sessionMistakes;
+              st.streak = 0;
+              st.masteryScore = Math.max(10, oldMastery - 15);
+              st.level = Algorithms.Scoring.getMasteryLevel(st.masteryScore);
+              st.lastReviewed = now;
+              st.nextReviewDate = scheduledDate;
+            });
+          } else {
+            // 原盒稳固
+            consolidated.push(p);
+            this.broadcastWordStatUpdate(currentPackId, word, (st) => {
+              st.box = p.initialBox;
+              st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
+              st.mistakes = oldMistakes + p.sessionMistakes;
+              st.masteryScore = Math.min(100, oldMastery + (p.sessionMistakes === 0 ? 4 : 0));
+              st.level = Algorithms.Scoring.getMasteryLevel(st.masteryScore);
+              st.lastReviewed = now;
+              st.nextReviewDate = scheduledDate;
+            });
+          }
+
+          Services.Storage.logEvent('BOX_REINFORCE_COMMIT', word, currentPackId, {
+            fromBox: p.initialBox,
+            toBox: p.currentBox,
+            rt: p.firstPassRT,
+            state: p.cognitiveState,
+            nextReview: scheduledDate,
+            t: now
+          });
+        }
+
+        // 保存本次结算报告数据
+        const elapsedMs = Math.max(1000, now - session.startTime);
+        const elapsedSec = Math.floor(elapsedMs / 1000);
+        const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+        const s = String(elapsedSec % 60).padStart(2, '0');
+        const avgRT = testedCount > 0 ? (totalRT / testedCount / 1000).toFixed(1) : '0.0';
+
+        const commitData = {
+          boxId: session.boxId,
+          boxName: session.boxName,
+          startTime: session.startTime,
+          finishTime: now,
+          totalDurationStr: `${m}:${s}`,
+          avgRTStr: `${avgRT}s`,
+          totalBoxWords: session.totalCount,
+          testedCount: testedCount,
+          promoted: promoted,
+          consolidated: consolidated,
+          demoted: demoted,
+          untested: untested
+        };
+
+        AppState.update('boxReinforcePendingCommitData', commitData);
+
+        // 触发云同步防抖
+        Services.Sync.scheduleDebouncedSync(2000);
+
+        // 弹出终极战报结算卡片
+        this.showBoxReinforceRetrospectiveModal(commitData);
+      },
+
+      showBoxReinforceRetrospectiveModal(data) {
+        const overlay = document.getElementById('box-reinforce-retrospective-overlay');
+        if (!overlay) return;
+
+        const titleEl = document.getElementById('retro-modal-title');
+        const subEl = document.getElementById('retro-modal-sub');
+        const pEl = document.getElementById('retro-promoted-count');
+        const cEl = document.getElementById('retro-consolidated-count');
+        const dEl = document.getElementById('retro-demoted-count');
+        const uEl = document.getElementById('retro-untested-count');
+        const timeEl = document.getElementById('retro-total-time');
+        const rtEl = document.getElementById('retro-avg-rt');
+
+        if (titleEl) titleEl.innerText = `🏆 【${data.boxName}】强化成果结算`;
+        if (subEl) subEl.innerText = `本次会话挑战了 ${data.testedCount} / ${data.totalBoxWords} 个单词，数据已保守安全落盘`;
+        if (pEl) pEl.innerText = `${data.promoted.length} 词`;
+        if (cEl) cEl.innerText = `${data.consolidated.length} 词`;
+        if (dEl) dEl.innerText = `${data.demoted.length} 词`;
+        if (uEl) uEl.innerText = `${data.untested.length} 词`;
+        if (timeEl) timeEl.innerText = data.totalDurationStr;
+        if (rtEl) rtEl.innerText = data.avgRTStr;
+
+        overlay.style.display = 'flex';
+        ModalStackManager.openModal('box_reinforce_retro', () => this.finishBoxReinforceSessionCommit(), overlay);
+        KeyRouter.pushModal({
+          element: overlay,
+          onEscape: () => this.finishBoxReinforceSessionCommit(),
+          onEnter: () => this.finishBoxReinforceSessionCommit()
+        });
+
+        if (AppState.get('soundEffectsEnabled')) {
+          Services.Sfx.playFeedbackSound(true, 'arcade');
+        }
+      },
+
+      finishBoxReinforceSessionCommit() {
+        const overlay = document.getElementById('box-reinforce-retrospective-overlay');
+        if (overlay) {
+          overlay.style.display = 'none';
+          KeyRouter.popModal(overlay);
+          ModalStackManager.dismissModal('box_reinforce_retro', { triggerHistoryBack: false });
+        }
+
+        const session = AppState.get('boxReinforceSession');
+        if (session && session.backupContext) {
+          AppState.batchUpdate({
+            activePool: session.backupContext.activePool,
+            orderMode: session.backupContext.orderMode,
+            sequentialIndex: session.backupContext.sequentialIndex,
+            shuffleQueue: session.backupContext.shuffleQueue,
+            shufflePointer: session.backupContext.shufflePointer,
+            questionHistory: session.backupContext.questionHistory,
+            historyCursor: session.backupContext.historyCursor
+          });
+        }
+
+        AppState.update('boxReinforceSession', {
+          isActive: false,
+          boxId: null,
+          boxName: '',
+          startTime: 0,
+          totalCount: 0,
+          primaryQueue: [],
+          mistakeQueue: [],
+          profileMap: {},
+          promotableRemaining: 0,
+          intermissionShown: false,
+          backupContext: null
+        });
+
+        // 隐藏强化胶囊与阶段卡片
+        const capsule = document.getElementById('box-reinforce-capsule');
+        if (capsule) capsule.style.display = 'none';
+        const card = document.getElementById('smart-intermission-card');
+        if (card) card.style.display = 'none';
+        const compassWrap = document.getElementById('leitner-compass-wrap');
+        if (compassWrap) compassWrap.style.display = 'flex';
+
+        // 刷新看板与矩阵
+        Views.Compass.markBoxesDirty();
+        Views.Compass.markMatrixDirty();
+        Views.Compass.renderBoxes();
+        this.updateDueBadge();
+
+        // 切换回五盒看板
+        this.switchMode('leitner_box');
+        Services.Sync.showToast('🎉 单盒强化已顺利完成并安全落盘！', 'success', 2200);
+      },
+
+      exportBoxReinforceDetails() {
+        const data = AppState.get('boxReinforcePendingCommitData');
+        if (!data) return;
+
+        let content = `=========================================================\n`;
+        content += `CET-4 词根终端 · 【${data.boxName}】全盒强化变动详情结算单\n`;
+        content += `开始时间: ${new Date(data.startTime).toLocaleString()}\n`;
+        content += `结束时间: ${new Date(data.finishTime).toLocaleString()}\n`;
+        content += `强化耗时: ${data.totalDurationStr} ｜ 平均单题反应时: ${data.avgRTStr}\n`;
+        content += `挑战进度: ${data.testedCount} / ${data.totalBoxWords} 词\n`;
+        content += `=========================================================\n\n`;
+
+        content += `【🚀 稳健晋级清单 (${data.promoted.length} 词)】(首碰 ≤1.8s 直觉秒答，成功迈入 Box ${data.boxId + 1})\n`;
+        data.promoted.forEach((p, idx) => {
+          content += `  ${idx + 1}. ${p.word} - Box ${p.initialBox} ➔ Box ${p.currentBox} | 耗时: ${(p.firstPassRT/1000).toFixed(2)}s | 释义: ${p.wordObj.pos || ''} ${p.wordObj.meaning}\n`;
+        });
+
+        content += `\n【🛡️ 原盒加深稳固清单 (${data.consolidated.length} 词)】(思考深入/犹豫推断，锁定原盒+1天延保)\n`;
+        data.consolidated.forEach((p, idx) => {
+          content += `  ${idx + 1}. ${p.word} - 保持 Box ${p.initialBox} | 耗时: ${(p.firstPassRT/1000).toFixed(2)}s (${p.cognitiveState}) | 释义: ${p.wordObj.pos || ''} ${p.wordObj.meaning}\n`;
+        });
+
+        content += `\n【🎯 精准排雷降级清单 (${data.demoted.length} 词)】(暴露记忆盲区，安全降级快速重检)\n`;
+        data.demoted.forEach((p, idx) => {
+          content += `  ${idx + 1}. ${p.word} - Box ${p.initialBox} ➔ Box ${p.currentBox} | 错题次数: ${p.sessionMistakes} | 释义: ${p.wordObj.pos || ''} ${p.wordObj.meaning}\n`;
+        });
+
+        content += `\n【⏸️ 未学保留清单 (${data.untested.length} 词)】(未遭遇词汇，原封不动保留原盒)\n`;
+        data.untested.forEach((p, idx) => {
+          content += `  ${idx + 1}. ${p.word} - 维持 Box ${p.initialBox} (未测试)\n`;
+        });
+
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Box_${data.boxId}_Reinforce_Report_${new Date().toISOString().slice(0, 10)}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+        Services.Sync.showToast('📜 已成功导出强化报告详情', 'success', 2000);
+      },
       init() {
         let packs = (typeof window !== 'undefined' ? window.VOCABULARY_PACKS : null) || {};
         const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__)) ||
@@ -10129,6 +11062,9 @@ Gist ID: ${curId}
       },
 
       switchWordPack(packId, options = {}) {
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
         if (AppState.get('dueReviewSession')?.isActive) {
           this.exitDueReviewSession(false);
         }
@@ -10257,9 +11193,6 @@ Gist ID: ${curId}
 
       adaptiveStepCounter: 0,
 
-      // =========================================================================
-      // ★ 抗遗忘专享冲刺会话控制器 (Due Review Session State Machine)
-      // =========================================================================
       startDueReviewSession(options = {}) {
         const boxId = options.boxId !== undefined ? options.boxId : null;
         const boxName = options.boxName || (boxId ? `Box ${boxId} 到期复习` : '今日全盒抗遗忘冲刺');
@@ -10280,6 +11213,9 @@ Gist ID: ${curId}
           return false;
         }
 
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
         if (AppState.get('dueReviewSession')?.isActive) {
           this.exitDueReviewSession(false);
         }
@@ -10377,7 +11313,6 @@ Gist ID: ${curId}
           const passed = session.passedWords.size;
           const total = session.totalInitial;
           progEl.innerText = `⚡ [抗遗忘] 剩余 ${session.queue.length} / 共 ${total} 词 (已消灭 ${passed} 词)`;
-          progEl.title = `抗遗忘冲刺专属调度队列：\n• 冲刺范围: ${session.scopeName}\n• 初始待复习总词数: ${total}\n• 已成功内化消除: ${passed}\n• 队列剩余待测: ${session.queue.length} (答错将循环至末尾直至全部消灭)`;
         }
       },
 
@@ -10463,6 +11398,24 @@ Gist ID: ${curId}
       },
 
       pickNextWord(direction = 1) {
+        // ★ 若处于单盒强化沙箱会话中：
+        const reinforceSession = AppState.get('boxReinforceSession');
+        if (reinforceSession && reinforceSession.isActive) {
+          // 1. 优先从首碰主线队列出题
+          if (reinforceSession.primaryQueue.length > 0) {
+            const nextWord = reinforceSession.primaryQueue.shift();
+            return nextWord;
+          }
+          // 2. 首碰完毕后，若有错题，从错题队列出题循环
+          if (reinforceSession.mistakeQueue.length > 0) {
+            const nextMistakeWord = reinforceSession.mistakeQueue[0];
+            return nextMistakeWord;
+          }
+          // 3. 错题也已全部清零，触发自然通关！
+          this.commitBoxReinforceSession();
+          return null;
+        }
+
         const pool = this.getEffectivePool();
         if (pool.length === 0) return null;
 
@@ -10517,7 +11470,6 @@ Gist ID: ${curId}
             const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
             if (progEl) {
               progEl.innerText = `🎯 [新词探索 ${todayNewCount}/${limitLabel}] ${targetIndex + 1} / ${pool.length}`;
-              progEl.title = `双轨自适应调度器 · 探索轨决策：\n• 调度队列: 新词探索轨 (Discovery Track)\n• 今日已学新词: ${todayNewCount} / ${limitLabel}\n• 生词库存: 剩余 ${unlearnedPool.length} 词\n• 出题策略: 原书自然顺序平滑推进 (8:2 混合步进)`;
             }
             return candidate;
           }
@@ -10593,7 +11545,6 @@ Gist ID: ${curId}
             const pruneTag = dbg.pruned ? ' ⚡剪枝底分' : '';
             const probPct = (chosenProb * 100).toFixed(1);
             progEl.innerText = `🧠 [自适应复习 P:${Math.round(chosenItem.score)} | 风险:${dbg.risk}% | 概率:${probPct}%${dueTag}${rootTag}${pruneTag}]`;
-            progEl.title = `自适应调度动力学元数据追踪：\n• 队列状态: 强化复习轨 (Review Track)\n• 综合得分 (P): ${chosenItem.score.toFixed(1)}\n• 抽样概率: ${probPct}%\n• 遗忘风险: ${dbg.risk}% (记忆保留率: ${dbg.recall}%)\n• 基础稳定性(S): ${dbg.stability}d\n• 生效稳定性(S_eff): ${dbg.effStability}d (保底退火)\n• 题型基准耗时(T_base): ${dbg.T_base}ms\n• 迟疑系数(λ): ${dbg.lambda.toFixed(2)} (耗时: ${dbg.respTimeMs}ms)\n• 迟疑加分: +${dbg.pHesitation.toFixed(1)} (上限12分)\n• 词根盲区加成: +${dbg.pRootBoost.toFixed(1)} (族错误率: ${(dbg.familyErrorRate * 100).toFixed(1)}%)\n• 莱特纳逾期比(R_overdue): ${dbg.rOverdue >= 0 ? dbg.rOverdue.toFixed(2) : '未逾期'}\n• 到期阶跃倍率: x${dbg.dueMultiplier.toFixed(2)}\n• 防重指数扣分: -${dbg.penalty.toFixed(1)} (间隔步数: ${dbg.recencyStep >= 0 ? dbg.recencyStep : '无'})`;
           }
 
           return chosenItem.word;
@@ -10661,6 +11612,24 @@ Gist ID: ${curId}
 
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
         const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
+
+        // ★ 单盒全面强化沙箱专享出题调度
+        const reinforceSession = AppState.get('boxReinforceSession');
+        if (reinforceSession && reinforceSession.isActive) {
+          const nextWord = this.pickNextWord(1);
+          if (!nextWord) return;
+
+          let history = AppState.get('questionHistory');
+          history.push(nextWord.word);
+          if (history.length > 100) history.shift();
+          AppState.update('questionHistory', history);
+          AppState.update('historyCursor', history.length - 1);
+          AppState.update('currentWord', nextWord);
+
+          this.renderCurrentView();
+          this.updateBoxReinforceCapsuleUI();
+          return;
+        }
 
         const dueSession = AppState.get('dueReviewSession');
         if (dueSession && dueSession.isActive) {
@@ -10897,7 +11866,7 @@ Gist ID: ${curId}
         const analysisCard = typeof document !== 'undefined' ? document.getElementById('analysis-card') : null;
         if (analysisCard) analysisCard.style.display = 'none';
 
-        AppState.update('currentQuestionRenderTime', Date.now());
+        AppState.update('currentQuestionRenderTime', performance.now());
 
         if (!word.isGhost) {
           const poolSize = AppState.get('activePool')?.length || 50;
@@ -10949,6 +11918,12 @@ Gist ID: ${curId}
         } else {
           const bar = typeof document !== 'undefined' ? document.getElementById('due-sprint-bar') : null;
           if (bar) bar.style.display = 'none';
+        }
+
+        // 单盒强化胶囊更新
+        const reinforceSession = AppState.get('boxReinforceSession');
+        if (reinforceSession && reinforceSession.isActive) {
+          this.updateBoxReinforceCapsuleUI();
         }
 
         try {
@@ -11105,9 +12080,9 @@ Gist ID: ${curId}
       recordAnswer(isCorrect) {
         const word = AppState.get('currentWord');
         if (!word) return;
-        const now = Date.now();
+        const now = performance.now();
         const renderTime = AppState.get('currentQuestionRenderTime') || now;
-        const responseTimeMs = Math.max(100, now - renderTime);
+        const responseTimeMs = Math.max(100, Math.round(now - renderTime));
         this.recordAnswerForWord(word.word, isCorrect, responseTimeMs, AppState.get('currentMode'));
       },
 
@@ -11332,6 +12307,11 @@ Gist ID: ${curId}
         LifecycleScheduler.teardown();
         Services.Storage.flushAll();
 
+        // 若切出非选择题模式且当前单盒强化正在运行，安全收拢
+        if (mode !== 'choice' && AppState.get('boxReinforceSession')?.isActive) {
+          this.commitBoxReinforceSession();
+        }
+
         AppState.update('currentMode', mode);
         const MODE_NAME_MAP = {
           choice: { name: '四选一测试', icon: '🎯' },
@@ -11532,6 +12512,9 @@ Gist ID: ${curId}
       },
 
       filterByGroup(groupName) {
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
         if (AppState.get('dueReviewSession')?.isActive) {
           this.exitDueReviewSession(false);
         }
@@ -11553,6 +12536,10 @@ Gist ID: ${curId}
       },
 
       clearScopeFilter() {
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+          return;
+        }
         if (AppState.get('dueReviewSession')?.isActive) {
           this.exitDueReviewSession(true);
           return;
@@ -11660,7 +12647,6 @@ Gist ID: ${curId}
       }
     };
   })();
-
   // =========================================================================
   // ★ 模块 7：全局事件监听与 HTML 动作门面绑定 (Global Facades)
   // =========================================================================
@@ -11750,6 +12736,14 @@ Gist ID: ${curId}
     window.dismissDueMilestone = () => App.dismissDueMilestone();
     window.closeLeitnerDrawer = () => Views.Compass.closeDrawer();
     window.jumpBoxFromCompass = (b) => Views.Compass.jumpBox(b);
+
+    // ★ 单盒强化全局门面导出
+    window.startBoxReinforceSession = (boxId, boxName) => App.startBoxReinforceSession(boxId, boxName);
+    window.handleBoxReinforceExit = (isEsc) => App.handleBoxReinforceExit(isEsc);
+    window.handleBoxReinforceIntermissionChoice = (c) => App.handleBoxReinforceIntermissionChoice(c);
+    window.commitBoxReinforceSession = () => App.commitBoxReinforceSession();
+    window.finishBoxReinforceSessionCommit = () => App.finishBoxReinforceSessionCommit();
+    window.exportBoxReinforceDetails = () => App.exportBoxReinforceDetails();
 
     window.openShortcutModal = () => {
       const m = document.getElementById('shortcut-modal');
@@ -12439,7 +13433,7 @@ Gist ID: ${curId}
           } catch (_) {}
 
           if (!words) {
-            const match = text.match(/(?:WORDS_DATA|VOCABULARY_PACKS|words)\\s*=\\s*(\\[[\\s\\S]*\\]);?/);
+            const match = text.match(/(?:WORDS_DATA|VOCABULARY_PACKS|words)\s*=\s*(\[[\\s\\S]*\]);?/);
             if (match) {
               try {
                 words = JSON.parse(match[1]);
