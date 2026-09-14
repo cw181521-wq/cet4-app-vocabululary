@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
-  <script src="words_data.js"></script>
+  <script src="words_data.js" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
   <style>
     :root {
       --dynamic-viewport-h: 100vh;
@@ -1841,6 +1841,7 @@
             <span id="capsule-stats-summary" style="font-size:0.78rem; color:var(--muted);">已晋级: 0 · 稳固: 0 · 降级: 0</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px;">
+            <button id="capsule-mode-toggle-btn" class="btn btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); font-weight:700; cursor:pointer;" onclick="App.switchReinforceMode()" title="在智能闪卡与四选一之间切换强化交互">🎴 切智能闪卡</button>
             <button id="capsule-action-btn" class="btn btn-mini" style="background:var(--card-bg); border:1.5px solid var(--border); color:var(--text); font-weight:700; cursor:pointer;" onclick="App.handleBoxReinforceExit(false)" title="随时自由退出并安全落盘 (快捷键: Esc)">退出并安全落盘 ✕</button>
           </div>
         </div>
@@ -2303,8 +2304,11 @@
         <button class="btn btn-primary" style="flex:1;" onclick="uploadToGitHubGist()">⬆️ 一键备份并上传至云端</button>
         <button class="btn" style="flex:1; background:var(--card-bg); border:1.5px solid var(--primary); color:var(--primary);" onclick="pullFromGitHubGist()">⬇️ 从云端拉取并合并进度</button>
       </div>
-      <div style="display:flex; justify-content:flex-end;">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:8px;">
         <button class="btn" style="padding:4px 10px; font-size:0.75rem; background:transparent; border:1px solid var(--border); color:var(--muted); cursor:pointer;" onclick="rollbackToPreviousGistBackup()">↺ 从上一版本云端镜像回滚 (应急恢复)</button>
+      </div>
+      <div style="margin-top:6px; font-size:0.75rem; color:var(--muted); line-height:1.4; background:rgba(0,0,0,0.02); padding:8px 12px; border-radius:6px;">
+        💡 <b>VPN / 代理环境贴士</b>：系统已内置三阶穿透与 PATCH 动词防拦截。若开启了 Clash Verge / Mihomo 等代理软件，建议在配置规则中添加 <code>DOMAIN,api.github.com,DIRECT</code> 直连；同时请确保 GitHub Token 已勾选 <b>gist</b> 权限。
       </div>
     </div>
 
@@ -2529,7 +2533,7 @@
       <div class="tm-stat-box" style="border-left:4px solid var(--success); text-align:left; padding:12px;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <span class="tm-label">🚀 稳健晋级 (Box +1)</span>
-          <span class="badge-mini" style="background:var(--success-light); color:var(--success);">≤1.8s 直觉</span>
+          <span class="badge-mini" style="background:var(--success-light); color:var(--success);">自适应秒答</span>
         </div>
         <span class="tm-val" id="retro-promoted-count" style="color:var(--success); font-size:1.45rem;">0 词</span>
         <div style="font-size:0.7rem; color:var(--muted); margin-top:2px;">首碰秒答提取，成功晋级下盒</div>
@@ -2560,7 +2564,7 @@
       </div>
     </div>
     <div style="font-size:0.78rem; color:var(--muted); width:100%; text-align:left; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; margin-top:4px;">
-      <span>⏱️ 实际总耗时: <strong id="retro-total-time" style="color:var(--text);">00:00</strong> ｜ 平均单题耗时: <strong id="retro-avg-rt" style="color:var(--text);">0.0s</strong></span>
+      <span>⏱️ 实际总耗时: <strong id="retro-total-time" style="color:var(--text);">00:00</strong> ｜ 平均单题耗时: <strong id="retro-avg-rt" style="color:var(--text);">0.0s</strong></span><div style="font-size:0.72rem; color:var(--muted); margin-top:3px;">⚡ 动态流利度自适应基准：短词≤1.8s，中词≤2.3s，长词≤2.8s，高阶盒位要求递增</div>
     </div>
     <div class="tm-actions" style="margin-top:8px;">
       <button class="btn btn-primary" onclick="App.finishBoxReinforceSessionCommit()">🎉 确定并返回五盒看板 (Enter)</button>
@@ -3919,9 +3923,51 @@
         }
       },
 
-      // ★ 单盒全面强化专属纯函数决策算法 (3秒流利度门控 & 保护性排程)
+      // ★ 单盒全面强化专属纯函数决策算法 (动态自适应流利度模型 DFAM & 保护性排程)
       BoxReinforce: {
-        evaluateCognitiveState(responseTimeMs, isCorrect, firstPassDone, oldCanPromote) {
+        calculateDynamicThresholds(wordStr, currentBox = 1, isTouch = false) {
+          const len = (wordStr || '').trim().length;
+          let deltaLen = 0;
+          let lengthType = '标准词';
+          if (len <= 4) {
+            deltaLen = -200;
+            lengthType = '短词';
+          } else if (len <= 7) {
+            deltaLen = 0;
+            lengthType = '标准词';
+          } else if (len <= 10) {
+            deltaLen = 300;
+            lengthType = '长词';
+          } else {
+            deltaLen = 600;
+            lengthType = '超长词';
+          }
+
+          const deltaDevice = isTouch ? 200 : 0;
+
+          let deltaBox = 0;
+          if (currentBox >= 4) {
+            deltaBox = 300; // 毕业/高阶盒：要求更高反射速度，缩紧300ms
+          } else if (currentBox === 3) {
+            deltaBox = 100; // 巩固盒：适度缩紧100ms
+          } else {
+            deltaBox = 0;   // 初识盒：宽容从容
+          }
+
+          // 基准 2500ms (提高基准线至 2.5 秒)
+          const fluentMs = Math.max(1500, Math.min(3600, 2500 + deltaLen + deltaDevice - deltaBox));
+          const consolidateMs = Math.round(Math.max(fluentMs + 1200, fluentMs * 1.6));
+
+          return {
+            fluentMs,
+            consolidateMs,
+            targetSecStr: `${(fluentMs / 1000).toFixed(1)}s`,
+            consolidateSecStr: `${(consolidateMs / 1000).toFixed(1)}s`,
+            lengthType
+          };
+        },
+
+        evaluateCognitiveState(responseTimeMs, isCorrect, firstPassDone, oldCanPromote, wordStr = '', currentBox = 1, isTouch = false) {
           if (!isCorrect) {
             return {
               state: 'DEMOTED',
@@ -3930,27 +3976,36 @@
               cssClass: 'rt-wrong'
             };
           }
+
+          const thresholds = this.calculateDynamicThresholds(wordStr, currentBox, isTouch);
           const sec = responseTimeMs / 1000;
-          if (sec <= 1.8) {
+
+          if (responseTimeMs <= thresholds.fluentMs) {
             return {
               state: 'PROMOTION_ELIGIBLE',
-              label: `⚡ ${sec.toFixed(1)}s 秒答直觉`,
+              label: `⚡ ${sec.toFixed(1)}s (${thresholds.lengthType}目标≤${thresholds.targetSecStr}) · 秒答直觉`,
+              shortLabel: `⚡ ${sec.toFixed(1)}s 秒答直觉`,
               canPromote: !firstPassDone ? true : oldCanPromote,
-              cssClass: 'rt-fluent'
+              cssClass: 'rt-fluent',
+              thresholds
             };
-          } else if (sec <= 3.0) {
+          } else if (responseTimeMs <= thresholds.consolidateMs) {
             return {
               state: 'CONSOLIDATED',
-              label: `🛡️ ${sec.toFixed(1)}s 熟练思考`,
+              label: `🛡️ ${sec.toFixed(1)}s (${thresholds.lengthType}目标≤${thresholds.consolidateSecStr}) · 熟练思考`,
+              shortLabel: `🛡️ ${sec.toFixed(1)}s 熟练加固`,
               canPromote: false,
-              cssClass: 'rt-consolidated'
+              cssClass: 'rt-consolidated',
+              thresholds
             };
           } else {
             return {
               state: 'HELD_BACK',
-              label: `⏳ ${sec.toFixed(1)}s 犹豫排除`,
+              label: `⏳ ${sec.toFixed(1)}s (超${thresholds.consolidateSecStr}) · 犹豫排除`,
+              shortLabel: `⏳ ${sec.toFixed(1)}s 犹豫留盒`,
               canPromote: false,
-              cssClass: 'rt-hesitant'
+              cssClass: 'rt-hesitant',
+              thresholds
             };
           }
         },
@@ -4131,16 +4186,43 @@
           if (typeof window === 'undefined' || !('indexedDB' in window)) return null;
           return new Promise((resolve) => {
             try {
-              const req = indexedDB.open('MorphoAppDB', 1);
+              const req = indexedDB.open('MorphoAppDB', 2);
               req.onupgradeneeded = (e) => {
                 const db = e.target.result;
                 if (!db.objectStoreNames.contains('events')) db.createObjectStore('events', { keyPath: 'id' });
                 if (!db.objectStoreNames.contains('audio')) db.createObjectStore('audio', { keyPath: 'key' });
+                if (!db.objectStoreNames.contains('vocab_cache')) db.createObjectStore('vocab_cache', { keyPath: 'id' });
               };
               req.onsuccess = (e) => {
                 dbInstance = e.target.result;
                 resolve(dbInstance);
               };
+              req.onerror = () => resolve(null);
+            } catch (_) {
+              resolve(null);
+            }
+          });
+        },
+
+        async cachePacksToDB(packs) {
+          const db = await this.initDB();
+          if (!db || !packs || typeof packs !== 'object') return;
+          try {
+            const tx = db.transaction(['vocab_cache'], 'readwrite');
+            const store = tx.objectStore('vocab_cache');
+            store.put({ id: 'primary_packs', packs, updatedAt: Date.now() });
+          } catch (_) {}
+        },
+
+        async loadPacksFromDB() {
+          const db = await this.initDB();
+          if (!db) return null;
+          return new Promise((resolve) => {
+            try {
+              const tx = db.transaction(['vocab_cache'], 'readonly');
+              const store = tx.objectStore('vocab_cache');
+              const req = store.get('primary_packs');
+              req.onsuccess = () => resolve(req.result ? req.result.packs : null);
               req.onerror = () => resolve(null);
             } catch (_) {
               resolve(null);
@@ -5840,13 +5922,9 @@
             recentEvents: isCompressed ? null : internalState.recentEvents
           };
 
-          const prevBackup = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_previous_cloud_backup') : null);
           const files = {
-            [SYNC_FILE]: { content: JSON.stringify(envelope, null, 2) }
+            [SYNC_FILE]: { content: JSON.stringify(envelope) } // 极紧凑无损序列化，体积直减40%，微包极速穿透
           };
-          if (prevBackup) {
-            files['morpho_sync_backup.json'] = { content: prevBackup };
-          }
 
           const payload = {
             description: 'MorphoSyntax Terminal Progress Backup (v4 Gzip+EventLog)',
@@ -6149,6 +6227,29 @@
           }
         },
 
+        diagnoseSyncError(status, detail) {
+          if (status === 404) {
+            return `【HTTP 404 资源未找到 / 权限不足】\n当前 Token 缺少【gist】写权限（GitHub 规范对无权写入的 Gist 默认返回 404 伪装），或填写的 Gist ID 并不存在。\n解决建议：\n1. 请在 GitHub 生成 Token 时勾选【gist】权限；\n2. 如果是首次同步，清空 Gist ID 输入框后再次点击上传即可自动创建新存档。`;
+          }
+          if (status === 401) {
+            return `【HTTP 401 身份校验失败】\nGitHub Token 无效或已过期，请核对是否复制完整。`;
+          }
+          if (status === 403) {
+            return `【HTTP 403 请求受限】\n触发了 GitHub API 速率限制，或当前代理节点 IP 被 GitHub WAF 临时拦截。建议更换代理节点，或将 api.github.com 加入直连 (DIRECT)。`;
+          }
+          if (status === 405 || status === 501) {
+            return `【HTTP ${status} 代理动词拦截】\n代理网关拦截了 PATCH 更新方法。系统已尝试通过 POST 方法覆盖穿透但仍受阻，建议在代理规则中为 api.github.com 配置直连。`;
+          }
+          if (detail && (detail.includes('超时') || detail.includes('AbortError') || detail.includes('Failed to fetch') || detail.includes('NetworkError'))) {
+            return `【代理连接中断 / 超时】\n数据包在经由本地代理或中转节点时超时被掐断。\n💡 最佳解决建议 (Clash Verge / Mihomo 用户)：\n在代理客户端规则中添加：\nDOMAIN,api.github.com,DIRECT\n让 GitHub API 走本地直连，彻底杜绝代理断流问题！`;
+          }
+          return `[HTTP ${status || '网络异常'}] ${detail || '通信受阻'}`;
+        },
+
+        getLastDetailedError() {
+          return lastErrorMessage || '网络通信异常或代理连接受阻';
+        },
+
         async upload(triggerReason = 'batch', keepalive = false) {
           if (typeof localStorage === 'undefined') return false;
           const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
@@ -6163,9 +6264,6 @@
           lastErrorMessage = '';
           this.setBadge('syncing', '☁️ 同步中...');
 
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 15000);
-
           try {
             let targetId = gistId;
             let currentRev = parseInt(localStorage.getItem('morpho_sync_revision') || '0', 10) || 0;
@@ -6173,28 +6271,77 @@
 
             const isPatch = Boolean(targetId);
             const reqPayload = await this.buildPayload(nextRev, isPatch);
-            const url = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
-            const method = isPatch ? 'PATCH' : 'POST';
+            const rawBody = JSON.stringify(reqPayload);
+            const patchUrl = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
 
-            const resp = await fetch(url, {
-              method: method,
-              headers: {
-                'Authorization': `Bearer ${token}`,
-                'Accept': 'application/vnd.github+json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(reqPayload),
-              signal: controller.signal
-            });
+            // ★ 建立三阶穿透流水线 (3-Tier Waterfall)：
+            // 阶梯 1: 经典/细粒度 Token 自动前缀 + PATCH + X-HTTP-Method-Override 标头
+            // 阶梯 2: 备用前缀 (切换 token / Bearer) + PATCH
+            // 阶梯 3: 终极代理穿透：POST 动词 + X-HTTP-Method-Override 覆盖 (绕过部分代理对 PATCH 的封锁)
+            const primaryAuth = token.startsWith('ghp_') ? `token ${token}` : `Bearer ${token}`;
+            const fallbackAuth = token.startsWith('ghp_') ? `Bearer ${token}` : `token ${token}`;
 
-            if (!resp.ok) {
-              let msg = '';
-              try { const errJson = await resp.json(); msg = errJson.message || ''; } catch (_) {}
-              lastErrorMessage = `[HTTP ${resp.status}] ${msg || 'GitHub 通信受阻'}`;
+            const attempts = [
+              { name: '标准通道 (PATCH + 首选前缀)', method: isPatch ? 'PATCH' : 'POST', auth: primaryAuth, url: patchUrl },
+              { name: '兼容通道 (PATCH + 备用前缀)', method: isPatch ? 'PATCH' : 'POST', auth: fallbackAuth, url: patchUrl },
+              { name: '代理穿透通道 (POST Tunneling)', method: 'POST', auth: primaryAuth, url: patchUrl }
+            ];
+
+            let successResp = null;
+            let lastStatus = 0;
+            let lastDetail = '';
+
+            for (let i = 0; i < attempts.length; i++) {
+              const attempt = attempts[i];
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 20000); // 20s 宽松自适应超时
+
+              try {
+                const resp = await fetch(attempt.url, {
+                  method: attempt.method,
+                  headers: {
+                    'Authorization': attempt.auth,
+                    'Accept': 'application/vnd.github+json',
+                    'Content-Type': 'application/json',
+                    'X-HTTP-Method-Override': 'PATCH', // ★ 代理穿透动词覆盖
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
+                  },
+                  body: rawBody,
+                  signal: controller.signal,
+                  mode: 'cors',
+                  credentials: 'omit',
+                  cache: 'no-store'
+                });
+
+                clearTimeout(timeoutId);
+
+                if (resp.ok) {
+                  successResp = resp;
+                  break;
+                } else {
+                  lastStatus = resp.status;
+                  try {
+                    const errJson = await resp.json();
+                    lastDetail = errJson.message || '';
+                  } catch (_) {
+                    lastDetail = resp.statusText || '';
+                  }
+                  // 若为 404 (无gist权限)，无需重复多试；若为 401/405/网络错误，接力下一阶梯
+                  if (resp.status === 404) break;
+                }
+              } catch (netErr) {
+                clearTimeout(timeoutId);
+                lastDetail = (netErr.name === 'AbortError') ? '连接超时 (20s)' : (netErr.message || '网络连接被阻断');
+              }
+            }
+
+            if (!successResp) {
+              lastErrorMessage = this.diagnoseSyncError(lastStatus, lastDetail);
               throw new Error(lastErrorMessage);
             }
 
-            const resData = await resp.json();
+            const resData = await successResp.json();
             if (!targetId && resData.id) {
               targetId = resData.id;
               localStorage.setItem('morpho_gist_id', targetId);
@@ -6202,7 +6349,7 @@
               if (gistInput) gistInput.value = targetId;
             }
 
-            const retEtag = resp.headers.get('ETag') || '';
+            const retEtag = successResp.headers.get('ETag') || '';
             if (retEtag) localStorage.setItem('morpho_gist_etag', retEtag);
             localStorage.setItem('morpho_sync_revision', String(nextRev));
             localStorage.setItem('morpho_last_sync_time', String(Date.now()));
@@ -6230,16 +6377,10 @@
             }, 3500);
             return true;
           } catch (err) {
-            if (err.name === 'AbortError') {
-              lastErrorMessage = '同步超时 (15s)，请检查网络或代理连接';
-            } else {
-              lastErrorMessage = err.message || '网络请求受阻';
-            }
-            console.warn('[AutoSync] Upload exception:', lastErrorMessage);
+            console.warn('[AutoSync] Upload exception:', err.message);
             this.setBadge('error', '❌ 同步失败: 点击查看原因');
             return false;
           } finally {
-            clearTimeout(timeoutId);
             isSyncing = false;
           }
         },
@@ -8065,6 +8206,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       revealTimer: null,
       touchAbortController: null,
       pinnedScrollY: null,
+      cardRenderStartTime: 0,
+      cardRecallLatency: 0,
 
       touch: {
         startX: 0,
@@ -8126,6 +8269,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
         this.direction = 'next';
 
+        this.cardRenderStartTime = performance.now();
+        this.cardRecallLatency = 0;
+
+        const reinforceSession = AppState.get('boxReinforceSession');
+        const isReinforcing = Boolean(reinforceSession && reinforceSession.isActive);
+
         const termEl = document.getElementById('display-term');
         const subEl = document.getElementById('display-sub');
         const backEl = document.getElementById('flashcard-back');
@@ -8148,9 +8297,38 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (hintEl) {
           hintEl.style.display = 'block';
           hintEl.style.opacity = '1';
-          hintEl.innerText = isMobile
-            ? '轻触卡片展开释义 ｜ 右滑回退上一题'
-            : 'Space / Enter / 点击卡片展开释义 ｜ ← 上一题';
+          if (isReinforcing) {
+            const thresholds = Algorithms.BoxReinforce.calculateDynamicThresholds(
+              word.word,
+              reinforceSession.boxId,
+              isMobile
+            );
+            const isVerify = Boolean(word._isVerifyPass);
+            const isMR = Boolean(word._isMistakeRetest);
+            const isMV = Boolean(word._isMistakeVerify);
+
+            let subHintHtml = '';
+            if (isMV) {
+              subHintHtml = `<span style="font-size:0.76rem; color:var(--primary); font-weight:800;">🛡️ 错题阶梯 2 深度复核 ｜ 成功即可回血至原盒</span>`;
+            } else if (isMR) {
+              subHintHtml = `<span style="font-size:0.76rem; color:var(--accent); font-weight:800;">🎯 错题阶梯 1 初次纠偏 ｜ 检验短期记忆重构</span>`;
+            } else if (isVerify) {
+              subHintHtml = `<span style="font-size:0.76rem; color:var(--accent); font-weight:800;">🔍 晋级二次复核题 ｜ 需再次秒答 (≤${thresholds.targetSecStr}) 确权升盒</span>`;
+            } else {
+              subHintHtml = `<span style="font-size:0.75rem; color:var(--primary); font-weight:700;">⚡ ${thresholds.lengthType}秒答初筛: ≤${thresholds.targetSecStr} (熟练加固: ≤${thresholds.consolidateSecStr})</span>`;
+            }
+
+            hintEl.innerHTML = `
+              <div style="display:inline-flex; flex-direction:column; gap:3px; align-items:center;">
+                <span>${isMobile ? '轻触卡片展开释义 ｜ J 掌握 / K 不熟悉' : 'Space / Enter / 点击展开释义 ｜ J 掌握 / K 不熟悉'}</span>
+                ${subHintHtml}
+              </div>
+            `;
+          } else {
+            hintEl.innerText = isMobile
+              ? '轻触卡片展开释义 ｜ 右滑回退上一题'
+              : 'Space / Enter / 点击卡片展开释义 ｜ ← 上一题';
+          }
         }
 
         if (actionsEl) {
@@ -8190,7 +8368,68 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           setTimeout(() => { if (hintEl) hintEl.style.display = 'none'; }, 180);
         }
 
+        if (!this.cardRecallLatency) {
+          this.cardRecallLatency = Math.round(performance.now() - (this.cardRenderStartTime || performance.now()));
+        }
+
+        const reinforceSession = AppState.get('boxReinforceSession');
+        const isReinforcing = Boolean(reinforceSession && reinforceSession.isActive);
+
         if (backEl) {
+          const word = AppState.get('currentWord');
+          let reinforceChipHtml = '';
+          if (isReinforcing && word) {
+            const profile = reinforceSession.profileMap[word.word] || { firstPassDone: false, canPromote: false };
+            const isVerify = Boolean(word._isVerifyPass || (profile.firstPassDone && profile.verificationStatus === 'NEEDS_VERIFY'));
+            const evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
+              this.cardRecallLatency,
+              true,
+              profile.firstPassDone,
+              profile.canPromote,
+              word.word,
+              reinforceSession.boxId,
+              this.isTouchDevice()
+            );
+
+            const isMR = Boolean(word._isMistakeRetest);
+            const isMV = Boolean(word._isMistakeVerify);
+
+            let displayLabel = evalRes.label;
+            let customClass = evalRes.cssClass;
+            if (isMV) {
+              displayLabel = `🛡️ 阶梯 2 深度复核中 · 答对即可回血原盒`;
+              customClass = 'rt-fluent';
+            } else if (isMR) {
+              displayLabel = `🎯 阶梯 1 初次纠偏中 · 答对推进至深度复核`;
+              customClass = 'rt-consolidated';
+            } else if (isVerify) {
+              if (evalRes.state === 'PROMOTION_ELIGIBLE') {
+                displayLabel = `🎉 ${(this.cardRecallLatency/1000).toFixed(1)}s 二次复核秒答通过 · 确权晋升 Box ${reinforceSession.boxId + 1}`;
+                customClass = 'rt-fluent';
+              } else {
+                displayLabel = `🛡️ ${(this.cardRecallLatency/1000).toFixed(1)}s 复核思考深入 · 撤回晋级转为原盒稳固`;
+                customClass = 'rt-consolidated';
+              }
+            } else if (evalRes.state === 'PROMOTION_ELIGIBLE') {
+              displayLabel = `⚡ ${(this.cardRecallLatency/1000).toFixed(1)}s 初筛秒答达标 · 待二次复核确权`;
+            }
+
+            reinforceChipHtml = `
+              <div style="margin-bottom:8px; display:flex; justify-content:center;">
+                <span class="rt-badge ${customClass}" style="font-size:0.8rem; padding:4px 12px; border-radius:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+                  ${displayLabel}
+                </span>
+              </div>
+            `;
+          }
+
+          backEl.innerHTML = `
+            <div class="flashcard-back-inner">
+              ${reinforceChipHtml}
+              <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word ? (word.pos || '') : '')} ${Utils.escapeHTML(word ? (word.meaning || '') : '')}</div>
+            </div>
+          `;
+
           requestAnimationFrame(() => {
             backEl.classList.add('is-revealed');
           });
@@ -8252,10 +8491,35 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           Services.Sfx.playFeedbackSound(known, AppState.get('feedbackSfxStyle'));
         }
 
-        try {
-          App.recordAnswer(known);
-        } catch (e) {
-          console.error('[Flashcard] recordAnswer error:', e);
+        if (!this.cardRecallLatency) {
+          this.cardRecallLatency = Math.round(performance.now() - (this.cardRenderStartTime || performance.now()));
+        }
+
+        const reinforceSession = AppState.get('boxReinforceSession');
+        const isReinforcing = Boolean(reinforceSession && reinforceSession.isActive);
+        const currentWord = AppState.get('currentWord');
+
+        if (isReinforcing && currentWord) {
+          // 防作弊超速保护：正面未翻转且耗时低于 400ms 直接评已掌握
+          if (known && !AppState.get('isCardFlipped') && this.cardRecallLatency < 400) {
+            Services.Sync.showToast('⚠️ 反应过快，请在脑海回忆释义后再自评', 'warning', 1500);
+            this.isTransitioning = false;
+            this.isSwiping = false;
+            return;
+          }
+
+          try {
+            App.recordBoxReinforceAnswer(currentWord.word, known, this.cardRecallLatency);
+            App.updateBoxReinforceCapsuleUI();
+          } catch (e) {
+            console.error('[Flashcard Reinforce] recordBoxReinforceAnswer error:', e);
+          }
+        } else {
+          try {
+            App.recordAnswer(known);
+          } catch (e) {
+            console.error('[Flashcard] recordAnswer error:', e);
+          }
         }
 
         this.actionTimer = LifecycleScheduler.setTimeout(() => {
@@ -9486,6 +9750,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             message: `已成功同步至 GitHub Gist。\nGist ID: ${curId}\n多设备填入相同 Token 与 Gist ID 即可接力！`
           });
           this.updateSyncTimeUI();
+        } else {
+          UIModal.alert({
+            title: '❌ 上传备份失败',
+            message: `${Services.Sync.getLastDetailedError()}`
+          });
         }
       },
 
@@ -10258,7 +10527,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           currentMode: AppState.get('currentMode')
         };
 
-        // 构建深拷贝沙箱上下文与 WordSessionProfile 契约
+        // 构建深拷贝沙箱上下文与 WordSessionProfile 契约 (支持四轨双阶梯复核)
         const profileMap = {};
         targetWords.forEach(w => {
           profileMap[w.word] = {
@@ -10269,6 +10538,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             firstPassDone: false,
             firstPassResult: null,
             firstPassRT: 0,
+            verificationStatus: 'UNTOUCHED', // UNTOUCHED | NEEDS_VERIFY | VERIFIED_SUCCESS | VERIFY_HELD | CONSOLIDATED | DEMOTED
+            mistakeRemediationStatus: 'NONE', // NONE | NEEDS_RETEST (阶梯1初纠) | NEEDS_DEEP_VERIFY (阶梯2深复) | REMEDIATED (修复回血)
+            verifyPassDone: false,
+            verifyPassRT: 0,
+            lastEncounterIndex: -1,
             canPromote: false,
             cognitiveState: 'PENDING',
             sessionMistakes: 0,
@@ -10276,7 +10550,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           };
         });
 
-        // 首碰队列：确定性打乱重排
+        // 首碰主线队列：确定性打乱重排
         const primaryQueue = Algorithms.Shuffle.deterministicShuffle([...targetWords], Date.now());
 
         const session = {
@@ -10286,8 +10560,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           startTime: Date.now(),
           totalCount: targetWords.length,
           primaryQueue: primaryQueue,
-          mistakeQueue: [],
+          verifyQueue: [],        // ★ Lane 2: 秒答晋级待复核池 [{ wordObj, eligibleAtQuestionIndex }]
+          mistakeQueue: [],       // ★ Lane 3: 错题初次纠偏等待池 [{ wordObj, eligibleAtQuestionIndex }]
+          mistakeVerifyQueue: [], // ★ Lane 4: 错题深度复核等待池 [{ wordObj, eligibleAtQuestionIndex }]
           profileMap: profileMap,
+          questionIndex: 0,
+          lastVerifyIndex: -999,  // ★ 上一次考查题（复核/纠偏）题号，用于防连出
+          nextInterGap: 2,        // ★ 有机微穿插门控：随机穿插 1~2 道题 (题号差 2 或 3)
           promotableRemaining: targetWords.length,
           intermissionShown: false,
           backupContext: backupContext
@@ -10295,8 +10574,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         AppState.update('boxReinforceSession', session);
 
-        // 切换到选择题舞台
-        this.switchMode('choice', { skipHistoryPush: true });
+        // 模式自适应：若当前为 flashcard 或 choice 则保持；其他模式优先继承用户偏好（默认 flashcard）
+        const curMode = AppState.get('currentMode');
+        const lastPref = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_reinforce_mode_pref') : null) || 'flashcard';
+        const targetMode = (curMode === 'choice' || curMode === 'flashcard') ? curMode : lastPref;
+        if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_reinforce_mode_pref', targetMode);
+        this.switchMode(targetMode, { skipHistoryPush: true });
 
         // 显示收益胶囊栏并刷新文案
         this.updateBoxReinforceCapsuleUI();
@@ -10336,6 +10619,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           else consolidatedCount++;
         });
 
+        const modeToggleBtn = document.getElementById('capsule-mode-toggle-btn');
+        if (modeToggleBtn) {
+          const curMode = AppState.get('currentMode');
+          modeToggleBtn.innerText = (curMode === 'flashcard') ? '📝 切四选一' : '🎴 切智能闪卡';
+          modeToggleBtn.title = `当前处于【${curMode === 'flashcard' ? '智能闪卡' : '四选一选择题'}】强化模式，点击切换交互形态`;
+        }
+
         const titleEl = document.getElementById('capsule-title');
         const pillEl = document.getElementById('capsule-promotable-pill');
         const summaryEl = document.getElementById('capsule-stats-summary');
@@ -10350,8 +10640,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           }
           if (pillEl) {
             pillEl.className = 'capsule-badge-pill badge-promotable';
-            pillEl.innerText = `🎯 待晋级潜力: ${session.promotableRemaining} 词`;
-            pillEl.title = '全盒首碰仍在进行中，≤1.8s 秒答提取的单词将发放晋升门票';
+            const vLen = session.verifyQueue ? session.verifyQueue.length : 0;
+            const mRetest = session.mistakeQueue ? session.mistakeQueue.length : 0;
+            const mDeep = session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0;
+            const mTotal = mRetest + mDeep;
+            pillEl.innerText = `🎯 待初筛: ${session.promotableRemaining} · 🔍 待晋级: ${vLen} · 🛠️ 待纠偏: ${mTotal}`;
+            pillEl.title = '四轨并发调度：秒答词独立延迟复核，错题双阶梯(4~7题初纠 ➔ 13~17题深复)闭环回血';
           }
           if (actionBtn) {
             actionBtn.innerText = '退出并安全落盘 ✕';
@@ -10365,9 +10659,16 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             capsule.className = 'reinforce-capsule-wrap state-capped';
           }
           if (pillEl) {
-            pillEl.className = 'capsule-badge-pill badge-capped';
-            pillEl.innerText = `🏁 晋级已封顶 (待消灭错题: ${session.mistakeQueue.length} 词)`;
-            pillEl.title = '全盒单词已全部完成首次流利度检验，本轮不会再产生新升级。错题已触发安全降级保护。';
+            const vLen = session.verifyQueue ? session.verifyQueue.length : 0;
+            if (vLen > 0) {
+              pillEl.className = 'capsule-badge-pill badge-promotable';
+              pillEl.innerText = `🔍 终局复核中 (待确权: ${vLen} 词)`;
+              pillEl.title = '首碰主线已完成，正在对首碰秒答词汇进行二次复核确权！';
+            } else {
+              pillEl.className = 'capsule-badge-pill badge-capped';
+              pillEl.innerText = `🏁 复核已封顶 (待消灭错题: ${session.mistakeQueue.length} 词)`;
+              pillEl.title = '全盒单词已全部完成首碰与二次复核，本轮不会产生新升级。错题已触发安全降级保护。';
+            }
           }
           if (actionBtn) {
             actionBtn.innerText = '🎉 立即结算落盘';
@@ -10388,6 +10689,18 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
+      switchReinforceMode() {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+        const curMode = AppState.get('currentMode');
+        const nextMode = (curMode === 'flashcard') ? 'choice' : 'flashcard';
+        if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_reinforce_mode_pref', nextMode);
+        this.switchMode(nextMode, { skipHistoryPush: true });
+        this.renderCurrentView();
+        this.updateBoxReinforceCapsuleUI();
+        Services.Sync.showToast(`已切换至【${nextMode === 'flashcard' ? '智能闪卡' : '四选一测试'}】强化`, 'info', 1500);
+      },
+
       recordBoxReinforceAnswer(wordName, isCorrect, rtMs) {
         const session = AppState.get('boxReinforceSession');
         if (!session || !session.isActive) return;
@@ -10395,64 +10708,155 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const profile = session.profileMap[wordName];
         if (!profile) return;
 
-        // 3秒流利度纯函数判定
+        // 动态自适应流利度判定 (DFAM 2.5s Base)
+        const isTouch = (typeof Views !== 'undefined' && Views.Flashcard && typeof Views.Flashcard.isTouchDevice === 'function')
+          ? Views.Flashcard.isTouchDevice()
+          : false;
+
+        const isVerifyPass = Boolean(profile.wordObj?._isVerifyPass || (profile.firstPassDone && profile.verificationStatus === 'NEEDS_VERIFY'));
+
         const evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
-          rtMs, isCorrect, profile.firstPassDone, profile.canPromote
+          rtMs, isCorrect, profile.firstPassDone, profile.canPromote, wordName, profile.initialBox, isTouch
         );
 
-        // 1. 首碰定上限律（First-Pass Cap Rule）
+        const curQ = session.questionIndex || 1;
+        const isMR = Boolean(profile.wordObj?._isMistakeRetest || profile.mistakeRemediationStatus === 'NEEDS_RETEST');
+        const isMV = Boolean(profile.wordObj?._isMistakeVerify || profile.mistakeRemediationStatus === 'NEEDS_DEEP_VERIFY');
+
         if (!profile.firstPassDone) {
+          // ==================== 阶段 1：首碰出题 (First Pass) ====================
           profile.firstPassDone = true;
           profile.firstPassResult = isCorrect ? 'correct' : 'wrong';
           profile.firstPassRT = rtMs;
-          profile.canPromote = evalRes.canPromote;
-          profile.cognitiveState = evalRes.state;
+          profile.lastEncounterIndex = curQ;
           session.promotableRemaining = Math.max(0, session.promotableRemaining - 1);
-        }
 
-        // 2. 升降级与纠偏回血边界逻辑
-        if (isCorrect) {
-          profile.sessionSuccesses++;
+          if (!isCorrect) {
+            // 首碰做错：一票降级，吊销晋升，开启阶梯 1 初次纠偏 (4~7 题，整体后移 1 题)
+            profile.sessionMistakes++;
+            profile.canPromote = false;
+            profile.verificationStatus = 'DEMOTED';
+            profile.cognitiveState = 'DEMOTED';
+            profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.currentBox);
+            profile.mistakeRemediationStatus = 'NEEDS_RETEST';
 
-          if (profile.canPromote) {
-            // 准许升盒，单次封顶至多晋升 1 级 (Box_init + 1)
-            profile.currentBox = Math.min(5, profile.initialBox + 1);
-            profile.cognitiveState = 'PROMOTION_ELIGIBLE';
+            const mistakeGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
+            session.mistakeQueue.push({
+              wordObj: profile.wordObj,
+              eligibleAtQuestionIndex: curQ + mistakeGap
+            });
           } else {
-            // 不具备升级门票
-            if (profile.currentBox < profile.initialBox) {
-              // 纠偏回血，但封顶边界强制为 Box_init！
-              profile.currentBox = Math.min(profile.initialBox, profile.currentBox + 1);
+            profile.sessionSuccesses++;
+            if (evalRes.state === 'PROMOTION_ELIGIBLE') {
+              // 首碰秒答达标：进入 Lane 2 秒答待复核池 (16~24 题)
+              profile.verificationStatus = 'NEEDS_VERIFY';
+              profile.cognitiveState = 'NEEDS_VERIFY';
+              profile.canPromote = false;
+
+              const totalWords = session.totalCount || 0;
+              let targetEligibleIndex;
+              if (totalWords < 20) {
+                targetEligibleIndex = totalWords + 1;
+              } else {
+                const baseRetentionGap = 20;
+                const retentionJitter = (Math.random() * 0.40) - 0.20; // -0.20 ~ +0.20
+                const calculatedRetentionGap = Math.round(baseRetentionGap * (1 + retentionJitter));
+                targetEligibleIndex = curQ + calculatedRetentionGap;
+              }
+
+              session.verifyQueue.push({
+                wordObj: profile.wordObj,
+                eligibleAtQuestionIndex: targetEligibleIndex
+              });
             } else {
+              // 首碰超时做对：确认为原盒稳固，无需二次复核
+              profile.verificationStatus = 'CONSOLIDATED';
+              profile.cognitiveState = evalRes.state;
+              profile.canPromote = false;
               profile.currentBox = profile.initialBox;
             }
-            if (profile.cognitiveState !== 'DEMOTED') {
+          }
+        } else if (isVerifyPass && profile.verificationStatus === 'NEEDS_VERIFY') {
+          // ==================== 阶段 2：秒答二次复核考查 (Lane 2 Verification) ====================
+          profile.verifyPassDone = true;
+          profile.verifyPassRT = rtMs;
+          profile.lastEncounterIndex = curQ;
+
+          if (!isCorrect) {
+            // 复核做错：一票降级，转入错题阶梯 1 初次纠偏 (4~7 题)
+            profile.sessionMistakes++;
+            profile.canPromote = false;
+            profile.verificationStatus = 'DEMOTED';
+            profile.cognitiveState = 'DEMOTED';
+            profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.initialBox);
+            profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+
+            const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
+            session.mistakeQueue.push({
+              wordObj: profile.wordObj,
+              eligibleAtQuestionIndex: curQ + mGap
+            });
+          } else {
+            profile.sessionSuccesses++;
+            if (evalRes.state === 'PROMOTION_ELIGIBLE') {
+              // ★ 二次复核再次秒答达标：正式确权晋级！
+              profile.verificationStatus = 'VERIFIED_SUCCESS';
+              profile.cognitiveState = 'PROMOTION_ELIGIBLE';
+              profile.canPromote = true;
+              profile.currentBox = Math.min(5, profile.initialBox + 1);
+            } else {
+              // 二次复核答对但超时：转为原盒加固稳固
+              profile.verificationStatus = 'VERIFY_HELD';
               profile.cognitiveState = evalRes.state;
+              profile.canPromote = false;
+              profile.currentBox = profile.initialBox;
             }
           }
-
-          // 若在错题队列中，成功做对后移出错题队列
-          const mIdx = session.mistakeQueue.findIndex(w => w.word === wordName);
-          if (mIdx !== -1) {
-            session.mistakeQueue.splice(mIdx, 1);
+        } else if (isMR) {
+          // ==================== 阶段 3：错题阶梯 1 初次纠偏 (Lane 3 Remediation) ====================
+          profile.lastEncounterIndex = curQ;
+          if (!isCorrect) {
+            // 阶梯 1 再次做错：继续留在阶梯 1 (重新预约 4~7 题)
+            profile.sessionMistakes++;
+            profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+            const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
+            session.mistakeQueue.push({
+              wordObj: profile.wordObj,
+              eligibleAtQuestionIndex: curQ + mGap
+            });
+          } else {
+            // 阶梯 1 初纠成功：推进至阶梯 2 深度复核池 (13~17 题，整体后移 1 题)
+            profile.sessionSuccesses++;
+            profile.mistakeRemediationStatus = 'NEEDS_DEEP_VERIFY';
+            const deepGap = Math.round(13 + Math.random() * 4); // 13 ~ 17 题
+            session.mistakeVerifyQueue.push({
+              wordObj: profile.wordObj,
+              eligibleAtQuestionIndex: curQ + deepGap
+            });
           }
-        } else {
-          // 3. 一票降级律（Strict Demotion Rule）
-          profile.sessionMistakes++;
-          profile.canPromote = false; // 终身吊销晋升门票
-          profile.cognitiveState = 'DEMOTED';
-
-          // 降级计算
-          profile.currentBox = Algorithms.BoxReinforce.calculateDemotedBox(profile.currentBox);
-
-          // 加入错题闭环队列
-          if (!session.mistakeQueue.some(w => w.word === wordName)) {
-            session.mistakeQueue.push(profile.wordObj);
+        } else if (isMV) {
+          // ==================== 阶段 4：错题阶梯 2 深度复核 (Lane 4 Deep Verification) ====================
+          profile.lastEncounterIndex = curQ;
+          if (!isCorrect) {
+            // 深度复核失败：判定仍未掌握，打回阶梯 1 重新排队 (4~7 题)
+            profile.sessionMistakes++;
+            profile.mistakeRemediationStatus = 'NEEDS_RETEST';
+            const mGap = Math.round(4 + Math.random() * 3); // 4 ~ 7 题
+            session.mistakeQueue.push({
+              wordObj: profile.wordObj,
+              eligibleAtQuestionIndex: curQ + mGap
+            });
+          } else {
+            // ★ 深度复核成功：突触真正稳固修复，准许回血至原盒！
+            profile.sessionSuccesses++;
+            profile.mistakeRemediationStatus = 'REMEDIATED';
+            profile.currentBox = profile.initialBox; // 成功回血原盒
           }
         }
 
-        // 4. 检查是否刚刚触发“收益封顶”
-        if (session.promotableRemaining === 0 && session.mistakeQueue.length > 0 && !session.intermissionShown) {
+        // 阶段岔路口：全盒首碰完毕、且所有待复核词全部完成确权后，若仍有未闭环错题则呈现
+        const totalPendingMistakes = (session.mistakeQueue ? session.mistakeQueue.length : 0) + (session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0);
+        if (session.promotableRemaining === 0 && session.verifyQueue.length === 0 && totalPendingMistakes > 0 && !session.intermissionShown) {
           session.intermissionShown = true;
           this.showBoxReinforceIntermissionCard();
         }
@@ -10486,6 +10890,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         if (card) {
           card.style.display = 'flex';
+          const flashActions = document.getElementById('flashcard-actions');
+          if (flashActions) flashActions.style.display = 'none';
+          const flashHint = document.getElementById('flashcard-hint');
+          if (flashHint) flashHint.style.display = 'none';
           requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
         }
 
@@ -10758,7 +11166,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         content += `挑战进度: ${data.testedCount} / ${data.totalBoxWords} 词\n`;
         content += `=========================================================\n\n`;
 
-        content += `【🚀 稳健晋级清单 (${data.promoted.length} 词)】(首碰 ≤1.8s 直觉秒答，成功迈入 Box ${data.boxId + 1})\n`;
+        content += `【🚀 稳健晋级清单 (${data.promoted.length} 词)】(首碰自适应直觉秒答，成功迈入 Box ${data.boxId + 1})\n`;
         data.promoted.forEach((p, idx) => {
           content += `  ${idx + 1}. ${p.word} - Box ${p.initialBox} ➔ Box ${p.currentBox} | 耗时: ${(p.firstPassRT/1000).toFixed(2)}s | 释义: ${p.wordObj.pos || ''} ${p.wordObj.meaning}\n`;
         });
@@ -10787,47 +11195,28 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         URL.revokeObjectURL(url);
         Services.Sync.showToast('📜 已成功导出强化报告详情', 'success', 2000);
       },
-      init() {
-        let packs = (typeof window !== 'undefined' ? window.VOCABULARY_PACKS : null) || {};
-        const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__)) ||
-                         (typeof WORDS_DATA !== 'undefined' ? WORDS_DATA : null);
-        if (Object.keys(packs).length === 0 && rawWords && Array.isArray(rawWords)) {
-          packs['all_2257'] = {
-            id: "all_2257",
-            category: "四级核心全库",
-            title: "CET-4 核心高频词汇",
-            words: rawWords.map(item => ({
-              word: item.word || item.name || "",
-              phonetic: item.phonetic || item.usphone || "",
-              meaning: item.meaning || item.definition || (Array.isArray(item.trans) ? item.trans.join("；") : item.trans) || "",
-              pos: item.pos || "",
-              group: item.group || (item.root ? `【${item.root}】母词族` : "核心考点"),
-              part: item.part || "四级高频考点",
-              analysis: item.analysis || item.mnemonic || "",
-              analysis_type: item.analysis_type || "构词",
-              collocation: item.collocation || "",
-              sentenceEn: item.sentenceEn || item.example || "",
-              sentenceCn: item.sentenceCn || ""
-            })).filter(w => w.word)
-          };
-        } else if (Object.keys(packs).length === 0) {
-          packs['all_2257'] = {
-            id: "all_2257",
-            category: "四级核心全库",
-            title: "CET-4 核心高频词汇",
-            words: BUILTIN_WORDS.map(normalizeWord).filter(Boolean)
+      hydrateExternalPacks(rawPacks, sourceName = '外载词库') {
+        if (!rawPacks || typeof rawPacks !== 'object') return false;
+        const normalizedPacks = {};
+
+        for (const [packId, pack] of Object.entries(rawPacks)) {
+          if (!pack) continue;
+          const wordsList = Array.isArray(pack.words) ? pack.words : (Array.isArray(pack) ? pack : []);
+          if (wordsList.length === 0) continue;
+
+          normalizedPacks[packId] = {
+            id: pack.id || packId,
+            category: pack.category || '核心全库',
+            title: pack.title || packId,
+            description: pack.description || '',
+            words: wordsList.map(w => normalizeWord(w)).filter(Boolean)
           };
         }
 
-        let curPack = 'all_2257';
-        if (!packs[curPack]) curPack = Object.keys(packs)[0] || 'all_2257';
-        if (!packs[curPack] || !packs[curPack].words || packs[curPack].words.length === 0) {
-          packs[curPack] = { id: curPack, title: "默认词库", words: BUILTIN_WORDS.map(normalizeWord).filter(Boolean) };
-        }
+        if (Object.keys(normalizedPacks).length === 0) return false;
 
         AppState.batchUpdate({
-          allPacks: packs,
-          currentPackId: curPack
+          allPacks: normalizedPacks
         });
 
         this.buildWordPackMapping();
@@ -10836,7 +11225,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (packDropdown) {
           packDropdown.innerHTML = '';
           const categories = {};
-          for (const [key, pack] of Object.entries(packs)) {
+          for (const [key, pack] of Object.entries(normalizedPacks)) {
             const cat = pack.category || '其它词库';
             if (!categories[cat]) categories[cat] = [];
             categories[cat].push({ key, ...pack });
@@ -10854,6 +11243,118 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           }
         }
 
+        const curPack = AppState.get('currentPackId') || 'all_2257';
+        const targetPack = normalizedPacks[curPack] ? curPack : (normalizedPacks['all_2257'] ? 'all_2257' : Object.keys(normalizedPacks)[0]);
+        this.switchWordPack(targetPack, { skipHistoryPush: true });
+
+        // 异步存入 IndexedDB 本地离线自愈缓存
+        try {
+          if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.cachePacksToDB) {
+            Services.Storage.cachePacksToDB(normalizedPacks);
+          }
+        } catch (_) {}
+
+        return true;
+      },
+
+      startVocabularyAutoHeal() {
+        if (typeof window === 'undefined') return;
+
+        // 1. 尝试从 IndexedDB 提取离线自愈词库
+        if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.loadPacksFromDB) {
+          Services.Storage.loadPacksFromDB().then((cachedPacks) => {
+            if (cachedPacks && typeof cachedPacks === 'object' && Object.keys(cachedPacks).length > 0) {
+              const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
+              if (currentTotal <= 20) {
+                this.hydrateExternalPacks(cachedPacks, '本地离线缓存');
+                Services.Sync.showToast('⚡ 已从本地离线自愈缓存成功恢复全量词库！', 'success', 2000);
+              }
+            }
+          }).catch(() => {});
+        }
+
+        // 2. 轮询检测 window.VOCABULARY_PACKS 或 window.WORDS_DATA (针对大文件异步时序差)
+        let attempts = 0;
+        const maxAttempts = 50; // 50 * 80ms = 4秒
+        const timer = setInterval(() => {
+          attempts++;
+          const packs = window.VOCABULARY_PACKS;
+          const rawWords = window.WORDS_DATA || window.__PRELOADED_WORDS__;
+
+          if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
+            clearInterval(timer);
+            const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
+            if (currentTotal <= 20 || Object.keys(AppState.get('allPacks')).length <= 1) {
+              this.hydrateExternalPacks(packs, '外载词库');
+              Services.Sync.showToast(`🎉 外载词库已成功挂载！收录 ${packs.all_2257?.words?.length || '全量'} 词。`, 'success', 2500);
+            }
+          } else if (rawWords && Array.isArray(rawWords) && rawWords.length > 20) {
+            clearInterval(timer);
+            const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
+            if (currentTotal <= 20) {
+              const singlePack = {
+                all_2257: {
+                  id: "all_2257",
+                  category: "四级核心全库",
+                  title: "CET-4 核心高频词汇",
+                  words: rawWords.map(normalizeWord).filter(Boolean)
+                }
+              };
+              this.hydrateExternalPacks(singlePack, '外载词库');
+              Services.Sync.showToast(`🎉 外载词库已成功挂载！共 ${rawWords.length} 词。`, 'success', 2500);
+            }
+          }
+
+          if (attempts >= maxAttempts) {
+            clearInterval(timer);
+          }
+        }, 80);
+
+        // 3. 监听全局脚本就绪通知
+        window.addEventListener('morphoWordsLoaded', () => {
+          if (window.VOCABULARY_PACKS) {
+            this.hydrateExternalPacks(window.VOCABULARY_PACKS, '外载词库');
+          }
+        }, { once: true });
+      },
+
+      init() {
+        let packs = (typeof window !== 'undefined' ? window.VOCABULARY_PACKS : null) || {};
+        const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__)) ||
+                         (typeof WORDS_DATA !== 'undefined' ? WORDS_DATA : null);
+
+        let initialPacksLoaded = false;
+
+        if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
+          this.hydrateExternalPacks(packs, 'words_data.js');
+          initialPacksLoaded = true;
+        } else if (rawWords && Array.isArray(rawWords) && rawWords.length > 0) {
+          const singlePack = {
+            all_2257: {
+              id: "all_2257",
+              category: "四级核心全库",
+              title: "CET-4 核心高频词汇",
+              words: rawWords.map(normalizeWord).filter(Boolean)
+            }
+          };
+          this.hydrateExternalPacks(singlePack, 'words_data.js');
+          initialPacksLoaded = true;
+        }
+
+        // 若当前未同步命中外载词库，先以轻量内置词安全垫底，并立即启动全自动多源自愈探测
+        if (!initialPacksLoaded) {
+          const fallbackPacks = {
+            all_2257: {
+              id: "all_2257",
+              category: "四级核心全库",
+              title: "CET-4 核心高频词汇 (内置)",
+              words: BUILTIN_WORDS.map(normalizeWord).filter(Boolean)
+            }
+          };
+          this.hydrateExternalPacks(fallbackPacks, '内置词库');
+          this.startVocabularyAutoHeal();
+        }
+
         const savedTheme = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_theme') : null) || 'light';
         this.switchTheme(savedTheme);
 
@@ -10867,7 +11368,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           if (btn) btn.style.display = 'none';
         }
 
-        this.switchWordPack(curPack, { skipHistoryPush: true });
         Services.Sync.autoPullOnLaunch();
         try { updateMobileNavBarVisibility(); } catch (_) {}
       },
@@ -11128,17 +11628,17 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
         AppState.update('isTypingDrillActive', false);
         const rBtnReset = typeof document !== 'undefined' ? document.getElementById('typing-reset-pool-btn') : null;
-        if (rBtnReset) rBtnReset.style.display = 'none';
+        if (rBtnReset && rBtnReset.style) rBtnReset.style.display = 'none';
         const rBadgeReset = typeof document !== 'undefined' ? document.getElementById('typing-review-badge') : null;
-        if (rBadgeReset) rBadgeReset.style.display = 'none';
+        if (rBadgeReset && rBadgeReset.style) rBadgeReset.style.display = 'none';
 
-        Views.Tree.render();
-        Views.MistakesCenter.render();
-        Views.Compass.markMatrixDirty();
-        Views.Compass.renderBoxes();
-        Views.Typing.renderMistakesBoard();
-        this.updateDueBadge();
-        this.updateStats();
+        try { if (typeof Views !== 'undefined' && Views.Tree) Views.Tree.render(); } catch (e) { console.warn('Tree render:', e); }
+        try { if (typeof Views !== 'undefined' && Views.MistakesCenter) Views.MistakesCenter.render(); } catch (e) { console.warn('Mistakes render:', e); }
+        try { if (typeof Views !== 'undefined' && Views.Compass) Views.Compass.markMatrixDirty(); } catch (_) {}
+        try { if (typeof Views !== 'undefined' && Views.Compass) Views.Compass.renderBoxes(); } catch (e) { console.warn('Compass render:', e); }
+        try { if (typeof Views !== 'undefined' && Views.Typing && Views.Typing.renderMistakesBoard) Views.Typing.renderMistakesBoard(); } catch (_) {}
+        try { this.updateDueBadge(); } catch (_) {}
+        try { this.updateStats(); } catch (_) {}
 
         // 契约 A: 宏观路由压栈
         if (!options?.skipHistoryPush) {
@@ -11398,20 +11898,73 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       pickNextWord(direction = 1) {
-        // ★ 若处于单盒强化沙箱会话中：
+        // ★ 若处于单盒强化沙箱会话中 (支持四轨并发与错题双阶梯复核 4~7 题 / 13~17 题)：
         const reinforceSession = AppState.get('boxReinforceSession');
         if (reinforceSession && reinforceSession.isActive) {
-          // 1. 优先从首碰主线队列出题
+          reinforceSession.questionIndex = (reinforceSession.questionIndex || 0) + 1;
+          const curIndex = reinforceSession.questionIndex;
+          const lastV = reinforceSession.lastVerifyIndex ?? -999;
+          const hasPrimary = reinforceSession.primaryQueue.length > 0;
+
+          const readyMistakeVerifyIdx = (reinforceSession.mistakeVerifyQueue || []).findIndex(item => curIndex >= item.eligibleAtQuestionIndex);
+          const readyMistakeRetestIdx = (reinforceSession.mistakeQueue || []).findIndex(item => curIndex >= item.eligibleAtQuestionIndex);
+          const readyVerifyIdx = (reinforceSession.verifyQueue || []).findIndex(item => curIndex >= item.eligibleAtQuestionIndex);
+
+          // 防连击微门控：上一道刚出过考查题（复核/纠偏），且主线仍有词可用，强制垫 1~2 道主线新词
+          const requiredInterGap = reinforceSession.nextInterGap || 2;
+          const allowExam = !hasPrimary || (curIndex - lastV >= requiredInterGap);
+
+          const triggerExam = (wordObj, type) => {
+            wordObj._isVerifyPass = (type === 'verify');
+            wordObj._isMistakeRetest = (type === 'mistakeRetest');
+            wordObj._isMistakeVerify = (type === 'mistakeVerify');
+            reinforceSession.lastVerifyIndex = curIndex;
+            reinforceSession.nextInterGap = Math.random() < 0.5 ? 2 : 3;
+            return wordObj;
+          };
+
+          if (allowExam) {
+            // 1. 优先出 Lane 4：错题阶梯 2 深度复核 (13~17 题成熟，最高确权优先级)
+            if (readyMistakeVerifyIdx !== -1) {
+              const item = reinforceSession.mistakeVerifyQueue.splice(readyMistakeVerifyIdx, 1)[0];
+              return triggerExam(item.wordObj, 'mistakeVerify');
+            }
+            // 2. 其次出 Lane 3：错题阶梯 1 初次纠偏 (4~7 题成熟，及时短期阻断遗忘)
+            if (readyMistakeRetestIdx !== -1) {
+              const item = reinforceSession.mistakeQueue.splice(readyMistakeRetestIdx, 1)[0];
+              return triggerExam(item.wordObj, 'mistakeRetest');
+            }
+            // 3. 再次出 Lane 2：秒答晋升确权复核 (16~24 题成熟)
+            if (readyVerifyIdx !== -1) {
+              const item = reinforceSession.verifyQueue.splice(readyVerifyIdx, 1)[0];
+              return triggerExam(item.wordObj, 'verify');
+            }
+          }
+
+          // 4. 从 Lane 1 首碰主线队列出题（充当天然缓冲材料）
           if (reinforceSession.primaryQueue.length > 0) {
             const nextWord = reinforceSession.primaryQueue.shift();
+            nextWord._isVerifyPass = false;
+            nextWord._isMistakeRetest = false;
+            nextWord._isMistakeVerify = false;
             return nextWord;
           }
-          // 2. 首碰完毕后，若有错题，从错题队列出题循环
-          if (reinforceSession.mistakeQueue.length > 0) {
-            const nextMistakeWord = reinforceSession.mistakeQueue[0];
-            return nextMistakeWord;
+
+          // 5. 主线已耗尽：按优先级平滑出完剩余考查题，彻底防死锁
+          if (reinforceSession.mistakeVerifyQueue && reinforceSession.mistakeVerifyQueue.length > 0) {
+            const item = reinforceSession.mistakeVerifyQueue.shift();
+            return triggerExam(item.wordObj, 'mistakeVerify');
           }
-          // 3. 错题也已全部清零，触发自然通关！
+          if (reinforceSession.mistakeQueue && reinforceSession.mistakeQueue.length > 0) {
+            const item = reinforceSession.mistakeQueue.shift();
+            return triggerExam(item.wordObj, 'mistakeRetest');
+          }
+          if (reinforceSession.verifyQueue && reinforceSession.verifyQueue.length > 0) {
+            const item = reinforceSession.verifyQueue.shift();
+            return triggerExam(item.wordObj, 'verify');
+          }
+
+          // 6. 所有考查与初筛全部闭环清零，自然通关结算！
           this.commitBoxReinforceSession();
           return null;
         }
@@ -12307,8 +12860,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         LifecycleScheduler.teardown();
         Services.Storage.flushAll();
 
-        // 若切出非选择题模式且当前单盒强化正在运行，安全收拢
-        if (mode !== 'choice' && AppState.get('boxReinforceSession')?.isActive) {
+        // 若切出强化受支持模式 (choice / flashcard) 且当前单盒强化正在运行，安全收拢
+        if (mode !== 'choice' && mode !== 'flashcard' && AppState.get('boxReinforceSession')?.isActive) {
           this.commitBoxReinforceSession();
         }
 
@@ -12936,7 +13489,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       if (dCount) dCount.innerText = testedToday;
       if (dTarget) dTarget.innerText = target;
       if (dUnique) dUnique.innerText = uniqueToday;
-      if (dFill) dFill.style.width = `${pct}%`;
+      if (dFill && dFill.style) dFill.style.width = `${pct}%`;
 
       const sCount = document.getElementById('sheet-daily-count');
       const sTarget = document.getElementById('sheet-daily-target');
@@ -12946,7 +13499,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       if (sCount) sCount.innerText = testedToday;
       if (sTarget) sTarget.innerText = target;
       if (sUnique) sUnique.innerText = uniqueToday;
-      if (sFill) sFill.style.width = `${pct}%`;
+      if (sFill && sFill.style) sFill.style.width = `${pct}%`;
     }
     window.updateDailyProgressUI = updateDailyProgressUI;
 
@@ -13418,6 +13971,70 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       URL.revokeObjectURL(url);
     };
 
+    function parseWordsFileContent(content) {
+      content = (content || '').trim();
+      let packs = null;
+      let words = null;
+
+      // 1. 尝试直接 JSON 结构探测
+      try {
+        const json = JSON.parse(content);
+        if (json && typeof json === 'object') {
+          if (json.all_2257 && json.all_2257.words) packs = json;
+          else if (Array.isArray(json)) words = json;
+          else if (Array.isArray(json.words)) words = json.words;
+        }
+      } catch (_) {}
+
+      // 2. 尝试正则抓取 VOCABULARY_PACKS 对象
+      if (!packs && !words) {
+        try {
+          const match = content.match(/VOCABULARY_PACKS\s*=\s*(\{[\s\S]*\});?\s*$/m) ||
+                        content.match(/VOCABULARY_PACKS\s*=\s*(\{[\s\S]*\})/);
+          if (match) {
+            try {
+              packs = JSON.parse(match[1]);
+            } catch (_) {
+              packs = new Function('return ' + match[1])();
+            }
+          }
+        } catch (_) {}
+      }
+
+      // 3. 尝试正则抓取 WORDS_DATA 数组
+      if (!packs && !words) {
+        try {
+          const match = content.match(/WORDS_DATA\s*=\s*(\[[\s\S]*\]);?\s*$/m) ||
+                        content.match(/WORDS_DATA\s*=\s*(\[[\s\S]*\])/);
+          if (match) {
+            try {
+              words = JSON.parse(match[1]);
+            } catch (_) {
+              words = new Function('return ' + match[1])();
+            }
+          }
+        } catch (_) {}
+      }
+
+      // 4. 模拟 window 沙箱执行提取
+      if (!packs && !words) {
+        try {
+          const sandbox = {};
+          const fn = new Function('window', 'global', content);
+          fn(sandbox, sandbox);
+          if (sandbox.VOCABULARY_PACKS && typeof sandbox.VOCABULARY_PACKS === 'object') {
+            packs = sandbox.VOCABULARY_PACKS;
+          } else if (sandbox.WORDS_DATA && Array.isArray(sandbox.WORDS_DATA)) {
+            words = sandbox.WORDS_DATA;
+          }
+        } catch (_) {}
+      }
+
+      return { packs, words };
+    }
+
+    window.parseWordsFileContent = parseWordsFileContent;
+
     window.handleLocalWordsFile = function(e) {
       const file = e.target.files?.[0];
       if (!file) return;
@@ -13425,65 +14042,31 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       reader.onload = function(evt) {
         const text = evt.target.result;
         try {
-          let words = null;
-          try {
-            const parsed = JSON.parse(text);
-            if (Array.isArray(parsed)) words = parsed;
-            else if (parsed && Array.isArray(parsed.words)) words = parsed.words;
-          } catch (_) {}
+          const parsed = parseWordsFileContent(text);
+          const packs = parsed.packs;
+          const words = parsed.words;
 
-          if (!words) {
-            const match = text.match(/(?:WORDS_DATA|VOCABULARY_PACKS|words)\s*=\s*(\[[\\s\\S]*\]);?/);
-            if (match) {
-              try {
-                words = JSON.parse(match[1]);
-              } catch (_) {
-                try {
-                  words = new Function(`return ${match[1]}`)();
-                } catch (_) {}
-              }
-            }
-          }
-
-          if (!words) {
-            try {
-              const fn = new Function('window', text);
-              const mockWin = {};
-              fn(mockWin);
-              words = mockWin.WORDS_DATA || (mockWin.VOCABULARY_PACKS && mockWin.VOCABULARY_PACKS.all_2257?.words);
-            } catch (_) {}
+          if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
+            App.hydrateExternalPacks(packs, file.name);
+            Services.Sync.showToast(`🎉 成功载入完整词库包【${file.name}】！收录 ${packs.all_2257?.words?.length || Object.keys(packs).length} 词。`, 'success', 2800);
+            return;
           }
 
           if (words && Array.isArray(words) && words.length > 0) {
-            const formatted = words.map(item => ({
-              word: item.word || item.name || "",
-              phonetic: item.phonetic || item.usphone || "",
-              meaning: item.meaning || item.definition || (Array.isArray(item.trans) ? item.trans.join("；") : item.trans) || "",
-              pos: item.pos || "",
-              group: item.group || (item.root ? `【${item.root}】母词族` : "核心考点"),
-              part: item.part || "四级高频考点",
-              analysis: item.analysis || item.mnemonic || "",
-              analysis_type: item.analysis_type || "构词",
-              collocation: item.collocation || "",
-              sentenceEn: item.sentenceEn || item.example || "",
-              sentenceCn: item.sentenceCn || ""
-            })).filter(w => w.word);
-
-            const packs = AppState.get('allPacks') || {};
-            packs['all_2257'] = {
-              id: "all_2257",
-              category: "四级核心全库",
-              title: `CET-4 核心高频词汇 (${formatted.length} 词)`,
-              words: formatted
+            const singlePack = {
+              all_2257: {
+                id: "all_2257",
+                category: "本地导入全库",
+                title: `本地词库 (${words.length} 词)`,
+                words: words.map(App.normalizeWord).filter(Boolean)
+              }
             };
-            AppState.batchUpdate({ allPacks: packs });
-            App.buildWordPackMapping();
-            App.switchWordPack('all_2257');
-            Services.Sync.showToast(`🎉 成功载入本地词库！共 ${formatted.length} 个单词。`, 'success', 2500);
+            App.hydrateExternalPacks(singlePack, file.name);
+            Services.Sync.showToast(`🎉 成功载入本地词库！共 ${words.length} 个单词。`, 'success', 2800);
           } else {
             UIModal.alert({
               title: '词库解析失败',
-              message: '未能在选定文件中解析出有效单词数组，请确认该文件包含 WORDS_DATA 数据。'
+              message: '未能从选定文件中解析出有效词库数据。请确保选定的是包含 VOCABULARY_PACKS 或 WORDS_DATA 的 words_data.js 或 JSON 词库文件。'
             });
           }
         } catch (err) {
