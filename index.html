@@ -2304,11 +2304,8 @@
         <button class="btn btn-primary" style="flex:1;" onclick="uploadToGitHubGist()">⬆️ 一键备份并上传至云端</button>
         <button class="btn" style="flex:1; background:var(--card-bg); border:1.5px solid var(--primary); color:var(--primary);" onclick="pullFromGitHubGist()">⬇️ 从云端拉取并合并进度</button>
       </div>
-      <div style="display:flex; justify-content:flex-end; margin-bottom:8px;">
+      <div style="display:flex; justify-content:flex-end;">
         <button class="btn" style="padding:4px 10px; font-size:0.75rem; background:transparent; border:1px solid var(--border); color:var(--muted); cursor:pointer;" onclick="rollbackToPreviousGistBackup()">↺ 从上一版本云端镜像回滚 (应急恢复)</button>
-      </div>
-      <div style="margin-top:6px; font-size:0.75rem; color:var(--muted); line-height:1.4; background:rgba(0,0,0,0.02); padding:8px 12px; border-radius:6px;">
-        💡 <b>VPN / 代理环境贴士</b>：系统已内置三阶穿透与 PATCH 动词防拦截。若开启了 Clash Verge / Mihomo 等代理软件，建议在配置规则中添加 <code>DOMAIN,api.github.com,DIRECT</code> 直连；同时请确保 GitHub Token 已勾选 <b>gist</b> 权限。
       </div>
     </div>
 
@@ -5922,9 +5919,13 @@
             recentEvents: isCompressed ? null : internalState.recentEvents
           };
 
+          const prevBackup = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_previous_cloud_backup') : null);
           const files = {
-            [SYNC_FILE]: { content: JSON.stringify(envelope) } // 极紧凑无损序列化，体积直减40%，微包极速穿透
+            [SYNC_FILE]: { content: JSON.stringify(envelope, null, 2) }
           };
+          if (prevBackup) {
+            files['morpho_sync_backup.json'] = { content: prevBackup };
+          }
 
           const payload = {
             description: 'MorphoSyntax Terminal Progress Backup (v4 Gzip+EventLog)',
@@ -6227,29 +6228,6 @@
           }
         },
 
-        diagnoseSyncError(status, detail) {
-          if (status === 404) {
-            return `【HTTP 404 资源未找到 / 权限不足】\n当前 Token 缺少【gist】写权限（GitHub 规范对无权写入的 Gist 默认返回 404 伪装），或填写的 Gist ID 并不存在。\n解决建议：\n1. 请在 GitHub 生成 Token 时勾选【gist】权限；\n2. 如果是首次同步，清空 Gist ID 输入框后再次点击上传即可自动创建新存档。`;
-          }
-          if (status === 401) {
-            return `【HTTP 401 身份校验失败】\nGitHub Token 无效或已过期，请核对是否复制完整。`;
-          }
-          if (status === 403) {
-            return `【HTTP 403 请求受限】\n触发了 GitHub API 速率限制，或当前代理节点 IP 被 GitHub WAF 临时拦截。建议更换代理节点，或将 api.github.com 加入直连 (DIRECT)。`;
-          }
-          if (status === 405 || status === 501) {
-            return `【HTTP ${status} 代理动词拦截】\n代理网关拦截了 PATCH 更新方法。系统已尝试通过 POST 方法覆盖穿透但仍受阻，建议在代理规则中为 api.github.com 配置直连。`;
-          }
-          if (detail && (detail.includes('超时') || detail.includes('AbortError') || detail.includes('Failed to fetch') || detail.includes('NetworkError'))) {
-            return `【代理连接中断 / 超时】\n数据包在经由本地代理或中转节点时超时被掐断。\n💡 最佳解决建议 (Clash Verge / Mihomo 用户)：\n在代理客户端规则中添加：\nDOMAIN,api.github.com,DIRECT\n让 GitHub API 走本地直连，彻底杜绝代理断流问题！`;
-          }
-          return `[HTTP ${status || '网络异常'}] ${detail || '通信受阻'}`;
-        },
-
-        getLastDetailedError() {
-          return lastErrorMessage || '网络通信异常或代理连接受阻';
-        },
-
         async upload(triggerReason = 'batch', keepalive = false) {
           if (typeof localStorage === 'undefined') return false;
           const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
@@ -6264,6 +6242,9 @@
           lastErrorMessage = '';
           this.setBadge('syncing', '☁️ 同步中...');
 
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 15000);
+
           try {
             let targetId = gistId;
             let currentRev = parseInt(localStorage.getItem('morpho_sync_revision') || '0', 10) || 0;
@@ -6271,77 +6252,28 @@
 
             const isPatch = Boolean(targetId);
             const reqPayload = await this.buildPayload(nextRev, isPatch);
-            const rawBody = JSON.stringify(reqPayload);
-            const patchUrl = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
+            const url = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
+            const method = isPatch ? 'PATCH' : 'POST';
 
-            // ★ 建立三阶穿透流水线 (3-Tier Waterfall)：
-            // 阶梯 1: 经典/细粒度 Token 自动前缀 + PATCH + X-HTTP-Method-Override 标头
-            // 阶梯 2: 备用前缀 (切换 token / Bearer) + PATCH
-            // 阶梯 3: 终极代理穿透：POST 动词 + X-HTTP-Method-Override 覆盖 (绕过部分代理对 PATCH 的封锁)
-            const primaryAuth = token.startsWith('ghp_') ? `token ${token}` : `Bearer ${token}`;
-            const fallbackAuth = token.startsWith('ghp_') ? `Bearer ${token}` : `token ${token}`;
+            const resp = await fetch(url, {
+              method: method,
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github+json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(reqPayload),
+              signal: controller.signal
+            });
 
-            const attempts = [
-              { name: '标准通道 (PATCH + 首选前缀)', method: isPatch ? 'PATCH' : 'POST', auth: primaryAuth, url: patchUrl },
-              { name: '兼容通道 (PATCH + 备用前缀)', method: isPatch ? 'PATCH' : 'POST', auth: fallbackAuth, url: patchUrl },
-              { name: '代理穿透通道 (POST Tunneling)', method: 'POST', auth: primaryAuth, url: patchUrl }
-            ];
-
-            let successResp = null;
-            let lastStatus = 0;
-            let lastDetail = '';
-
-            for (let i = 0; i < attempts.length; i++) {
-              const attempt = attempts[i];
-              const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 20000); // 20s 宽松自适应超时
-
-              try {
-                const resp = await fetch(attempt.url, {
-                  method: attempt.method,
-                  headers: {
-                    'Authorization': attempt.auth,
-                    'Accept': 'application/vnd.github+json',
-                    'Content-Type': 'application/json',
-                    'X-HTTP-Method-Override': 'PATCH', // ★ 代理穿透动词覆盖
-                    'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache'
-                  },
-                  body: rawBody,
-                  signal: controller.signal,
-                  mode: 'cors',
-                  credentials: 'omit',
-                  cache: 'no-store'
-                });
-
-                clearTimeout(timeoutId);
-
-                if (resp.ok) {
-                  successResp = resp;
-                  break;
-                } else {
-                  lastStatus = resp.status;
-                  try {
-                    const errJson = await resp.json();
-                    lastDetail = errJson.message || '';
-                  } catch (_) {
-                    lastDetail = resp.statusText || '';
-                  }
-                  // 若为 404 (无gist权限)，无需重复多试；若为 401/405/网络错误，接力下一阶梯
-                  if (resp.status === 404) break;
-                }
-              } catch (netErr) {
-                clearTimeout(timeoutId);
-                lastDetail = (netErr.name === 'AbortError') ? '连接超时 (20s)' : (netErr.message || '网络连接被阻断');
-              }
-            }
-
-            if (!successResp) {
-              lastErrorMessage = this.diagnoseSyncError(lastStatus, lastDetail);
+            if (!resp.ok) {
+              let msg = '';
+              try { const errJson = await resp.json(); msg = errJson.message || ''; } catch (_) {}
+              lastErrorMessage = `[HTTP ${resp.status}] ${msg || 'GitHub 通信受阻'}`;
               throw new Error(lastErrorMessage);
             }
 
-            const resData = await successResp.json();
+            const resData = await resp.json();
             if (!targetId && resData.id) {
               targetId = resData.id;
               localStorage.setItem('morpho_gist_id', targetId);
@@ -6349,7 +6281,7 @@
               if (gistInput) gistInput.value = targetId;
             }
 
-            const retEtag = successResp.headers.get('ETag') || '';
+            const retEtag = resp.headers.get('ETag') || '';
             if (retEtag) localStorage.setItem('morpho_gist_etag', retEtag);
             localStorage.setItem('morpho_sync_revision', String(nextRev));
             localStorage.setItem('morpho_last_sync_time', String(Date.now()));
@@ -6377,10 +6309,16 @@
             }, 3500);
             return true;
           } catch (err) {
-            console.warn('[AutoSync] Upload exception:', err.message);
+            if (err.name === 'AbortError') {
+              lastErrorMessage = '同步超时 (15s)，请检查网络或代理连接';
+            } else {
+              lastErrorMessage = err.message || '网络请求受阻';
+            }
+            console.warn('[AutoSync] Upload exception:', lastErrorMessage);
             this.setBadge('error', '❌ 同步失败: 点击查看原因');
             return false;
           } finally {
+            clearTimeout(timeoutId);
             isSyncing = false;
           }
         },
@@ -9750,11 +9688,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             message: `已成功同步至 GitHub Gist。\nGist ID: ${curId}\n多设备填入相同 Token 与 Gist ID 即可接力！`
           });
           this.updateSyncTimeUI();
-        } else {
-          UIModal.alert({
-            title: '❌ 上传备份失败',
-            message: `${Services.Sync.getLastDetailedError()}`
-          });
         }
       },
 
