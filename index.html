@@ -130,7 +130,7 @@
     .weak-roots-grid::-webkit-scrollbar-thumb {
       background: var(--border);
       border-radius: 999px;
-      transition: background 0.2s ease;
+      transition: background 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .custom-scroll::-webkit-scrollbar-thumb:hover,
     .typing-history-track::-webkit-scrollbar-thumb:hover,
@@ -148,6 +148,8 @@
     .tree-group-card { content-visibility: auto; contain-intrinsic-size: 120px; }
     #mistakes-tbody tr, #typing-mistakes-tbody tr { content-visibility: auto; contain-intrinsic-size: 52px; }
     .glass-backdrop { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    
+    /* 契约 D: 浮层与模态卡片 120 FPS 合成层规范 */
     .modal-overlay, .ui-modal-overlay {
       position: fixed;
       inset: 0;
@@ -158,6 +160,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      will-change: opacity;
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .ui-modal-card {
       background: var(--card-bg);
@@ -171,12 +175,16 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+      animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes modalSlideUp { from { transform: translateY(20px) scale(0.96); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+    @keyframes modalSlideUp {
+      from { transform: translate3d(0, 16px, 0) scale(0.96); opacity: 0; }
+      to { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+    }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 20px 14px; display: flex; justify-content: center; min-height: 100vh; transition: background-color 0.2s, color 0.2s; }
+    body { background-color: var(--bg); color: var(--text); padding: 20px 14px; display: flex; justify-content: center; min-height: 100vh; transition: background-color 0.18s ease, color 0.18s ease; }
     .container { width: 100%; max-width: 960px; background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06), 0 8px 10px -6px rgba(0,0,0,0.02); padding: 26px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--border); }
     .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 10px; }
     .logo-area { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -186,26 +194,26 @@
     .theme-select { padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.82rem; cursor: pointer; outline: none; }
     .daily-target-box { display: flex; align-items: center; gap: 8px; background: var(--bg); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); }
     .daily-bar-wrap { width: 80px; height: 7px; background: #cbd5e1; border-radius: 4px; overflow: hidden; }
-    .daily-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.3s; }
+    .daily-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
     .control-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; background: var(--bg); padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; border: 1px solid var(--border); }
     .ctrl-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .ctrl-label { display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none; font-weight: 600; }
     select, input[type="text"], input[type="number"] { padding: 5px 9px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; outline: none; }
     .nav-tabs { display: flex; gap: 5px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .tab-btn { padding: 7px 11px; border: none; background: none; border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 700; color: var(--muted); transition: 0.15s; }
+    .tab-btn { padding: 7px 11px; border: none; background: none; border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 700; color: var(--muted); transition: 0.15s ease; }
     .tab-btn.active { background: var(--primary); color: #fff; }
     .tab-btn:hover:not(.active) { background: var(--primary-light); color: var(--primary); }
     .search-panel { display: flex; gap: 8px; }
     .search-input { flex: 1; padding: 9px 14px; font-size: 0.95rem; border: 1.5px solid var(--border); border-radius: 8px; background: var(--card-bg); color: var(--text); }
-    .stage-card { border: 1.5px solid var(--border); border-radius: 14px; padding: 26px 20px; text-align: center; position: relative; background: var(--card-bg); }
+    .stage-card { border: 1.5px solid var(--border); border-radius: 14px; padding: 26px 20px; text-align: center; position: relative; background: var(--card-bg); will-change: transform, opacity; }
     .star-level { font-size: 0.88rem; color: var(--accent); font-weight: bold; white-space: nowrap; letter-spacing: 1px; }
     .group-tip { font-size: 0.75rem; background: var(--bg); color: var(--muted); padding: 3px 8px; border-radius: 6px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid var(--border); }
     .order-progress { font-size: 0.78rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
     .word-main { font-size: 2.3rem; font-weight: 800; color: var(--text); margin-top: 14px; margin-bottom: 6px; }
     .word-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 14px; }
-    .audio-btn { background: var(--bg); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 1.15rem; color: var(--text); }
+    .audio-btn { background: var(--bg); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 1.15rem; color: var(--text); will-change: transform; transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1); }
     .dict-links-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .dict-pill { font-size: 0.76rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
+    .dict-pill { font-size: 0.76rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s ease; }
     .dict-pill:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
     .speech-micro-tip { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; margin-top: 8px; }
     .speed-timer-wrap { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-top: 10px; display: none; }
@@ -220,7 +228,7 @@
     .user-note-box { margin-top: 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: left; }
     .note-textarea { width: 100%; height: 50px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; resize: vertical; outline: none; margin-top: 4px; }
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
-    .opt-btn { width: 100%; padding: 14px 18px; text-align: left; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; cursor: pointer; display: flex; flex-direction: column; transition: all 0.2s ease; position: relative; color: var(--text); user-select: none; -webkit-tap-highlight-color: transparent; }
+    .opt-btn { width: 100%; padding: 14px 18px; text-align: left; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.16s ease, border-color 0.16s ease; position: relative; color: var(--text); user-select: none; -webkit-tap-highlight-color: transparent; will-change: transform; }
     .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--bg); }
     .opt-header { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; }
     .opt-header-left { display: flex; align-items: center; flex: 1; min-width: 0; }
@@ -238,7 +246,7 @@
     .spell-box { display: flex; gap: 8px; margin-top: 12px; }
     .spell-input { flex: 1; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1.15rem; outline: none; background: var(--card-bg); color: var(--text); }
 
-    /* 方案重构：闪卡背面自适应风琴展开动效与操作条浮现 (Frosted Accordion Reveal) */
+    /* 契约 D: 闪卡背面自适应风琴展开动效与操作条浮现 (Frosted Accordion Reveal: 180ms cubic-bezier) */
     .flashcard-back {
       border-top: 1.5px dashed var(--border);
       margin-top: 18px;
@@ -246,12 +254,12 @@
       display: grid;
       grid-template-rows: 0fr;
       opacity: 0;
-      transform: translateY(-8px);
-      filter: blur(8px);
-      transition: grid-template-rows 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.18s ease;
+      transform: translate3d(0, -8px, 0);
+      filter: blur(6px);
+      transition: grid-template-rows 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.16s ease;
       will-change: grid-template-rows, opacity, transform, filter;
       overflow: hidden;
     }
@@ -262,7 +270,7 @@
     .flashcard-back.is-revealed {
       grid-template-rows: 1fr;
       opacity: 1 !important;
-      transform: translateY(0) !important;
+      transform: translate3d(0, 0, 0) !important;
       filter: blur(0px) !important;
     }
     .flashcard-meaning {
@@ -277,15 +285,15 @@
       gap: 12px;
       margin-top: 18px;
       opacity: 0;
-      transform: translateY(8px);
+      transform: translate3d(0, 8px, 0);
       pointer-events: none;
-      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
     .flashcard-actions.is-revealed {
       opacity: 1 !important;
-      transform: translateY(0) !important;
+      transform: translate3d(0, 0, 0) !important;
       pointer-events: auto !important;
     }
     .flashcard-hint {
@@ -295,10 +303,10 @@
       font-weight: 600;
       letter-spacing: 0.3px;
       user-select: none;
-      transition: opacity 0.18s ease;
+      transition: opacity 0.16s ease;
     }
 
-    .btn { padding: 11px 18px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; }
+    .btn { padding: 11px 18px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none; transition: 0.18s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-hover); }
     .btn-success { background: var(--success); color: #fff; }
@@ -309,7 +317,7 @@
     .match-panel { display: none; }
     .match-grid-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
     .match-col { display: flex; flex-direction: column; gap: 10px; }
-    .match-tile { padding: 14px; border: 2px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; transition: all 0.15s; user-select: none; }
+    .match-tile { padding: 14px; border: 2px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; transition: all 0.15s ease; user-select: none; will-change: transform; }
     .match-tile:hover { border-color: var(--primary); background: var(--primary-light); }
     .match-tile.selected { border-color: var(--primary); background: #dbeafe; color: #1e40af; transform: scale(1.02); }
     .match-tile.matched { opacity: 0; pointer-events: none; transform: scale(0.9); }
@@ -365,7 +373,7 @@
         grid-template-columns: minmax(0, 1fr) 320px !important;
         gap: 24px !important;
         align-items: start !important;
-        transition: grid-template-columns 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: grid-template-columns 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .workspace-layout.companion-collapsed {
         grid-template-columns: 1fr !important;
@@ -378,7 +386,7 @@
         top: 16px !important;
         max-height: calc(100vh - 36px) !important;
         overflow-y: auto !important;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .desktop-companion-panel.is-collapsed {
         display: none !important;
@@ -408,8 +416,8 @@
     /* === 艾宾浩斯五盒动态罗盘与跳跃动效 === */
     .leitner-compass-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden; }
     .compass-nodes-bar { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
-    .compass-node { flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 4px; text-align: center; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
-    .compass-node:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .compass-node { flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 4px; text-align: center; cursor: pointer; transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease, border-color 0.18s ease; position: relative; will-change: transform; }
+    .compass-node:hover { border-color: var(--primary); transform: translate3d(0, -2px, 0); }
     .compass-node.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 10px rgba(14, 165, 233, 0.35); transform: scale(1.04); }
     .compass-node.active::after { content: '●'; position: absolute; top: -5px; right: -3px; color: var(--primary); font-size: 10px; animation: cnodePulse 1.5s infinite; }
     @keyframes cnodePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { transform: scale(1.04); } }
@@ -421,8 +429,8 @@
     .compass-actions { display: flex; gap: 6px; }
     .compass-mini-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; font-size: 0.72rem; color: var(--text); cursor: pointer; transition: all 0.15s ease; }
     .compass-mini-btn:hover { border-color: var(--primary); color: var(--primary); }
-    .box-hop-badge { position: absolute; top: 12px; right: 14px; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; color: #ffffff; pointer-events: none; z-index: 30; animation: hopAndFade 2.4s forwards cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    @keyframes hopAndFade { 0% { opacity: 0; transform: translateY(10px) scale(0.9); } 18% { opacity: 1; transform: translateY(0) scale(1.02); } 82% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(0.95); } }
+    .box-hop-badge { position: absolute; top: 12px; right: 14px; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; color: #ffffff; pointer-events: none; z-index: 30; animation: hopAndFade 2.2s forwards cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); will-change: transform, opacity; }
+    @keyframes hopAndFade { 0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.9); } 18% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.02); } 82% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } 100% { opacity: 0; transform: translate3d(0, -10px, 0) scale(0.95); } }
 
     /* === 独立五盒看板 === */
     .leitner-overall-card { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(147, 51, 234, 0.08) 100%); border: 1.5px solid var(--primary-light); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
@@ -433,8 +441,8 @@
     .metric-val.due { color: #ef4444; }
     .metric-val.grad { color: #10b981; }
     .leitner-3d-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
-    .leitner-card-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 16px 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; position: relative; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-    .leitner-card-box:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); border-color: var(--primary); }
+    .leitner-card-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 16px 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; position: relative; transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease; will-change: transform; }
+    .leitner-card-box:hover { transform: translate3d(0, -3px, 0); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); border-color: var(--primary); }
     .leitner-card-box.has-due { border-color: #ef4444; box-shadow: 0 0 14px rgba(239, 68, 68, 0.16); }
     .box-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
     .box-tag-pill { font-size: 0.68rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--card-bg); color: var(--muted); border: 1px solid var(--border); }
@@ -442,7 +450,7 @@
     @keyframes pulseDue { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
     .box-count-large { font-size: 1.75rem; font-weight: 900; color: var(--text); margin: 4px 0 2px 0; line-height: 1; }
     .box-progress-track { height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 4px; }
-    .box-progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .box-progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
     .box-btn-group { display: flex; flex-direction: column; gap: 6px; }
     .box-action-btn { padding: 6px 10px; font-size: 0.78rem; font-weight: 700; border-radius: 8px; border: none; cursor: pointer; transition: all 0.15s ease; text-align: center; }
     .box-btn-due { background: #ef4444; color: #ffffff; }
@@ -451,7 +459,7 @@
     .box-btn-all:hover { border-color: var(--primary); color: var(--primary); }
     .box-btn-preview { background: transparent; color: var(--muted); font-size: 0.72rem; padding: 3px; border: none; cursor: pointer; }
     .box-btn-preview:hover { color: var(--primary); }
-    .leitner-drawer { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: none; flex-direction: column; gap: 12px; margin-top: 10px; }
+    .leitner-drawer { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: none; flex-direction: column; gap: 12px; margin-top: 10px; will-change: transform, opacity; }
     .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
     .drawer-word-cloud { display: flex; flex-wrap: wrap; gap: 6px; max-height: 220px; overflow-y: auto; padding: 4px 0; }
     .drawer-word-tag { padding: 4px 9px; border-radius: 6px; font-size: 0.78rem; background: var(--bg); border: 1px solid var(--border); color: var(--text); cursor: pointer; transition: all 0.15s ease; }
@@ -469,8 +477,9 @@
       padding: 16px 20px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.03);
       text-align: left;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 0.18s ease;
       box-sizing: border-box;
+      will-change: opacity;
     }
     .typing-mistakes-header {
       display: flex;
@@ -540,8 +549,9 @@
       border: 1.5px solid var(--border);
       border-radius: 14px;
       padding: 12px 16px;
-      animation: fadeIn 0.2s ease;
+      animation: fadeIn 0.18s ease;
       box-sizing: border-box;
+      will-change: opacity;
     }
     .typing-history-header {
       display: flex;
@@ -577,9 +587,10 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
       user-select: none;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      will-change: transform;
     }
     .typing-history-chip:hover {
-      transform: translateY(-2px);
+      transform: translate3d(0, -2px, 0);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     .typing-history-chip .chip-top { display: flex; align-items: center; gap: 6px; }
@@ -601,10 +612,10 @@
     .tvi-mistake-row { transition: background 0.15s ease; cursor: pointer; }
     .tvi-mistake-row:hover { background: var(--primary-light); }
     .tvi-word-col { display: flex; align-items: center; gap: 6px; }
-    .tvi-speaker-icon { font-size: 0.85rem; opacity: 0.7; transition: transform 0.15s ease, opacity 0.15s ease; }
+    .tvi-speaker-icon { font-size: 0.85rem; opacity: 0.7; transition: transform 0.15s ease, opacity 0.15s ease; will-change: transform; }
     .tvi-word-col:hover .tvi-speaker-icon { transform: scale(1.2); opacity: 1; }
     .tvi-word-name { font-size: 0.95rem; font-weight: 800; color: var(--text); letter-spacing: 0.2px; }
-    .tvi-badge-btn { transition: transform 0.15s ease, box-shadow 0.15s ease; display: inline-block; }
+    .tvi-badge-btn { transition: transform 0.15s ease, box-shadow 0.15s ease; display: inline-block; will-change: transform; }
     .tvi-badge-btn:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); }
 
     .typing-review-badge {
@@ -639,11 +650,11 @@
 
     /* 模式手风琴 */
     .mode-nav-accordion { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 2px; }
-    .mode-nav-capsule-bar { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 8px 16px; cursor: pointer; user-select: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mode-nav-capsule-bar { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 8px 16px; cursor: pointer; user-select: none; transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .mode-nav-capsule-bar:hover { background: var(--primary-light); border-color: var(--primary); }
     .mode-nav-capsule-pill { font-size: 0.88rem; font-weight: 700; color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
     .mode-nav-capsule-pill strong { color: var(--primary); font-weight: 800; }
-    .capsule-chevron { font-size: 0.76rem; color: var(--primary); font-weight: 700; background: var(--card-bg); border: 1px solid var(--border); padding: 3px 10px; border-radius: 6px; transition: all 0.2s ease; }
+    .capsule-chevron { font-size: 0.76rem; color: var(--primary); font-weight: 700; background: var(--card-bg); border: 1px solid var(--border); padding: 3px 10px; border-radius: 6px; transition: all 0.18s ease; }
     .mode-nav-capsule-bar:hover .capsule-chevron { border-color: var(--primary); background: var(--primary); color: #fff; }
     .mode-nav-accordion.is-collapsed .nav-tabs { display: none !important; }
 
@@ -657,7 +668,7 @@
     }
 
     /* === 键盘极速盲打响应式工作台 === */
-    .view-typing-panel { display: none; width: 100%; animation: fadeIn 0.25s ease; }
+    .view-typing-panel { display: none; width: 100%; animation: fadeIn 0.18s ease; will-change: opacity; }
     .typing-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 24px; align-items: start; width: 100%; }
     .typing-main-column { display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; gap: 16px; }
     .typing-card {
@@ -676,13 +687,13 @@
       text-align: center;
       box-sizing: border-box;
       cursor: text;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
       position: relative;
       overflow: hidden;
       max-height: calc(var(--dynamic-viewport-h, 100vh) - 40px);
     }
     .typing-card-progress-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 3.5px; background: rgba(0, 0, 0, 0.05); border-radius: 0 0 18px 18px; overflow: hidden; }
-    .typing-card-progress-fill { height: 100%; width: 0%; border-radius: 0 0 18px 18px; transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease; background: linear-gradient(90deg, #10b981, #059669); }
+    .typing-card-progress-fill { height: 100%; width: 0%; border-radius: 0 0 18px 18px; transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease; background: linear-gradient(90deg, #10b981, #059669); }
 
     .combo-heat-1 { animation: comboPulse1 1s infinite alternate; color: #10b981 !important; }
     .combo-heat-2 { animation: comboPulse2 0.7s infinite alternate; color: #f59e0b !important; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
@@ -691,10 +702,10 @@
     @keyframes comboPulse2 { from { transform: scale(1.05); } to { transform: scale(1.18); } }
     @keyframes comboPulse3 { from { transform: scale(1.1); } to { transform: scale(1.28); } }
 
-    /* 达标弹窗 */
-    .typing-milestone-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.62); backdrop-filter: blur(8px); z-index: 9999; display: none; justify-content: center; align-items: center; animation: tmFadeIn 0.25s ease-out; }
-    .typing-milestone-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 22px; width: 90%; max-width: 520px; padding: 34px 28px 26px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.28); color: var(--text); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; position: relative; animation: tmSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    .tm-trophy { font-size: 3.2rem; line-height: 1; animation: tmTrophyBounce 0.6s ease; }
+    /* 达标弹窗 契约 D 优化 */
+    .typing-milestone-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.62); backdrop-filter: blur(8px); z-index: 9999; display: none; justify-content: center; align-items: center; animation: tmFadeIn 0.18s ease-out; will-change: opacity; }
+    .typing-milestone-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 22px; width: 90%; max-width: 520px; padding: 34px 28px 26px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.28); color: var(--text); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; position: relative; animation: tmSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
+    .tm-trophy { font-size: 3.2rem; line-height: 1; animation: tmTrophyBounce 0.5s ease; }
     .tm-title { font-size: 1.35rem; font-weight: 800; margin: 0; color: var(--text); }
     .tm-sub { font-size: 0.9rem; color: var(--muted); margin: -6px 0 6px; }
     .tm-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
@@ -704,28 +715,28 @@
     .tm-val { font-size: 1.15rem; font-weight: 800; font-family: monospace; color: var(--primary); }
     .tm-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px; }
     @keyframes tmFadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes tmSlideUp { from { transform: translateY(24px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
-    @keyframes tmTrophyBounce { 0% { transform: scale(0.5); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+    @keyframes tmSlideUp { from { transform: translate3d(0, 20px, 0) scale(0.96); opacity: 0; } to { transform: translate3d(0, 0, 0) scale(1); opacity: 1; } }
+    @keyframes tmTrophyBounce { 0% { transform: scale(0.5); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
     .typing-card.typing-focused { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light), 0 12px 32px rgba(0, 0, 0, 0.06); }
-    .typing-root-tip { font-size: 0.82rem; color: var(--primary); background: var(--primary-light); padding: 4px 14px; border-radius: 16px; font-weight: 700; max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 1; transition: opacity 0.28s ease, background-color 0.28s ease, color 0.28s ease; }
+    .typing-root-tip { font-size: 0.82rem; color: var(--primary); background: var(--primary-light); padding: 4px 14px; border-radius: 16px; font-weight: 700; max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 1; transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
     .typing-root-tip.tip-hidden { visibility: hidden; opacity: 0; }
     .typing-root-tip.tip-rescue { background: var(--accent-light); color: var(--accent); }
     .typing-phonetic { font-size: 1.05rem; color: var(--muted); font-family: serif; letter-spacing: 0.5px; }
     .typing-meaning { font-size: 1.35rem; font-weight: 800; color: var(--text); line-height: 1.4; max-width: 92%; }
     .typing-slots-wrap { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin: 14px 0 10px; min-height: 60px; width: 100%; }
-    .typing-char-slot { width: 42px; height: 54px; border-bottom: 3.5px solid var(--border); display: flex; justify-content: center; align-items: center; font-size: 2.05rem; font-weight: 800; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; color: var(--text); transition: all 0.15s ease; text-transform: lowercase; border-radius: 6px 6px 2px 2px; background: rgba(0, 0, 0, 0.015); box-sizing: border-box; }
+    .typing-char-slot { width: 42px; height: 54px; border-bottom: 3.5px solid var(--border); display: flex; justify-content: center; align-items: center; font-size: 2.05rem; font-weight: 800; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; color: var(--text); transition: all 0.15s ease; text-transform: lowercase; border-radius: 6px 6px 2px 2px; background: rgba(0, 0, 0, 0.015); box-sizing: border-box; will-change: transform; }
     .typing-char-slot.active, .typing-char-slot.slot-cursor { border-bottom-color: var(--primary) !important; background: var(--primary-light); box-shadow: 0 4px 12px rgba(15, 118, 110, 0.18); animation: cursorBlink 0.9s infinite ease-in-out; }
     @keyframes cursorBlink { 0%, 100% { border-bottom-color: var(--primary); opacity: 1; } 50% { border-bottom-color: transparent; opacity: 0.7; } }
-    .typing-char-slot.correct, .typing-char-slot.slot-correct { color: var(--success); border-bottom-color: var(--success) !important; background: var(--success-light); transform: translateY(-2px); }
-    .typing-char-slot.error, .typing-char-slot.slot-wrong { color: var(--error); border-bottom-color: var(--error) !important; background: var(--error-light); animation: slotShake 0.25s ease; }
-    @keyframes slotShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    .typing-char-slot.correct, .typing-char-slot.slot-correct { color: var(--success); border-bottom-color: var(--success) !important; background: var(--success-light); transform: translate3d(0, -2px, 0); }
+    .typing-char-slot.error, .typing-char-slot.slot-wrong { color: var(--error); border-bottom-color: var(--error) !important; background: var(--error-light); animation: slotShake 0.22s ease; }
+    @keyframes slotShake { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-5px, 0, 0); } 75% { transform: translate3d(5px, 0, 0); } }
 
     .typing-capture { position: absolute; width: 1px; height: 1px; opacity: 0.001; border: none; outline: none; background: transparent; color: transparent; padding: 0; margin: 0; pointer-events: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-    .typing-char-slot.slot-revealed { color: #b45309 !important; background: #fef3c7 !important; border-bottom: 3.5px solid #f59e0b !important; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.28); animation: revealPulse 1.8s infinite ease-in-out; }
+    .typing-char-slot.slot-revealed { color: #b45309 !important; background: #fef3c7 !important; border-bottom: 3.5px solid #f59e0b !important; transform: translate3d(0, -2px, 0); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.28); animation: revealPulse 1.8s infinite ease-in-out; }
     :root[data-theme="dark"] .typing-char-slot.slot-revealed { color: #fbbf24 !important; background: rgba(120, 53, 15, 0.45) !important; border-bottom: 3.5px solid #fbbf24 !important; box-shadow: 0 4px 14px rgba(251, 191, 36, 0.25); }
     :root[data-theme="sepia"] .typing-char-slot.slot-revealed { color: #92400e !important; background: #fde68a !important; border-bottom: 3.5px solid #d97706 !important; }
-    @keyframes revealPulse { 0%, 100% { transform: translateY(-2px) scale(1); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.28); } 50% { transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45); } }
+    @keyframes revealPulse { 0%, 100% { transform: translate3d(0, -2px, 0) scale(1); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.28); } 50% { transform: translate3d(0, -3px, 0) scale(1.03); box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45); } }
     .typing-hint-text.revealed-hint { color: #b45309; background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 12px; font-weight: 700; font-size: 0.85rem; animation: hintGlow 1.8s infinite ease-in-out; }
     @keyframes hintGlow { 0%, 100% { opacity: 0.92; } 50% { opacity: 1; } }
     .typing-hint-text { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
@@ -745,8 +756,8 @@
       .typing-sidebar-column .typing-mistakes-table-wrap { max-height: 280px; }
     }
 
-    .shortcut-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); z-index: 9999; display: none; justify-content: center; align-items: center; }
-    .shortcut-modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; width: 92%; max-width: 620px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); color: var(--text); display: flex; flex-direction: column; gap: 16px; }
+    .shortcut-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); z-index: 9999; display: none; justify-content: center; align-items: center; will-change: opacity; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
+    .shortcut-modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; width: 92%; max-width: 620px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); color: var(--text); display: flex; flex-direction: column; gap: 16px; will-change: transform, opacity; animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .shortcut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
     .shortcut-row { display: flex; align-items: center; gap: 8px; }
     .shortcut-row kbd { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px 7px; font-family: monospace; color: var(--text); font-weight: 700; font-size: 0.8rem; min-width: 24px; text-align: center; }
@@ -773,7 +784,7 @@
     .speed-time-num.warning { color: #f59e0b; border-color: #f59e0b; }
     .speed-time-num.danger { color: #ef4444; border-color: #ef4444; animation: blitzPulse 0.45s infinite; }
     @keyframes blitzPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-    .speed-pause-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(6px); z-index: 50; display: none; flex-direction: column; justify-content: center; align-items: center; border-radius: 16px; color: #ffffff; cursor: pointer; text-align: center; padding: 20px; }
+    .speed-pause-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(6px); z-index: 50; display: none; flex-direction: column; justify-content: center; align-items: center; border-radius: 16px; color: #ffffff; cursor: pointer; text-align: center; padding: 20px; will-change: opacity; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .speed-pause-icon { font-size: 2.4rem; margin-bottom: 8px; }
     .speed-pause-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
     .speed-pause-sub { font-size: 0.85rem; color: #cbd5e1; }
@@ -801,7 +812,7 @@
     .analysis-card,.user-note-box,.upgrader-card,.cloze-text-card { border-radius: 14px; }
     .analysis-card { background: var(--primary-light); border-left-color: var(--primary); }
     .opt-btn { border-radius: 13px; padding: 16px 18px; }
-    .opt-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(25,80,75,.10); }
+    .opt-btn:hover:not(:disabled) { transform: translate3d(0, -1px, 0); box-shadow: 0 6px 14px rgba(25,80,75,.10); }
     .btn { border-radius: 10px; }
     .btn-primary { box-shadow: 0 5px 12px rgba(15,118,110,.20); }
     .leitner-compass-wrap,.workspace-main > div:not(.stage-card) { border-radius: 14px; }
@@ -809,7 +820,6 @@
     .utility-toggle-btn { border-radius: 9px; }
 
     @media (max-width: 768px) {
-      /* 模块一：视口满幅通栏改造（根除左右缝隙与边框） */
       body {
         padding: 0 !important;
         padding-top: env(safe-area-inset-top, 0px) !important;
@@ -827,7 +837,6 @@
         gap: 10px !important;
       }
 
-      /* 模块二：顶栏精简、自适应双层布局（严格限定在手机端 ≤768px 生效） */
       .header {
         border-bottom: 1px solid var(--border) !important;
         padding-bottom: 8px !important;
@@ -866,7 +875,6 @@
         display: none !important;
       }
 
-      /* 手机端操作区：启用单行通栏布局（展示刷题/独立词胶囊 + 主题切换下拉框） */
       .header .top-actions {
         display: flex !important;
         width: 100% !important;
@@ -876,7 +884,6 @@
         flex-wrap: nowrap !important;
         margin-top: 2px !important;
       }
-      /* 屏蔽桌面端专属按钮，防止在手机端拥挤折行或撑破视口 */
       .header .top-actions #top-due-btn,
       .header .top-actions #pwa-install-btn,
       .header .top-actions #auto-sync-badge,
@@ -885,7 +892,6 @@
         display: none !important;
       }
 
-      /* 今日刷题与独立词进度胶囊 */
       .header .top-actions .daily-target-box {
         flex: 1 1 auto !important;
         min-width: 0 !important;
@@ -909,7 +915,6 @@
         flex-shrink: 0 !important;
       }
 
-      /* 主题切换下拉选择器 */
       .header .top-actions .theme-select {
         flex: 0 0 auto !important;
         padding: 4px 8px !important;
@@ -938,7 +943,6 @@
         white-space: nowrap;
       }
 
-      /* 模块三：核心舞台卡片、罗盘与选项通栏自适应 */
       .stage-card {
         padding: 16px 10px !important;
         border-radius: 10px !important;
@@ -996,10 +1000,9 @@
       .leitner-boxes-grid { grid-template-columns: repeat(3, 1fr); }
       .match-grid-wrap { grid-template-columns: 1fr; }
 
-      /* 模块四：底部交互条按需显示与安全区自适应 */
       #stage-area {
         padding-bottom: 12px;
-        transition: padding-bottom 0.2s ease;
+        transition: padding-bottom 0.18s ease;
       }
       #stage-area.has-active-bottom-bar {
         padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
@@ -1020,30 +1023,31 @@
         flex-direction: column;
         gap: 6px;
         backdrop-filter: blur(10px);
-        animation: slideUpBottomBar 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: slideUpBottomBar 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: transform, opacity;
       }
       .stage-nav-bar .feedback { margin-top: 0; font-size: 0.86rem; min-height: 18px; line-height: 1.25; }
       .stage-nav-bar .nav-action-btns { display: flex; gap: 8px; margin-top: 0; width: 100%; }
       .stage-nav-bar .btn { padding: 10px 14px; font-size: 0.92rem; }
     }
     .card-meta-header { display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 10px; margin-bottom: 10px; }
-    .stage-card { transition: background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, transform 0.18s ease; }
-    .stage-card.card-correct-feedback { background-color: var(--success-light) !important; border-color: var(--success) !important; box-shadow: 0 0 24px rgba(16, 185, 129, 0.28) !important; transform: translateY(-2px); }
-    .stage-card.card-wrong-feedback { background-color: var(--error-light) !important; border-color: var(--error) !important; box-shadow: 0 0 24px rgba(239, 68, 68, 0.28) !important; animation: cardShake 0.32s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
-    @keyframes cardShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(3px); } }
+    .stage-card { transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
+    .stage-card.card-correct-feedback { background-color: var(--success-light) !important; border-color: var(--success) !important; box-shadow: 0 0 24px rgba(16, 185, 129, 0.28) !important; transform: translate3d(0, -2px, 0); }
+    .stage-card.card-wrong-feedback { background-color: var(--error-light) !important; border-color: var(--error) !important; box-shadow: 0 0 24px rgba(239, 68, 68, 0.28) !important; animation: cardShake 0.22s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+    @keyframes cardShake { 0%, 100% { transform: translate3d(0, 0, 0); } 20% { transform: translate3d(-5px, 0, 0); } 40% { transform: translate3d(5px, 0, 0); } 60% { transform: translate3d(-3px, 0, 0); } 80% { transform: translate3d(3px, 0, 0); } }
     .advance-time-select { padding: 3px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.8rem; font-weight: 700; outline: none; cursor: pointer; }
     .unexpected-badge { font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
     .family-radar-box { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
     .family-radar-head { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.82rem; color: var(--primary); margin-bottom: 6px; }
     .family-radar-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .family-radar-chip { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+    .family-radar-chip { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.15s ease; }
     .family-radar-chip:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
     .audio-btn.loading-pulse { transform: scale(1.15) !important; border-color: var(--primary) !important; box-shadow: 0 0 14px rgba(15, 118, 110, 0.4) !important; transition: all 0.15s ease !important; }
     .audio-btn.playing { border-color: var(--primary) !important; box-shadow: 0 0 16px rgba(15, 118, 110, 0.45) !important; animation: audioPulseWave 0.9s infinite alternate ease-in-out !important; }
     @keyframes audioPulseWave { from { transform: scale(1); filter: brightness(1); } to { transform: scale(1.12); filter: brightness(1.15); } }
     .slow-btn.playing { border-color: var(--primary) !important; background: var(--primary-light) !important; color: var(--primary) !important; }
     .mobile-mode-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 7px 10px; margin-bottom: 8px; position: sticky; top: 0; z-index: 40; backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-    .mobile-mode-main-btn { display: flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1.5px solid var(--primary); border-radius: 8px; padding: 5px 9px; font-size: 0.82rem; font-weight: 800; color: var(--primary); cursor: pointer; flex-shrink: 0; transition: all 0.15s ease; }
+    .mobile-mode-main-btn { display: flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1.5px solid var(--primary); border-radius: 8px; padding: 5px 9px; font-size: 0.82rem; font-weight: 800; color: var(--primary); cursor: pointer; flex-shrink: 0; transition: all 0.15s ease; will-change: transform; }
     .mobile-mode-main-btn:active { background: var(--primary-light); transform: scale(0.98); }
     .mobile-mode-badge { font-size: 0.68rem; background: var(--primary-light); padding: 2px 5px; border-radius: 4px; }
     .mobile-mode-pills { display: flex; align-items: center; gap: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -1052,17 +1056,17 @@
     .mobile-pill-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 2px 8px rgba(15,118,110,0.25); }
     .mobile-pill-btn.more-btn { background: var(--primary-light); color: var(--primary); border-color: rgba(15, 118, 110, 0.25); }
     .mobile-only-btn { display: none !important; }
-    @keyframes slideUpBottomBar { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .mobile-mode-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(6px); z-index: 9999; display: none; justify-content: center; align-items: flex-end; opacity: 0; transition: opacity 0.25s ease; }
+    @keyframes slideUpBottomBar { from { transform: translate3d(0, 100%, 0); opacity: 0; } to { transform: translate3d(0, 0, 0); opacity: 1; } }
+    .mobile-mode-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(6px); z-index: 9999; display: none; justify-content: center; align-items: flex-end; opacity: 0; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity; }
     .mobile-mode-overlay.open { display: flex; opacity: 1; }
-    .mobile-mode-sheet-card { width: 100%; max-width: 560px; max-height: 85vh; background: var(--card-bg); border-top: 2px solid var(--border); border-radius: 20px 20px 0 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; overflow: hidden; animation: slideUpSheet 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes slideUpSheet { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .mobile-mode-sheet-card { width: 100%; max-width: 560px; max-height: 85vh; background: var(--card-bg); border-top: 2px solid var(--border); border-radius: 20px 20px 0 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; overflow: hidden; animation: slideUpSheet 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform; }
+    @keyframes slideUpSheet { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
     .sheet-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--bg); }
     .sheet-close-btn { background: none; border: none; font-size: 1.3rem; color: var(--muted); cursor: pointer; padding: 2px 8px; border-radius: 6px; }
     .sheet-scroll-body { padding: 14px 16px 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; -webkit-overflow-scrolling: touch; }
     .sheet-group-title { font-size: 0.72rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 2px; }
     .sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .sheet-item { display: flex; align-items: center; gap: 8px; padding: 10px 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s ease; user-select: none; }
+    .sheet-item { display: flex; align-items: center; gap: 8px; padding: 10px 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s ease; user-select: none; will-change: transform; }
     .sheet-item:active { border-color: var(--primary); background: var(--primary-light); transform: scale(0.98); }
     .sheet-item.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 1.5px var(--primary); }
     .sheet-item-icon { font-size: 1.25rem; flex-shrink: 0; }
@@ -1071,10 +1075,10 @@
     .sheet-item-text span { font-size: 0.68rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .card-bottom-root-wrap { display: flex; justify-content: center; align-items: center; margin-top: 10px; width: 100%; }
     .group-tip-bottom { font-size: 0.8rem; background: var(--primary-light); color: var(--primary); padding: 4px 14px; border-radius: 16px; border: 1px solid rgba(15, 118, 110, 0.2); font-weight: 700; text-align: center; max-width: 95%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .preloaded-sentence-box { margin-top: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; text-align: left; display: none; flex-direction: column; gap: 4px; transition: all 0.2s ease; }
+    .preloaded-sentence-box { margin-top: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; text-align: left; display: none; flex-direction: column; gap: 4px; transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .sentence-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
     .sentence-badge { font-size: 0.72rem; font-weight: 800; color: var(--primary); display: inline-flex; align-items: center; gap: 3px; }
-    .sentence-audio-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 0.72rem; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+    .sentence-audio-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 0.72rem; cursor: pointer; color: var(--muted); transition: all 0.15s ease; }
     .sentence-audio-btn:hover { border-color: var(--primary); color: var(--primary); }
     .sentence-en { font-size: 0.88rem; line-height: 1.5; color: var(--text); }
     .sentence-cn { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
@@ -1084,25 +1088,25 @@
     .risk-pill { font-size: 0.72rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; background: #fef2f2; color: #b91c1c; border: 1px solid rgba(239, 68, 68, 0.25); white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
     .risk-pill.safe { background: var(--success-light); color: var(--success); border-color: rgba(16, 185, 129, 0.25); }
     .risk-pill.warning { background: #fffbeb; color: #b45309; border-color: rgba(245, 158, 11, 0.25); }
-    .sync-badge { font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); display: inline-flex; align-items: center; gap: 5px; transition: all 0.25s ease; user-select: none; }
+    .sync-badge { font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); display: inline-flex; align-items: center; gap: 5px; transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; }
     .sync-badge.syncing { border-color: var(--primary); color: var(--primary); background: var(--primary-light); animation: syncBadgePulse 1.2s infinite ease-in-out; }
     .sync-badge.synced { border-color: var(--success); color: var(--success); background: var(--success-light); }
     .sync-badge.dirty { border-color: #f59e0b; color: #b45309; background: #fffbeb; }
     .sync-badge.error { border-color: var(--error); color: var(--error); background: var(--error-light); }
     @keyframes syncBadgePulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.03); opacity: 0.65; } }
-    .sync-toast { position: fixed; bottom: 24px; right: 24px; background: var(--card-bg); color: var(--text); border: 1.5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-radius: 30px; padding: 9px 18px; font-size: 0.84rem; font-weight: 700; z-index: 10000; display: flex; align-items: center; gap: 8px; opacity: 0; transform: translateY(12px); transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; }
-    .sync-toast.show { opacity: 1; transform: translateY(0); }
+    .sync-toast { position: fixed; bottom: 24px; right: 24px; background: var(--card-bg); color: var(--text); border: 1.5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-radius: 30px; padding: 9px 18px; font-size: 0.84rem; font-weight: 700; z-index: 10000; display: flex; align-items: center; gap: 8px; opacity: 0; transform: translate3d(0, 12px, 0); transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; will-change: transform, opacity; }
+    .sync-toast.show { opacity: 1; transform: translate3d(0, 0, 0); }
     @media (max-width: 768px) { .sync-toast { bottom: 84px; right: 12px; left: 12px; justify-content: center; } }
 
     .weak-roots-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
     .weak-roots-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
     .weak-roots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-height: 290px; overflow-y: auto; padding-right: 4px; }
-    .weak-root-item { background: var(--card-bg); border: 1px solid var(--border); border-left: 4px solid var(--error); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; transition: transform 0.15s, box-shadow 0.15s; }
-    .weak-root-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--error); }
+    .weak-root-item { background: var(--card-bg); border: 1px solid var(--border); border-left: 4px solid var(--error); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; transition: transform 0.15s ease, box-shadow 0.15s ease; will-change: transform; }
+    .weak-root-item:hover { transform: translate3d(0, -2px, 0); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--error); }
     .weak-root-title { font-size: 0.86rem; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .weak-root-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: var(--muted); }
     .weak-root-rate { color: var(--error); font-weight: 800; font-size: 0.88rem; }
-    .weak-root-btn { margin-top: 4px; padding: 5px 10px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; border: 1px solid var(--primary); background: var(--primary-light); color: var(--primary); cursor: pointer; transition: all 0.15s; text-align: center; }
+    .weak-root-btn { margin-top: 4px; padding: 5px 10px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; border: 1px solid var(--primary); background: var(--primary-light); color: var(--primary); cursor: pointer; transition: all 0.15s ease; text-align: center; }
     .weak-root-btn:hover { background: var(--primary); color: #ffffff; }
 
     .mastery-matrix-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
@@ -1111,180 +1115,190 @@
     .matrix-legend-item { display: flex; align-items: center; gap: 4px; }
     .matrix-legend-dot { width: 8px; height: 8px; border-radius: 1.5px; display: inline-block; }
     .mastery-matrix-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(8px, 1fr)); gap: 2.5px; max-height: 240px; overflow-y: auto; padding: 6px 2px; }
-    .matrix-cell { width: 100%; aspect-ratio: 1; min-width: 6px; min-height: 6px; max-width: 10px; max-height: 10px; border-radius: 1.5px; cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease; }
+    .matrix-cell { width: 100%; aspect-ratio: 1; min-width: 6px; min-height: 6px; max-width: 10px; max-height: 10px; border-radius: 1.5px; cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease; will-change: transform; }
     .matrix-cell:hover { transform: scale(1.8); z-index: 10; filter: brightness(1.2); box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
 
     /* =========================================================================
-   闪卡模式：液态玻璃拟态、3D 翻转与物理抛脱动效 (跨端自适应)
-   ========================================================================= */
+       闪卡模式：液态玻璃拟态、3D 翻转与物理抛脱动效 (跨端自适应)
+       ========================================================================= */
 
-/* 1. 液态玻璃基础卡片 */
-.stage-card.liquid-glass {
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(18px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
-  border-radius: 20px !important;
-  box-shadow: 
-    0 18px 40px -10px rgba(15, 118, 110, 0.1),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.03) !important;
-  overflow: hidden;
-  position: relative;
-  will-change: transform, opacity;
-}
+    /* 1. 液态玻璃基础卡片 */
+    .stage-card.liquid-glass {
+      background: rgba(255, 255, 255, 0.65) !important;
+      backdrop-filter: blur(18px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.75) !important;
+      border-radius: 20px !important;
+      box-shadow: 
+        0 18px 40px -10px rgba(15, 118, 110, 0.1),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.03) !important;
+      overflow: hidden;
+      position: relative;
+      will-change: transform, opacity;
+    }
 
-:root[data-theme="dark"] .stage-card.liquid-glass {
-  background: rgba(24, 38, 40, 0.65) !important;
-  border-color: rgba(79, 209, 197, 0.25) !important;
-  box-shadow: 
-    0 20px 45px -10px rgba(0, 0, 0, 0.55),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4) !important;
-}
+    :root[data-theme="dark"] .stage-card.liquid-glass {
+      background: rgba(24, 38, 40, 0.65) !important;
+      border-color: rgba(79, 209, 197, 0.25) !important;
+      box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.55),
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4) !important;
+    }
 
-:root[data-theme="sepia"] .stage-card.liquid-glass {
-  background: rgba(250, 244, 230, 0.7) !important;
-  border-color: rgba(226, 211, 180, 0.85) !important;
-  box-shadow: 
-    0 18px 36px -12px rgba(61, 47, 31, 0.12),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75) !important;
-}
+    :root[data-theme="sepia"] .stage-card.liquid-glass {
+      background: rgba(250, 244, 230, 0.7) !important;
+      border-color: rgba(226, 211, 180, 0.85) !important;
+      box-shadow: 
+        0 18px 36px -12px rgba(61, 47, 31, 0.12),
+        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75) !important;
+    }
 
-/* 1.1 卡片基础高度锁定垫片，杜绝切词瞬态文档流坍塌 (CLS 彻底归零) */
-.stage-card.flashcard-stable-stage {
-  min-height: 280px;
-  contain: layout style;
-  transition: min-height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.24s ease,
-              border-color 0.24s ease,
-              box-shadow 0.24s ease;
-}
+    /* 1.1 卡片基础高度锁定垫片，杜绝切词瞬态文档流坍塌 (CLS 彻底归零) */
+    .stage-card.flashcard-stable-stage {
+      min-height: 280px;
+      contain: layout style;
+      transition: min-height 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.18s ease,
+                  border-color 0.18s ease,
+                  box-shadow 0.18s ease;
+    }
 
-/* 2. 液态玻璃状态下的对错高亮融合 */
-.stage-card.liquid-glass.card-correct-feedback {
-  background: rgba(234, 248, 238, 0.82) !important;
-  border-color: var(--success) !important;
-}
-:root[data-theme="dark"] .stage-card.liquid-glass.card-correct-feedback {
-  background: rgba(6, 78, 59, 0.75) !important;
-}
+    /* 2. 液态玻璃状态下的对错高亮融合 */
+    .stage-card.liquid-glass.card-correct-feedback {
+      background: rgba(234, 248, 238, 0.82) !important;
+      border-color: var(--success) !important;
+    }
+    :root[data-theme="dark"] .stage-card.liquid-glass.card-correct-feedback {
+      background: rgba(6, 78, 59, 0.75) !important;
+    }
 
-.stage-card.liquid-glass.card-wrong-feedback {
-  background: rgba(255, 240, 240, 0.82) !important;
-  border-color: var(--error) !important;
-}
-:root[data-theme="dark"] .stage-card.liquid-glass.card-wrong-feedback {
-  background: rgba(127, 29, 29, 0.75) !important;
-}
+    .stage-card.liquid-glass.card-wrong-feedback {
+      background: rgba(255, 240, 240, 0.82) !important;
+      border-color: var(--error) !important;
+    }
+    :root[data-theme="dark"] .stage-card.liquid-glass.card-wrong-feedback {
+      background: rgba(127, 29, 29, 0.75) !important;
+    }
 
-/* 3. 旋转原点轴心下移（模拟手部自然扇形摆动） */
-.stage-card.flashcard-touch-surface {
-  transform-origin: 50% 125%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  contain: layout style paint;
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-}
+    /* 3. 旋转原点轴心下移（模拟手部自然扇形摆动） */
+    .stage-card.flashcard-touch-surface {
+      transform-origin: 50% 125%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      contain: layout style paint;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-/* 4. 流体红绿光晕 */
-.stage-card.liquid-glow-left {
-  border-color: rgba(239, 68, 68, 0.6) !important;
-  box-shadow: -12px 18px 40px -10px rgba(239, 68, 68, 0.3) !important;
-}
-.stage-card.liquid-glow-right {
-  border-color: rgba(16, 185, 129, 0.6) !important;
-  box-shadow: 12px 18px 40px -10px rgba(16, 185, 129, 0.3) !important;
-}
+    /* 4. 流体红绿光晕 */
+    .stage-card.liquid-glow-left {
+      border-color: rgba(239, 68, 68, 0.6) !important;
+      box-shadow: -12px 18px 40px -10px rgba(239, 68, 68, 0.3) !important;
+    }
+    .stage-card.liquid-glow-right {
+      border-color: rgba(16, 185, 129, 0.6) !important;
+      box-shadow: 12px 18px 40px -10px rgba(16, 185, 129, 0.3) !important;
+    }
 
-/* 5. 键盘与触屏通用的抛脱滑出与弹性回弹 */
-.stage-card.flashcard-swipe-left {
-  transform: translate3d(-140px, 12px, 0) rotate(-7deg) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease !important;
-}
+    /* 5. 键盘与触屏通用的抛脱滑出与弹性回弹 (契约 D: 180ms cubic-bezier) */
+    .stage-card.flashcard-swipe-left {
+      transform: translate3d(-140px, 12px, 0) rotate(-7deg) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease !important;
+    }
 
-.stage-card.flashcard-swipe-right {
-  transform: translate3d(140px, -12px, 0) rotate(7deg) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease !important;
-}
+    .stage-card.flashcard-swipe-right {
+      transform: translate3d(140px, -12px, 0) rotate(7deg) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease !important;
+    }
 
-.stage-card.touch-exit-left {
-  transform: translate3d(-120vw, 0, 0) rotate(-14deg) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease !important;
-}
+    .stage-card.touch-exit-left {
+      transform: translate3d(-120vw, 0, 0) rotate(-14deg) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
+    }
 
-.stage-card.touch-exit-right {
-  transform: translate3d(120vw, 0, 0) rotate(14deg) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease !important;
-}
+    .stage-card.touch-exit-right {
+      transform: translate3d(120vw, 0, 0) rotate(14deg) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
+    }
 
-.stage-card.touch-animating {
-  transition: transform 0.24s cubic-bezier(0.18, 0.89, 0.32, 1.15), opacity 0.22s ease !important;
-}
+    .stage-card.touch-animating {
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease !important;
+    }
 
-/* 6. 彻底移除旧有 3D 旋转翻卡动画，杜绝眩晕 */
-.stage-card.is-flipping {
-  animation: none !important;
-}
+    .stage-card.is-flipping {
+      animation: none !important;
+    }
 
-/* 7. 平滑切词入场动效 */
-.stage-card.flashcard-enter-next {
-  animation: flashcardEnterNext 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.stage-card.flashcard-enter-prev {
-  animation: flashcardEnterPrev 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+    /* 7. 平滑切词入场动效 (契约 D) */
+    .stage-card.flashcard-enter-next {
+      animation: flashcardEnterNext 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .stage-card.flashcard-enter-prev {
+      animation: flashcardEnterPrev 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
-@keyframes flashcardEnterNext {
-  from { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.96); }
-  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-}
-@keyframes flashcardEnterPrev {
-  from { opacity: 0; transform: translate3d(-30px, 0, 0) scale(0.96); }
-  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-}
+    @keyframes flashcardEnterNext {
+      from { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.96); }
+      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes flashcardEnterPrev {
+      from { opacity: 0; transform: translate3d(-30px, 0, 0) scale(0.96); }
+      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
 
-/* 8. 触屏拖拽指示徽章 */
-.flashcard-swipe-badge {
-  position: absolute;
-  top: 14px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 10;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: opacity 0.15s ease;
-}
+    /* 8. 触屏拖拽指示徽章 */
+    .flashcard-swipe-badge {
+      position: absolute;
+      top: 14px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.15s ease;
+      will-change: opacity;
+    }
 
-.flashcard-swipe-badge.badge-left {
-  left: 14px;
-  background: rgba(254, 226, 226, 0.88);
-  color: #b91c1c;
-  border: 1.5px solid rgba(239, 68, 68, 0.45);
-  transform: rotate(-6deg);
-}
+    .flashcard-swipe-badge.badge-left {
+      left: 14px;
+      background: rgba(254, 226, 226, 0.88);
+      color: #b91c1c;
+      border: 1.5px solid rgba(239, 68, 68, 0.45);
+      transform: rotate(-6deg);
+    }
 
-.flashcard-swipe-badge.badge-right {
-  right: 14px;
-  background: rgba(220, 252, 231, 0.88);
-  color: #15803d;
-  border: 1.5px solid rgba(16, 185, 129, 0.45);
-  transform: rotate(6deg);
-}
+    .flashcard-swipe-badge.badge-right {
+      right: 14px;
+      background: rgba(220, 252, 231, 0.88);
+      color: #15803d;
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      transform: rotate(6deg);
+    }
+
+    /* 契约 D: 减弱动效偏好无障碍兜底 (prefers-reduced-motion) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2458,6 +2472,158 @@
     };
   })();
 
+
+  // =========================================================================
+  // ★ 规范契约 A：宏观路由与双轨状态机 (HistoryRouter)
+  // =========================================================================
+  const HistoryRouter = (function() {
+    let isHandlingPopState = false;
+
+    function parseHash(hash) {
+      const clean = (hash || '').replace(/^#\/?/, '').split('?')[0];
+      const match = clean.match(/^pack\/([^\/]+)\/mode\/([^\/]+)$/);
+      if (match) {
+        return { packId: decodeURIComponent(match[1]), mode: decodeURIComponent(match[2]) };
+      }
+      return null;
+    }
+
+    function getCanonicalHash(packId, mode) {
+      return `#/pack/${encodeURIComponent(packId)}/mode/${encodeURIComponent(mode)}`;
+    }
+
+    return {
+      isHandlingPopState() {
+        return isHandlingPopState;
+      },
+
+      push(packId, mode) {
+        if (isHandlingPopState || typeof window === 'undefined' || !window.history) return;
+        const targetHash = getCanonicalHash(packId, mode);
+        const currentCleanHash = (window.location.hash || '').split('?')[0];
+        if (currentCleanHash === targetHash) return;
+        window.history.pushState({ packId, mode }, '', targetHash);
+      },
+
+      replace(packId, mode) {
+        if (typeof window === 'undefined' || !window.history) return;
+        const targetHash = getCanonicalHash(packId, mode);
+        window.history.replaceState({ packId, mode }, '', targetHash);
+      },
+
+      handlePopState(e) {
+        isHandlingPopState = true;
+        try {
+          // 1. 优先执行模态层 LIFO 出栈拦截（契约 B）
+          if (typeof ModalStackManager !== 'undefined' && ModalStackManager.consumeTopModal()) {
+            return;
+          }
+
+          // 2. 执行宏观路由安全恢复（契约 A）
+          if (typeof RouteDispatcher !== 'undefined') {
+            RouteDispatcher.restoreState(e ? e.state : null);
+          }
+        } finally {
+          // 3. 在宏任务队列中安全释放事务锁，彻底防止死循环
+          setTimeout(() => { isHandlingPopState = false; }, 0);
+        }
+      },
+
+      init() {
+        if (typeof window === 'undefined') return;
+        window.addEventListener('popstate', (e) => this.handlePopState(e));
+        window.addEventListener('hashchange', () => {
+          if (!isHandlingPopState) {
+            const cleanHash = (window.location.hash || '').split('?')[0];
+            const parsed = parseHash(cleanHash);
+            if (parsed && typeof RouteDispatcher !== 'undefined') {
+              RouteDispatcher.restoreState(parsed);
+            }
+          }
+        });
+      }
+    };
+  })();
+
+  // =========================================================================
+  // ★ 规范契约 B：分层浮层 LIFO 消费栈 (ModalStackManager)
+  // =========================================================================
+  const ModalStackManager = (function() {
+    const stack = []; // 条目结构: { id, close, element }
+
+    return {
+      getStack() {
+        return stack;
+      },
+
+      hasActiveModal() {
+        return stack.length > 0;
+      },
+
+      getActiveModalId() {
+        return stack.length > 0 ? stack[stack.length - 1].id : null;
+      },
+
+      openModal(modalId, closeCallback, element = null) {
+        if (stack.some(m => m.id === modalId)) {
+          return;
+        }
+        stack.push({ id: modalId, close: closeCallback, element });
+
+        // 压入虚拟栈帧 (?modal={modalId})
+        if (typeof window !== 'undefined' && window.history && !HistoryRouter.isHandlingPopState()) {
+          const curHash = window.location.hash || '#/pack/all_2257/mode/choice';
+          const baseHash = curHash.split('?')[0];
+          const modalHash = `${baseHash}?modal=${encodeURIComponent(modalId)}`;
+          if (window.location.hash !== modalHash) {
+            const curState = window.history.state || {};
+            window.history.pushState({ ...curState, modalId, isModalVirtualFrame: true }, '', modalHash);
+          }
+        }
+      },
+
+      dismissModal(modalId, options = { triggerHistoryBack: true }) {
+        const idx = stack.findIndex(m => m.id === modalId);
+        if (idx !== -1) {
+          const [removed] = stack.splice(idx, 1);
+          if (removed && typeof removed.close === 'function') {
+            try { removed.close(false); } catch (_) {}
+          }
+        }
+
+        // 若当前 URL 带有该虚拟帧，且非出栈引起的主动关闭，回退对齐历史栈
+        if (options.triggerHistoryBack && typeof window !== 'undefined' && window.history && !HistoryRouter.isHandlingPopState()) {
+          const hash = window.location.hash || '';
+          if (hash.includes(`?modal=${encodeURIComponent(modalId)}`) || hash.includes('?modal=')) {
+            window.history.back();
+          }
+        }
+      },
+
+      consumeTopModal() {
+        if (stack.length === 0) return false;
+        const top = stack.pop();
+        if (top && typeof top.close === 'function') {
+          try {
+            top.close(true); // 传入 isPopState = true，阻止二次触发 history.back()
+          } catch (e) {
+            console.error('[ModalStackManager] Close error:', e);
+          }
+        }
+        return true;
+      },
+
+      clearAll() {
+        while (stack.length > 0) {
+          const top = stack.pop();
+          if (top && typeof top.close === 'function') {
+            try { top.close(true); } catch (_) {}
+          }
+        }
+      }
+    };
+  })();
+
   // =========================================================================
   // ★ 方案模块 1：输入仲裁与按键路由调度器 (Key Router & Focus Trap)
   // =========================================================================
@@ -2646,7 +2812,10 @@
 
         if (e.key === 'Escape') {
           const modal = document.getElementById('shortcut-modal');
-          if (modal) modal.style.display = 'none';
+          if (modal && modal.style.display === 'flex') {
+            window.closeShortcutModal();
+            return;
+          }
           Views.Compass.closeDrawer();
           return;
         }
@@ -2677,7 +2846,7 @@
           // 其他模式保留原本微晃动
           const card = document.getElementById('main-card');
           if (card) {
-            card.style.transform = isRight ? 'translateX(12px)' : 'translateX(-12px)';
+            card.style.transform = isRight ? 'translate3d(12px, 0, 0)' : 'translate3d(-12px, 0, 0)';
             setTimeout(() => { if (card) card.style.transform = ''; }, 180);
           }
 
@@ -2792,7 +2961,7 @@
   })();
 
   // =========================================================================
-  // ★ 方案模块 2：悬挂 Promise 熔断与状态锁自愈 (Promise Lifecycle & Deadlock Unwind)
+  // ★ 零号法则 3：平台安全无毒 — 非阻塞异步确认与对话框 (UIModal)
   // =========================================================================
   const UIModal = (function() {
     let activeResolver = null;
@@ -2834,9 +3003,10 @@
           overlay.style.display = 'flex';
           activeModalEl = overlay;
 
-          const settle = (val) => {
+          const settle = (val, isPopState = false) => {
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
+            ModalStackManager.dismissModal('ui_confirm', { triggerHistoryBack: !isPopState });
             activeModalEl = null;
             const r = activeResolver;
             activeResolver = null;
@@ -2852,11 +3022,61 @@
           confirmBtn.onclick = () => settle(true);
           overlay.onclick = (e) => { if (e.target === overlay) settle(false); };
 
+          ModalStackManager.openModal('ui_confirm', (isPop) => settle(false, isPop), overlay);
           KeyRouter.pushModal({
             element: overlay,
             onEscape: () => settle(false),
             onEnter: () => settle(true),
             activeResolver: settle
+          });
+        });
+      },
+
+      alert(options) {
+        if (typeof options === 'string') {
+          options = { message: options };
+        }
+        return new Promise((resolve) => {
+          let overlay = document.getElementById('ui-modal-alert-overlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'ui-modal-alert-overlay';
+            overlay.className = 'ui-modal-overlay modal-overlay';
+            document.body.appendChild(overlay);
+          }
+
+          const title = options.title || '系统提示';
+          const message = options.message || '';
+          const confirmText = options.confirmText || '我知道了';
+
+          overlay.innerHTML = `
+            <div class="ui-modal-card" role="dialog" aria-modal="true">
+              <h3 style="margin:0; font-size:1.15rem; font-weight:800; color:var(--text);">${Utils.escapeHTML(title)}</h3>
+              <p style="margin:0; font-size:0.92rem; color:var(--muted); line-height:1.5; white-space:pre-line;">${Utils.escapeHTML(message)}</p>
+              <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                <button class="btn btn-primary" data-role="confirm" style="padding:8px 20px;">${Utils.escapeHTML(confirmText)}</button>
+              </div>
+            </div>
+          `;
+
+          overlay.style.display = 'flex';
+
+          const settle = (isPopState = false) => {
+            overlay.style.display = 'none';
+            KeyRouter.popModal(overlay);
+            ModalStackManager.dismissModal('ui_alert', { triggerHistoryBack: !isPopState });
+            resolve();
+          };
+
+          const confirmBtn = overlay.querySelector('[data-role="confirm"]');
+          confirmBtn.onclick = () => settle(false);
+          overlay.onclick = (e) => { if (e.target === overlay) settle(false); };
+
+          ModalStackManager.openModal('ui_alert', (isPop) => settle(isPop), overlay);
+          KeyRouter.pushModal({
+            element: overlay,
+            onEscape: () => settle(false),
+            onEnter: () => settle(false)
           });
         });
       },
@@ -2872,12 +3092,13 @@
           activeModalEl = null;
         }
         KeyRouter.clearAllModals(true);
+        ModalStackManager.clearAll();
       }
     };
   })();
 
   // =========================================================================
-  // ★ 方案模块 3：模式生命周期与计时器沙箱化 (Lifecycle Sandbox)
+  // ★ 规范契约 C：模式生命周期与计时器沙箱化 (Lifecycle Sandbox)
   // =========================================================================
   const LifecycleScheduler = (function() {
     const timers = new Set();
@@ -2972,11 +3193,17 @@
           Services.Audio.stopAll();
         }
 
-        // 7. 排空所有未结算的模态 Promise 句柄
+        // 7. 解除输入框焦点
+        if (typeof document !== 'undefined' && document.activeElement && typeof document.activeElement.blur === 'function') {
+          document.activeElement.blur();
+        }
+
+        // 8. 排空所有未结算的模态 Promise 句柄
         UIModal.unwind();
       }
     };
   })();
+
   // =========================================================================
   // ★ 模块 2：集中式状态管理中心 (AppState - Closure Store)
   // =========================================================================
@@ -3525,7 +3752,7 @@
   // =========================================================================
   const Services = (function() {
     // -----------------------------------------------------------------------
-    // [4.1 Storage Service - 自适应防抖与持久化保底管道 (Adaptive Persistence Engine)]
+    // [4.1 Storage Service - 自适应防抖与持久化保底管道]
     // -----------------------------------------------------------------------
     const Storage = (function() {
       let dbInstance = null;
@@ -3564,7 +3791,6 @@
       function executePartialSilentCleanup() {
         if (typeof localStorage === 'undefined') return;
         try {
-          // 1. 清理超过 30 天的非核心打卡日志
           const rawAct = localStorage.getItem('morpho_activity');
           if (rawAct) {
             try {
@@ -3583,7 +3809,6 @@
               localStorage.setItem('morpho_activity', JSON.stringify(pruned));
             } catch (_) {}
           }
-          // 2. 截断待同步日志队列至最近 100 条
           const rawPending = localStorage.getItem('morpho_pending_events');
           if (rawPending) {
             try {
@@ -3593,7 +3818,6 @@
               }
             } catch (_) {}
           }
-          // 3. 清理已缓存的临时备份镜像
           localStorage.removeItem('morpho_previous_cloud_backup');
         } catch (_) {}
       }
@@ -4262,7 +4486,7 @@
     })();
 
     // -----------------------------------------------------------------------
-    // [4.3 Audio Service - 高可用弹性多源网络与本地双轨音频引擎]
+    // [4.3 Audio Service - 高可用弹性多源网络与本地双轨音频引擎 (契约 C)]
     // -----------------------------------------------------------------------
     const AudioService = (function() {
       const NETWORK_WATCHDOG_TIMEOUT_MS = 850;
@@ -5102,7 +5326,7 @@
     })();
 
     // -----------------------------------------------------------------------
-    // [4.4 Sync Service - GitHub Gist 自动云同步中枢 (Schema v4 - 工业级防截断与容灾自愈版)]
+    // [4.4 Sync Service - GitHub Gist 自动云同步中枢 (Schema v4)]
     // -----------------------------------------------------------------------
     const Sync = (function() {
       const SCHEMA = 4;
@@ -5161,11 +5385,9 @@
           }, delayMs);
         },
 
-        // 安全 Gist 文件读取（自动检测 1MB 截断并回退至 Raw URL 完整下载，兼顾 CORS 与鉴权容错）
         async fetchSafeGistFile(fileObj, token, timeoutMs = 15000) {
           if (!fileObj) throw new Error('云端备份文件不存在');
 
-          // 若未截断且内容非空字符串，直接使用
           if (!fileObj.truncated && typeof fileObj.content === 'string' && fileObj.content.length > 0) {
             return fileObj.content;
           }
@@ -5191,7 +5413,6 @@
                 signal: controller.signal,
                 cache: 'no-store'
               });
-              // 容错：若携带 Token 遭 Raw CDN 拒绝 (400/401/403)，回退到匿名拉取
               if (!resp.ok && (resp.status === 400 || resp.status === 401 || resp.status === 403)) {
                 resp = await fetch(fileObj.raw_url, {
                   method: 'GET',
@@ -5201,7 +5422,6 @@
               }
             } catch (networkErr) {
               if (networkErr.name === 'AbortError') throw networkErr;
-              // 若带 Authorization 触发浏览器 CORS 报错 (TypeError)，尝试匿名直连
               if (token) {
                 resp = await fetch(fileObj.raw_url, {
                   method: 'GET',
@@ -5246,11 +5466,9 @@
           const localDailyUnique = Storage.getDailyUniqueMap ? Storage.getDailyUniqueMap() : {};
           const pendingEvents = Storage.getPendingEvents();
 
-          // 1. 日志压实：仅保留最近 MAX_LOG_EVENTS 条变动事件，防范历史日志无限线性膨胀
           const eventsToUpload = pendingEvents.slice(-MAX_LOG_EVENTS);
           inFlightEventIds = new Set(eventsToUpload.map(e => e.id));
 
-          // 2. 统计数据瘦身：剔除全库中未触碰的默认初始空词（降低 70% 体积）
           const trimmedStats = {};
           for (const [pId, pData] of Object.entries(localStats)) {
             if (!pData || typeof pData !== 'object') continue;
@@ -5768,7 +5986,6 @@
             this.performMerge(cloudData);
             localStorage.removeItem('morpho_sync_dirty');
 
-            // 统一调度数据合并后刷新中枢
             if (typeof App !== 'undefined' && App.onDataMerged) {
               App.onDataMerged({ refreshStage: true, silentAudio: true });
             }
@@ -5803,7 +6020,16 @@
           if (state === 'error') {
             badge.title = `❌ 同步异常: ${lastErrorMessage || '网络请求受阻'} (点击查看排查建议)`;
             badge.onclick = () => {
-              alert(`❌ 同步失败原因：\n${lastErrorMessage || '网络连接超时或凭证失效'}\n\n排查建议：\n1. 检查 GitHub Token 是否过期且具备 gist 权限；\n2. 检查网络代理是否允许访问 api.github.com；\n3. 点击进入“打卡与备份”面板核对 Gist ID。`);
+              UIModal.alert({
+                title: '❌ 同步失败排查建议',
+                message: `失败原因：
+${lastErrorMessage || '网络连接超时或凭证失效'}
+
+建议步骤：
+1. 检查 GitHub Token 是否有效并具备 gist 权限；
+2. 检查当前网络或代理配置是否允许访问 api.github.com；
+3. 点击进入“打卡与备份”面板重新核对 Gist ID。`
+              });
               if (window.switchMode) window.switchMode('manage');
             };
           } else {
@@ -5827,7 +6053,7 @@
           requestAnimationFrame(() => toast.classList.add('show'));
           setTimeout(() => {
             toast.classList.remove('show');
-            setTimeout(() => { toast.style.display = 'none'; }, 260);
+            setTimeout(() => { toast.style.display = 'none'; }, 200);
           }, duration);
         }
       };
@@ -5840,9 +6066,91 @@
       Sync
     };
   })();
-  if (typeof window !== 'undefined') window.Services = Services;
   // =========================================================================
-  // ★ 模块 5：视图控制器层 (Views - Lifecycle standard: render & cleanup)
+  // ★ 规范契约 A：路由分发与容错纠偏 (RouteDispatcher)
+  // =========================================================================
+  const RouteDispatcher = (function() {
+    const VALID_MODES = new Set([
+      'choice', 'typing', 'spell', 'flashcard', 'speed_blitz',
+      'audio_clo', 'confusables', 'match_game', 'vocab_upgrader',
+      'root_dict', 'leitner_box', 'mock', 'mistakes_center', 'tree', 'manage'
+    ]);
+
+    return {
+      getValidModes() {
+        return VALID_MODES;
+      },
+
+      hydrate() {
+        const hash = (typeof window !== 'undefined' ? window.location.hash : '') || '';
+        const clean = hash.replace(/^#\/?/, '').split('?')[0];
+        const match = clean.match(/^pack\/([^\/]+)\/mode\/([^\/]+)$/);
+
+        const allPacks = AppState.get('allPacks') || {};
+        const defaultPack = allPacks['all_2257'] ? 'all_2257' : (Object.keys(allPacks)[0] || 'all_2257');
+        const defaultMode = 'choice';
+
+        let targetPack = defaultPack;
+        let targetMode = defaultMode;
+        let needReplace = false;
+
+        if (match) {
+          const requestedPack = decodeURIComponent(match[1]);
+          const requestedMode = decodeURIComponent(match[2]);
+
+          if (allPacks[requestedPack]) {
+            targetPack = requestedPack;
+          } else {
+            needReplace = true;
+          }
+
+          if (VALID_MODES.has(requestedMode)) {
+            targetMode = requestedMode;
+          } else {
+            needReplace = true;
+          }
+        } else {
+          needReplace = true;
+        }
+
+        if (needReplace) {
+          HistoryRouter.replace(targetPack, targetMode);
+        }
+
+        if (AppState.get('currentPackId') !== targetPack) {
+          App.switchWordPack(targetPack, { skipHistoryPush: true });
+        }
+        if (AppState.get('currentMode') !== targetMode) {
+          App.switchMode(targetMode, { skipHistoryPush: true });
+        }
+      },
+
+      restoreState(state) {
+        const hash = (typeof window !== 'undefined' ? window.location.hash : '') || '';
+        const clean = hash.replace(/^#\/?/, '').split('?')[0];
+        const match = clean.match(/^pack\/([^\/]+)\/mode\/([^\/]+)$/);
+
+        const allPacks = AppState.get('allPacks') || {};
+        const defaultPack = allPacks['all_2257'] ? 'all_2257' : (Object.keys(allPacks)[0] || 'all_2257');
+        const defaultMode = 'choice';
+
+        let packId = (state && state.packId) ? state.packId : (match ? decodeURIComponent(match[1]) : defaultPack);
+        let mode = (state && state.mode) ? state.mode : (match ? decodeURIComponent(match[2]) : defaultMode);
+
+        if (!allPacks[packId]) packId = defaultPack;
+        if (!VALID_MODES.has(mode)) mode = defaultMode;
+
+        if (AppState.get('currentPackId') !== packId) {
+          App.switchWordPack(packId, { skipHistoryPush: true });
+        }
+        if (AppState.get('currentMode') !== mode) {
+          App.switchMode(mode, { skipHistoryPush: true });
+        }
+      }
+    };
+  })();
+  // =========================================================================
+  // ★ 模块 5：视图控制器层 (Views)
   // =========================================================================
   const Views = (function() {
     let autoAdvanceTimeout = null;
@@ -6005,7 +6313,7 @@
     };
 
     // -----------------------------------------------------------------------
-    // [5.2 Typing View - 键盘极速盲打 (含 IME 锁与动态视口锁)]
+    // [5.2 Typing View - 键盘极速盲打]
     // -----------------------------------------------------------------------
     const Typing = {
       slotElements: [],
@@ -6139,7 +6447,7 @@
         this.isRoundComplete = false;
         AppState.update('isTypingCompleted', false);
 
-        this.hideMilestoneModal();
+        this.hideMilestoneModal(false);
         this.saveLocalSession();
       },
 
@@ -6250,6 +6558,7 @@
         if (correctedEl) correctedEl.innerText = `${correctedCount} 词`;
 
         overlay.style.display = 'flex';
+        ModalStackManager.openModal('typing_milestone', (isPop) => this.hideMilestoneModal(isPop), overlay);
         KeyRouter.pushModal({
           element: overlay,
           onEscape: () => this.dismissMilestone(),
@@ -6266,7 +6575,7 @@
       },
 
       continueLargerPool(targetLimit) {
-        this.hideMilestoneModal();
+        this.hideMilestoneModal(false);
         AppState.update('isTypingCompleted', false);
         changeTypingPoolLimit(targetLimit);
         if (typeof Services !== 'undefined' && Services.Sync) {
@@ -6274,16 +6583,17 @@
         }
       },
 
-      hideMilestoneModal() {
+      hideMilestoneModal(isPopState = false) {
         const overlay = document.getElementById('typing-milestone-overlay');
         if (overlay) {
           overlay.style.display = 'none';
           KeyRouter.popModal(overlay);
+          ModalStackManager.dismissModal('typing_milestone', { triggerHistoryBack: !isPopState });
         }
       },
 
       startNewRound() {
-        this.hideMilestoneModal();
+        this.hideMilestoneModal(false);
         AppState.update('isTypingCompleted', false);
 
         this.shuffleSeed = Date.now();
@@ -6304,13 +6614,13 @@
       },
 
       drillMistakesFromMilestone() {
-        this.hideMilestoneModal();
+        this.hideMilestoneModal(false);
         AppState.update('isTypingCompleted', false);
         this.drillMistakes();
       },
 
       dismissMilestone() {
-        this.hideMilestoneModal();
+        this.hideMilestoneModal(false);
         AppState.update('isTypingCompleted', false);
       },
 
@@ -7179,7 +7489,7 @@
         const stDict = AppState.get('packStats')[currentPackId] || {};
         const pool = AppState.get('allPacks')[currentPackId]?.words.filter(w => (stDict[w.word]?.typingMistakes || 0) > 0);
         if (!pool || pool.length === 0) {
-          alert('当前没有记录到盲打错误词！');
+          Services.Sync.showToast('当前没有记录到盲打错误词！', 'info', 2000);
           return;
         }
         AppState.update('isTypingDrillActive', true);
@@ -7222,6 +7532,37 @@
         App.nextQuestion();
         const limit = AppState.get('typingPoolLimit') || 60;
         Services.Sync.showToast(`已恢复盲打词池 (${Math.min(limit, fullPool.length)} 词)`, 'info', 1800);
+      },
+
+      async clearAll() {
+        const ok = await UIModal.confirm({
+          title: '清空盲打错误记录确认',
+          message: '确认清空盲打错误记录吗？（将同步清空总库与所有归属单元中的盲打错词）',
+          confirmText: '确认清空',
+          cancelText: '保留记录',
+          danger: true
+        });
+        if (!ok) return;
+
+        const currentPackId = AppState.get('currentPackId');
+        const pool = AppState.get('activePool') || [];
+        const now = Date.now();
+
+        pool.forEach(w => {
+          const st = AppState.get('packStats')[currentPackId]?.[w.word];
+          if (st && ((st.typingMistakes || 0) > 0 || (st.typingKeyErrors || 0) > 0)) {
+            App.broadcastWordStatUpdate(currentPackId, w.word, (item) => {
+              item.typingMistakes = 0;
+              item.typingKeyErrors = 0;
+              item.lastReviewed = now;
+            });
+            Services.Storage.logEvent('TYPING_MISTAKE_CLEAR', w.word, currentPackId, { t: now });
+          }
+        });
+
+        Services.Sync.scheduleDebouncedSync(1000);
+        this.renderMistakesBoard();
+        Services.Sync.showToast('已清空盲打错词记录', 'info', 1800);
       },
 
       cleanup() {
@@ -7388,7 +7729,7 @@
           mainCard.classList.add(enterClass);
           setTimeout(() => {
             if (mainCard) mainCard.classList.remove('flashcard-enter-next', 'flashcard-enter-prev');
-          }, 220);
+          }, 180);
         }
         this.direction = 'next';
 
@@ -7538,7 +7879,7 @@
               this.restoreScrollPosition();
             });
           }
-        }, 200);
+        }, 180);
       },
 
       handleKnown(known) {
@@ -7847,18 +8188,24 @@
         if (AppState.get('speedRemainingMs') <= 0) return;
         AppState.update('isSpeedBlitzPaused', true);
         const overlay = document.getElementById('speed-pause-overlay');
-        if (overlay) overlay.style.display = 'flex';
+        if (overlay) {
+          overlay.style.display = 'flex';
+          ModalStackManager.openModal('speed_pause', () => this.resume(), overlay);
+        }
       },
 
       resume() {
         AppState.update('isSpeedBlitzPaused', false);
         this.lastTick = Date.now();
-        this.hidePauseOverlay();
+        this.hidePauseOverlay(false);
       },
 
-      hidePauseOverlay() {
+      hidePauseOverlay(isPopState = false) {
         const overlay = document.getElementById('speed-pause-overlay');
-        if (overlay) overlay.style.display = 'none';
+        if (overlay) {
+          overlay.style.display = 'none';
+          ModalStackManager.dismissModal('speed_pause', { triggerHistoryBack: !isPopState });
+        }
       },
 
       handleAnswer(isCorrect, isTimeout = false) {
@@ -7889,7 +8236,11 @@
           App.recordAnswer(false);
 
           if (lives <= 0) {
-            alert(`💥 极速挑战结束！最终得分: ${AppState.get('speedScore')}\n已自动保存本次训练成果。`);
+            UIModal.alert({
+              title: '💥 极速挑战结算',
+              message: `极速挑战结束！最终得分: ${AppState.get('speedScore')}
+已自动保存本次训练成果。`
+            });
             AppState.update('speedLives', 3);
             AppState.update('speedScore', 0);
             App.switchMode('choice');
@@ -7904,7 +8255,7 @@
           LifecycleScheduler.clearInterval(this.timerId);
           this.timerId = null;
         }
-        this.hidePauseOverlay();
+        this.hidePauseOverlay(false);
         const header = document.getElementById('speed-blitz-header');
         if (header) header.style.display = 'none';
       }
@@ -8374,7 +8725,7 @@
     };
 
     // -----------------------------------------------------------------------
-    // [5.11 MistakesCenter View - 错题大本营 (非悬挂 Promise 保护)]
+    // [5.11 MistakesCenter View - 错题大本营]
     // -----------------------------------------------------------------------
     const MistakesCenter = {
       isDirty: true,
@@ -8435,7 +8786,7 @@
             <div class="weak-root-meta" style="font-size:0.72rem; color:var(--muted); border-top:1px dashed var(--border); padding-top:4px;">
               <span>薄弱指数: <strong style="color:var(--primary);">${item.weightedScore}</strong></span>
             </div>
-            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\\'"))}', ${isGlobal})">🎯 专练此族</button>
+            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\\\'"))}', ${isGlobal})">🎯 专练此族</button>
           `;
           fragment.appendChild(card);
         });
@@ -8612,6 +8963,7 @@
         this.render();
         Compass.renderBoxes();
         App.updateStats();
+        Services.Sync.showToast('已清空当前单元错题记录', 'info', 1800);
       },
 
       cleanup() {}
@@ -8673,7 +9025,7 @@
     };
 
     // -----------------------------------------------------------------------
-    // [5.13 Manage View - 打卡与备份中心 (工业级防截断与超时熔断版)]
+    // [5.13 Manage View - 打卡与备份中心 (平台安全无阻塞)]
     // -----------------------------------------------------------------------
     const Manage = {
       render() {
@@ -8726,7 +9078,7 @@
       async upload() {
         const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
         if (!token) {
-          alert('请先输入 GitHub Personal Access Token (需勾选 gist 权限)！');
+          Services.Sync.showToast('请先输入 GitHub Personal Access Token (需勾选 gist 权限)！', 'error', 3000);
           return;
         }
         localStorage.setItem('morpho_gist_token', token);
@@ -8737,7 +9089,12 @@
         const ok = await Services.Sync.upload('manual');
         if (ok) {
           const curId = localStorage.getItem('morpho_gist_id');
-          alert(`🎉 备份成功！\n已成功同步至 GitHub Gist。\nGist ID: ${curId}\n多设备填入相同 Token 与 Gist ID 即可接力！`);
+          UIModal.alert({
+            title: '🎉 备份成功',
+            message: `已成功同步至 GitHub Gist。
+Gist ID: ${curId}
+多设备填入相同 Token 与 Gist ID 即可接力！`
+          });
           this.updateSyncTimeUI();
         }
       },
@@ -8746,7 +9103,7 @@
         const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
         const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
         if (!token || !gistId) {
-          alert('从云端拉取需要同时填写 GitHub Token 与已有的 Gist ID！');
+          Services.Sync.showToast('从云端拉取需要同时填写 GitHub Token 与已有的 Gist ID！', 'error', 3000);
           return;
         }
         localStorage.setItem('morpho_gist_token', token);
@@ -8770,22 +9127,28 @@
           const file = data.files && (data.files['morpho_sync_data.json'] || data.files[Object.keys(data.files)[0]]);
           if (!file) throw new Error('未在 Gist 中找到数据存档文件');
 
-          // 工业级防截断自愈拉取：若文件超过约1MB被GitHub截断，自动通过Raw URL安全获取完整原文
           const rawContent = await Services.Sync.fetchSafeGistFile(file, token);
           const cloudData = await Services.Sync.parseCloudData(rawContent);
 
-          // 内存合并与状态持久化
           Services.Sync.performMerge(cloudData);
 
           App.onDataMerged({ refreshStage: false, silentAudio: true });
 
           Services.Sync.setBadge('synced', '☁️ 同步成功');
-          alert('🎉 成功从云端拉取并智能合并所有学习进度与错题！');
+          Services.Sync.showToast('🎉 成功从云端拉取并智能合并所有学习进度与错题！', 'success', 2500);
           this.updateSyncTimeUI();
         } catch (err) {
           console.error('[Sync Pull Error]', err);
           Services.Sync.setBadge('error', '❌ 同步失败');
-          alert(`❌ 拉取失败: ${err.message}\n\n建议排查：\n1. Token 是否包含 gist 权限；\n2. 网络代理连接；\n3. Gist ID 是否准确。`);
+          UIModal.alert({
+            title: '❌ 拉取失败',
+            message: `错误原因: ${err.message}
+
+建议排查：
+1. Token 是否包含 gist 权限；
+2. 网络代理连接；
+3. Gist ID 是否准确。`
+          });
         } finally {
           clearTimeout(timeoutId);
         }
@@ -8794,7 +9157,7 @@
       async rollback() {
         const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
         const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
-        if (!token || !gistId) { alert('请先配置 GitHub Token 与 Gist ID！'); return; }
+        if (!token || !gistId) { Services.Sync.showToast('请先配置 GitHub Token 与 Gist ID！', 'error', 3000); return; }
 
         const ok = await UIModal.confirm({
           title: '云端备份回滚确认',
@@ -8829,11 +9192,11 @@
 
           App.onDataMerged({ refreshStage: false, silentAudio: true });
           Services.Sync.setBadge('synced', '☁️ 回滚完成');
-          alert('🎉 成功从云端上一版本备份镜像回滚！');
+          Services.Sync.showToast('🎉 成功从云端上一版本备份镜像回滚！', 'success', 2500);
         } catch (e) {
           console.error('[Sync Rollback Error]', e);
           Services.Sync.setBadge('error', '❌ 回滚失败');
-          alert('回滚失败: ' + e.message);
+          Services.Sync.showToast('回滚失败: ' + e.message, 'error', 3000);
         } finally {
           clearTimeout(timeoutId);
         }
@@ -8870,7 +9233,7 @@
         a.download = `CET4_Anki_${currentPackId}_${new Date().toISOString().slice(0, 10)}.tsv`;
         a.click();
         URL.revokeObjectURL(url);
-        alert('🎉 成功导出 Anki 卡包文件！');
+        Services.Sync.showToast('🎉 成功导出 Anki 卡包文件！', 'success', 2500);
       },
 
       cleanup() {}
@@ -9132,7 +9495,7 @@
 
         const filtered = packWords.filter(w => (stDict[w.word]?.box ?? 1) === boxId);
         if (filtered.length === 0) {
-          alert(`当前【${boxName}】暂时没有单词！`);
+          Services.Sync.showToast(`当前【${boxName}】暂时没有单词！`, 'info', 2000);
           return;
         }
 
@@ -9140,7 +9503,7 @@
         AppState.update('questionHistory', []);
         AppState.update('historyCursor', -1);
         App.switchMode('choice');
-        alert(`已锁定【${boxName} 全量词单】，共 ${filtered.length} 个单词开始专练！`);
+        Services.Sync.showToast(`已锁定【${boxName} 全量词单】，共 ${filtered.length} 个单词开始专练！`, 'info', 2500);
         App.nextQuestion();
       },
 
@@ -9149,13 +9512,13 @@
         if (!drawer) return;
 
         if (this.selectedDrawerBoxId === boxId && drawer.style.display === 'flex') {
-          drawer.style.display = 'none';
-          this.selectedDrawerBoxId = null;
+          this.closeDrawer(false);
           return;
         }
 
         this.selectedDrawerBoxId = boxId;
         drawer.style.display = 'flex';
+        ModalStackManager.openModal('leitner_drawer', () => this.closeDrawer(true), drawer);
 
         const titleEl = document.getElementById('drawer-title');
         if (titleEl) titleEl.innerHTML = `📦 ${Utils.escapeHTML(boxName)} · 收录词单明细`;
@@ -9186,10 +9549,11 @@
         });
       },
 
-      closeDrawer() {
+      closeDrawer(isPopState = false) {
         const drawer = document.getElementById('leitner-drawer');
         if (drawer) drawer.style.display = 'none';
         this.selectedDrawerBoxId = null;
+        ModalStackManager.dismissModal('leitner_drawer', { triggerHistoryBack: !isPopState });
       }
     };
 
@@ -9277,6 +9641,7 @@
       Companion
     };
   })();
+
   // =========================================================================
   // ★ 模块 6：应用主控制器 (App Orchestrator & Global Facades)
   // =========================================================================
@@ -9569,7 +9934,7 @@
           if (btn) btn.style.display = 'none';
         }
 
-        this.switchWordPack(curPack);
+        this.switchWordPack(curPack, { skipHistoryPush: true });
         Services.Sync.autoPullOnLaunch();
         try { updateMobileNavBarVisibility(); } catch (_) {}
       },
@@ -9763,8 +10128,7 @@
         Views.Manage.updateSyncTimeUI();
       },
 
-      switchWordPack(packId) {
-        // 切换词库时若处于冲刺会话，安全注销以防止跨词库词池污染
+      switchWordPack(packId, options = {}) {
         if (AppState.get('dueReviewSession')?.isActive) {
           this.exitDueReviewSession(false);
         }
@@ -9839,6 +10203,12 @@
         Views.Typing.renderMistakesBoard();
         this.updateDueBadge();
         this.updateStats();
+
+        // 契约 A: 宏观路由压栈
+        if (!options?.skipHistoryPush) {
+          HistoryRouter.push(packId, AppState.get('currentMode'));
+        }
+
         this.nextQuestion();
       },
 
@@ -9869,7 +10239,7 @@
             return (st?.mistakes > 0) || (st?.level <= 1) || Boolean(st?.isFlagged);
           });
           if (pool.length === 0) {
-            if (typeof alert !== 'undefined') alert('恭喜！当前题库暂无待强化的错词，已自动返回全库模式。');
+            Services.Sync.showToast('恭喜！当前题库暂无待强化的错词，已自动返回全库模式。', 'info', 2500);
             const chk = typeof document !== 'undefined' ? document.getElementById('mistake-only-chk') : null;
             if (chk) chk.checked = false;
             pool = AppState.get('activePool');
@@ -9898,7 +10268,6 @@
         const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
         const stDict = AppState.get('packStats')[currentPackId] || {};
 
-        // 严格已学到期判定：必须学过(lastReviewed > 0)且到达复习临界点(now >= nextReviewDate)
         const dueWords = packWords.filter(w => {
           const st = stDict[w.word];
           if (boxId !== null && (st?.box ?? 1) !== boxId) return false;
@@ -9907,7 +10276,7 @@
 
         if (dueWords.length === 0) {
           const msg = boxId !== null ? `当前【${boxName}】暂无到期单词！` : '🎉 太棒了！今日暂无到期需要复习的单词，请继续背诵新词！';
-          alert(msg);
+          Services.Sync.showToast(msg, 'info', 2500);
           return false;
         }
 
@@ -9915,7 +10284,6 @@
           this.exitDueReviewSession(false);
         }
 
-        // 备份当前主线上下文
         const backupContext = {
           activePool: [...AppState.get('activePool')],
           orderMode: AppState.get('orderMode'),
@@ -9941,7 +10309,6 @@
 
         AppState.update('dueReviewSession', session);
 
-        // 若当前处于管理/图谱等非题型面板，自动切入核心测试
         const curMode = AppState.get('currentMode');
         const isQuestionMode = ['choice', 'flashcard', 'spell', 'speed_blitz', 'audio_clo', 'confusables'].includes(curMode);
         if (!isQuestionMode) {
@@ -10010,11 +10377,7 @@
           const passed = session.passedWords.size;
           const total = session.totalInitial;
           progEl.innerText = `⚡ [抗遗忘] 剩余 ${session.queue.length} / 共 ${total} 词 (已消灭 ${passed} 词)`;
-          progEl.title = `抗遗忘冲刺专属调度队列：
-• 冲刺范围: ${session.scopeName}
-• 初始待复习总词数: ${total}
-• 已成功内化消除: ${passed}
-• 队列剩余待测: ${session.queue.length} (答错将循环至末尾直至全部消灭)`;
+          progEl.title = `抗遗忘冲刺专属调度队列：\n• 冲刺范围: ${session.scopeName}\n• 初始待复习总词数: ${total}\n• 已成功内化消除: ${passed}\n• 队列剩余待测: ${session.queue.length} (答错将循环至末尾直至全部消灭)`;
         }
       },
 
@@ -10044,7 +10407,6 @@
         if (cycledEl) cycledEl.innerText = `${cycledCount} 词`;
         if (remainEl) remainEl.innerText = `0 词`;
 
-        // 恢复主线状态
         if (session.backupContext) {
           AppState.batchUpdate({
             activePool: session.backupContext.activePool,
@@ -10077,6 +10439,7 @@
 
         if (overlay) {
           overlay.style.display = 'flex';
+          ModalStackManager.openModal('due_milestone', (isPop) => this.dismissDueMilestone(isPop), overlay);
           KeyRouter.pushModal({
             element: overlay,
             onEscape: () => this.dismissDueMilestone(),
@@ -10089,11 +10452,12 @@
         }
       },
 
-      dismissDueMilestone() {
+      dismissDueMilestone(isPopState = false) {
         const overlay = document.getElementById('due-milestone-overlay');
         if (overlay) {
           overlay.style.display = 'none';
           KeyRouter.popModal(overlay);
+          ModalStackManager.dismissModal('due_milestone', { triggerHistoryBack: !isPopState });
         }
         this.nextQuestion();
       },
@@ -10153,11 +10517,7 @@
             const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
             if (progEl) {
               progEl.innerText = `🎯 [新词探索 ${todayNewCount}/${limitLabel}] ${targetIndex + 1} / ${pool.length}`;
-              progEl.title = `双轨自适应调度器 · 探索轨决策：
-• 调度队列: 新词探索轨 (Discovery Track)
-• 今日已学新词: ${todayNewCount} / ${limitLabel}
-• 生词库存: 剩余 ${unlearnedPool.length} 词
-• 出题策略: 原书自然顺序平滑推进 (8:2 混合步进)`;
+              progEl.title = `双轨自适应调度器 · 探索轨决策：\n• 调度队列: 新词探索轨 (Discovery Track)\n• 今日已学新词: ${todayNewCount} / ${limitLabel}\n• 生词库存: 剩余 ${unlearnedPool.length} 词\n• 出题策略: 原书自然顺序平滑推进 (8:2 混合步进)`;
             }
             return candidate;
           }
@@ -10233,20 +10593,7 @@
             const pruneTag = dbg.pruned ? ' ⚡剪枝底分' : '';
             const probPct = (chosenProb * 100).toFixed(1);
             progEl.innerText = `🧠 [自适应复习 P:${Math.round(chosenItem.score)} | 风险:${dbg.risk}% | 概率:${probPct}%${dueTag}${rootTag}${pruneTag}]`;
-            progEl.title = `自适应调度动力学元数据追踪：
-• 队列状态: 强化复习轨 (Review Track)
-• 综合得分 (P): ${chosenItem.score.toFixed(1)}
-• 抽样概率: ${probPct}%
-• 遗忘风险: ${dbg.risk}% (记忆保留率: ${dbg.recall}%)
-• 基础稳定性(S): ${dbg.stability}d
-• 生效稳定性(S_eff): ${dbg.effStability}d (保底退火)
-• 题型基准耗时(T_base): ${dbg.T_base}ms
-• 迟疑系数(λ): ${dbg.lambda.toFixed(2)} (耗时: ${dbg.respTimeMs}ms)
-• 迟疑加分: +${dbg.pHesitation.toFixed(1)} (上限12分)
-• 词根盲区加成: +${dbg.pRootBoost.toFixed(1)} (族错误率: ${(dbg.familyErrorRate * 100).toFixed(1)}%)
-• 莱特纳逾期比(R_overdue): ${dbg.rOverdue >= 0 ? dbg.rOverdue.toFixed(2) : '未逾期'}
-• 到期阶跃倍率: x${dbg.dueMultiplier.toFixed(2)}
-• 防重指数扣分: -${dbg.penalty.toFixed(1)} (间隔步数: ${dbg.recencyStep >= 0 ? dbg.recencyStep : '无'})`;
+            progEl.title = `自适应调度动力学元数据追踪：\n• 队列状态: 强化复习轨 (Review Track)\n• 综合得分 (P): ${chosenItem.score.toFixed(1)}\n• 抽样概率: ${probPct}%\n• 遗忘风险: ${dbg.risk}% (记忆保留率: ${dbg.recall}%)\n• 基础稳定性(S): ${dbg.stability}d\n• 生效稳定性(S_eff): ${dbg.effStability}d (保底退火)\n• 题型基准耗时(T_base): ${dbg.T_base}ms\n• 迟疑系数(λ): ${dbg.lambda.toFixed(2)} (耗时: ${dbg.respTimeMs}ms)\n• 迟疑加分: +${dbg.pHesitation.toFixed(1)} (上限12分)\n• 词根盲区加成: +${dbg.pRootBoost.toFixed(1)} (族错误率: ${(dbg.familyErrorRate * 100).toFixed(1)}%)\n• 莱特纳逾期比(R_overdue): ${dbg.rOverdue >= 0 ? dbg.rOverdue.toFixed(2) : '未逾期'}\n• 到期阶跃倍率: x${dbg.dueMultiplier.toFixed(2)}\n• 防重指数扣分: -${dbg.penalty.toFixed(1)} (间隔步数: ${dbg.recencyStep >= 0 ? dbg.recencyStep : '无'})`;
           }
 
           return chosenItem.word;
@@ -10315,7 +10662,6 @@
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
         const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
-        // ★ 抗遗忘专享冲刺通道拦截 (短路自适应打分，彻底杜绝回退全库黑洞与微池死锁)
         const dueSession = AppState.get('dueReviewSession');
         if (dueSession && dueSession.isActive) {
           if (dueSession.queue.length === 0) {
@@ -10444,7 +10790,6 @@
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
         const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
-        // ★ 抗遗忘专享冲刺会话撤销回滚流
         const dueSession = AppState.get('dueReviewSession');
         if (dueSession && dueSession.isActive && cursor > 0) {
           const prevWordName = history[cursor - 1];
@@ -10746,7 +11091,7 @@
 
         const item = Services.Audio.preloadSentence(word.word, word);
         if (item && item.en) {
-          const highlighted = item.en.replace(new RegExp(`\b(${word.word}|${word.word}s|${word.word}ed|${word.word}ing)\b`, 'gi'), '<b style="color:var(--primary); font-weight:800;">$1</b>');
+          const highlighted = item.en.replace(new RegExp(`\\b(${word.word}|${word.word}s|${word.word}ed|${word.word}ing)\\b`, 'gi'), '<b style="color:var(--primary); font-weight:800;">$1</b>');
           enEl.innerHTML = highlighted;
           cnEl.innerText = item.cn || '';
           cnEl.style.display = item.cn ? 'block' : 'none';
@@ -10804,17 +11149,15 @@
           eventId: null
         };
 
-        // ★ 抗遗忘专享冲刺会话队列消费与闭环推进流
         const dueSession = AppState.get('dueReviewSession');
         if (dueSession && dueSession.isActive && dueSession.queue.length > 0) {
           const head = dueSession.queue[0];
           if (head && head.word === wordName) {
             if (isCorrect) {
               dueSession.passedWords.add(wordName);
-              dueSession.queue.shift(); // 顺利出队
+              dueSession.queue.shift();
             } else {
               dueSession.mistakeWords.add(wordName);
-              // Anki 闭环循环：移出队头，推入队尾，直到全部消灭
               const failed = dueSession.queue.shift();
               dueSession.queue.push(failed);
             }
@@ -10984,7 +11327,7 @@
         if (sheetDue) sheetDue.innerText = `${dueCount} 词`;
       },
 
-      switchMode(mode) {
+      switchMode(mode, options = {}) {
         const prevMode = AppState.get('currentMode');
         LifecycleScheduler.teardown();
         Services.Storage.flushAll();
@@ -11181,6 +11524,11 @@
             this.renderCurrentView();
           }
         }
+
+        // 契约 A: 宏观路由压栈
+        if (!options?.skipHistoryPush) {
+          HistoryRouter.push(AppState.get('currentPackId'), mode);
+        }
       },
 
       filterByGroup(groupName) {
@@ -11200,7 +11548,7 @@
         });
 
         this.switchMode('choice');
-        if (typeof alert !== 'undefined') alert(`已锁定专练题库：【${groupName}】，共 ${filtered.length} 词！`);
+        Services.Sync.showToast(`已锁定专练题库：【${groupName}】，共 ${filtered.length} 词！`, 'info', 2000);
         this.nextQuestion();
       },
 
@@ -11318,6 +11666,19 @@
   // =========================================================================
 
   if (typeof window !== 'undefined') {
+    // 全局兜底安全防护：彻底封死原生阻塞性对话框
+    window.alert = function(msg) {
+      if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+        Services.Sync.showToast(String(msg), 'info', 3200);
+      } else {
+        console.warn('[Safety Alert Polyfill]', msg);
+      }
+    };
+    window.confirm = function(msg) {
+      console.warn('[Safety Guard] Synchronous window.confirm is disabled. Please use await UIModal.confirm(...) instead.', msg);
+      return false;
+    };
+
     window.addEventListener('keydown', (e) => {
       KeyRouter.handleKeyDown(e);
     });
@@ -11394,17 +11755,19 @@
       const m = document.getElementById('shortcut-modal');
       if (m) {
         m.style.display = 'flex';
+        ModalStackManager.openModal('shortcut_modal', (isPop) => window.closeShortcutModal(isPop), m);
         KeyRouter.pushModal({
           element: m,
           onEscape: () => { window.closeShortcutModal(); }
         });
       }
     };
-    window.closeShortcutModal = () => {
+    window.closeShortcutModal = (isPopState = false) => {
       const m = document.getElementById('shortcut-modal');
       if (m) {
         m.style.display = 'none';
         KeyRouter.popModal(m);
+        ModalStackManager.dismissModal('shortcut_modal', { triggerHistoryBack: !isPopState });
       }
     };
 
@@ -11449,604 +11812,21 @@
       localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
     };
 
-    window.toggleMobileToolsSheet = function(open) {
+    window.toggleMobileToolsSheet = function(open, isPopState = false) {
       const sheet = document.getElementById('mobile-tools-sheet');
       if (!sheet) return;
       if (open) {
         syncSheetControls();
         sheet.classList.add('open');
-        if (typeof KeyRouter !== 'undefined') KeyRouter.pushModal(sheet, () => toggleMobileToolsSheet(false));
-      } else {
-        sheet.classList.remove('open');
-        if (typeof KeyRouter !== 'undefined') KeyRouter.popModal(sheet);
-      }
-    };
-
-    window.syncSheetControls = function() {
-      if (typeof document === 'undefined') return;
-      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
-      if (chkSheet) chkSheet.checked = AppState.get('flashcardSpeakZh');
-
-      const dueCount = document.getElementById('top-due-count')?.innerText || '0';
-      const sheetDue = document.getElementById('sheet-due-badge');
-      if (sheetDue) sheetDue.innerText = `${dueCount} 词`;
-
-      const dailyCount = document.getElementById('daily-count')?.innerText || '0';
-      const dailyTarget = document.getElementById('daily-target-num')?.innerText || '50';
-      const dailyUnique = document.getElementById('daily-unique-count')?.innerText || '0';
-      const barFill = document.getElementById('daily-bar-fill');
-
-      const sCount = document.getElementById('sheet-daily-count');
-      const sTarget = document.getElementById('sheet-daily-target');
-      const sUnique = document.getElementById('sheet-daily-unique');
-      const sBar = document.getElementById('sheet-daily-bar-fill');
-
-      if (sCount) sCount.innerText = dailyCount;
-      if (sTarget) sTarget.innerText = dailyTarget;
-      if (sUnique) sUnique.innerText = dailyUnique;
-      if (sBar && barFill) sBar.style.width = barFill.style.width || '0%';
-
-      const targetSel = document.getElementById('daily-target-select');
-      const sheetTargetSel = document.getElementById('sheet-daily-target-select');
-      if (targetSel && sheetTargetSel) sheetTargetSel.value = targetSel.value;
-
-      const newLimitSel = document.getElementById('daily-new-limit-select');
-      const sheetNewLimitSel = document.getElementById('sheet-daily-new-limit-select');
-      if (newLimitSel && sheetNewLimitSel) sheetNewLimitSel.value = newLimitSel.value;
-
-      const themeSel = document.getElementById('theme-select');
-      const sheetThemeSel = document.getElementById('sheet-theme-select');
-      if (themeSel && sheetThemeSel) sheetThemeSel.value = themeSel.value;
-
-      const isFocus = (typeof AppState !== 'undefined') ? AppState.get('focusMode') : false;
-      const sheetFocusBtn = document.getElementById('sheet-focus-btn');
-      if (sheetFocusBtn) sheetFocusBtn.innerText = isFocus ? '↩️ 退出专注' : '🎯 专注模式';
-    };
-
-    window.updateMobileNavBarVisibility = function() {
-      if (typeof document === 'undefined') return;
-      const navBar = document.getElementById('stage-nav-bar');
-      if (!navBar) return;
-      const nextBtn = document.getElementById('next-btn');
-      const prevBtn = document.getElementById('prev-btn');
-      const feedback = document.getElementById('feedback');
-      const stageArea = document.getElementById('stage-area');
-
-      const hasNext = nextBtn && nextBtn.style.display !== 'none';
-      const hasPrev = prevBtn && prevBtn.style.display !== 'none';
-      const hasFeedback = feedback && feedback.innerText.trim().length > 0;
-
-      const isActive = Boolean(hasNext || hasPrev || hasFeedback);
-      navBar.classList.toggle('has-active-action', isActive);
-      if (stageArea) {
-        stageArea.classList.toggle('has-active-bottom-bar', isActive);
-      }
-    };
-
-    window.toggleFocusMode = () => {
-      const cur = !AppState.get('focusMode');
-      AppState.update('focusMode', cur);
-      document.body.classList.toggle('focus-mode', cur);
-      localStorage.setItem('morpho_focus_mode', cur ? '1' : '0');
-      const btn = document.getElementById('focus-mode-btn');
-      if (btn) btn.innerText = cur ? '↩️ 退出专注模式' : '🎯 专注模式';
-    };
-
-    window.switchWordPack = (id) => App.switchWordPack(id);
-    function switchTheme(theme) {
-      const validThemes = ['light', 'dark', 'sepia'];
-      const targetTheme = validThemes.includes(theme) ? theme : 'light';
-
-      document.documentElement.setAttribute('data-theme', targetTheme);
-      try {
-        localStorage.setItem('morpho_theme', targetTheme);
-      } catch (_) {}
-
-      const topSelect = document.getElementById('theme-select');
-      if (topSelect && topSelect.value !== targetTheme) {
-        topSelect.value = targetTheme;
-      }
-
-      const sheetSelect = document.getElementById('sheet-theme-select');
-      if (sheetSelect && sheetSelect.value !== targetTheme) {
-        sheetSelect.value = targetTheme;
-      }
-    }
-    window.switchTheme = switchTheme;
-
-    function updateDailyProgressUI() {
-      const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
-      const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
-      const testedToday = act[todayStr] || 0;
-
-      const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
-      const uniqueList = dailyUniqueMap[todayStr] || [];
-      const uniqueToday = uniqueList.length;
-
-      const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
-      const pct = Math.min(100, Math.round((testedToday / target) * 100));
-
-      const dCount = document.getElementById('daily-count');
-      const dTarget = document.getElementById('daily-target-num');
-      const dUnique = document.getElementById('daily-unique-count');
-      const dFill = document.getElementById('daily-bar-fill');
-
-      if (dCount) dCount.innerText = testedToday;
-      if (dTarget) dTarget.innerText = target;
-      if (dUnique) dUnique.innerText = uniqueToday;
-      if (dFill) dFill.style.width = `${pct}%`;
-
-      const sCount = document.getElementById('sheet-daily-count');
-      const sTarget = document.getElementById('sheet-daily-target');
-      const sUnique = document.getElementById('sheet-daily-unique');
-      const sFill = document.getElementById('sheet-daily-bar-fill');
-
-      if (sCount) sCount.innerText = testedToday;
-      if (sTarget) sTarget.innerText = target;
-      if (sUnique) sUnique.innerText = uniqueToday;
-      if (sFill) sFill.style.width = `${pct}%`;
-    }
-    window.updateDailyProgressUI = updateDailyProgressUI;
-
-    window.changeVoiceRate = (v) => AppState.update('currentVoiceRate', parseFloat(v));
-    window.changeTypingSfx = (m) => {
-      AppState.update('typingSfxMode', m);
-      localStorage.setItem('morpho_typing_sfx', m);
-      const sel = document.getElementById('typing-sfx-select');
-      if (sel && sel.value !== m) sel.value = m;
-      Services.Sfx.triggerAuditionDebounced(m);
-      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
-        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
-      }
-    };
-
-    window.handleTypingVolumeInput = function(val) {
-      const volInt = parseInt(val, 10);
-      const factor = volInt / 100;
-      AppState.update('typingSfxVolume', factor);
-      const label = document.getElementById('typing-sfx-vol-label');
-      const icon = document.getElementById('typing-vol-icon');
-
-      if (label) label.innerText = `${volInt}%`;
-      if (icon) {
-        if (volInt === 0) icon.innerText = '🔇';
-        else if (volInt < 40) icon.innerText = '🔉';
-        else if (volInt <= 100) icon.innerText = '🔊';
-        else icon.innerText = '📢';
-      }
-
-      if (typeof Services !== 'undefined' && Services.Sfx && Services.Sfx.setMasterVolume) {
-        Services.Sfx.setMasterVolume(factor);
-      }
-    };
-
-    window.handleTypingVolumeChange = function(val) {
-      const volInt = parseInt(val, 10);
-      const factor = volInt / 100;
-      AppState.update('typingSfxVolume', factor);
-      localStorage.setItem('morpho_typing_sfx_volume', String(factor));
-      if (volInt > 0) {
-        AppState.update('typingLastNonZeroVolume', factor);
-        localStorage.setItem('morpho_typing_last_nonzero_vol', String(factor));
-      }
-      if (typeof Services !== 'undefined' && Services.Sfx && Services.Sfx.triggerAuditionDebounced) {
-        Services.Sfx.triggerAuditionDebounced(AppState.get('typingSfxMode'));
-      }
-      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
-        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
-      }
-    };
-
-    window.toggleTypingSfxMute = function() {
-      const curVol = AppState.get('typingSfxVolume') || 0;
-      if (curVol > 0.01) {
-        AppState.update('typingLastNonZeroVolume', curVol);
-        localStorage.setItem('morpho_typing_last_nonzero_vol', String(curVol));
-        const slider = document.getElementById('typing-sfx-volume');
-        if (slider) slider.value = '0';
-        handleTypingVolumeInput(0);
-        handleTypingVolumeChange(0);
-      } else {
-        const lastVol = parseFloat(localStorage.getItem('morpho_typing_last_nonzero_vol') || '0.7');
-        const targetVol = Math.max(0.05, Math.min(2.0, isNaN(lastVol) ? 0.7 : lastVol));
-        const targetInt = Math.round(targetVol * 100);
-        const slider = document.getElementById('typing-sfx-volume');
-        if (slider) slider.value = String(targetInt);
-        handleTypingVolumeInput(targetInt);
-        handleTypingVolumeChange(targetInt);
-      }
-      if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing) {
-        LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 60);
-      }
-    };
-
-    window.changeDailyTarget = (v) => {
-      const val = Math.max(1, parseInt(v, 10) || 50);
-      localStorage.setItem('morpho_daily_target', String(val));
-      App.initDailyActivity();
-    };
-
-    window.changeDailyNewLimit = (v) => {
-      const val = parseInt(v, 10) || 20;
-      AppState.update('dailyNewLimit', val);
-      localStorage.setItem('morpho_daily_new_limit', String(val));
-      const sel = document.getElementById('daily-new-limit-select');
-      if (sel && sel.value !== String(val)) sel.value = String(val);
-      Services.Sync.showToast(`每日新词配额已设为: ${val >= 9999 ? '不设上限' : val + ' 词/日'}`, 'info', 1500);
-      App.nextQuestion();
-    };
-
-    window.changeOrderMode = (m) => {
-      AppState.update('orderMode', m);
-      const pool = App.getEffectivePool();
-      if (m === 'shuffle') AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(pool.length));
-      else if (m === 'sequential') AppState.update('sequentialIndex', -1);
-      AppState.update('questionHistory', []);
-      AppState.update('historyCursor', -1);
-      App.nextQuestion();
-    };
-
-    window.changeLeitnerMode = (m) => {
-      AppState.update('leitnerMode', m);
-      localStorage.setItem('morpho_leitner_mode', m);
-    };
-
-    window.toggleMistakeMode = () => App.nextQuestion();
-    window.toggleUnexpectedMode = () => {
-      const chk = document.getElementById('unexpected-only-chk');
-      if (chk?.checked) {
-        const mChk = document.getElementById('mistake-only-chk');
-        if (mChk) mChk.checked = false;
-      }
-      const pool = App.getEffectivePool();
-      AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(pool.length));
-      AppState.update('sequentialIndex', -1);
-      AppState.update('questionHistory', []);
-      AppState.update('historyCursor', -1);
-      App.nextQuestion();
-    };
-
-    window.toggleSoundEffects = (checked) => {
-      AppState.update('soundEffectsEnabled', checked);
-      localStorage.setItem('morpho_sfx_enabled', checked ? '1' : '0');
-    };
-
-    window.changeSfxStyle = (v) => {
-      AppState.update('feedbackSfxStyle', v);
-      localStorage.setItem('morpho_sfx_style', v);
-      Services.Sfx.playFeedbackSound(true, v);
-    };
-
-    window.toggleAutoAdvance = (c) => {
-      AppState.update('autoAdvanceEnabled', c);
-      localStorage.setItem('morpho_auto_advance', c ? '1' : '0');
-    };
-
-    window.changeAutoAdvanceDelay = (v) => AppState.update('autoAdvanceDelay', parseFloat(v));
-    window.saveVoiceSetting = () => {
-      const v = document.getElementById('accent-select')?.value || 'en-GB';
-      AppState.update('voiceAccent', v);
-      localStorage.setItem('morpho_voice', v);
-    };
-
-    window.toggleSpeakEn = (checked) => {
-      AppState.update('speakEnabledEn', checked);
-      localStorage.setItem('morpho_speak_en', checked ? '1' : '0');
-    };
-    window.toggleSpeakZh = (checked) => {
-      AppState.update('speakEnabledZh', checked);
-      localStorage.setItem('morpho_speak_zh', checked ? '1' : '0');
-    };
-
-    window.toggleFlashcardSpeakZh = function(checked = null) {
-      const current = AppState.get('flashcardSpeakZh');
-      const target = (checked !== null) ? Boolean(checked) : !current;
-
-      AppState.update('flashcardSpeakZh', target);
-      localStorage.setItem('morpho_flashcard_speak_zh', target ? '1' : '0');
-
-      const chkDesk = document.getElementById('flashcard-speak-zh-chk');
-      const chkSheet = document.getElementById('sheet-flashcard-speak-zh');
-      if (chkDesk) chkDesk.checked = target;
-      if (chkSheet) chkSheet.checked = target;
-
-      Services.Sync.showToast(target ? '🔊 已开启闪卡翻转读中文' : '🔇 已关闭闪卡翻转读中文', 'info', 1200);
-    };
-
-    window.toggleTypingShowAnalysis = (checked) => {
-      AppState.update('typingShowAnalysis', checked);
-      localStorage.setItem('morpho_typing_show_analysis', checked ? '1' : '0');
-      if (typeof Views !== 'undefined' && Views.Typing && Views.Typing.updateRootTipVisibility) {
-        Views.Typing.updateRootTipVisibility();
-      }
-    };
-    window.toggleTypingShowPhonetic = (checked) => {
-      AppState.update('typingShowPhonetic', checked);
-      localStorage.setItem('morpho_typing_show_phonetic', checked ? '1' : '0');
-      const el = document.getElementById('typing-phonetic');
-      if (el) el.style.display = checked ? '' : 'none';
-    };
-
-    window.changeTypingHintThreshold = (v) => {
-      if (v === '0' || v === 'off' || v === 'false') {
-        AppState.update('typingHintOnMistake', false);
-        localStorage.setItem('morpho_typing_hint_on_mistake', '0');
-        localStorage.setItem('morpho_typing_hint_threshold', '0');
-      } else {
-        const n = parseInt(v, 10) || 3;
-        AppState.update('typingHintOnMistake', true);
-        AppState.update('typingHintMistakeThreshold', n);
-        localStorage.setItem('morpho_typing_hint_on_mistake', '1');
-        localStorage.setItem('morpho_typing_hint_threshold', String(n));
-      }
-      const sel = document.getElementById('typing-hint-threshold-select');
-      if (sel) sel.value = AppState.get('typingHintOnMistake') ? String(AppState.get('typingHintMistakeThreshold')) : '0';
-      const chk = document.getElementById('typing-hint-mistake-chk');
-      if (chk) chk.checked = AppState.get('typingHintOnMistake');
-    };
-    window.toggleTypingHintOnMistake = (checked) => {
-      AppState.update('typingHintOnMistake', checked);
-      localStorage.setItem('morpho_typing_hint_on_mistake', checked ? '1' : '0');
-      const sel = document.getElementById('typing-hint-threshold-select');
-      if (sel) {
-        sel.value = checked ? String(AppState.get('typingHintMistakeThreshold') || 3) : '0';
-      }
-    };
-
-    function buildLimitedTypingPool(customSeed = null) {
-      const currentPackId = AppState.get('currentPackId');
-      const allPacks = AppState.get('allPacks') || {};
-      const packWords = allPacks[currentPackId]?.words || [];
-      const limit = AppState.get('typingPoolLimit') || 60;
-
-      if (packWords.length === 0) return [];
-      if (limit >= 9999 || packWords.length <= limit) {
-        const seed = customSeed || (typeof Views !== 'undefined' && Views.Typing && Views.Typing.shuffleSeed) || Date.now();
-        if (typeof Views !== 'undefined' && Views.Typing) Views.Typing.shuffleSeed = seed;
-        return Algorithms.Shuffle.deterministicShuffle([...packWords], seed);
-      }
-
-      let stDict = {};
-      if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
-        stDict = App.getAggregatedStatsForTotal();
-      } else {
-        stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
-      }
-
-      const mistakeWords = packWords.filter(w => {
-        const st = stDict[w.word];
-        return (st?.typingMistakes > 0) || (st?.mistakes > 0) || (st?.level <= 1);
-      });
-
-      let selected = [];
-      if (mistakeWords.length >= limit) {
-        selected = [...mistakeWords].sort(() => 0.5 - Math.random()).slice(0, limit);
-      } else {
-        const mistakeSet = new Set(mistakeWords);
-        const normalWords = packWords.filter(w => !mistakeSet.has(w)).sort(() => 0.5 - Math.random());
-        const needed = limit - mistakeWords.length;
-        selected = [...mistakeWords].concat(normalWords.slice(0, needed));
-      }
-
-      return selected.sort(() => 0.5 - Math.random());
-    }
-
-    function changeTypingPoolLimit(val) {
-      const limit = parseInt(val, 10) || 60;
-      const oldLimit = AppState.get('typingPoolLimit') || 60;
-      AppState.update('typingPoolLimit', limit);
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('morpho_typing_pool_limit', String(limit));
-      }
-
-      const sel = document.getElementById('typing-pool-limit-select');
-      if (sel && sel.value !== String(limit)) {
-        sel.value = String(limit);
-      }
-
-      if (AppState.get('currentMode') === 'typing' && !AppState.get('isTypingDrillActive')) {
-        const currentPackId = AppState.get('currentPackId');
-        const allPacks = AppState.get('allPacks') || {};
-        const packWords = allPacks[currentPackId]?.words || [];
-        const isFullPack = (limit >= 9999 || limit >= packWords.length);
-        const effectiveLimit = isFullPack ? packWords.length : Math.min(limit, packWords.length || limit);
-
-        const completedCount = (typeof Views !== 'undefined' && Views.Typing && Views.Typing.completedUniqueWords)
-          ? Views.Typing.completedUniqueWords.size
-          : 0;
-
-        if (typeof Views !== 'undefined' && Views.Typing) {
-          if (!Views.Typing.typingMasterQueue || Views.Typing.typingMasterQueue.length === 0) {
-            Views.Typing.typingMasterQueue = [...(Views.Typing.typingTargetQueue || [])];
-          }
-
-          if (completedCount < effectiveLimit) {
-            Views.Typing.totalTargetCount = effectiveLimit;
-
-            let targetQueue = Views.Typing.typingTargetQueue || [];
-            const completedSet = Views.Typing.completedUniqueWords || new Set();
-            const currentWord = AppState.get('currentWord');
-
-            if (targetQueue.length < effectiveLimit) {
-              const currentSet = new Set(targetQueue.map(w => w.word));
-              const available = packWords.filter(w => !currentSet.has(w.word));
-
-              let additional = [];
-              if (isFullPack) {
-                const seed = Views.Typing.shuffleSeed || Date.now();
-                Views.Typing.shuffleSeed = seed;
-                additional = Algorithms.Shuffle.deterministicShuffle(available, seed);
-              } else {
-                let stDict = {};
-                if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
-                  stDict = App.getAggregatedStatsForTotal();
-                } else {
-                  stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
-                }
-
-                const mistakes = available.filter(w => (stDict[w.word]?.typingMistakes > 0) || (stDict[w.word]?.mistakes > 0));
-                const reviewDue = available.filter(w => !mistakes.includes(w) && ((stDict[w.word]?.level <= 1) || (stDict[w.word]?.nextReviewDate && stDict[w.word]?.nextReviewDate <= Date.now())));
-                const normals = available.filter(w => !mistakes.includes(w) && !reviewDue.includes(w));
-
-                const needed = effectiveLimit - targetQueue.length;
-                const prioritized = [
-                  ...mistakes.sort(() => 0.5 - Math.random()),
-                  ...reviewDue.sort(() => 0.5 - Math.random()),
-                  ...normals.sort(() => 0.5 - Math.random())
-                ];
-                additional = prioritized.slice(0, needed);
-              }
-
-              targetQueue = targetQueue.concat(additional);
-              Views.Typing.typingMasterQueue = [...targetQueue];
-            } else if (targetQueue.length > effectiveLimit) {
-              const preserved = targetQueue.filter(w => completedSet.has(w.word) || (currentWord && w.word === currentWord.word));
-              const remaining = targetQueue.filter(w => !completedSet.has(w.word) && (!currentWord || w.word !== currentWord.word));
-              const needed = Math.max(0, effectiveLimit - preserved.length);
-              targetQueue = preserved.concat(remaining.slice(0, needed));
-            }
-
-            Views.Typing.typingTargetQueue = targetQueue;
-            Views.Typing.saveLocalSession();
-            Views.Typing.updateHUD();
-
-            if (typeof Services !== 'undefined' && Services.Sync) {
-              Services.Sync.showToast(`🎯 练习题量已调整为 ${effectiveLimit} 词 (当前进度 ${completedCount}/${effectiveLimit})`, 'info', 1600);
-            }
-          } else {
-            Views.Typing.showGoalReachedModal(completedCount, effectiveLimit, oldLimit);
-          }
-        }
-      }
-    }
-
-    window.mulberry32 = Algorithms.Shuffle.mulberry32;
-    window.deterministicShuffle = Algorithms.Shuffle.deterministicShuffle;
-    window.buildLimitedTypingPool = buildLimitedTypingPool;
-    window.changeTypingPoolLimit = changeTypingPoolLimit;
-    App.buildLimitedTypingPool = buildLimitedTypingPool;
-    App.changeTypingPoolLimit = changeTypingPoolLimit;
-
-    window.changeTypingRevealThreshold = (v) => {
-      if (v === '0' || v === 'off' || v === 'false') {
-        AppState.update('typingRevealEnabled', false);
-        localStorage.setItem('morpho_typing_reveal_enabled', '0');
-        localStorage.setItem('morpho_typing_reveal_threshold', '0');
-      } else {
-        const n = parseInt(v, 10) || 6;
-        AppState.update('typingRevealEnabled', true);
-        AppState.update('typingRevealThreshold', n);
-        localStorage.setItem('morpho_typing_reveal_enabled', '1');
-        localStorage.setItem('morpho_typing_reveal_threshold', String(n));
-      }
-      const sel = document.getElementById('typing-reveal-threshold-select');
-      if (sel) sel.value = AppState.get('typingRevealEnabled') ? String(AppState.get('typingRevealThreshold')) : '0';
-      const chk = document.getElementById('typing-reveal-enabled-chk');
-      if (chk) chk.checked = AppState.get('typingRevealEnabled');
-    };
-    window.toggleTypingRevealEnabled = (checked) => {
-      AppState.update('typingRevealEnabled', checked);
-      localStorage.setItem('morpho_typing_reveal_enabled', checked ? '1' : '0');
-      const sel = document.getElementById('typing-reveal-threshold-select');
-      if (sel) {
-        sel.value = checked ? String(AppState.get('typingRevealThreshold') || 6) : '0';
-      }
-    };
-
-    window.saveCloudSyncConfig = (silent = false) => {
-      const token = document.getElementById('gist-token')?.value.trim() || '';
-      const gistId = document.getElementById('gist-id')?.value.trim() || '';
-      localStorage.setItem('morpho_gist_token', token);
-      localStorage.setItem('morpho_gist_id', gistId);
-      if (!silent) Services.Sync.showToast('☁️ 同步凭证已保存在本地', 'success', 1800);
-    };
-
-    window.uploadToGitHubGist = () => Views.Manage.upload();
-    window.pullFromGitHubGist = () => Views.Manage.pull();
-    window.rollbackToPreviousGistBackup = () => Views.Manage.rollback();
-
-        window.triggerPwaInstall = () => {
-      if (!deferredInstall) return;
-      deferredInstall.prompt();
-      deferredInstall.userChoice.then(r => {
-        if (r.outcome === 'accepted') {
-          const btn = document.getElementById('pwa-install-btn');
-          if (btn) btn.style.display = 'none';
-          Services.Sync.showToast('🎉 正在安装到系统独立窗口！', 'success', 2500);
-        }
-        deferredInstall = null;
-      });
-    };
-
-    window.openShortcutModal = () => {
-      const m = document.getElementById('shortcut-modal');
-      if (m) {
-        m.style.display = 'flex';
+        ModalStackManager.openModal('mobile_tools_sheet', (isPop) => toggleMobileToolsSheet(false, isPop), sheet);
         KeyRouter.pushModal({
-          element: m,
-          onEscape: () => { window.closeShortcutModal(); }
+          element: sheet,
+          onEscape: () => toggleMobileToolsSheet(false)
         });
-      }
-    };
-    window.closeShortcutModal = () => {
-      const m = document.getElementById('shortcut-modal');
-      if (m) {
-        m.style.display = 'none';
-        KeyRouter.popModal(m);
-      }
-    };
-
-    window.toggleModeNavAccordion = function(forceState = null) {
-      const acc = document.getElementById('mode-nav-accordion');
-      const chev = document.getElementById('capsule-chevron');
-      if (!acc) return;
-      const isCurrentlyCollapsed = acc.classList.contains('is-collapsed');
-      const shouldCollapse = (forceState !== null) ? forceState : !isCurrentlyCollapsed;
-      acc.classList.toggle('is-collapsed', shouldCollapse);
-      if (chev) {
-        chev.innerText = shouldCollapse ? '▾ 点击展开其他模式' : '▴ 点击收起模式栏';
-      }
-    };
-
-    window.toggleUtilityPanel = () => {
-      const panels = [document.getElementById('utility-control-panel'), document.getElementById('utility-nav-panel')].filter(Boolean);
-      const collapsed = panels.some(p => !p.classList.contains('is-collapsed'));
-      panels.forEach(p => p.classList.toggle('is-collapsed', collapsed));
-      const btn = document.getElementById('utility-toggle-btn');
-      if (btn) {
-        btn.setAttribute('aria-expanded', String(!collapsed));
-        btn.innerText = collapsed ? '⚙️ 展开设置面板' : '⚙️ 收起设置面板';
-      }
-      localStorage.setItem('morpho_utility_collapsed', collapsed ? '1' : '0');
-    };
-
-    window.toggleCompanionPanel = (forceState = null) => {
-      const panel = document.getElementById('desktop-companion-panel');
-      const layout = document.querySelector('.workspace-layout');
-      if (!panel) return;
-      const isCollapsed = (forceState !== null) ? Boolean(forceState) : !panel.classList.contains('is-collapsed');
-      panel.classList.toggle('is-collapsed', isCollapsed);
-      if (layout) {
-        layout.classList.toggle('companion-collapsed', isCollapsed);
-      }
-      const btn = document.getElementById('companion-toggle-btn');
-      if (btn) {
-        btn.setAttribute('aria-expanded', String(!isCollapsed));
-        btn.innerText = isCollapsed ? '▣ 展开辅助栏' : '▣ 收起辅助栏';
-      }
-      localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
-    };
-
-    window.toggleMobileToolsSheet = function(open) {
-      const sheet = document.getElementById('mobile-tools-sheet');
-      if (!sheet) return;
-      if (open) {
-        syncSheetControls();
-        sheet.classList.add('open');
-        if (typeof KeyRouter !== 'undefined') KeyRouter.pushModal(sheet, () => toggleMobileToolsSheet(false));
       } else {
         sheet.classList.remove('open');
-        if (typeof KeyRouter !== 'undefined') KeyRouter.popModal(sheet);
+        KeyRouter.popModal(sheet);
+        ModalStackManager.dismissModal('mobile_tools_sheet', { triggerHistoryBack: !isPopState });
       }
     };
 
@@ -12556,9 +12336,12 @@
     window.triggerPwaInstall = () => {
       if (!deferredInstall) {
         if (App.isStandaloneMode()) {
-          alert('您当前已处于独立桌面窗口 / PWA 运行模式中！');
+          Services.Sync.showToast('您当前已处于独立桌面窗口 / PWA 运行模式中！', 'info', 2500);
         } else {
-          alert('浏览器暂未触发安装事件。请确认：\n1. 请使用 HTTPS 或 http://localhost 访问（若直接双击以 file:/// 打开本地文件，现代浏览器安全机制禁止安装 PWA）；\n2. 桌面 Chrome / Edge 可直接点击浏览器地址栏最右侧的【安装】电脑图标；\n3. 手机浏览器（如 Safari/Chrome）可点击【分享】或菜单 ->【添加到主屏幕】。');
+          UIModal.alert({
+            title: '📲 PWA 安装提示',
+            message: '浏览器暂未触发安装事件。请确认：\n1. 请使用 HTTPS 或 http://localhost 访问（若直接双击以 file:/// 打开本地文件，现代浏览器安全机制禁止安装 PWA）；\n2. 桌面 Chrome / Edge 可直接点击浏览器地址栏最右侧的【安装】电脑图标；\n3. 手机浏览器（如 Safari/Chrome）可点击【分享】或菜单 ->【添加到主屏幕】。'
+          });
         }
         return;
       }
@@ -12577,17 +12360,19 @@
       const s = document.getElementById('mobile-mode-sheet');
       if (s) {
         s.classList.add('open');
+        ModalStackManager.openModal('mobile_mode_sheet', (isPop) => window.closeMobileModeSheet(isPop), s);
         KeyRouter.pushModal({
           element: s,
           onEscape: () => { window.closeMobileModeSheet(); }
         });
       }
     };
-    window.closeMobileModeSheet = () => {
+    window.closeMobileModeSheet = (isPopState = false) => {
       const s = document.getElementById('mobile-mode-sheet');
       if (s) {
         s.classList.remove('open');
         KeyRouter.popModal(s);
+        ModalStackManager.dismissModal('mobile_mode_sheet', { triggerHistoryBack: !isPopState });
       }
     };
     window.selectModeFromSheet = (m) => { window.closeMobileModeSheet(); App.switchMode(m); };
@@ -12654,7 +12439,7 @@
           } catch (_) {}
 
           if (!words) {
-            const match = text.match(/(?:WORDS_DATA|VOCABULARY_PACKS|words)\s*=\s*(\[[\s\S]*\]);?/);
+            const match = text.match(/(?:WORDS_DATA|VOCABULARY_PACKS|words)\\s*=\\s*(\\[[\\s\\S]*\\]);?/);
             if (match) {
               try {
                 words = JSON.parse(match[1]);
@@ -12700,12 +12485,18 @@
             AppState.batchUpdate({ allPacks: packs });
             App.buildWordPackMapping();
             App.switchWordPack('all_2257');
-            alert(`🎉 成功载入本地词库！共 ${formatted.length} 个单词。`);
+            Services.Sync.showToast(`🎉 成功载入本地词库！共 ${formatted.length} 个单词。`, 'success', 2500);
           } else {
-            alert("未能在选定文件中解析出有效单词数组，请确认该文件包含 WORDS_DATA 数据。");
+            UIModal.alert({
+              title: '词库解析失败',
+              message: '未能在选定文件中解析出有效单词数组，请确认该文件包含 WORDS_DATA 数据。'
+            });
           }
         } catch (err) {
-          alert("文件读取解析异常: " + err.message);
+          UIModal.alert({
+            title: '读取异常',
+            message: '文件读取解析异常: ' + err.message
+          });
         }
       };
       reader.readAsText(file, 'utf-8');
@@ -12740,10 +12531,13 @@
 
         App.buildWordPackMapping();
         App.switchWordPack(newId);
-        alert(`🎉 成功导入 ${parsed.length} 个单词！`);
+        Services.Sync.showToast(`🎉 成功导入 ${parsed.length} 个单词！`, 'success', 2500);
         App.switchMode('choice');
       } catch (_) {
-        alert('解析失败，请确保粘贴符合 Qwerty 格式的 JSON 数组。');
+        UIModal.alert({
+          title: '导入失败',
+          message: '解析失败，请确保粘贴符合 Qwerty 格式的 JSON 数组。'
+        });
       }
     };
 
@@ -12758,7 +12552,7 @@
       });
       const sel = document.getElementById('order-select');
       if (sel) sel.value = 'shuffle';
-      alert(`已重新打乱题库！共 ${pool.length} 词。`);
+      Services.Sync.showToast(`已重新打乱题库！共 ${pool.length} 词。`, 'info', 1800);
       App.nextQuestion();
     };
 
@@ -12766,7 +12560,6 @@
       if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
 
       const register = () => {
-        // 使用相对路径 ./sw.js，完美兼容 GitHub Pages 项目子路径
         navigator.serviceWorker.register('./sw.js', { scope: './' })
           .then((registration) => {
             console.log('[PWA] Service Worker 注册就绪，Scope:', registration.scope);
@@ -12776,7 +12569,6 @@
           });
       };
 
-      // 修复漏洞：若当前 document 已经处于 complete 状态，直接注册，防止 load 监听落空
       if (document.readyState === 'complete') {
         register();
       } else {
@@ -12820,12 +12612,22 @@
     window.KeyRouter = KeyRouter;
     window.UIModal = UIModal;
     window.LifecycleScheduler = LifecycleScheduler;
+    window.ModalStackManager = ModalStackManager;
+    window.HistoryRouter = HistoryRouter;
+    window.RouteDispatcher = RouteDispatcher;
 
     function bootstrapApp() {
       try {
         App.init();
       } catch (err) {
         console.error("App.init failed:", err);
+      }
+
+      try {
+        HistoryRouter.init();
+        RouteDispatcher.hydrate();
+      } catch (err) {
+        console.error("HistoryRouter.init failed:", err);
       }
 
       try {
@@ -12877,7 +12679,22 @@
   }
 
   if (typeof module !== 'undefined') {
-    module.exports = { Utils, KeyRouter, UIModal, LifecycleScheduler, AppState, Algorithms, Services, Views, App, buildLimitedTypingPool, changeTypingPoolLimit };
+    module.exports = {
+      Utils,
+      ModalStackManager,
+      KeyRouter,
+      UIModal,
+      LifecycleScheduler,
+      AppState,
+      Algorithms,
+      Services,
+      HistoryRouter,
+      RouteDispatcher,
+      Views,
+      App,
+      buildLimitedTypingPool,
+      changeTypingPoolLimit
+    };
   }
 
 </script>
