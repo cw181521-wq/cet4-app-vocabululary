@@ -3473,7 +3473,9 @@
         startTime: 0,
         totalCount: 0,
         primaryQueue: [],
+        verifyQueue: [],
         mistakeQueue: [],
+        mistakeVerifyQueue: [],
         profileMap: {},
         promotableRemaining: 0,
         intermissionShown: false,
@@ -11377,7 +11379,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           startTime: 0,
           totalCount: 0,
           primaryQueue: [],
+          verifyQueue: [],
           mistakeQueue: [],
+          mistakeVerifyQueue: [],
           profileMap: {},
           promotableRemaining: 0,
           intermissionShown: false,
@@ -14469,7 +14473,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     function registerOfflineServiceWorker() {
-      if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
+      if (typeof window === 'undefined' || !('serviceWorker' in navigator) || window.location.protocol === 'file:') return;
 
       const register = () => {
         navigator.serviceWorker.register('./sw.js', { scope: './' })
