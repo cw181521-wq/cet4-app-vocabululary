@@ -3200,6 +3200,98 @@
     let activeModalEl = null;
 
     return {
+      showLootPreview(options) {
+        return new Promise((resolve) => {
+          let overlay = document.getElementById('ui-modal-loot-overlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'ui-modal-loot-overlay';
+            overlay.className = 'ui-modal-overlay modal-overlay';
+            document.body.appendChild(overlay);
+          }
+
+          const promotables = options.promotables || [];
+          const remediations = options.remediations || [];
+          const estSec = options.estimatedSeconds || 30;
+
+          const renderWordPills = (list, tagClass) => {
+            if (!list || list.length === 0) return '<span style="color:var(--muted); font-size:0.75rem;">无</span>';
+            return list.map(w => `<span class="badge-mini ${tagClass}" style="margin:2px 4px; padding:3px 8px; display:inline-block;" title="${Utils.escapeHTML(w.meaning || '')}"><strong>${Utils.escapeHTML(w.word)}</strong></span>`).join('');
+          };
+
+          overlay.innerHTML = `
+            <div class="ui-modal-card" role="dialog" aria-modal="true" style="max-width:520px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px;">
+                <h3 style="margin:0; font-size:1.15rem; font-weight:800; color:var(--text); display:flex; align-items:center; gap:6px;">
+                  <span>🎁 战利品清账看板 (预备落盘)</span>
+                </h3>
+                <span class="badge-mini" style="background:#fef3c7; color:#d97706; font-weight:800;">待收割战果</span>
+              </div>
+              <p style="margin:0; font-size:0.86rem; color:var(--muted); line-height:1.45;">
+                您当前手头有尚未完成确权的词汇。开启预备落盘将<strong>立即冻结主线新词</strong>，集中把以下做过的单词推到最前方，快速冲刺确权：
+              </p>
+
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:12px; display:flex; flex-direction:column; gap:10px; max-height:220px; overflow-y:auto;">
+                <div>
+                  <div style="font-size:0.78rem; font-weight:700; color:var(--success); margin-bottom:4px; display:flex; justify-content:space-between;">
+                    <span>🚀 待秒答确权升盒 (${promotables.length} 词)</span>
+                    <span style="font-size:0.72rem; color:var(--muted);">再秒答 1 次即晋级</span>
+                  </div>
+                  <div>${renderWordPills(promotables, 'badge-promotable')}</div>
+                </div>
+
+                <div style="border-top:1px dashed var(--border); padding-top:8px;">
+                  <div style="font-size:0.78rem; font-weight:700; color:var(--error); margin-bottom:4px; display:flex; justify-content:space-between;">
+                    <span>🛠️ 待纠偏回血错题 (${remediations.length} 词)</span>
+                    <span style="font-size:0.72rem; color:var(--muted);">再做对 1 次即回血原盒</span>
+                  </div>
+                  <div>${renderWordPills(remediations, 'badge-demoted')}</div>
+                </div>
+              </div>
+
+              <div style="font-size:0.8rem; color:var(--primary); font-weight:700; background:var(--primary-light); padding:8px 12px; border-radius:8px; text-align:center;">
+                ⏱️ 预计清账仅需约 <strong>${estSec} 秒</strong> (共 ${promotables.length + remediations.length} 题)，即可拿满全部战果！
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                <button class="btn btn-primary" id="loot-sprint-btn" style="padding:10px; font-size:0.92rem; background:linear-gradient(135deg, #10b981, #059669); border:none; box-shadow:0 4px 12px rgba(16,185,129,0.25);">
+                  🚀 开启预落盘清账 (拿满晋升与回血)
+                </button>
+                <div style="display:flex; gap:8px;">
+                  <button class="btn" id="loot-direct-commit-btn" style="flex:1; padding:8px; font-size:0.8rem; background:var(--bg); border:1px solid var(--border); color:var(--text);" title="未复核词将以原盒稳固保底">
+                    ⚡ 强行直接落盘 (保留原盒)
+                  </button>
+                  <button class="btn" id="loot-cancel-btn" style="padding:8px 16px; font-size:0.8rem; background:transparent; border:1px solid var(--border); color:var(--muted);">
+                    ↩️ 取消
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+
+          overlay.style.display = 'flex';
+
+          const settle = (choice, isPopState = false) => {
+            overlay.style.display = 'none';
+            KeyRouter.popModal(overlay);
+            ModalStackManager.dismissModal('ui_loot_preview', { triggerHistoryBack: !isPopState });
+            resolve(choice);
+          };
+
+          overlay.querySelector('#loot-sprint-btn').onclick = () => settle('sprint');
+          overlay.querySelector('#loot-direct-commit-btn').onclick = () => settle('commit');
+          overlay.querySelector('#loot-cancel-btn').onclick = () => settle('cancel');
+          overlay.onclick = (e) => { if (e.target === overlay) settle('cancel'); };
+
+          ModalStackManager.openModal('ui_loot_preview', (isPop) => settle('cancel', isPop), overlay);
+          KeyRouter.pushModal({
+            element: overlay,
+            onEscape: () => settle('cancel'),
+            onEnter: () => settle('sprint')
+          });
+        });
+      },
+
       confirm(options) {
         return new Promise((resolve) => {
           if (activeResolver) {
@@ -3476,6 +3568,8 @@
         verifyQueue: [],
         mistakeQueue: [],
         mistakeVerifyQueue: [],
+        isPreCommitStaging: false,
+        preCommitQueue: [],
         profileMap: {},
         promotableRemaining: 0,
         intermissionShown: false,
@@ -4256,7 +4350,7 @@
           };
         },
 
-        evaluateCognitiveState(responseTimeMs, isCorrect, firstPassDone, oldCanPromote, wordStr = '', currentBox = 1, isTouch = false) {
+        evaluateCognitiveState(responseTimeMs, isCorrect, firstPassDone, oldCanPromote, wordStr = '', currentBox = 1, isTouch = false, isTightened = false) {
           if (!isCorrect) {
             return {
               state: 'DEMOTED',
@@ -4267,9 +4361,11 @@
           }
 
           const thresholds = this.calculateDynamicThresholds(wordStr, currentBox, isTouch);
+          // 若为预落盘短距词，自动收紧 300ms 门槛防放水
+          const effectiveFluentMs = isTightened ? Math.max(1200, thresholds.fluentMs - 300) : thresholds.fluentMs;
           const sec = responseTimeMs / 1000;
 
-          if (responseTimeMs <= thresholds.fluentMs) {
+          if (responseTimeMs <= effectiveFluentMs) {
             return {
               state: 'PROMOTION_ELIGIBLE',
               label: `⚡ ${sec.toFixed(1)}s (${thresholds.lengthType}目标≤${thresholds.targetSecStr}) · 秒答直觉`,
@@ -10793,6 +10889,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           verifyQueue: [],        // ★ Lane 2: 秒答晋级待复核池 [{ wordObj, eligibleAtQuestionIndex }]
           mistakeQueue: [],       // ★ Lane 3: 错题初次纠偏等待池 [{ wordObj, eligibleAtQuestionIndex }]
           mistakeVerifyQueue: [], // ★ Lane 4: 错题深度复核等待池 [{ wordObj, eligibleAtQuestionIndex }]
+          isPreCommitStaging: false,
+          preCommitQueue: [],
           profileMap: profileMap,
           questionIndex: 0,
           lastVerifyIndex: -999,  // ★ 上一次考查题（复核/纠偏）题号，用于防连出
@@ -10863,7 +10961,25 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         if (titleEl) titleEl.innerText = `⚡ [${session.boxName} 强化]`;
 
-        if (session.promotableRemaining > 0) {
+        if (session.isPreCommitStaging) {
+          // ★ 形态 C: 预备落盘清账冲刺态 (金色高光流光)
+          if (capsule) {
+            capsule.className = 'reinforce-capsule-wrap state-capped';
+          }
+          const remain = session.preCommitQueue ? session.preCommitQueue.length : 0;
+          if (pillEl) {
+            pillEl.className = 'capsule-badge-pill badge-capped';
+            pillEl.innerText = `🏁 预备落盘清账中 (剩余 ${remain} 词)`;
+            pillEl.title = '主线新词已完全冻结，正在将已测词汇集中确权清账！';
+          }
+          if (actionBtn) {
+            actionBtn.innerText = '⚡ 随时直接落盘';
+            actionBtn.className = 'btn btn-mini';
+            actionBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            actionBtn.style.color = '#ffffff';
+            actionBtn.onclick = () => App.commitBoxReinforceSession();
+          }
+        } else if (session.promotableRemaining > 0) {
           // 形态 A：尚有晋级潜力
           if (capsule) {
             capsule.className = 'reinforce-capsule-wrap state-active';
@@ -10882,6 +10998,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             actionBtn.className = 'btn btn-mini';
             actionBtn.style.background = 'var(--card-bg)';
             actionBtn.style.color = 'var(--text)';
+            actionBtn.onclick = () => App.handleBoxReinforceExit(false);
           }
         } else {
           // 形态 B：晋级已封顶，微弹性脉冲高亮
@@ -10945,8 +11062,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         const isVerifyPass = Boolean(profile.wordObj?._isVerifyPass || (profile.firstPassDone && profile.verificationStatus === 'NEEDS_VERIFY'));
 
+        const isTightened = Boolean(profile.wordObj?._isTightenedRecency);
         const evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
-          rtMs, isCorrect, profile.firstPassDone, profile.canPromote, wordName, profile.initialBox, isTouch
+          rtMs, isCorrect, profile.firstPassDone, profile.canPromote, wordName, profile.initialBox, isTouch, isTightened
         );
 
         const curQ = session.questionIndex || 1;
@@ -11166,35 +11284,142 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
+      buildPreCommitStagingQueue(session) {
+        const curQ = session.questionIndex || 1;
+
+        const getDeltaQ = (item) => {
+          const profile = session.profileMap[item.wordObj.word];
+          return curQ - (profile?.lastEncounterIndex || 1);
+        };
+
+        // 1. 待秒答确权桶 (Lane 2)，按冷却深度 deltaQ 从大到小排列
+        const verifyBucket = [...(session.verifyQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+
+        // 2. 纠偏桶 (Lane 4 深复优先于 Lane 3 初纠，内部按 deltaQ 倒序)
+        const mistakeVerifyBucket = [...(session.mistakeVerifyQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+        const mistakeRetestBucket = [...(session.mistakeQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+        const remediationBucket = [...mistakeVerifyBucket, ...mistakeRetestBucket];
+
+        // 3. 近距词强制下沉压轴 (deltaQ <= 3 题者下沉至尾部，借前面题目人造缓冲)
+        const regularVerify = [];
+        const sinkingVerify = [];
+        verifyBucket.forEach(item => {
+          if (getDeltaQ(item) <= 3) {
+            item.isSinkingRecency = true;
+            sinkingVerify.push(item);
+          } else {
+            regularVerify.push(item);
+          }
+        });
+
+        // 4. 双向异质拉链编织 (Zip Interleaving: 纠偏 ⇄ 秒答 乒乓交替)
+        const stagedSequence = [];
+        while (regularVerify.length > 0 || remediationBucket.length > 0) {
+          if (remediationBucket.length > 0) stagedSequence.push(remediationBucket.shift());
+          if (regularVerify.length > 0) stagedSequence.push(regularVerify.shift());
+        }
+
+        // 5. 将冷却不足的下沉词接在序列尾部压轴
+        stagedSequence.push(...sinkingVerify);
+
+        // 6. 相邻题目同母词族排斥微调 (Local Repulsion)
+        for (let i = 0; i < stagedSequence.length - 1; i++) {
+          const gCurrent = stagedSequence[i].wordObj.group;
+          const gNext = stagedSequence[i + 1].wordObj.group;
+          if (gCurrent && gCurrent === gNext && i + 2 < stagedSequence.length) {
+            const temp = stagedSequence[i + 1];
+            stagedSequence[i + 1] = stagedSequence[i + 2];
+            stagedSequence[i + 2] = temp;
+          }
+        }
+
+        return stagedSequence;
+      },
+
+      startPreCommitSprint() {
+        const session = AppState.get('boxReinforceSession');
+        if (!session || !session.isActive) return;
+
+        session.isPreCommitStaging = true;
+        session.primaryQueue = []; // ★ 彻底冻结初筛新词，不再引入任何新题
+
+        // 生成深度排序后的清账序列
+        const stagedQueue = this.buildPreCommitStagingQueue(session);
+        session.preCommitQueue = stagedQueue;
+
+        // 清空原排期池，全部交由清账序列接管
+        session.verifyQueue = [];
+        session.mistakeQueue = [];
+        session.mistakeVerifyQueue = [];
+
+        this.updateBoxReinforceCapsuleUI();
+        Services.Sync.showToast(`🚀 已进入预备落盘！共 ${stagedQueue.length} 词待冲刺清账，不再出新词。`, 'success', 2500);
+
+        this.nextQuestion();
+      },
+
       async handleBoxReinforceExit(isEsc = false) {
         const session = AppState.get('boxReinforceSession');
         if (!session || !session.isActive) return;
 
-        let pCount = 0, cCount = 0, dCount = 0, uCount = 0;
-        Object.values(session.profileMap).forEach(p => {
-          if (!p.firstPassDone) {
-            uCount++;
-          } else {
-            if (p.currentBox > p.initialBox) pCount++;
+        // 若当前已经在预备落盘清账中，点击退出直接弹出结算落盘确认
+        if (session.isPreCommitStaging) {
+          const ok = await UIModal.confirm({
+            title: '结束预备落盘确认',
+            message: '当前正处于预备落盘冲刺中。是否立即结束冲刺，将当前最新战果直接落盘？',
+            confirmText: '确定直接落盘',
+            cancelText: '继续冲刺'
+          });
+          if (ok) {
+            this.commitBoxReinforceSession();
+          }
+          return;
+        }
+
+        const pendingVerify = session.verifyQueue ? session.verifyQueue.length : 0;
+        const pendingMistakeRetest = session.mistakeQueue ? session.mistakeQueue.length : 0;
+        const pendingMistakeVerify = session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0;
+        const totalPendingExam = pendingVerify + pendingMistakeRetest + pendingMistakeVerify;
+
+        // 若当前没有任何待确权或待纠偏的半成品词，直接弹出标准落盘确认
+        if (totalPendingExam === 0) {
+          let pCount = 0, cCount = 0, dCount = 0, uCount = 0;
+          Object.values(session.profileMap).forEach(p => {
+            if (!p.firstPassDone) uCount++;
+            else if (p.currentBox > p.initialBox) pCount++;
             else if (p.currentBox < p.initialBox) dCount++;
             else cCount++;
-          }
-        });
+          });
 
-        const ok = await UIModal.confirm({
-          title: '退出并安全落盘确认',
-          message: `按当前实际进度为您即刻结算：
+          const ok = await UIModal.confirm({
+            title: '退出并安全落盘确认',
+            message: `按当前实际进度为您即刻结算：
 • 🚀 顺利晋升：${pCount} 词
 • 🛡️ 原盒加固：${cCount} 词
 • 🎯 精准排雷：${dCount} 词
 • ⏸️ 未学保留：${uCount} 词 (原封不动保存在原盒，绝不丢数据)
 
 是否立即执行安全落盘？`,
-          confirmText: '确定结算落盘',
-          cancelText: '继续强化'
+            confirmText: '确定结算落盘',
+            cancelText: '继续强化'
+          });
+
+          if (ok) {
+            this.commitBoxReinforceSession();
+          }
+          return;
+        }
+
+        // ★ 核心分流：手头存在未闭环词汇，唤起战利品清单看板 (Loot Preview)
+        const choice = await UIModal.showLootPreview({
+          promotables: session.verifyQueue.map(item => item.wordObj),
+          remediations: [...session.mistakeVerifyQueue, ...session.mistakeQueue].map(item => item.wordObj),
+          estimatedSeconds: Math.max(15, totalPendingExam * 8)
         });
 
-        if (ok) {
+        if (choice === 'sprint') {
+          this.startPreCommitSprint();
+        } else if (choice === 'commit') {
           this.commitBoxReinforceSession();
         }
       },
@@ -11382,6 +11607,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           verifyQueue: [],
           mistakeQueue: [],
           mistakeVerifyQueue: [],
+          isPreCommitStaging: false,
+          preCommitQueue: [],
           profileMap: {},
           promotableRemaining: 0,
           intermissionShown: false,
@@ -12196,6 +12423,34 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (reinforceSession && reinforceSession.isActive) {
           reinforceSession.questionIndex = (reinforceSession.questionIndex || 0) + 1;
           const curIndex = reinforceSession.questionIndex;
+
+          // ★ 预备落盘清账独占调度通道 (冻结主线新词，全速消化已测词)
+          if (reinforceSession.isPreCommitStaging) {
+            if (reinforceSession.preCommitQueue && reinforceSession.preCommitQueue.length > 0) {
+              const item = reinforceSession.preCommitQueue.shift();
+              const profile = reinforceSession.profileMap[item.wordObj.word] || {};
+
+              const isVerify = (profile.verificationStatus === 'NEEDS_VERIFY');
+              const isMV = (profile.mistakeRemediationStatus === 'NEEDS_DEEP_VERIFY');
+              const isMR = (profile.mistakeRemediationStatus === 'NEEDS_RETEST');
+
+              item.wordObj._isVerifyPass = isVerify;
+              item.wordObj._isMistakeVerify = isMV;
+              item.wordObj._isMistakeRetest = isMR;
+              item.wordObj._isPreCommit = true;
+
+              // 近距紧缩门控标记 (若是刚做过不久的词，收紧 300ms 门槛防放水)
+              const deltaQ = curIndex - (profile.lastEncounterIndex || 1);
+              item.wordObj._isTightenedRecency = (deltaQ < 12);
+
+              return item.wordObj;
+            }
+
+            // 预备落盘词池已全部清空，自动圆满落盘结算！
+            this.commitBoxReinforceSession();
+            return null;
+          }
+
           const lastV = reinforceSession.lastVerifyIndex ?? -999;
           const hasPrimary = reinforceSession.primaryQueue.length > 0;
 
@@ -13601,6 +13856,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
     // ★ 单盒强化全局门面导出
     window.startBoxReinforceSession = (boxId, boxName) => App.startBoxReinforceSession(boxId, boxName);
+    window.startPreCommitSprint = () => App.startPreCommitSprint();
     window.handleBoxReinforceExit = (isEsc) => App.handleBoxReinforceExit(isEsc);
     window.handleBoxReinforceIntermissionChoice = (c) => App.handleBoxReinforceIntermissionChoice(c);
     window.commitBoxReinforceSession = () => App.commitBoxReinforceSession();
