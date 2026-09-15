@@ -158,30 +158,45 @@
     .modal-overlay, .ui-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 9999;
-      display: flex;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10005;
+      display: none;
       justify-content: center;
       align-items: center;
       will-change: opacity;
       transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 0;
+    }
+    .modal-overlay.open, .ui-modal-overlay.open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
     }
     .ui-modal-card {
       background: var(--card-bg);
       border: 1.5px solid var(--border);
       border-radius: 18px;
-      width: 90%;
+      width: 92%;
       max-width: 480px;
-      padding: 24px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+      padding: 22px 18px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
       color: var(--text);
       display: flex;
       flex-direction: column;
       gap: 14px;
       will-change: transform, opacity;
       animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: calc(var(--dynamic-viewport-h, 100dvh) - 32px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: auto;
     }
     @keyframes modalSlideUp {
       from { transform: translate3d(0, 16px, 0) scale(0.96); opacity: 0; }
@@ -1183,8 +1198,6 @@
     @keyframes slideUpBottomBar { from { transform: translate3d(0, 100%, 0); opacity: 0; } to { transform: translate3d(0, 0, 0); opacity: 1; } }
     /* ★ 幽灵遮罩防御体系 (Ghost Overlay Trap Defense)：关闭状态下彻底剥离触控与可视性 */
     .mobile-mode-overlay,
-    .modal-overlay,
-    .ui-modal-overlay,
     #mobile-mode-sheet,
     #mobile-tools-sheet {
       position: fixed;
@@ -1205,15 +1218,48 @@
       transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity;
     }
+
+    .modal-overlay,
+    .ui-modal-overlay,
+    .typing-milestone-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10005;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 0;
+    }
+
     .mobile-mode-overlay.open,
-    .modal-overlay.open,
-    .ui-modal-overlay.open,
     #mobile-mode-sheet.open,
     #mobile-tools-sheet.open {
       display: flex !important;
       opacity: 1 !important;
       pointer-events: auto !important;
       visibility: visible !important;
+    }
+
+    .modal-overlay.open,
+    .ui-modal-overlay.open,
+    .typing-milestone-overlay.open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+      z-index: 10005 !important;
     }
     .mobile-mode-sheet-card { width: 100%; max-width: 560px; max-height: 85vh; background: var(--card-bg); border-top: 2px solid var(--border); border-radius: 20px 20px 0 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; overflow: hidden; animation: slideUpSheet 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform; }
     @keyframes slideUpSheet { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
@@ -2333,7 +2379,51 @@
       pointer-events: none !important;
     }
 
-  </style>
+  
+    @media (max-width: 768px) {
+      .reinforce-capsule-wrap {
+        padding: 8px 12px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+      }
+      .reinforce-capsule-wrap .capsule-info-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+      .reinforce-capsule-wrap > div:last-child {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        gap: 8px !important;
+      }
+      .reinforce-capsule-wrap button {
+        flex: 1 !important;
+        padding: 8px 10px !important;
+        font-size: 0.8rem !important;
+        text-align: center !important;
+      }
+      #box-reinforce-retrospective-overlay .tm-stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+      #box-reinforce-retrospective-overlay .tm-stat-box {
+        padding: 8px 10px !important;
+      }
+      #box-reinforce-retrospective-overlay .tm-val {
+        font-size: 1.25rem !important;
+      }
+      .typing-milestone-card {
+        padding: 20px 16px 18px !important;
+        border-radius: 18px !important;
+        max-height: calc(var(--dynamic-viewport-h, 100dvh) - 24px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+    }
+</style>
 </head>
 <body>
 <div class="container">
@@ -2807,7 +2897,6 @@
                 <span class="micro-dot" data-box="3" title="Box 3 中期强化"></span>
                 <span class="micro-dot" data-box="4" title="Box 4 周度稳固"></span>
                 <span class="micro-dot" data-box="5" title="Box 5 永久毕业"></span>
-                
               </div>
               <!-- 行 2: 掌握度指标 -->
               <span class="mastery-pill" id="mastery-pill" title="基于作答反应时与记忆稳定度的 0~100 自适应掌握度">掌握度: 35%</span>
@@ -3634,6 +3723,7 @@
   // =========================================================================
   const HistoryRouter = (function() {
     let isHandlingPopState = false;
+    let ignoreNextPopState = false;
 
     function parseHash(hash) {
       const clean = (hash || '').replace(/^#\/?/, '').split('?')[0];
@@ -3651,6 +3741,14 @@
     return {
       isHandlingPopState() {
         return isHandlingPopState;
+      },
+
+      setIgnoreNextPopState(val) {
+        ignoreNextPopState = Boolean(val);
+      },
+
+      getIgnoreNextPopState() {
+        return ignoreNextPopState;
       },
 
       push(packId, mode) {
@@ -3677,6 +3775,10 @@
       },
 
       handlePopState(e) {
+        if (ignoreNextPopState) {
+          ignoreNextPopState = false;
+          return;
+        }
         isHandlingPopState = true;
         try {
           // 1. 优先执行模态层 LIFO 出栈拦截（契约 B）
@@ -3754,16 +3856,16 @@
       dismissModal(modalId, options = { triggerHistoryBack: true }) {
         const idx = stack.findIndex(m => m.id === modalId);
         if (idx !== -1) {
-          const [removed] = stack.splice(idx, 1);
-          if (removed && typeof removed.close === 'function') {
-            try { removed.close(false); } catch (_) {}
-          }
+          stack.splice(idx, 1);
         }
 
         // 若当前 URL 带有该虚拟帧，且非出栈引起的主动关闭，回退对齐历史栈
         if (options.triggerHistoryBack && typeof window !== 'undefined' && window.history && !HistoryRouter.isHandlingPopState()) {
           const hash = window.location.hash || '';
           if (hash.includes(`?modal=${encodeURIComponent(modalId)}`) || hash.includes('?modal=')) {
+            if (typeof HistoryRouter !== 'undefined' && typeof HistoryRouter.setIgnoreNextPopState === 'function') {
+              HistoryRouter.setIgnoreNextPopState(true);
+            }
             window.history.back();
           }
         }
@@ -4255,18 +4357,27 @@
             </div>
           `;
 
+          overlay.classList.add('open');
           overlay.style.display = 'flex';
 
+          let isSettled = false;
           const settle = (choice, isPopState = false) => {
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_loot_preview', { triggerHistoryBack: !isPopState });
             resolve(choice);
           };
 
-          overlay.querySelector('#loot-sprint-btn').onclick = () => settle('sprint');
-          overlay.querySelector('#loot-direct-commit-btn').onclick = () => settle('commit');
-          overlay.querySelector('#loot-cancel-btn').onclick = () => settle('cancel');
+          const sprintBtn = overlay.querySelector('#loot-sprint-btn');
+          const directCommitBtn = overlay.querySelector('#loot-direct-commit-btn');
+          const cancelBtn = overlay.querySelector('#loot-cancel-btn');
+
+          if (sprintBtn) sprintBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('sprint'); };
+          if (directCommitBtn) directCommitBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('commit'); };
+          if (cancelBtn) cancelBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('cancel'); };
           overlay.onclick = (e) => { if (e.target === overlay) settle('cancel'); };
 
           ModalStackManager.openModal('ui_loot_preview', (isPop) => settle('cancel', isPop), overlay);
@@ -4310,10 +4421,15 @@
             </div>
           `;
 
+          overlay.classList.add('open');
           overlay.style.display = 'flex';
           activeModalEl = overlay;
 
+          let isSettled = false;
           const settle = (val, isPopState = false) => {
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_confirm', { triggerHistoryBack: !isPopState });
@@ -4369,9 +4485,14 @@
             </div>
           `;
 
+          overlay.classList.add('open');
           overlay.style.display = 'flex';
 
+          let isSettled = false;
           const settle = (isPopState = false) => {
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_alert', { triggerHistoryBack: !isPopState });
@@ -4397,6 +4518,7 @@
           activeResolver = null;
         }
         if (activeModalEl) {
+          activeModalEl.classList.remove('open');
           activeModalEl.style.display = 'none';
           KeyRouter.popModal(activeModalEl);
           activeModalEl = null;
@@ -4685,6 +4807,7 @@
       }
     };
   })();
+
   // =========================================================================
   // ★ 模块 3：纯函数算法模型集合 (Algorithms)
   // =========================================================================
@@ -5484,6 +5607,7 @@
         }
       }
     };
+
   })();
 
   // =========================================================================
@@ -7817,11 +7941,97 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       };
     })();
 
+    // ★ 0916C 线性马达声触一体化反向制动引擎
+    const Haptic = (function() {
+      const isVibrateSupported = typeof navigator !== 'undefined' && 'vibrate' in navigator;
+      let cachedAudioBuffer = null;
+
+      // 14ms 离散反相波形采样
+      function getAcousticBrakeBuffer(ctx) {
+        if (cachedAudioBuffer) return cachedAudioBuffer;
+        const sampleRate = ctx.sampleRate;
+        const frameCount = Math.floor(sampleRate * 0.014); // 严格截断于 14ms
+        const buffer = ctx.createBuffer(1, frameCount, sampleRate);
+        const data = buffer.getChannelData(0);
+        const f0 = 165; // 0916C 谐振基频
+
+        for (let i = 0; i < frameCount; i++) {
+          const t = i / sampleRate;
+
+          if (t < 0.002) {
+            // [阶段 1: 0~2ms] 2.8kHz 高频机械起刀瞬态，提供骨感
+            const click = Math.sin(2 * Math.PI * 2800 * t) * (1 - t / 0.002);
+            data[i] = click * 0.45;
+          } else if (t < 0.009) {
+            // [阶段 2: 2~9ms] 虚拟谐波合成 (165Hz + 330Hz + 495Hz)
+            const waveT = t - 0.002;
+            const h1 = Math.sin(2 * Math.PI * f0 * waveT) * 0.35;
+            const h2 = Math.sin(2 * Math.PI * (f0 * 2) * waveT) * 0.65; // 能量重心
+            const h3 = Math.sin(2 * Math.PI * (f0 * 3) * waveT) * 0.25;
+            const envelope = Math.exp(-waveT / 0.0032);
+            data[i] = (h1 + h2 + h3) * envelope;
+          } else {
+            // [阶段 3: 9~14ms] 180° 反相声学切断，强制钳位收尾
+            const brakeT = t - 0.009;
+            const brakeWave = -0.55 * Math.sin(2 * Math.PI * (f0 * 2) * brakeT);
+            const clamp = 1 - (brakeT / 0.005);
+            data[i] = brakeWave * clamp;
+          }
+        }
+        cachedAudioBuffer = buffer;
+        return buffer;
+      }
+
+      return {
+        detent() {
+          // ★ 仅在甩出时振动，拖拽过程中不触发任何物理振动
+          this.playAcousticImpulse(0.12, 0.6);
+        },
+
+        snap(velocity = 1.0) {
+          // ★ 0916C 线性马达 [9, 18, 6] 单模式复合脉冲，严格仅在甩出时触发
+          if (isVibrateSupported) {
+            try {
+              navigator.vibrate([9, 18, 6]);
+            } catch (_) {}
+          }
+          this.playAcousticImpulse(0.24, velocity);
+        },
+
+        cushion() {
+          // ★ 仅在甩出时振动，未达阈值回弹不触发任何物理振动
+        },
+
+        playAcousticImpulse(baseGain, velocity) {
+          try {
+            if (typeof AppState !== 'undefined' && !AppState.get('soundEffectsEnabled')) return;
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            const ctx = window.__morphoGlobalAudioCtx || new AudioCtx();
+            if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+
+            const buffer = getAcousticBrakeBuffer(ctx);
+            const source = ctx.createBufferSource();
+            const gain = ctx.createGain();
+
+            const dynamicVol = Math.min(0.42, baseGain + Math.min(velocity, 2.2) * 0.08);
+            gain.gain.setValueAtTime(dynamicVol, ctx.currentTime);
+
+            source.buffer = buffer;
+            source.connect(gain);
+            gain.connect(ctx.destination);
+            source.start(ctx.currentTime);
+          } catch (_) {}
+        }
+      };
+    })();
+
     return {
       Storage,
       Sfx,
       Audio: AudioService,
-      Sync
+      Sync,
+      Haptic
     };
   })();
 
@@ -7885,6 +8095,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       restoreState(state) {
+        // ★ 核心会话防中断保护：单盒强化专练进行中，严禁由于历史出栈或路由恢复中断会话
+        if (typeof AppState !== 'undefined' && AppState.get('boxReinforceSession')?.isActive) {
+          return;
+        }
+
         const hash = (typeof window !== 'undefined' ? window.location.hash : '') || '';
         const clean = hash.replace(/^#\/?/, '').split('?')[0];
         const match = clean.match(/^pack\/([^\/]+)\/mode\/([^\/]+)$/);
@@ -7908,6 +8123,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
   })();
+
   // =========================================================================
   // ★ 模块 5：视图控制器层 (Views - 严格沙箱生命周期与内嵌流式折叠架构)
   // =========================================================================
@@ -8172,7 +8388,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.2 Flashcard View - 智能闪卡 (方案一: 内嵌流式折叠与局部视口预算 | 方案二: 严格沙箱隔离)]
+    // [5.2 Flashcard View - 智能闪卡 (0916C 线性马达声触一体反向制动与内嵌折叠架构)]
     // -----------------------------------------------------------------------
     const Flashcard = {
       isTransitioning: false,
@@ -8188,12 +8404,15 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       touch: {
         startX: 0,
         startY: 0,
+        lastX: 0,
+        lastTime: 0,
         currentX: 0,
         startTime: 0,
+        velocity: 0,
         isDragging: false,
         directionDetermined: false,
         isHorizontalSwipe: false,
-        hasVibrated: false,
+        hasVibratedDetent: false,
         badgeLeft: null,
         badgeRight: null
       },
@@ -8604,7 +8823,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
-      handleSwipeDecision(known, isTouchExit = false) {
+      handleSwipeDecision(known, isTouchExit = false, velocity = 1.0) {
         if (this.isTransitioning) return;
         if (AppState.get('isReinforceReadOnly')) {
           Services.Sync.showToast('当前处于历史只读态，请点击下方按钮操作', 'info', 1000);
@@ -8614,6 +8833,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.isSwiping = true;
 
         Services.Audio.stopAll();
+
+        // ★ 0916C 线性马达声触一体化反向制动脱手反馈 (Snap)
+        Services.Haptic.snap(velocity);
 
         const mainCard = document.getElementById('main-card');
         if (document.activeElement && typeof document.activeElement.blur === 'function') {
@@ -8732,12 +8954,15 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
           this.touch.startX = t.clientX;
           this.touch.startY = t.clientY;
+          this.touch.lastX = t.clientX;
           this.touch.currentX = t.clientX;
           this.touch.startTime = Date.now();
+          this.touch.lastTime = performance.now();
+          this.touch.velocity = 0;
           this.touch.isDragging = false;
           this.touch.directionDetermined = false;
           this.touch.isHorizontalSwipe = false;
-          this.touch.hasVibrated = false;
+          this.touch.hasVibratedDetent = false;
 
           card.classList.remove('touch-animating', 'touch-exit-left', 'touch-exit-right');
         }, { passive: true, signal });
@@ -8745,12 +8970,14 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         card.addEventListener('touchmove', (e) => {
           if (!this.touch.startTime || this.isTransitioning) return;
           const t = e.touches[0];
+          const now = performance.now();
+          this.touch.currentX = t.clientX;
           const deltaX = t.clientX - this.touch.startX;
           const deltaY = t.clientY - this.touch.startY;
+          const absX = Math.abs(deltaX);
+          const absY = Math.abs(deltaY);
 
           if (!this.touch.directionDetermined) {
-            const absX = Math.abs(deltaX);
-            const absY = Math.abs(deltaY);
             if (absX > 8 || absY > 8) {
               this.touch.directionDetermined = true;
               // ★ 规范 2.2：双向意图向量仲裁。若垂直位移占据主导，立刻解除手势控制，交还原生滚屏
@@ -8773,20 +9000,25 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           if (this.touch.isHorizontalSwipe) {
             if (e.cancelable) e.preventDefault();
             this.touch.isDragging = true;
-            this.touch.currentX = t.clientX;
+
+            const dt = now - (this.touch.lastTime || now);
+            if (dt > 12) {
+              this.touch.velocity = Math.abs(t.clientX - this.touch.lastX) / dt;
+              this.touch.lastX = t.clientX;
+              this.touch.lastTime = now;
+            }
+
+            // 迟滞滤波：85px 阈值触发微齿轮咬合 (5ms 脉冲与声学冲激)；75px 迟滞回位，防止临界振荡
+            if (absX >= 85 && !this.touch.hasVibratedDetent) {
+              this.touch.hasVibratedDetent = true;
+              Services.Haptic.detent();
+            } else if (absX < 75 && this.touch.hasVibratedDetent) {
+              this.touch.hasVibratedDetent = false;
+            }
 
             // 纯净自然的平移与旋转轻扫动效 (无畸变无多余模糊)
             const rotate = deltaX * 0.055;
             card.style.transform = `translate3d(${deltaX}px, 0, 0) rotate(${rotate}deg)`;
-
-            // 轻扫达到阈值时的触感震动反馈 (Haptic)
-            const crossedThreshold = Math.abs(deltaX) > 75;
-            if (crossedThreshold && !this.touch.hasVibrated) {
-              this.touch.hasVibrated = true;
-              if ('vibrate' in navigator) navigator.vibrate(10);
-            } else if (!crossedThreshold && this.touch.hasVibrated) {
-              this.touch.hasVibrated = false;
-            }
 
             const isFlipped = AppState.get('isCardFlipped');
             const bLeft = this.touch.badgeLeft;
@@ -8796,7 +9028,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               if (deltaX < -18) {
                 card.classList.add('liquid-glow-left');
                 card.classList.remove('liquid-glow-right');
-                if (bLeft) bLeft.style.opacity = String(Math.min(1, Math.abs(deltaX) / 85));
+                if (bLeft) bLeft.style.opacity = String(Math.min(1, absX / 85));
                 if (bRight) bRight.style.opacity = '0';
               } else if (deltaX > 18) {
                 card.classList.add('liquid-glow-right');
@@ -8818,45 +9050,48 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const deltaTime = Date.now() - this.touch.startTime;
           const isFlipped = AppState.get('isCardFlipped');
           const wasDragging = this.touch.isDragging;
+          const absX = Math.abs(deltaX);
+          const velocity = this.touch.velocity || (absX / Math.max(1, deltaTime));
 
           this.touch.startTime = 0;
           this.touch.isDragging = false;
+          this.touch.hasVibratedDetent = false;
 
           card.classList.remove('liquid-glow-left', 'liquid-glow-right');
           if (this.touch.badgeLeft) this.touch.badgeLeft.style.opacity = '0';
           if (this.touch.badgeRight) this.touch.badgeRight.style.opacity = '0';
 
-          if (!wasDragging && Math.abs(deltaX) < 10 && deltaTime < 300) {
+          if (!wasDragging && absX < 10 && deltaTime < 300) {
             if (!isFlipped) this.flip();
             return;
           }
 
           if (!wasDragging) return;
 
-          const absDeltaX = Math.abs(deltaX);
-          const velocity = absDeltaX / Math.max(1, deltaTime);
-          const isValidTrigger = absDeltaX > 75 || velocity > 0.45;
+          // 判定条件：位移突破 85px 或 逃逸速度达到 0.65 px/ms
+          const isValidTrigger = (absX >= 85 || velocity > 0.65);
 
           card.classList.add('touch-animating');
 
           if (!isFlipped) {
-            if (deltaX > 75 && isValidTrigger) {
+            if (deltaX > 75 && (absX > 75 || velocity > 0.45)) {
               this.direction = 'prev';
               card.style.transform = '';
+              Services.Haptic.snap(velocity);
               App.prevQuestion();
             } else {
+              Services.Haptic.cushion();
               card.style.transform = '';
             }
           } else {
-            if (deltaX > 60 && isValidTrigger) {
-              card.classList.add('touch-exit-right');
+            if (isValidTrigger) {
+              const isKnown = deltaX > 0;
+              card.classList.add(isKnown ? 'touch-exit-right' : 'touch-exit-left');
               card.style.transform = '';
-              this.handleSwipeDecision(true, true);
-            } else if (deltaX < -60 && isValidTrigger) {
-              card.classList.add('touch-exit-left');
-              card.style.transform = '';
-              this.handleSwipeDecision(false, true);
+              this.handleSwipeDecision(isKnown, true, velocity);
             } else {
+              // 未达标回弹：单个半波 3ms 微脉冲吸收机械回弹感
+              Services.Haptic.cushion();
               card.style.transform = '';
             }
           }
@@ -8866,11 +9101,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         card.addEventListener('touchcancel', () => {
           this.touch.startTime = 0;
           this.touch.isDragging = false;
+          this.touch.hasVibratedDetent = false;
           card.classList.remove('liquid-glow-left', 'liquid-glow-right');
           card.classList.add('touch-animating');
           card.style.transform = '';
           if (this.touch.badgeLeft) this.touch.badgeLeft.style.opacity = '0';
           if (this.touch.badgeRight) this.touch.badgeRight.style.opacity = '0';
+          Services.Haptic.cushion();
         }, { signal });
       },
 
@@ -8894,6 +9131,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.isSwiping = false;
         this.touch.startTime = 0;
         this.touch.isDragging = false;
+        this.touch.hasVibratedDetent = false;
+        this.touch.velocity = 0;
         AppState.update('isCardFlipped', false);
 
         const mainCard = document.getElementById('main-card');
@@ -11081,7 +11320,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             <div class="weak-root-meta" style="font-size:0.72rem; color:var(--muted); border-top:1px dashed var(--border); padding-top:4px;">
               <span>薄弱指数: <strong style="color:var(--primary);">${item.weightedScore}</strong></span>
             </div>
-            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\'"))}', ${isGlobal})">🎯 专练此族</button>
+            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "'"))}', ${isGlobal})">🎯 专练此族</button>
           `;
           fragment.appendChild(card);
         });
@@ -11534,8 +11773,8 @@ Gist ID: ${curId}
           if (allNotes[w.word]) {
             back += `<div style="font-size:13px; color:#7c3aed; margin-top:4px;"><b>[我的笔记]</b> ${allNotes[w.word]}</div>`;
           }
-          const cleanFront = front.replace(/\t/g, ' ').replace(/\n/g, ' ');
-          const cleanBack = back.replace(/\t/g, ' ').replace(/\n/g, ' ');
+          const cleanFront = front.replace(/	/g, ' ').replace(/\n/g, ' ');
+          const cleanBack = back.replace(/	/g, ' ').replace(/\n/g, ' ');
           tsvLines.push(`${cleanFront}	${cleanBack}`);
         });
 
@@ -11636,7 +11875,11 @@ Gist ID: ${curId}
         // 2. ★ 方案 1-A：彻底取缔左上角弹窗浮标胶囊，仅保留纯净五盒微点与视触双通道低噪反馈
         if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
           try {
-            navigator.vibrate(isCorrect ? 8 : 12);
+            // 闪卡模式由卡片飞出独立接管档位 A 强物理震动，跳过此处的微弱震动以杜绝重复触发
+            const isFlashcardActive = (typeof AppState !== 'undefined' && AppState.get('currentMode') === 'flashcard');
+            if (!isFlashcardActive) {
+              navigator.vibrate(isCorrect ? 8 : 12);
+            }
           } catch (_) {}
         }
       },
@@ -11983,71 +12226,69 @@ Gist ID: ${curId}
     'world', 'write', 'wrong', 'yard', 'year', 'yield'
   ]);
 
-  
-    // =========================================================================
-    // ★ [移动端架构] 硬件性能分级嗅探器与动态视口锁存引擎
-    // =========================================================================
-    const DeviceTierEngine = (function() {
-      let tier = 'high';
-      function sniff() {
-        if (typeof window === 'undefined') return 'high';
-        try {
-          const cores = navigator.hardwareConcurrency || 4;
-          const memory = navigator.deviceMemory || 4;
-          const isMobile = (window.innerWidth <= 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  // =========================================================================
+  // ★ [移动端架构] 硬件性能分级嗅探器与动态视口锁存引擎
+  // =========================================================================
+  const DeviceTierEngine = (function() {
+    let tier = 'high';
+    function sniff() {
+      if (typeof window === 'undefined') return 'high';
+      try {
+        const cores = navigator.hardwareConcurrency || 4;
+        const memory = navigator.deviceMemory || 4;
+        const isMobile = (window.innerWidth <= 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-          if (isMobile && (cores <= 4 || memory <= 4)) {
-            tier = 'low';
-          } else {
-            tier = 'high';
-          }
-          if (document && document.documentElement) {
-            document.documentElement.setAttribute('data-gpu-tier', tier);
-          }
-        } catch (_) {
+        if (isMobile && (cores <= 4 || memory <= 4)) {
+          tier = 'low';
+        } else {
           tier = 'high';
         }
-        return tier;
-      }
-      return {
-        sniff,
-        getTier: () => tier
-      };
-    })();
-
-    function initGlobalVisualViewportEngine() {
-      if (typeof window === 'undefined') return;
-      let lastH = 0;
-      let rAF = null;
-
-      const updateHeight = () => {
-        const vh = (window.visualViewport && window.visualViewport.height) 
-          ? window.visualViewport.height 
-          : window.innerHeight;
-        // 防跳动阈值：微量像素波动 (例如虚拟键盘细微沉浮) 自动锁存
-        if (Math.abs(vh - lastH) < 2) return;
-        lastH = vh;
-        if (document && document.documentElement && document.documentElement.style) {
-          if (typeof document.documentElement.style.setProperty === 'function') {
-            document.documentElement.style.setProperty('--dynamic-viewport-h', `${vh}px`);
-          } else {
-            document.documentElement.style['--dynamic-viewport-h'] = `${vh}px`;
-          }
+        if (document && document.documentElement) {
+          document.documentElement.setAttribute('data-gpu-tier', tier);
         }
-      };
-
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', () => {
-          if (rAF) cancelAnimationFrame(rAF);
-          rAF = requestAnimationFrame(updateHeight);
-        });
+      } catch (_) {
+        tier = 'high';
       }
-      window.addEventListener('resize', updateHeight);
-      window.addEventListener('orientationchange', () => {
-        setTimeout(updateHeight, 150);
-      });
-      updateHeight();
+      return tier;
     }
+    return {
+      sniff,
+      getTier: () => tier
+    };
+  })();
+
+  function initGlobalVisualViewportEngine() {
+    if (typeof window === 'undefined') return;
+    let lastH = 0;
+    let rAF = null;
+
+    const updateHeight = () => {
+      const vh = (window.visualViewport && window.visualViewport.height) 
+        ? window.visualViewport.height 
+        : window.innerHeight;
+      if (Math.abs(vh - lastH) < 2) return;
+      lastH = vh;
+      if (document && document.documentElement && document.documentElement.style) {
+        if (typeof document.documentElement.style.setProperty === 'function') {
+          document.documentElement.style.setProperty('--dynamic-viewport-h', `${vh}px`);
+        } else {
+          document.documentElement.style['--dynamic-viewport-h'] = `${vh}px`;
+        }
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (rAF) cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(updateHeight);
+      });
+    }
+    window.addEventListener('resize', updateHeight);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(updateHeight, 150);
+    });
+    updateHeight();
+  }
 
   const App = (function() {
     const BUILTIN_WORDS = [
@@ -12242,9 +12483,6 @@ Gist ID: ${curId}
         AppState.update('packStats', pStats);
       },
 
-      // =========================================================================
-      // ★ 单盒全面强化完整学习逻辑核心控制器 (Box Reinforcement Engine)
-      // =========================================================================
       startBoxReinforceSession(boxId, boxName) {
         const currentPackId = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
@@ -12462,7 +12700,8 @@ Gist ID: ${curId}
         this.renderCurrentView();
         this.updateBoxReinforceCapsuleUI();
         Services.Sync.showToast(`已切换至【${nextMode === 'flashcard' ? '智能闪卡' : '四选一测试'}】强化`, 'info', 1500);
-      },
+      }
+,
 
       recordBoxReinforceAnswer(wordName, isCorrect, rtMs) {
         const session = AppState.get('boxReinforceSession');
@@ -12629,23 +12868,32 @@ Gist ID: ${curId}
           if (!isCorrect) {
             profile.sessionMistakes++;
             profile.mistakeRemediationStatus = 'NEEDS_RETEST';
-            const mGap = Math.round(4 + Math.random() * 3);
-            journalFrame.enqueuedTo = 'mistakeQueue';
-            session.mistakeQueue.push({
-              wordObj: profile.wordObj,
-              eligibleAtQuestionIndex: curQ + mGap
-            });
+            if (!session.isPreCommitStaging) {
+              const mGap = Math.round(4 + Math.random() * 3);
+              journalFrame.enqueuedTo = 'mistakeQueue';
+              session.mistakeQueue.push({
+                wordObj: profile.wordObj,
+                eligibleAtQuestionIndex: curQ + mGap
+              });
+            }
           } else {
             profile.sessionSuccesses++;
-            profile.mistakeRemediationStatus = 'NEEDS_DEEP_VERIFY';
-            profile.currentStability = profile.currentStability * 1.6;
+            if (session.isPreCommitStaging || profile.wordObj?._isPreCommit) {
+              // ★ 预落盘冲刺模式下承诺“做对 1 次即回血原盒”：立即确权回血
+              profile.mistakeRemediationStatus = 'REMEDIATED';
+              profile.currentBox = profile.initialBox;
+              profile.currentStability = Math.min(profile.initialStability, 0.85 * profile.initialStability + 0.15 * profile.currentStability);
+            } else {
+              profile.mistakeRemediationStatus = 'NEEDS_DEEP_VERIFY';
+              profile.currentStability = profile.currentStability * 1.6;
 
-            const deepGap = Math.round(13 + Math.random() * 4);
-            journalFrame.enqueuedTo = 'mistakeVerifyQueue';
-            session.mistakeVerifyQueue.push({
-              wordObj: profile.wordObj,
-              eligibleAtQuestionIndex: curQ + deepGap
-            });
+              const deepGap = Math.round(13 + Math.random() * 4);
+              journalFrame.enqueuedTo = 'mistakeVerifyQueue';
+              session.mistakeVerifyQueue.push({
+                wordObj: profile.wordObj,
+                eligibleAtQuestionIndex: curQ + deepGap
+              });
+            }
           }
         } else if (isMV) {
           profile.lastEncounterIndex = curQ;
@@ -12668,7 +12916,7 @@ Gist ID: ${curId}
         }
 
         const totalPendingMistakes = (session.mistakeQueue ? session.mistakeQueue.length : 0) + (session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0);
-        if (session.promotableRemaining === 0 && session.verifyQueue.length === 0 && totalPendingMistakes > 0 && !session.intermissionShown) {
+        if (!session.isPreCommitStaging && session.promotableRemaining === 0 && session.verifyQueue.length === 0 && totalPendingMistakes > 0 && !session.intermissionShown) {
           session.intermissionShown = true;
           this.showBoxReinforceIntermissionCard();
         }
@@ -12821,9 +13069,28 @@ Gist ID: ${curId}
           return curQ - (profile?.lastEncounterIndex || 1);
         };
 
-        const verifyBucket = [...(session.verifyQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
-        const mistakeVerifyBucket = [...(session.mistakeVerifyQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
-        const mistakeRetestBucket = [...(session.mistakeQueue || [])].sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+        const verifySet = new Set((session.verifyQueue || []).map(i => i.wordObj?.word).filter(Boolean));
+        const mistakeSet = new Set([...(session.mistakeVerifyQueue || []), ...(session.mistakeQueue || [])].map(i => i.wordObj?.word).filter(Boolean));
+
+        const verifyBucket = [...(session.verifyQueue || [])];
+        const mistakeVerifyBucket = [...(session.mistakeVerifyQueue || [])];
+        const mistakeRetestBucket = [...(session.mistakeQueue || [])];
+
+        // 深度扫描 profileMap 防止遗漏当前题或未压入队列的复核/纠偏词
+        Object.values(session.profileMap || {}).forEach(p => {
+          if (!p.wordObj) return;
+          if (p.firstPassDone && p.verificationStatus === 'NEEDS_VERIFY' && !p.verifyPassDone && !verifySet.has(p.word)) {
+            verifyBucket.push({ wordObj: p.wordObj, eligibleAtQuestionIndex: curQ });
+            verifySet.add(p.word);
+          } else if (p.firstPassDone && (p.mistakeRemediationStatus === 'NEEDS_RETEST' || p.mistakeRemediationStatus === 'NEEDS_DEEP_VERIFY') && !mistakeSet.has(p.word)) {
+            mistakeRetestBucket.push({ wordObj: p.wordObj, eligibleAtQuestionIndex: curQ });
+            mistakeSet.add(p.word);
+          }
+        });
+
+        verifyBucket.sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+        mistakeVerifyBucket.sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
+        mistakeRetestBucket.sort((a, b) => getDeltaQ(b) - getDeltaQ(a));
         const remediationBucket = [...mistakeVerifyBucket, ...mistakeRetestBucket];
 
         const regularVerify = [];
@@ -12846,8 +13113,8 @@ Gist ID: ${curId}
         stagedSequence.push(...sinkingVerify);
 
         for (let i = 0; i < stagedSequence.length - 1; i++) {
-          const gCurrent = stagedSequence[i].wordObj.group;
-          const gNext = stagedSequence[i + 1].wordObj.group;
+          const gCurrent = stagedSequence[i]?.wordObj?.group;
+          const gNext = stagedSequence[i + 1]?.wordObj?.group;
           if (gCurrent && gCurrent === gNext && i + 2 < stagedSequence.length) {
             const temp = stagedSequence[i + 1];
             stagedSequence[i + 1] = stagedSequence[i + 2];
@@ -12872,6 +13139,13 @@ Gist ID: ${curId}
         session.mistakeQueue = [];
         session.mistakeVerifyQueue = [];
 
+        // 确保历史游标重置到最新端，禁止回看态干扰
+        AppState.update('isReinforceReadOnly', false);
+        const hist = AppState.get('questionHistory') || [];
+        if (hist.length > 0) {
+          AppState.update('historyCursor', hist.length - 1);
+        }
+
         this.updateBoxReinforceCapsuleUI();
         Services.Sync.showToast(`🚀 已进入预备落盘！共 ${stagedQueue.length} 词待冲刺清账，不再出新词。`, 'success', 2500);
 
@@ -12895,9 +13169,24 @@ Gist ID: ${curId}
           return;
         }
 
-        const pendingVerify = session.verifyQueue ? session.verifyQueue.length : 0;
-        const pendingMistakeRetest = session.mistakeQueue ? session.mistakeQueue.length : 0;
-        const pendingMistakeVerify = session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0;
+        let pendingVerify = session.verifyQueue ? session.verifyQueue.length : 0;
+        let pendingMistakeRetest = session.mistakeQueue ? session.mistakeQueue.length : 0;
+        let pendingMistakeVerify = session.mistakeVerifyQueue ? session.mistakeVerifyQueue.length : 0;
+
+        const vSet = new Set((session.verifyQueue || []).map(i => i.wordObj?.word).filter(Boolean));
+        const mSet = new Set([...(session.mistakeVerifyQueue || []), ...(session.mistakeQueue || [])].map(i => i.wordObj?.word).filter(Boolean));
+
+        Object.values(session.profileMap || {}).forEach(p => {
+          if (!p.wordObj) return;
+          if (p.firstPassDone && p.verificationStatus === 'NEEDS_VERIFY' && !p.verifyPassDone && !vSet.has(p.word)) {
+            pendingVerify++;
+            vSet.add(p.word);
+          } else if (p.firstPassDone && (p.mistakeRemediationStatus === 'NEEDS_RETEST' || p.mistakeRemediationStatus === 'NEEDS_DEEP_VERIFY') && !mSet.has(p.word)) {
+            pendingMistakeRetest++;
+            mSet.add(p.word);
+          }
+        });
+
         const totalPendingExam = pendingVerify + pendingMistakeRetest + pendingMistakeVerify;
 
         if (totalPendingExam === 0) {
@@ -13070,6 +13359,7 @@ Gist ID: ${curId}
         if (timeEl) timeEl.innerText = data.totalDurationStr;
         if (rtEl) rtEl.innerText = data.avgRTStr;
 
+        overlay.classList.add('open');
         overlay.style.display = 'flex';
         ModalStackManager.openModal('box_reinforce_retro', () => this.finishBoxReinforceSessionCommit(), overlay);
         KeyRouter.pushModal({
@@ -13086,6 +13376,7 @@ Gist ID: ${curId}
       finishBoxReinforceSessionCommit() {
         const overlay = document.getElementById('box-reinforce-retrospective-overlay');
         if (overlay) {
+          overlay.classList.remove('open');
           overlay.style.display = 'none';
           KeyRouter.popModal(overlay);
           ModalStackManager.dismissModal('box_reinforce_retro', { triggerHistoryBack: false });
@@ -13178,7 +13469,9 @@ Gist ID: ${curId}
         a.click();
         URL.revokeObjectURL(url);
         Services.Sync.showToast('📜 已成功导出强化报告详情', 'success', 2000);
-      },
+      }
+,
+
       hydrateExternalPacks(rawPacks, sourceName = '外载词库') {
         if (!rawPacks || typeof rawPacks !== 'object') return false;
         const normalizedPacks = {};
@@ -13525,7 +13818,8 @@ Gist ID: ${curId}
             btn.innerText = '▣ 展开辅助栏';
           }
         }
-      },
+      }
+,
 
       initDailyActivity() {
         const today = Utils.getLocalDateStr();
@@ -14472,14 +14766,14 @@ Gist ID: ${curId}
           }
         }
         Services.Sync.showToast('已处于历史最前一题', 'info', 1000);
-      },
+      }
+,
 
       renderCurrentView(options = { silent: false }) {
         const mode = AppState.get('currentMode');
         const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'speed_blitz', 'audio_clo', 'confusables'].includes(mode);
         if (!isQuestionMode) return;
 
-        // ★ 视图渲染防泄漏隔离：非极速挑战模式强制清除极速心跳条
         if (typeof document !== 'undefined') {
           if (mode !== 'speed_blitz') {
             document.body.classList.remove('mode-speed_blitz-active');
@@ -14628,7 +14922,6 @@ Gist ID: ${curId}
         if (termEl) termEl.innerText = word.word;
         if (subEl) subEl.innerText = word.phonetic || '';
 
-        // 仅在非闪卡模式下才开启外部独立解析卡片
         if (AppState.get('currentMode') !== 'flashcard' && word.analysis) {
           const tag = document.getElementById('analysis-tag');
           const isExt = (word.analysis_type === '引申');
@@ -14712,7 +15005,6 @@ Gist ID: ${curId}
             badgeEl.innerHTML = `📰 ${item.source || '真题'}语境 ${isMob ? '<span class="sentence-accordion-toggle">▾ 点击展收</span>' : ''}`;
           }
           box.style.display = 'flex';
-          // 移动端默认折叠，降低信息密度
           if (window.innerWidth <= 768 && !box._hasManualToggle) {
             box.classList.add('is-collapsed');
           }
@@ -14995,8 +15287,7 @@ Gist ID: ${curId}
         this.updateStats();
         Services.Sync.showToast(newFlag ? `⭐ 已收藏【${word.word}】到重点强化本` : `已取消收藏【${word.word}】`, 'info', 1500);
       },
-      // ★ 方案二核心落地：严格的多模式生命周期沙箱调度中枢 (先销毁、后挂载)
-      // 模式切换过渡锁 (Transition Lock)：严格防止手抖连击引发状态竞争
+
       _isModeTransitioning: false,
 
       isTransitionLocked() {
@@ -15004,7 +15295,6 @@ Gist ID: ${curId}
       },
 
       switchMode(mode, options = {}) {
-        // 过渡锁拦截与重入防护 (Re-entrance Guard)
         if (this._isModeTransitioning && !options.forceUnlock) {
           console.warn('[FSM] Mode transition locked. Ignoring re-entrant request for:', mode);
           return false;
@@ -15018,14 +15308,11 @@ Gist ID: ${curId}
         try {
           return this._executeModeSwitch(prevMode, mode, options);
         } finally {
-          // 模式执行完毕立即解开事务锁，杜绝死锁与阻塞合法切换
           this._isModeTransitioning = false;
         }
       },
 
       _executeModeSwitch(prevMode, mode, options = {}) {
-
-        // 1. 严格生命周期：离开旧模式 (Leave / Teardown)
         if (prevMode && Views[prevMode] && typeof Views[prevMode].leave === 'function') {
           try { Views[prevMode].leave(mode); } catch (e) { console.warn('[Lifecycle] Leave error:', prevMode, e); }
         } else if (prevMode === 'choice' && typeof Views.Choice.leave === 'function') {
@@ -15034,12 +15321,10 @@ Gist ID: ${curId}
           Views.Flashcard.leave(mode);
         }
 
-        // 2. 全局通用清理（硬断电熔断核、音频流即时终止、本地存储刷盘、幽灵遮罩物理剥离）
         LifecycleScheduler.teardown();
         Services.Storage.flushAll();
         Services.Audio.stopAll();
 
-        // 收拢所有展开中的抽屉和弹层，并强制剥离所有触控捕获属性 (Ghost Trap Defense)
         if (typeof window.closeMobileModeSheet === 'function') {
           try { window.closeMobileModeSheet(true); } catch (_) {}
         }
@@ -15058,12 +15343,10 @@ Gist ID: ${curId}
           });
         }
 
-        // 若切出强化受支持模式 (choice / flashcard) 且当前单盒强化正在运行，安全收拢
         if (mode !== 'choice' && mode !== 'flashcard' && AppState.get('boxReinforceSession')?.isActive) {
           this.commitBoxReinforceSession();
         }
 
-        // ★ 极速挑战残余样式彻底清除兜底
         if (prevMode === 'speed_blitz' || mode !== 'speed_blitz') {
           if (typeof document !== 'undefined') {
             document.body.classList.remove('mode-speed_blitz-active');
@@ -15086,19 +15369,14 @@ Gist ID: ${curId}
         const analysisCard = document.getElementById('analysis-card');
         if (analysisCard) analysisCard.style.display = 'none';
 
-        // 3. 物理切断四选一选项容器，杜绝串扰污染
         const choiceContainer = document.getElementById('view-choice');
         if (choiceContainer && mode !== 'choice' && mode !== 'audio_clo' && mode !== 'confusables' && mode !== 'speed_blitz') {
           choiceContainer.innerHTML = '';
           choiceContainer.style.display = 'none';
         }
 
-        // 4. 更新当前模式状态
         AppState.update('currentMode', mode);
 
-        // =========================================================================
-        // ★ 就绪验证 (Validation)：词库流标尺与过滤条件脱轨防护 (Bounds Check & Fallback)
-        // =========================================================================
         try {
           let pool = this.getEffectivePool() || [];
           const curPack = AppState.get('currentPackId');
@@ -15107,7 +15385,6 @@ Gist ID: ${curId}
             pool = fallbackPack.words || [];
           }
           let currentWord = AppState.get('currentWord');
-          // 若当前单词在生效词池中脱轨不存在或悬空，安全归一化指针，彻底杜绝白屏硬中断
           if (!currentWord || (pool.length > 0 && !pool.some(w => w.word === currentWord.word))) {
             currentWord = pool[0] || null;
             if (currentWord) {
@@ -15141,7 +15418,6 @@ Gist ID: ${curId}
         const capNameEl = typeof document !== 'undefined' ? document.getElementById('capsule-mode-name') : null;
         if (capNameEl) capNameEl.innerHTML = `${curMeta.icon} ${curMeta.name}`;
 
-        // 同步顶栏模式切换按钮状态 (沉浸模式右侧，精炼 2~4 字防溢出)
         const topModeIcon = typeof document !== 'undefined' ? document.getElementById('top-mode-icon') : null;
         const topModeName = typeof document !== 'undefined' ? document.getElementById('top-mode-name') : null;
         if (topModeIcon) topModeIcon.textContent = curMeta.icon;
@@ -15155,7 +15431,6 @@ Gist ID: ${curId}
           topModeName.textContent = SHORT_NAME_MAP[mode] || curMeta.name.replace(/测试|训练|挑战|大本营/g, '').trim() || curMeta.name;
         }
 
-        // 同步全模式抽屉高亮状态
         const mobCurIcon = typeof document !== 'undefined' ? document.getElementById('mobile-cur-icon') : null;
         const mobCurName = typeof document !== 'undefined' ? document.getElementById('mobile-cur-name') : null;
         if (mobCurIcon) mobCurIcon.textContent = curMeta.icon;
@@ -15170,7 +15445,6 @@ Gist ID: ${curId}
             }
           });
 
-          // 自动平滑滚动激活的 Tab 按钮至滑轨中心视区
           const activeTabBtn = document.querySelector(`.nav-tabs .tab-btn.active`);
           if (activeTabBtn && typeof activeTabBtn.scrollIntoView === 'function') {
             try {
@@ -15197,7 +15471,6 @@ Gist ID: ${curId}
           const searchPanel = document.getElementById('search-panel');
           if (searchPanel) searchPanel.style.display = 'none';
 
-          // 5. 严格生命周期：进入新模式 (Enter / Mount)
           if (Views[mode] && typeof Views[mode].enter === 'function') {
             try { Views[mode].enter(prevMode); } catch (e) { console.warn('[Lifecycle] Enter error:', mode, e); }
           }
@@ -15467,6 +15740,7 @@ Gist ID: ${curId}
       }
     };
   })();
+
   // =========================================================================
   // ★ 模块 7：全局事件监听与 HTML 动作门面绑定 (Global Facades)
   // =========================================================================
@@ -15724,7 +15998,6 @@ Gist ID: ${curId}
       document.body.classList.toggle('focus-mode-active', targetState);
       document.body.classList.toggle('focus-mode', targetState);
 
-      // ★ 方案 2-B：彻底移除沉浸模式右上角退出胶囊（完全由卡片外部空白双击手势与 Esc 物理键接管）
       const escapeBtn = document.getElementById('focus-escape-pill');
       if (escapeBtn && escapeBtn.parentNode) {
         escapeBtn.remove();
@@ -15750,49 +16023,34 @@ Gist ID: ${curId}
         cardZenBtn.title = targetState ? '退出沉浸模式' : '进入全屏沉浸模式';
       }
 
-      // ★ 规范落地：彻底弃用原生 requestFullscreen，消除系统级全屏拦截提示横幅
-      // 全面依托 100dvh 与 CSS 视口层级实现无弹窗纯净沉浸
-
       if (typeof Services !== 'undefined' && Services.Sync && typeof Services.Sync.showToast === 'function') {
         Services.Sync.showToast(targetState ? '🎯 已开启专注沉浸模式' : '↩️ 已退出专注模式', 'info', 1200);
       }
     };
 
-// ★ 已移除 fullscreenchange 原生监听，由 Esc 键及 .focus-escape-pill 安全接管
-
-    
-    // =========================================================================
-    // ★ 方案 2-B：沉浸模式卡片外部空白区域高精度双击安全退出手势 (Zero-Bug 严格范围把控)
-    // =========================================================================
     (function initFocusDoubleTapExit() {
       let lastTapTime = 0;
       let lastTapX = 0;
       let lastTapY = 0;
 
       function handleFocusDoubleTap(e) {
-        // 守卫 1：仅在激活专注沉浸模式时执行判定
         if (!AppState.get('focusMode')) return;
 
         const target = e.target;
         if (!target) return;
 
-        // 守卫 2：严禁在任何交互性表单、输入与按钮元素上触发 (防盲打、打字、选词干扰)
         if (target.closest('button, input, textarea, select, a, [role="button"], .choice-btn, .btn, .tab-btn, .opt-btn, .tag-pill, .checkbox-label')) {
           return;
         }
 
-        // 守卫 3：严禁在任何打开的模态框、抽屉、快捷键说明浮层上触发
         if (target.closest('.modal, .drawer, .sheet-modal, .overlay, .typing-milestone-overlay, .dropdown-menu')) {
           return;
         }
 
-        // 守卫 4（核心范围把控）：严禁在主卡片及任何词汇展示/练习内容内部触发！
-        // 彻底杜绝背词、闪卡翻转、例句阅读、划词释义时的连击误触
         if (target.closest('#main-card, .stage-card, #flashcard-front, #flashcard-back, #choice-container, .card-meta-header, .word-main-card')) {
           return;
         }
 
-        // 守卫 5：仅允许在卡片外围的纯背景留白区域（body, container 边距, stage-area 卡片外空白）触发
         const isValidBlankArea = (
           target === document.body ||
           target === document.documentElement ||
@@ -15802,7 +16060,6 @@ Gist ID: ${curId}
         );
         if (!isValidBlankArea) return;
 
-        // 守卫 6：提取物理坐标，同时兼容移动端触摸 (touchend) 与桌面端鼠标点击
         const touch = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
         const curX = touch.clientX || 0;
         const curY = touch.clientY || 0;
@@ -15811,8 +16068,6 @@ Gist ID: ${curId}
         const timeDiff = now - lastTapTime;
         const dist = Math.hypot(curX - lastTapX, curY - lastTapY);
 
-        // 守卫 7：时间与空间位移双重精细约束 (防抖防晃，排除屏幕两端无序点击)
-        // 两次点击时间间隔须在 180ms ~ 450ms 之间，物理间距 <= 28px
         if (timeDiff >= 180 && timeDiff <= 450 && dist <= 28) {
           lastTapTime = 0;
           if (e.cancelable) e.preventDefault();
@@ -15827,7 +16082,6 @@ Gist ID: ${curId}
           return;
         }
 
-        // 记录首击时间与坐标
         lastTapTime = now;
         lastTapX = curX;
         lastTapY = curY;
@@ -16325,14 +16579,12 @@ Gist ID: ${curId}
     };
 
     window.selectModeFromSheet = (m) => {
-      // 1. 关闭抽屉，传入 true 坚决不触发异步 history.back() 冲掉新模式
       try {
         window.closeMobileModeSheet(true);
       } catch (e) {
         console.warn('[Sheet] safe close error:', e);
       }
 
-      // 2. 立即执行模式切换
       try {
         App.switchMode(m);
       } catch (e) {
@@ -16635,8 +16887,6 @@ Gist ID: ${curId}
     window.HistoryRouter = HistoryRouter;
     window.RouteDispatcher = RouteDispatcher;
 
-    
-    // 软键盘弹起时的视口自动对齐黄金分割点与防遮挡
     function bindMobileKeyboardViewportAlignment() {
       if (typeof window === 'undefined') return;
       const inputs = document.querySelectorAll('input, textarea');

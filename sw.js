@@ -1,65 +1,41 @@
-// MorphoSyntax Pro - Service Worker (PWA Offline Engine)
-const CACHE_NAME = 'morpho-pwa-v1.0.5';
-const PRECACHE_ASSETS = [
+const CACHE_NAME = 'morphosyntax-v3.2-0916c';
+const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './words_data.js',
-  './manifest.json'
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('[SW] Precache optional asset notice:', err);
-      });
-    })
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)).then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+        keys.map((k) => {
+          if (k !== CACHE_NAME) return caches.delete(k);
         })
       );
     }).then(() => self.clients.claim())
   );
 });
 
-self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
-
-  // 1. GitHub API 云同步、外部在线音频发音直接透传网络，不走静态缓存
-  if (
-    url.hostname.includes('api.github.com') ||
-    url.hostname.includes('dict.youdao.com') ||
-    event.request.method !== 'GET'
-  ) {
-    return;
-  }
-
-  // 2. 本地静态资源优先使用缓存以实现极致断网离线秒开，同时后台平滑更新 (Stale-While-Revalidate)
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          }
-          return networkResponse;
-        })
-        .catch(() => cachedResponse);
-
-      return cachedResponse || fetchPromise;
+self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.match(e.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(e.request).then((resp) => {
+        if (!resp || resp.status !== 200 || resp.type !== 'basic') return resp;
+        const copy = resp.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+        return resp;
+      }).catch(() => caches.match('./index.html'));
     })
   );
 });
