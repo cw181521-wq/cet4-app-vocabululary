@@ -1659,59 +1659,14 @@
       }
     }
 
-    /* ★ 沉浸模式退出胶囊：纯 CSS 物理级守卫 (默认严格隐藏，仅沉浸激活时展示) */
-    .focus-escape-pill {
-      display: none !important;
-      position: fixed !important;
-      top: max(16px, env(safe-area-inset-top, 16px)) !important;
-      right: max(16px, env(safe-area-inset-right, 16px)) !important;
-      z-index: 99999 !important;
-      background: var(--card-bg) !important;
-      border: 1.5px solid var(--primary) !important;
-      border-radius: 999px !important;
-      padding: 8px 16px !important;
-      font-size: 0.84rem !important;
-      font-weight: 800 !important;
-      color: var(--primary) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(15, 118, 110, 0.15) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      cursor: pointer !important;
-      opacity: 0;
-      pointer-events: none !important;
-      transition: opacity 0.2s ease, transform 0.15s ease, background 0.2s ease !important;
-      align-items: center !important;
-      gap: 6px !important;
-      user-select: none !important;
-      -webkit-tap-highlight-color: transparent !important;
-    }
-
-    /* 仅当 body 明确带有沉浸类名时展示 */
+    /* ★ 方案 2-B：沉浸模式退出胶囊彻底移除并物理绝缘 (由卡片外部空白双击手势与 Esc 键完全接管) */
+    .focus-escape-pill,
     body.focus-mode-active .focus-escape-pill,
     body.focus-mode .focus-escape-pill {
-      display: inline-flex !important;
-      opacity: 0.96 !important;
-      pointer-events: auto !important;
-    }
-
-    body.focus-mode-active .focus-escape-pill:hover,
-    body.focus-mode-active .focus-escape-pill:active,
-    body.focus-mode .focus-escape-pill:hover,
-    body.focus-mode .focus-escape-pill:active {
-      opacity: 1.0 !important;
-      transform: scale(1.03) !important;
-      background: var(--primary-light) !important;
-      color: var(--primary) !important;
-    }
-
-    @media (max-width: 768px) {
-      body.focus-mode-active .focus-escape-pill,
-      body.focus-mode .focus-escape-pill {
-        top: max(16px, env(safe-area-inset-top, 16px)) !important;
-        right: max(14px, env(safe-area-inset-right, 14px)) !important;
-        padding: 9px 18px !important;
-        font-size: 0.84rem !important;
-      }
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     body.focus-mode-active #box-reinforce-capsule,
@@ -2319,36 +2274,12 @@
       transform: scale(1.4) !important;
       box-shadow: 0 0 6px rgba(16, 185, 129, 0.85) !important;
     }
+    /* ★ 方案 1-A：彻底取缔卡片左上角升降盒浮动弹窗胶囊，全面恢复静默微点流转 */
     .micro-step-float {
-      position: absolute !important;
-      top: -20px !important;
-      left: 50% !important;
-      transform: translateX(-50%) translateY(0) !important;
-      font-size: 0.70rem !important;
-      font-weight: 800 !important;
-      padding: 2px 6px !important;
-      border-radius: 4px !important;
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
       pointer-events: none !important;
-      opacity: 0;
-      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      white-space: nowrap !important;
-      z-index: 10 !important;
-    }
-    .micro-step-float.show-up {
-      opacity: 1 !important;
-      transform: translateX(-50%) translateY(-6px) !important;
-      color: var(--success) !important;
-      background: var(--success-light) !important;
-      border: 1px solid rgba(22, 163, 74, 0.25) !important;
-      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15) !important;
-    }
-    .micro-step-float.show-down {
-      opacity: 1 !important;
-      transform: translateX(-50%) translateY(-6px) !important;
-      color: var(--error) !important;
-      background: var(--error-light) !important;
-      border: 1px solid rgba(220, 38, 38, 0.25) !important;
-      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15) !important;
     }
 
     /* 就地卡片边缘呼吸流光动效 (替代顶部粗暴横幅) */
@@ -2876,7 +2807,7 @@
                 <span class="micro-dot" data-box="3" title="Box 3 中期强化"></span>
                 <span class="micro-dot" data-box="4" title="Box 4 周度稳固"></span>
                 <span class="micro-dot" data-box="5" title="Box 5 永久毕业"></span>
-                <span class="micro-step-float" id="micro-step-float"></span>
+                
               </div>
               <!-- 行 2: 掌握度指标 -->
               <span class="mastery-pill" id="mastery-pill" title="基于作答反应时与记忆稳定度的 0~100 自适应掌握度">掌握度: 35%</span>
@@ -11691,7 +11622,6 @@ Gist ID: ${curId}
       // ★ 规范第 3 章：全面取缔顶部高饱和横幅，执行就地微反馈与卡片呼吸流光 (In-place Micro Feedback)
       triggerHopBadge(fromBox, toBox, isCorrect) {
         const card = document.getElementById('main-card');
-        const floatTag = document.getElementById('micro-step-float');
 
         // 1. 卡片边缘就地呼吸流光 (Edge Glow)
         if (card) {
@@ -11703,23 +11633,7 @@ Gist ID: ${curId}
           }, 500);
         }
 
-        // 2. 指示微标点位流转与瞬态浮动提示 (Micro-dot Stepper)
-        if (floatTag) {
-          floatTag.classList.remove('show-up', 'show-down');
-          void floatTag.offsetWidth;
-          if (isCorrect) {
-            floatTag.innerText = (toBox === 5) ? '毕业 🏆' : `Box ${toBox} ↑`;
-            floatTag.classList.add('show-up');
-          } else {
-            floatTag.innerText = (toBox < fromBox) ? `Box ${toBox} ↓` : '巩固 ⚠️';
-            floatTag.classList.add('show-down');
-          }
-          LifecycleScheduler.setTimeout(() => {
-            if (floatTag) floatTag.classList.remove('show-up', 'show-down');
-          }, 600);
-        }
-
-        // 3. 微触觉震动反馈 (视触双通道低噪反馈)
+        // 2. ★ 方案 1-A：彻底取缔左上角弹窗浮标胶囊，仅保留纯净五盒微点与视触双通道低噪反馈
         if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
           try {
             navigator.vibrate(isCorrect ? 8 : 12);
@@ -15810,52 +15724,10 @@ Gist ID: ${curId}
       document.body.classList.toggle('focus-mode-active', targetState);
       document.body.classList.toggle('focus-mode', targetState);
 
-      let escapeBtn = document.getElementById('focus-escape-pill');
-      const isMobileTouch = (typeof window !== 'undefined') && (
-        window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0)
-      );
-
-      if (targetState) {
-        if (!escapeBtn) {
-          escapeBtn = document.createElement('button');
-          escapeBtn.id = 'focus-escape-pill';
-          escapeBtn.className = 'focus-escape-pill';
-          escapeBtn.innerHTML = isMobileTouch ? '✕ 退出沉浸' : '✕ 退出专注 <span class="escape-key-hint">(Esc)</span>';
-          escapeBtn.title = '退出专注沉浸模式 (快捷键 Esc)';
-          escapeBtn.onclick = () => window.toggleFocusMode(false);
-          document.body.appendChild(escapeBtn);
-        } else {
-          escapeBtn.innerHTML = isMobileTouch ? '✕ 退出沉浸' : '✕ 退出专注 <span class="escape-key-hint">(Esc)</span>';
-        }
-        escapeBtn.style.display = 'inline-flex';
-        escapeBtn.style.opacity = isMobileTouch ? '0.96' : '0.85';
-
-        // 仅在配备鼠标的 PC 桌面端启用微弱闲置淡化，触控移动端全程常驻高能见度显示
-        if (!isMobileTouch && !window._focusMouseTimerRegistered) {
-          window._focusMouseTimerRegistered = true;
-          let fadeTimer = null;
-          window.addEventListener('mousemove', () => {
-            if (!AppState.get('focusMode')) return;
-            const pill = document.getElementById('focus-escape-pill');
-            if (pill) {
-              pill.style.opacity = '0.90';
-              clearTimeout(fadeTimer);
-              fadeTimer = setTimeout(() => {
-                if (AppState.get('focusMode')) {
-                  const p = document.getElementById('focus-escape-pill');
-                  if (p && !p.matches(':hover')) p.style.opacity = '0.45';
-                }
-              }, 3000);
-            }
-          }, { passive: true });
-        }
-      } else if (escapeBtn) {
-        escapeBtn.style.display = 'none';
-        escapeBtn.style.opacity = '0';
-        escapeBtn.style.pointerEvents = 'none';
-        if (escapeBtn.parentNode) {
-          escapeBtn.remove();
-        }
+      // ★ 方案 2-B：彻底移除沉浸模式右上角退出胶囊（完全由卡片外部空白双击手势与 Esc 物理键接管）
+      const escapeBtn = document.getElementById('focus-escape-pill');
+      if (escapeBtn && escapeBtn.parentNode) {
+        escapeBtn.remove();
       }
 
       ['focus-mode-btn', 'sheet-focus-btn', 'mobile-focus-pill'].forEach(id => {
@@ -15887,6 +15759,83 @@ Gist ID: ${curId}
     };
 
 // ★ 已移除 fullscreenchange 原生监听，由 Esc 键及 .focus-escape-pill 安全接管
+
+    
+    // =========================================================================
+    // ★ 方案 2-B：沉浸模式卡片外部空白区域高精度双击安全退出手势 (Zero-Bug 严格范围把控)
+    // =========================================================================
+    (function initFocusDoubleTapExit() {
+      let lastTapTime = 0;
+      let lastTapX = 0;
+      let lastTapY = 0;
+
+      function handleFocusDoubleTap(e) {
+        // 守卫 1：仅在激活专注沉浸模式时执行判定
+        if (!AppState.get('focusMode')) return;
+
+        const target = e.target;
+        if (!target) return;
+
+        // 守卫 2：严禁在任何交互性表单、输入与按钮元素上触发 (防盲打、打字、选词干扰)
+        if (target.closest('button, input, textarea, select, a, [role="button"], .choice-btn, .btn, .tab-btn, .opt-btn, .tag-pill, .checkbox-label')) {
+          return;
+        }
+
+        // 守卫 3：严禁在任何打开的模态框、抽屉、快捷键说明浮层上触发
+        if (target.closest('.modal, .drawer, .sheet-modal, .overlay, .typing-milestone-overlay, .dropdown-menu')) {
+          return;
+        }
+
+        // 守卫 4（核心范围把控）：严禁在主卡片及任何词汇展示/练习内容内部触发！
+        // 彻底杜绝背词、闪卡翻转、例句阅读、划词释义时的连击误触
+        if (target.closest('#main-card, .stage-card, #flashcard-front, #flashcard-back, #choice-container, .card-meta-header, .word-main-card')) {
+          return;
+        }
+
+        // 守卫 5：仅允许在卡片外围的纯背景留白区域（body, container 边距, stage-area 卡片外空白）触发
+        const isValidBlankArea = (
+          target === document.body ||
+          target === document.documentElement ||
+          target.id === 'stage-area' ||
+          target.classList.contains('container') ||
+          target.classList.contains('main-layout')
+        );
+        if (!isValidBlankArea) return;
+
+        // 守卫 6：提取物理坐标，同时兼容移动端触摸 (touchend) 与桌面端鼠标点击
+        const touch = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
+        const curX = touch.clientX || 0;
+        const curY = touch.clientY || 0;
+        const now = Date.now();
+
+        const timeDiff = now - lastTapTime;
+        const dist = Math.hypot(curX - lastTapX, curY - lastTapY);
+
+        // 守卫 7：时间与空间位移双重精细约束 (防抖防晃，排除屏幕两端无序点击)
+        // 两次点击时间间隔须在 180ms ~ 450ms 之间，物理间距 <= 28px
+        if (timeDiff >= 180 && timeDiff <= 450 && dist <= 28) {
+          lastTapTime = 0;
+          if (e.cancelable) e.preventDefault();
+          window.toggleFocusMode(false);
+
+          if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+            try { navigator.vibrate(15); } catch (_) {}
+          }
+          if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+            Services.Sync.showToast('↩️ 已双击空白区域退出专注模式', 'info', 1200);
+          }
+          return;
+        }
+
+        // 记录首击时间与坐标
+        lastTapTime = now;
+        lastTapX = curX;
+        lastTapY = curY;
+      }
+
+      window.addEventListener('touchend', handleFocusDoubleTap, { passive: false });
+      window.addEventListener('click', handleFocusDoubleTap, { passive: true });
+    })();
 
     window.switchWordPack = (id) => App.switchWordPack(id);
     function switchTheme(theme) {
