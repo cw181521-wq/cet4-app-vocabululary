@@ -1002,10 +1002,21 @@
       }
       .header .top-actions #top-due-btn,
       .header .top-actions #pwa-install-btn,
-      .header .top-actions #auto-sync-badge,
       .header .top-actions #shortcut-btn,
       .header .top-actions .plan-controls {
         display: none !important;
+      }
+      .header .top-actions #auto-sync-badge {
+        display: inline-flex !important;
+        font-size: 0.70rem !important;
+        padding: 3px 8px !important;
+        max-width: 105px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.2 !important;
+        height: 28px !important;
+        align-items: center !important;
       }
 
       .header .top-actions .daily-target-box {
@@ -1151,7 +1162,10 @@
       .stage-nav-bar .nav-action-btns { display: flex; gap: 8px; margin-top: 0; width: 100%; }
       .stage-nav-bar .btn { padding: 10px 14px; font-size: 0.92rem; }
 
-      /* ★ 闪卡模式激活时：彻底隐藏外部解析卡片和四选一选项容器，杜绝撑破视口 */
+      
+    
+
+    /* ★ 闪卡模式激活时：彻底隐藏外部解析卡片和四选一选项容器，杜绝撑破视口 */
       body.flashcard-mode-active #analysis-card,
       body.flashcard-mode-active #view-choice {
         display: none !important;
@@ -1367,17 +1381,17 @@
                   box-shadow 0.18s ease;
     }
 
-    /* 2. 液态玻璃状态下的对错判定与低饱和微光晕 (降饱和度、收窄晕染半径、柔和呼吸感) */
+    /* 2. 液态玻璃状态下的对错判定与光压蓄能体系 (0~85px 弹性受压聚拢 + 低饱和微晕) */
     .stage-card.liquid-glass.card-correct-feedback,
     .stage-card.liquid-glass.liquid-glow-right,
     .stage-card.flashcard-pending-decision.liquid-glow-right,
     .stage-card.flashcard-pending-decision.card-correct-feedback {
       background: rgba(242, 250, 245, 0.78) !important;
-      border-color: rgba(46, 160, 120, 0.72) !important; /* 低饱和柔和鼠尾草绿 */
+      border-color: rgba(46, 160, 120, calc(0.70 + 0.12 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(46, 160, 120, 0.30),
-        0 4px 14px -2px rgba(46, 160, 120, 0.25),
-        8px 10px 24px -6px rgba(46, 160, 120, 0.18),      /* 晕染半径从 48px 收窄至 24px */
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(46, 160, 120, calc(0.28 + 0.12 * var(--tension-ratio, 0))),
+        0 4px calc(14px - 4px * var(--tension-ratio, 0)) -2px rgba(46, 160, 120, 0.25),
+        calc(8px * (1 + 0.2 * var(--tension-ratio, 0))) 10px calc(24px - 8px * var(--tension-ratio, 0)) -6px rgba(46, 160, 120, 0.18),
         inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.85),
         inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.02) !important;
     }
@@ -1387,11 +1401,11 @@
     :root[data-theme="dark"] .stage-card.flashcard-pending-decision.liquid-glow-right,
     :root[data-theme="dark"] .stage-card.flashcard-pending-decision.card-correct-feedback {
       background: rgba(10, 60, 48, 0.75) !important;
-      border-color: rgba(74, 195, 148, 0.72) !important;
+      border-color: rgba(74, 195, 148, calc(0.70 + 0.12 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(74, 195, 148, 0.32),
-        0 0 14px 1px rgba(74, 195, 148, 0.30),
-        10px 12px 28px -6px rgba(46, 160, 120, 0.26),    /* 晕染半径从 56px 收窄至 28px */
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(74, 195, 148, calc(0.30 + 0.15 * var(--tension-ratio, 0))),
+        0 0 calc(14px - 4px * var(--tension-ratio, 0)) 1px rgba(74, 195, 148, 0.30),
+        calc(10px * (1 + 0.2 * var(--tension-ratio, 0))) 12px calc(28px - 8px * var(--tension-ratio, 0)) -6px rgba(46, 160, 120, 0.26),
         inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.20),
         inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.38) !important;
     }
@@ -1401,10 +1415,10 @@
     :root[data-theme="sepia"] .stage-card.flashcard-pending-decision.liquid-glow-right,
     :root[data-theme="sepia"] .stage-card.flashcard-pending-decision.card-correct-feedback {
       background: rgba(243, 249, 244, 0.78) !important;
-      border-color: rgba(35, 130, 75, 0.65) !important;
+      border-color: rgba(35, 130, 75, calc(0.65 + 0.10 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(35, 130, 75, 0.20),
-        8px 10px 20px -6px rgba(35, 130, 75, 0.18),
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(35, 130, 75, calc(0.20 + 0.10 * var(--tension-ratio, 0))),
+        calc(8px * (1 + 0.2 * var(--tension-ratio, 0))) 10px calc(20px - 6px * var(--tension-ratio, 0)) -6px rgba(35, 130, 75, 0.18),
         inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.70) !important;
     }
 
@@ -1413,11 +1427,11 @@
     .stage-card.flashcard-pending-decision.liquid-glow-left,
     .stage-card.flashcard-pending-decision.card-wrong-feedback {
       background: rgba(254, 245, 245, 0.78) !important;
-      border-color: rgba(220, 95, 88, 0.72) !important;  /* 低饱和柔和砖红/玫瑰珊瑚红 */
+      border-color: rgba(220, 95, 88, calc(0.70 + 0.12 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(220, 95, 88, 0.30),
-        0 4px 14px -2px rgba(220, 95, 88, 0.25),
-        -8px 10px 24px -6px rgba(220, 95, 88, 0.18),     /* 晕染半径从 48px 收窄至 24px */
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(220, 95, 88, calc(0.28 + 0.12 * var(--tension-ratio, 0))),
+        0 4px calc(14px - 4px * var(--tension-ratio, 0)) -2px rgba(220, 95, 88, 0.25),
+        calc(-8px * (1 + 0.2 * var(--tension-ratio, 0))) 10px calc(24px - 8px * var(--tension-ratio, 0)) -6px rgba(220, 95, 88, 0.18),
         inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.85),
         inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.02) !important;
     }
@@ -1427,11 +1441,11 @@
     :root[data-theme="dark"] .stage-card.flashcard-pending-decision.liquid-glow-left,
     :root[data-theme="dark"] .stage-card.flashcard-pending-decision.card-wrong-feedback {
       background: rgba(85, 28, 28, 0.75) !important;
-      border-color: rgba(235, 115, 110, 0.72) !important;
+      border-color: rgba(235, 115, 110, calc(0.70 + 0.12 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(235, 115, 110, 0.32),
-        0 0 14px 1px rgba(235, 115, 110, 0.30),
-        -10px 12px 28px -6px rgba(220, 95, 88, 0.26),   /* 晕染半径从 56px 收窄至 28px */
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(235, 115, 110, calc(0.30 + 0.15 * var(--tension-ratio, 0))),
+        0 0 calc(14px - 4px * var(--tension-ratio, 0)) 1px rgba(235, 115, 110, 0.30),
+        calc(-10px * (1 + 0.2 * var(--tension-ratio, 0))) 12px calc(28px - 8px * var(--tension-ratio, 0)) -6px rgba(220, 95, 88, 0.26),
         inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.20),
         inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.38) !important;
     }
@@ -1441,10 +1455,10 @@
     :root[data-theme="sepia"] .stage-card.flashcard-pending-decision.liquid-glow-left,
     :root[data-theme="sepia"] .stage-card.flashcard-pending-decision.card-wrong-feedback {
       background: rgba(253, 244, 244, 0.78) !important;
-      border-color: rgba(180, 50, 50, 0.65) !important;
+      border-color: rgba(180, 50, 50, calc(0.65 + 0.10 * var(--tension-ratio, 0))) !important;
       box-shadow:
-        0 0 0 1px rgba(180, 50, 50, 0.20),
-        -8px 10px 20px -6px rgba(180, 50, 50, 0.18),
+        0 0 0 calc(1px + 0.5px * var(--tension-ratio, 0)) rgba(180, 50, 50, calc(0.20 + 0.10 * var(--tension-ratio, 0))),
+        calc(-8px * (1 + 0.2 * var(--tension-ratio, 0))) 10px calc(20px - 6px * var(--tension-ratio, 0)) -6px rgba(180, 50, 50, 0.18),
         inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.70) !important;
     }
 
@@ -1567,6 +1581,18 @@
       box-shadow:
         inset 0 0 1px 1px rgba(254, 202, 202, 0.28),
         inset 0 0 16px 2px rgba(235, 115, 110, 0.24) !important;
+    }
+
+    /* 4.4.1 临界咬合：彻底删除瞬态光爆(brightness 1.22 爆闪)，保留纯净机械触感与柔和光晕 */
+    .stage-card.detent-snapped {
+      animation: none !important;
+      filter: none !important;
+    }
+
+    @keyframes detentSnapPulse {
+      0%, 100% {
+        filter: none !important;
+      }
     }
 
     /* 4.5 辅助功能与低配设备降级 */
@@ -2600,6 +2626,413 @@
         -webkit-overflow-scrolling: touch !important;
       }
     }
+
+/* ==========================================================================
+   ★ 混淆词真题对抗重构版：微差对比看板与子顶栏 (Confusables Diff System)
+   ========================================================================== */
+.confusables-sub-bar {
+  margin: 0 auto 12px auto;
+  max-width: var(--stage-max-w, 720px);
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+}
+.confusables-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.confusables-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+.confusables-badge {
+  font-weight: 800;
+  color: var(--primary, #0f766e);
+  background: rgba(15, 118, 110, 0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.confusables-sub-desc {
+  color: var(--muted, #64748b);
+  font-size: 0.78rem;
+}
+.confusable-diff-card {
+  margin-top: 14px;
+  background: var(--card-bg, #ffffff);
+  border: 2px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  animation: springPop 0.3s ease-out;
+}
+
+.diff-transposition-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.diff-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border, #e2e8f0);
+}
+.diff-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  color: var(--text, #1e293b);
+}
+.diff-audio-btn {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--primary, #0f766e);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  .diff-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .diff-vs {
+    display: none;
+  }
+}
+.diff-col {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.diff-chosen {
+  background: rgba(239, 68, 68, 0.04);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.diff-target {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+.diff-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--muted, #94a3b8);
+  padding: 0 4px;
+}
+.diff-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+.pill-wrong {
+  background: var(--error-light, #fee2e2);
+  color: var(--error, #dc2626);
+}
+.pill-correct {
+  background: var(--success-light, #d1fae5);
+  color: var(--success, #059669);
+}
+.diff-word-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  color: var(--text, #1e293b);
+}
+.diff-phonetic {
+  font-size: 0.8rem;
+  color: var(--muted, #64748b);
+}
+.diff-meaning {
+  font-size: 0.88rem;
+  color: var(--text, #1e293b);
+  margin-top: 2px;
+}
+.diff-analysis {
+  font-size: 0.76rem;
+  color: var(--muted, #64748b);
+  line-height: 1.4;
+  margin-top: 4px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 6px;
+  border-radius: 6px;
+}
+.diff-highlight-wrong {
+  color: #dc2626;
+  background: #fecaca;
+  padding: 0 2px;
+  border-radius: 3px;
+  text-decoration: underline;
+  font-weight: 900;
+}
+.diff-highlight-correct {
+  color: #059669;
+  background: #a7f3d0;
+  padding: 0 2px;
+  border-radius: 3px;
+  text-decoration: underline;
+  font-weight: 900;
+}
+.diff-mnemonic-box {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+.diff-mnemonic-label {
+  font-weight: 800;
+  color: #b45309;
+  margin-bottom: 3px;
+}
+.diff-mnemonic-text {
+  color: #92400e;
+  line-height: 1.45;
+}
+
+
+/* ==========================================================================
+   ★ 混淆微差内嵌卡片体系 (In-Card Diff Stage - Zero-Scroll Design)
+   ========================================================================== */
+.confusable-in-card-diff {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border, #cbd5e1);
+  animation: springPop 0.25s ease-out;
+  width: 100%;
+}
+.diff-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: nowrap;
+}
+.diff-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text, #1e293b);
+  white-space: nowrap;
+}
+.diff-audio-btn {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  padding: 4px 10px !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  background: var(--primary, #0f766e) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  line-height: 1.2 !important;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: stretch;
+}
+.diff-col {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+.diff-chosen {
+  background: rgba(239, 68, 68, 0.04);
+  border-color: rgba(239, 68, 68, 0.28);
+}
+.diff-target {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.32);
+}
+.diff-pill {
+  display: inline-block;
+  font-size: 0.70rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-bottom: 2px;
+}
+.pill-wrong {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.pill-correct {
+  background: #d1fae5;
+  color: #059669;
+}
+.diff-word-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text, #1e293b);
+}
+.diff-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: var(--muted, #64748b);
+}
+.diff-phonetic {
+  color: var(--muted, #64748b);
+}
+.diff-pos {
+  font-weight: 700;
+  color: var(--primary, #0f766e);
+}
+.diff-meaning {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--text, #1e293b);
+  margin-top: 1px;
+}
+.diff-analysis {
+  font-size: 0.72rem;
+  color: var(--muted, #64748b);
+  line-height: 1.35;
+  margin-top: 3px;
+  background: rgba(0, 0, 0, 0.02);
+  padding: 5px 6px;
+  border-radius: 5px;
+  max-height: 75px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.diff-mnemonic-box {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 7px;
+  font-size: 0.76rem;
+  text-align: left;
+}
+.diff-mnemonic-label {
+  font-weight: 800;
+  color: #b45309;
+  margin-bottom: 2px;
+}
+.diff-mnemonic-text {
+  color: #92400e;
+  line-height: 1.35;
+}
+
+
+    /* === 核心反义对偶胶囊系统 (Antonym Capsule System) === */
+    .flashcard-antonyms-box {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 6px 0 8px;
+    }
+    .antonym-capsule {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.32);
+      color: var(--error);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.16s ease, border-color 0.16s ease;
+      will-change: transform;
+    }
+    :root[data-theme="dark"] .antonym-capsule {
+      background: rgba(239, 68, 68, 0.16);
+      border-color: rgba(248, 113, 113, 0.4);
+      color: #fca5a5;
+    }
+    :root[data-theme="sepia"] .antonym-capsule {
+      background: rgba(185, 28, 28, 0.08);
+      border-color: rgba(185, 28, 28, 0.28);
+      color: #b91c1c;
+    }
+    .antonym-capsule:hover {
+      transform: scale(1.04);
+      background: rgba(239, 68, 68, 0.16);
+      border-color: var(--error);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
+    }
+    .antonym-icon {
+      font-size: 0.85rem;
+    }
+    .antonym-sense-tag {
+      font-size: 0.72rem;
+      opacity: 0.82;
+      font-weight: 600;
+    }
+    .antonym-word-btn {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .antonym-speak-icon {
+      font-size: 0.75rem;
+      opacity: 0.75;
+      padding: 1px 3px;
+      border-radius: 4px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .antonym-speak-icon:hover {
+      transform: scale(1.25);
+      opacity: 1;
+    }
+
 </style>
 </head>
 <body>
@@ -2609,7 +3042,7 @@
     <div class="logo-area">
       <div class="app-title">CET-4 科学词根全能终端 Pro</div>
       <select id="pack-dropdown" class="pack-selector" onchange="switchWordPack(this.value)"></select>
-      <input type="file" id="local-words-file-input" accept=".js,.json" style="display:none;" onchange="handleLocalWordsFile(event)">
+      <input type="file" id="local-words-file-input" accept=".js,.json,text/javascript,application/javascript,application/json,text/plain,*" style="display:none;" onchange="handleLocalWordsFile(event)">
       <button class="utility-toggle-btn" style="cursor:pointer; font-size:0.75rem; padding:4px 8px;" onclick="document.getElementById('local-words-file-input').click()" title="选取本地 words_data.js 或 JSON 文件">📁 载入本地词库</button>
     </div>
 
@@ -2879,7 +3312,10 @@
         </div>
 
         <div style="background:var(--card-subtle); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
-          <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px;">💾 数据管理与同步</div>
+          <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <span>💾 数据管理与云同步</span>
+            <div id="mobile-auto-sync-badge" class="sync-badge" onclick="toggleMobileToolsSheet(false); switchMode('manage');" style="cursor:pointer; font-size:0.72rem; padding:2px 8px;" title="点击查看同步日志与凭证">☁️ 自动同步就绪</div>
+          </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
             <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); document.getElementById('local-words-file-input').click();">📁 载入本地词库</button>
             <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); switchMode('manage');">☁️ 云同步与备份</button>
@@ -3068,12 +3504,12 @@
             <!-- 左侧：三行一列记忆状态信息柱 (五盒指示、掌握度、遗忘风险) -->
             <div class="card-meta-slot-left" id="card-meta-slot-left">
               <!-- 行 1: 五盒指示器 (5 盒专属颜色微点) -->
-              <div class="leitner-micro-stepper" id="leitner-micro-stepper" onclick="App.switchMode('leitner_box')" title="艾宾浩斯五盒当前掌握盒位 (点击打开五盒看板)">
-                <span class="micro-dot active" data-box="1" title="Box 1 每日巩固"></span>
-                <span class="micro-dot" data-box="2" title="Box 2 隔日复习"></span>
-                <span class="micro-dot" data-box="3" title="Box 3 中期强化"></span>
-                <span class="micro-dot" data-box="4" title="Box 4 周度稳固"></span>
-                <span class="micro-dot" data-box="5" title="Box 5 永久毕业"></span>
+              <div class="leitner-micro-stepper" id="leitner-micro-stepper" title="艾宾浩斯五盒当前掌握盒位 (点击圆点直接跳盒，双击打开五盒看板)">
+                <span class="micro-dot active" data-box="1" onclick="event.stopPropagation(); jumpBoxFromCompass(1);" title="点击手动跳至 Box 1 (初识盒)"></span>
+                <span class="micro-dot" data-box="2" onclick="event.stopPropagation(); jumpBoxFromCompass(2);" title="点击手动跳至 Box 2 (复习盒)"></span>
+                <span class="micro-dot" data-box="3" onclick="event.stopPropagation(); jumpBoxFromCompass(3);" title="点击手动跳至 Box 3 (巩固盒)"></span>
+                <span class="micro-dot" data-box="4" onclick="event.stopPropagation(); jumpBoxFromCompass(4);" title="点击手动跳至 Box 4 (强化盒)"></span>
+                <span class="micro-dot" data-box="5" onclick="event.stopPropagation(); jumpBoxFromCompass(5);" title="点击手动跳至 Box 5 (精通盒)"></span>
               </div>
               <!-- 行 2: 掌握度指标 -->
               <span class="mastery-pill" id="mastery-pill" title="基于作答反应时与记忆稳定度的 0~100 自适应掌握度">掌握度: 35%</span>
@@ -3165,6 +3601,9 @@
             </div>
           </div>
           <div class="flashcard-hint" id="flashcard-hint" style="display:none;">点击卡片或按 Space 翻转查看释义与词根</div>
+
+          <!-- ★ 混淆对决微差对比内嵌舞台 (In-Card Diff Stage - Zero-Scroll Design) -->
+          <div id="confusable-in-card-diff" class="confusable-in-card-diff" style="display:none;"></div>
         </div>
 
         <!-- 四选一 / 盲听 / 形近辨析 / 单盒强化纯认读选择容器 (方案二：严格沙箱隔离) -->
@@ -3222,6 +3661,7 @@
           <span class="analysis-tag tag-gouci" id="analysis-tag">构词精解</span>
           <div class="analysis-content" id="analysis-content"></div>
           <div class="collocation-box" id="collocation-box" style="display:none;"></div>
+          <div class="collocation-box" id="analysis-antonyms-box" style="display:none; color:var(--error); border-color:rgba(239,68,68,0.3);"></div>
           <div class="family-radar-box" id="family-radar-box" style="display:none;">
             <div class="family-radar-head">
               <span>🌱 母词族家族雷达 (同根串记)</span>
@@ -4378,6 +4818,22 @@
         }
         if (e.key.toLowerCase() === 'r') {
           Views.Compass.jumpBox(1);
+          return;
+        }
+
+        // Shift + 1..5: 全模式通用手动跳盒快捷键
+        if (e.shiftKey && ['1', '2', '3', '4', '5'].includes(e.key)) {
+          e.preventDefault();
+          const targetBox = parseInt(e.key, 10);
+          Views.Compass.jumpBox(targetBox);
+          return;
+        }
+
+        // 闪卡模式下按数字 1..5 直接触发跳盒
+        if (curMode === 'flashcard' && ['1', '2', '3', '4', '5'].includes(e.key)) {
+          e.preventDefault();
+          const targetBox = parseInt(e.key, 10);
+          Views.Compass.jumpBox(targetBox);
           return;
         }
 
@@ -5592,7 +6048,10 @@
             const canAdvance = (leitnerMode !== 'strict') || !lastReviewed || (lastReviewed === 0) || (now >= nextReviewDate);
             newBox = canAdvance ? Math.min(5, currentBox + 1) : currentBox;
             const cfg = LEITNER_BOX_CONFIG[newBox - 1];
-            return { box: newBox, nextReviewDate: now + cfg.ms, streakDelta: 1, isPromoted: newBox > currentBox };
+            const targetNextDate = canAdvance
+              ? (now + cfg.ms)
+              : ((nextReviewDate && nextReviewDate > now) ? nextReviewDate : (now + cfg.ms));
+            return { box: newBox, nextReviewDate: targetNextDate, streakDelta: 1, isPromoted: newBox > currentBox };
           } else {
             if (currentBox >= 4) newBox = currentBox - 2;
             else if (currentBox >= 2) newBox = currentBox - 1;
@@ -5753,6 +6212,343 @@
             }
           }
           return dp[a.length][b.length];
+        }
+      },
+
+
+      // -----------------------------------------------------------------------
+      // [3.4 Confusables Algorithm - 混淆词三级漏斗与真题对比矩阵]
+      // -----------------------------------------------------------------------
+      // [3.4 Confusables Algorithm - 混淆词三级漏斗与真题对比矩阵 (高阶完备版)]
+      // -----------------------------------------------------------------------
+      Confusables: {
+        CURATED_PAIRS: [
+          // 形似字与字母换位陷阱 (Transposition & Orthographic)
+          { key: "casual_causal", words: ["casual", "causal"], hint: "casual 随便的,非正式的 / causal 因果关系的" },
+          { key: "trail_trial", words: ["trail", "trial"], hint: "trail 痕迹,足迹,小路 / trial 审判,试验,考验" },
+          { key: "form_from", words: ["form", "from"], hint: "form 形式,表格,形成 / from 来自,源于" },
+          { key: "dairy_diary", words: ["dairy", "diary"], hint: "dairy 奶制品,乳品店 / diary 日记,日程簿" },
+          { key: "angel_angle", words: ["angel", "angle"], hint: "angel 天使,守护神 / angle 角度,视角" },
+          { key: "quite_quiet_quit", words: ["quite", "quiet", "quit"], hint: "quite 相当,十分 / quiet 安静的 / quit 退出,辞职" },
+          { key: "desert_dessert", words: ["desert", "dessert"], hint: "desert 沙漠,抛弃(重音在后) / dessert 甜品,餐后甜点" },
+          { key: "custom_costume", words: ["custom", "costume"], hint: "custom 风俗习惯,海关(pl.) / costume 戏剧服装,戏服" },
+          { key: "drought_draft_draught", words: ["drought", "draft", "draught"], hint: "drought 干旱 / draft 草稿,起草 / draught 拖拉,气流" },
+          { key: "aboard_abroad_broad_board", words: ["aboard", "abroad", "broad", "board"], hint: "aboard 在船/车上 / abroad 在国外 / broad 宽阔的 / board 木板,登机" },
+          { key: "later_latter_latest_lately", words: ["later", "latter", "latest", "lately"], hint: "later 后来 / latter 后者的 / latest 最新的 / lately 最近,近来" },
+          { key: "personal_personnel", words: ["personal", "personnel"], hint: "personal 私人的,个人的 / personnel 全体人员,人事部门" },
+
+          // 核心易混动词辨析 (High-Frequency Verbs)
+          { key: "arise_rise_raise_arouse", words: ["arise", "rise", "raise", "arouse"], hint: "arise 出现,发生(vi.) / rise 升起,上涨(vi.) / raise 举起,抚养,筹集(vt.) / arouse 唤起,激起(vt.)" },
+          { key: "require_inquire_acquire", words: ["require", "inquire", "acquire"], hint: "require 要求,需要 / inquire 打听,询问 / acquire 获得,学到" },
+          { key: "assure_ensure_insure_reassure", words: ["assure", "ensure", "insure", "reassure"], hint: "assure 向人打保票(sb.) / ensure 确保事情发生 / insure 投保 / reassure 使放心" },
+          { key: "precede_proceed_exceed_succeed", words: ["precede", "proceed", "exceed", "succeed"], hint: "precede 在先,先于 / proceed 继续进行 / exceed 超过,超越 / succeed 成功,继承" },
+          { key: "prescribe_subscribe_describe", words: ["prescribe", "subscribe", "describe"], hint: "prescribe 开处方,规定 / subscribe 订阅,赞同(to) / describe 描述" },
+          { key: "perceive_conceive_deceive", words: ["perceive", "conceive", "deceive"], hint: "perceive 感知,察觉 / conceive 构想,怀胎 / deceive 欺骗,蒙骗" },
+          { key: "inspire_expire_aspire", words: ["inspire", "expire", "aspire"], hint: "inspire 启发,鼓舞 / expire 到期,终止 / aspire 渴望,立志(to)" },
+          { key: "incline_decline", words: ["incline", "decline"], hint: "incline 倾斜,倾向于 / decline 下降,衰落,婉拒" },
+          { key: "emerge_merge_submerge", words: ["emerge", "merge", "submerge"], hint: "emerge 浮现,显露 / merge 合并,兼并 / submerge 浸没在水中" },
+          { key: "transmit_transfer_transform_transit", words: ["transmit", "transfer", "transform", "transit"], hint: "transmit 传播信号/疾病 / transfer 调动,转移 / transform 变形改观 / transit 运输,经过" },
+          { key: "confirm_conform", words: ["confirm", "conform"], hint: "confirm 确认,证实 / conform 遵守,顺从,符合(to)" },
+          { key: "defend_offend", words: ["defend", "offend"], hint: "defend 保卫,防守 / offend 冒犯,触犯" },
+          { key: "deprive_derive", words: ["deprive", "derive"], hint: "deprive 剥夺,使丧失(of) / derive 源自,提炼(from)" },
+          { key: "embrace_embarrass", words: ["embrace", "embarrass"], hint: "embrace 拥抱,欣然接纳 / embarrass 使尴尬,使难堪" },
+          { key: "collision_collusion", words: ["collision", "collusion"], hint: "collision 碰撞,冲突 / collusion 勾结,共谋" },
+          { key: "contact_contract_contrast", words: ["contact", "contract", "contrast"], hint: "contact 接触,联系 / contract 合同,收缩 / contrast 对比,对照" },
+          { key: "device_devise", words: ["device", "devise"], hint: "device 装置,设备(n.) / devise 设计,发明(v.)" },
+          { key: "elicit_illicit", words: ["elicit", "illicit"], hint: "elicit 引出,诱出(v.) / illicit 违法的,不正当的(adj.)" },
+          { key: "deceit_defeat", words: ["deceit", "defeat"], hint: "deceit 欺骗,欺诈 / defeat 击败,战胜" },
+          { key: "curb_curve", words: ["curb", "curve"], hint: "curb 控制,约束 / curve 曲线,弯曲" },
+          { key: "appraise_apprise", words: ["appraise", "apprise"], hint: "appraise 评估,估价 / apprise 通知,告知" },
+          { key: "censor_censure_sensor", words: ["censor", "censure", "sensor"], hint: "censor 审查,审查员 / censure 严厉谴责 / sensor 传感器" },
+
+          // 核心形容词与近义辨析 (Adjectives & Nuances)
+          { key: "adapt_adopt_adept", words: ["adapt", "adopt", "adept"], hint: "adapt 适应(apt能力) / adopt 采纳,收养(opt选择) / adept 熟练的(ept精通)" },
+          { key: "affect_effect_effort", words: ["affect", "effect", "effort"], hint: "affect 动词影响/感动 / effect 名词效果/影响 (take effect) / effort 努力" },
+          { key: "attribute_contribute_distribute", words: ["attribute", "contribute", "distribute"], hint: "attribute 归因于(to) / contribute 贡献,促成(to) / distribute 分发,散布" },
+          { key: "access_assess_excess", words: ["access", "assess", "excess"], hint: "access 进入,使用权 / assess 评估,评价 / excess 过度,过量" },
+          { key: "stationary_stationery", words: ["stationary", "stationery"], hint: "stationary 静止的(a-站立) / stationery 文具(e-envelope信封)" },
+          { key: "complement_compliment", words: ["complement", "compliment"], hint: "complement 补充,补足(ple满) / compliment 赞美,称赞(i-爱心赞美)" },
+          { key: "continual_continuous_constant", words: ["continual", "continuous", "constant"], hint: "continual 屡次频发的(断续) / continuous 连续不断的(空间时间无间断) / constant 恒久不变的" },
+          { key: "special_specific_particular_peculiar", words: ["special", "specific", "particular", "peculiar"], hint: "special 特殊的 / specific 明确具体的 / particular 特定的,挑剔的 / peculiar 奇特古怪的" },
+          { key: "sensible_sensitive", words: ["sensible", "sensitive"], hint: "sensible 明智的,合情理的 / sensitive 敏感的,易受伤害的" },
+          { key: "respectable_respectful_respective", words: ["respectable", "respectful", "respective"], hint: "respectable 值得尊敬的 / respectful 充满敬意的 / respective 各自的" },
+          { key: "principal_principle", words: ["principal", "principle"], hint: "principal 主要的,校长(pal朋友/人) / principle 原则,原理(le-rule规则)" },
+          { key: "expand_expend_extend", words: ["expand", "expend", "extend"], hint: "expand 扩大,膨胀(体积) / expend 耗费,支出(金钱精力) / extend 伸展,延续(长度时间)" },
+          { key: "persecute_prosecute", words: ["persecute", "prosecute"], hint: "persecute 残害,迫害 / prosecute 起诉,检举" },
+          { key: "economic_economical", words: ["economic", "economical"], hint: "economic 经济上的 / economical 节约省钱的" },
+          { key: "historic_historical", words: ["historic", "historical"], hint: "historic 具重大历史意义的 / historical 历史上发生过的,历史题材的" },
+          { key: "intense_intensive", words: ["intense", "intensive"], hint: "intense 情绪情感强烈的 / intensive 精细密集的,强化的" },
+          { key: "competent_competitive", words: ["competent", "competitive"], hint: "competent 有能力的,胜任的 / competitive 竞争激烈的,有竞争力的" },
+          { key: "considerable_considerate", words: ["considerable", "considerate"], hint: "considerable 相当大的,可观的 / considerate 体贴周到的" },
+          { key: "definite_infinite", words: ["definite", "infinite"], hint: "definite 明确的,确定的 / infinite 无限的,无穷的" },
+          { key: "immigrant_emigrant", words: ["immigrant", "emigrant"], hint: "immigrant 迁入者,移民 / emigrant 迁出者,移居国外者" },
+          { key: "literal_literary_literate", words: ["literal", "literary", "literate"], hint: "literal 字面意义的 / literary 文学的,文雅的 / literate 有文化的,能读写的" },
+          { key: "loose_lose", words: ["loose", "lose"], hint: "loose 宽松松散的 / lose 丢失,输掉" },
+          { key: "moral_mortal", words: ["moral", "mortal"], hint: "moral 道德上的 / mortal 终有一死的,凡人的" },
+          { key: "negligent_negligible", words: ["negligent", "negligible"], hint: "negligent 疏忽大意的,失职的 / negligible 微不足道的,可忽略的" },
+          { key: "patent_patient", words: ["patent", "patient"], hint: "patent 专利权,显而易见的 / patient 耐心的,病人" },
+          { key: "perspective_prospective", words: ["perspective", "prospective"], hint: "perspective 透视全貌,视角 / prospective 未来的,预期的" },
+          { key: "reluctant_redundant", words: ["reluctant", "redundant"], hint: "reluctant 勉强的,不情愿的 / redundant 多余的,被裁员的" },
+          { key: "statue_statute_status_stature", words: ["statue", "statute", "status", "stature"], hint: "statue 雕像 / statute 成文法规,法令 / status 身份地位,现状 / stature 身材,声望" },
+          { key: "subtle_substitute", words: ["subtle", "substitute"], hint: "subtle 微妙隐约的 / substitute 替代品,代用品(for)" },
+          { key: "tempt_attempt", words: ["tempt", "attempt"], hint: "tempt 诱惑,引诱 / attempt 企图,尝试" },
+          { key: "wander_wonder", words: ["wander", "wonder"], hint: "wander 漫步,徘徊 / wonder 想知道,纳闷,奇迹" },
+          { key: "descent_decent_dissent", words: ["descent", "decent", "dissent"], hint: "descent 下降,血统 / decent 体面的,得体的 / dissent 异议,不同意" },
+          { key: "eligible_illegible", words: ["eligible", "illegible"], hint: "eligible 符合条件的,合格的 / illegible 字迹模糊难辨的" },
+          { key: "eminent_imminent", words: ["eminent", "imminent"], hint: "eminent 杰出著名的 / imminent 迫在眉睫的,即将发生的" },
+          { key: "explicit_implicit", words: ["explicit", "implicit"], hint: "explicit 详述明确的 / implicit 含蓄暗含的" },
+          { key: "fiction_fraction_friction", words: ["fiction", "fraction", "friction"], hint: "fiction 虚构小说 / fraction 小部分,分数 / friction 摩擦,冲突" },
+          { key: "ingenious_ingenuous", words: ["ingenious", "ingenuous"], hint: "ingenious 灵巧机敏的 / ingenuous 天真单纯的" },
+          { key: "invaluable_valueless", words: ["invaluable", "valueless"], hint: "invaluable 无价的,极其宝贵的 / valueless 毫无价值的" },
+          { key: "notable_noticeable", words: ["notable", "noticeable"], hint: "notable 显要值得注意的 / noticeable 显而易见明显的" },
+          { key: "oblige_obstacle", words: ["oblige", "obstacle"], hint: "oblige 强迫,使感激 / obstacle 障碍物,阻碍" },
+          { key: "remedy_melody", words: ["remedy", "melody"], hint: "remedy 补救办法,药品 / melody 优美旋律" },
+          { key: "session_section", words: ["session", "section"], hint: "session 一场会议,一段时间 / section 章节,部分" },
+          { key: "sympathy_empathy", words: ["sympathy", "empathy"], hint: "sympathy 同情心 / empathy 感同身受,共情" },
+          { key: "allusion_illusion", words: ["allusion", "illusion"], hint: "allusion 典故,暗示 / illusion 幻觉,错觉" },
+          { key: "conscience_conscious", words: ["conscience", "conscious"], hint: "conscience 良心良知 / conscious 清醒的,有意识的" },
+          { key: "conservation_conversation", words: ["conservation", "conversation"], hint: "conservation 保存,生态保护 / conversation 对话交谈" },
+          { key: "council_counsel", words: ["council", "counsel"], hint: "council 委员会,理事会 / counsel 咨询,劝告,辩护律师" },
+          { key: "discreet_discrete", words: ["discreet", "discrete"], hint: "discreet 言行谨慎的 / discrete 离散的分立的" },
+          { key: "distinct_distinctive_distinguished", words: ["distinct", "distinctive", "distinguished"], hint: "distinct 清晰截然不同的 / distinctive 独特的有特色的 / distinguished 著名的卓越的" },
+          { key: "effective_efficient", words: ["effective", "efficient"], hint: "effective 有成效的 / efficient 效率高的" },
+          { key: "exhaust_exhaustible_exhaustive", words: ["exhaust", "exhaustible", "exhaustive"], hint: "exhaust 使精疲力竭 / exhaustible 可耗尽的 / exhaustive 详尽透彻的" },
+          { key: "facility_faculty", words: ["facility", "faculty"], hint: "facility 设施便利 / faculty 全体教职员,才能" },
+          { key: "fatal_fateful", words: ["fatal", "fateful"], hint: "fatal 致命毁灭性的 / fateful 命中注定的,重大决定的" },
+          { key: "graceful_gracious", words: ["graceful", "gracious"], hint: "graceful 举止优美的 / gracious 和蔼慈祥的" },
+          { key: "human_humane", words: ["human", "humane"], hint: "human 人类的 / humane 人道的,慈悲仁爱的" },
+          { key: "industrial_industrious", words: ["industrial", "industrious"], hint: "industrial 工业的 / industrious 勤劳刻苦的" },
+          { key: "judicial_judicious", words: ["judicial", "judicious"], hint: "judicial 司法的,法庭的 / judicious 明智审慎的" },
+          { key: "momentary_momentous", words: ["momentary", "momentous"], hint: "momentary 瞬间即逝的 / momentous 重大关键的" },
+          { key: "practicable_practical", words: ["practicable", "practical"], hint: "practicable 行得通可实施的 / practical 实际切实的,实用的" },
+          { key: "sensory_sensual_sensuous", words: ["sensory", "sensual", "sensuous"], hint: "sensory 感觉器官的 / sensual 肉体感官的 / sensuous 艺术赏心悦目的" },
+          { key: "social_sociable", words: ["social", "sociable"], hint: "social 社会的,社交的 / sociable 好交际的,友善的" },
+          { key: "temper_temperament", words: ["temper", "temperament"], hint: "temper 脾气,火气 / temperament 性情,气质禀赋" },
+          { key: "urban_urbane", words: ["urban", "urbane"], hint: "urban 城镇的,都市的 / urbane 温文尔雅的,有教养的" },
+          { key: "verbal_verbose", words: ["verbal", "verbose"], hint: "verbal 言语的,口头的 / verbose 冗长啰嗦的" },
+          { key: "vocation_vacation", words: ["vocation", "vacation"], hint: "vocation 职业,天职使命 / vacation 假期,休假" }
+        ],
+
+        normalizePos(posStr) {
+          if (!posStr || typeof posStr !== 'string') return new Set();
+          const clean = posStr.toLowerCase().replace(/[()（）\[\]【】]/g, ' ');
+          const tokens = clean.split(/[/,;；\s.+]+/).filter(Boolean);
+          const categories = new Set();
+          tokens.forEach(t => {
+            if (['v', 'vt', 'vi', 'verb', '动词', '及物动词', '不及物动词'].includes(t)) categories.add('verb');
+            else if (['n', 'noun', '名词'].includes(t)) categories.add('noun');
+            else if (['adj', 'a', 'adjective', '形容词'].includes(t)) categories.add('adj');
+            else if (['adv', 'ad', 'adverb', '副词'].includes(t)) categories.add('adv');
+            else if (['prep', 'preposition', '介词'].includes(t)) categories.add('prep');
+            else if (['conj', 'conjunction', '连词'].includes(t)) categories.add('conj');
+            else if (['num', '数词'].includes(t)) categories.add('num');
+            else if (['pron', '代词'].includes(t)) categories.add('pron');
+          });
+          return categories;
+        },
+
+        calculatePosSimilarity(posA, posB) {
+          const setA = this.normalizePos(posA);
+          const setB = this.normalizePos(posB);
+          if (setA.size === 0 || setB.size === 0) return 0.5;
+          for (const cat of setA) {
+            if (setB.has(cat)) return 1.0;
+          }
+          return 0.0;
+        },
+
+        getLevenshteinDistance(a, b) {
+          if (!a || !b) return (a || b || '').length;
+          const s1 = a.toLowerCase();
+          const s2 = b.toLowerCase();
+          const m = s1.length;
+          const n = s2.length;
+          const d = [];
+          for (let i = 0; i <= m; i++) d[i] = [i];
+          for (let j = 0; j <= n; j++) d[0][j] = j;
+
+          for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+              const cost = (s1[i - 1] === s2[j - 1]) ? 0 : 1;
+              d[i][j] = Math.min(
+                d[i - 1][j] + 1,
+                d[i][j - 1] + 1,
+                d[i - 1][j - 1] + cost
+              );
+            }
+          }
+          return d[m][n];
+        },
+
+        generateDistractors(targetWord, allWords, packStats = {}, count = 3) {
+          if (!targetWord || !Array.isArray(allWords)) return [];
+          const targetClean = (targetWord.word || '').toLowerCase();
+          const targetGroup = targetWord.group;
+
+          const candidates = allWords.filter(w => w.word && w.word.toLowerCase() !== targetClean);
+          if (candidates.length <= count) return candidates;
+
+          const st = packStats[targetWord.word];
+          const historicalConfused = (st && st.confusedWith) ? st.confusedWith : {};
+
+          // SRS 掌握度动态衰减因子
+          const targetStreak = (st && typeof st.streak === 'number') ? st.streak : 0;
+          const targetBox = (st && typeof st.box === 'number') ? st.box : 1;
+          const srsDecayFactor = Math.max(0.18, 1.0 - (targetStreak * 0.18) - (targetBox >= 4 ? 0.32 : 0));
+
+          const curatedMatch = this.CURATED_PAIRS.find(p => p.words.includes(targetClean));
+          const curatedWords = curatedMatch ? new Set(curatedMatch.words) : new Set();
+
+          const scored = [];
+          candidates.forEach(cand => {
+            const candClean = cand.word.toLowerCase();
+            let score = 0;
+
+            // 0. 历史误选命中 (支持衰减)
+            if (historicalConfused[cand.word]) {
+              const baseWeight = 120 + (historicalConfused[cand.word] * 25);
+              score += Math.round(baseWeight * srsDecayFactor);
+            }
+
+            // 1. 真题预置矩阵命中
+            if (curatedWords.has(candClean)) {
+              score += 95;
+            }
+
+            // 2. 严格同词根族 (Level 1)
+            if (targetGroup && cand.group && cand.group === targetGroup) {
+              score += 65;
+            }
+
+            // 3. 词形编辑距离 (Level 2: Levenshtein)
+            const dist = this.getLevenshteinDistance(targetClean, candClean);
+            if (dist === 1) score += 48;
+            else if (dist === 2) score += 30;
+            else if (dist === 3) score += 15;
+
+            // 字母换位加分
+            if (targetClean.length === candClean.length && dist === 2) {
+              const diffIndices = [];
+              for (let idx = 0; idx < targetClean.length; idx++) {
+                if (targetClean[idx] !== candClean[idx]) diffIndices.push(idx);
+              }
+              if (diffIndices.length === 2 && diffIndices[1] === diffIndices[0] + 1) {
+                if (targetClean[diffIndices[0]] === candClean[diffIndices[1]] &&
+                    targetClean[diffIndices[1]] === candClean[diffIndices[0]]) {
+                  score += 40;
+                }
+              }
+            }
+
+            // 前缀/后缀特征共享
+            if (targetClean.length >= 4 && candClean.length >= 4) {
+              if (targetClean.slice(0, 3) === candClean.slice(0, 3)) score += 20;
+              if (targetClean.slice(-3) === candClean.slice(-3)) score += 16;
+            }
+
+            // 4. 词性归一化加权 (Level 3: POS Normalization)
+            const posSim = this.calculatePosSimilarity(targetWord.pos, cand.pos);
+            score += Math.round(posSim * 20);
+
+            // 5. 长度相近度
+            const lenDiff = Math.abs(targetClean.length - candClean.length);
+            if (lenDiff === 0) score += 10;
+            else if (lenDiff === 1) score += 6;
+            else if (lenDiff === 2) score += 3;
+
+            scored.push({ wordObj: cand, score, dist });
+          });
+
+          scored.sort((a, b) => b.score - a.score);
+
+          const selected = [];
+          const used = new Set();
+
+          for (const item of scored) {
+            if (selected.length >= count) break;
+            if (!used.has(item.wordObj.word)) {
+              selected.push(item.wordObj);
+              used.add(item.wordObj.word);
+            }
+          }
+
+          if (selected.length < count) {
+            const fallback = candidates
+              .filter(c => !used.has(c.word))
+              .sort((a, b) => {
+                const dA = this.getLevenshteinDistance(targetClean, a.word);
+                const dB = this.getLevenshteinDistance(targetClean, b.word);
+                return dA - dB;
+              });
+            for (const f of fallback) {
+              if (selected.length >= count) break;
+              selected.push(f);
+              used.add(f.word);
+            }
+          }
+
+          return selected;
+        },
+
+        generateWordDiffHtml(wordA, wordB) {
+          const a = (wordA || '').toLowerCase();
+          const b = (wordB || '').toLowerCase();
+
+          // 1. 优先检测相邻字母换位
+          if (a.length === b.length) {
+            const diffs = [];
+            for (let i = 0; i < a.length; i++) {
+              if (a[i] !== b[i]) diffs.push(i);
+            }
+            if (diffs.length === 2 && diffs[1] === diffs[0] + 1) {
+              const i = diffs[0];
+              const j = diffs[1];
+              if (a[i] === b[j] && a[j] === b[i]) {
+                const prefix = a.slice(0, i);
+                const suffix = a.slice(j + 1);
+                const pairA = a.slice(i, j + 1);
+                const pairB = b.slice(i, j + 1);
+                return {
+                  diffA: `${prefix}<span class="diff-highlight-wrong">${pairA}</span>${suffix}`,
+                  diffB: `${prefix}<span class="diff-highlight-correct">${pairB}</span>${suffix}`,
+                  note: `⚠️ 字母颠倒陷阱：【${pairA}】与【${pairB}】顺序互换`
+                };
+              }
+            }
+          }
+
+          // 2. 双指针公共前缀与后缀匹配
+          let prefixLen = 0;
+          while (prefixLen < a.length && prefixLen < b.length && a[prefixLen] === b[prefixLen]) {
+            prefixLen++;
+          }
+
+          let suffixLen = 0;
+          while (
+            suffixLen < (a.length - prefixLen) &&
+            suffixLen < (b.length - prefixLen) &&
+            a[a.length - 1 - suffixLen] === b[b.length - 1 - suffixLen]
+          ) {
+            suffixLen++;
+          }
+
+          const commonPrefix = b.slice(0, prefixLen);
+          const midA = a.slice(prefixLen, a.length - suffixLen);
+          const midB = b.slice(prefixLen, b.length - suffixLen);
+          const commonSuffix = b.slice(b.length - suffixLen);
+
+          const diffA = `${commonPrefix}<span class="diff-highlight-wrong">${midA || '∅'}</span>${commonSuffix}`;
+          const diffB = `${commonPrefix}<span class="diff-highlight-correct">${midB || '∅'}</span>${commonSuffix}`;
+
+          return { diffA, diffB, note: null };
+        },
+
+        getMnemonic(targetWord, chosenWord) {
+          const t = (targetWord || '').toLowerCase();
+          const c = (chosenWord || '').toLowerCase();
+          const pair = this.CURATED_PAIRS.find(p => p.words.includes(t) && p.words.includes(c));
+          if (pair && pair.hint) return pair.hint;
+          return null;
         }
       },
 
@@ -7199,6 +7995,24 @@
           return s || String(meaningStr).replace(/[^一-龥]/g, '').slice(0, 6);
         },
 
+        
+        playConfusableContrast(chosenWordName, targetWordName) {
+          if (!chosenWordName || !targetWordName) return;
+          this.stopAll();
+          const thisEpoch = currentEpoch;
+          this.playWord(chosenWordName).then(() => {
+            if (thisEpoch !== currentEpoch) return;
+            setTimeout(() => {
+              if (thisEpoch !== currentEpoch) return;
+              this.playWord(targetWordName);
+            }, 600);
+          }).catch(() => {
+            if (thisEpoch === currentEpoch) {
+              this.playWord(targetWordName);
+            }
+          });
+        },
+
         playFlashcardMeaningZh(meaningStr) {
           if (typeof window === 'undefined') return;
           const zhText = this.cleanChineseMeaningForSpeech(meaningStr);
@@ -7398,7 +8212,44 @@
       let lastErrorMessage = '';
       const hasNativeCompression = (typeof CompressionStream !== 'undefined') && (typeof DecompressionStream !== 'undefined');
 
-      async function compress(str) {
+            // ★ 工业级弱网与代理重试引擎：在 ALPN 闪断、高延迟、网络抖动时自动指数退避重试
+      async function resilientFetch(url, options = {}, maxRetries = 2) {
+        let lastErr = null;
+        for (let attempt = 0; attempt <= maxRetries; attempt++) {
+          const controller = new AbortController();
+          const timeoutMs = options.timeoutMs || 15000;
+          const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+          try {
+            const reqSignal = options.signal || controller.signal;
+            const fetchOpts = { ...options, signal: reqSignal };
+            if (options.keepalive) fetchOpts.keepalive = true;
+
+            const resp = await fetch(url, fetchOpts);
+            clearTimeout(timeoutId);
+
+            // 针对 5xx 服务端暂时波动或 429 速率限制实施自适应指数退避
+            if ((resp.status >= 500 || resp.status === 429) && attempt < maxRetries) {
+              const retryHeader = parseInt(resp.headers.get('Retry-After') || '0', 10);
+              const backoffDelay = retryHeader > 0 ? (retryHeader * 1000) : (1200 * Math.pow(2, attempt) + Math.random() * 400);
+              await new Promise(r => setTimeout(r, backoffDelay));
+              continue;
+            }
+            return resp;
+          } catch (err) {
+            clearTimeout(timeoutId);
+            lastErr = err;
+            if (attempt < maxRetries && err.name !== 'AbortError') {
+              const backoffDelay = 1000 * Math.pow(2, attempt) + Math.random() * 500;
+              await new Promise(r => setTimeout(r, backoffDelay));
+              continue;
+            }
+            throw lastErr;
+          }
+        }
+      }
+
+async function compress(str) {
         if (!hasNativeCompression) return null;
         try {
           const stream = new Blob([str]).stream().pipeThrough(new CompressionStream('gzip'));
@@ -7453,7 +8304,6 @@
 
           if (!fileObj.raw_url) {
             if (typeof fileObj.content === 'string') return fileObj.content;
-            throw new Error('云端数据被截断且未提供 Raw 下载地址');
           }
 
           const controller = new AbortController();
@@ -7811,14 +8661,54 @@
             }
           }
 
+          // ★ 核心修复：多设备同步合并独立词与每日刷题数，保证做题数与独立词集合严密单调一致
+          const localAct = Storage.getActivity();
+          const mergedAct = { ...localAct };
           if (cloudSnapshot.activity) {
-            const localAct = Storage.getActivity();
-            const mergedAct = { ...localAct };
             for (const [k, count] of Object.entries(cloudSnapshot.activity)) {
               mergedAct[k] = Math.max(localAct[k] || 0, count || 0);
             }
-            Storage.saveActivity(mergedAct);
           }
+
+          if (cloudSnapshot.dailyUniqueMap) {
+            const localMap = Storage.getDailyUniqueMap();
+            const mergedMap = { ...localMap };
+
+            for (const [dateStr, cloudWords] of Object.entries(cloudSnapshot.dailyUniqueMap)) {
+              if (Array.isArray(cloudWords)) {
+                const localList = mergedMap[dateStr] || [];
+                const localSet = new Set(localList);
+                const mergedSet = new Set(localList);
+
+                let cloudNewUniqueDelta = 0;
+                cloudWords.forEach(w => {
+                  const clean = String(w || '').trim().toLowerCase();
+                  if (clean) {
+                    if (!localSet.has(clean)) {
+                      cloudNewUniqueDelta++;
+                    }
+                    mergedSet.add(clean);
+                  }
+                });
+
+                mergedMap[dateStr] = Array.from(mergedSet);
+
+                // 校准总刷题数：至少计入跨设备新题增量，且绝不低于合并后的独立词总数
+                const baseTested = mergedAct[dateStr] || 0;
+                mergedAct[dateStr] = Math.max(baseTested + cloudNewUniqueDelta, mergedSet.size);
+              }
+            }
+            Storage.saveDailyUniqueMap(mergedMap);
+          }
+
+          // 强制不变量兜底：每一天的刷题数均必须大于等于其独立词数
+          const currentUniqueMap = Storage.getDailyUniqueMap();
+          for (const [dateStr, words] of Object.entries(currentUniqueMap)) {
+            if (Array.isArray(words) && words.length > 0) {
+              mergedAct[dateStr] = Math.max(mergedAct[dateStr] || 0, words.length);
+            }
+          }
+          Storage.saveActivity(mergedAct);
 
           if (cloudSnapshot.notes) {
             const localNotes = Storage.getNotes();
@@ -7829,21 +8719,6 @@
               }
             }
             Storage.saveNotes(mergedNotes);
-          }
-
-          if (cloudSnapshot.dailyUniqueMap) {
-            const localMap = Storage.getDailyUniqueMap();
-            const mergedMap = { ...localMap };
-            for (const [dateStr, words] of Object.entries(cloudSnapshot.dailyUniqueMap)) {
-              if (Array.isArray(words)) {
-                const existingSet = new Set(mergedMap[dateStr] || []);
-                words.forEach(w => {
-                  if (w) existingSet.add(String(w).trim().toLowerCase());
-                });
-                mergedMap[dateStr] = Array.from(existingSet);
-              }
-            }
-            Storage.saveDailyUniqueMap(mergedMap);
           }
 
           const cloudLimit = cloudData.typingPoolLimit || cloudSnapshot?.typingPoolLimit;
@@ -7930,7 +8805,7 @@
             const url = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
             const method = isPatch ? 'PATCH' : 'POST';
 
-            const resp = await fetch(url, {
+            const resp = await resilientFetch(url, {
               method: method,
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -7938,8 +8813,9 @@
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(reqPayload),
-              signal: controller.signal
-            });
+              keepalive: Boolean(keepalive),
+              timeoutMs: 16000
+            }, 2);
 
             if (!resp.ok) {
               let msg = '';
@@ -8016,10 +8892,10 @@
               headers['If-None-Match'] = cachedETag;
             }
 
-            const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+            const resp = await resilientFetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
               headers,
-              signal: controller.signal
-            });
+              timeoutMs: 16000
+            }, 2);
             if (resp.status === 304) {
               if (this.hasUnsyncedChanges()) {
                 await this.upload('launch_push_pending');
@@ -8071,10 +8947,17 @@
 
         setBadge(state, text) {
           if (typeof document === 'undefined') return;
-          const badge = document.getElementById('auto-sync-badge');
-          if (!badge) return;
-          badge.className = `sync-badge${state ? ' ' + state : ''}`;
-          badge.innerText = text;
+          const badges = [
+            document.getElementById('auto-sync-badge'),
+            document.getElementById('mobile-auto-sync-badge')
+          ].filter(Boolean);
+          if (badges.length === 0) return;
+
+          badges.forEach(badge => {
+            badge.className = `sync-badge${state ? ' ' + state : ''}`;
+            badge.innerText = text;
+          });
+          const badge = badges[0];
 
           if (state === 'error') {
             badge.title = `❌ 同步异常: ${lastErrorMessage || '网络请求受阻'} (点击查看排查建议)`;
@@ -8178,6 +9061,17 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         cushion() {
           // ★ 仅在甩出时振动，未达阈值回弹不触发任何物理振动
         },
+
+        confusableAlert() {
+          // ★ 0916C 线性马达专属：双击重挫混淆警报 (25ms起震 -> 40ms间歇 -> 50ms重挫制动)
+          if (isVibrateSupported) {
+            try {
+              navigator.vibrate([25, 40, 50]);
+            } catch (_) {}
+          }
+          this.playAcousticImpulse(0.36, 1.4);
+        },
+
 
         playAcousticImpulse(baseGain, velocity) {
           try {
@@ -8396,8 +9290,18 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
             options = [word, ...chosenDistractors.slice(0, 3)].sort(() => 0.5 - Math.random());
           } else {
-            const distractors = currentPackWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
-            options = [word, ...distractors].sort(() => 0.5 - Math.random());
+            const stDict = AppState.get('packStats')[currentPackId] || {};
+            const st = stDict[word.word];
+            const historicalConfused = (st && st.confusedWith) ? Object.keys(st.confusedWith) : [];
+            let confusedDistractor = null;
+            if (historicalConfused.length > 0) {
+              const matchedWord = currentPackWords.find(w => historicalConfused.includes(w.word) && w.word !== word.word);
+              if (matchedWord) confusedDistractor = matchedWord;
+            }
+
+            const baseDistractors = currentPackWords.filter(w => w.word !== word.word && (!confusedDistractor || w.word !== confusedDistractor.word)).sort(() => 0.5 - Math.random()).slice(0, confusedDistractor ? 2 : 3);
+            const chosen = confusedDistractor ? [confusedDistractor, ...baseDistractors] : baseDistractors;
+            options = [word, ...chosen].sort(() => 0.5 - Math.random());
           }
         }
 
@@ -8438,6 +9342,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                 ${opt.word === word.word ? '<span style="color:var(--success); font-size:0.75rem; font-weight:800;">[正确选项]</span>' : ''}
               </div>
               <div>${analysisBadge} <span>${analysisText}</span></div>
+              ${opt.antonyms && Array.isArray(opt.antonyms) && opt.antonyms.length > 0 ? `<div style="margin-top:4px; font-size:0.75rem; color:var(--error); font-weight:700;">⚡ 核心反义: ${opt.antonyms.map(a => typeof a === 'string' ? a : `${a.target}${a.for_sense ? ' (' + a.for_sense + ')' : ''}`).join(' · ')}</div>` : ''}
             </div>
           `;
 
@@ -8460,6 +9365,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
             AppState.update('hasAnsweredChoice', true);
             const isCorrect = (opt.word === word.word);
+            const curMode = AppState.get('currentMode');
 
             const renderTime = AppState.get('currentQuestionRenderTime') || performance.now();
             const rtMs = Math.max(80, Math.round(performance.now() - renderTime));
@@ -8484,6 +9390,40 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                 if (badge) { badge.style.display = 'inline-block'; badge.innerText = '解析 ▾'; }
               }
             });
+
+            if (curMode === 'confusables') {
+              const cPackId = AppState.get('currentPackId');
+              const pDict = AppState.get('packStats')[cPackId] || {};
+              const st = pDict[word.word];
+
+              if (!isCorrect) {
+                // 1. 作答误选：彻底隐藏选项区与外部独立解析卡片，让渡 100% 视口空间
+                const choiceContainer = document.getElementById('view-choice');
+                if (choiceContainer) choiceContainer.style.display = 'none';
+                const analysisCard = document.getElementById('analysis-card');
+                if (analysisCard) analysisCard.style.display = 'none';
+                const sentenceBox = document.getElementById('preloaded-sentence-box');
+                if (sentenceBox) sentenceBox.style.display = 'none';
+
+                if (Services.Haptic && typeof Services.Haptic.confusableAlert === 'function') {
+                  Services.Haptic.confusableAlert();
+                }
+                if (Views.Confusables && typeof Views.Confusables.renderDiffCard === 'function') {
+                  Views.Confusables.renderDiffCard(word, opt);
+                }
+                if (Services.Audio && typeof Services.Audio.playConfusableContrast === 'function') {
+                  Services.Audio.playConfusableContrast(opt.word, word.word);
+                }
+              } else if (st && st.confusedWith && opt && opt.word) {
+                // 正确识别出混淆词：动态执行平反 (逐步扣减历史混淆标记权重)
+                for (const o of options) {
+                  if (o.word !== word.word && st.confusedWith[o.word]) {
+                    st.confusedWith[o.word] = Math.max(0, st.confusedWith[o.word] - 1);
+                    if (st.confusedWith[o.word] === 0) delete st.confusedWith[o.word];
+                  }
+                }
+              }
+            }
 
             const mainCard = document.getElementById('main-card');
             if (mainCard) {
@@ -8518,11 +9458,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               App.recordBoxReinforceAnswer(word.word, isCorrect, rtMs);
 
             } else {
-              App.recordAnswer(isCorrect);
+              App.recordAnswer(isCorrect, (!isCorrect && opt && opt.word) ? { confusedWith: opt.word } : {});
               if (isCorrect) {
-                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+                if (feedbackEl) {
+                  feedbackEl.innerHTML = (curMode === 'confusables')
+                    ? `<span style="color:var(--success); font-weight:800;">🎯 漂亮！成功识破混淆陷阱！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`
+                    : `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+                }
               } else {
-                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                if (feedbackEl) {
+                  feedbackEl.innerHTML = (curMode === 'confusables')
+                    ? `<span style="color:var(--error); font-weight:800;">⚔️ 误入混淆陷阱！已记录混淆图谱并触发五盒降级</span>`
+                    : `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                }
               }
             }
 
@@ -8568,6 +9516,39 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     // [5.2 Flashcard View - 智能闪卡 (0916C 线性马达声触一体反向制动与内嵌折叠架构)]
     // -----------------------------------------------------------------------
     const Flashcard = {
+      formatAntonymsHtml(word) {
+        if (!word || !Array.isArray(word.antonyms) || word.antonyms.length === 0) return '';
+        const pills = word.antonyms.map(item => {
+          let target = '';
+          let sense = '';
+          let inPack = true;
+          if (typeof item === 'string') {
+            target = item;
+          } else if (item && typeof item === 'object') {
+            target = item.target || '';
+            sense = item.for_sense || '';
+            inPack = item.in_pack !== false;
+          }
+          if (!target) return '';
+          const senseStr = sense ? `<span class="antonym-sense-tag">[针对: ${Utils.escapeHTML(sense)}]</span> ` : '';
+          const jumpHint = inPack ? '点击直达该词并自测' : '点击朗读发音';
+          const actionAttr = inPack
+            ? `onclick="event.stopPropagation(); App.jumpToWord('${Utils.escapeHTML(target)}'); Services.Audio.playWord('${Utils.escapeHTML(target)}');"`
+            : `onclick="event.stopPropagation(); Services.Audio.playWord('${Utils.escapeHTML(target)}');"`;
+
+          return `
+            <span class="antonym-capsule" ${actionAttr} title="⚡ 对立反义词 · ${jumpHint}">
+              <span class="antonym-icon">⚡</span>
+              ${senseStr}<span class="antonym-word-btn">${Utils.escapeHTML(target)}</span>
+              <span class="antonym-speak-icon" onclick="event.stopPropagation(); Services.Audio.playWord('${Utils.escapeHTML(target)}');" title="朗读反义词">🔊</span>
+            </span>
+          `;
+        }).filter(Boolean).join('');
+
+        if (!pills) return '';
+        return `<div class="flashcard-antonyms-box">${pills}</div>`;
+      },
+
       isTransitioning: false,
       isSwiping: false,
       direction: 'next',
@@ -8745,6 +9726,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           backEl.innerHTML = `
             <div class="flashcard-back-inner">
               <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word.pos || '')} ${Utils.escapeHTML(word.meaning || '')}</div>
+              ${this.formatAntonymsHtml(word)}
               <div class="flashcard-embedded-analysis" id="flashcard-embedded-analysis" style="display:none;">
                 <span class="flashcard-analysis-tag tag-gouci" id="flashcard-analysis-tag">形态学构词精解</span>
                 <div class="flashcard-analysis-text" id="flashcard-analysis-text"></div>
@@ -8952,6 +9934,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           `;
         }
 
+        const antonymsHtml = this.formatAntonymsHtml(word);
         // 内嵌构词精解 HTML 生成
         let embeddedAnalysisHtml = '';
         if (word && (word.analysis || word.collocation)) {
@@ -8973,6 +9956,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             <div class="flashcard-back-inner">
               ${reinforceChipHtml}
               <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word ? (word.pos || '') : '')} ${Utils.escapeHTML(word ? (word.meaning || '') : '')}</div>
+              ${antonymsHtml}
               ${embeddedAnalysisHtml}
               <div class="flashcard-swipe-hint-mobile">‹ 左滑生疏 · 右滑掌握 ›</div>
             </div>
@@ -9204,9 +10188,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             // 迟滞滤波：85px 阈值触发微齿轮咬合 (5ms 脉冲与声学冲激)；75px 迟滞回位，防止临界振荡
             if (absX >= 85 && !this.touch.hasVibratedDetent) {
               this.touch.hasVibratedDetent = true;
+              // ★ 声触一体硬件反馈 (0916C 5ms 刚性脉冲 + 2.8kHz 高频机械起刀)
               Services.Haptic.detent();
+              // ★ 声触一体硬件反馈 (0916C 脉冲，彻底删除亮度光爆)
             } else if (absX < 75 && this.touch.hasVibratedDetent) {
               this.touch.hasVibratedDetent = false;
+              card.classList.remove('detent-snapped');
             }
 
             // 纯净自然的平移与旋转轻扫动效 (无畸变无多余模糊)
@@ -9218,6 +10205,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             const bRight = this.touch.badgeRight;
 
             if (isFlipped) {
+              // ★ 方案一核心：0~85px 弹性张力光压因子 (非线性幂次渐进聚拢)
+              const tension = Math.min(1, Math.pow(absX / 85, 1.3));
+              card.style.setProperty('--tension-ratio', tension.toFixed(3));
+
               // 动态计算待判定靛蓝衰减比例 (0px ~ 60px 连续线性淡出，无级让渡给决策光晕)
               const dragFadeDist = 60;
               const dragProgress = Math.min(1, absX / dragFadeDist);
@@ -9225,13 +10216,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               card.style.setProperty('--glow-dynamic-opacity', remainingGlow.toFixed(3));
 
               if (deltaX < -18) {
-                // 明确左滑：剥离待判定蓝态，挂载珊瑚红，边框瞬变纯红
+                // 明确左滑：剥离待判定蓝态，挂载珊瑚红，边框平滑过渡
                 card.classList.remove('flashcard-pending-decision', 'liquid-glow-right');
                 card.classList.add('liquid-glow-left');
                 if (bLeft) bLeft.style.opacity = String(Math.min(1, absX / 85));
                 if (bRight) bRight.style.opacity = '0';
               } else if (deltaX > 18) {
-                // 明确右滑：剥离待判定蓝态，挂载翡翠绿，边框瞬变纯绿
+                // 明确右滑：剥离待判定蓝态，挂载翡翠绿，边框平滑过渡
                 card.classList.remove('flashcard-pending-decision', 'liquid-glow-left');
                 card.classList.add('liquid-glow-right');
                 if (bRight) bRight.style.opacity = String(Math.min(1, deltaX / 85));
@@ -9259,6 +10250,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           this.touch.startTime = 0;
           this.touch.isDragging = false;
           this.touch.hasVibratedDetent = false;
+          card.style.removeProperty('--tension-ratio');
+          card.classList.remove('detent-snapped');
 
           if (!wasDragging && absX < 10 && deltaTime < 300) {
             card.classList.remove('liquid-glow-left', 'liquid-glow-right');
@@ -9324,6 +10317,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           this.touch.startTime = 0;
           this.touch.isDragging = false;
           this.touch.hasVibratedDetent = false;
+          card.style.removeProperty('--tension-ratio');
+          card.classList.remove('detent-snapped');
           card.classList.remove('liquid-glow-left', 'liquid-glow-right');
           card.classList.add('touch-animating');
           card.style.transform = '';
@@ -9404,8 +10399,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       clearPendingGlow(card) {
         const c = card || document.getElementById('main-card');
         if (c) {
-          c.classList.remove('flashcard-pending-decision');
+          c.classList.remove('flashcard-pending-decision', 'detent-snapped');
           c.style.removeProperty('--glow-dynamic-opacity');
+          c.style.removeProperty('--tension-ratio');
         }
       },
 
@@ -9413,6 +10409,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const card = document.getElementById('main-card');
         if (!card || !AppState.get('isCardFlipped')) return;
         const absX = Math.abs(deltaX || 0);
+        const tension = Math.min(1, Math.pow(absX / 85, 1.3));
+        card.style.setProperty('--tension-ratio', tension.toFixed(3));
         const dragProgress = Math.min(1, absX / 60);
         const remainingGlow = Math.max(0, 1 - dragProgress);
         card.style.setProperty('--glow-dynamic-opacity', remainingGlow.toFixed(3));
@@ -9608,6 +10606,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         } else {
           this.perfectFirstPassWords.delete(wordStr);
           this.correctedMistakeWords.add(wordStr);
+        }
+
+        // ★ 核心贯通：盲打模式作为主动回忆高阶训练，同步接入五盒晋级与每日打卡
+        if (typeof App !== 'undefined' && App.recordAnswerForWord) {
+          const latency = this.cardRecallLatency || 2200;
+          App.recordAnswerForWord(wordStr, isPerfect, latency, 'typing');
         }
 
         this.saveLocalSession();
@@ -11084,28 +12088,159 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.7 Confusables View - 同根易混词对决]
+    // [5.7 Confusables View - 全真混淆词对抗重构版]
     // -----------------------------------------------------------------------
     const Confusables = {
-      enter(prevMode) {},
-      leave(nextMode) { Choice.cleanup(); },
+      isCuratedOnly: false,
+
+      enter(prevMode) {
+        this.renderSubTopbar();
+        const stageArea = document.getElementById('stage-area');
+        if (stageArea) stageArea.style.display = 'block';
+        const analysisCard = document.getElementById('analysis-card');
+        if (analysisCard) analysisCard.style.display = 'none';
+      },
+
+      leave(nextMode) {
+        this.cleanup();
+        const subBar = document.getElementById('confusables-sub-bar');
+        if (subBar) subBar.remove();
+        Choice.cleanup();
+      },
+
+      renderSubTopbar() {
+        let subBar = document.getElementById('confusables-sub-bar');
+        if (!subBar) {
+          subBar = document.createElement('div');
+          subBar.id = 'confusables-sub-bar';
+          subBar.className = 'confusables-sub-bar';
+          const stageArea = document.getElementById('stage-area');
+          if (stageArea && stageArea.parentNode) {
+            stageArea.parentNode.insertBefore(subBar, stageArea);
+          }
+        }
+        subBar.innerHTML = `
+          <div class="confusables-bar-content">
+            <div class="confusables-bar-left">
+              <span class="confusables-badge">⚔️ 混淆词真题对抗</span>
+              <span class="confusables-sub-desc" id="confusables-pool-desc">
+                ${this.isCuratedOnly ? '🎯 四级核心真题易混矩阵 (100+ 考点对)' : '🌐 全词库同根/形近动态对决'}
+              </span>
+            </div>
+            <div class="confusables-bar-right">
+              <button class="btn btn-sm ${this.isCuratedOnly ? 'btn-primary' : 'btn-ghost'}" id="toggle-curated-confusables-btn" onclick="Views.Confusables.toggleCuratedMode()" style="padding:4px 10px; font-size:0.75rem; border-radius:6px; cursor:pointer;">
+                ${this.isCuratedOnly ? '返回全库对决' : '🎯 仅练真题高频对'}
+              </button>
+            </div>
+          </div>
+        `;
+      },
+
+      toggleCuratedMode() {
+        this.isCuratedOnly = !this.isCuratedOnly;
+        Services.Sync.showToast(
+          this.isCuratedOnly ? '🎯 已切换至：四级真题高频混淆词矩阵' : '🌐 已切换至：全词库同根/形近对抗',
+          'info',
+          1800
+        );
+        this.renderSubTopbar();
+        App.nextQuestion();
+      },
+
       render(word) {
         this.cleanup();
+        this.renderSubTopbar();
+
         const currentPackId = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
+        const packStats = AppState.get('packStats')[currentPackId] || {};
 
-        let sameGroup = packWords.filter(w => w.group === word.group && w.word !== word.word);
-        if (sameGroup.length < 3) {
-          sameGroup = packWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
-        } else {
-          sameGroup = sameGroup.sort(() => 0.5 - Math.random()).slice(0, 3);
-        }
+        // 三级漏斗高拟真干扰项生成 (同词根 -> Levenshtein形近 -> 同词性长度匹配)
+        const distractors = Algorithms.Confusables.generateDistractors(word, packWords, packStats, 3);
+        const options = [word, ...distractors].sort(() => 0.5 - Math.random());
 
-        const options = [word, ...sameGroup].sort(() => 0.5 - Math.random());
         Choice.render(word, options);
       },
 
+      renderDiffCard(targetWord, chosenWord) {
+        let innerDiff = document.getElementById('confusable-in-card-diff');
+        if (!innerDiff) {
+          innerDiff = document.createElement('div');
+          innerDiff.id = 'confusable-in-card-diff';
+          innerDiff.className = 'confusable-in-card-diff';
+          const mainCard = document.getElementById('main-card');
+          if (mainCard) mainCard.appendChild(innerDiff);
+        }
+
+        const diffObj = Algorithms.Confusables.generateWordDiffHtml(chosenWord.word, targetWord.word);
+        const mnemonic = Algorithms.Confusables.getMnemonic(targetWord.word, chosenWord.word);
+
+        innerDiff.innerHTML = `
+          <div class="diff-card-header">
+            <div class="diff-card-title">
+              <span class="diff-icon">⚡</span>
+              <strong>易混词对抗微差解析 (Diff Analyzer)</strong>
+            </div>
+            <button class="diff-audio-btn" onclick="Services.Audio.playConfusableContrast('${Utils.escapeHTML(chosenWord.word)}', '${Utils.escapeHTML(targetWord.word)}')">
+              🔊 对比发音
+            </button>
+          </div>
+          ${diffObj.note ? `<div class="diff-transposition-badge">${Utils.escapeHTML(diffObj.note)}</div>` : ''}
+
+          <div class="diff-grid">
+            <div class="diff-col diff-chosen">
+              <div class="diff-pill pill-wrong">❌ 你误选的词</div>
+              <div class="diff-word-title">${diffObj.diffA}</div>
+              <div class="diff-meta-row">
+                <span class="diff-phonetic">${Utils.escapeHTML(chosenWord.phonetic || '')}</span>
+                <span class="diff-pos">${Utils.escapeHTML(chosenWord.pos || '')}</span>
+              </div>
+              <div class="diff-meaning">${Utils.escapeHTML(chosenWord.meaning || '')}</div>
+              <div class="diff-analysis">${Utils.escapeHTML(chosenWord.analysis || '同根/形近易混词干扰项')}</div>
+            </div>
+
+            <div class="diff-col diff-target">
+              <div class="diff-pill pill-correct">🎯 真正的目标词</div>
+              <div class="diff-word-title">${diffObj.diffB}</div>
+              <div class="diff-meta-row">
+                <span class="diff-phonetic">${Utils.escapeHTML(targetWord.phonetic || '')}</span>
+                <span class="diff-pos">${Utils.escapeHTML(targetWord.pos || '')}</span>
+              </div>
+              <div class="diff-meaning">${Utils.escapeHTML(targetWord.meaning || '')}</div>
+              <div class="diff-analysis">${Utils.escapeHTML(targetWord.analysis || '形态学核心词根与语义解析')}</div>
+            </div>
+          </div>
+
+          ${mnemonic ? `
+            <div class="diff-mnemonic-box">
+              <div class="diff-mnemonic-label">💡 考点速记与辨析秘籍：</div>
+              <div class="diff-mnemonic-text">${Utils.escapeHTML(mnemonic)}</div>
+            </div>
+          ` : ''}
+        `;
+
+        innerDiff.style.display = 'block';
+      },
+
       cleanup() {
+        const innerDiff = document.getElementById('confusable-in-card-diff');
+        if (innerDiff) {
+          innerDiff.style.display = 'none';
+          innerDiff.innerHTML = '';
+        }
+        const externalDiff = document.getElementById('confusable-diff-card');
+        if (externalDiff) externalDiff.remove();
+
+        const choiceContainer = document.getElementById('view-choice');
+        if (choiceContainer && AppState.get('currentMode') === 'confusables') {
+          choiceContainer.style.display = 'grid';
+        }
+
+        const analysisCard = document.getElementById('analysis-card');
+        if (analysisCard && AppState.get('currentMode') === 'confusables') {
+          analysisCard.style.display = 'none';
+        }
+
         Choice.cleanup();
       }
     };
@@ -11664,6 +12799,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const rowsHtml = slice.map(w => {
           const st = stDict[w.word] || {};
           const note = allNotes[w.word] ? `<div style="color:var(--primary); font-size:0.8rem; margin-top:3px;">📝 专属笔记: ${Utils.escapeHTML(allNotes[w.word])}</div>` : '';
+          const antBadge = (w.antonyms && Array.isArray(w.antonyms) && w.antonyms.length > 0)
+            ? `<div style="color:var(--error); font-size:0.76rem; margin-top:2px; font-weight:700;">⚡ 对立反义: ${w.antonyms.map(a => typeof a === 'string' ? a : `${a.target}${a.for_sense ? ' (' + a.for_sense + ')' : ''}`).join(' · ')}</div>`
+            : '';
           const flagBadge = st.isFlagged ? `<span style="color:#f59e0b; margin-right:4px;">⭐</span>` : '';
           return `
             <tr>
@@ -11672,6 +12810,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               <td>
                 <div><strong>${Utils.escapeHTML(w.pos || '')}</strong> ${Utils.escapeHTML(w.meaning)}</div>
                 <div style="font-size:0.8rem; color:#475569; margin-top:3px;">${w.analysis ? (w.analysis_type === '引申' ? '【引申】' : '【构词】') + Utils.escapeHTML(w.analysis) : ''}</div>
+                ${antBadge}
                 ${note}
               </td>
               <td class="no-print"><span class="mistake-badge">${st.mistakes || 0} 次</span></td>
@@ -12116,9 +13255,10 @@ Gist ID: ${curId}
       // ★ 规范第 3 章：全面取缔顶部高饱和横幅，执行就地微反馈与卡片呼吸流光 (In-place Micro Feedback)
       triggerHopBadge(fromBox, toBox, isCorrect) {
         const card = document.getElementById('main-card');
+        const isFlashcardActive = (typeof AppState !== 'undefined' && AppState.get('currentMode') === 'flashcard');
 
-        // 1. 卡片边缘就地呼吸流光 (Edge Glow)
-        if (card) {
+        // 1. 卡片边缘就地呼吸流光 (Edge Glow) —— 闪卡模式彻底免除闪光
+        if (card && !isFlashcardActive) {
           card.classList.remove('edge-glow-success', 'edge-glow-warning');
           void card.offsetWidth; // 触发回流重置动效
           card.classList.add(isCorrect ? 'edge-glow-success' : 'edge-glow-warning');
@@ -12140,6 +13280,7 @@ Gist ID: ${curId}
       },
 
       jumpBox(targetBoxId) {
+        const targetBox = Math.max(1, Math.min(5, parseInt(targetBoxId, 10) || 1));
         const word = AppState.get('currentWord');
         if (!word) return;
         const currentPackId = AppState.get('currentPackId');
@@ -12147,27 +13288,60 @@ Gist ID: ${curId}
         const oldBox = st ? (st.box || 1) : 1;
         const now = Date.now();
 
+        // 规范目标盒子阶梯掌握度、连对与稳定性
+        const targetMastery = [0, 20, 45, 65, 85, 95][targetBox];
+        const targetStreak = targetBox === 1 ? 0 : (targetBox === 5 ? 5 : targetBox - 1);
+        const targetStability = Math.round(0.65 * Math.pow(1.6, targetBox - 1) * 100) / 100;
+        const cfg = Algorithms.Leitner.getConfig(targetBox);
+        const nextReviewDate = now + cfg.ms;
+        const targetLevel = Algorithms.Scoring.getMasteryLevel(targetMastery);
+
         App.broadcastWordStatUpdate(currentPackId, word.word, (item) => {
-          item.box = targetBoxId;
+          item.box = targetBox;
+          item.tested = Math.max(item.tested || 0, 1);
+          item.streak = targetStreak;
+          item.masteryScore = targetMastery;
+          item.level = targetLevel;
+          item.stability = targetStability;
           item.lastReviewed = now;
-          item.nextReviewDate = now + Algorithms.Leitner.getConfig(targetBoxId).ms;
-          if (targetBoxId === 5) {
-            item.streak = Math.max(item.streak || 0, 5);
-            item.masteryScore = Math.max(item.masteryScore || 0, 90);
-          } else if (targetBoxId === 1) {
-            item.streak = 0;
-            item.masteryScore = Math.min(item.masteryScore || 35, 20);
-          }
-          item.level = Algorithms.Scoring.getMasteryLevel(item.masteryScore);
+          item.nextReviewDate = nextReviewDate;
         });
 
-        const updatedSt = AppState.get('packStats')[currentPackId]?.[word.word] || {};
-        Services.Storage.logEvent('BOX', word.word, currentPackId, { box: targetBoxId, lvl: updatedSt.level, mastery: updatedSt.masteryScore, t: now });
-        this.triggerHopBadge(oldBox, targetBoxId, targetBoxId >= oldBox);
+        // 记录同步审计日志
+        Services.Storage.logEvent('BOX', word.word, currentPackId, {
+          box: targetBox,
+          lvl: targetLevel,
+          mastery: targetMastery,
+          t: now,
+          manual: true
+        });
+
+        // 触发金标跳盒动效
+        this.triggerHopBadge(oldBox, targetBox, targetBox >= oldBox);
+
+        // 刷新罗盘节点高亮与卡片内嵌小圆点
         this.render(word);
+
+        // 刷新卡片头部元数据 (星级、掌握度胶囊、遗忘风险胶囊)
+        if (typeof App !== 'undefined' && App.updateCardHeaderMeta) {
+          App.updateCardHeaderMeta(word);
+        }
+
+        // 刷新全局统计、到期徽章与看板矩阵
         App.updateDueBadge();
+        App.updateStats();
         this.markMatrixDirty();
+        this.markBoxesDirty();
         this.renderBoxes();
+
+        // 调度云端同步
+        if (typeof App !== 'undefined' && App.onQuestionAnswered) {
+          App.onQuestionAnswered(1);
+        }
+
+        // 友好气泡提示
+        const boxNames = ['', '初识盒 (每日巩固)', '复习盒 (隔日复习)', '巩固盒 (中期强化)', '强化盒 (周度稳固)', '精通盒 (永久毕业)'];
+        Services.Sync.showToast(`🎯 已手动将【${word.word}】调整至 Box ${targetBox} · ${boxNames[targetBox]}`, 'success', 1800);
       },
 
       renderMasteryMatrix(force = false) {
@@ -12565,25 +13739,41 @@ Gist ID: ${curId}
       const word = String(rawWord).trim();
       if (!word) return null;
 
-      let meaning = item.meaning || item.definition || item.trans;
+      let meaning = item.meaning || item.definition || item.trans || item.translation || '';
       if (Array.isArray(meaning)) meaning = meaning.join('；');
-      meaning = String(meaning || '');
+      meaning = String(meaning || '').trim();
+
+      let pos = item.pos || '';
+      if (!pos && meaning) {
+        const m = meaning.match(/^([a-zA-Z]+(?:\.[a-zA-Z]+)*\.)\s*(.*)$/);
+        if (m) {
+          pos = m[1];
+          meaning = m[2];
+        }
+      }
 
       let phonetic = item.phonetic || item.usphone || '';
       if (phonetic && !phonetic.startsWith('/')) phonetic = `/${phonetic}/`;
+
+      const group = item.group ||
+                    (item.category ? `【${item.category}】` : null) ||
+                    (item.root ? `【${item.root}】母词族` : '核心考点');
+
+      const part = item.part || item.section || '四级高频考点';
 
       return {
         word: word,
         phonetic: phonetic,
         meaning: meaning,
-        pos: item.pos || '',
-        group: item.group || (item.root ? `【${item.root}】母词族` : '核心考点'),
-        part: item.part || '四级高频考点',
+        pos: pos,
+        group: group,
+        part: part,
         analysis: item.analysis || item.mnemonic || '',
         analysis_type: item.analysis_type || '构词',
         collocation: item.collocation || '',
         sentenceEn: item.sentenceEn || item.example || '',
         sentenceCn: item.sentenceCn || '',
+        antonyms: Array.isArray(item.antonyms) ? item.antonyms : (item.antonym ? [item.antonym] : []),
         isGhost: Boolean(item.isGhost)
       };
     }
@@ -13526,7 +14716,12 @@ Gist ID: ${curId}
               st.box = p.currentBox;
               st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
               st.streak = oldStreak + 1;
-              st.masteryScore = Math.min(100, oldMastery + 10);
+              let score = Math.min(100, oldMastery + 10);
+              const minMasteryByBox = [0, 15, 36, 56, 76, 90];
+              if (score < minMasteryByBox[p.currentBox]) {
+                score = minMasteryByBox[p.currentBox];
+              }
+              st.masteryScore = score;
               st.level = Algorithms.Scoring.getMasteryLevel(st.masteryScore);
               st.lastReviewed = now;
               st.nextReviewDate = scheduledDate;
@@ -13779,6 +14974,14 @@ Gist ID: ${curId}
         const targetPack = normalizedPacks[curPack] ? curPack : (normalizedPacks['all_2257'] ? 'all_2257' : Object.keys(normalizedPacks)[0]);
         this.switchWordPack(targetPack, { skipHistoryPush: true });
 
+        // 挂载后强制刷新当前视图与罗盘看板
+        this.renderCurrentView();
+        this.updateStats();
+        if (typeof Views !== 'undefined' && Views.Compass) {
+          Views.Compass.renderBoxes();
+          Views.Compass.renderMatrix();
+        }
+
         try {
           const totalWordsCount = Object.values(normalizedPacks).reduce((sum, p) => sum + (p.words ? p.words.length : 0), 0);
           if (totalWordsCount > 20 && typeof Services !== 'undefined' && Services.Storage && Services.Storage.cachePacksToDB) {
@@ -13793,8 +14996,12 @@ Gist ID: ${curId}
         if (typeof window === 'undefined') return;
 
         const tryHydrateGlobal = () => {
-          const packs = window.VOCABULARY_PACKS;
-          const rawWords = window.WORDS_DATA || window.__PRELOADED_WORDS__ || window.words;
+          const packs = (typeof window !== 'undefined' && window.VOCABULARY_PACKS) ||
+                        (typeof VOCABULARY_PACKS !== 'undefined' ? VOCABULARY_PACKS : null);
+          const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__ || window.words)) ||
+                           (typeof WORDS_DATA !== 'undefined' ? WORDS_DATA : null) ||
+                           (typeof CET4_LISTENING_WORDS !== 'undefined' ? CET4_LISTENING_WORDS : null) ||
+                           (typeof words !== 'undefined' ? words : null);
 
           if (packs && typeof packs === 'object' && Object.keys(packs).length > 0) {
             const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
@@ -13885,9 +15092,13 @@ Gist ID: ${curId}
       },
 
       init() {
-        let packs = (typeof window !== 'undefined' ? window.VOCABULARY_PACKS : null) || {};
-        const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__)) ||
-                         (typeof WORDS_DATA !== 'undefined' ? WORDS_DATA : null);
+        let packs = (typeof window !== 'undefined' && window.VOCABULARY_PACKS) ||
+                    (typeof VOCABULARY_PACKS !== 'undefined' ? VOCABULARY_PACKS : null) ||
+                    {};
+        const rawWords = (typeof window !== 'undefined' && (window.WORDS_DATA || window.__PRELOADED_WORDS__ || window.words)) ||
+                         (typeof WORDS_DATA !== 'undefined' ? WORDS_DATA : null) ||
+                         (typeof CET4_LISTENING_WORDS !== 'undefined' ? CET4_LISTENING_WORDS : null) ||
+                         (typeof words !== 'undefined' ? words : null);
 
         let initialPacksLoaded = false;
 
@@ -13925,6 +15136,26 @@ Gist ID: ${curId}
 
         this.restorePreferences();
         Views.VocabUpgrader.render();
+        
+        // 自动无感扫描并修复历史 30 天打卡数据单调性 (保证刷题数 >= 独立词数)
+        try {
+          const actData = Services.Storage.getActivity();
+          const uniqMap = Services.Storage.getDailyUniqueMap();
+          let mutated = false;
+          for (const [day, wList] of Object.entries(uniqMap)) {
+            if (Array.isArray(wList) && wList.length > 0) {
+              const curAct = actData[day] || 0;
+              if (curAct < wList.length) {
+                actData[day] = wList.length;
+                mutated = true;
+              }
+            }
+          }
+          if (mutated) {
+            Services.Storage.saveActivity(actData);
+          }
+        } catch (_) {}
+
         this.initDailyActivity();
         this.initCloudConfig();
 
@@ -14083,17 +15314,26 @@ Gist ID: ${curId}
         if (targetNumEl) targetNumEl.innerText = target;
 
         const activityData = Services.Storage.getActivity();
-        const todayCount = activityData[today] || 0;
+        let todayCount = activityData[today] || 0;
+
+        const dailyUniqueMap = Services.Storage.getDailyUniqueMap();
+        const todayUniqueWords = Array.isArray(dailyUniqueMap[today]) ? dailyUniqueMap[today] : [];
+        const uniqueCount = todayUniqueWords.length;
+
+        // ★ 核心数学自愈闭环：刷题总数绝不可少于遇到的独立词数 (自动纠偏历史倒挂数据)
+        if (todayCount < uniqueCount) {
+          todayCount = uniqueCount;
+          activityData[today] = todayCount;
+          Services.Storage.saveActivity(activityData);
+        }
+
         const dailyCountEl = typeof document !== 'undefined' ? document.getElementById('daily-count') : null;
         const todayTestedEl = typeof document !== 'undefined' ? document.getElementById('today-tested-count') : null;
         const uniqueCountEl = typeof document !== 'undefined' ? document.getElementById('daily-unique-count') : null;
 
         if (dailyCountEl) dailyCountEl.innerText = todayCount;
         if (todayTestedEl) todayTestedEl.innerText = todayCount;
-
-        const dailyUniqueMap = Services.Storage.getDailyUniqueMap();
-        const todayUniqueWords = Array.isArray(dailyUniqueMap[today]) ? dailyUniqueMap[today] : [];
-        if (uniqueCountEl) uniqueCountEl.innerText = todayUniqueWords.length;
+        if (uniqueCountEl) uniqueCountEl.innerText = uniqueCount;
 
         const pct = Math.min(100, Math.round((todayCount / target) * 100));
         const barFill = typeof document !== 'undefined' ? document.getElementById('daily-bar-fill') : null;
@@ -14104,11 +15344,18 @@ Gist ID: ${curId}
         const today = Utils.getLocalDateStr();
         const activityData = Services.Storage.getActivity();
         activityData[today] = (activityData[today] || 0) + 1;
-        Services.Storage.saveActivity(activityData);
 
         if (words) {
           Services.Storage.recordDailyWord(today, words);
         }
+
+        // 保证刷题计数始终不小于当日独立词数
+        const dailyUniqueMap = Services.Storage.getDailyUniqueMap();
+        const todayUniqueCount = (dailyUniqueMap[today] || []).length;
+        if (activityData[today] < todayUniqueCount) {
+          activityData[today] = todayUniqueCount;
+        }
+        Services.Storage.saveActivity(activityData);
 
         this.initDailyActivity();
         if (typeof updateDailyProgressUI === 'function') {
@@ -14230,6 +15477,19 @@ Gist ID: ${curId}
 
       getEffectivePool() {
         let pool = AppState.get('activePool');
+        const curMode = AppState.get('currentMode');
+
+        if (curMode === 'confusables' && typeof Views !== 'undefined' && Views.Confusables && Views.Confusables.isCuratedOnly) {
+          const curPack = AppState.get('currentPackId');
+          const allWords = AppState.get('allPacks')[curPack]?.words || [];
+          const curatedSet = new Set();
+          if (typeof Algorithms !== 'undefined' && Algorithms.Confusables && Algorithms.Confusables.CURATED_PAIRS) {
+            Algorithms.Confusables.CURATED_PAIRS.forEach(p => p.words.forEach(w => curatedSet.add(w.toLowerCase())));
+          }
+          const filtered = allWords.filter(w => curatedSet.has((w.word || '').toLowerCase()));
+          if (filtered.length > 0) return filtered;
+        }
+
         const mistakeOnly = (typeof document !== 'undefined' ? document.getElementById('mistake-only-chk')?.checked : false) || false;
         const curPack = AppState.get('currentPackId');
         const stDict = AppState.get('packStats')[curPack] || {};
@@ -15067,28 +16327,7 @@ Gist ID: ${curId}
           AppState.update('recentQuestionBuffer', buf);
         }
 
-        const curPack = AppState.get('currentPackId');
-        const stWord = AppState.get('packStats')[curPack]?.[word.word] || {};
-        const lvl = Algorithms.Scoring.getMasteryLevel(stWord.masteryScore ?? 35);
-        stWord.level = lvl;
-        const mScore = stWord.masteryScore ?? 35;
-        const riskData = Algorithms.Ebbinghaus.calculateMemoryRisk(stWord);
-
-        const starEl = typeof document !== 'undefined' ? document.getElementById('star-level') : null;
-        const groupTip = typeof document !== 'undefined' ? document.getElementById('group-tip') : null;
-        if (starEl) starEl.innerText = '★'.repeat(lvl) + '☆'.repeat(5 - lvl);
-        if (groupTip) groupTip.innerText = word.group || word.part || '核心考点';
-
-        const masteryEl = typeof document !== 'undefined' ? document.getElementById('mastery-pill') : null;
-        const riskEl = typeof document !== 'undefined' ? document.getElementById('risk-pill') : null;
-        if (masteryEl) {
-          masteryEl.innerText = `掌握度: ${mScore}%`;
-          masteryEl.style.color = mScore >= 80 ? 'var(--success)' : (mScore >= 50 ? 'var(--primary)' : 'var(--muted)');
-        }
-        if (riskEl) {
-          riskEl.innerText = `遗忘风险: ${riskData.risk}%`;
-          riskEl.className = `risk-pill ${riskData.risk > 50 ? 'danger' : (riskData.risk > 25 ? 'warning' : 'safe')}`;
-        }
+        this.updateCardHeaderMeta(word);
 
         const prevBtn = typeof document !== 'undefined' ? document.getElementById('prev-btn') : null;
         if (prevBtn) prevBtn.style.display = (AppState.get('historyCursor') > 0) ? 'block' : 'none';
@@ -15177,7 +16416,7 @@ Gist ID: ${curId}
         if (termEl) termEl.innerText = word.word;
         if (subEl) subEl.innerText = word.phonetic || '';
 
-        if (AppState.get('currentMode') !== 'flashcard' && word.analysis) {
+        if (AppState.get('currentMode') !== 'flashcard' && AppState.get('currentMode') !== 'confusables' && word.analysis) {
           const tag = document.getElementById('analysis-tag');
           const isExt = (word.analysis_type === '引申');
           if (tag) {
@@ -15190,11 +16429,26 @@ Gist ID: ${curId}
           if (cardEl) cardEl.style.display = 'block';
         }
 
-        if (AppState.get('currentMode') !== 'flashcard' && word.collocation) {
+        if (AppState.get('currentMode') !== 'flashcard' && AppState.get('currentMode') !== 'confusables' && word.collocation) {
           const colocBox = document.getElementById('collocation-box');
           if (colocBox) {
             colocBox.innerText = `【核心考点搭配】：${word.collocation}`;
             colocBox.style.display = 'block';
+          }
+        }
+
+        const antBox = document.getElementById('analysis-antonyms-box');
+        if (antBox) {
+          if (word.antonyms && Array.isArray(word.antonyms) && word.antonyms.length > 0) {
+            const antTags = word.antonyms.map(a => {
+              const t = typeof a === 'string' ? a : a.target;
+              const s = typeof a === 'object' && a.for_sense ? `[针对: ${a.for_sense}] ` : '';
+              return `${s}<b style="cursor:pointer; text-decoration:underline;" onclick="App.jumpToWord('${t}'); Services.Audio.playWord('${t}');">${t}</b> <span style="cursor:pointer; font-size:0.75rem;" onclick="event.stopPropagation(); Services.Audio.playWord('${t}');" title="发音">🔊</span>`;
+            }).join('； ');
+            antBox.innerHTML = `【⚡ 核心反义辨析】：${antTags}`;
+            antBox.style.display = 'block';
+          } else {
+            antBox.style.display = 'none';
           }
         }
       },
@@ -15234,6 +16488,33 @@ Gist ID: ${curId}
         Services.Storage.logEvent('NOTE', word.word, cPack, { note: text });
         Services.Sync.scheduleDebouncedSync(3000);
         Views.MistakesCenter.render();
+      },
+
+            updateCardHeaderMeta(word) {
+        if (!word) word = AppState.get('currentWord');
+        if (!word) return;
+        const curPack = AppState.get('currentPackId');
+        const stWord = AppState.get('packStats')[curPack]?.[word.word] || {};
+        const mScore = stWord.masteryScore ?? 35;
+        const lvl = Algorithms.Scoring.getMasteryLevel(mScore);
+        stWord.level = lvl;
+        const riskData = Algorithms.Ebbinghaus.calculateMemoryRisk(stWord);
+
+        const starEl = typeof document !== 'undefined' ? document.getElementById('star-level') : null;
+        const groupTip = typeof document !== 'undefined' ? document.getElementById('group-tip') : null;
+        if (starEl) starEl.innerText = '★'.repeat(lvl) + '☆'.repeat(5 - lvl);
+        if (groupTip) groupTip.innerText = word.group || word.part || '核心考点';
+
+        const masteryEl = typeof document !== 'undefined' ? document.getElementById('mastery-pill') : null;
+        const riskEl = typeof document !== 'undefined' ? document.getElementById('risk-pill') : null;
+        if (masteryEl) {
+          masteryEl.innerText = `掌握度: ${mScore}%`;
+          masteryEl.style.color = mScore >= 80 ? 'var(--success)' : (mScore >= 50 ? 'var(--primary)' : 'var(--muted)');
+        }
+        if (riskEl) {
+          riskEl.innerText = `遗忘风险: ${riskData.risk}%`;
+          riskEl.className = `risk-pill ${riskData.risk > 50 ? 'danger' : (riskData.risk > 25 ? 'warning' : 'safe')}`;
+        }
       },
 
       renderSentence(word) {
@@ -15277,16 +16558,16 @@ Gist ID: ${curId}
         }
       },
 
-      recordAnswer(isCorrect) {
+      recordAnswer(isCorrect, extraData = {}) {
         const word = AppState.get('currentWord');
         if (!word) return;
         const now = performance.now();
         const renderTime = AppState.get('currentQuestionRenderTime') || now;
         const responseTimeMs = Math.max(100, Math.round(now - renderTime));
-        this.recordAnswerForWord(word.word, isCorrect, responseTimeMs, AppState.get('currentMode'));
+        this.recordAnswerForWord(word.word, isCorrect, responseTimeMs, AppState.get('currentMode'), extraData);
       },
 
-      recordAnswerForWord(wordName, isCorrect, responseTimeMs = 2000, mode = 'choice') {
+      recordAnswerForWord(wordName, isCorrect, responseTimeMs = 2000, mode = 'choice', extraData = {}) {
         const currentPackId = AppState.get('currentPackId');
         const now = Date.now();
         const pStats = AppState.get('packStats') || {};
@@ -15361,22 +16642,39 @@ Gist ID: ${curId}
           ? Views.Flashcard.isTouchDevice()
           : false;
 
-        const transition = Algorithms.AdaptiveEngine.CRSE.applyRecallTransition(
-          baseStat || {},
+        // ★ 核心升级修复：在常规测试与日常刷题中完整接入莱特纳五盒晋级引擎与掌握度算法
+        const leitnerMode = AppState.get('leitnerMode') || 'instant';
+        const leitnerAdv = Algorithms.Leitner.calculateAdvance(
+          oldBox,
           isCorrect,
-          responseTimeMs,
-          {
-            mode,
-            wordLen: wordName.length,
-            isTouch,
-            sessionCount: AppState.get('sessionAnswered') || 0
-          }
+          leitnerMode,
+          baseStat ? baseStat.lastReviewed : 0,
+          baseStat ? baseStat.nextReviewDate : 0
         );
 
-        const newBox = transition.box;
-        const newNextReviewDate = transition.nextReviewDate;
-        const newMastery = transition.masteryScore;
+        const newBox = leitnerAdv.box;
+        const newNextReviewDate = leitnerAdv.nextReviewDate;
+
+        const deltaMastery = Algorithms.Scoring.calculateMasteryDelta(
+          isCorrect,
+          responseTimeMs,
+          newStreak,
+          daysSinceLastReview,
+          mode
+        );
+        let newMastery = Math.min(100, Math.max(10, oldMastery + deltaMastery));
+        const minMasteryByBox = [0, 15, 36, 56, 76, 90];
+        const maxMasteryByBox = [0, 35, 55, 75, 89, 100];
+        if (isCorrect && newMastery < minMasteryByBox[newBox]) {
+          newMastery = minMasteryByBox[newBox];
+        } else if (!isCorrect && newMastery > maxMasteryByBox[newBox]) {
+          newMastery = maxMasteryByBox[newBox];
+        }
         const newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+        const newStability = Math.round(Math.max(0.65, 0.65 * Math.pow(1.6, newBox - 1)) * 100) / 100;
+        const newDifficulty = isCorrect
+          ? Math.max(1.0, (baseStat?.difficulty || 5.0) - 0.2)
+          : Math.min(10.0, (baseStat?.difficulty || 5.0) + 0.8);
 
         this.broadcastWordStatUpdate(currentPackId, wordName, (st) => {
           st.tested = newTested;
@@ -15385,11 +16683,16 @@ Gist ID: ${curId}
           st.box = newBox;
           st.level = newLevel;
           st.masteryScore = newMastery;
-          st.stability = transition.stability;
-          st.difficulty = transition.difficulty;
+          st.stability = newStability;
+          st.difficulty = newDifficulty;
           st.lastReviewed = now;
           st.lastResponseTime = responseTimeMs;
           st.nextReviewDate = newNextReviewDate;
+
+          if (!isCorrect && extraData && extraData.confusedWith) {
+            if (!st.confusedWith) st.confusedWith = {};
+            st.confusedWith[extraData.confusedWith] = (st.confusedWith[extraData.confusedWith] || 0) + 1;
+          }
         });
 
         const activeSt = pStats[currentPackId]?.[wordName] || pStats['all_2257']?.[wordName];
@@ -16371,11 +17674,20 @@ Gist ID: ${curId}
     function updateDailyProgressUI() {
       const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr() : new Date().toISOString().slice(0, 10);
       const act = (typeof Services !== 'undefined' && Services.Storage) ? Services.Storage.getActivity() : {};
-      const testedToday = act[todayStr] || 0;
+      let testedToday = act[todayStr] || 0;
 
       const dailyUniqueMap = (typeof Services !== 'undefined' && Services.Storage && Services.Storage.getDailyUniqueMap) ? Services.Storage.getDailyUniqueMap() : {};
       const uniqueList = dailyUniqueMap[todayStr] || [];
       const uniqueToday = uniqueList.length;
+
+      // ★ 核心数学自愈闭环：做题数绝不可少于遇到的独立词数
+      if (testedToday < uniqueToday) {
+        testedToday = uniqueToday;
+        act[todayStr] = testedToday;
+        if (typeof Services !== 'undefined' && Services.Storage) {
+          Services.Storage.saveActivity(act);
+        }
+      }
 
       const target = parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_daily_target') : null) || '50', 10);
       const pct = Math.min(100, Math.round((testedToday / target) * 100));
@@ -16897,69 +18209,178 @@ Gist ID: ${curId}
 
     function parseWordsFileContent(content) {
       if (!content || typeof content !== 'string') return { packs: null, words: null };
-      content = content.replace(/^\\ufeff/, '').trim();
+      content = content.replace(/^\ufeff/, '').trim();
       let packs = null;
       let words = null;
 
+      // 辅助函数：从长难句/语篇真题数据库 (READING_DATA) 中智能提炼词汇包
+      function tryExtractFromReadingData(readingList) {
+        if (!Array.isArray(readingList) || readingList.length === 0) return null;
+        const extracted = [];
+        const seen = new Set();
+        readingList.forEach(passage => {
+          if (!passage) return;
+          const vList = passage.vocabList || passage.words || passage.vocab;
+          if (Array.isArray(vList)) {
+            vList.forEach(v => {
+              if (!v || !v.word) return;
+              const wKey = String(v.word).trim().toLowerCase();
+              if (seen.has(wKey)) return;
+              seen.add(wKey);
+
+              let m = v.meaning || v.translation || '';
+              let p = v.pos || '';
+              if (!p && m) {
+                const posM = m.match(/^([a-zA-Z]+(?:\.[a-zA-Z]+)*\.)\s*(.*)$/);
+                if (posM) { p = posM[1]; m = posM[2]; }
+              }
+
+              extracted.push({
+                word: String(v.word).trim(),
+                phonetic: v.phonetic || '',
+                meaning: m,
+                pos: p,
+                group: v.group || '【真题长难句】',
+                part: passage.title || '长难句核心考点',
+                analysis: v.analysis || '',
+                sentenceEn: passage.rawSentence || '',
+                sentenceCn: passage.translation || ''
+              });
+            });
+          }
+        });
+
+        if (extracted.length === 0) return null;
+
+        return {
+          cet4_reading_vocab: {
+            id: 'cet4_reading_vocab',
+            category: '历年真题语篇',
+            title: `长难句真题词汇 (${extracted.length} 词)`,
+            description: `从 ${readingList.length} 篇 2020-2026 四级真题语篇与长难句中提炼的核心词根考点库`,
+            words: extracted
+          }
+        };
+      }
+
+      // 快速路径 1: 纯 JSON 格式解析
       try {
         const json = JSON.parse(content);
         if (json && typeof json === 'object') {
           if (json.all_2257 && json.all_2257.words) packs = json;
-          else if (Array.isArray(json)) words = json;
+          else if (Array.isArray(json)) {
+            if (json[0]?.vocabList || json[0]?.rawSentence) {
+              const rPack = tryExtractFromReadingData(json);
+              if (rPack) packs = rPack;
+            } else {
+              words = json;
+            }
+          }
           else if (Array.isArray(json.words)) words = json.words;
-          else {
-            const hasPacks = Object.values(json).some(v => v && Array.isArray(v.words));
-            if (hasPacks) packs = json;
+          else if (json.READING_DATA && Array.isArray(json.READING_DATA)) {
+            const rPack = tryExtractFromReadingData(json.READING_DATA);
+            if (rPack) packs = rPack;
+          }
+          else if (Object.values(json).some(v => v && Array.isArray(v.words))) packs = json;
+        }
+      } catch (_) {}
+
+      if (packs || words) return { packs, words };
+
+      // 快速路径 2: 提取 JS 赋值中的 JSON 结构
+      try {
+        const assignMatch = content.match(/=\s*([{\[][\s\S]*?[}\]])\s*;?\s*(?:\(function|\/\/|\/\*|$)/);
+        if (assignMatch) {
+          const candidate = JSON.parse(assignMatch[1]);
+          if (candidate.all_2257 && candidate.all_2257.words) packs = candidate;
+          else if (Array.isArray(candidate)) {
+            if (candidate[0]?.vocabList || candidate[0]?.rawSentence) {
+              const rPack = tryExtractFromReadingData(candidate);
+              if (rPack) packs = rPack;
+            } else {
+              words = candidate;
+            }
+          }
+          else if (Object.values(candidate).some(v => v && Array.isArray(v.words))) packs = candidate;
+        }
+      } catch (_) {}
+
+      if (packs || words) return { packs, words };
+
+      // 快速路径 3: 语法转换沙箱安全执行 (支持 const/let/var 顶级变量改写与全量变量捕获)
+      let cleanJs = content
+        .replace(/^export\s+default\s+/m, '')
+        .replace(/^export\s+(const|let|var)\s+/m, '$1 ')
+        .replace(/^module\.exports\s*=\s*/m, '')
+        .replace(/^(?:const|let|var)\s+([a-zA-Z0-9_$]+)\s*=/gm, 'window.$1 = globalThis.$1 = ');
+
+      try {
+        const sandbox = { window: {}, global: {}, self: {}, globalThis: {} };
+        sandbox.window = sandbox;
+        sandbox.global = sandbox;
+        sandbox.self = sandbox;
+        sandbox.globalThis = sandbox;
+
+        const fn = new Function('window', 'global', 'self', 'globalThis', cleanJs);
+        fn(sandbox, sandbox, sandbox, sandbox);
+
+        if (sandbox.READING_DATA && Array.isArray(sandbox.READING_DATA)) {
+          const rPack = tryExtractFromReadingData(sandbox.READING_DATA);
+          if (rPack) packs = rPack;
+        } else if (sandbox.VOCABULARY_PACKS && typeof sandbox.VOCABULARY_PACKS === 'object') {
+          packs = sandbox.VOCABULARY_PACKS;
+        } else if (sandbox.WORDS_DATA && Array.isArray(sandbox.WORDS_DATA)) {
+          words = sandbox.WORDS_DATA;
+        } else if (sandbox.words && Array.isArray(sandbox.words)) {
+          words = sandbox.words;
+        } else if (sandbox.CET4_LISTENING_WORDS && Array.isArray(sandbox.CET4_LISTENING_WORDS)) {
+          words = sandbox.CET4_LISTENING_WORDS;
+        }
+
+        if (!packs && !words) {
+          for (const [k, v] of Object.entries(sandbox)) {
+            if (['window', 'global', 'self', 'globalThis'].includes(k)) continue;
+            if (!v || typeof v !== 'object') continue;
+            if (Array.isArray(v) && v.length > 0 && (v[0].vocabList || v[0].rawSentence)) {
+              const rPack = tryExtractFromReadingData(v);
+              if (rPack) { packs = rPack; break; }
+            }
+            if (v.all_2257 && Array.isArray(v.all_2257.words)) { packs = v; break; }
+            if (Object.values(v).some(p => p && Array.isArray(p.words) && p.words.length > 0)) { packs = v; break; }
+            if (Array.isArray(v) && v.length > 0 && (v[0].word || v[0].name || v[0].id)) { words = v; break; }
           }
         }
       } catch (_) {}
 
-      let cleanJs = content
-        .replace(/^export\\s+default\\s+/m, '')
-        .replace(/^export\\s+(const|let|var)\\s+/m, '$1 ')
-        .replace(/^module\\.exports\\s*=\\s*/m, '');
-
-      if (!packs && !words) {
-        try {
-          const sandbox = { window: {}, global: {}, self: {}, globalThis: {} };
-          sandbox.window = sandbox;
-          sandbox.global = sandbox;
-          sandbox.self = sandbox;
-          sandbox.globalThis = sandbox;
-
-          const fn = new Function('window', 'global', 'self', 'globalThis', cleanJs);
-          fn(sandbox, sandbox, sandbox, sandbox);
-
-          if (sandbox.VOCABULARY_PACKS && typeof sandbox.VOCABULARY_PACKS === 'object') {
-            packs = sandbox.VOCABULARY_PACKS;
-          } else if (sandbox.WORDS_DATA && Array.isArray(sandbox.WORDS_DATA)) {
-            words = sandbox.WORDS_DATA;
-          } else if (sandbox.words && Array.isArray(sandbox.words)) {
-            words = sandbox.words;
-          }
-        } catch (_) {}
-      }
-
+      // 快速路径 4: DOM 脚本注入兜底
       if (!packs && !words && typeof document !== 'undefined') {
         try {
           const prevPacks = window.VOCABULARY_PACKS;
           const prevWords = window.WORDS_DATA;
+          const prevReading = window.READING_DATA;
           window.VOCABULARY_PACKS = undefined;
           window.WORDS_DATA = undefined;
+          window.READING_DATA = undefined;
 
           const scriptEl = document.createElement('script');
           scriptEl.textContent = cleanJs;
           document.head.appendChild(scriptEl);
           scriptEl.remove();
 
-          if (window.VOCABULARY_PACKS && typeof window.VOCABULARY_PACKS === 'object') {
+          if (window.READING_DATA && Array.isArray(window.READING_DATA)) {
+            const rPack = tryExtractFromReadingData(window.READING_DATA);
+            if (rPack) packs = rPack;
+          } else if (window.VOCABULARY_PACKS && typeof window.VOCABULARY_PACKS === 'object') {
             packs = window.VOCABULARY_PACKS;
           } else if (window.WORDS_DATA && Array.isArray(window.WORDS_DATA)) {
             words = window.WORDS_DATA;
+          } else if (window.CET4_LISTENING_WORDS && Array.isArray(window.CET4_LISTENING_WORDS)) {
+            words = window.CET4_LISTENING_WORDS;
           }
 
           if (!window.VOCABULARY_PACKS && prevPacks) window.VOCABULARY_PACKS = prevPacks;
           if (!window.WORDS_DATA && prevWords) window.WORDS_DATA = prevWords;
+          if (!window.READING_DATA && prevReading) window.READING_DATA = prevReading;
         } catch (_) {}
       }
 
@@ -17159,6 +18580,25 @@ Gist ID: ${curId}
         });
       });
     }
+
+    
+      // ★ 全网态自适应链路：监听网络在线/离线事件，网络断开静默保护，重新连网瞬间自动触发同步接力
+      if (typeof window !== 'undefined') {
+        window.addEventListener('online', () => {
+          Services.Sync.setBadge('syncing', '🌐 网络恢复，正在同步...');
+          setTimeout(() => {
+            if (Services.Sync.hasUnsyncedChanges()) {
+              Services.Sync.upload('online_reconnect');
+            } else {
+              Services.Sync.autoPullOnLaunch();
+            }
+          }, 1200);
+        });
+
+        window.addEventListener('offline', () => {
+          Services.Sync.setBadge('offline', '📡 离线模式 (本地安全暂存)');
+        });
+      }
 
     function bootstrapApp() {
       try {
