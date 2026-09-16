@@ -3259,8 +3259,14 @@
     </div>
     <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:20px;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
-        <h3 style="color:var(--text); margin:0;">☁️ 跨设备多端云同步 (电脑/手机/iPad 错题互通)</h3>
-        <span id="manage-sync-time" style="font-size:0.75rem; color:var(--muted);">上次同步: 从未同步</span>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <h3 style="color:var(--text); margin:0;">☁️ 跨设备多端云同步 (电脑/手机/iPad 错题互通)</h3>
+          <span id="app-version-badge" class="badge-mini" style="background:var(--primary-light); color:var(--primary); font-size:0.72rem; padding:2px 7px; border-radius:6px;" title="当前网页构建代码版本号">v3.0-BuildSyncOk</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span id="manage-sync-time" style="font-size:0.75rem; color:var(--muted);">上次同步: 从未同步</span>
+          <button class="btn btn-mini" style="background:var(--bg); border:1px solid var(--border); color:var(--text); font-size:0.72rem; padding:2px 8px; cursor:pointer;" onclick="clearPwaCacheAndReload()" title="如线上代码已更新但手机仍显示旧版，点击此按钮强制注销 Service Worker 并重载">🧹 清除旧缓存并强刷</button>
+        </div>
       </div>
       <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;">支持通过 GitHub Gist 进行私密云端存档，在手机或另一台电脑上输入相同凭据即可随时双向同步进度：</p>
 
@@ -16468,7 +16474,34 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    window.saveCloudSyncConfig = (silent = false) => {
+    window.clearPwaCacheAndReload = async function() {
+      if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+        Services.Sync.showToast('🧹 正在注销旧版工作线程并清理缓存...', 'info', 2000);
+      }
+      try {
+        if ('serviceWorker' in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const reg of registrations) {
+            await reg.unregister();
+          }
+        }
+        if ('caches' in window) {
+          const keys = await caches.keys();
+          for (const key of keys) {
+            await caches.delete(key);
+          }
+        }
+      } catch (err) {
+        console.warn('[CacheBuster] Unregister error:', err);
+      }
+      setTimeout(() => {
+        const cleanUrl = window.location.href.split('?')[0].split('#')[0];
+        const hash = window.location.hash || '';
+        window.location.href = `${cleanUrl}?_b=${Date.now()}${hash}`;
+      }, 500);
+    };
+
+        window.saveCloudSyncConfig = (silent = false) => {
       const rawToken = document.getElementById('gist-token')?.value || '';
       const rawGistId = document.getElementById('gist-id')?.value || '';
       const cleanToken = rawToken.replace(/^(Bearer|token)\s+/i, '').trim();
@@ -16804,6 +16837,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         navigator.serviceWorker.register('./sw.js', { scope: './' })
           .then((registration) => {
             console.log('[PWA] Service Worker 注册就绪，Scope:', registration.scope);
+            try { registration.update(); } catch (_) {}
+            registration.onupdatefound = () => {
+              const installingWorker = registration.installing;
+              if (installingWorker) {
+                installingWorker.onstatechange = () => {
+                  if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+                      Services.Sync.showToast('🚀 检测到新版代码已发布，刷新页面即可生效！', 'info', 3000);
+                    }
+                  }
+                };
+              }
+            };
           })
           .catch((err) => {
             console.warn('[PWA] Service Worker 注册失败:', err);
