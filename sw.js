@@ -1,4 +1,4 @@
-const CACHE_NAME = 'morphosyntax-v3.2-0916c';
+const CACHE_NAME = 'morphosyntax-v3.3-0916c';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
