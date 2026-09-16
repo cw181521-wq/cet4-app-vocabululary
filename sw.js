@@ -1,4 +1,4 @@
-const CACHE_NAME = 'morpho-pwa-v2.1';
+const CACHE_NAME = 'morpho-pwa-v2.2';
 const ASSETS = [
   './',
   './index.html',
@@ -10,7 +10,7 @@ const ASSETS = [
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // 逐个缓存，单个资源 404 不会导致整个 PWA 安装失败
+      // 逐个缓存，单个静态资源 404 不会导致整个 PWA 安装失败
       for (const asset of ASSETS) {
         try {
           await cache.add(asset);
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (e) => {
       if (cached) return cached;
 
       return fetch(e.request).then((resp) => {
-        // 如果是同源有效文件，动态放入缓存
+        // 如果是同源有效文件，动态写入缓存
         if (resp && resp.status === 200 && resp.type === 'basic') {
           const respClone = resp.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(e.request, respClone));

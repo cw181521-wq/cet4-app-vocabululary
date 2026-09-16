@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" id="meta-theme-color">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="词根终端">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#0f766e">
   <!-- PWA 独立清单与多端桌面图标 -->
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#0f766e">
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
@@ -18,6 +17,11 @@
   <style>
     :root {
       --dynamic-viewport-h: 100vh;
+    }
+    html {
+      background-color: var(--card-bg);
+      min-height: 100%;
+      min-height: 100dvh;
     }
     :root[data-theme="light"] {
       --bg: #eef3f2;
@@ -925,17 +929,18 @@
         padding: 0 !important;
         padding-top: env(safe-area-inset-top, 0px) !important;
         background-color: var(--card-bg) !important;
+        min-height: 100dvh !important;
       }
       .container {
         width: 100vw !important;
         max-width: 100% !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        border-left: none !important;
-        border-right: none !important;
-        border-top: none !important;
-        padding: 8px 10px !important;
+        border: none !important;
+        background: var(--card-bg) !important;
+        padding: 8px 12px calc(16px + env(safe-area-inset-bottom, 0px)) 12px !important;
         gap: 10px !important;
+        min-height: 100dvh !important;
       }
 
       .header {
@@ -15780,6 +15785,17 @@ Gist ID: ${curId}
       try {
         localStorage.setItem('morpho_theme', targetTheme);
       } catch (_) {}
+
+      // 动态同步更新移动端手机状态栏与手势底色
+      const themeColorMeta = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
+      if (themeColorMeta) {
+        const THEME_COLORS = {
+          light: '#ffffff',
+          dark: '#182628',
+          sepia: '#faf4e6'
+        };
+        themeColorMeta.setAttribute('content', THEME_COLORS[targetTheme] || '#ffffff');
+      }
 
       const topSelect = document.getElementById('theme-select');
       if (topSelect && topSelect.value !== targetTheme) {
