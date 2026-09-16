@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff" id="meta-theme-color">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="词根终端">
   <meta name="mobile-web-app-capable" content="yes">
@@ -87,8 +89,6 @@
     [inert] {
       pointer-events: none !important;
       user-select: none !important;
-      filter: grayscale(0.2) contrast(0.9);
-      opacity: 0.85;
     }
 
     .custom-scroll,
@@ -858,7 +858,8 @@
       .typing-sidebar-column .typing-mistakes-table-wrap { max-height: 280px; }
     }
 
-    .shortcut-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); z-index: 9999; display: none; justify-content: center; align-items: center; will-change: opacity; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
+    .shortcut-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); z-index: 10005; display: none; justify-content: center; align-items: center; will-change: opacity; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
+.shortcut-modal-overlay.open { display: flex !important; opacity: 1 !important; pointer-events: auto !important; visibility: visible !important; }
     .shortcut-modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; width: 92%; max-width: 620px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); color: var(--text); display: flex; flex-direction: column; gap: 16px; will-change: transform, opacity; animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .shortcut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
     .shortcut-row { display: flex; align-items: center; gap: 8px; }
@@ -929,7 +930,9 @@
         padding: 0 !important;
         padding-top: env(safe-area-inset-top, 0px) !important;
         background-color: var(--card-bg) !important;
+        min-height: 100% !important;
         min-height: 100dvh !important;
+        overflow-x: hidden !important;
       }
       .container {
         width: 100vw !important;
@@ -938,9 +941,12 @@
         box-shadow: none !important;
         border: none !important;
         background: var(--card-bg) !important;
-        padding: 8px 12px calc(16px + env(safe-area-inset-bottom, 0px)) 12px !important;
+        /* ★ 消除死白下巴：内容紧凑对齐，仅保留真实安全边距，不增加多余空白底板 */
+        padding: 6px 10px max(8px, env(safe-area-inset-bottom, 8px)) 10px !important;
         gap: 10px !important;
+        min-height: 100% !important;
         min-height: 100dvh !important;
+        box-sizing: border-box !important;
       }
 
       .header {
@@ -1188,8 +1194,6 @@
     @keyframes slideUpBottomBar { from { transform: translate3d(0, 100%, 0); opacity: 0; } to { transform: translate3d(0, 0, 0); opacity: 1; } }
     /* ★ 幽灵遮罩防御体系 (Ghost Overlay Trap Defense)：关闭状态下彻底剥离触控与可视性 */
     .mobile-mode-overlay,
-    .modal-overlay,
-    .ui-modal-overlay,
     #mobile-mode-sheet,
     #mobile-tools-sheet {
       position: fixed;
@@ -1210,15 +1214,48 @@
       transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity;
     }
+
+    .modal-overlay,
+    .ui-modal-overlay,
+    .typing-milestone-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.68);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10005;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 0;
+    }
+
     .mobile-mode-overlay.open,
-    .modal-overlay.open,
-    .ui-modal-overlay.open,
     #mobile-mode-sheet.open,
     #mobile-tools-sheet.open {
       display: flex !important;
       opacity: 1 !important;
       pointer-events: auto !important;
       visibility: visible !important;
+    }
+
+    .modal-overlay.open,
+    .ui-modal-overlay.open,
+    .typing-milestone-overlay.open {
+      display: flex !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
+      z-index: 10005 !important;
     }
     .mobile-mode-sheet-card { width: 100%; max-width: 560px; max-height: 85vh; background: var(--card-bg); border-top: 2px solid var(--border); border-radius: 20px 20px 0 0; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; overflow: hidden; animation: slideUpSheet 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform; }
     @keyframes slideUpSheet { from { transform: translate3d(0, 100%, 0); } to { transform: translate3d(0, 0, 0); } }
@@ -3230,11 +3267,11 @@
       <div class="sync-grid-inputs" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:10px; margin-bottom:10px;">
         <div>
           <label style="font-size:0.78rem; font-weight:700; color:var(--muted); display:block; margin-bottom:3px;">GitHub Personal Access Token:</label>
-          <input type="password" id="gist-token" style="width:100%;" placeholder="ghp_..." onchange="saveCloudSyncConfig()">
+          <input type="password" id="gist-token" style="width:100%;" placeholder="ghp_..." oninput="saveCloudSyncConfig(true)" onchange="saveCloudSyncConfig()">
         </div>
         <div>
           <label style="font-size:0.78rem; font-weight:700; color:var(--muted); display:block; margin-bottom:3px;">Gist ID (首次上传自动生成):</label>
-          <input type="text" id="gist-id" style="width:100%;" placeholder="自动生成或粘贴已有 Gist ID" onchange="saveCloudSyncConfig()">
+          <input type="text" id="gist-id" style="width:100%;" placeholder="自动生成或粘贴已有 Gist ID" oninput="saveCloudSyncConfig(true)" onchange="saveCloudSyncConfig()">
         </div>
       </div>
 
@@ -3555,6 +3592,62 @@
   }
 
   // =========================================================================
+  // ★ 工业级弱网与代理重试引擎 (resilientFetch)
+  // =========================================================================
+  async function resilientFetch(url, options = {}, maxRetries = 2) {
+    let lastErr = null;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      const controller = new AbortController();
+      const timeoutMs = options.timeoutMs || 16000;
+      let timer = null;
+
+      try {
+        const timeoutPromise = new Promise((_, reject) => {
+          timer = setTimeout(() => {
+            controller.abort();
+            reject(new Error(`网络连接超时 (${Math.round(timeoutMs / 1000)}s)`));
+          }, timeoutMs);
+        });
+
+        const reqSignal = options.signal || controller.signal;
+        const fetchOpts = { ...options, signal: reqSignal };
+        delete fetchOpts.timeoutMs;
+
+        const resp = await Promise.race([
+          fetch(url, fetchOpts),
+          timeoutPromise
+        ]);
+
+        if (timer) clearTimeout(timer);
+
+        // 若遇服务端临时 5xx 错误或 429 频控限制，进行指数退避重试
+        if ((resp.status >= 500 || resp.status === 429) && attempt < maxRetries) {
+          const retryHeader = parseInt(resp.headers?.get?.('Retry-After') || '0', 10);
+          const backoffDelay = retryHeader > 0 ? (retryHeader * 1000) : (1000 * Math.pow(2, attempt) + Math.random() * 400);
+          await new Promise(r => setTimeout(r, backoffDelay));
+          continue;
+        }
+
+        return resp;
+      } catch (err) {
+        if (timer) clearTimeout(timer);
+        lastErr = err;
+        if (options.signal && options.signal.aborted) {
+          throw err;
+        }
+        if (attempt < maxRetries && err.name !== 'AbortError') {
+          const backoffDelay = 1000 * Math.pow(2, attempt) + Math.random() * 400;
+          await new Promise(r => setTimeout(r, backoffDelay));
+          continue;
+        }
+        throw lastErr;
+      }
+    }
+    throw lastErr;
+  }
+  if (typeof window !== 'undefined') window.resilientFetch = resilientFetch;
+
+  // =========================================================================
   // ★ 模块 1：通用工具库 (Utils)
   // =========================================================================
   const Utils = (function() {
@@ -3855,6 +3948,8 @@
             }
           }
         }
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
       },
       applyFocusTrap(modalConfig) {
         if (!modalConfig || !modalConfig.element) return;
@@ -3876,7 +3971,7 @@
       },
       releaseFocusTrap(modalConfig) {
         const container = document.querySelector('.container');
-        if (container && modalStack.length <= 1) {
+        if (container) {
           container.removeAttribute('inert');
         }
         if (modalConfig && modalConfig.triggerEl) {
@@ -4267,18 +4362,27 @@
             </div>
           `;
 
-          overlay.style.display = 'flex';
+          overlay.classList.add('open');
+          overlay.classList.add('open'); overlay.classList.add('open'); overlay.style.display = 'flex';
 
+          let isSettled = false;
           const settle = (choice, isPopState = false) => {
-            overlay.style.display = 'none';
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
+            overlay.classList.remove('open'); overlay.classList.remove('open'); overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_loot_preview', { triggerHistoryBack: !isPopState });
             resolve(choice);
           };
 
-          overlay.querySelector('#loot-sprint-btn').onclick = () => settle('sprint');
-          overlay.querySelector('#loot-direct-commit-btn').onclick = () => settle('commit');
-          overlay.querySelector('#loot-cancel-btn').onclick = () => settle('cancel');
+          const sprintBtn = overlay.querySelector('#loot-sprint-btn');
+          const directCommitBtn = overlay.querySelector('#loot-direct-commit-btn');
+          const cancelBtn = overlay.querySelector('#loot-cancel-btn');
+
+          if (sprintBtn) sprintBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('sprint'); };
+          if (directCommitBtn) directCommitBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('commit'); };
+          if (cancelBtn) cancelBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); settle('cancel'); };
           overlay.onclick = (e) => { if (e.target === overlay) settle('cancel'); };
 
           ModalStackManager.openModal('ui_loot_preview', (isPop) => settle('cancel', isPop), overlay);
@@ -4322,10 +4426,15 @@
             </div>
           `;
 
+          overlay.classList.add('open');
           overlay.style.display = 'flex';
           activeModalEl = overlay;
 
+          let isSettled = false;
           const settle = (val, isPopState = false) => {
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_confirm', { triggerHistoryBack: !isPopState });
@@ -4381,9 +4490,14 @@
             </div>
           `;
 
+          overlay.classList.add('open');
           overlay.style.display = 'flex';
 
+          let isSettled = false;
           const settle = (isPopState = false) => {
+            if (isSettled) return;
+            isSettled = true;
+            overlay.classList.remove('open');
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_alert', { triggerHistoryBack: !isPopState });
@@ -4409,12 +4523,15 @@
           activeResolver = null;
         }
         if (activeModalEl) {
+          activeModalEl.classList.remove('open');
           activeModalEl.style.display = 'none';
           KeyRouter.popModal(activeModalEl);
           activeModalEl = null;
         }
         KeyRouter.clearAllModals(true);
         ModalStackManager.clearAll();
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
       }
     };
   })();
@@ -7155,67 +7272,178 @@
           }, delayMs);
         },
 
-        async fetchSafeGistFile(fileObj, token, gistId = '', timeoutMs = 15000) {
-          if (!fileObj) throw new Error('云端备份文件不存在');
+        async buildPayload(targetRevision, isPatch = false) {
+          const curPack = AppState.get('currentPackId');
+          const allPStats = AppState.get('packStats');
 
-          // 1. 如果文件未截断且内容完整，直接返回
-          if (!fileObj.truncated && typeof fileObj.content === 'string' && fileObj.content.length > 0) {
-            return fileObj.content;
+          if (curPack && allPStats[curPack]) {
+            Storage.saveStats(curPack, allPStats[curPack]);
+          }
+          for (const [pId, st] of Object.entries(allPStats)) {
+            if (st && Object.keys(st).length > 0) Storage.saveStats(pId, st);
           }
 
-          // 2. 如果被截断，严禁向 gist.githubusercontent.com 发送 Authorization 头 (会导致 CORS 拦截)
-          // 直接通过 api.github.com 主端点以 raw 格式安全获取完整文件内容
-          const cleanId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(gistId) : String(gistId || '').trim();
-          if (cleanId) {
-            try {
-              const apiRawHeaders = {
-                'Accept': 'application/vnd.github.v3.raw'
-              };
-              if (token && token.trim()) {
-                apiRawHeaders['Authorization'] = `Bearer ${token.trim()}`;
+          const localStats = Storage.getAllLocalStats();
+          const localActivity = Storage.getActivity();
+          const localNotes = Storage.getNotes();
+          const localDailyUnique = Storage.getDailyUniqueMap ? Storage.getDailyUniqueMap() : {};
+          const pendingEvents = Storage.getPendingEvents();
+
+          const eventsToUpload = pendingEvents.slice(-MAX_LOG_EVENTS);
+          inFlightEventIds = new Set(eventsToUpload.map(e => e.id));
+
+          const trimmedStats = {};
+          for (const [pId, pData] of Object.entries(localStats)) {
+            if (!pData || typeof pData !== 'object') continue;
+            const activeWords = {};
+            for (const [w, st] of Object.entries(pData)) {
+              if (!st) continue;
+              if (
+                (st.tested || 0) > 0 ||
+                Boolean(st.isFlagged) ||
+                (st.mistakes || 0) > 0 ||
+                (st.typingMistakes || 0) > 0 ||
+                (st.lastReviewed || 0) > 0 ||
+                (st.box || 1) > 1 ||
+                (st.streak || 0) > 0
+              ) {
+                activeWords[w] = st;
               }
+            }
+            if (Object.keys(activeWords).length > 0) {
+              trimmedStats[pId] = activeWords;
+            }
+          }
 
-              const rawResp = await resilientFetch(`https://api.github.com/gists/${cleanId}`, {
+          let typingSession = null;
+          if (typeof Views !== 'undefined' && Views.Typing && typeof Views.Typing.exportSession === 'function') {
+            typingSession = Views.Typing.exportSession();
+          } else if (typeof localStorage !== 'undefined') {
+            const rawSession = localStorage.getItem('morpho_typing_session');
+            if (rawSession) {
+              try { typingSession = JSON.parse(rawSession); } catch (_) {}
+            }
+          }
+          const typingPoolLimit = AppState.get('typingPoolLimit') || 60;
+
+          const internalState = {
+            snapshot: {
+              stats: trimmedStats,
+              activity: localActivity,
+              notes: localNotes,
+              dailyUniqueMap: localDailyUnique,
+              typingSession: typingSession,
+              typingPoolLimit: typingPoolLimit
+            },
+            typingSession: typingSession,
+            recentEvents: eventsToUpload
+          };
+
+          const rawJson = JSON.stringify(internalState);
+          const compressedB64 = await compress(rawJson);
+          const isCompressed = Boolean(compressedB64);
+          const checksumVal = isCompressed ? Utils.calculateChecksum(compressedB64) : Utils.calculateChecksum(rawJson);
+
+          const envelope = {
+            schema: SCHEMA,
+            format: isCompressed ? 'gzip-b64' : 'raw-json',
+            checksum: checksumVal,
+            revision: targetRevision,
+            deviceId: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_device_id') : null) || Utils.randomId('dev'),
+            timestamp: new Date().toISOString(),
+            modifiedTime: parseInt((typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_last_modified_time') : null) || String(Date.now()), 10),
+            typingSession: typingSession,
+            typingPoolLimit: typingPoolLimit,
+            payload: isCompressed ? compressedB64 : null,
+            snapshot: internalState.snapshot,
+            recentEvents: isCompressed ? null : internalState.recentEvents
+          };
+
+          const prevBackup = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_previous_cloud_backup') : null);
+          const files = {
+            [SYNC_FILE]: { content: JSON.stringify(envelope, null, 2) }
+          };
+          if (prevBackup) {
+            files['morpho_sync_backup.json'] = { content: prevBackup };
+          }
+
+          const payload = {
+            description: 'MorphoSyntax Terminal Progress Backup (v4 Gzip+EventLog)',
+            files: files
+          };
+          if (!isPatch) payload.public = false;
+          return payload;
+        },
+
+                async fetchSafeGistFile(fileObj, token, gistId = '', timeoutMs = 15000) {
+          if (!fileObj) throw new Error('云端备份文件不存在');
+
+          // 1. 优先使用 Gist 接口直接返回的内联 content
+          if (typeof fileObj.content === 'string' && fileObj.content.trim().length > 0) {
+            // 只要不是明确声明被截断，且能解析出 JSON 括号闭合，即可直接使用
+            const trimmed = fileObj.content.trim();
+            if (!fileObj.truncated && trimmed.startsWith('{') && trimmed.endsWith('}')) {
+              return trimmed;
+            }
+          }
+
+          // 2. 双通道安全获取完整原始内容：
+          // 路径 A：纯匿名请求 raw_url（严禁带 Authorization，绝不触发 CORS 预检阻断）
+          if (fileObj.raw_url) {
+            try {
+              const ctrl = new AbortController();
+              const tid = setTimeout(() => ctrl.abort(), timeoutMs);
+              const rawResp = await fetch(fileObj.raw_url, {
                 method: 'GET',
-                headers: apiRawHeaders,
-                timeoutMs: timeoutMs
-              }, 2);
-
+                signal: ctrl.signal,
+                cache: 'no-store'
+              });
+              clearTimeout(tid);
               if (rawResp && rawResp.ok) {
                 const text = await rawResp.text();
                 if (text && text.trim().length > 0) {
-                  return text;
+                  return text.trim();
+                }
+              }
+            } catch (rawErr) {
+              console.warn('[Sync] raw_url fetch failed, trying API raw endpoint:', rawErr);
+            }
+          }
+
+          // 路径 B：经由 api.github.com 的 raw 媒体类型请求 (走已验证可用的 API 主干道)
+          const cleanId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(gistId) : String(gistId || '').trim();
+          if (cleanId) {
+            try {
+              const cleanToken = (token || '').replace(/^(Bearer|token)\s+/i, '').trim();
+              const apiHeaders = {
+                'Accept': 'application/vnd.github.v3.raw'
+              };
+              if (cleanToken) {
+                apiHeaders['Authorization'] = `Bearer ${cleanToken}`;
+              }
+
+              const apiResp = await resilientFetch(`https://api.github.com/gists/${cleanId}`, {
+                method: 'GET',
+                headers: apiHeaders,
+                timeoutMs: timeoutMs
+              }, 2);
+
+              if (apiResp && apiResp.ok) {
+                const text = await apiResp.text();
+                if (text && text.trim().length > 0) {
+                  return text.trim();
                 }
               }
             } catch (apiErr) {
-              console.warn('[Sync] Fetch via api.github.com raw failed, trying fallback:', apiErr);
+              console.warn('[Sync] API raw endpoint failed:', apiErr);
             }
           }
 
-          // 3. 兜底策略：如果存在 raw_url，仅发起完全不带 Authorization 头的纯匿名 GET (规避 CORS preflight 拦截)
-          if (fileObj.raw_url) {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), timeoutMs);
-            try {
-              const resp = await fetch(fileObj.raw_url, {
-                method: 'GET',
-                signal: controller.signal,
-                cache: 'no-store'
-              });
-              if (resp.ok) {
-                return await resp.text();
-              }
-            } catch (err) {
-              console.warn('[Sync] Fallback raw_url fetch failed:', err);
-            } finally {
-              clearTimeout(timer);
-            }
+          // 3. 最终兜底：使用已有的截断内容
+          if (typeof fileObj.content === 'string' && fileObj.content.trim().length > 0) {
+            return fileObj.content.trim();
           }
-
-          if (typeof fileObj.content === 'string' && fileObj.content.length > 0) {
-            return fileObj.content;
-          }
-          throw new Error('无法从云端获取完整文件内容，请检查网络连接');
+          throw new Error('未能从云端获取有效存档内容，请检查网络或 Gist ID');
         },
 
         async parseCloudData(fileContent) {
@@ -7518,10 +7746,13 @@
 
         async upload(triggerReason = 'batch', keepalive = false) {
           if (typeof localStorage === 'undefined') return false;
-          const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
-          const gistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
+          const rawToken = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+          const rawGistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
+          const token = rawToken.replace(/^(Bearer|token)\s+/i, '').trim();
+          const cleanGistId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(rawGistId) : rawGistId;
+
           if (!token) {
-            lastErrorMessage = '未配置 GitHub Token';
+            lastErrorMessage = '未配置有效的 GitHub Token';
             return false;
           }
 
@@ -7531,10 +7762,10 @@
           this.setBadge('syncing', '☁️ 同步中...');
 
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 15000);
+          const timeoutId = setTimeout(() => controller.abort(), 16000);
 
           try {
-            let targetId = gistId;
+            let targetId = cleanGistId;
             let currentRev = parseInt(localStorage.getItem('morpho_sync_revision') || '0', 10) || 0;
             let nextRev = currentRev + 1;
 
@@ -7543,7 +7774,7 @@
             const url = isPatch ? `https://api.github.com/gists/${encodeURIComponent(targetId)}` : 'https://api.github.com/gists';
             const method = isPatch ? 'PATCH' : 'POST';
 
-            const resp = await fetch(url, {
+            const resp = await resilientFetch(url, {
               method: method,
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -7551,8 +7782,8 @@
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(reqPayload),
-              signal: controller.signal
-            });
+              timeoutMs: 18000
+            }, 2);
 
             if (!resp.ok) {
               let msg = '';
@@ -11309,26 +11540,27 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       async upload() {
-        const token = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+        const rawToken = (localStorage.getItem('morpho_gist_token') || document.getElementById('gist-token')?.value || '').trim();
+        const rawGistId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
+        const token = rawToken.replace(/^(Bearer|token)\s+/i, '').trim();
+        const cleanGistId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(rawGistId) : rawGistId;
+
         if (!token) {
-          Services.Sync.showToast('请先输入 GitHub Personal Access Token (需勾选 gist 权限)！', 'error', 3000);
+          Services.Sync.showToast('请先输入 GitHub Token (须具备 gist 权限)！', 'error', 3000);
           return;
         }
         localStorage.setItem('morpho_gist_token', token);
-        const gId = (localStorage.getItem('morpho_gist_id') || document.getElementById('gist-id')?.value || '').trim();
-        if (gId) localStorage.setItem('morpho_gist_id', gId);
+        if (cleanGistId) localStorage.setItem('morpho_gist_id', cleanGistId);
 
-        Services.Sync.showToast('正在安全备份并上传至云端...', 'info', 3000);
+        Services.Sync.showToast('☁️ 正在上传备份至 GitHub Gist...', 'info', 3000);
         const ok = await Services.Sync.upload('manual');
         if (ok) {
-          const curId = localStorage.getItem('morpho_gist_id');
-          UIModal.alert({
-            title: '🎉 备份成功',
-            message: `已成功同步至 GitHub Gist。
-Gist ID: ${curId}
-多设备填入相同 Token 与 Gist ID 即可接力！`
-          });
+          const curId = localStorage.getItem('morpho_gist_id') || cleanGistId;
+          Services.Sync.showToast(`🎉 云端备份成功！Gist ID: ${curId.slice(0, 10)}...`, 'success', 3000);
           this.updateSyncTimeUI();
+        } else {
+          const errDetail = Services.Sync.lastErrorMessage || '连接 GitHub 超时或凭证受限';
+          Services.Sync.showToast(`❌ 上传失败: ${errDetail}`, 'error', 4000);
         }
       },
 
@@ -11384,20 +11616,12 @@ Gist ID: ${curId}
           App.onDataMerged({ refreshStage: true, silentAudio: true });
 
           Services.Sync.setBadge('synced', '☁️ 同步成功');
-          Services.Sync.showToast('🎉 成功从云端拉取并合并所有学习进度与错题！', 'success', 2500);
+          Services.Sync.showToast('🎉 成功从云端拉取并合并学习进度！', 'success', 3000);
           this.updateSyncTimeUI();
         } catch (err) {
           console.error('[Sync Pull Error]', err);
           Services.Sync.setBadge('error', '❌ 同步失败');
-          UIModal.alert({
-            title: '❌ 拉取失败',
-            message: `错误原因: ${err.message}
-
-建议排查：
-1. 若为私密 Gist，Token 是否包含 gist 写入与读取权限；
-2. 检查网络是否能够连通 api.github.com；
-3. 检查 Gist ID 是否无误。`
-          });
+          Services.Sync.showToast(`❌ 拉取失败: ${err.message}`, 'error', 4000);
         }
       },
 
@@ -13336,15 +13560,18 @@ Gist ID: ${curId}
       },
 
       switchTheme(theme) {
-        if (typeof switchTheme === 'function') {
-          switchTheme(theme);
+        if (typeof window !== 'undefined' && typeof window.switchTheme === 'function') {
+          window.switchTheme(theme);
         } else {
+          const validThemes = ['light', 'dark', 'sepia'];
+          const targetTheme = validThemes.includes(theme) ? theme : 'light';
           if (typeof document !== 'undefined') {
-            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('data-theme', targetTheme);
             const sel = document.getElementById('theme-select');
-            if (sel) sel.value = theme;
+            if (sel) sel.value = targetTheme;
           }
-          if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_theme', theme);
+          if (typeof localStorage !== 'undefined') localStorage.setItem('morpho_theme', targetTheme);
+          if (typeof applySystemBarColors === 'function') applySystemBarColors(targetTheme);
         }
       },
 
@@ -15506,7 +15733,7 @@ Gist ID: ${curId}
     window.openShortcutModal = () => {
       const m = document.getElementById('shortcut-modal');
       if (m) {
-        m.style.display = 'flex';
+        m.classList.add('open'); m.style.display = 'flex';
         ModalStackManager.openModal('shortcut_modal', (isPop) => window.closeShortcutModal(isPop), m);
         KeyRouter.pushModal({
           element: m,
@@ -15517,7 +15744,7 @@ Gist ID: ${curId}
     window.closeShortcutModal = (isPopState = false) => {
       const m = document.getElementById('shortcut-modal');
       if (m) {
-        m.style.display = 'none';
+        m.classList.remove('open'); m.style.display = 'none';
         KeyRouter.popModal(m);
         ModalStackManager.dismissModal('shortcut_modal', { triggerHistoryBack: !isPopState });
       }
@@ -15777,25 +16004,58 @@ Gist ID: ${curId}
     })();
 
     window.switchWordPack = (id) => App.switchWordPack(id);
+    function applySystemBarColors(targetTheme) {
+      const THEME_COLORS = {
+        light: { bg: '#ffffff', textScheme: 'light', appleStyle: 'default' },
+        dark: { bg: '#182628', textScheme: 'dark', appleStyle: 'black-translucent' },
+        sepia: { bg: '#faf4e6', textScheme: 'light', appleStyle: 'default' }
+      };
+      const cfg = THEME_COLORS[targetTheme] || THEME_COLORS.light;
+
+      // 1. 动态贯通根容器底色，直接渗透至全面屏手势小白条（下巴）与状态栏（额头）
+      if (typeof document !== 'undefined') {
+        if (document.documentElement) {
+          document.documentElement.style.backgroundColor = cfg.bg;
+          document.documentElement.style.colorScheme = cfg.textScheme;
+        }
+        if (document.body) {
+          document.body.style.backgroundColor = cfg.bg;
+        }
+
+        // 2. 强制触发 Android Chrome/Edge 状态栏变色 (重塑 meta 标签以击穿浏览器静态缓存)
+        const oldMetas = document.querySelectorAll('meta[name="theme-color"]');
+        oldMetas.forEach(m => m.remove());
+
+        const newMeta = document.createElement('meta');
+        newMeta.name = 'theme-color';
+        newMeta.content = cfg.bg;
+        newMeta.id = 'meta-theme-color';
+        document.head.appendChild(newMeta);
+
+        // 3. 适配 iOS Safari PWA 状态栏
+        let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        if (!appleMeta) {
+          appleMeta = document.createElement('meta');
+          appleMeta.name = 'apple-mobile-web-app-status-bar-style';
+          document.head.appendChild(appleMeta);
+        }
+        appleMeta.content = cfg.appleStyle;
+      }
+    }
+
     function switchTheme(theme) {
       const validThemes = ['light', 'dark', 'sepia'];
       const targetTheme = validThemes.includes(theme) ? theme : 'light';
 
-      document.documentElement.setAttribute('data-theme', targetTheme);
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', targetTheme);
+      }
       try {
         localStorage.setItem('morpho_theme', targetTheme);
       } catch (_) {}
 
-      // 动态同步更新移动端手机状态栏与手势底色
-      const themeColorMeta = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
-      if (themeColorMeta) {
-        const THEME_COLORS = {
-          light: '#ffffff',
-          dark: '#182628',
-          sepia: '#faf4e6'
-        };
-        themeColorMeta.setAttribute('content', THEME_COLORS[targetTheme] || '#ffffff');
-      }
+      // 立即触发系统栏与全屏底色变色
+      applySystemBarColors(targetTheme);
 
       const topSelect = document.getElementById('theme-select');
       if (topSelect && topSelect.value !== targetTheme) {
@@ -16209,11 +16469,23 @@ Gist ID: ${curId}
     };
 
     window.saveCloudSyncConfig = (silent = false) => {
-      const token = document.getElementById('gist-token')?.value.trim() || '';
-      const gistId = document.getElementById('gist-id')?.value.trim() || '';
-      localStorage.setItem('morpho_gist_token', token);
-      localStorage.setItem('morpho_gist_id', gistId);
-      if (!silent) Services.Sync.showToast('☁️ 同步凭证已保存在本地', 'success', 1800);
+      const rawToken = document.getElementById('gist-token')?.value || '';
+      const rawGistId = document.getElementById('gist-id')?.value || '';
+      const cleanToken = rawToken.replace(/^(Bearer|token)\s+/i, '').trim();
+      const cleanGistId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(rawGistId) : rawGistId.trim();
+
+      if (cleanToken) localStorage.setItem('morpho_gist_token', cleanToken);
+      else localStorage.removeItem('morpho_gist_token');
+
+      if (cleanGistId) localStorage.setItem('morpho_gist_id', cleanGistId);
+      else localStorage.removeItem('morpho_gist_id');
+
+      const idInput = document.getElementById('gist-id');
+      if (idInput && cleanGistId && cleanGistId !== rawGistId) {
+        idInput.value = cleanGistId;
+      }
+
+      if (!silent) Services.Sync.showToast('☁️ 同步凭证已保存并提纯', 'success', 1500);
     };
 
     window.uploadToGitHubGist = () => Views.Manage.upload();

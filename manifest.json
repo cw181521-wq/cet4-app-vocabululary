@@ -3,6 +3,7 @@
   "short_name": "词根终端",
   "start_url": "./index.html",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "description": "CET-4 科学词根与句法全能终端 - 智能闪卡零滚动架构与艾宾浩斯抗遗忘引擎",
