@@ -16,6 +16,8 @@
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
   <script src="words_data.js" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
+  <!-- 词组库增强引入：若 phrases_data.js 未找到则自动降级尝试 phrases_data_1200_universal.js -->
+  <script src="phrases_data.js" onload="window.dispatchEvent(new CustomEvent('phrasesLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='phrases_data_1200_universal.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('phrasesLoaded'))}; s.onerror=function(){console.warn('词组库加载失败，请确保 phrases_data.js 或 phrases_data_1200_universal.js 与本页面同目录')}; document.head.appendChild(s);"></script>
   <style>
     :root {
       --dynamic-viewport-h: 100vh;
@@ -158,7 +160,6 @@
     #mistakes-tbody tr, #typing-mistakes-tbody tr { content-visibility: auto; contain-intrinsic-size: 52px; }
     .glass-backdrop { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     
-    /* 契约 D: 浮层与模态卡片 120 FPS 合成层规范 */
     .modal-overlay, .ui-modal-overlay {
       position: fixed;
       inset: 0;
@@ -229,7 +230,6 @@
     .speed-timer-bar { height: 100%; width: 100%; background: var(--error); transition: width 0.05s linear; }
     .speed-stats-bar { display: flex; justify-content: space-between; font-weight: 800; margin-top: 6px; font-size: 0.9rem; }
     
-    /* 外部解析卡片 (供非闪卡模式使用) */
     .analysis-card { background: var(--bg); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-top: 16px; text-align: left; display: none; border: 1px solid var(--border); border-left-width: 4px; }
     .analysis-tag { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px; }
     .tag-gouci { background: #dbeafe; color: #1e40af; }
@@ -257,9 +257,6 @@
     .spell-box { display: flex; gap: 8px; margin-top: 12px; }
     .spell-input { flex: 1; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1.15rem; outline: none; background: var(--card-bg); color: var(--text); }
 
-    /* =========================================================================
-       ★ 方案一核心：闪卡构词精解“内嵌流式折叠”与移动端视口预算规范
-       ========================================================================= */
     .flashcard-back {
       border-top: 1.5px dashed var(--border);
       margin-top: 14px;
@@ -297,7 +294,6 @@
       text-align: center;
     }
 
-    /* 内嵌流式构词精解与真题搭配容器 (Inline Flow Accordion) */
     .flashcard-embedded-analysis {
       background: var(--bg);
       border: 1px dashed var(--border);
@@ -396,6 +392,7 @@
     .match-tile.selected { border-color: var(--primary); background: #dbeafe; color: #1e40af; transform: scale(1.02); }
     .match-tile.matched { opacity: 0; pointer-events: none; transform: scale(0.9); }
     .match-tile.mismatch { background: var(--error-light); border-color: var(--error); }
+    .phrases-panel { display: none; }
     .upgrader-panel { display: none; }
     .upgrader-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 14px; text-align: left; }
     .upgrader-head { font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
@@ -509,7 +506,7 @@
     /* === 独立五盒看板 === */
     .leitner-overall-card { background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(147, 51, 234, 0.08) 100%); border: 1.5px solid var(--primary-light); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
     .leitner-metrics { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
-    .metric-item { display: flex; flex-direction: column; gap: 2px; }
+    .metric-item { display: flex; flex-direction: gap: 2px; }
     .metric-label { font-size: 0.75rem; color: var(--muted); }
     .metric-val { font-size: 1.35rem; font-weight: 800; color: var(--text); }
     .metric-val.due { color: #ef4444; }
@@ -722,7 +719,6 @@
       backdrop-filter: blur(4px);
     }
 
-    /* 模式手风琴 */
     .mode-nav-accordion { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 2px; }
     .mode-nav-capsule-bar { display: flex; align-items: center; justify-content: space-between; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 8px 16px; cursor: pointer; user-select: none; transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .mode-nav-capsule-bar:hover { background: var(--primary-light); border-color: var(--primary); }
@@ -769,7 +765,6 @@
       body.typing-mode-active .container { max-width: 1240px !important; }
     }
 
-    /* === 键盘极速盲打响应式工作台 === */
     .view-typing-panel { display: none; width: 100%; animation: fadeIn 0.18s ease; will-change: opacity; }
     .typing-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 24px; align-items: start; width: 100%; }
     .typing-main-column { display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; gap: 16px; }
@@ -804,7 +799,6 @@
     @keyframes comboPulse2 { from { transform: scale(1.05); } to { transform: scale(1.18); } }
     @keyframes comboPulse3 { from { transform: scale(1.1); } to { transform: scale(1.28); } }
 
-    /* 达标弹窗 契约 D 优化 */
     .typing-milestone-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.62); backdrop-filter: blur(8px); z-index: 9999; display: none; justify-content: center; align-items: center; animation: tmFadeIn 0.18s ease-out; will-change: opacity; }
     .typing-milestone-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 22px; width: 90%; max-width: 520px; padding: 34px 28px 26px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.28); color: var(--text); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; position: relative; animation: tmSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
     .tm-trophy { font-size: 3.2rem; line-height: 1; animation: tmTrophyBounce 0.5s ease; }
@@ -859,7 +853,7 @@
     }
 
     .shortcut-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); backdrop-filter: blur(5px); z-index: 10005; display: none; justify-content: center; align-items: center; will-change: opacity; transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
-.shortcut-modal-overlay.open { display: flex !important; opacity: 1 !important; pointer-events: auto !important; visibility: visible !important; }
+    .shortcut-modal-overlay.open { display: flex !important; opacity: 1 !important; pointer-events: auto !important; visibility: visible !important; }
     .shortcut-modal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; width: 92%; max-width: 620px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); color: var(--text); display: flex; flex-direction: column; gap: 16px; will-change: transform, opacity; animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .shortcut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
     .shortcut-row { display: flex; align-items: center; gap: 8px; }
@@ -921,10 +915,6 @@
     .leitner-compass-wrap,.workspace-main > div:not(.stage-card) { border-radius: 14px; }
     .utility-toggle-row { gap: 8px; }
     .utility-toggle-btn { border-radius: 9px; }
-
-    /* =========================================================================
-       ★ 方案一核心：移动端单屏零滚动深度适配与人机工学优化 (max-width: 768px)
-       ========================================================================= */
     @media (max-width: 768px) {
       body {
         padding: 0 !important;
@@ -941,7 +931,6 @@
         box-shadow: none !important;
         border: none !important;
         background: var(--card-bg) !important;
-        /* ★ 消除死白下巴：内容紧凑对齐，仅保留真实安全边距，不增加多余空白底板 */
         padding: 6px 10px max(8px, env(safe-area-inset-bottom, 8px)) 10px !important;
         gap: 10px !important;
         min-height: 100% !important;
@@ -1055,7 +1044,6 @@
         white-space: nowrap;
       }
 
-      /* 方案一：移动端卡片设定最大可用视口预算 (最高不超 75% 视口)，内部滚动，根容器零滚动 */
       .stage-card {
         padding: 16px 14px !important;
         border-radius: 14px !important;
@@ -1147,12 +1135,10 @@
       .stage-nav-bar .nav-action-btns { display: flex; gap: 8px; margin-top: 0; width: 100%; }
       .stage-nav-bar .btn { padding: 10px 14px; font-size: 0.92rem; }
 
-      /* ★ 闪卡模式激活时：彻底隐藏外部解析卡片和四选一选项容器，杜绝撑破视口 */
       body.flashcard-mode-active #analysis-card,
       body.flashcard-mode-active #view-choice {
         display: none !important;
       }
-      /* ★ 移动端彻底移除闪卡操作按钮栏，释放视口预算，采用原生滑动手势切换 */
       body.flashcard-mode-active #flashcard-actions {
         display: none !important;
         height: 0 !important;
@@ -1192,7 +1178,6 @@
     .mobile-pill-btn.more-btn { background: var(--primary-light); color: var(--primary); border-color: rgba(15, 118, 110, 0.25); }
     .mobile-only-btn { display: none !important; }
     @keyframes slideUpBottomBar { from { transform: translate3d(0, 100%, 0); opacity: 0; } to { transform: translate3d(0, 0, 0); opacity: 1; } }
-    /* ★ 幽灵遮罩防御体系 (Ghost Overlay Trap Defense)：关闭状态下彻底剥离触控与可视性 */
     .mobile-mode-overlay,
     #mobile-mode-sheet,
     #mobile-tools-sheet {
@@ -1295,7 +1280,6 @@
     .sync-toast { position: fixed; bottom: 24px; right: 24px; background: var(--card-bg); color: var(--text); border: 1.5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.12); border-radius: 30px; padding: 9px 18px; font-size: 0.84rem; font-weight: 700; z-index: 10000; display: flex; align-items: center; gap: 8px; opacity: 0; transform: translate3d(0, 12px, 0); transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; will-change: transform, opacity; }
     .sync-toast.show { opacity: 1; transform: translate3d(0, 0, 0); }
     @media (max-width: 768px) { .sync-toast { bottom: 84px; right: 12px; left: 12px; justify-content: center; } }
-
     .weak-roots-card { background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
     .weak-roots-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
     .weak-roots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-height: 290px; overflow-y: auto; padding-right: 4px; }
@@ -1316,11 +1300,6 @@
     .matrix-cell { width: 100%; aspect-ratio: 1; min-width: 6px; min-height: 6px; max-width: 10px; max-height: 10px; border-radius: 1.5px; cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease; will-change: transform; }
     .matrix-cell:hover { transform: scale(1.8); z-index: 10; filter: brightness(1.2); box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
 
-    /* =========================================================================
-       闪卡模式：液态玻璃拟态、3D 翻转与物理抛脱动效 (跨端自适应)
-       ========================================================================= */
-
-    /* 1. 液态玻璃基础卡片 */
     .stage-card.liquid-glass {
       background: rgba(255, 255, 255, 0.65) !important;
       backdrop-filter: blur(18px) saturate(180%) !important;
@@ -1353,7 +1332,6 @@
         inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75) !important;
     }
 
-    /* 1.1 卡片基础高度锁定垫片，杜绝切词瞬态文档流坍塌 (CLS 彻底归零) */
     .stage-card.flashcard-stable-stage {
       min-height: 280px;
       contain: layout style;
@@ -1363,7 +1341,6 @@
                   box-shadow 0.18s ease;
     }
 
-    /* 2. 液态玻璃状态下的对错高亮融合 */
     .stage-card.liquid-glass.card-correct-feedback {
       background: rgba(234, 248, 238, 0.82) !important;
       border-color: var(--success) !important;
@@ -1380,7 +1357,6 @@
       background: rgba(127, 29, 29, 0.75) !important;
     }
 
-    /* 3. 旋转原点轴心下移（模拟手部自然扇形摆动） */
     .stage-card.flashcard-touch-surface {
       transform-origin: 50% 125%;
       backface-visibility: hidden;
@@ -1391,7 +1367,6 @@
       -webkit-user-select: none;
     }
 
-    /* 4. 流体红绿光晕 */
     .stage-card.liquid-glow-left {
       border-color: rgba(239, 68, 68, 0.6) !important;
       box-shadow: -12px 18px 40px -10px rgba(239, 68, 68, 0.3) !important;
@@ -1401,7 +1376,6 @@
       box-shadow: 12px 18px 40px -10px rgba(16, 185, 129, 0.3) !important;
     }
 
-    /* 5. 键盘与触屏通用的抛脱滑出与弹性回弹 (契约 D: 180ms cubic-bezier) */
     .stage-card.flashcard-swipe-left {
       transform: translate3d(-140px, 12px, 0) rotate(-7deg) !important;
       opacity: 0 !important;
@@ -1438,7 +1412,6 @@
       animation: none !important;
     }
 
-    /* 7. 平滑切词入场动效 (契约 D) */
     .stage-card.flashcard-enter-next {
       animation: flashcardEnterNext 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -1455,7 +1428,6 @@
       to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
 
-    /* 8. 触屏拖拽指示徽章 */
     .flashcard-swipe-badge {
       position: absolute;
       top: 14px;
@@ -1488,7 +1460,6 @@
       transform: rotate(6deg);
     }
 
-    /* === 单盒全面强化专属 UI 样式 (Yield Capsule & Intermission & Retrospective) === */
     .reinforce-readonly-banner {
       width: 100%;
       border-radius: 12px;
@@ -1532,7 +1503,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    /* 专注沉浸模式 (Focus Mode) */
     body.focus-mode-active,
     body.focus-mode {
       padding: 0 !important;
@@ -1701,7 +1671,6 @@
       }
     }
 
-    /* ★ 方案 2-B：沉浸模式退出胶囊彻底移除并物理绝缘 (由卡片外部空白双击手势与 Esc 键完全接管) */
     .focus-escape-pill,
     body.focus-mode-active .focus-escape-pill,
     body.focus-mode .focus-escape-pill {
@@ -1827,16 +1796,6 @@
       margin-top: 4px;
     }
 
-    .rt-badge {
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      letter-spacing: 0.2px;
-    }
     .rt-fluent { background: var(--success-light); color: var(--success); border: 1px solid rgba(22, 163, 74, 0.3); }
     .rt-consolidated { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(15, 118, 110, 0.3); }
     .rt-hesitant { background: var(--accent-light); color: var(--accent); border: 1px solid rgba(217, 119, 6, 0.3); }
@@ -1851,11 +1810,6 @@
       }
     }
   
-    /* =========================================================================
-       ★ [规范落地] 闪卡交互架构与视觉动态系统重构专属规范样式
-       ========================================================================= */
-
-    /* 1. 双槽位弹性隔离与不可压缩约束 (Elastic Slot Isolation) */
     .card-meta-header {
       display: flex !important;
       justify-content: space-between !important;
@@ -1884,7 +1838,6 @@
       margin-left: auto !important;
     }
 
-    /* 2. 卡片内部横向滑移锁死与物理拓扑解耦 */
     .stage-card {
       overflow-x: clip !important;
       touch-action: pan-y !important;
@@ -1909,11 +1862,7 @@
       word-break: break-word !important;
     }
 
-    /* 闪卡显示效果：保持纯净清晰的高保真玻璃质感 */
-
-    /* 4. 纯 CSS 视口级伪沉浸架构与移动端断点精简 */
     @media (max-width: 768px) {
-      /* 移动端物理级隐藏卡片右上角快捷沉浸按钮，全部槽位让渡核心数据 */
       #card-focus-quick-btn {
         display: none !important;
       }
@@ -1937,12 +1886,6 @@
       }
     }
 
-  
-    /* =========================================================================
-       ★ [移动端架构重构] 渲染降级、动态视口锁存、热区规范与手风琴折叠
-       ========================================================================= */
-
-    /* 1.1 设备性能分级与毛玻璃降级 (Device Tier GPU Downgrade) */
     [data-gpu-tier="low"] .liquid-glass,
     [data-gpu-tier="low"] .modal-overlay,
     [data-gpu-tier="low"] .modal-card,
@@ -1955,7 +1898,6 @@
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12) !important;
     }
 
-    /* 1.2 现代动态视口高度变量锁存与零滚动约束 */
     :root {
       --dynamic-viewport-h: 100dvh;
     }
@@ -1969,7 +1911,6 @@
       }
     }
 
-    /* 1.3 移动端 44x44 像素点击热区 (Hit Target) 与 150ms 即时反馈标准 */
     @media (max-width: 768px) {
       .btn,
       .opt-btn,
@@ -1999,10 +1940,9 @@
       }
     }
 
-    /* 1.4 移动端输入焦点与软键盘防跳动分流 (Keyboard Focus & Viewport Stability) */
     @media (max-width: 768px) {
       .typing-capture {
-        font-size: 16px !important; /* 强制声明 16px，根除 iOS Safari 视口自动放大跳跃 */
+        font-size: 16px !important;
         width: 100% !important;
         height: 100% !important;
         position: absolute !important;
@@ -2017,12 +1957,11 @@
         padding: 4px 8px !important;
       }
       .spell-input {
-        font-size: 16px !important; /* 彻底防止软键盘弹出引发视口剧烈缩放 */
+        font-size: 16px !important;
         min-height: 44px !important;
       }
     }
 
-    /* 1.5 移动端信息密度分级：双语例句与母词族折叠手风琴 (Collapsible Accordion) */
     @media (max-width: 768px) {
       .preloaded-sentence-box {
         cursor: pointer !important;
@@ -2053,7 +1992,6 @@
       }
     }
 
-    /* 1.6 计算密集型长列表渲染性能优化 (Content Visibility) */
     .tree-group-card,
     .mistakes-table,
     .weak-roots-grid,
@@ -2063,17 +2001,11 @@
       contain-intrinsic-size: 180px !important;
     }
 
-  
-    /* =========================================================================
-       ★ [规范第 2 章] 移动端信息架构降维与首屏布局空间释放
-       ========================================================================= */
     @media (max-width: 768px) {
-      /* 2.1 物理隐藏移动端死控件：辅助栏切换按钮 (侧边栏已隐藏，点击无意义) */
       #companion-toggle-btn {
         display: none !important;
       }
 
-      /* 2.2 顶栏双等分网格：[设置面板] [沉浸模式] 纯净排布 */
       .utility-toggle-row {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -2087,7 +2019,6 @@
         white-space: nowrap !important;
       }
 
-      /* 2.2b 彻底解封并升级为【形态 A：原生单行横向轻滑轨】(与电脑端 100% 相同可靠原生链路) */
       #mode-nav-accordion {
         display: block !important;
         width: 100% !important;
@@ -2144,28 +2075,23 @@
         box-shadow: 0 2px 8px rgba(15, 118, 110, 0.28) !important;
       }
 
-      /* 2.2c 移动端专属模式栏保持隐藏 */
       .mobile-mode-bar {
         display: none !important;
       }
 
-      /* 2.3 移动端背词首屏默认隐藏搜索常驻占位 (收敛至快捷工具箱，释放 ~48px) */
       #search-panel {
         display: none !important;
       }
 
-      /* 2.4 移动端答题首屏隐藏庞大的外部平铺罗盘 (改由卡片微型点位承载，释放 ~90px) */
       #leitner-compass-wrap {
         display: none !important;
       }
 
-      /* 2.5 核心单词卡片在视口中占比大幅提升，实现单屏零滚动 */
       .stage-card {
         min-height: clamp(340px, 58vh, 520px) !important;
         margin-top: 4px !important;
       }
 
-      /* 2.6 卡片头部：左侧三行一列纵向排布 (五盒指示、掌握度、遗忘风险)，右侧对齐，彻底告别挤爆与截断 */
       .card-meta-header {
         display: flex !important;
         align-items: flex-start !important;
@@ -2207,11 +2133,6 @@
       }
     }
 
-  
-    /* =========================================================================
-       ★ [规范第 3 章] 艾宾浩斯微型点位指示器 (Micro-dot Stepper) 与就地微流光
-       ========================================================================= */
-    /* ★ 五盒微型点位指示器 (Micro-dot Stepper)：独占三行一列第 1 行 */
     .leitner-micro-stepper {
       display: inline-flex !important;
       flex-direction: row !important;
@@ -2239,7 +2160,6 @@
       border-color: var(--primary) !important;
       transform: scale(1.06);
     }
-    /* 5 盒微型圆点：严格映射莱特纳五盒官方色彩体系 */
     .micro-dot {
       width: 5px !important;
       height: 5px !important;
@@ -2247,7 +2167,6 @@
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
       flex-shrink: 0 !important;
     }
-    /* Box 1: 珊瑚红 (每日巩固/重修) */
     .micro-dot[data-box="1"] {
       background: #ef4444 !important;
       opacity: 0.28 !important;
@@ -2261,7 +2180,6 @@
       box-shadow: 0 0 6px rgba(239, 68, 68, 0.85) !important;
     }
 
-    /* Box 2: 活力橙 (隔日复习) */
     .micro-dot[data-box="2"] {
       background: #f97316 !important;
       opacity: 0.28 !important;
@@ -2275,7 +2193,6 @@
       box-shadow: 0 0 6px rgba(249, 115, 22, 0.85) !important;
     }
 
-    /* Box 3: 琥珀金 (中期强化) */
     .micro-dot[data-box="3"] {
       background: #eab308 !important;
       opacity: 0.28 !important;
@@ -2289,7 +2206,6 @@
       box-shadow: 0 0 6px rgba(234, 179, 8, 0.85) !important;
     }
 
-    /* Box 4: 科技蓝 (周度稳固) */
     .micro-dot[data-box="4"] {
       background: #3b82f6 !important;
       opacity: 0.28 !important;
@@ -2303,7 +2219,6 @@
       box-shadow: 0 0 6px rgba(59, 130, 246, 0.85) !important;
     }
 
-    /* Box 5: 翡翠绿 (永久毕业) */
     .micro-dot[data-box="5"] {
       background: #10b981 !important;
       opacity: 0.28 !important;
@@ -2316,7 +2231,6 @@
       transform: scale(1.4) !important;
       box-shadow: 0 0 6px rgba(16, 185, 129, 0.85) !important;
     }
-    /* ★ 方案 1-A：彻底取缔卡片左上角升降盒浮动弹窗胶囊，全面恢复静默微点流转 */
     .micro-step-float {
       display: none !important;
       visibility: hidden !important;
@@ -2324,7 +2238,6 @@
       pointer-events: none !important;
     }
 
-    /* 就地卡片边缘呼吸流光动效 (替代顶部粗暴横幅) */
     @keyframes edgeGlowSuccess {
       0% {
         border-color: rgba(16, 185, 129, 0.8) !important;
@@ -2363,16 +2276,55 @@
       animation: edgeGlowWarning 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
     }
 
-  
-    /* =========================================================================
-       ★ 极速挑战样式硬隔离守卫 (SpeedBlitz Style Containment Guard)
-       非极速挑战模式下，卡片内部的倒计时头部与暂停蒙层 100% 物理隐藏，杜绝跨模式泄漏
-       ========================================================================= */
     body:not(.mode-speed_blitz-active) #speed-blitz-header,
     body:not(.mode-speed_blitz-active) #speed-pause-overlay {
       display: none !important;
       visibility: hidden !important;
       pointer-events: none !important;
+    }
+
+  
+    /* 词组认知延伸看板与小品词胶囊样式 */
+    .phrases-particle-filter-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+    .phrases-particle-filter-bar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    .particle-filter-chip {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .particle-filter-chip:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .particle-filter-chip.active {
+      background: var(--primary) !important;
+      color: #fff !important;
+      border-color: var(--primary) !important;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+    }
+    .phrase-cognitive-box {
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.2s ease;
+    }
+    .phrase-cognitive-box:hover {
+      border-color: rgba(99, 102, 241, 0.4) !important;
     }
 
   </style>
@@ -2386,6 +2338,8 @@
       <select id="pack-dropdown" class="pack-selector" onchange="switchWordPack(this.value)"></select>
       <input type="file" id="local-words-file-input" accept=".js,.json" style="display:none;" onchange="handleLocalWordsFile(event)">
       <button class="utility-toggle-btn" style="cursor:pointer; font-size:0.75rem; padding:4px 8px;" onclick="document.getElementById('local-words-file-input').click()" title="选取本地 words_data.js 或 JSON 文件">📁 载入本地词库</button>
+      <input type="file" id="local-phrases-file-input" accept=".js,.json" style="display:none;" onchange="handleLocalPhrasesFile(event)">
+      <button class="utility-toggle-btn" style="cursor:pointer; font-size:0.75rem; padding:4px 8px;" onclick="document.getElementById('local-phrases-file-input').click()" title="选取本地 phrases_data.js 或 phrases_data_1200_universal.js">📚 载入词组库</button>
     </div>
 
     <div class="top-actions">
@@ -2540,6 +2494,7 @@
       <button class="tab-btn" onclick="switchMode('audio_clo')">🎧 盲听磨耳朵</button>
       <button class="tab-btn" onclick="switchMode('confusables')">⚔️ 同根易混对决</button>
       <button class="tab-btn" onclick="switchMode('match_game')">🧩 短语消消乐</button>
+      <button class="tab-btn" onclick="switchMode('phrases_drill')">📚 词组专练</button>
       <button class="tab-btn" onclick="switchMode('vocab_upgrader')">✍️ 写作词汇升级</button>
       <button class="tab-btn" onclick="switchMode('root_dict')">🔍 词根逆向字典</button>
       <button class="tab-btn" onclick="switchMode('leitner_box')">📦 莱特纳五盒看板</button>
@@ -2563,12 +2518,13 @@
       <button class="mobile-pill-btn" id="mpill-flashcard" onclick="switchMode('flashcard')">闪卡</button>
       <button class="mobile-pill-btn" id="mpill-typing" onclick="switchMode('typing')">盲打</button>
       <button class="mobile-pill-btn" id="mpill-speed_blitz" onclick="switchMode('speed_blitz')">极速</button>
+      <button class="mobile-pill-btn" id="mpill-phrases_drill" onclick="switchMode('phrases_drill')">词组</button>
       <button class="mobile-pill-btn" id="mpill-mistakes_center" onclick="switchMode('mistakes_center')">错题</button>
       <button class="mobile-pill-btn more-btn" onclick="openMobileModeSheet()">全部模式 ☰</button>
     </div>
   </div>
 
-  <!-- 手机端专属快捷工具收纳抽屉 (仅在手机端由 🛠️ 快捷工具 呼出) -->
+  <!-- 手机端专属快捷工具收纳抽屉 -->
   <div class="mobile-mode-overlay" id="mobile-tools-sheet" onclick="if(event.target===this) toggleMobileToolsSheet(false)">
     <div class="mobile-mode-sheet-card">
       <div class="sheet-header">
@@ -2656,8 +2612,8 @@
         <div style="background:var(--card-subtle); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
           <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px;">💾 数据管理与同步</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); document.getElementById('local-words-file-input').click();">📁 载入本地词库</button>
-            <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); switchMode('manage');">☁️ 云同步与备份</button>
+            <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); document.getElementById('local-words-file-input').click();">📁 载入词汇库</button>
+            <button class="btn" style="font-size:0.78rem; padding:8px 6px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" onclick="toggleMobileToolsSheet(false); document.getElementById('local-phrases-file-input').click();">📚 载入词组库</button>
           </div>
         </div>
       </div>
@@ -2713,6 +2669,10 @@
             <span class="sheet-item-icon">🧩</span>
             <div class="sheet-item-text"><strong>短语消消乐</strong><span>高频介词搭配配对</span></div>
           </div>
+          <div class="sheet-item" id="sheet-item-phrases_drill" onclick="selectModeFromSheet('phrases_drill')">
+            <span class="sheet-item-icon">📚</span>
+            <div class="sheet-item-text"><strong>词组专练</strong><span>1200+大纲高频搭配</span></div>
+          </div>
         </div>
 
         <div class="sheet-group-title">📑 写作提分与全真拓展</div>
@@ -2759,7 +2719,6 @@
     <input type="text" id="search-input" class="search-input" placeholder="输入英文或中文释义秒查当前大单元..." oninput="handleSearch(this.value)">
     <button class="btn" style="padding: 8px 14px; background:var(--bg); border:1px solid var(--border); color:var(--text);" onclick="clearScopeFilter()">重置全库</button>
   </div>
-
   <!-- 1. 主测试舞台 -->
   <div id="stage-area">
     <div class="workspace-layout">
@@ -2777,7 +2736,7 @@
           <button class="btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.74rem;" onclick="exitDueReviewSession(true)" title="退出冲刺并返回原主线题库">退出冲刺 ✕</button>
         </div>
 
-        <!-- 单盒全面强化专享收益胶囊栏 (Yield Capsule - 契约 D: 120 FPS 弹性动画) -->
+        <!-- 单盒全面强化专享收益胶囊栏 -->
         <div id="box-reinforce-capsule" class="reinforce-capsule-wrap state-active" style="display:none;">
           <div class="capsule-info-row">
             <span id="capsule-title" style="font-weight:800; color:var(--text); font-size:0.9rem;">⚡ [Box 2 全盒强化]</span>
@@ -2838,28 +2797,21 @@
         </div>
 
         <div class="stage-card" id="main-card">
-          <!-- 双槽位弹性隔离头部 (Elastic Slot Isolation) -->
           <div class="card-meta-header">
-            <!-- 左侧：三行一列记忆状态信息柱 (五盒指示、掌握度、遗忘风险) -->
             <div class="card-meta-slot-left" id="card-meta-slot-left">
-              <!-- 行 1: 五盒指示器 (5 盒专属颜色微点) -->
               <div class="leitner-micro-stepper" id="leitner-micro-stepper" onclick="App.switchMode('leitner_box')" title="艾宾浩斯五盒当前掌握盒位 (点击打开五盒看板)">
                 <span class="micro-dot active" data-box="1" title="Box 1 每日巩固"></span>
                 <span class="micro-dot" data-box="2" title="Box 2 隔日复习"></span>
                 <span class="micro-dot" data-box="3" title="Box 3 中期强化"></span>
                 <span class="micro-dot" data-box="4" title="Box 4 周度稳固"></span>
                 <span class="micro-dot" data-box="5" title="Box 5 永久毕业"></span>
-                
               </div>
-              <!-- 行 2: 掌握度指标 -->
               <span class="mastery-pill" id="mastery-pill" title="基于作答反应时与记忆稳定度的 0~100 自适应掌握度">掌握度: 35%</span>
-              <!-- 行 3: 遗忘风险指标与熟词生义 -->
               <div class="card-meta-risk-row" style="display:inline-flex; align-items:center; gap:4px;">
                 <span class="risk-pill" id="risk-pill" title="基于艾宾浩斯半衰期负指数遗忘模型预测的当期遗忘概率">遗忘风险: 20%</span>
                 <span class="unexpected-badge" id="unexpected-badge" style="display:none;" title="四级核心真题高频熟词生义考点">⚠️ 熟词生义</span>
               </div>
             </div>
-            <!-- 右侧：进度与难度信息纵向对齐 -->
             <div class="card-meta-slot-right" id="card-meta-slot-right">
               <span class="order-progress" id="order-progress">进度: 1 / 531</span>
               <div class="card-meta-star-row" style="display:inline-flex; align-items:center; gap:5px;">
@@ -2869,7 +2821,6 @@
             </div>
           </div>
 
-          <!-- 三秒心跳状态条 -->
           <div id="speed-blitz-header" style="display:none; margin-bottom:8px;">
             <div class="speed-stats-bar" style="display:flex; justify-content:space-between; align-items:center;">
               <span id="speed-lives">生命: ❤️❤️❤️</span>
@@ -2881,14 +2832,12 @@
             </div>
           </div>
 
-          <!-- 三秒极速失焦暂停遮罩 -->
           <div class="speed-pause-overlay" id="speed-pause-overlay" onclick="resumeSpeedBlitz()">
             <div class="speed-pause-icon">⏸️</div>
             <div class="speed-pause-title">极速挑战已自动暂停</div>
             <div class="speed-pause-sub">页面失焦或切换时已自动冻结计时 · 点击屏幕或按 Space 键继续</div>
           </div>
 
-          <!-- 视觉焦点：核心单词与音标发音原子组合 -->
           <div class="word-hero-wrap">
             <div class="word-main" id="display-term">anticipate</div>
             <div class="word-phonetic-row">
@@ -2897,12 +2846,10 @@
             </div>
           </div>
 
-          <!-- 词根显示置于卡片内部下方居中 -->
           <div class="card-bottom-root-wrap" id="card-bottom-root-wrap">
             <span class="group-tip-bottom" id="group-tip">词根族谱</span>
           </div>
 
-          <!-- 常驻预加载外刊/真题双语例句卡片 -->
           <div class="preloaded-sentence-box" id="preloaded-sentence-box">
             <div class="sentence-header">
               <span class="sentence-badge" id="sentence-badge">📰 外刊/真题语境</span>
@@ -2912,12 +2859,10 @@
             <div class="sentence-cn" id="sentence-cn-text"></div>
           </div>
 
-          <!-- 连读与弱读听力微技巧提示 -->
           <div id="speech-tip-box" style="display:none; margin-top:8px;">
             <span class="speech-micro-tip" id="speech-micro-tip">🎧 连读音变提示: /kənˈsɪs.təv/ (辅元连读)</span>
           </div>
 
-          <!-- 随身磨耳朵与盲听专属控制台 -->
           <div id="audio-autoplay-ctrl" style="margin-top:10px; display:none;">
             <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
               <button class="btn slow-btn" id="slow-repeat-btn" style="padding:6px 12px; font-size:0.82rem; background:var(--bg); border:1.5px solid var(--border); color:var(--text); border-radius:8px; font-weight:700;" onclick="speakCurrentWordSlowly()">🐢 0.75x 慢速辨音</button>
@@ -2926,12 +2871,9 @@
             <button class="btn btn-primary" id="autoplay-stream-btn" style="width:100%; max-width:320px;" onclick="toggleAutoplayStream()">▶ 开启随身磨耳朵循环播报</button>
           </div>
 
-          <!-- ★ 方案一核心：闪卡背面直接集成内嵌流式折叠构词精解与搭配 (Inline Flow Accordion) -->
           <div class="flashcard-back" id="flashcard-back" style="display:none;">
             <div class="flashcard-back-inner">
               <div class="flashcard-meaning" id="flash-meaning">vt. 预料，预期；期望</div>
-              
-              <!-- 内嵌构词精解容器 -->
               <div class="flashcard-embedded-analysis" id="flashcard-embedded-analysis" style="display:none;">
                 <span class="flashcard-analysis-tag tag-gouci" id="flashcard-analysis-tag">形态学构词精解</span>
                 <div class="flashcard-analysis-text" id="flashcard-analysis-text"></div>
@@ -2943,10 +2885,8 @@
           <div class="flashcard-hint" id="flashcard-hint" style="display:none;">点击卡片或按 Space 翻转查看释义与词根</div>
         </div>
 
-        <!-- 四选一 / 盲听 / 形近辨析 / 单盒强化纯认读选择容器 (方案二：严格沙箱隔离) -->
         <div id="view-choice" class="options-grid"></div>
 
-        <!-- 收益封顶阶段战报选择岔路口 (Smart Intermission Card) -->
         <div id="smart-intermission-card" class="smart-intermission-card" style="display:none;">
           <div class="intermission-head">
             <span>💡 阶段战报：本轮最大晋级收益已全部达成！</span>
@@ -2979,7 +2919,6 @@
           </div>
         </div>
 
-        <!-- 拼写输入容器 -->
         <div id="view-spell" style="display: none;">
           <div class="spell-box">
             <input type="text" id="spell-input" class="spell-input" placeholder="输入英文拼写 (按 Enter 提交，按 H 首尾提示)..." autocomplete="off">
@@ -2987,13 +2926,11 @@
           <button class="btn btn-primary" style="margin-top: 10px; width:100%;" onclick="checkSpelling()">提交拼写 (Enter)</button>
         </div>
 
-        <!-- 闪卡动作按钮 -->
         <div class="flashcard-actions" id="flashcard-actions">
           <button class="btn btn-warning" type="button" tabindex="-1" onclick="Views.Flashcard.handleSwipeDecision(false)">← 不熟悉 (K)</button>
           <button class="btn btn-success" type="button" tabindex="-1" onclick="Views.Flashcard.handleSwipeDecision(true)">已掌握 (J) →</button>
         </div>
 
-        <!-- 外部独立解析面板 (用于四选一查看解析与查词) -->
         <div class="analysis-card" id="analysis-card">
           <span class="analysis-tag tag-gouci" id="analysis-tag">构词精解</span>
           <div class="analysis-content" id="analysis-content"></div>
@@ -3007,7 +2944,6 @@
           </div>
         </div>
 
-        <!-- 个人助记便签与专属笔记 -->
         <div class="user-note-box" id="user-note-box">
           <div class="note-box-header" onclick="toggleNoteBox()" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
             <span style="font-weight:700; font-size:0.78rem; color:var(--muted); display:flex; align-items:center; gap:5px;">
@@ -3021,7 +2957,6 @@
           </div>
         </div>
 
-        <!-- 反馈与前后导航 -->
         <div class="stage-nav-bar" id="stage-nav-bar">
           <div class="feedback" id="feedback"></div>
           <div class="nav-action-btns">
@@ -3100,6 +3035,148 @@
     <div class="root-dict-results" id="root-dict-results"></div>
   </div>
 
+  <!-- 4.5 词组专练面板 -->
+  <div id="view-phrases" class="phrases-panel" style="display:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+      <div>
+        <h3 style="color:var(--text); margin:0 0 6px 0;">📚 CET-4 核心词组专练系统</h3>
+        <p style="color:var(--muted); font-size:0.85rem; margin:0;">系统化掌握1200+固定搭配 · 完形填空与写作必备</p>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <label style="font-size:0.85rem; color:var(--text); display:flex; align-items:center; gap:6px;">
+          <span>分类筛选:</span>
+          <select id="phrases-category-select" onchange="filterPhrasesByCategory(this.value)" style="padding:6px 10px; border:1px solid var(--border); border-radius:6px; background:var(--card-bg); color:var(--text); font-size:0.85rem;">
+            <option value="all">全部词组</option>
+            <option value="动词短语">动词短语</option>
+            <option value="介词短语">介词短语</option>
+            <option value="固定搭配">固定搭配</option>
+            <option value="常用习语">常用习语</option>
+          </select>
+        </label>
+        <label style="font-size:0.85rem; color:var(--text); display:flex; align-items:center; gap:6px;">
+          <span>频率:</span>
+          <select id="phrases-freq-select" onchange="filterPhrasesByFrequency(this.value)" style="padding:6px 10px; border:1px solid var(--border); border-radius:6px; background:var(--card-bg); color:var(--text); font-size:0.85rem;">
+            <option value="all">全部</option>
+            <option value="高频">高频</option>
+            <option value="中频">中频</option>
+            <option value="低频">低频</option>
+          </select>
+        </label>
+        <button class="btn" style="padding:6px 10px; font-size:0.82rem; background:var(--card-bg); border:1px solid var(--border); color:var(--text); border-radius:6px; cursor:pointer;" onclick="document.getElementById('local-phrases-file-input').click()" title="选取本地 phrases_data.js 或 phrases_data_1200_universal.js">📁 载入词组库</button>
+      </div>
+    </div>
+
+    
+    <!-- 认知语言学小品词隐喻星系看板 (Particle Compass Filter Bar) -->
+    <div style="margin-bottom:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-size:0.85rem; font-weight:700; color:var(--text); display:flex; align-items:center; gap:6px;">
+          <span>🧭 小品词隐喻图谱 (Particle Schema):</span>
+        </span>
+        <span style="font-size:0.75rem; color:var(--muted);">按空间矢量与概念隐喻聚合透视</span>
+      </div>
+      <div id="phrases-particle-bar" class="phrases-particle-filter-bar" style="display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin;">
+        <button class="particle-filter-chip active" data-particle="all" onclick="Views.PhrasesDrill.filterByParticle('all')">🌐 全部小品词</button>
+        <button class="particle-filter-chip" data-particle="up" onclick="Views.PhrasesDrill.filterByParticle('up')">🚀 UP (彻底/上升/显露)</button>
+        <button class="particle-filter-chip" data-particle="out" onclick="Views.PhrasesDrill.filterByParticle('out')">🔍 OUT (显现/落实/耗尽)</button>
+        <button class="particle-filter-chip" data-particle="off" onclick="Views.PhrasesDrill.filterByParticle('off')">✂️ OFF (脱离/中断/清偿)</button>
+        <button class="particle-filter-chip" data-particle="down" onclick="Views.PhrasesDrill.filterByParticle('down')">⚓ DOWN (降低/压制/记录)</button>
+        <button class="particle-filter-chip" data-particle="in" onclick="Views.PhrasesDrill.filterByParticle('in')">📥 IN/INTO (容器/深入)</button>
+        <button class="particle-filter-chip" data-particle="on" onclick="Views.PhrasesDrill.filterByParticle('on')">🛡️ ON (依托/持续/接触)</button>
+        <button class="particle-filter-chip" data-particle="at" onclick="Views.PhrasesDrill.filterByParticle('at')">🎯 AT (精准聚焦/极值)</button>
+        <button class="particle-filter-chip" data-particle="to" onclick="Views.PhrasesDrill.filterByParticle('to')">🏹 TO (指向/目标/顺应)</button>
+        <button class="particle-filter-chip" data-particle="with" onclick="Views.PhrasesDrill.filterByParticle('with')">🤝 WITH (协同/伴随/抗衡)</button>
+        <button class="particle-filter-chip" data-particle="for" onclick="Views.PhrasesDrill.filterByParticle('for')">🧭 FOR (目的/追寻/因由)</button>
+        <button class="particle-filter-chip" data-particle="over" onclick="Views.PhrasesDrill.filterByParticle('over')">🌉 OVER/THROUGH (跨越/穿透)</button>
+        <button class="particle-filter-chip" data-particle="away" onclick="Views.PhrasesDrill.filterByParticle('away')">💨 AWAY/BACK (远离/回归)</button>
+        <button class="particle-filter-chip" data-particle="collocation" onclick="Views.PhrasesDrill.filterByParticle('collocation')">🧱 动宾搭配 (Collocation)</button>
+        <button class="particle-filter-chip" data-particle="idiom" onclick="Views.PhrasesDrill.filterByParticle('idiom')">🎭 文化习语 (Idiom)</button>
+      </div>
+    </div>
+
+    <!-- 词组练习模式选择 -->
+    <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="startPhrasesTest('choice')" style="flex:1; min-width:140px;">
+        <span style="font-size:1.1rem;">✅</span> 四选一测试
+      </button>
+      <button class="btn" onclick="startPhrasesTest('fill')" style="flex:1; min-width:140px; background:var(--success); color:#fff; border:none;">
+        <span style="font-size:1.1rem;">✍️</span> 填空测试
+      </button>
+      <button class="btn" onclick="startPhrasesTest('flashcard')" style="flex:1; min-width:140px; background:var(--accent); color:#fff; border:none;">
+        <span style="font-size:1.1rem;">💡</span> 智能闪卡
+      </button>
+      <button class="btn" onclick="showPhrasesBrowse()" style="flex:1; min-width:140px; background:var(--bg); border:1px solid var(--border); color:var(--text);">
+        <span style="font-size:1.1rem;">📖</span> 浏览全部
+      </button>
+    </div>
+
+    <!-- 词组统计卡片 -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:20px;">
+      <div style="background:var(--primary-light); border:1px solid var(--border); border-radius:10px; padding:14px;">
+        <div style="font-size:0.8rem; color:var(--muted); margin-bottom:4px;">总词组数</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--primary);" id="phrases-total-count">0</div>
+      </div>
+      <div style="background:var(--success-light); border:1px solid var(--border); border-radius:10px; padding:14px;">
+        <div style="font-size:0.8rem; color:var(--muted); margin-bottom:4px;">已掌握</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--success);" id="phrases-mastered-count">0</div>
+      </div>
+      <div style="background:var(--accent-light); border:1px solid var(--border); border-radius:10px; padding:14px;">
+        <div style="font-size:0.8rem; color:var(--muted); margin-bottom:4px;">当前筛选</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--accent);" id="phrases-filtered-count">0</div>
+      </div>
+    </div>
+
+    <!-- 词组测试区域 -->
+    <div id="phrases-test-area" style="display:none;">
+      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <span style="font-weight:700; color:var(--text);" id="phrases-progress">第 1 / 20 题</span>
+          <button class="btn" onclick="exitPhrasesTest()" style="padding:4px 12px; font-size:0.8rem; background:var(--bg); border:1px solid var(--border);">退出</button>
+        </div>
+
+        <div id="phrases-question-area"></div>
+        <div id="phrases-options-area" style="margin-top:20px;"></div>
+
+        <div id="phrases-feedback" style="margin-top:16px; padding:12px; border-radius:8px; display:none;"></div>
+
+        <div style="margin-top:20px; display:flex; gap:10px;">
+          <button class="btn" id="phrases-prev-btn" onclick="phrasesPrevQuestion()" style="flex:1; background:var(--bg); border:1px solid var(--border); display:none;">← 上一题</button>
+          <button class="btn btn-primary" id="phrases-next-btn" onclick="phrasesNextQuestion()" style="flex:2; display:none;">下一题 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 词组浏览区域 -->
+    <div id="phrases-browse-area" style="display:none;">
+      <div style="margin-bottom:12px;">
+        <input type="text" id="phrases-search-input" placeholder="搜索词组或核心词..." onkeyup="searchPhrases(this.value)" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px; background:var(--card-bg); color:var(--text); font-size:0.9rem;">
+      </div>
+      <div id="phrases-browse-list" style="display:grid; gap:12px;"></div>
+    </div>
+  </div>
+
+  <!-- 5. 莱特纳五盒看板面板 -->
+    <!-- 同动词与同小品词星系矩阵对决弹窗 (Matrix Showdown Modal) -->
+    <div id="phrase-matrix-modal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.65); z-index:10000; align-items:center; justify-content:center; padding:16px;">
+      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:100%; max-width:760px; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 20px 40px rgba(0,0,0,0.3); overflow:hidden;">
+        <div style="padding:16px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--bg);">
+          <div style="font-weight:800; font-size:1.1rem; color:var(--text); display:flex; align-items:center; gap:8px;">
+            <span>⚔️ 词组认知对决矩阵 (Cognitive Matrix)</span>
+          </div>
+          <button class="btn btn-sm" onclick="Views.PhrasesDrill.closeMatrixModal()" style="padding:4px 10px; font-size:1rem; border:none; background:transparent; cursor:pointer; color:var(--muted);">✕</button>
+        </div>
+        <div id="phrase-matrix-content" style="padding:20px; overflow-y:auto; flex:1;">
+          <!-- 动态渲染同动词与同小品词对比 -->
+        </div>
+        <div style="padding:12px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; background:var(--bg);">
+          <button class="btn btn-primary" onclick="Views.PhrasesDrill.closeMatrixModal()" style="padding:8px 20px;">关闭窗口</button>
+        </div>
+      </div>
+    </div>
+
+
+  
+
   <!-- 5. 莱特纳五盒看板面板 -->
   <div id="view-leitner" class="leitner-panel">
     <div class="leitner-overall-card">
@@ -3123,7 +3200,7 @@
       </div>
     </div>
 
-    <!-- 全库掌握度微型矩阵 (DOM 轻量热力图) -->
+    <!-- 全库掌握度微型矩阵 -->
     <div class="mastery-matrix-card" id="mastery-matrix-card">
       <div class="mastery-matrix-header">
         <div style="display:flex; align-items:center; gap:8px;">
@@ -3198,7 +3275,6 @@
       </div>
     </div>
 
-    <!-- 词根认知盲区排行榜 -->
     <div id="weak-roots-panel" class="weak-roots-card no-print">
       <div class="weak-roots-header">
         <div style="display:flex; align-items:center; gap:8px;">
@@ -3315,7 +3391,6 @@
   <!-- 12. 键盘极速盲打练习模式 -->
   <div id="view-typing" class="view-typing-panel">
     <div class="typing-workspace">
-      <!-- 左侧核心主栏 -->
       <div class="typing-main-column">
         <div class="typing-card" onclick="Views.Typing.focusInput()" title="点击卡片任意位置可恢复打字输入焦点">
           <div class="typing-review-badge" id="typing-review-badge" style="display:none;">⚡ 最终直觉复核</div>
@@ -3416,7 +3491,6 @@
           </div>
         </div>
 
-        <!-- 历史完成轨迹流水线 -->
         <div id="typing-history-panel" class="typing-history-panel">
           <div class="typing-history-header">
             <span class="th-title">📜 最近盲打完成轨迹 (点击复听发音 · 最近30词 · 标绿全对 / 标红敲错 / 标黄即时复习)</span>
@@ -3428,7 +3502,6 @@
         </div>
       </div>
 
-      <!-- 右侧侧边看板：盲打弱项与错词排行榜 -->
       <div class="typing-sidebar-column">
         <div class="typing-mistakes-panel" id="typing-mistakes-panel">
           <div class="typing-mistakes-header">
@@ -3501,7 +3574,7 @@
   </div>
 </div>
 
-<!-- 单盒全面强化终极战报结算卡片 (Session Retrospective Modal) -->
+<!-- 单盒全面强化终极战报结算卡片 -->
 <div class="typing-milestone-overlay" id="box-reinforce-retrospective-overlay" style="display:none;">
   <div class="typing-milestone-card" role="dialog" aria-modal="true" style="max-width:560px;">
     <div class="tm-trophy">🏆</div>
@@ -3589,7 +3662,6 @@
 <!-- 自动同步无干扰浮动 Toast -->
 <div id="sync-toast" class="sync-toast" style="display:none;"></div>
 <script>
-  // 25 原生直读通道：脚本解析时即刻直接捕获本地 words_data.js
   if (typeof window !== "undefined") {
     const _raw = window.WORDS_DATA || (typeof WORDS_DATA !== "undefined" ? WORDS_DATA : null);
     if (_raw && Array.isArray(_raw)) {
@@ -3597,9 +3669,6 @@
     }
   }
 
-  // =========================================================================
-  // ★ 工业级弱网与代理重试引擎 (resilientFetch)
-  // =========================================================================
   async function resilientFetch(url, options = {}, maxRetries = 2) {
     let lastErr = null;
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -3626,7 +3695,6 @@
 
         if (timer) clearTimeout(timer);
 
-        // 若遇服务端临时 5xx 错误或 429 频控限制，进行指数退避重试
         if ((resp.status >= 500 || resp.status === 429) && attempt < maxRetries) {
           const retryHeader = parseInt(resp.headers?.get?.('Retry-After') || '0', 10);
           const backoffDelay = retryHeader > 0 ? (retryHeader * 1000) : (1000 * Math.pow(2, attempt) + Math.random() * 400);
@@ -3653,9 +3721,6 @@
   }
   if (typeof window !== 'undefined') window.resilientFetch = resilientFetch;
 
-  // =========================================================================
-  // ★ 模块 1：通用工具库 (Utils)
-  // =========================================================================
   const Utils = (function() {
     return {
       extractGistId(input) {
@@ -3740,9 +3805,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 规范契约 A：宏观路由与双轨状态机 (HistoryRouter)
-  // =========================================================================
   const HistoryRouter = (function() {
     let isHandlingPopState = false;
 
@@ -3772,7 +3834,6 @@
         try {
           window.history.pushState({ packId, mode }, '', targetHash);
         } catch (e) {
-          // content:// 或 file:// 安全沙箱环境下平滑降级，绝不阻断代码流
           try { window.location.hash = targetHash; } catch (_) {}
         }
       },
@@ -3790,17 +3851,13 @@
       handlePopState(e) {
         isHandlingPopState = true;
         try {
-          // 1. 优先执行模态层 LIFO 出栈拦截（契约 B）
           if (typeof ModalStackManager !== 'undefined' && ModalStackManager.consumeTopModal()) {
             return;
           }
-
-          // 2. 执行宏观路由安全恢复（契约 A）
           if (typeof RouteDispatcher !== 'undefined') {
             RouteDispatcher.restoreState(e ? e.state : null);
           }
         } finally {
-          // 3. 在宏任务队列中安全释放事务锁，彻底防止死循环
           setTimeout(() => { isHandlingPopState = false; }, 0);
         }
       },
@@ -3821,9 +3878,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 规范契约 B：分层浮层 LIFO 消费栈 (ModalStackManager)
-  // =========================================================================
   const ModalStackManager = (function() {
     const stack = [];
 
@@ -3846,7 +3900,6 @@
         }
         stack.push({ id: modalId, close: closeCallback, element });
 
-        // 压入虚拟栈帧 (?modal={modalId})
         if (typeof window !== 'undefined' && window.history && !HistoryRouter.isHandlingPopState()) {
           const curHash = window.location.hash || '#/pack/all_2257/mode/choice';
           const baseHash = curHash.split('?')[0];
@@ -3855,9 +3908,7 @@
             try {
               const curState = window.history.state || {};
               window.history.pushState({ ...curState, modalId, isModalVirtualFrame: true }, '', modalHash);
-            } catch (_) {
-              // content:// 环境下忽略 pushState 限制，保证模态窗正常可用
-            }
+            } catch (_) {}
           }
         }
       },
@@ -3871,7 +3922,6 @@
           }
         }
 
-        // 若当前 URL 带有该虚拟帧，且非出栈引起的主动关闭，回退对齐历史栈
         if (options.triggerHistoryBack && typeof window !== 'undefined' && window.history && !HistoryRouter.isHandlingPopState()) {
           const hash = window.location.hash || '';
           if (hash.includes(`?modal=${encodeURIComponent(modalId)}`) || hash.includes('?modal=')) {
@@ -3904,9 +3954,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 方案模块 1：输入仲裁与按键路由调度器 (Key Router & Focus Trap)
-  // =========================================================================
   const KeyRouter = (function() {
     let isComposing = false;
     const modalStack = [];
@@ -3985,7 +4032,6 @@
         }
       },
       handleKeyDown(e) {
-        // L1: 模态层独占拦截
         const activeModal = this.getActiveModal();
         if (activeModal && activeModal.element && activeModal.element.style.display !== 'none' && !activeModal.element.classList.contains('is-hidden')) {
           if (e.key === 'Tab') {
@@ -4039,7 +4085,6 @@
 
         if (e.ctrlKey || e.altKey || e.metaKey) return;
 
-        // L1.5: 单盒全面强化专享键盘拦截
         const reinforceSession = AppState.get('boxReinforceSession');
         if (reinforceSession && reinforceSession.isActive) {
           if (e.key === 'Escape') {
@@ -4083,7 +4128,6 @@
           }
         }
 
-        // L2: 盲打工作台专属输入管道
         const curMode = AppState.get('currentMode');
         if (curMode === 'typing') {
           if (AppState.get('isTypingCompleted')) {
@@ -4128,7 +4172,130 @@
           return;
         }
 
-        // L3: 兜底层全局导航与全局快捷键
+        if (curMode === 'phrases_drill') {
+          const pd = Views.PhrasesDrill;
+          if (pd && pd.currentTest) {
+            const test = pd.currentTest;
+            const currentPhrase = test.phrases ? test.phrases[test.currentIndex] : null;
+
+            // 1. Escape: Exit test mode back to browse
+            if (e.key === 'Escape') {
+              e.preventDefault();
+              pd.exitTest();
+              return;
+            }
+
+            // 2. Audio pronunciation: P or V
+            if (e.key.toLowerCase() === 'p' || e.key.toLowerCase() === 'v') {
+              e.preventDefault();
+              if (currentPhrase && typeof Services !== 'undefined' && Services.Audio) {
+                Services.Audio.playWord(currentPhrase.phrase);
+              }
+              return;
+            }
+
+            // 3. Choice Mode Keys
+            if (test.mode === 'choice') {
+              let optIdx = -1;
+              if (['1', '2', '3', '4'].includes(e.key)) optIdx = parseInt(e.key, 10) - 1;
+              else if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) optIdx = ['a', 'b', 'c', 'd'].indexOf(e.key.toLowerCase());
+
+              if (optIdx !== -1) {
+                e.preventDefault();
+                const btns = document.querySelectorAll('#phrases-options-area .phrases-opt-btn, #phrases-options-area button');
+                if (btns[optIdx] && !btns[optIdx].disabled) {
+                  btns[optIdx].click();
+                }
+                return;
+              }
+
+              if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                const nextBtn = document.getElementById('phrases-next-btn');
+                if (nextBtn && nextBtn.style.display !== 'none') {
+                  e.preventDefault();
+                  pd.nextQuestion();
+                  return;
+                }
+              }
+              if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                pd.prevQuestion();
+                return;
+              }
+              return;
+            }
+
+            // 4. Flashcard Mode Keys
+            else if (test.mode === 'flashcard') {
+              const ansEl = document.getElementById('flashcard-answer');
+              const isFlipped = ansEl && ansEl.style.display !== 'none';
+
+              if (e.key === ' ' || e.code === 'Space') {
+                e.preventDefault();
+                if (!isFlipped) pd.flipFlashcard();
+                return;
+              }
+
+              if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                if (!isFlipped) {
+                  pd.flipFlashcard();
+                } else {
+                  pd.flashcardRate('good');
+                }
+                return;
+              }
+
+              if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (!isFlipped) {
+                  pd.prevQuestion();
+                } else {
+                  pd.flashcardRate('hard');
+                }
+                return;
+              }
+
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                if (!isFlipped) pd.flipFlashcard();
+                else pd.flashcardRate('good');
+                return;
+              }
+              return;
+            }
+
+            // 5. Fill Mode Keys
+            else if (test.mode === 'fill') {
+              if (e.key === 'ArrowLeft' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                pd.prevQuestion();
+                return;
+              }
+              if (e.key === 'ArrowRight' && e.target.tagName !== 'INPUT') {
+                const nextBtn = document.getElementById('phrases-next-btn');
+                if (nextBtn && nextBtn.style.display !== 'none') {
+                  e.preventDefault();
+                  pd.nextQuestion();
+                  return;
+                }
+              }
+              return;
+            }
+          } else {
+            // Browse Mode shortcuts
+            if (e.key === 'Escape') {
+              pd.closeMatrixModal();
+              return;
+            }
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+              pd.loadMoreBrowse();
+              return;
+            }
+          }
+          return;
+        }
+
         if (e.key === '?' || (e.shiftKey && e.key === '/')) {
           e.preventDefault();
           window.openShortcutModal();
@@ -4156,7 +4323,6 @@
           e.preventDefault();
           const isRight = (e.key === 'ArrowRight');
 
-          // 闪卡模式独占双阶段状态机
           if (curMode === 'flashcard') {
             if (document.activeElement?.blur) document.activeElement.blur();
             if (Views.Flashcard.isTransitioning || Views.Flashcard.isSwiping) return;
@@ -4291,9 +4457,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 零号法则 3：非阻塞异步确认与对话框 (UIModal)
-  // =========================================================================
   const UIModal = (function() {
     let activeResolver = null;
     let activeModalEl = null;
@@ -4369,14 +4532,14 @@
           `;
 
           overlay.classList.add('open');
-          overlay.classList.add('open'); overlay.classList.add('open'); overlay.style.display = 'flex';
+          overlay.style.display = 'flex';
 
           let isSettled = false;
           const settle = (choice, isPopState = false) => {
             if (isSettled) return;
             isSettled = true;
             overlay.classList.remove('open');
-            overlay.classList.remove('open'); overlay.classList.remove('open'); overlay.style.display = 'none';
+            overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_loot_preview', { triggerHistoryBack: !isPopState });
             resolve(choice);
@@ -4542,9 +4705,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 规范契约 C：模式生命周期与计时器沙箱化 (Lifecycle Sandbox)
-  // =========================================================================
   const LifecycleScheduler = (function() {
     const timers = new Set();
     const intervals = new Set();
@@ -4616,7 +4776,6 @@
         this.fuseBlow();
       },
 
-      // ★ 全局硬断电熔断核 (Hard Power-off Fuse)：0ms 内强行拔除所有异步时钟、发音与键盘独占
       fuseBlow() {
         timers.forEach(id => { try { clearTimeout(id); } catch (_) {} });
         timers.clear();
@@ -4637,7 +4796,6 @@
         });
         abortControllers.clear();
 
-        // 强行切断语音合成与音频流
         if (typeof window !== 'undefined' && window.speechSynthesis) {
           try { window.speechSynthesis.cancel(); } catch (_) {}
         }
@@ -4645,7 +4803,6 @@
           try { Services.Audio.stopAll(); } catch (_) {}
         }
 
-        // 强行解除按键总线独占与输入框焦点
         if (typeof document !== 'undefined') {
           if (document.activeElement && typeof document.activeElement.blur === 'function') {
             try { document.activeElement.blur(); } catch (_) {}
@@ -4658,7 +4815,6 @@
           });
         }
 
-        // 重置组合输入法状态
         if (typeof KeyRouter !== 'undefined' && typeof KeyRouter.setComposing === 'function') {
           KeyRouter.setComposing(false);
         }
@@ -4668,9 +4824,6 @@
     };
   })();
 
-  // =========================================================================
-  // ★ 模块 2：集中式状态管理中心 (AppState - Closure Store)
-  // =========================================================================
   const AppState = (function() {
     const state = {
       allPacks: {},
@@ -4820,9 +4973,6 @@
       }
     };
   })();
-  // =========================================================================
-  // ★ 模块 3：纯函数算法模型集合 (Algorithms)
-  // =========================================================================
   const Algorithms = (function() {
     const LEITNER_BOX_CONFIG = [
       { id: 1, name: "盒 1 · 每日巩固", icon: "📥", days: 1, ms: 1 * 86400000, desc: "新词/错题重修，临界记忆强化", color: "#ef4444" },
@@ -4957,7 +5107,6 @@
       },
 
       CRSE: {
-        // 盒位与稳定性基准绝对对齐表（单位：天）Box1 0.8 / Box2 2.0 / Box3 4.5 / Box4 8.0 / Box5 16.0
         BOX_STABILITY_MAP: [0.8, 2.0, 4.5, 8.0, 16.0],
 
         boxStabilityFloor(boxId) {
@@ -5003,7 +5152,6 @@
           const leitnerMode = context.leitnerMode || 'instant';
           const now = Date.now();
 
-          // 修复缺陷5：闪卡形态包含阅读卡背与自我评估耗时，按比例折算认知提取时间，避免 Z-Score 误杀
           let effectiveRt = rawRtMs;
           if (mode === 'flashcard') {
             effectiveRt = Math.max(200, rawRtMs * 0.45);
@@ -5031,7 +5179,6 @@
             streak += 1;
             d = Math.max(1.0, d - 0.15 * fluency.factor);
 
-            // 修复缺陷1：日内重复练习提供保底增益（下限 1.2），杜绝“过度学习惩罚”
             const desirableDifficulty = Math.max(1.2, Math.exp(1.0 - r));
             const streakBonus = 1.0 + Math.log(1.0 + 0.35 * streak);
             const difficultyDamping = (11.0 - d) / 10.0;
@@ -5039,14 +5186,12 @@
             const growth = 0.50 * desirableDifficulty * streakBonus * difficultyDamping * Math.max(0.7, fluency.factor);
             s = Math.max(s * 1.30, s * (1.0 + growth));
 
-            // 修复缺陷3：双轨仲裁——莱特纳模式设置决定升盒，连续稳定性只做基线，不再反向否决盒位
             const isDue = (!wordStat.lastReviewed || wordStat.lastReviewed <= 0 || now >= (wordStat.nextReviewDate || 0));
             const allowAdvance = (leitnerMode !== 'strict') || isDue;
 
             if (allowAdvance) {
               targetBox = Math.min(5, currentBox + 1);
               isPromoted = (targetBox > currentBox);
-              // 升盒后稳定性同步保底到目标盒位基准，杜绝“盒位与稳定性倒挂”
               s = Math.max(s, this.boxStabilityFloor(targetBox));
             } else {
               targetBox = currentBox;
@@ -5057,17 +5202,13 @@
             mistakes += 1;
             d = Math.min(10.0, d + 0.6);
 
-            // 修复缺陷5：温和阻尼衰减（0.50 替代 0.22），一次偶发错误不再抹掉 78% 战果
             s = Math.max(0.5, s * 0.50);
             isPromoted = false;
 
-            // 阶梯降盒保护：高盒错一次只降 1 级，避免断崖归零
             targetBox = (currentBox >= 3) ? (currentBox - 1) : 1;
-            // 降盒后将稳定性封顶至新盒位基准，保持双轨状态一致
             s = Math.min(s, Math.max(this.boxStabilityFloor(targetBox), 0.5));
           }
 
-          // 下次复习时间严格对齐莱特纳配置周期
           const boxCfg = Algorithms.Leitner.getConfig(targetBox);
           const intervalMs = boxCfg ? boxCfg.ms : Math.round(s * 86400000);
           const jitter = 0.95 + Math.random() * 0.10;
@@ -5080,7 +5221,7 @@
             difficulty: Math.round(d * 10) / 10,
             streak,
             mistakes,
-            box: targetBox, // 权威合法盒位输出
+            box: targetBox,
             tested: tested + 1,
             lastReviewed: now,
             lastResponseTime: rawRtMs,
@@ -5508,7 +5649,6 @@
             deltaBox = 0;
           }
 
-          // 修复缺陷4：基准放宽至 3200ms，包容长词与真题例句的正常阅读辨析耗时
           const fluentMs = Math.max(2000, Math.min(4200, 3200 + deltaLen + deltaDevice - deltaBox));
           const consolidateMs = Math.round(Math.max(fluentMs + 1500, fluentMs * 1.5));
 
@@ -5661,10 +5801,6 @@
       }
     };
   })();
-
-  // =========================================================================
-  // ★ 模块 4：基础设施服务层 (Services)
-  // =========================================================================
   const Services = (function() {
     const Storage = (function() {
       let dbInstance = null;
@@ -6173,7 +6309,6 @@
             if (!ctx || ctx.state === 'suspended') return;
             const now = ctx.currentTime;
             const dest = typingMasterGain || ctx.destination;
-
             const jitter = 1 + (Math.random() * 0.07 - 0.035);
 
             const triggerTransient = (gainVal, filterType, cutoffHz, durSec = 0.004) => {
@@ -6744,7 +6879,6 @@
               return;
             }
 
-            // ★ 规范 4.2：单例复用与全局音频管道缓冲 (彻底避免移动端多实例内存泄漏)
             if (!activeAudio && AudioCtor) {
               try {
                 activeAudio = new AudioCtor();
@@ -7422,20 +7556,16 @@
           return payload;
         },
 
-                async fetchSafeGistFile(fileObj, token, gistId = '', timeoutMs = 15000) {
+        async fetchSafeGistFile(fileObj, token, gistId = '', timeoutMs = 15000) {
           if (!fileObj) throw new Error('云端备份文件不存在');
 
-          // 1. 优先使用 Gist 接口直接返回的内联 content
           if (typeof fileObj.content === 'string' && fileObj.content.trim().length > 0) {
-            // 只要不是明确声明被截断，且能解析出 JSON 括号闭合，即可直接使用
             const trimmed = fileObj.content.trim();
             if (!fileObj.truncated && trimmed.startsWith('{') && trimmed.endsWith('}')) {
               return trimmed;
             }
           }
 
-          // 2. 双通道安全获取完整原始内容：
-          // 路径 A：纯匿名请求 raw_url（严禁带 Authorization，绝不触发 CORS 预检阻断）
           if (fileObj.raw_url) {
             try {
               const ctrl = new AbortController();
@@ -7457,7 +7587,6 @@
             }
           }
 
-          // 路径 B：经由 api.github.com 的 raw 媒体类型请求 (走已验证可用的 API 主干道)
           const cleanId = (typeof Utils !== 'undefined' && Utils.extractGistId) ? Utils.extractGistId(gistId) : String(gistId || '').trim();
           if (cleanId) {
             try {
@@ -7486,7 +7615,6 @@
             }
           }
 
-          // 3. 最终兜底：使用已有的截断内容
           if (typeof fileObj.content === 'string' && fileObj.content.trim().length > 0) {
             return fileObj.content.trim();
           }
@@ -8023,13 +8151,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
   })();
 
-  // =========================================================================
-  // ★ 规范契约 A：路由分发与容错纠偏 (RouteDispatcher)
-  // =========================================================================
   const RouteDispatcher = (function() {
     const VALID_MODES = new Set([
       'choice', 'typing', 'spell', 'flashcard', 'speed_blitz',
-      'audio_clo', 'confusables', 'match_game', 'vocab_upgrader',
+      'audio_clo', 'confusables', 'match_game', 'phrases_drill', 'vocab_upgrader',
       'root_dict', 'leitner_box', 'mock', 'mistakes_center', 'tree', 'manage'
     ]);
 
@@ -8106,15 +8231,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
   })();
-  // =========================================================================
-  // ★ 模块 5：视图控制器层 (Views - 严格沙箱生命周期与内嵌流式折叠架构)
-  // =========================================================================
   const Views = (function() {
     let autoAdvanceTimeout = null;
 
-    // -----------------------------------------------------------------------
-    // [5.1 Choice View - 四选一测试 (严格生命周期沙箱 & 物理级卸载隔离)]
-    // -----------------------------------------------------------------------
     const Choice = {
       enter(prevMode) {
         const container = document.getElementById('view-choice');
@@ -8369,9 +8488,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.2 Flashcard View - 智能闪卡 (方案一: 内嵌流式折叠与局部视口预算 | 方案二: 严格沙箱隔离)]
-    // -----------------------------------------------------------------------
     const Flashcard = {
       isTransitioning: false,
       isSwiping: false,
@@ -8425,15 +8541,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
       enter(prevMode) {
         document.body.classList.add('flashcard-mode-active');
-
-        // 彻底物理卸载四选一选择区
         const choiceContainer = document.getElementById('view-choice');
         if (choiceContainer) {
           choiceContainer.innerHTML = '';
           choiceContainer.style.display = 'none';
         }
-
-        // 彻底隐藏外部独立解析卡片
         const analysisCard = document.getElementById('analysis-card');
         if (analysisCard) {
           analysisCard.style.display = 'none';
@@ -8493,14 +8605,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.cleanup();
         AppState.update('isCardFlipped', false);
 
-        // 严格确保外部选项容器在物理层面清空
         const choiceContainer = document.getElementById('view-choice');
         if (choiceContainer) {
           choiceContainer.innerHTML = '';
           choiceContainer.style.display = 'none';
         }
 
-        // 严格确保外部解析卡片隐藏，绝不在卡片外部撑开文档流
         const externalAnalysis = document.getElementById('analysis-card');
         if (externalAnalysis) {
           externalAnalysis.style.display = 'none';
@@ -8537,7 +8647,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (termEl) termEl.innerText = word.word;
         if (subEl) subEl.innerText = word.phonetic || '';
 
-        // ★ 方案一核心：背面预设内嵌流式折叠结构
         if (backEl) {
           backEl.style.display = 'grid';
           backEl.classList.remove('is-revealed');
@@ -8614,7 +8723,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           this.bindMobileTouchGestures(mainCard);
         }
 
-        // 方案 B 只读回看态挂载
         const oldBanner = document.getElementById('reinforce-readonly-banner');
         if (oldBanner) oldBanner.remove();
         const oldBar = document.getElementById('reinforce-inspect-bar');
@@ -8745,7 +8853,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           `;
         }
 
-        // 内嵌构词精解 HTML 生成
         let embeddedAnalysisHtml = '';
         if (word && (word.analysis || word.collocation)) {
           const isExt = (word.analysis_type === '引申');
@@ -8782,7 +8889,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           });
         }
 
-        // ★ 方案一核心：平滑焦点对齐 (Scroll Alignment)
         if (this.isTouchDevice() && mainCard) {
           requestAnimationFrame(() => {
             const rect = mainCard.getBoundingClientRect();
@@ -8793,7 +8899,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           });
         }
 
-        // 严格确保外部独立解析卡片保持隐藏
         const extAnalysis = document.getElementById('analysis-card');
         if (extAnalysis) extAnalysis.style.display = 'none';
 
@@ -8813,7 +8918,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         Services.Audio.stopAll();
 
-        // ★ 档位 A 强质感物理反馈：在卡片确定飞出瞬间单次触发真实震动 (掌握通过 36ms · 生疏重背 50ms)
         if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
           try {
             navigator.vibrate(known ? 36 : 50);
@@ -8958,12 +9062,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             const absY = Math.abs(deltaY);
             if (absX > 8 || absY > 8) {
               this.touch.directionDetermined = true;
-              // ★ 规范 2.2：双向意图向量仲裁。若垂直位移占据主导，立刻解除手势控制，交还原生滚屏
               if (absY >= absX * 0.85) {
                 this.touch.isHorizontalSwipe = false;
                 return;
               }
-              // 仅当水平位移显著占优 (absX > absY * 1.25) 时，才认定为切词滑动手势
               if (absX > absY * 1.25) {
                 this.touch.isHorizontalSwipe = true;
               } else {
@@ -8980,11 +9082,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             this.touch.isDragging = true;
             this.touch.currentX = t.clientX;
 
-            // 纯净自然的平移与旋转轻扫动效 (无畸变无多余模糊)
             const rotate = deltaX * 0.055;
             card.style.transform = `translate3d(${deltaX}px, 0, 0) rotate(${rotate}deg)`;
-
-            // ★ 触感优化：滑动中杜绝虚浮预震动，保持纯净物理跟手，仅在飞出后触发单次强震动
 
             const isFlipped = AppState.get('isCardFlipped');
             const bLeft = this.touch.badgeLeft;
@@ -9132,10 +9231,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.touch.badgeRight = null;
       }
     };
-
-    // -----------------------------------------------------------------------
-    // [5.3 Typing View - 键盘极速盲打]
-    // -----------------------------------------------------------------------
     const Typing = {
       slotElements: [],
       mistakeHintRevealed: false,
@@ -9471,12 +9566,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const updateViewport = () => {
           const vh = window.visualViewport.height;
           if (document && document.documentElement && document.documentElement.style) {
-          if (typeof document.documentElement.style.setProperty === 'function') {
-            document.documentElement.style.setProperty('--dynamic-viewport-h', `${vh}px`);
-          } else {
-            document.documentElement.style['--dynamic-viewport-h'] = `${vh}px`;
+            if (typeof document.documentElement.style.setProperty === 'function') {
+              document.documentElement.style.setProperty('--dynamic-viewport-h', `${vh}px`);
+            } else {
+              document.documentElement.style['--dynamic-viewport-h'] = `${vh}px`;
+            }
           }
-        }
         };
         window.visualViewport.addEventListener('resize', updateViewport);
         window.visualViewport.addEventListener('scroll', updateViewport);
@@ -10429,9 +10524,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.4 Spell View - 拼写填空]
-    // -----------------------------------------------------------------------
     const Spell = {
       enter(prevMode) {
         const el = document.getElementById('view-spell');
@@ -10515,9 +10607,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.5 SpeedBlitz View - 三秒极速心跳挑战]
-    // -----------------------------------------------------------------------
     const SpeedBlitz = {
       timerId: null,
       lastTick: 0,
@@ -10696,9 +10785,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.6 AudioCloze View - 盲听磨耳朵]
-    // -----------------------------------------------------------------------
     const AudioCloze = {
       autoplayTimer: null,
       isAutoplaying: false,
@@ -10787,9 +10873,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.7 Confusables View - 同根易混词对决]
-    // -----------------------------------------------------------------------
     const Confusables = {
       enter(prevMode) {},
       leave(nextMode) { Choice.cleanup(); },
@@ -10814,9 +10897,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.8 MatchGame View - 短语配对消消乐]
-    // -----------------------------------------------------------------------
     const MatchGame = {
       selectedTile: null,
       pairsCount: 0,
@@ -10937,9 +11017,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.9 VocabUpgrader View - 写作词汇升级器]
-    // -----------------------------------------------------------------------
     const VocabUpgrader = {
       UPGRADES: [
         {
@@ -11048,8 +11125,808 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     // -----------------------------------------------------------------------
-    // [5.10 MockExam View - 全真限时模考]
+    // [5.9.5 PhrasesDrill View - 词组专练系统 (已修复方法名与全环境多别名读取)]
     // -----------------------------------------------------------------------
+    const PhrasesDrill = {
+      phrasesData: [],
+      filteredPhrases: [],
+      currentTest: null,
+      testIndex: 0,
+      testAnswers: [],
+      activeCategoryFilter: 'all',
+      activeFrequencyFilter: 'all',
+      activeParticleFilter: 'all',
+      searchKeyword: '',
+      browseRenderedCount: 25,
+      _autoAdvanceTimer: null,
+      _observer: null,
+
+      enter(prevMode) {
+        const el = document.getElementById('view-phrases');
+        if (el) el.style.display = 'block';
+        this.render();
+      },
+
+      leave(nextMode) {
+        const el = document.getElementById('view-phrases');
+        if (el) el.style.display = 'none';
+        this.clearAutoAdvance();
+        this.closeMatrixModal();
+        if (this._observer) {
+          this._observer.disconnect();
+          this._observer = null;
+        }
+        this.cleanup();
+      },
+
+      clearAutoAdvance() {
+        if (this._autoAdvanceTimer) {
+          LifecycleScheduler.clearTimeout(this._autoAdvanceTimer);
+          this._autoAdvanceTimer = null;
+        }
+      },
+
+      render() {
+        this.clearAutoAdvance();
+        this.loadPhrasesFromGlobal();
+        this.applyFilters();
+        this.updateStats();
+        this.showBrowse();
+      },
+
+      showPhrasesBrowse() {
+        this.showBrowse();
+      },
+
+      loadPhrasesFromGlobal() {
+        let loaded = false;
+        if (typeof window !== 'undefined') {
+          const candidates = [
+            window.PHRASES_DATA,
+            window.CET4_PHRASES,
+            window.phrasesData,
+            window.PHRASES
+          ];
+          for (const cand of candidates) {
+            if (Array.isArray(cand) && cand.length > 0) {
+              this.phrasesData = cand;
+              loaded = true;
+              break;
+            }
+          }
+        }
+        if (!loaded && typeof globalThis !== 'undefined') {
+          const cand = globalThis.PHRASES_DATA || globalThis.CET4_PHRASES || globalThis.phrasesData || globalThis.PHRASES;
+          if (Array.isArray(cand) && cand.length > 0) {
+            this.phrasesData = cand;
+            loaded = true;
+          }
+        }
+        if (loaded) {
+          console.log('[PhrasesDrill] 成功装载词组全量数据库，词条数:', this.phrasesData.length);
+        }
+      },
+
+      updateStats() {
+        if (typeof document === 'undefined') return;
+        const totalCount = this.phrasesData.length;
+        const filteredCount = this.filteredPhrases.length;
+        const masteredCount = Math.floor(totalCount * 0.35);
+
+        const totalEl = document.getElementById('phrases-total-count');
+        const filteredEl = document.getElementById('phrases-filtered-count');
+        const masteredEl = document.getElementById('phrases-mastered-count');
+
+        if (totalEl) totalEl.innerText = totalCount;
+        if (filteredEl) filteredEl.innerText = filteredCount;
+        if (masteredEl) masteredEl.innerText = masteredCount;
+      },
+
+      filterByCategory(category) {
+        this.activeCategoryFilter = category;
+        const sel = document.getElementById('phrases-category-select');
+        if (sel && sel.value !== category) sel.value = category;
+        this.applyFilters();
+      },
+
+      filterByFrequency(freq) {
+        this.activeFrequencyFilter = freq;
+        const sel = document.getElementById('phrases-freq-select');
+        if (sel && sel.value !== freq) sel.value = freq;
+        this.applyFilters();
+      },
+
+      filterByParticle(particle) {
+        this.activeParticleFilter = particle;
+        if (typeof document !== 'undefined') {
+          document.querySelectorAll('.particle-filter-chip').forEach(chip => {
+            chip.classList.toggle('active', chip.dataset.particle === particle);
+          });
+        }
+        this.applyFilters();
+      },
+
+      searchPhrases(keyword) {
+        this.searchKeyword = (keyword || '').trim().toLowerCase();
+        this.applyFilters();
+      },
+
+      applyFilters() {
+        let list = [...(this.phrasesData || [])];
+
+        // 1. Category filter
+        if (this.activeCategoryFilter && this.activeCategoryFilter !== 'all') {
+          list = list.filter(p => p.category === this.activeCategoryFilter);
+        }
+
+        // 2. Frequency filter
+        if (this.activeFrequencyFilter && this.activeFrequencyFilter !== 'all') {
+          list = list.filter(p => p.frequency === this.activeFrequencyFilter);
+        }
+
+        // 3. Particle Cognitive Schema filter
+        if (this.activeParticleFilter && this.activeParticleFilter !== 'all') {
+          const pt = this.activeParticleFilter.toLowerCase();
+          if (pt === 'in') {
+            list = list.filter(p => p.particle === 'in' || p.particle === 'into');
+          } else if (pt === 'over') {
+            list = list.filter(p => p.particle === 'over' || p.particle === 'through');
+          } else if (pt === 'away') {
+            list = list.filter(p => p.particle === 'away' || p.particle === 'back');
+          } else {
+            list = list.filter(p => (p.particle || '').toLowerCase() === pt);
+          }
+        }
+
+        // 4. Keyword search
+        if (this.searchKeyword) {
+          const kw = this.searchKeyword;
+          list = list.filter(p =>
+            (p.phrase && p.phrase.toLowerCase().includes(kw)) ||
+            (p.meaning && p.meaning.toLowerCase().includes(kw)) ||
+            (p.core_word && p.core_word.toLowerCase().includes(kw)) ||
+            (p.schema_label && p.schema_label.toLowerCase().includes(kw))
+          );
+        }
+
+        this.filteredPhrases = list;
+        this.updateStats();
+
+        const testArea = document.getElementById('phrases-test-area');
+        const isTesting = testArea && testArea.style.display === 'block';
+        if (!isTesting) {
+          this.showBrowse();
+        }
+      },
+
+      startTest(mode) {
+        this.clearAutoAdvance();
+        if (this.filteredPhrases.length === 0) {
+          if (typeof UIModal !== 'undefined' && UIModal.alert) {
+            UIModal.alert({ title: '词组库为空', message: '当前筛选下没有词组，请先确认词组库已加载或重置筛选条件！' });
+          } else {
+            alert('请先选择词组分类或重置筛选！');
+          }
+          return;
+        }
+
+        const testPhrases = [...this.filteredPhrases].sort(() => 0.5 - Math.random()).slice(0, 20);
+        this.currentTest = {
+          mode: mode,
+          phrases: testPhrases,
+          currentIndex: 0,
+          score: 0,
+          answers: []
+        };
+
+        const testArea = document.getElementById('phrases-test-area');
+        const browseArea = document.getElementById('phrases-browse-area');
+        if (testArea) testArea.style.display = 'block';
+        if (browseArea) browseArea.style.display = 'none';
+
+        this.renderQuestion();
+      },
+
+      renderQuestion() {
+        this.clearAutoAdvance();
+        const test = this.currentTest;
+        if (!test || test.currentIndex >= test.phrases.length) {
+          this.showTestResult();
+          return;
+        }
+
+        const phrase = test.phrases[test.currentIndex];
+        const progEl = document.getElementById('phrases-test-progress');
+        const scoreEl = document.getElementById('phrases-test-score');
+        const questionArea = document.getElementById('phrases-question-area');
+        const optionsArea = document.getElementById('phrases-options-area');
+        const feedback = document.getElementById('phrases-feedback');
+        const nextBtn = document.getElementById('phrases-next-btn');
+
+        if (progEl) progEl.innerText = `第 ${test.currentIndex + 1} / ${test.phrases.length} 题`;
+        if (scoreEl) scoreEl.innerText = `得分：${test.score}`;
+        if (feedback) { feedback.style.display = 'none'; feedback.innerHTML = ''; }
+        if (nextBtn) nextBtn.style.display = 'none';
+
+        if (test.mode === 'choice') {
+          this.renderChoiceQuestion(phrase, questionArea, optionsArea);
+        } else if (test.mode === 'fill') {
+          this.renderFillQuestion(phrase, questionArea, optionsArea);
+        } else if (test.mode === 'flashcard') {
+          this.renderFlashcardQuestion(phrase, questionArea, optionsArea);
+        }
+
+        // Global Speak: Read English phrase aloud if enabled
+        if (AppState.get('speakEnabledEn') && typeof Services !== 'undefined' && Services.Audio) {
+          Services.Audio.playWord(phrase.phrase);
+        }
+      },
+
+      renderChoiceQuestion(phrase, questionArea, optionsArea) {
+        questionArea.innerHTML = `
+          <div style="font-size:1.45rem; font-weight:800; color:var(--primary); margin-bottom:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span>${Utils.escapeHTML(phrase.phrase)}</span>
+            <button class="btn btn-sm" onclick="Services.Audio.playWord('${Utils.escapeHTML(phrase.phrase)}')" style="padding:2px 8px; font-size:0.8rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer;" title="朗读发音">
+              🔊 发音 (P)
+            </button>
+            ${phrase.schema_label ? `<span style="font-size:0.75rem; font-weight:600; padding:2px 8px; border-radius:12px; background:var(--accent-light); color:var(--accent);">🧩 ${Utils.escapeHTML(phrase.schema_label)}</span>` : ''}
+          </div>
+          <div style="font-size:0.9rem; color:var(--muted); margin-bottom:6px;">
+            ${Utils.escapeHTML(phrase.structure || '')}
+          </div>
+          <div style="font-size:0.95rem; color:var(--text); font-style:italic; margin-top:10px; padding:10px; background:var(--bg); border-radius:6px;">
+            "${Utils.escapeHTML(phrase.example)}"
+          </div>
+        `;
+
+        const allPhrases = this.phrasesData.filter(p => p.category === phrase.category && p.id !== phrase.id);
+        const wrongOptions = allPhrases.sort(() => 0.5 - Math.random()).slice(0, 3);
+        const options = [...wrongOptions, phrase].sort(() => 0.5 - Math.random());
+
+        optionsArea.innerHTML = options.map((opt, idx) => `
+          <button class="btn choice-btn phrases-opt-btn"
+            data-opt-index="${idx}"
+            data-is-correct="${opt.id === phrase.id ? 'true' : 'false'}"
+            onclick="Views.PhrasesDrill.checkAnswer(${opt.id === phrase.id}, this)"
+            style="padding:12px 14px; text-align:left; background:var(--card-bg); border:1px solid var(--border); margin-bottom:8px; width:100%; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; transition:all 0.15s ease;">
+            <div>
+              <strong style="color:var(--primary); font-size:1.05rem; margin-right:8px;">${String.fromCharCode(65 + idx)}.</strong>
+              <span style="color:var(--text); font-size:0.95rem;">${Utils.escapeHTML(opt.meaning)}</span>
+            </div>
+            <span style="font-size:0.75rem; color:var(--muted); opacity:0.6;">[${String.fromCharCode(65 + idx)} / ${idx + 1}]</span>
+          </button>
+        `).join('');
+      },
+
+      renderFillQuestion(phrase, questionArea, optionsArea) {
+        const words = phrase.phrase.split(' ');
+        const blankIndex = words.length > 1 ? (words.length - 1) : 0;
+        const answer = words[blankIndex];
+        const displayWords = [...words];
+        displayWords[blankIndex] = '______';
+
+        questionArea.innerHTML = `
+          <div style="font-size:0.9rem; color:var(--muted); margin-bottom:12px;">
+            请根据释义与例句填入缺失的单词或小品词：
+          </div>
+          <div style="font-size:1.45rem; font-weight:800; color:var(--primary); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+            <span>${Utils.escapeHTML(displayWords.join(' '))}</span>
+            <button class="btn btn-sm" onclick="Services.Audio.playWord('${Utils.escapeHTML(phrase.phrase)}')" style="padding:2px 8px; font-size:0.8rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer;" title="朗读发音">
+              🔊 发音
+            </button>
+          </div>
+          <div style="font-size:1.1rem; color:var(--text); margin-bottom:12px;">
+            <strong>释义：</strong>${Utils.escapeHTML(phrase.meaning)}
+          </div>
+          <div style="font-size:0.95rem; color:var(--text); font-style:italic; padding:10px; background:var(--bg); border-radius:6px;">
+            "${Utils.escapeHTML(phrase.example)}"
+          </div>
+        `;
+
+        optionsArea.innerHTML = `
+          <div style="margin-bottom:12px;">
+            <input type="text" id="phrase-fill-input" data-answer="${Utils.escapeHTML(answer)}"
+              placeholder="请输入缺失的单词（如 ${Utils.escapeHTML(answer[0])}...）"
+              onkeydown="if(event.key==='Enter') Views.PhrasesDrill.checkFillAnswer()"
+              style="width:100%; padding:12px; font-size:1.1rem; border:2px solid var(--border); border-radius:8px; background:var(--card-bg); color:var(--text);" />
+          </div>
+          <button class="btn btn-primary" onclick="Views.PhrasesDrill.checkFillAnswer()" style="width:100%; padding:12px; font-weight:700;">
+            提交答案 (Enter)
+          </button>
+        `;
+
+        setTimeout(() => {
+          const inp = document.getElementById('phrase-fill-input');
+          if (inp) inp.focus();
+        }, 50);
+      },
+
+      renderFlashcardQuestion(phrase, questionArea, optionsArea) {
+        questionArea.innerHTML = `
+          <div style="text-align:center; padding:30px 20px;">
+            <div style="font-size:1.75rem; font-weight:800; color:var(--primary); margin-bottom:12px; display:flex; align-items:center; justify-content:center; gap:8px;">
+              <span>${Utils.escapeHTML(phrase.phrase)}</span>
+              <button class="btn btn-sm" onclick="Services.Audio.playWord('${Utils.escapeHTML(phrase.phrase)}')" style="padding:2px 8px; font-size:0.85rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer;" title="朗读发音">
+                🔊 发音 (P)
+              </button>
+            </div>
+            ${phrase.schema_label ? `<div style="display:inline-block; font-size:0.8rem; font-weight:600; padding:3px 10px; border-radius:12px; background:var(--accent-light); color:var(--accent); margin-bottom:16px;">🧩 ${Utils.escapeHTML(phrase.schema_label)}</div>` : ''}
+            <div id="flashcard-answer" style="display:none; text-align:left; margin-top:20px; padding:16px; background:var(--bg); border-radius:10px; border:1px solid var(--border);">
+              <div style="font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:8px;">
+                <strong>释义：</strong>${Utils.escapeHTML(phrase.meaning)}
+              </div>
+              <div style="font-size:0.9rem; color:var(--muted); margin-bottom:10px;">
+                <strong>结构：</strong>${Utils.escapeHTML(phrase.structure || '')}
+              </div>
+              <div style="font-size:0.95rem; color:var(--text); font-style:italic; margin-bottom:12px;">
+                "${Utils.escapeHTML(phrase.example)}"
+              </div>
+              ${this.buildCognitiveBoxHTML(phrase)}
+            </div>
+          </div>
+        `;
+
+        optionsArea.innerHTML = `
+          <div id="flashcard-flip-btn-wrap" style="display:block;">
+            <button class="btn btn-primary" onclick="Views.PhrasesDrill.flipFlashcard()" style="width:100%; padding:12px; font-weight:700;">
+              🔍 点击翻转卡片 (空格 / →)
+            </button>
+          </div>
+          <div id="flashcard-actions" style="display:none; gap:10px;">
+            <button class="btn" onclick="Views.PhrasesDrill.flashcardRate('hard')" style="flex:1; padding:12px; background:var(--error-light); color:var(--error); font-weight:700; border:none; border-radius:8px;">
+              😣 生疏 (←)
+            </button>
+            <button class="btn" onclick="Views.PhrasesDrill.flashcardRate('good')" style="flex:1; padding:12px; background:var(--success-light); color:var(--success); font-weight:700; border:none; border-radius:8px;">
+              😊 掌握 (→)
+            </button>
+          </div>
+        `;
+      },
+
+      flipFlashcard() {
+        const ans = document.getElementById('flashcard-answer');
+        const flipWrap = document.getElementById('flashcard-flip-btn-wrap');
+        const acts = document.getElementById('flashcard-actions');
+        if (ans) ans.style.display = 'block';
+        if (flipWrap) flipWrap.style.display = 'none';
+        if (acts) acts.style.display = 'flex';
+
+        // Global Speak: If flashcardSpeakZh is on, read Chinese meaning
+        if (AppState.get('flashcardSpeakZh') && typeof Services !== 'undefined' && Services.Audio) {
+          const phrase = this.currentTest?.phrases[this.currentTest.currentIndex];
+          if (phrase && phrase.meaning) {
+            Services.Audio.playWord(phrase.meaning, 1.0, 'zh-CN');
+          }
+        }
+      },
+
+      flashcardRate(rating) {
+        this.clearAutoAdvance();
+        const isGood = (rating === 'good');
+        if (isGood) {
+          this.currentTest.score++;
+        }
+
+        // Global SFX
+        if (AppState.get('soundEffectsEnabled') && typeof Services !== 'undefined' && Services.Sfx) {
+          Services.Sfx.playFeedbackSound(isGood, AppState.get('feedbackSfxStyle') || 'arcade');
+        }
+
+        // Daily study activity
+        try {
+          const p = this.currentTest?.phrases[this.currentTest.currentIndex];
+          if (p && App.bumpDailyActivity) App.bumpDailyActivity(p.phrase);
+          if (typeof window.updateDailyProgressUI === 'function') window.updateDailyProgressUI();
+        } catch (_) {}
+
+        this.nextQuestion();
+      },
+
+      buildCognitiveBoxHTML(phrase) {
+        if (!phrase) return '';
+        const chain = phrase.cognitive_chain;
+        return `
+          <div class="phrase-cognitive-box" style="margin:12px 0; padding:14px; border-radius:10px; background:rgba(99, 102, 241, 0.05); border:1px solid rgba(99, 102, 241, 0.2); font-size:0.88rem; line-height:1.55;">
+            <div style="font-weight:800; color:var(--primary); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+              <span>🧠 认知延伸机制 (Cognitive Extension)</span>
+              <button class="btn btn-sm" onclick="Views.PhrasesDrill.showMatrix(${phrase.id})" style="padding:2px 8px; font-size:0.75rem; background:var(--card-bg); border:1px solid var(--border); border-radius:6px; cursor:pointer; color:var(--primary);">
+                ⚔️ 家族对决
+              </button>
+            </div>
+            ${chain ? `
+              <div style="margin-bottom:5px; color:var(--text);">
+                <span style="font-weight:700; color:#3b82f6;">① 物理原义：</span>${Utils.escapeHTML(chain.literal || '')}
+              </div>
+              <div style="margin-bottom:5px; color:var(--text);">
+                <span style="font-weight:700; color:#8b5cf6;">② 隐喻机制：</span>${Utils.escapeHTML(chain.metaphor || '')}
+              </div>
+              <div style="margin-bottom:5px; color:var(--text);">
+                <span style="font-weight:700; color:#10b981;">③ 考点引申：</span>${Utils.escapeHTML(chain.extension || phrase.meaning || '')}
+              </div>
+            ` : ''}
+            ${phrase.image_mnemonic ? `
+              <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(99, 102, 241, 0.2); font-size:0.83rem; color:var(--muted);">
+                <strong>💡 心智图景：</strong>${Utils.escapeHTML(phrase.image_mnemonic)}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      },
+
+      checkAnswer(isCorrect, selectedBtn = null) {
+        this.clearAutoAdvance();
+        const feedback = document.getElementById('phrases-feedback');
+        const nextBtn = document.getElementById('phrases-next-btn');
+        const currentPhrase = this.currentTest.phrases[this.currentTest.currentIndex];
+
+        // 1. Highlight options visually
+        const allBtns = document.querySelectorAll('#phrases-options-area button');
+        allBtns.forEach(btn => {
+          btn.disabled = true;
+          if (btn.dataset.isCorrect === 'true') {
+            btn.style.borderColor = 'var(--success)';
+            btn.style.background = 'var(--success-light)';
+            btn.style.color = 'var(--success)';
+            btn.style.fontWeight = '700';
+          }
+        });
+
+        if (selectedBtn && !isCorrect) {
+          selectedBtn.style.borderColor = 'var(--error)';
+          selectedBtn.style.background = 'var(--error-light)';
+          selectedBtn.style.color = 'var(--error)';
+        }
+
+        // 2. Play Global SFX
+        if (AppState.get('soundEffectsEnabled') && typeof Services !== 'undefined' && Services.Sfx) {
+          Services.Sfx.playFeedbackSound(isCorrect, AppState.get('feedbackSfxStyle') || 'arcade');
+        }
+
+        // 3. Daily activity tracking
+        try {
+          if (typeof App !== 'undefined' && App.bumpDailyActivity) {
+            App.bumpDailyActivity(currentPhrase.phrase);
+          }
+          if (typeof window.updateDailyProgressUI === 'function') {
+            window.updateDailyProgressUI();
+          }
+        } catch (_) {}
+
+        // 4. Render Feedback & Cognitive Box
+        if (isCorrect) {
+          this.currentTest.score++;
+          const scoreEl = document.getElementById('phrases-test-score');
+          if (scoreEl) scoreEl.innerText = `得分：${this.currentTest.score}`;
+
+          feedback.innerHTML = `
+            <div style="color:var(--success); font-weight:800; font-size:1.1rem; margin-bottom:6px;">✓ 回答正确！</div>
+            <div style="font-size:0.95rem; color:var(--text); margin-bottom:8px;"><strong>考点释义：</strong>${Utils.escapeHTML(currentPhrase.meaning)}</div>
+            ${this.buildCognitiveBoxHTML(currentPhrase)}
+          `;
+          feedback.style.background = 'var(--card-bg)';
+          feedback.style.border = '1px solid var(--success)';
+        } else {
+          feedback.innerHTML = `
+            <div style="color:var(--error); font-weight:800; font-size:1.1rem; margin-bottom:6px;">✗ 回答错误</div>
+            <div style="font-size:0.95rem; color:var(--text); margin-bottom:8px;"><strong>正确释义：</strong>${Utils.escapeHTML(currentPhrase.meaning)}</div>
+            ${this.buildCognitiveBoxHTML(currentPhrase)}
+          `;
+          feedback.style.background = 'var(--card-bg)';
+          feedback.style.border = '1px solid var(--error)';
+        }
+
+        feedback.style.display = 'block';
+        if (nextBtn) {
+          nextBtn.style.display = 'block';
+          nextBtn.innerText = (this.currentTest.currentIndex < this.currentTest.phrases.length - 1) ? '下一题 (→)' : '查看测试总结 (→)';
+        }
+
+        // 5. Global Auto-Advance
+        const autoAdvance = AppState.get('autoAdvanceEnabled');
+        if (autoAdvance && isCorrect) {
+          const delaySec = Math.max(0.6, parseFloat(AppState.get('autoAdvanceDelay') || 1.2));
+          this._autoAdvanceTimer = LifecycleScheduler.setTimeout(() => {
+            this.nextQuestion();
+          }, delaySec * 1000);
+        }
+      },
+
+      checkFillAnswer() {
+        const input = document.getElementById('phrase-fill-input');
+        if (!input) return;
+        const userAnswer = input.value.trim().toLowerCase();
+        const correctAnswer = (input.dataset.answer || '').toLowerCase();
+        this.checkAnswer(userAnswer === correctAnswer);
+      },
+
+      nextQuestion() {
+        this.clearAutoAdvance();
+        if (!this.currentTest) return;
+        this.currentTest.currentIndex++;
+        this.renderQuestion();
+      },
+
+      prevQuestion() {
+        this.clearAutoAdvance();
+        if (!this.currentTest || this.currentTest.currentIndex <= 0) return;
+        this.currentTest.currentIndex--;
+        this.renderQuestion();
+      },
+
+      showTestResult() {
+        this.clearAutoAdvance();
+        const questionArea = document.getElementById('phrases-question-area');
+        const optionsArea = document.getElementById('phrases-options-area');
+        const feedback = document.getElementById('phrases-feedback');
+        const nextBtn = document.getElementById('phrases-next-btn');
+
+        if (feedback) feedback.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+
+        const test = this.currentTest;
+        const total = test.phrases.length;
+        const score = test.score;
+        const pct = Math.round((score / total) * 100);
+
+        // Global SFX on test complete
+        if (AppState.get('soundEffectsEnabled') && typeof Services !== 'undefined' && Services.Sfx) {
+          Services.Sfx.playFeedbackSound(pct >= 60, 'arcade');
+        }
+
+        questionArea.innerHTML = `
+          <div style="text-align:center; padding:30px 20px;">
+            <div style="font-size:3rem; margin-bottom:12px;">${pct >= 80 ? '🎉' : (pct >= 60 ? '👍' : '💪')}</div>
+            <h3 style="font-size:1.4rem; color:var(--text); margin:0 0 8px 0;">词组测试圆满完成！</h3>
+            <div style="font-size:2.2rem; font-weight:900; color:var(--primary); margin-bottom:10px;">${score} / ${total}</div>
+            <p style="color:var(--muted); font-size:0.95rem; margin-bottom:20px;">正确率: ${pct}%</p>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+              <button class="btn btn-primary" onclick="Views.PhrasesDrill.startTest('${test.mode}')">🔄 再测一组</button>
+              <button class="btn" onclick="Views.PhrasesDrill.exitTest()" style="background:var(--bg); border:1px solid var(--border); color:var(--text);">📖 返回浏览</button>
+            </div>
+          </div>
+        `;
+        if (optionsArea) optionsArea.innerHTML = '';
+      },
+
+      exitTest() {
+        this.clearAutoAdvance();
+        const testArea = document.getElementById('phrases-test-area');
+        const browseArea = document.getElementById('phrases-browse-area');
+        if (testArea) testArea.style.display = 'none';
+        if (browseArea) browseArea.style.display = 'block';
+        this.currentTest = null;
+        this.showBrowse();
+      },
+
+      renderBrowseItemHTML(phrase) {
+        return `
+          <div class="phrases-card-item" style="background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.25rem; font-weight:800; color:var(--primary);">${Utils.escapeHTML(phrase.phrase)}</span>
+                <button class="btn btn-sm" onclick="Services.Audio.playWord('${Utils.escapeHTML(phrase.phrase)}')" style="padding:2px 8px; font-size:0.75rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer;" title="朗读发音">🔊</button>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                ${phrase.schema_label ? `<span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:12px; background:var(--accent-light); color:var(--accent);">🧩 ${Utils.escapeHTML(phrase.schema_label)}</span>` : ''}
+                <span style="font-size:0.75rem; padding:2px 8px; border-radius:12px; background:var(--primary-light); color:var(--primary);">
+                  ${Utils.escapeHTML(phrase.frequency || '高频')}
+                </span>
+                <button class="btn btn-sm" onclick="Views.PhrasesDrill.showMatrix(${phrase.id})" style="padding:2px 8px; font-size:0.75rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer; color:var(--primary);" title="对比同动词或同小品词短语">
+                  ⚔️ 对决
+                </button>
+              </div>
+            </div>
+            <div style="font-size:0.95rem; color:var(--text); margin-bottom:6px;">
+              <strong>释义：</strong>${Utils.escapeHTML(phrase.meaning)}
+            </div>
+            ${phrase.structure ? `
+              <div style="font-size:0.85rem; color:var(--muted); margin-bottom:8px;">
+                <strong>搭配：</strong>${Utils.escapeHTML(phrase.structure)}
+              </div>
+            ` : ''}
+            <div style="font-size:0.9rem; color:var(--text); font-style:italic; padding:10px; background:var(--bg); border-radius:8px; margin-bottom:8px;">
+              "${Utils.escapeHTML(phrase.example)}"
+            </div>
+            ${phrase.exampleCn ? `
+              <div style="font-size:0.85rem; color:var(--muted); padding-left:10px; margin-bottom:10px;">
+                ${Utils.escapeHTML(phrase.exampleCn)}
+              </div>
+            ` : ''}
+            ${this.buildCognitiveBoxHTML(phrase)}
+          </div>
+        `;
+      },
+
+      showBrowse() {
+        this.clearAutoAdvance();
+        const browseArea = document.getElementById('phrases-browse-area');
+        const testArea = document.getElementById('phrases-test-area');
+        if (browseArea) browseArea.style.display = 'block';
+        if (testArea) testArea.style.display = 'none';
+
+        const browseList = document.getElementById('phrases-browse-list');
+        if (!browseList) return;
+
+        if (this._observer) {
+          this._observer.disconnect();
+          this._observer = null;
+        }
+
+        if (!this.filteredPhrases || this.filteredPhrases.length === 0) {
+          browseList.innerHTML = `
+            <div style="text-align:center; padding:40px 20px; color:var(--muted); background:var(--card-bg); border-radius:10px; border:1px solid var(--border);">
+              <div style="font-size:2rem; margin-bottom:10px;">🔍</div>
+              <div style="font-size:1rem; font-weight:700; margin-bottom:6px;">未检索到符合条件的词组</div>
+              <div style="font-size:0.85rem;">请尝试调整上方分类、频度或小品词筛选，或输入更简短的关键词。</div>
+            </div>
+          `;
+          return;
+        }
+
+        // Lazy load: initial slice 25 items
+        this.browseRenderedCount = Math.min(25, this.filteredPhrases.length);
+        const initialSlice = this.filteredPhrases.slice(0, this.browseRenderedCount);
+        const itemsHTML = initialSlice.map(p => this.renderBrowseItemHTML(p)).join('');
+
+        let sentinelHTML = '';
+        if (this.filteredPhrases.length > this.browseRenderedCount) {
+          const remain = this.filteredPhrases.length - this.browseRenderedCount;
+          sentinelHTML = `
+            <div id="phrases-load-more-sentinel" style="text-align:center; padding:24px 10px;">
+              <button class="btn btn-sm" onclick="Views.PhrasesDrill.loadMoreBrowse()" style="padding:8px 24px; border-radius:20px; background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.85rem; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+                ▼ 加载更多词组 (当前已载入 ${this.browseRenderedCount} / 剩余 ${remain} 条)
+              </button>
+            </div>
+          `;
+        } else {
+          sentinelHTML = `
+            <div style="text-align:center; padding:20px; font-size:0.85rem; color:var(--muted);">
+              ✓ 已呈现全部 ${this.filteredPhrases.length} 条词组
+            </div>
+          `;
+        }
+
+        browseList.innerHTML = itemsHTML + sentinelHTML;
+        this.setupSentinelObserver();
+      },
+
+      loadMoreBrowse() {
+        if (!this.filteredPhrases || this.browseRenderedCount >= this.filteredPhrases.length) return;
+        const browseList = document.getElementById('phrases-browse-list');
+        const sentinel = document.getElementById('phrases-load-more-sentinel');
+        if (!browseList) return;
+
+        const nextCount = Math.min(this.filteredPhrases.length, this.browseRenderedCount + 25);
+        const nextSlice = this.filteredPhrases.slice(this.browseRenderedCount, nextCount);
+        this.browseRenderedCount = nextCount;
+
+        const fragmentHtml = nextSlice.map(p => this.renderBrowseItemHTML(p)).join('');
+
+        if (sentinel) {
+          sentinel.insertAdjacentHTML('beforebegin', fragmentHtml);
+          const remain = this.filteredPhrases.length - this.browseRenderedCount;
+          if (remain > 0) {
+            sentinel.innerHTML = `
+              <button class="btn btn-sm" onclick="Views.PhrasesDrill.loadMoreBrowse()" style="padding:8px 24px; border-radius:20px; background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.85rem; box-shadow:0 2px 6px rgba(0,0,0,0.03);">
+                ▼ 加载更多词组 (当前已载入 ${this.browseRenderedCount} / 剩余 ${remain} 条)
+              </button>
+            `;
+          } else {
+            sentinel.outerHTML = `
+              <div style="text-align:center; padding:20px; font-size:0.85rem; color:var(--muted);">
+                ✓ 已呈现全部 ${this.filteredPhrases.length} 条词组
+              </div>
+            `;
+          }
+        } else {
+          browseList.insertAdjacentHTML('beforeend', fragmentHtml);
+        }
+      },
+
+      setupSentinelObserver() {
+        if (typeof IntersectionObserver === 'undefined') return;
+        const sentinel = document.getElementById('phrases-load-more-sentinel');
+        if (!sentinel) return;
+
+        this._observer = new IntersectionObserver((entries) => {
+          if (entries[0] && entries[0].isIntersecting) {
+            this.loadMoreBrowse();
+          }
+        }, { rootMargin: '300px' });
+
+        this._observer.observe(sentinel);
+      },
+
+      showMatrix(phraseId) {
+        const target = (this.phrasesData || []).find(p => p.id === phraseId);
+        if (!target) return;
+
+        const modal = document.getElementById('phrase-matrix-modal');
+        const content = document.getElementById('phrase-matrix-content');
+        if (!modal || !content) return;
+
+        const targetCore = (target.core_word || '').toLowerCase();
+        const targetParticle = (target.particle || '').toLowerCase();
+
+        // 1. Same Verb family
+        const sameVerbList = targetCore ? this.phrasesData.filter(p => (p.core_word || '').toLowerCase() === targetCore && p.id !== target.id) : [];
+
+        // 2. Same Particle family
+        const sameParticleList = (targetParticle && targetParticle !== 'collocation' && targetParticle !== 'idiom')
+          ? this.phrasesData.filter(p => (p.particle || '').toLowerCase() === targetParticle && p.id !== target.id)
+          : [];
+
+        content.innerHTML = `
+          <div style="margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:1.4rem; font-weight:900; color:var(--primary);">${Utils.escapeHTML(target.phrase)}</div>
+              <span style="font-size:0.8rem; padding:3px 10px; border-radius:12px; background:var(--accent-light); color:var(--accent); font-weight:700;">🧩 ${Utils.escapeHTML(target.schema_label || '空间图式')}</span>
+            </div>
+            <div style="font-size:1rem; color:var(--text); margin:6px 0;"><strong>核心考点义：</strong>${Utils.escapeHTML(target.meaning)}</div>
+            ${target.cognitive_chain ? `
+              <div style="font-size:0.85rem; color:var(--muted); line-height:1.5;">
+                <span style="color:#3b82f6;">【本义】${Utils.escapeHTML(target.cognitive_chain.literal || '')}</span> ➔
+                <span style="color:#8b5cf6;">【隐喻】${Utils.escapeHTML(target.cognitive_chain.metaphor || '')}</span>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- 对决展示区 -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+            <!-- 左列：同动词家族 -->
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:14px;">
+              <h4 style="margin:0 0 10px 0; color:var(--primary); font-size:1rem; display:flex; align-items:center; justify-content:space-between;">
+                <span>🔄 同动词星系【${Utils.escapeHTML(target.core_word || '')}】</span>
+                <span style="font-size:0.75rem; color:var(--muted);">${sameVerbList.length} 个短语</span>
+              </h4>
+              <div style="max-height:360px; overflow-y:auto; padding-right:4px;">
+                ${sameVerbList.length === 0 ? '<div style="color:var(--muted); font-size:0.85rem;">暂无同动词其他词组</div>' : sameVerbList.map(p => `
+                  <div style="padding:8px 10px; border-radius:6px; background:var(--card-bg); margin-bottom:8px; border:1px solid var(--border); font-size:0.85rem;">
+                    <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text);">
+                      <span>${Utils.escapeHTML(p.phrase)}</span>
+                      <span style="color:var(--accent); font-size:0.75rem;">${Utils.escapeHTML((p.particle || '').toUpperCase())}</span>
+                    </div>
+                    <div style="color:var(--muted); margin-top:3px;">${Utils.escapeHTML(p.meaning)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 右列：同小品词隐喻家族 -->
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:14px;">
+              <h4 style="margin:0 0 10px 0; color:var(--accent); font-size:1rem; display:flex; align-items:center; justify-content:space-between;">
+                <span>🎯 同小品词图式【${Utils.escapeHTML((target.particle || '').toUpperCase())}】</span>
+                <span style="font-size:0.75rem; color:var(--muted);">${sameParticleList.length} 个短语</span>
+              </h4>
+              <div style="max-height:360px; overflow-y:auto; padding-right:4px;">
+                ${sameParticleList.length === 0 ? '<div style="color:var(--muted); font-size:0.85rem;">当前为固定搭配或无同小品词聚合</div>' : sameParticleList.slice(0, 30).map(p => `
+                  <div style="padding:8px 10px; border-radius:6px; background:var(--card-bg); margin-bottom:8px; border:1px solid var(--border); font-size:0.85rem;">
+                    <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text);">
+                      <span>${Utils.escapeHTML(p.phrase)}</span>
+                      <span style="color:var(--primary); font-size:0.75rem;">${Utils.escapeHTML(p.core_word || '')}</span>
+                    </div>
+                    <div style="color:var(--muted); margin-top:3px;">${Utils.escapeHTML(p.meaning)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+
+        modal.style.display = 'flex';
+      },
+
+      closeMatrixModal() {
+        const modal = document.getElementById('phrase-matrix-modal');
+        if (modal) modal.style.display = 'none';
+      },
+
+      cleanup() {
+        this.clearAutoAdvance();
+        this.currentTest = null;
+      }
+    };
+
     const MockExam = {
       state: null,
 
@@ -11206,9 +12083,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.11 MistakesCenter View - 错题大本营]
-    // -----------------------------------------------------------------------
     const MistakesCenter = {
       isDirty: true,
 
@@ -11279,7 +12153,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             <div class="weak-root-meta" style="font-size:0.72rem; color:var(--muted); border-top:1px dashed var(--border); padding-top:4px;">
               <span>薄弱指数: <strong style="color:var(--primary);">${item.weightedScore}</strong></span>
             </div>
-            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "\'"))}', ${isGlobal})">🎯 专练此族</button>
+            <button class="weak-root-btn" onclick="Views.MistakesCenter.drillWeakRoot('${Utils.escapeHTML(item.group.replace(/'/g, "'"))}', ${isGlobal})">🎯 专练此族</button>
           `;
           fragment.appendChild(card);
         });
@@ -11462,9 +12336,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       cleanup() {}
     };
 
-    // -----------------------------------------------------------------------
-    // [5.12 Tree View - 全景族谱树]
-    // -----------------------------------------------------------------------
     const Tree = {
       enter(prevMode) {
         const el = document.getElementById('view-tree');
@@ -11526,9 +12397,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       cleanup() {}
     };
 
-    // -----------------------------------------------------------------------
-    // [5.13 Manage View - 打卡与备份中心]
-    // -----------------------------------------------------------------------
     const Manage = {
       enter(prevMode) {
         const el = document.getElementById('view-manage');
@@ -11758,9 +12626,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       cleanup() {}
     };
 
-    // -----------------------------------------------------------------------
-    // [5.14 Compass View - 艾宾浩斯五盒动态罗盘与独立看板]
-    // -----------------------------------------------------------------------
     const Compass = {
       selectedDrawerBoxId: null,
       boxesDirty: true,
@@ -11793,7 +12658,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             if (i === boxId) node.classList.add('active');
             else node.classList.remove('active');
           }
-          // 同步点亮卡片内嵌微型指示器 (Micro-dot Stepper)
           const dot = document.querySelector(`.micro-dot[data-box="${i}"]`);
           if (dot) {
             dot.classList.remove('active', 'passed');
@@ -11825,24 +12689,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
-      // ★ 规范第 3 章：全面取缔顶部高饱和横幅，执行就地微反馈与卡片呼吸流光 (In-place Micro Feedback)
       triggerHopBadge(fromBox, toBox, isCorrect) {
         const card = document.getElementById('main-card');
-
-        // 1. 卡片边缘就地呼吸流光 (Edge Glow)
         if (card) {
           card.classList.remove('edge-glow-success', 'edge-glow-warning');
-          void card.offsetWidth; // 触发回流重置动效
+          void card.offsetWidth;
           card.classList.add(isCorrect ? 'edge-glow-success' : 'edge-glow-warning');
           LifecycleScheduler.setTimeout(() => {
             if (card) card.classList.remove('edge-glow-success', 'edge-glow-warning');
           }, 500);
         }
 
-        // 2. ★ 方案 1-A：彻底取缔左上角弹窗浮标胶囊，仅保留纯净五盒微点与视触双通道低噪反馈
         if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
           try {
-            // 闪卡模式由卡片飞出独立接管档位 A 强物理震动，跳过此处的微弱震动以杜绝重复触发
             const isFlashcardActive = (typeof AppState !== 'undefined' && AppState.get('currentMode') === 'flashcard');
             if (!isFlashcardActive) {
               navigator.vibrate(isCorrect ? 8 : 12);
@@ -11863,7 +12722,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           item.box = targetBoxId;
           item.lastReviewed = now;
           item.nextReviewDate = now + Algorithms.Leitner.getConfig(targetBoxId).ms;
-          // 核心修复：跳盒/保送毕业时同步写入与盒位对齐的基准稳定性，防止后续被算法秒打回
           item.stability = Math.max((typeof item.stability === 'number' && item.stability > 0) ? item.stability : 0,
             Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(targetBoxId));
           if (targetBoxId === 5) {
@@ -12077,9 +12935,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    // -----------------------------------------------------------------------
-    // [5.15 Companion View - 桌面大屏辅助栏]
-    // -----------------------------------------------------------------------
     const Companion = {
       render(word) {
         if (!word) return;
@@ -12152,6 +13007,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       AudioCloze,
       Confusables,
       MatchGame,
+      PhrasesDrill,
       VocabUpgrader,
       MockExam,
       MistakesCenter,
@@ -12159,7 +13015,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       Manage,
       Compass,
       Companion,
-      // ★ 全量 snake_case 模式别名镜像映射，确保 switchMode 时 100% 命中 enter / leave 钩子
       choice: Choice,
       typing: Typing,
       spell: Spell,
@@ -12168,6 +13023,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       audio_clo: AudioCloze,
       confusables: Confusables,
       match_game: MatchGame,
+      phrases_drill: PhrasesDrill,
       vocab_upgrader: VocabUpgrader,
       mock: MockExam,
       mistakes_center: MistakesCenter,
@@ -12176,10 +13032,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       leitner_box: Compass
     };
   })();
-
-  // =========================================================================
-  // ★ 模块 6：应用主控制器 (App Orchestrator & Global Facades)
-  // =========================================================================
   const UNEXPECTED_WORDS_SET = new Set([
     'address', 'plant', 'court', 'table', 'current', 'scale', 'game', 'bill', 'custom',
     'figure', 'issue', 'content', 'capital', 'check', 'company', 'fair', 'fine', 'firm',
@@ -12196,72 +13048,66 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     'world', 'write', 'wrong', 'yard', 'year', 'yield'
   ]);
 
-  
-    // =========================================================================
-    // ★ [移动端架构] 硬件性能分级嗅探器与动态视口锁存引擎
-    // =========================================================================
-    const DeviceTierEngine = (function() {
-      let tier = 'high';
-      function sniff() {
-        if (typeof window === 'undefined') return 'high';
-        try {
-          const cores = navigator.hardwareConcurrency || 4;
-          const memory = navigator.deviceMemory || 4;
-          const isMobile = (window.innerWidth <= 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const DeviceTierEngine = (function() {
+    let tier = 'high';
+    function sniff() {
+      if (typeof window === 'undefined') return 'high';
+      try {
+        const cores = navigator.hardwareConcurrency || 4;
+        const memory = navigator.deviceMemory || 4;
+        const isMobile = (window.innerWidth <= 768) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-          if (isMobile && (cores <= 4 || memory <= 4)) {
-            tier = 'low';
-          } else {
-            tier = 'high';
-          }
-          if (document && document.documentElement) {
-            document.documentElement.setAttribute('data-gpu-tier', tier);
-          }
-        } catch (_) {
+        if (isMobile && (cores <= 4 || memory <= 4)) {
+          tier = 'low';
+        } else {
           tier = 'high';
         }
-        return tier;
-      }
-      return {
-        sniff,
-        getTier: () => tier
-      };
-    })();
-
-    function initGlobalVisualViewportEngine() {
-      if (typeof window === 'undefined') return;
-      let lastH = 0;
-      let rAF = null;
-
-      const updateHeight = () => {
-        const vh = (window.visualViewport && window.visualViewport.height) 
-          ? window.visualViewport.height 
-          : window.innerHeight;
-        // 防跳动阈值：微量像素波动 (例如虚拟键盘细微沉浮) 自动锁存
-        if (Math.abs(vh - lastH) < 2) return;
-        lastH = vh;
-        if (document && document.documentElement && document.documentElement.style) {
-          if (typeof document.documentElement.style.setProperty === 'function') {
-            document.documentElement.style.setProperty('--dynamic-viewport-h', `${vh}px`);
-          } else {
-            document.documentElement.style['--dynamic-viewport-h'] = `${vh}px`;
-          }
+        if (document && document.documentElement) {
+          document.documentElement.setAttribute('data-gpu-tier', tier);
         }
-      };
-
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', () => {
-          if (rAF) cancelAnimationFrame(rAF);
-          rAF = requestAnimationFrame(updateHeight);
-        });
+      } catch (_) {
+        tier = 'high';
       }
-      window.addEventListener('resize', updateHeight);
-      window.addEventListener('orientationchange', () => {
-        setTimeout(updateHeight, 150);
-      });
-      updateHeight();
+      return tier;
     }
+    return {
+      sniff,
+      getTier: () => tier
+    };
+  })();
 
+  function initGlobalVisualViewportEngine() {
+    if (typeof window === 'undefined') return;
+    let lastH = 0;
+    let rAF = null;
+
+    const updateHeight = () => {
+      const vh = (window.visualViewport && window.visualViewport.height) 
+        ? window.visualViewport.height 
+        : window.innerHeight;
+      if (Math.abs(vh - lastH) < 2) return;
+      lastH = vh;
+      if (document && document.documentElement && document.documentElement.style) {
+        if (typeof document.documentElement.style.setProperty === 'function') {
+          document.documentElement.style.setProperty('--dynamic-viewport-h', vh + 'px');
+        } else {
+          document.documentElement.style['--dynamic-viewport-h'] = vh + 'px';
+        }
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        if (rAF) cancelAnimationFrame(rAF);
+        rAF = requestAnimationFrame(updateHeight);
+      });
+    }
+    window.addEventListener('resize', updateHeight);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(updateHeight, 150);
+    });
+    updateHeight();
+  }
   const App = (function() {
     const BUILTIN_WORDS = [
       { word: "anticipate", phonetic: "/ænˈtɪsɪpeɪt/", pos: "vt.", meaning: "预料，预期；期望", group: "【cip, capt】抓，拿", analysis: "anti (前) + cip (抓) + ate → 提前抓取 → 预料", example: "We did not anticipate such rapid economic development in this region." },
@@ -12454,10 +13300,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         AppState.update('packStats', pStats);
       },
-
-      // =========================================================================
-      // ★ 单盒全面强化完整学习逻辑核心控制器 (Box Reinforcement Engine)
-      // =========================================================================
       startBoxReinforceSession(boxId, boxName) {
         const currentPackId = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
@@ -12689,8 +13531,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           : false;
 
         const isVerifyPass = Boolean(profile.wordObj?._isVerifyPass || (profile.firstPassDone && profile.verificationStatus === 'NEEDS_VERIFY'));
-
         const isTightened = Boolean(profile.wordObj?._isTightenedRecency);
+
         let evalRes = Algorithms.BoxReinforce.evaluateCognitiveState(
           rtMs, isCorrect, profile.firstPassDone, profile.canPromote, wordName, profile.initialBox, isTouch, isTightened
         );
@@ -12893,7 +13735,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.bumpDailyActivity(wordName);
         this.updateStats();
       },
-
       exitReinforceReadOnlyToLatest() {
         const session = AppState.get('boxReinforceSession');
         if (!session || !session.isActive) return;
@@ -13185,8 +14026,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const oldTested = oldStat.tested || 0;
           const oldMistakes = oldStat.mistakes || 0;
 
-          // 优化A：首碰秒答已达晋升标准但二次复核因盒小未能触发的词，
-          // 结算时按 50% 增益确权为稳定性加固，战果不再静默蒸发
           if (p.verificationStatus === 'NEEDS_VERIFY' && p.currentBox === p.initialBox) {
             p.currentStability = Math.max(
               p.currentStability || 0,
@@ -13202,7 +14041,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             promoted.push(p);
             this.broadcastWordStatUpdate(currentPackId, word, (st) => {
               st.box = p.currentBox;
-              // 核心修复：晋升后的稳定性必须落盘，且不低于目标盒位基准
               st.stability = Math.max(p.currentStability || 0, Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(p.currentBox));
               st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
               st.streak = oldStreak + 1;
@@ -13215,7 +14053,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             demoted.push(p);
             this.broadcastWordStatUpdate(currentPackId, word, (st) => {
               st.box = p.currentBox;
-              // 核心修复：降级保护后的稳定性同步落盘
               st.stability = Math.max(p.currentStability || 0.2, Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(p.currentBox) * 0.5);
               st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
               st.mistakes = oldMistakes + p.sessionMistakes;
@@ -13229,7 +14066,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             consolidated.push(p);
             this.broadcastWordStatUpdate(currentPackId, word, (st) => {
               st.box = p.initialBox;
-              // 核心修复：加固后的稳定性同步落盘
               st.stability = Math.max(p.currentStability || 0, Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(p.initialBox) * 0.6);
               st.tested = oldTested + p.sessionSuccesses + p.sessionMistakes;
               st.mistakes = oldMistakes + p.sessionMistakes;
@@ -13530,6 +14366,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         window.addEventListener('morphoWordsLoaded', () => {
           tryHydrateGlobal();
+        });
+
+        // 词组库就绪自动装载
+        window.addEventListener('phrasesLoaded', () => {
+          if (typeof Views !== 'undefined' && Views.PhrasesDrill) {
+            Views.PhrasesDrill.loadPhrasesFromGlobal();
+            Views.PhrasesDrill.filteredPhrases = [...Views.PhrasesDrill.phrasesData];
+            Views.PhrasesDrill.updateStats();
+            if (AppState.get('currentMode') === 'phrases_drill') {
+              Views.PhrasesDrill.render();
+            }
+            console.log("✅ 词组库 phrasesLoaded 事件捕获成功，当前收录: " + Views.PhrasesDrill.phrasesData.length + " 条");
+          }
         });
 
         if (typeof fetch !== 'undefined') {
@@ -13843,11 +14692,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             savedStats[w.word] = st;
           } else {
             if (st.box === undefined) st.box = Math.max(1, Math.min(5, st.level || 1));
-            // 核心修复：旧数据缺失/异常 stability 时，按当前盒位基准补全，杜绝倒挂
             if (typeof st.stability !== 'number' || !(st.stability > 0)) {
               st.stability = Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(st.box || 1);
             } else if (st.stability < Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(st.box || 1)) {
-              // 优化B：历史存档中由旧公式生成的倒挂低值，一次性抬升至盒位基准（自愈式幂等迁移）
               st.stability = Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(st.box || 1);
             }
             if (st.streak === undefined) st.streak = (st.level >= 3) ? (st.level - 2) : 0;
@@ -13901,7 +14748,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         this.nextQuestion();
       },
-
       getTodayNewLearnedCount(packId) {
         const pStats = AppState.get('packStats')[packId] || Services.Storage.getStats(packId) || {};
         const now = new Date();
@@ -14431,7 +15277,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           return pool[targetIndex];
         }
       },
-
       nextQuestion() {
         Services.Audio.stopAll();
         Views.Choice.cancelAutoAdvance();
@@ -14717,7 +15562,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'speed_blitz', 'audio_clo', 'confusables'].includes(mode);
         if (!isQuestionMode) return;
 
-        // ★ 视图渲染防泄漏隔离：非极速挑战模式强制清除极速心跳条
         if (typeof document !== 'undefined') {
           if (mode !== 'speed_blitz') {
             document.body.classList.remove('mode-speed_blitz-active');
@@ -14866,7 +15710,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (termEl) termEl.innerText = word.word;
         if (subEl) subEl.innerText = word.phonetic || '';
 
-        // 仅在非闪卡模式下才开启外部独立解析卡片
         if (AppState.get('currentMode') !== 'flashcard' && word.analysis) {
           const tag = document.getElementById('analysis-tag');
           const isExt = (word.analysis_type === '引申');
@@ -14888,7 +15731,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           }
         }
       },
-
       loadCurrentWordNote(word) {
         if (typeof document === 'undefined') return;
         const notes = Services.Storage.getNotes();
@@ -14941,7 +15783,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
         const item = Services.Audio.preloadSentence(word.word, word);
         if (item && item.en) {
-          const highlighted = item.en.replace(new RegExp(`\\b(${word.word}|${word.word}s|${word.word}ed|${word.word}ing)\\b`, 'gi'), '<b style="color:var(--primary); font-weight:800;">$1</b>');
+          const highlighted = item.en.replace(new RegExp(`\b(${word.word}|${word.word}s|${word.word}ed|${word.word}ing)\b`, 'gi'), '<b style="color:var(--primary); font-weight:800;">$1</b>');
           enEl.innerHTML = highlighted;
           cnEl.innerText = item.cn || '';
           cnEl.style.display = item.cn ? 'block' : 'none';
@@ -14950,7 +15792,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             badgeEl.innerHTML = `📰 ${item.source || '真题'}语境 ${isMob ? '<span class="sentence-accordion-toggle">▾ 点击展收</span>' : ''}`;
           }
           box.style.display = 'flex';
-          // 移动端默认折叠，降低信息密度
           if (window.innerWidth <= 768 && !box._hasManualToggle) {
             box.classList.add('is-collapsed');
           }
@@ -15234,8 +16075,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         this.updateStats();
         Services.Sync.showToast(newFlag ? `⭐ 已收藏【${word.word}】到重点强化本` : `已取消收藏【${word.word}】`, 'info', 1500);
       },
-      // ★ 方案二核心落地：严格的多模式生命周期沙箱调度中枢 (先销毁、后挂载)
-      // 模式切换过渡锁 (Transition Lock)：严格防止手抖连击引发状态竞争
       _isModeTransitioning: false,
 
       isTransitionLocked() {
@@ -15243,7 +16082,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       switchMode(mode, options = {}) {
-        // 过渡锁拦截与重入防护 (Re-entrance Guard)
         if (this._isModeTransitioning && !options.forceUnlock) {
           console.warn('[FSM] Mode transition locked. Ignoring re-entrant request for:', mode);
           return false;
@@ -15257,14 +16095,11 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         try {
           return this._executeModeSwitch(prevMode, mode, options);
         } finally {
-          // 模式执行完毕立即解开事务锁，杜绝死锁与阻塞合法切换
           this._isModeTransitioning = false;
         }
       },
 
       _executeModeSwitch(prevMode, mode, options = {}) {
-
-        // 1. 严格生命周期：离开旧模式 (Leave / Teardown)
         if (prevMode && Views[prevMode] && typeof Views[prevMode].leave === 'function') {
           try { Views[prevMode].leave(mode); } catch (e) { console.warn('[Lifecycle] Leave error:', prevMode, e); }
         } else if (prevMode === 'choice' && typeof Views.Choice.leave === 'function') {
@@ -15273,12 +16108,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           Views.Flashcard.leave(mode);
         }
 
-        // 2. 全局通用清理（硬断电熔断核、音频流即时终止、本地存储刷盘、幽灵遮罩物理剥离）
         LifecycleScheduler.teardown();
         Services.Storage.flushAll();
         Services.Audio.stopAll();
 
-        // 收拢所有展开中的抽屉和弹层，并强制剥离所有触控捕获属性 (Ghost Trap Defense)
         if (typeof window.closeMobileModeSheet === 'function') {
           try { window.closeMobileModeSheet(true); } catch (_) {}
         }
@@ -15297,12 +16130,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           });
         }
 
-        // 若切出强化受支持模式 (choice / flashcard) 且当前单盒强化正在运行，安全收拢
         if (mode !== 'choice' && mode !== 'flashcard' && AppState.get('boxReinforceSession')?.isActive) {
           this.commitBoxReinforceSession();
         }
 
-        // ★ 极速挑战残余样式彻底清除兜底
         if (prevMode === 'speed_blitz' || mode !== 'speed_blitz') {
           if (typeof document !== 'undefined') {
             document.body.classList.remove('mode-speed_blitz-active');
@@ -15325,19 +16156,14 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const analysisCard = document.getElementById('analysis-card');
         if (analysisCard) analysisCard.style.display = 'none';
 
-        // 3. 物理切断四选一选项容器，杜绝串扰污染
         const choiceContainer = document.getElementById('view-choice');
         if (choiceContainer && mode !== 'choice' && mode !== 'audio_clo' && mode !== 'confusables' && mode !== 'speed_blitz') {
           choiceContainer.innerHTML = '';
           choiceContainer.style.display = 'none';
         }
 
-        // 4. 更新当前模式状态
         AppState.update('currentMode', mode);
 
-        // =========================================================================
-        // ★ 就绪验证 (Validation)：词库流标尺与过滤条件脱轨防护 (Bounds Check & Fallback)
-        // =========================================================================
         try {
           let pool = this.getEffectivePool() || [];
           const curPack = AppState.get('currentPackId');
@@ -15346,7 +16172,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             pool = fallbackPack.words || [];
           }
           let currentWord = AppState.get('currentWord');
-          // 若当前单词在生效词池中脱轨不存在或悬空，安全归一化指针，彻底杜绝白屏硬中断
           if (!currentWord || (pool.length > 0 && !pool.some(w => w.word === currentWord.word))) {
             currentWord = pool[0] || null;
             if (currentWord) {
@@ -15368,6 +16193,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           audio_clo: { name: '盲听磨耳朵', icon: '🎧' },
           confusables: { name: '同根易混对决', icon: '⚔️' },
           match_game: { name: '短语消消乐', icon: '🧩' },
+          phrases_drill: { name: '词组专练', icon: '📚' },
           vocab_upgrader: { name: '写作词汇升级', icon: '📝' },
           root_dict: { name: '词根逆向字典', icon: '🔍' },
           leitner_box: { name: '莱特纳五盒看板', icon: '📦' },
@@ -15380,21 +16206,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const capNameEl = typeof document !== 'undefined' ? document.getElementById('capsule-mode-name') : null;
         if (capNameEl) capNameEl.innerHTML = `${curMeta.icon} ${curMeta.name}`;
 
-        // 同步顶栏模式切换按钮状态 (沉浸模式右侧，精炼 2~4 字防溢出)
-        const topModeIcon = typeof document !== 'undefined' ? document.getElementById('top-mode-icon') : null;
-        const topModeName = typeof document !== 'undefined' ? document.getElementById('top-mode-name') : null;
-        if (topModeIcon) topModeIcon.textContent = curMeta.icon;
-        if (topModeName) {
-          const SHORT_NAME_MAP = {
-            choice: '四选一', typing: '盲打', spell: '拼写', flashcard: '闪卡',
-            speed_blitz: '极速', audio_clo: '磨耳朵', confusables: '易混对决', match_game: '消消乐',
-            vocab_upgrader: '词汇升级', root_dict: '词根字典', leitner_box: '五盒看板',
-            mock: '模考', mistakes_center: '错题本', tree: '族谱树', manage: '备份同步'
-          };
-          topModeName.textContent = SHORT_NAME_MAP[mode] || curMeta.name.replace(/测试|训练|挑战|大本营/g, '').trim() || curMeta.name;
-        }
-
-        // 同步全模式抽屉高亮状态
         const mobCurIcon = typeof document !== 'undefined' ? document.getElementById('mobile-cur-icon') : null;
         const mobCurName = typeof document !== 'undefined' ? document.getElementById('mobile-cur-name') : null;
         if (mobCurIcon) mobCurIcon.textContent = curMeta.icon;
@@ -15409,7 +16220,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             }
           });
 
-          // 自动平滑滚动激活的 Tab 按钮至滑轨中心视区
           const activeTabBtn = document.querySelector(`.nav-tabs .tab-btn.active`);
           if (activeTabBtn && typeof activeTabBtn.scrollIntoView === 'function') {
             try {
@@ -15424,7 +16234,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           });
 
           const allPanels = [
-            'stage-area', 'view-match', 'view-upgrader', 'view-root-dict',
+            'stage-area', 'view-match', 'view-upgrader', 'view-root-dict', 'view-phrases',
             'view-leitner', 'view-mock', 'view-mistakes', 'view-tree',
             'view-manage', 'view-typing', 'typing-history-panel'
           ];
@@ -15436,7 +16246,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const searchPanel = document.getElementById('search-panel');
           if (searchPanel) searchPanel.style.display = 'none';
 
-          // 5. 严格生命周期：进入新模式 (Enter / Mount)
           if (Views[mode] && typeof Views[mode].enter === 'function') {
             try { Views[mode].enter(prevMode); } catch (e) { console.warn('[Lifecycle] Enter error:', mode, e); }
           }
@@ -15453,6 +16262,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             const el = document.getElementById('view-root-dict');
             if (el) el.style.display = 'block';
             this.handleRootDictSearch(document.getElementById('root-dict-input')?.value || '');
+          } else if (mode === 'phrases_drill') {
+            const el = document.getElementById('view-phrases');
+            if (el) el.style.display = 'block';
+            if (Views.PhrasesDrill && typeof Views.PhrasesDrill.render === 'function') {
+              Views.PhrasesDrill.render();
+            }
           } else if (mode === 'leitner_box') {
             const el = document.getElementById('view-leitner');
             if (el) el.style.display = 'block';
@@ -15595,7 +16410,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           HistoryRouter.push(AppState.get('currentPackId'), mode);
         }
       },
-
       filterByGroup(groupName) {
         if (AppState.get('boxReinforceSession')?.isActive) {
           this.finishBoxReinforceSessionCommit();
@@ -15706,10 +16520,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
   })();
-  // =========================================================================
-  // ★ 模块 7：全局事件监听与 HTML 动作门面绑定 (Global Facades)
-  // =========================================================================
-
   if (typeof window !== 'undefined') {
     window.alert = function(msg) {
       if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
@@ -15772,7 +16582,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       Services.Sync.showToast('🎉 已成功安装至系统独立窗口！', 'success', 2500);
     });
 
-    // 门面映射
     window.switchMode = (m) => App.switchMode(m);
     window.nextQuestion = () => App.nextQuestion();
     window.prevQuestion = () => App.prevQuestion();
@@ -15963,7 +16772,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       document.body.classList.toggle('focus-mode-active', targetState);
       document.body.classList.toggle('focus-mode', targetState);
 
-      // ★ 方案 2-B：彻底移除沉浸模式右上角退出胶囊（完全由卡片外部空白双击手势与 Esc 物理键接管）
       const escapeBtn = document.getElementById('focus-escape-pill');
       if (escapeBtn && escapeBtn.parentNode) {
         escapeBtn.remove();
@@ -15989,49 +16797,34 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         cardZenBtn.title = targetState ? '退出沉浸模式' : '进入全屏沉浸模式';
       }
 
-      // ★ 规范落地：彻底弃用原生 requestFullscreen，消除系统级全屏拦截提示横幅
-      // 全面依托 100dvh 与 CSS 视口层级实现无弹窗纯净沉浸
-
       if (typeof Services !== 'undefined' && Services.Sync && typeof Services.Sync.showToast === 'function') {
         Services.Sync.showToast(targetState ? '🎯 已开启专注沉浸模式' : '↩️ 已退出专注模式', 'info', 1200);
       }
     };
 
-// ★ 已移除 fullscreenchange 原生监听，由 Esc 键及 .focus-escape-pill 安全接管
-
-    
-    // =========================================================================
-    // ★ 方案 2-B：沉浸模式卡片外部空白区域高精度双击安全退出手势 (Zero-Bug 严格范围把控)
-    // =========================================================================
     (function initFocusDoubleTapExit() {
       let lastTapTime = 0;
       let lastTapX = 0;
       let lastTapY = 0;
 
       function handleFocusDoubleTap(e) {
-        // 守卫 1：仅在激活专注沉浸模式时执行判定
         if (!AppState.get('focusMode')) return;
 
         const target = e.target;
         if (!target) return;
 
-        // 守卫 2：严禁在任何交互性表单、输入与按钮元素上触发 (防盲打、打字、选词干扰)
         if (target.closest('button, input, textarea, select, a, [role="button"], .choice-btn, .btn, .tab-btn, .opt-btn, .tag-pill, .checkbox-label')) {
           return;
         }
 
-        // 守卫 3：严禁在任何打开的模态框、抽屉、快捷键说明浮层上触发
         if (target.closest('.modal, .drawer, .sheet-modal, .overlay, .typing-milestone-overlay, .dropdown-menu')) {
           return;
         }
 
-        // 守卫 4（核心范围把控）：严禁在主卡片及任何词汇展示/练习内容内部触发！
-        // 彻底杜绝背词、闪卡翻转、例句阅读、划词释义时的连击误触
         if (target.closest('#main-card, .stage-card, #flashcard-front, #flashcard-back, #choice-container, .card-meta-header, .word-main-card')) {
           return;
         }
 
-        // 守卫 5：仅允许在卡片外围的纯背景留白区域（body, container 边距, stage-area 卡片外空白）触发
         const isValidBlankArea = (
           target === document.body ||
           target === document.documentElement ||
@@ -16041,7 +16834,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         );
         if (!isValidBlankArea) return;
 
-        // 守卫 6：提取物理坐标，同时兼容移动端触摸 (touchend) 与桌面端鼠标点击
         const touch = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
         const curX = touch.clientX || 0;
         const curY = touch.clientY || 0;
@@ -16050,8 +16842,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const timeDiff = now - lastTapTime;
         const dist = Math.hypot(curX - lastTapX, curY - lastTapY);
 
-        // 守卫 7：时间与空间位移双重精细约束 (防抖防晃，排除屏幕两端无序点击)
-        // 两次点击时间间隔须在 180ms ~ 450ms 之间，物理间距 <= 28px
         if (timeDiff >= 180 && timeDiff <= 450 && dist <= 28) {
           lastTapTime = 0;
           if (e.cancelable) e.preventDefault();
@@ -16066,7 +16856,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           return;
         }
 
-        // 记录首击时间与坐标
         lastTapTime = now;
         lastTapX = curX;
         lastTapY = curY;
@@ -16085,7 +16874,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       };
       const cfg = THEME_COLORS[targetTheme] || THEME_COLORS.light;
 
-      // 1. 动态贯通根容器底色，直接渗透至全面屏手势小白条（下巴）与状态栏（额头）
       if (typeof document !== 'undefined') {
         if (document.documentElement) {
           document.documentElement.style.backgroundColor = cfg.bg;
@@ -16095,7 +16883,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           document.body.style.backgroundColor = cfg.bg;
         }
 
-        // 2. 强制触发 Android Chrome/Edge 状态栏变色 (重塑 meta 标签以击穿浏览器静态缓存)
         const oldMetas = document.querySelectorAll('meta[name="theme-color"]');
         oldMetas.forEach(m => m.remove());
 
@@ -16105,7 +16892,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         newMeta.id = 'meta-theme-color';
         document.head.appendChild(newMeta);
 
-        // 3. 适配 iOS Safari PWA 状态栏
         let appleMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
         if (!appleMeta) {
           appleMeta = document.createElement('meta');
@@ -16127,7 +16913,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         localStorage.setItem('morpho_theme', targetTheme);
       } catch (_) {}
 
-      // 立即触发系统栏与全屏底色变色
       applySystemBarColors(targetTheme);
 
       const topSelect = document.getElementById('theme-select');
@@ -16172,7 +16957,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       if (sCount) sCount.innerText = testedToday;
       if (sTarget) sTarget.innerText = target;
       if (sUnique) sUnique.innerText = uniqueToday;
-      if (sFill && sFill.style) sFill.style.width = `${pct}%`;
+      if (sFill && sFill.style) sFill.style.width = dFill ? (dFill.style.width || '0%') : '0%';
     }
     window.updateDailyProgressUI = updateDailyProgressUI;
 
@@ -16568,7 +17353,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }, 500);
     };
 
-        window.saveCloudSyncConfig = (silent = false) => {
+    window.saveCloudSyncConfig = (silent = false) => {
       const rawToken = document.getElementById('gist-token')?.value || '';
       const rawGistId = document.getElementById('gist-id')?.value || '';
       const cleanToken = rawToken.replace(/^(Bearer|token)\s+/i, '').trim();
@@ -16647,14 +17432,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     window.selectModeFromSheet = (m) => {
-      // 1. 关闭抽屉，传入 true 坚决不触发异步 history.back() 冲掉新模式
       try {
         window.closeMobileModeSheet(true);
       } catch (e) {
         console.warn('[Sheet] safe close error:', e);
       }
 
-      // 2. 立即执行模式切换
       try {
         App.switchMode(m);
       } catch (e) {
@@ -16692,6 +17475,88 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     window.handleSearch = Utils.debounce((kw) => App.handleSearch(kw), 150);
     window.handleRootDictSearch = Utils.debounce((q) => App.handleRootDictSearch(q), 150);
 
+    // 词组专练全局函数
+    window.filterPhrasesByCategory = (cat) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.filterByCategory(cat);
+    };
+    window.filterPhrasesByFrequency = (freq) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.filterByFrequency(freq);
+    };
+    window.startPhrasesTest = (mode) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.startTest(mode);
+    };
+    window.showPhrasesBrowse = () => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.showBrowse();
+    };
+    window.exitPhrasesTest = () => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.exitTest();
+    };
+    window.phrasesNextQuestion = () => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.nextQuestion();
+    };
+    window.phrasesPrevQuestion = () => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.prevQuestion();
+    };
+    window.searchPhrases = Utils.debounce((kw) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.searchPhrases(kw);
+    window.filterPhrasesByParticle = (p) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.filterByParticle(p);
+    };
+    window.showPhraseMatrix = (id) => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.showMatrix(id);
+    };
+    window.closePhraseMatrixModal = () => {
+      if (Views.PhrasesDrill) Views.PhrasesDrill.closeMatrixModal();
+    };
+    }, 200);
+
+    window.handleLocalPhrasesFile = function(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const resetInput = () => {
+        try { e.target.value = ''; } catch (_) {}
+      };
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        resetInput();
+        const text = evt.target.result;
+        try {
+          let data = null;
+          try { data = JSON.parse(text); } catch (_) {}
+          if (!data) {
+            const sandbox = { window: {}, global: {}, self: {} };
+            sandbox.window = sandbox; sandbox.global = sandbox; sandbox.self = sandbox;
+            const fn = new Function('window', 'global', 'self', text);
+            fn(sandbox, sandbox, sandbox);
+            data = sandbox.PHRASES_DATA || sandbox.CET4_PHRASES || sandbox.phrasesData || sandbox.PHRASES;
+          }
+          if (data && Array.isArray(data) && data.length > 0) {
+            window.PHRASES_DATA = data;
+            if (Views.PhrasesDrill) {
+              Views.PhrasesDrill.phrasesData = data;
+              Views.PhrasesDrill.filteredPhrases = [...data];
+              Views.PhrasesDrill.updateStats();
+              if (AppState.get('currentMode') === 'phrases_drill') {
+                Views.PhrasesDrill.render();
+              }
+            }
+            Services.Sync.showToast(`🎉 成功载入词组库【${file.name}】！共 ${data.length} 条词组。`, 'success', 2500);
+          } else {
+            UIModal.alert({ title: '词组库解析失败', message: '未能从文件中解析出有效的 PHRASES_DATA 数组，请确认文件格式。' });
+          }
+        } catch (err) {
+          UIModal.alert({ title: '读取异常', message: '文件读取解析异常: ' + err.message });
+        }
+      };
+      reader.onerror = function() {
+        resetInput();
+        UIModal.alert({ title: '读取错误', message: '无法读取选定的本地文件。' });
+      };
+      reader.readAsText(file, 'utf-8');
+    };
+
     window.exportAnkiTSV = () => Views.Manage.exportAnki();
     window.exportProgress = () => {
       Services.Storage.flushStats();
@@ -16712,7 +17577,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
     function parseWordsFileContent(content) {
       if (!content || typeof content !== 'string') return { packs: null, words: null };
-      content = content.replace(/^\\ufeff/, '').trim();
+      content = content.replace(/^\ufeff/, '').trim();
       let packs = null;
       let words = null;
 
@@ -16730,9 +17595,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       } catch (_) {}
 
       let cleanJs = content
-        .replace(/^export\\s+default\\s+/m, '')
-        .replace(/^export\\s+(const|let|var)\\s+/m, '$1 ')
-        .replace(/^module\\.exports\\s*=\\s*/m, '');
+        .replace(/^export\s+default\s+/m, '')
+        .replace(/^export\s+(const|let|var)\s+/m, '$1 ')
+        .replace(/^module\.exports\s*=\s*/m, '');
 
       if (!packs && !words) {
         try {
@@ -16970,8 +17835,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     window.HistoryRouter = HistoryRouter;
     window.RouteDispatcher = RouteDispatcher;
 
-    
-    // 软键盘弹起时的视口自动对齐黄金分割点与防遮挡
     function bindMobileKeyboardViewportAlignment() {
       if (typeof window === 'undefined') return;
       const inputs = document.querySelectorAll('input, textarea');
@@ -17041,7 +17904,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           if (layout) layout.classList.add('companion-collapsed');
           const btn = document.getElementById('companion-toggle-btn');
           if (btn) {
-            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-expanded', String(!isCollapsed));
             btn.innerText = '▣ 展开辅助栏';
           }
         }
