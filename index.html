@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
-  <script src="words_data.js" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
+  <script src="words_data.js" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script></script>
   <!-- 词组库增强引入：若 phrases_data.js 未找到则自动降级尝试 phrases_data_1200_universal.js -->
   <script src="phrases_data.js" onload="window.dispatchEvent(new CustomEvent('phrasesLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='phrases_data_1200_universal.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('phrasesLoaded'))}; s.onerror=function(){console.warn('词组库加载失败，请确保 phrases_data.js 或 phrases_data_1200_universal.js 与本页面同目录')}; document.head.appendChild(s);"></script>
   <style>
@@ -2402,7 +2402,7 @@
         <option value="adaptive" selected>🎯 智能自适应 (遗忘风险与弱项优先)</option>
         <option value="shuffle">🔀 随机乱序 (打乱重排)</option>
         <option value="sequential">📑 原书顺序 (逐词前进)</option>
-        <option value="weighted">🧠 艾宾浩斯加权 (生词优先)</option>
+        <option value="weighted">🧠 艾宾浩斯加权 (生词与盒1~3进阶)</option>
       </select>
       <button class="btn" style="padding: 4px 8px; font-size: 0.8rem; background: var(--card-bg); border: 1px solid var(--border); color: var(--text);" onclick="reshufflePool()">🎲 重新打乱</button>
 
@@ -5289,6 +5289,31 @@
         familyStatsCache: new Map(),
         isCacheDirty: true,
 
+        groupDynamicStats: {},
+        recordGroupAnswer(groupName, isCorrect) {
+          if (!groupName) return;
+          if (!this.groupDynamicStats) this.groupDynamicStats = {};
+          if (!this.groupDynamicStats[groupName]) {
+            this.groupDynamicStats[groupName] = { right: 0, wrong: 0, streak: 0 };
+          }
+          const gs = this.groupDynamicStats[groupName];
+          if (isCorrect) {
+            gs.right += 1;
+            gs.streak += 1;
+          } else {
+            gs.wrong += 1;
+            gs.streak = 0;
+          }
+          this.markFamilyCacheDirty();
+        },
+        getGroupDecayFactor(groupName) {
+          if (!this.groupDynamicStats || !this.groupDynamicStats[groupName]) return 1.0;
+          const streak = this.groupDynamicStats[groupName].streak || 0;
+          if (streak >= 3) return 0.0; // 连续答对 3 次，该词族连带惩罚完全衰减归零
+          if (streak === 2) return 0.3; // 连续答对 2 次，衰减至 30%
+          if (streak === 1) return 0.6; // 连续答对 1 次，衰减至 60%
+          return 1.0;
+        },
         markFamilyCacheDirty() {
           this.isCacheDirty = true;
           this.familyStatsCache.clear();
@@ -5457,21 +5482,26 @@
           const isFlagged = (wordStat && wordStat.isFlagged) ? 25.0 : 0.0;
           const nextReview = (wordStat && typeof wordStat.nextReviewDate === 'number' && !isNaN(wordStat.nextReviewDate)) ? wordStat.nextReviewDate : 0;
           const lastReviewed = (wordStat && typeof wordStat.lastReviewed === 'number' && !isNaN(wordStat.lastReviewed)) ? wordStat.lastReviewed : 0;
+          const box = (wordStat?.box >= 1 && wordStat?.box <= 5) ? wordStat.box : 1;
+
+          const isMatureOrGraduated = (box === 5) && (streak >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated);
+          const effectiveMistakes = isMatureOrGraduated ? 0 : Math.min(mistakes, 6);
 
           const isSafeMature = (
-            tested >= 3 &&
+            (tested >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated) &&
             mastery >= 80 &&
-            mistakes === 0 &&
+            (streak >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated) &&
             !isFlagged &&
             nextReview > (now + 86400000)
           );
 
           if (isSafeMature) {
-            const baseScore = Math.max(0.05, ((100.0 - mastery) * 0.05));
+            const baseScore = Math.max(0.01, ((100.0 - mastery) * 0.02));
             return {
               score: baseScore,
               debug: {
                 word: wordObj?.word || '',
+                box,
                 tested,
                 mastery,
                 mistakes: 0,
@@ -5514,7 +5544,14 @@
 
           const pHesitation = (lambda > 1.0) ? Math.min(12.0, (lambda - 1.0) * 12.0) : 0.0;
 
-          let P = (riskInfo.risk * 0.45) + (Math.min(mistakes, 6) * 15.0 * 0.35) + ((100.0 - mastery) * 0.20) + isFlagged + pHesitation;
+          // ★ 核心法则：盒子层级倒序（Leitner 原则，盒 1 拥有最高基础权值）
+          const boxPriorityMap = { 1: 90.0, 2: 60.0, 3: 25.0, 4: 5.0, 5: 0.0 };
+          const baseBoxScore = boxPriorityMap[box] ?? 90.0;
+
+          // 连胜阻尼：连胜越高说明当前盒记忆越稳，轻微抑制
+          const streakDamping = Math.min(25.0, streak * 5.0);
+
+          let P = baseBoxScore + (riskInfo.risk * 0.35) + ((100.0 - mastery) * 0.40) + (effectiveMistakes * 12.0 * 0.20) + isFlagged + pHesitation - streakDamping;
 
           let familyErrorRate = 0.0;
           if (context && typeof context.familyErrorRate === 'number' && !isNaN(context.familyErrorRate)) {
@@ -5534,32 +5571,40 @@
           let rOverdue = -1.0;
           let dueMultiplier = 1.0;
           if (lastReviewed > 0 && nextReview > 0) {
-            const boxCfg = Algorithms.Leitner.getConfig(wordStat?.box || 1);
+            const boxCfg = Algorithms.Leitner.getConfig(box);
             const boxIntervalMs = (boxCfg && boxCfg.ms) ? boxCfg.ms : 86400000;
             const deltaT = now - nextReview;
             rOverdue = deltaT / boxIntervalMs;
 
             if (rOverdue >= 0) {
-              dueMultiplier = 1.5 + Math.min(2.0, rOverdue);
+              // 只有低阶盒 (Box 1~3) 享受逾期乘数；高阶成熟盒 (Box 4/5) 严禁逾期反客为主
+              const maxMultiplier = (box <= 2) ? 2.5 : (box === 3 ? 1.6 : 1.15);
+              dueMultiplier = Math.min(maxMultiplier, 1.2 + Math.min(1.5, rOverdue));
               P = P * dueMultiplier;
             }
           }
 
+          // ★ 防连续考同一词冷却保护 (Recency Cooldown)
           let recencyPenalty = 0.0;
           let recencyStep = -1;
           if (recentBuffer && recentBuffer.length > 0 && wordObj && wordObj.word) {
             const lastIdx = recentBuffer.lastIndexOf(wordObj.word);
             if (lastIdx !== -1) {
               recencyStep = recentBuffer.length - lastIdx;
-              recencyPenalty = Math.max(0.0, 200.0 * Math.exp(-(recencyStep - 1) / 2.5));
-              P = Math.max(0.0, P - recencyPenalty);
+              if (recencyStep <= 4) {
+                recencyPenalty = 500.0; // 4 题内彻底冷却
+              } else {
+                recencyPenalty = Math.max(0.0, 120.0 * Math.exp(-(recencyStep - 4) / 1.8));
+              }
+              P = Math.max(0.001, P - recencyPenalty);
             }
           }
 
           return {
-            score: Math.max(0.01, P),
+            score: Math.max(0.001, P),
             debug: {
               word: wordObj?.word || '',
+              box,
               tested,
               mastery,
               mistakes,
@@ -5593,9 +5638,10 @@
           return LEITNER_BOX_CONFIG[safeId - 1];
         },
         isWordDue(st, now = Date.now()) {
-          if (!st) return false;
+          if (!st) return true; // 未测试单词默认归属于盒 1，天然处于待背诵状态
+          const box = st.box || 1;
           const lastReviewed = (typeof st.lastReviewed === 'number') ? st.lastReviewed : 0;
-          if (lastReviewed <= 0) return false;
+          if (lastReviewed <= 0) return true; // 盒 1 尚未学习过的生词，允许随时到期巩固
           const nextReview = (typeof st.nextReviewDate === 'number') ? st.nextReviewDate : 0;
           return now >= nextReview;
         },
@@ -6556,8 +6602,9 @@
     })();
 
     const AudioService = (function() {
-      const NETWORK_WATCHDOG_TIMEOUT_MS = 850;
-      const TTS_WATCHDOG_TIMEOUT_MS = 2000;
+      // ★ 优化第 4 点：专精 Android & Windows，将网络看门狗压缩至 380ms，TTS 看门狗压缩至 1200ms
+      const NETWORK_WATCHDOG_TIMEOUT_MS = 380;
+      const TTS_WATCHDOG_TIMEOUT_MS = 1200;
       const MAX_CACHE_ENTRIES = 120;
       const DEBOUNCE_THRESHOLD_MS = 280;
 
@@ -6669,25 +6716,34 @@
         if (!cachedVoices || cachedVoices.length === 0) refreshVoices();
         const isGB = (accent === 'en-GB');
 
+        // ★ 方案二优化：优先匹配系统内的高保真自然音色 (Natural / Neural / Enhanced / Google / Edge)
+        const isNatural = (v) => {
+          const n = (v.name || '').toLowerCase();
+          return n.includes('natural') || n.includes('neural') || n.includes('enhanced') || n.includes('google') || n.includes('premium');
+        };
+
+        // 1. 首选：目标口音 + 高清自然音
         let matched = cachedVoices.find(v => {
           const isTargetLang = isGB 
             ? (v.lang === 'en-GB' || v.lang === 'en_GB' || v.lang === 'en-UK')
             : (v.lang === 'en-US' || v.lang === 'en_US');
-          return isTargetLang && v.localService === true;
+          return isTargetLang && isNatural(v);
         });
 
-        if (!matched) {
-          matched = cachedVoices.find(v => v.lang && v.lang.toLowerCase().startsWith('en') && v.localService === true);
-        }
-
+        // 2. 次选：目标口音本地语音
         if (!matched) {
           matched = cachedVoices.find(v => {
-            return isGB 
-              ? (v.lang === 'en-GB' || v.lang === 'en_GB' || v.name.includes('UK') || v.name.includes('British'))
-              : (v.lang === 'en-US' || v.lang === 'en_US' || v.name.includes('US') || v.name.includes('American'));
+            const isTargetLang = isGB 
+              ? (v.lang === 'en-GB' || v.lang === 'en_GB' || v.lang === 'en-UK')
+              : (v.lang === 'en-US' || v.lang === 'en_US');
+            return isTargetLang && v.localService === true;
           });
         }
 
+        // 3. 兜底英语泛匹配
+        if (!matched) {
+          matched = cachedVoices.find(v => v.lang && v.lang.toLowerCase().startsWith('en') && isNatural(v));
+        }
         if (!matched) {
           matched = cachedVoices.find(v => v.lang && v.lang.toLowerCase().startsWith('en'));
         }
@@ -6708,11 +6764,21 @@
           window.speechSynthesis.cancel();
         } catch (_) {}
 
+        // ★ 优化第 4 点：Android 离线无声挂起保护与 Windows 语音加速
+        const isAndroid = typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+        const isWindows = typeof navigator !== 'undefined' && /Windows/i.test(navigator.userAgent);
+        const chosenVoice = selectLocalVoice(accent || 'en-GB');
+
+        // 安卓端若系统无可用英文语音包，直接快速跳过避免 2 秒无声挂起
+        if (isAndroid && !chosenVoice && cachedVoices.length === 0) {
+          setButtonState('idle');
+          if (onDone) onDone();
+          return;
+        }
+
         const utter = new SpeechSynthesisUtterance(cleanWord);
         utter.lang = accent || 'en-GB';
         utter.rate = rate || 1.0;
-
-        const chosenVoice = selectLocalVoice(utter.lang);
         if (chosenVoice) utter.voice = chosenVoice;
 
         window.__morphoActiveUtterance = utter;
@@ -6760,35 +6826,20 @@
         const isGB = (accent === 'en-GB');
         const typeCode = isGB ? '1' : '2';
 
-        const domesticSource = {
+        // ★ 优化第 4 点：专精 Android/Windows，优先使用高可用国内 CDN 镜像，杜绝跨境外网卡顿
+        const domesticYoudao = {
           name: 'youdao',
           isDomestic: true,
           url: `https://dict.youdao.com/dictvoice?audio=${encoded}&type=${typeCode}`
         };
 
-        const overseasTFD = {
-          name: 'tfd_cdn',
-          isDomestic: false,
-          url: `https://img2.tfd.com/pron/mp3/${encoded}.mp3`
-        };
-
-        const overseasBing = {
+        const domesticBing = {
           name: 'bing_blob',
-          isDomestic: false,
+          isDomestic: true,
           url: `https://dictionary.blob.core.windows.net/media/default/audio/${isGB ? 'uk' : 'us'}/0/${encoded}.mp3`
         };
 
-        const overseasOpenDict = {
-          name: 'open_dict',
-          isDomestic: false,
-          url: `https://api.dictionaryapi.dev/media/pronunciations/en/${encoded}-${isGB ? 'uk' : 'us'}.mp3`
-        };
-
-        if (networkTrackScore >= 0) {
-          return [domesticSource, overseasTFD, overseasBing, overseasOpenDict];
-        } else {
-          return [overseasTFD, overseasBing, overseasOpenDict, domesticSource];
-        }
+        return [domesticYoudao, domesticBing];
       }
 
       return {
@@ -6827,6 +6878,7 @@
             const pre = new AudioCtor();
             pre.preload = 'auto';
             pre.src = sources[0].url;
+            try { pre.load(); } catch (_) {} // ★ 优化第 4 点：显式调用 load() 真正激活 Android/Windows 预读
 
             if (audioMemCache.size >= MAX_CACHE_ENTRIES) {
               const oldestKey = audioMemCache.keys().next().value;
@@ -7434,6 +7486,8 @@
       }
 
       return {
+        getLastErrorMessage() { return lastErrorMessage; },
+        get lastErrorMessage() { return lastErrorMessage; },
         hasUnsyncedChanges() {
           if (typeof localStorage === 'undefined') return false;
           const lastMod = parseInt(localStorage.getItem('morpho_last_modified_time') || '0', 10);
@@ -11149,7 +11203,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
       leave(nextMode) {
         const el = document.getElementById('view-phrases');
-        if (el) el.style.display = 'none';
+        if (el) {
+          el.style.display = 'none';
+          const browseList = document.getElementById('phrases-browse-list');
+          if (browseList) browseList.replaceChildren(); // ★ 优化第 3 点：清空词组全览列表 DOM 树
+          this.browseRenderedCount = 0;
+        }
         this.clearAutoAdvance();
         this.closeMatrixModal();
         if (this._observer) {
@@ -11207,11 +11266,49 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
       },
 
+      getMasteredPhrases() {
+        if (typeof localStorage === 'undefined') return new Set();
+        try {
+          const raw = localStorage.getItem('morpho_phrases_mastered');
+          if (!raw) return new Set();
+          const arr = JSON.parse(raw);
+          return new Set(Array.isArray(arr) ? arr : []);
+        } catch (_) {
+          return new Set();
+        }
+      },
+
+      saveMasteredPhrases(set) {
+        if (typeof localStorage === 'undefined') return;
+        try {
+          localStorage.setItem('morpho_phrases_mastered', JSON.stringify([...set]));
+        } catch (_) {}
+      },
+
+      markPhraseMastered(phraseId, isMastered = true) {
+        if (phraseId === undefined || phraseId === null) return;
+        const set = this.getMasteredPhrases();
+        if (isMastered) {
+          set.add(phraseId);
+        } else {
+          set.delete(phraseId);
+        }
+        this.saveMasteredPhrases(set);
+        this.updateStats();
+      },
+
+      resetMasteredPhrases() {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('morpho_phrases_mastered');
+        }
+        this.updateStats();
+      },
+
       updateStats() {
         if (typeof document === 'undefined') return;
         const totalCount = this.phrasesData.length;
         const filteredCount = this.filteredPhrases.length;
-        const masteredCount = Math.floor(totalCount * 0.35);
+        const masteredCount = this.getMasteredPhrases().size;
 
         const totalEl = document.getElementById('phrases-total-count');
         const filteredEl = document.getElementById('phrases-filtered-count');
@@ -11506,6 +11603,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (isGood) {
           this.currentTest.score++;
         }
+        const curPhrase = this.currentTest?.phrases[this.currentTest.currentIndex];
+        if (curPhrase && curPhrase.id !== undefined) {
+          this.markPhraseMastered(curPhrase.id, isGood);
+        }
 
         // Global SFX
         if (AppState.get('soundEffectsEnabled') && typeof Services !== 'undefined' && Services.Sfx) {
@@ -11597,6 +11698,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           this.currentTest.score++;
           const scoreEl = document.getElementById('phrases-test-score');
           if (scoreEl) scoreEl.innerText = `得分：${this.currentTest.score}`;
+          if (currentPhrase && currentPhrase.id !== undefined) {
+            this.markPhraseMastered(currentPhrase.id, true);
+          }
 
           feedback.innerHTML = `
             <div style="color:var(--success); font-weight:800; font-size:1.1rem; margin-bottom:6px;">✓ 回答正确！</div>
@@ -11699,6 +11803,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       renderBrowseItemHTML(phrase) {
+        const isMastered = this.getMasteredPhrases().has(phrase.id);
         return `
           <div class="phrases-card-item" style="background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
@@ -11707,6 +11812,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                 <button class="btn btn-sm" onclick="Services.Audio.playWord('${Utils.escapeHTML(phrase.phrase)}')" style="padding:2px 8px; font-size:0.75rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; cursor:pointer;" title="朗读发音">🔊</button>
               </div>
               <div style="display:flex; gap:6px; align-items:center;">
+                ${isMastered ? '<span style="font-size:0.75rem; padding:2px 8px; border-radius:12px; background:var(--success-light); color:var(--success); font-weight:700;">✓ 已掌握</span>' : ''}
                 ${phrase.schema_label ? `<span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:12px; background:var(--accent-light); color:var(--accent);">🧩 ${Utils.escapeHTML(phrase.schema_label)}</span>` : ''}
                 <span style="font-size:0.75rem; padding:2px 8px; border-radius:12px; background:var(--primary-light); color:var(--primary);">
                   ${Utils.escapeHTML(phrase.frequency || '高频')}
@@ -12098,7 +12204,14 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
       leave(nextMode) {
         const el = document.getElementById('view-mistakes');
-        if (el) el.style.display = 'none';
+        if (el) {
+          el.style.display = 'none';
+          const tbody = document.getElementById('mistakes-tbody');
+          if (tbody) tbody.replaceChildren(); // ★ 优化第 3 点：清空错题大表格 DOM 树
+          const rootsList = document.getElementById('weak-roots-list');
+          if (rootsList) rootsList.replaceChildren(); // 清空弱项词根列表
+          this.isDirty = true;
+        }
       },
 
       renderWeakRoots() {
@@ -12337,6 +12450,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     };
 
     const Tree = {
+      sortMode: 'num',
+      wordSortAlpha: true,
+
       enter(prevMode) {
         const el = document.getElementById('view-tree');
         if (el) el.style.display = 'block';
@@ -12344,7 +12460,19 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
       leave(nextMode) {
         const el = document.getElementById('view-tree');
-        if (el) el.style.display = 'none';
+        if (el) {
+          el.style.display = 'none';
+          el.replaceChildren(); // ★ 优化第 3 点：离开时释放母词族卡片与标签 DOM，避免内存驻留
+          el._hasDelegate = false;
+        }
+      },
+      setSortMode(mode) {
+        this.sortMode = mode;
+        this.render();
+      },
+      toggleWordSort() {
+        this.wordSortAlpha = !this.wordSortAlpha;
+        this.render();
       },
       render() {
         const treePanel = document.getElementById('view-tree');
@@ -12359,6 +12487,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               App.filterByGroup(btn.dataset.group);
             } else if (action === 'tree-jump-word') {
               App.jumpToWord(btn.dataset.word);
+            } else if (action === 'tree-sort-mode') {
+              this.setSortMode(btn.dataset.mode);
+            } else if (action === 'tree-toggle-word-sort') {
+              this.toggleWordSort();
             }
           });
           treePanel._hasDelegate = true;
@@ -12374,16 +12506,63 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           groups[g].push(w);
         });
 
-        const cardsHtml = Object.entries(groups).map(([groupName, words]) => {
-          const wordsHtml = words.map(w => 
-            `<span class="tree-word-tag" style="background:var(--card-bg); border:1px solid var(--border); padding:3px 8px; border-radius:4px; font-size:0.8rem; cursor:pointer;" data-action="tree-jump-word" data-word="${Utils.escapeHTML(w.word)}">${Utils.escapeHTML(w.word)} <span style="color:var(--muted);">${Utils.escapeHTML((w.meaning || '').slice(0, 5))}</span></span>`
+        let entries = Object.entries(groups);
+
+        // 按照自然章节序号、词数或字母排序
+        if (this.sortMode === 'num') {
+          entries.sort(([gA], [gB]) => {
+            const mA = gA.match(/\b(\d+)\./);
+            const mB = gB.match(/\b(\d+)\./);
+            const nA = mA ? parseInt(mA[1], 10) : null;
+            const nB = mB ? parseInt(mB[1], 10) : null;
+            if (nA !== null && nB !== null) {
+              if (nA !== nB) return nA - nB;
+            } else if (nA !== null) {
+              return -1;
+            } else if (nB !== null) {
+              return 1;
+            }
+            return gA.localeCompare(gB, 'zh-CN');
+          });
+        } else if (this.sortMode === 'count') {
+          entries.sort(([, wA], [, wB]) => wB.length - wA.length);
+        } else if (this.sortMode === 'alpha') {
+          entries.sort(([gA], [gB]) => gA.localeCompare(gB, 'zh-CN'));
+        }
+
+        const toolbarHtml = `
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; padding:10px 14px; background:var(--card-bg); border:1px solid var(--border); border-radius:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h3 style="margin:0; color:var(--text); font-size:1.15rem;">🌳 词根谱系与母词族全景树</h3>
+              <span style="font-size:0.8rem; color:var(--muted);">(共收录 ${entries.length} 个母词族 / ${packWords.length} 词)</span>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+              <span style="font-size:0.8rem; color:var(--muted);">分组排序:</span>
+              <button class="btn btn-sm ${this.sortMode === 'num' ? 'btn-primary' : ''}" style="padding:4px 10px; font-size:0.75rem; border-radius:6px; border:1px solid var(--border);" data-action="tree-sort-mode" data-mode="num">🔢 按章节序号 (1~90)</button>
+              <button class="btn btn-sm ${this.sortMode === 'count' ? 'btn-primary' : ''}" style="padding:4px 10px; font-size:0.75rem; border-radius:6px; border:1px solid var(--border);" data-action="tree-sort-mode" data-mode="count">📊 词数从多到少</button>
+              <button class="btn btn-sm ${this.sortMode === 'original' ? 'btn-primary' : ''}" style="padding:4px 10px; font-size:0.75rem; border-radius:6px; border:1px solid var(--border);" data-action="tree-sort-mode" data-mode="original">📄 词库原始顺序</button>
+              <button class="btn btn-sm" style="padding:4px 10px; font-size:0.75rem; border-radius:6px; border:1px solid var(--border); margin-left:6px; background:var(--bg);" data-action="tree-toggle-word-sort">
+                ${this.wordSortAlpha ? '🔤 组内: A-Z 字母序' : '📑 组内: 原始顺序'}
+              </button>
+            </div>
+          </div>
+        `;
+
+        const cardsHtml = entries.map(([groupName, words]) => {
+          let displayWords = words;
+          if (this.wordSortAlpha) {
+            displayWords = [...words].sort((a, b) => a.word.localeCompare(b.word));
+          }
+
+          const wordsHtml = displayWords.map(w => 
+            `<span class="tree-word-tag" style="background:var(--card-bg); border:1px solid var(--border); padding:4px 9px; border-radius:6px; font-size:0.82rem; cursor:pointer; display:inline-flex; align-items:center; gap:4px; transition:transform 0.1s;" data-action="tree-jump-word" data-word="${Utils.escapeHTML(w.word)}"><b style="color:var(--text);">${Utils.escapeHTML(w.word)}</b><span style="color:var(--muted); font-size:0.75rem;">${Utils.escapeHTML((w.meaning || '').slice(0, 7))}</span></span>`
           ).join('');
 
           return `
-            <div class="tree-group-card" style="border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin-bottom:10px; background:var(--bg);">
-              <div style="font-weight:700; color:var(--primary); display:flex; justify-content:space-between; margin-bottom:8px;">
-                <span>🌱 ${Utils.escapeHTML(groupName)} (${words.length} 词)</span>
-                <button class="btn" style="font-size:0.75rem; padding:3px 8px; background:var(--card-bg); border:1px solid var(--border); color:var(--text);" data-action="tree-filter-group" data-group="${Utils.escapeHTML(groupName)}">专练本组</button>
+            <div class="tree-group-card" style="border:1px solid var(--border); border-radius:10px; padding:12px 16px; margin-bottom:12px; background:var(--card-bg); box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+              <div style="font-weight:700; color:var(--primary); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+                <span style="font-size:0.96rem;">🌱 ${Utils.escapeHTML(groupName)} <span style="font-size:0.8rem; font-weight:normal; color:var(--muted);">(${words.length} 词)</span></span>
+                <button class="btn btn-sm" style="font-size:0.75rem; padding:4px 12px; background:var(--primary-light); border:1px solid var(--primary); color:var(--primary); border-radius:6px; font-weight:600; cursor:pointer;" data-action="tree-filter-group" data-group="${Utils.escapeHTML(groupName)}">🎯 专练本组</button>
               </div>
               <div style="display:flex; flex-wrap:wrap; gap:6px;">
                 ${wordsHtml}
@@ -12391,7 +12570,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             </div>`;
         }).join('');
 
-        treePanel.innerHTML = '<h3 style="margin-bottom:14px; color:var(--text);">词根谱系与母词族探索</h3>' + cardsHtml;
+        treePanel.innerHTML = toolbarHtml + cardsHtml;
       },
 
       cleanup() {}
@@ -12472,10 +12651,26 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (ok) {
           const curId = localStorage.getItem('morpho_gist_id') || cleanGistId;
           Services.Sync.showToast(`🎉 云端备份成功！Gist ID: ${curId.slice(0, 10)}...`, 'success', 3000);
+          UIModal.alert({
+            title: '🎉 备份成功',
+            message: `已成功同步至 GitHub Gist。
+Gist ID: ${curId}
+多设备填入相同 Token 与 Gist ID 即可接力！`
+          });
           this.updateSyncTimeUI();
         } else {
-          const errDetail = Services.Sync.lastErrorMessage || '连接 GitHub 超时或凭证受限';
+          const errDetail = (typeof Services !== 'undefined' && Services.Sync && (Services.Sync.lastErrorMessage || (Services.Sync.getLastErrorMessage && Services.Sync.getLastErrorMessage()))) || '连接 GitHub 超时或凭证受限';
           Services.Sync.showToast(`❌ 上传失败: ${errDetail}`, 'error', 4000);
+          UIModal.alert({
+            title: '❌ 上传备份失败',
+            message: `云端同步未能完成：
+${errDetail}
+
+排查建议：
+1. 请检查 GitHub Token 是否具备 'gist' 读写勾选权限；
+2. 请确认当前网络环境或代理节点能够顺畅访问 api.github.com；
+3. 若填入了 Gist ID，请确保该 Gist 为您当前 Token 账户名下的有效仓库，或将其清空后重新点击上传以自动新建。`
+          });
         }
       },
 
@@ -12727,9 +12922,16 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           if (targetBoxId === 5) {
             item.streak = Math.max(item.streak || 0, 5);
             item.masteryScore = Math.max(item.masteryScore || 0, 95);
+            item.isGraduated = true;
+            item.exemptUntilDue = true;
           } else if (targetBoxId === 1) {
             item.streak = 0;
             item.masteryScore = Math.min(item.masteryScore || 35, 20);
+            item.isGraduated = false;
+            item.exemptUntilDue = false;
+          } else {
+            item.isGraduated = false;
+            item.exemptUntilDue = false;
           }
           item.level = Algorithms.Scoring.getMasteryLevel(item.masteryScore);
         });
@@ -12762,29 +12964,135 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const stDict = AppState.get('packStats')[currentPackId] || {};
 
         if (countBadge) countBadge.innerText = `共 ${packWords.length} 词`;
-
-        if (!grid._hasDelegate) {
-          grid.addEventListener('click', (e) => {
-            const cell = e.target.closest('.matrix-cell');
-            if (cell && cell.dataset.word) {
-              App.jumpToWord(cell.dataset.word);
-              Services.Audio.playWord(cell.dataset.word);
-            }
-          });
-          grid._hasDelegate = true;
+        if (packWords.length === 0) {
+          grid.innerHTML = '<div style="color:var(--muted); font-size:0.85rem; padding:10px;">当前题库暂无词汇</div>';
+          return;
         }
+
+        let canvas = document.getElementById('mastery-matrix-canvas');
+        let tip = document.getElementById('mastery-matrix-tip');
+        if (!canvas) {
+          grid.innerHTML = '';
+          grid.style.position = 'relative';
+          grid.style.display = 'block';
+          grid.style.padding = '4px';
+
+          canvas = document.createElement('canvas');
+          canvas.id = 'mastery-matrix-canvas';
+          canvas.style.display = 'block';
+          canvas.style.width = '100%';
+          canvas.style.cursor = 'pointer';
+          grid.appendChild(canvas);
+
+          tip = document.createElement('div');
+          tip.id = 'mastery-matrix-tip';
+          tip.style.cssText = 'position:absolute; display:none; pointer-events:none; background:rgba(15,23,42,0.92); color:#fff; font-size:11px; padding:3px 8px; border-radius:4px; z-index:100; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,0.3); transform:translate(-50%, -120%); transition:opacity 0.1s;';
+          grid.appendChild(tip);
+        }
+
+        if (!canvas.getContext) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const dpr = window.devicePixelRatio || 1;
+        const rect = grid.getBoundingClientRect();
+        const displayWidth = Math.max(280, Math.floor(rect.width - 12));
+
+        const cellSize = 8;
+        const cellGap = 2.5;
+        const step = cellSize + cellGap;
+        const cols = Math.max(10, Math.floor((displayWidth + cellGap) / step));
+        const rows = Math.ceil(packWords.length / cols);
+        const displayHeight = rows * step;
+
+        canvas.width = Math.floor(displayWidth * dpr);
+        canvas.height = Math.floor(displayHeight * dpr);
+        canvas.style.width = `${displayWidth}px`;
+        canvas.style.height = `${displayHeight}px`;
+
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, displayWidth, displayHeight);
 
         const BOX_COLORS = ['#ef4444', '#ef4444', '#f97316', '#eab308', '#3b82f6', '#10b981'];
 
-        const html = packWords.map(w => {
+        for (let i = 0; i < packWords.length; i++) {
+          const w = packWords[i];
           const st = stDict[w.word] || {};
           const box = st.box || 1;
-          const mastery = st.masteryScore ?? 35;
           const color = BOX_COLORS[box] || '#ef4444';
-          return `<div class="matrix-cell" data-word="${Utils.escapeHTML(w.word)}" style="background-color:${color};" title="${Utils.escapeHTML(w.word)} - 掌握度: ${mastery}% (Box ${box})"></div>`;
-        }).join('');
 
-        grid.innerHTML = html;
+          const col = i % cols;
+          const row = Math.floor(i / cols);
+          const x = col * step;
+          const y = row * step;
+
+          ctx.fillStyle = color;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(x, y, cellSize, cellSize, 1.5);
+            ctx.fill();
+          } else {
+            ctx.fillRect(x, y, cellSize, cellSize);
+          }
+        }
+
+        canvas._matrixMeta = { cols, rows, step, cellSize, count: packWords.length, packWords, stDict };
+
+        if (!canvas._eventsBound) {
+          canvas._eventsBound = true;
+
+          const getWordAtEvent = (e) => {
+            const meta = canvas._matrixMeta;
+            if (!meta) return null;
+            const cRect = canvas.getBoundingClientRect();
+            const clientX = e.clientX - cRect.left;
+            const clientY = e.clientY - cRect.top;
+
+            if (clientX < 0 || clientY < 0 || clientX >= cRect.width || clientY >= cRect.height) return null;
+
+            const col = Math.floor(clientX / meta.step);
+            const row = Math.floor(clientY / meta.step);
+            const inCellX = clientX - col * meta.step;
+            const inCellY = clientY - row * meta.step;
+
+            if (inCellX > meta.cellSize || inCellY > meta.cellSize) return null;
+
+            const idx = row * meta.cols + col;
+            if (idx >= 0 && idx < meta.count) {
+              return { wordObj: meta.packWords[idx], idx, x: clientX, y: clientY };
+            }
+            return null;
+          };
+
+          canvas.addEventListener('mousemove', (e) => {
+            const hit = getWordAtEvent(e);
+            if (hit && hit.wordObj) {
+              const st = canvas._matrixMeta.stDict[hit.wordObj.word] || {};
+              const box = st.box || 1;
+              const mastery = st.masteryScore ?? 35;
+              tip.innerText = `${hit.wordObj.word} (Box ${box} · 掌握度: ${mastery}%)`;
+              tip.style.display = 'block';
+              tip.style.left = `${hit.x + 6}px`;
+              tip.style.top = `${hit.y - 6}px`;
+              canvas.style.cursor = 'pointer';
+            } else {
+              tip.style.display = 'none';
+              canvas.style.cursor = 'default';
+            }
+          });
+
+          canvas.addEventListener('mouseleave', () => {
+            tip.style.display = 'none';
+          });
+
+          canvas.addEventListener('click', (e) => {
+            const hit = getWordAtEvent(e);
+            if (hit && hit.wordObj) {
+              App.jumpToWord(hit.wordObj.word);
+              Services.Audio.playWord(hit.wordObj.word);
+            }
+          });
+        }
       },
 
       renderBoxes(force = false) {
@@ -12807,23 +13115,31 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const now = Date.now();
         const totalWords = packWords.length || 1;
 
-        let totalScore = 0;
-        let totalDue = 0;
-        let gradCount = 0;
+        const buckets = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+        const dueBuckets = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+
+        for (let i = 0; i < packWords.length; i++) {
+          const w = packWords[i];
+          const st = stDict[w.word];
+          const b = st?.box ?? 1;
+          const safeBox = (b >= 1 && b <= 5) ? b : 1;
+          buckets[safeBox].push(w);
+          if (Algorithms.Leitner.isWordDue(st, now)) {
+            dueBuckets[safeBox].push(w);
+          }
+        }
 
         const boxConfigs = Algorithms.Leitner.getConfigs();
+        const weights = [20, 40, 65, 85, 100];
+        let totalScore = 0;
+        let totalDue = 0;
+        let gradCount = buckets[5].length;
+
         const boxStats = boxConfigs.map(cfg => {
-          const inThisBox = packWords.filter(w => (stDict[w.word]?.box ?? 1) === cfg.id);
-          const dueInThisBox = inThisBox.filter(w => {
-            const st = stDict[w.word];
-            return Algorithms.Leitner.isWordDue(st, now);
-          });
-
-          if (cfg.id === 5) gradCount = inThisBox.length;
+          const inThisBox = buckets[cfg.id];
+          const dueInThisBox = dueBuckets[cfg.id];
           totalDue += dueInThisBox.length;
-
-          const weight = [20, 40, 65, 85, 100][cfg.id - 1];
-          totalScore += inThisBox.length * weight;
+          totalScore += inThisBox.length * weights[cfg.id - 1];
 
           return {
             ...cfg,
@@ -12842,6 +13158,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (dueEl) dueEl.innerText = `${totalDue} 词`;
         if (gradEl) gradEl.innerText = `${gradCount} 词`;
 
+        const frag = document.createDocumentFragment();
         boxStats.forEach(box => {
           const card = document.createElement('div');
           card.className = `leitner-card-box ${box.dueWords.length > 0 ? 'has-due' : ''}`;
@@ -12856,7 +13173,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               </div>
               <div style="font-weight:800; font-size:0.92rem; color:var(--text); margin-top:8px;">${Utils.escapeHTML(box.name)}</div>
               <div style="font-size:0.75rem; color:var(--muted);">${Utils.escapeHTML(box.desc)}</div>
-              <div class="box-count-large">${box.words.length} <span style="font-size:0.8rem; font-weight:500; color:var(--muted);">词 (${box.pct}%)</span></div>
+              <div class="box-count-large">${box.words.length} <span style="font-size:0.8rem; font-weight:500; color:var(--muted);">${box.pct}%</span></div>
               <div class="box-progress-track">
                 <div class="box-progress-fill" style="width:${box.pct}%; background:${box.color};"></div>
               </div>
@@ -12870,8 +13187,9 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               <button class="box-btn-preview" onclick="Views.Compass.toggleDrawer(${box.id}, '${Utils.escapeHTML(box.name)}')">👁️ 展开词单预览</button>
             </div>
           `;
-          grid.appendChild(card);
+          frag.appendChild(card);
         });
+        grid.appendChild(frag);
 
         this.renderMasteryMatrix(force);
         App.updateDueBadge();
@@ -12915,16 +13233,40 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           return;
         }
 
-        wordsInBox.forEach(w => {
-          const st = stDict[w.word];
-          const isDue = Algorithms.Leitner.isWordDue(st, now);
-          const tag = document.createElement('span');
-          tag.className = `drawer-word-tag ${isDue ? 'due-word' : ''}`;
-          tag.title = `${Utils.escapeHTML(w.pos || '')} ${Utils.escapeHTML(w.meaning)} (点击朗读发音)`;
-          tag.innerHTML = `<b>${Utils.escapeHTML(w.word)}</b> ${isDue ? '⚡' : ''}`;
-          tag.onclick = () => Services.Audio.playWord(w.word);
-          cloud.appendChild(tag);
-        });
+        const renderBatch = (startIdx, count) => {
+          const frag = document.createDocumentFragment();
+          const endIdx = Math.min(wordsInBox.length, startIdx + count);
+          for (let i = startIdx; i < endIdx; i++) {
+            const w = wordsInBox[i];
+            const st = stDict[w.word];
+            const isDue = Algorithms.Leitner.isWordDue(st, now);
+            const tag = document.createElement('span');
+            tag.className = `drawer-word-tag ${isDue ? 'due-word' : ''}`;
+            tag.title = `${Utils.escapeHTML(w.pos || '')} ${Utils.escapeHTML(w.meaning)} (点击朗读发音)`;
+            tag.innerHTML = `<b>${Utils.escapeHTML(w.word)}</b> ${isDue ? '⚡' : ''}`;
+            tag.onclick = () => Services.Audio.playWord(w.word);
+            frag.appendChild(tag);
+          }
+          cloud.appendChild(frag);
+
+          if (endIdx < wordsInBox.length) {
+            let loadMoreBtn = document.getElementById('drawer-load-more-btn');
+            if (!loadMoreBtn) {
+              loadMoreBtn = document.createElement('button');
+              loadMoreBtn.id = 'drawer-load-more-btn';
+              loadMoreBtn.className = 'btn';
+              loadMoreBtn.style.cssText = 'width:100%; margin-top:10px; font-size:0.85rem; padding:8px; background:var(--card-bg); border:1.5px dashed var(--primary); color:var(--primary); cursor:pointer;';
+              cloud.appendChild(loadMoreBtn);
+            }
+            loadMoreBtn.innerText = `展开更多单词 (${endIdx} / ${wordsInBox.length})...`;
+            loadMoreBtn.onclick = () => {
+              loadMoreBtn.remove();
+              renderBatch(endIdx, 150);
+            };
+          }
+        };
+
+        renderBatch(0, 80);
       },
 
       closeDrawer(isPopState = false) {
@@ -14753,10 +15095,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const now = new Date();
         let count = 0;
         for (const st of Object.values(pStats)) {
-          if (!st || !st.lastReviewed) continue;
-          const d = new Date(st.lastReviewed);
+          if (!st) continue;
+          const learnTs = st.firstLearnedAt || ((st.tested === 1 && st.lastReviewed) ? st.lastReviewed : 0);
+          if (!learnTs) continue;
+          const d = new Date(learnTs);
           const isToday = (d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate());
-          if (isToday && (st.tested || 0) >= 1 && (st.tested || 0) <= 3) {
+          if (isToday) {
             count++;
           }
         }
@@ -15099,127 +15443,205 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const mistakeOnly = (typeof document !== 'undefined' ? document.getElementById('mistake-only-chk')?.checked : false) || false;
           const dailyNewLimit = AppState.get('dailyNewLimit') ?? 20;
           const todayNewCount = this.getTodayNewLearnedCount(curPack);
+          const now = Date.now();
+          const recentBuf = AppState.get('recentQuestionBuffer') || [];
+          const recentLocked = recentBuf.slice(-4); // 4 题硬冷却
 
-          const unlearnedPool = [];
-          const reviewPool = [];
+          // ★ 方案三：心流与疲劳感知自适应调节器 (Cognitive Flow & Load Adapter)
+          // 维护最近 10 题表现滑动窗口，动态自适应微调玻尔兹曼温度 τ 与开荒配额
+          const flowWindow = AppState.get('recentPerformanceWindow') || [];
+          let tau = 24.0;
+          let box1Weight = 0.50; // 基准为用户设定的严格五五分 (50% : 50%)
+          let flowTag = '常态五五';
+
+          if (flowWindow.length >= 6) {
+            const correctCount = flowWindow.filter(item => item.ok).length;
+            const acc = correctCount / flowWindow.length;
+            const avgRt = flowWindow.reduce((sum, item) => sum + item.rt, 0) / flowWindow.length;
+
+            if (acc >= 0.83 && avgRt < 2600) {
+              // 心流高效态：思维敏捷、正确率高 -> 轻微上调开荒配额至 58%，稍微收敛温度聚焦攻坚
+              box1Weight = 0.58;
+              tau = 19.0;
+              flowTag = '心流高效';
+            } else if (acc <= 0.50 || avgRt > 4500) {
+              // 认知疲劳/受挫态：易错或频繁迟疑 -> 自动提升温故配额至 65%，升高温度平滑热涨落，减负巩固
+              box1Weight = 0.35; // 高阶温故提升至 65%
+              tau = 30.0;
+              flowTag = '减负加固';
+            }
+          }
+
+          // 动态归一化五盒宏观配额 (高阶盒内部比例保持 24:14:8:4)
+          const higherWeight = 1.0 - box1Weight;
+          const BASE_BOX_WEIGHTS = {
+            1: box1Weight,
+            2: higherWeight * 0.48,
+            3: higherWeight * 0.28,
+            4: higherWeight * 0.16,
+            5: higherWeight * 0.08
+          };
+
+          // 1. 全库分盒建组
+          const wordsByBox = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+          const unlearnedInBox1 = [];
+          const learnedInBox1 = [];
+
           pool.forEach(w => {
             const st = stDict[w.word];
-            if (!st || !st.lastReviewed || st.lastReviewed === 0 || (st.tested || 0) === 0) {
-              unlearnedPool.push(w);
-            } else {
-              reviewPool.push(w);
+            const isUnlearned = (!st || !st.lastReviewed || st.lastReviewed === 0 || (st.tested || 0) === 0);
+            const box = (st && typeof st.box === 'number' && st.box >= 1 && st.box <= 5) ? st.box : 1;
+            
+            if (box === 1) {
+              if (isUnlearned) unlearnedInBox1.push(w);
+              else learnedInBox1.push(w);
             }
+            wordsByBox[box].push(w);
           });
 
-          const isQuotaFull = (dailyNewLimit < 9999 && todayNewCount >= dailyNewLimit);
-          const isUnlearnedEmpty = (unlearnedPool.length === 0);
-          const isReviewEmpty = (reviewPool.length === 0);
-
-          let activeTrack = 'review';
-
-          if (mistakeOnly) {
-            activeTrack = 'review';
-          } else if (isReviewEmpty) {
-            activeTrack = 'discovery';
-          } else if (isQuotaFull || isUnlearnedEmpty) {
-            activeTrack = 'review';
-          } else {
-            this.adaptiveStepCounter = (this.adaptiveStepCounter || 0) + 1;
-            if (this.adaptiveStepCounter % 5 === 0) {
-              activeTrack = 'discovery';
-            } else {
-              activeTrack = 'review';
+          // 2. 统计各盒内非冷却的可用单词
+          const availableByBox = {};
+          for (let b = 1; b <= 5; b++) {
+            let candidates = wordsByBox[b].filter(w => !recentLocked.includes(w.word));
+            if (mistakeOnly) {
+              candidates = candidates.filter(w => {
+                const st = stDict[w.word];
+                return st && (st.mistakes > 0 || (st.box || 1) === 1);
+              });
+            }
+            if (candidates.length > 0) {
+              availableByBox[b] = candidates;
             }
           }
 
-          const recentBuf = AppState.get('recentQuestionBuffer') || [];
+          let targetBox = 1;
+          const availableBoxIds = Object.keys(availableByBox).map(Number);
 
-          if (activeTrack === 'discovery' && unlearnedPool.length > 0) {
-            const candidate = unlearnedPool.find(w => !recentBuf.includes(w.word)) || unlearnedPool[0];
-            const targetIndex = pool.indexOf(candidate);
-            const limitLabel = dailyNewLimit >= 9999 ? '∞' : dailyNewLimit;
+          if (availableBoxIds.length === 0) {
+            return pool[0]; // 极端冷却兜底
+          }
 
-            const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
-            if (progEl) {
-              progEl.innerText = `🎯 [新词探索 ${todayNewCount}/${limitLabel}] ${targetIndex + 1} / ${pool.length}`;
+          let totalActiveWeight = 0.0;
+          availableBoxIds.forEach(b => { totalActiveWeight += BASE_BOX_WEIGHTS[b]; });
+
+          let rBox = Math.random() * totalActiveWeight;
+          for (let i = 0; i < availableBoxIds.length; i++) {
+            const b = availableBoxIds[i];
+            rBox -= BASE_BOX_WEIGHTS[b];
+            if (rBox <= 0 || i === availableBoxIds.length - 1) {
+              targetBox = b;
+              break;
             }
-            return candidate;
           }
 
-          const candidateReviewPool = reviewPool.length > 0 ? reviewPool : (unlearnedPool.length > 0 ? unlearnedPool : pool);
-          const familyStatsMap = Algorithms.RootAnalytics.getPrecomputedFamilyMap(pool, stDict, curPack);
-          const currentMode = AppState.get('currentMode');
-
-          const evaluated = candidateReviewPool.map((w) => {
-            const st = stDict[w.word] || {};
-            const detailed = Algorithms.Ebbinghaus.calculateWordPriorityDetailed(w, st, recentBuf, candidateReviewPool.length, {
-              familyStatsMap,
-              mode: currentMode,
-              queueType: 'review',
-              pool: candidateReviewPool,
-              packStats: stDict
-            });
-            return {
-              index: pool.indexOf(w),
-              word: w,
-              score: detailed.score,
-              debug: detailed.debug
-            };
-          });
-
-          const rawScores = evaluated.map(item => item.score);
-          const maxRaw = Math.max(...rawScores);
-          const minRaw = Math.min(...rawScores);
-          const meanRaw = rawScores.reduce((sum, val) => sum + val, 0) / (rawScores.length || 1);
-          const varianceRaw = rawScores.reduce((sum, val) => sum + Math.pow(val - meanRaw, 2), 0) / (rawScores.length || 1);
-          const stdRaw = Math.sqrt(varianceRaw);
-
-          let normP;
-          if (stdRaw > 1e-4) {
-            normP = rawScores.map(s => (s - meanRaw) / stdRaw);
-          } else if (maxRaw > minRaw) {
-            normP = rawScores.map(s => ((s - minRaw) / (maxRaw - minRaw)) * 4.0);
-          } else {
-            normP = rawScores.map(() => 0.0);
-          }
-
-          const tau = 0.55;
-          const maxNorm = Math.max(...normP);
-          const expWeights = normP.map(p => Math.exp((p - maxNorm) / tau));
-          const sumExp = expWeights.reduce((sum, val) => sum + val, 0);
-
-          let chosenItem = evaluated[0];
+          // 3. 微观玻尔兹曼抽样
+          const targetPool = availableByBox[targetBox];
+          let chosenWord = targetPool[0];
+          let chosenType = `盒${targetBox}温故`;
+          let chosenP = 50;
+          let chosenGap = 50;
+          let chosenRisk = 50;
           let chosenProb = 1.0;
 
-          if (sumExp > 0 && !isNaN(sumExp)) {
-            const probs = expWeights.map(w => w / sumExp);
-            evaluated.forEach((item, i) => {
-              item.prob = probs[i];
-              item.normScore = normP[i];
+          if (targetBox === 1 && !mistakeOnly && unlearnedInBox1.length > 0) {
+            const availableUnlearned = unlearnedInBox1.filter(w => !recentLocked.includes(w.word));
+            const availableLearned = learnedInBox1.filter(w => !recentLocked.includes(w.word));
+
+            const shouldExploreNew = (availableUnlearned.length > 0) &&
+              (availableLearned.length === 0 || Math.random() < 0.50);
+
+            if (shouldExploreNew) {
+              if (this.unlearnedCursor === undefined) this.unlearnedCursor = 0;
+              chosenWord = availableUnlearned[this.unlearnedCursor % availableUnlearned.length];
+              this.unlearnedCursor = (this.unlearnedCursor + 1) % availableUnlearned.length;
+              chosenType = '全新开荒';
+              chosenP = 90;
+              chosenGap = 80;
+              chosenRisk = 100;
+              chosenProb = BASE_BOX_WEIGHTS[1] * 0.50;
+            } else if (availableLearned.length > 0) {
+              availableLearned.sort((a, b) => {
+                const stA = stDict[a.word] || {};
+                const stB = stDict[b.word] || {};
+                const mistA = stA.mistakes || 0;
+                const mistB = stB.mistakes || 0;
+                if (mistA !== mistB) return mistB - mistA;
+                return (stA.masteryScore || 35) - (stB.masteryScore || 35);
+              });
+              chosenWord = availableLearned[0];
+              const stC = stDict[chosenWord.word] || {};
+              chosenType = (stC.mistakes > 0) ? '盒1错题' : '盒1巩固';
+              chosenGap = Math.round(100 - (stC.masteryScore ?? 35));
+              chosenRisk = 85;
+              chosenP = Math.round(chosenGap * 0.5 + chosenRisk * 0.5 + Math.min(4, stC.mistakes || 0) * 8);
+              chosenProb = BASE_BOX_WEIGHTS[1] * 0.50;
+            }
+          } else {
+            // 盒 2 ~ 盒 5
+            const scoredInner = [];
+            for (let i = 0; i < targetPool.length; i++) {
+              const w = targetPool[i];
+              const st = stDict[w.word];
+              const mastery = (st && typeof st.masteryScore === 'number') ? st.masteryScore : 50;
+              const gap = Math.max(0, 100 - mastery);
+
+              const stability = (st && typeof st.stability === 'number' && st.stability > 0)
+                ? st.stability
+                : Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(targetBox);
+              const deltaDays = Math.max(0, (now - (st?.lastReviewed || now)) / 86400000);
+              const recall = Math.exp(-deltaDays / Math.max(0.1, stability));
+              const risk = Math.max(0.0, Math.min(100.0, (1.0 - recall) * 100.0));
+
+              // 结合母词族在线动态衰减因子
+              let rootBoost = 0;
+              if (w.group && Algorithms.RootAnalytics && typeof Algorithms.RootAnalytics.getGroupDecayFactor === 'function') {
+                const decay = Algorithms.RootAnalytics.getGroupDecayFactor(w.group);
+                rootBoost = 20.0 * decay;
+              }
+
+              const mistakeBoost = (st && (st.streak || 0) === 0) ? Math.min(4, st.mistakes || 0) * 8 : 0;
+              const P = (gap * 0.50) + (risk * 0.50) + mistakeBoost + rootBoost;
+
+              scoredInner.push({ word: w, score: P, gap: Math.round(gap), risk: Math.round(risk) });
+            }
+
+            let maxInner = -Infinity;
+            scoredInner.forEach(item => { if (item.score > maxInner) maxInner = item.score; });
+
+            let sumInner = 0.0;
+            const expWeights = scoredInner.map(item => {
+              const ew = Math.exp((item.score - maxInner) / tau);
+              sumInner += ew;
+              return ew;
             });
 
-            let rand = Math.random();
-            for (let i = 0; i < evaluated.length; i++) {
-              rand -= probs[i];
-              if (rand <= 0 || i === evaluated.length - 1) {
-                chosenItem = evaluated[i];
-                chosenProb = probs[i];
+            let rInner = Math.random() * sumInner;
+            let chosenItem = scoredInner[0];
+            for (let i = 0; i < scoredInner.length; i++) {
+              rInner -= expWeights[i];
+              if (rInner <= 0 || i === scoredInner.length - 1) {
+                chosenItem = scoredInner[i];
+                chosenProb = (BASE_BOX_WEIGHTS[targetBox] * (expWeights[i] / sumInner));
                 break;
               }
             }
+
+            chosenWord = chosenItem.word;
+            chosenP = Math.round(chosenItem.score);
+            chosenGap = chosenItem.gap;
+            chosenRisk = chosenItem.risk;
+            chosenType = `盒${targetBox}温故`;
           }
 
-          const dbg = chosenItem.debug;
+          // 4. 更新顶部 HUD
+          const targetIndex = pool.indexOf(chosenWord);
           const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
           if (progEl) {
-            const dueTag = dbg.dueMultiplier > 1.0 ? ' ⚡到期' : '';
-            const rootTag = dbg.pRootBoost > 0 ? ' 🌳同根' : '';
-            const pruneTag = dbg.pruned ? ' ⚡剪枝底分' : '';
             const probPct = (chosenProb * 100).toFixed(1);
-            progEl.innerText = `🧠 [自适应复习 P:${Math.round(chosenItem.score)} | 风险:${dbg.risk}% | 概率:${probPct}%${dueTag}${rootTag}${pruneTag}]`;
+            progEl.innerText = `🎯 [${chosenType}] ${chosenWord.word} (P:${chosenP} | 缺口:${chosenGap}% | 风险:${chosenRisk}% | 配额:${Math.round(BASE_BOX_WEIGHTS[targetBox]*100)}% | ${flowTag}) ${targetIndex + 1}/${pool.length}`;
           }
 
-          return chosenItem.word;
+          return chosenWord;
 
         } else if (mode === 'shuffle') {
           let sQueue = AppState.get('shuffleQueue');
@@ -15255,26 +15677,94 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           return pool[targetIndex];
 
         } else {
+          // ★ 艾宾浩斯加权 (生词与盒1~3进阶专练: 未学词100, 盒1: 60, 盒2: 35, 盒3: 20, 盒4/5: 0)
+          const now = Date.now();
+          const recentBuf = AppState.get('recentQuestionBuffer') || [];
+          const weights = new Array(pool.length);
           let totalWeight = 0;
-          for (let i = 0; i < pool.length; i++) {
-            const lvl = stDict[pool[i].word]?.level ?? 2;
-            totalWeight += Math.max(1, 6 - lvl);
-          }
+          let candidateCount = 0;
 
-          let randomWeight = Math.random() * totalWeight;
-          let runningSum = 0;
-          let targetIndex = 0;
           for (let i = 0; i < pool.length; i++) {
-            const lvl = stDict[pool[i].word]?.level ?? 2;
-            runningSum += Math.max(1, 6 - lvl);
-            if (randomWeight < runningSum) {
-              targetIndex = i;
-              break;
+            const w = pool[i];
+            const st = stDict[w.word];
+            let baseW = 0;
+
+            const isUnlearned = (!st || !st.lastReviewed || st.lastReviewed === 0 || (st.tested || 0) === 0);
+            if (isUnlearned) {
+              baseW = 100; // 未学全新词权重 100
+            } else {
+              const box = st.box || 1;
+              if (box === 1) {
+                baseW = 60; // 盒 1 每日巩固权重 60
+              } else if (box === 2) {
+                baseW = 35; // 盒 2 隔日复习权重 35
+              } else if (box === 3) {
+                baseW = 20; // 盒 3 中期强化权重 20
+              } else {
+                // 盒 4 (周度稳固) 与 盒 5 (终极毕业)：未逾期强制屏蔽，权重 0
+                baseW = 0;
+              }
+
+              // 处于盒 1~3 的词若有未克服错题，追加 15 分优先补偿
+              if (baseW > 0 && (st.mistakes || 0) > 0 && (st.streak || 0) === 0) {
+                baseW += 15;
+              }
+            }
+
+            // 防短距离连续重复冷却惩罚 (最近 5 题)
+            if (baseW > 0 && recentBuf.length > 0) {
+              const lastIdx = recentBuf.lastIndexOf(w.word);
+              if (lastIdx !== -1) {
+                const recencyStep = recentBuf.length - lastIdx;
+                if (recencyStep <= 3) {
+                  baseW = baseW * 0.1;
+                } else if (recencyStep <= 6) {
+                  baseW = baseW * 0.5;
+                }
+              }
+            }
+
+            weights[i] = baseW;
+            if (baseW > 0) {
+              totalWeight += baseW;
+              candidateCount++;
             }
           }
+
+          let targetIndex = 0;
           const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
-          if (progEl) progEl.innerText = `加权模式 (${pool.length} 词)`;
-          return pool[targetIndex];
+
+          if (totalWeight > 0) {
+            let randomWeight = Math.random() * totalWeight;
+            let runningSum = 0;
+            for (let i = 0; i < pool.length; i++) {
+              if (weights[i] <= 0) continue;
+              runningSum += weights[i];
+              if (randomWeight < runningSum) {
+                targetIndex = i;
+                break;
+              }
+            }
+            if (progEl) {
+              progEl.innerText = `🧠 加权进阶 (生词+盒1~3): 待攻坚 ${candidateCount} 词 / 全库 ${pool.length}`;
+            }
+            return pool[targetIndex];
+          } else {
+            // 兜底机制：若当前词库所有单词均已晋级至盒 4/5
+            if (progEl) {
+              progEl.innerText = `🎉 攻坚完成 (生词与盒1~3均已晋级)`;
+            }
+            let bestFallbackIdx = 0;
+            let lowestMastery = Infinity;
+            for (let i = 0; i < pool.length; i++) {
+              const m = stDict[pool[i].word]?.masteryScore ?? 50;
+              if (m < lowestMastery) {
+                lowestMastery = m;
+                bestFallbackIdx = i;
+              }
+            }
+            return pool[bestFallbackIdx];
+          }
         }
       },
       nextQuestion() {
@@ -15911,6 +16401,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         const newMastery = transition.masteryScore;
         const newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
 
+        const isFirstLearnEver = (oldTested === 0);
         this.broadcastWordStatUpdate(currentPackId, wordName, (st) => {
           st.tested = newTested;
           st.mistakes = newMistakes;
@@ -15923,6 +16414,13 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           st.lastReviewed = now;
           st.lastResponseTime = responseTimeMs;
           st.nextReviewDate = newNextReviewDate;
+          if (isFirstLearnEver && !st.firstLearnedAt) {
+            st.firstLearnedAt = now;
+          }
+          if (!isCorrect && (st.exemptUntilDue || st.isGraduated)) {
+            st.exemptUntilDue = false;
+            st.isGraduated = false;
+          }
         });
 
         const activeSt = pStats[currentPackId]?.[wordName] || pStats['all_2257']?.[wordName];
@@ -15962,8 +16460,18 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         }
 
         if (!this.statUndoStack) this.statUndoStack = [];
-        this.adaptiveStepCounter = 0;
         Algorithms.RootAnalytics.markFamilyCacheDirty();
+        // ★ 方案三：心流与认知负荷状态感知 (最近 10 题滑动窗口)
+        const flowWindow = AppState.get('recentPerformanceWindow') || [];
+        flowWindow.push({ ok: isCorrect, rt: responseTimeMs, t: now });
+        if (flowWindow.length > 10) flowWindow.shift();
+        AppState.update('recentPerformanceWindow', flowWindow);
+
+        // ★ 方案三：母词族贝叶斯在线学习 (连续答对动态衰减连带惩罚)
+        const wObj = AppState.get('currentWord');
+        if (wObj && wObj.group) {
+          Algorithms.RootAnalytics.recordGroupAnswer(wObj.group, isCorrect);
+        }
         this.statUndoStack.push(undoSnapshot);
         if (this.statUndoStack.length > 50) {
           this.statUndoStack.shift();
@@ -17476,6 +17984,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
     window.handleRootDictSearch = Utils.debounce((q) => App.handleRootDictSearch(q), 150);
 
     // 词组专练全局函数
+    window.resetPhrasesProgress = () => { if (Views.PhrasesDrill) Views.PhrasesDrill.resetMasteredPhrases(); };
     window.filterPhrasesByCategory = (cat) => {
       if (Views.PhrasesDrill) Views.PhrasesDrill.filterByCategory(cat);
     };
