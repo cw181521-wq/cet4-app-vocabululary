@@ -730,7 +730,7 @@
 
     .utility-toggle-row {
       display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
       align-items: center !important;
       gap: 8px !important;
       margin-bottom: 8px !important;
@@ -1825,17 +1825,37 @@
     .card-meta-slot-left {
       display: flex !important;
       align-items: center !important;
-      gap: 6px !important;
+      gap: 8px !important;
       flex: 0 1 auto !important;
       min-width: 0 !important;
-      overflow: hidden !important;
+      overflow: visible !important;
+      white-space: nowrap !important;
+    }
+    .card-meta-slot-left .mastery-pill,
+    .card-meta-slot-left .risk-pill {
+      flex-shrink: 0 !important;
+      white-space: nowrap !important;
     }
     .card-meta-slot-right {
       display: flex !important;
       align-items: center !important;
-      gap: 6px !important;
+      gap: 8px !important;
       flex-shrink: 0 !important;
       margin-left: auto !important;
+      white-space: nowrap !important;
+    }
+    .order-progress {
+      font-size: 0.8rem !important;
+      color: var(--muted) !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      background: var(--bg) !important;
+      padding: 3px 9px !important;
+      border-radius: 6px !important;
+      border: 1px solid var(--border) !important;
+      cursor: help !important;
+      display: inline-flex !important;
+      align-items: center !important;
     }
 
     .stage-card {
@@ -2391,7 +2411,7 @@
   <div class="utility-toggle-row">
     <button class="utility-toggle-btn" id="utility-toggle-btn" onclick="toggleUtilityPanel()" aria-expanded="false">⚙️ 设置面板</button>
     <button class="utility-toggle-btn focus-primary-btn" id="focus-mode-btn" onclick="toggleFocusMode()">🎯 沉浸模式</button>
-    <button class="utility-toggle-btn" id="companion-toggle-btn" onclick="toggleCompanionPanel()" aria-expanded="true" style="display:none !important;">▣ 辅助栏</button>
+    <button class="utility-toggle-btn companion-toggle-btn" id="companion-toggle-btn" onclick="toggleCompanionPanel()" aria-expanded="true">▣ 辅助栏</button>
   </div>
 
   <!-- 工具栏 -->
@@ -2717,7 +2737,8 @@
   <!-- 搜索栏 -->
   <div class="search-panel" id="search-panel">
     <input type="text" id="search-input" class="search-input" placeholder="输入英文或中文释义秒查当前大单元..." oninput="handleSearch(this.value)">
-    <button class="btn" style="padding: 8px 14px; background:var(--bg); border:1px solid var(--border); color:var(--text);" onclick="clearScopeFilter()">重置全库</button>
+    <button class="btn" style="padding: 8px 14px; background:var(--bg); border:1px solid var(--border); color:var(--text); white-space:nowrap;" onclick="clearScopeFilter()">重置全库</button>
+    <button class="btn companion-toggle-btn" id="companion-toggle-btn-quick" style="padding: 8px 14px; background:var(--card-bg); border:1px solid var(--border); color:var(--text); white-space:nowrap; cursor:pointer;" onclick="toggleCompanionPanel()" title="收起或展开右侧辅助栏 (快捷键: ])">▣ 辅助栏</button>
   </div>
   <!-- 1. 主测试舞台 -->
   <div id="stage-area">
@@ -2971,7 +2992,10 @@
         <div class="companion-card">
           <div class="companion-card-header">
             <span>🌳 母词族同根派生树</span>
-            <span id="family-count-badge" class="badge-mini">0 词</span>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span id="family-count-badge" class="badge-mini">0 词</span>
+              <button class="btn-mini" onclick="toggleCompanionPanel(true)" title="收起右侧辅助栏" style="background:transparent; border:none; color:var(--muted); cursor:pointer; font-size:0.8rem; padding:1px 4px;">✕ 收起</button>
+            </div>
           </div>
           <div class="family-word-list" id="root-family-tree-list"></div>
           <button class="btn" style="padding:5px 8px; font-size:0.75rem; background:var(--bg); border:1px solid var(--border); color:var(--primary); font-weight:700; cursor:pointer;" onclick="drillCurrentFamily()">🎯 专练当前母词族</button>
@@ -3385,6 +3409,8 @@
       <button class="btn btn-primary" style="flex:1;" onclick="importCustomQwertyPack()">解析导入新词库</button>
       <button class="btn" style="flex:1; background:var(--primary); color:#fff;" onclick="document.getElementById('local-words-file-input').click()">📁 本地选取 words_data.js</button>
       <button class="btn" style="flex:1; background:#475569;" onclick="exportProgress()">导出 JSON 备份</button>
+      <button class="btn" style="flex:1; background:#334155; color:#fff;" onclick="document.getElementById('local-progress-backup-input').click()">📥 导入 JSON 备份</button>
+      <input type="file" id="local-progress-backup-input" accept=".json" style="display:none;" onchange="importProgressBackup(event)">
     </div>
   </div>
 
@@ -3638,6 +3664,7 @@
       <div class="shortcut-row"><kbd>P</kbd> 或 <kbd>V</kbd><span>标准母语发音朗读</span></div>
       <div class="shortcut-row"><kbd>[</kbd> / <kbd>]</kbd><span>发音语速减慢 / 加快</span></div>
       <div class="shortcut-row"><kbd>←</kbd> / <kbd>→</kbd><span>上一题 / 下一题 (闪卡: 不熟悉 / 已掌握)</span></div>
+      <div class="shortcut-row"><kbd>小键盘 1~5</kbd> / <kbd>Alt+1~5</kbd><span>手动保送进 Box 1 ~ 5 (作答后大键盘 1~5 也可保送)</span></div>
       <div class="shortcut-row"><kbd>G</kbd><span>一键保送毕业到 Box 5</span></div>
       <div class="shortcut-row"><kbd>R</kbd><span>一键打回重背到 Box 1</span></div>
       <div class="shortcut-row"><kbd>M</kbd><span>加入/移除重点错题本</span></div>
@@ -4365,10 +4392,39 @@
           AppState.update('currentVoiceRate', 0.75);
           return;
         }
+
+        if (e.key === ']' || e.key === '\\') {
+          e.preventDefault();
+          window.toggleCompanionPanel();
+          return;
+        }
         if (e.key === ']') {
           const sel = document.getElementById('voice-rate-select');
           if (sel) sel.value = '1.25';
           AppState.update('currentVoiceRate', 1.25);
+          return;
+        }
+
+        // ★ 键盘手动保送：小键盘数字键 (Numpad 1~5) 全局直达
+        if (['Numpad1', 'Numpad2', 'Numpad3', 'Numpad4', 'Numpad5'].includes(e.code)) {
+          e.preventDefault();
+          const targetBox = parseInt(e.code.replace('Numpad', ''), 10);
+          Views.Compass.jumpBox(targetBox);
+          return;
+        }
+
+        // ★ 键盘手动保送：Alt + 1~5 全局强制定向
+        if (e.altKey && ['1', '2', '3', '4', '5'].includes(e.key)) {
+          e.preventDefault();
+          const targetBox = parseInt(e.key, 10);
+          Views.Compass.jumpBox(targetBox);
+          return;
+        }
+
+        // ★ 闪卡模式：主键盘数字键 1~5 直接保送
+        if (curMode === 'flashcard' && !e.ctrlKey && !e.altKey && !e.metaKey && ['1', '2', '3', '4', '5'].includes(e.key)) {
+          e.preventDefault();
+          Views.Compass.jumpBox(parseInt(e.key, 10));
           return;
         }
 
@@ -4398,6 +4454,22 @@
         }
 
         if (['choice', 'audio_clo', 'confusables', 'speed_blitz', 'mock'].includes(curMode)) {
+          const hasAnswered = AppState.get('hasAnsweredChoice');
+
+          // 若已作答 (已出解析)，主键盘数字键 1~5 自动解绑选项，直接作为保送快捷键！
+          if (hasAnswered && ['1', '2', '3', '4', '5'].includes(e.key)) {
+            e.preventDefault();
+            Views.Compass.jumpBox(parseInt(e.key, 10));
+            return;
+          }
+
+          // 若未作答，按 5 可直接保送盒 5
+          if (!hasAnswered && e.key === '5') {
+            e.preventDefault();
+            Views.Compass.jumpBox(5);
+            return;
+          }
+
           let optIdx = -1;
           if (['1', '2', '3', '4'].includes(e.key)) optIdx = parseInt(e.key, 10) - 1;
           else if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) optIdx = ['a', 'b', 'c', 'd'].indexOf(e.key.toLowerCase());
@@ -5098,11 +5170,13 @@
           return (totalMistakes + this.PRIOR.alpha) / (totalTested + this.PRIOR.alpha + this.PRIOR.beta);
         },
 
-        calculatePercolationBoost(group, wordTested, posteriorRate) {
+        calculatePercolationBoost(group, wordTested, posteriorRate, isHighFrequency = false) {
           if (posteriorRate <= 0.25) return 0.0;
           const severity = (posteriorRate - 0.25) / 0.75;
           const wordImmunity = wordTested / (wordTested + 2.5);
-          return Math.round(32.0 * severity * (1.0 - wordImmunity) * 10) / 10;
+          let boost = 32.0 * severity * (1.0 - wordImmunity);
+          if (isHighFrequency) boost *= 0.45; // ★ 高频熟词免疫 55% 的词族连带惩罚阻尼
+          return Math.round(boost * 10) / 10;
         }
       },
 
@@ -5476,115 +5550,57 @@
           const lambda = Math.min(2.0, Math.max(0.6, rawRespTime / T_base));
 
           const tested = (wordStat && typeof wordStat.tested === 'number' && !isNaN(wordStat.tested)) ? Math.max(0, wordStat.tested) : 0;
-          const mastery = (wordStat && typeof wordStat.masteryScore === 'number' && !isNaN(wordStat.masteryScore)) ? wordStat.masteryScore : 35;
+          const isUnlearned = (!wordStat.lastReviewed || wordStat.lastReviewed <= 0 || tested === 0);
+          const box = (wordStat?.box >= 1 && wordStat?.box <= 5) ? wordStat.box : 1;
           const streak = (wordStat && typeof wordStat.streak === 'number' && !isNaN(wordStat.streak)) ? Math.max(0, wordStat.streak) : 0;
           const mistakes = (wordStat && typeof wordStat.mistakes === 'number' && !isNaN(wordStat.mistakes)) ? Math.max(0, wordStat.mistakes) : 0;
-          const isFlagged = (wordStat && wordStat.isFlagged) ? 25.0 : 0.0;
-          const nextReview = (wordStat && typeof wordStat.nextReviewDate === 'number' && !isNaN(wordStat.nextReviewDate)) ? wordStat.nextReviewDate : 0;
-          const lastReviewed = (wordStat && typeof wordStat.lastReviewed === 'number' && !isNaN(wordStat.lastReviewed)) ? wordStat.lastReviewed : 0;
-          const box = (wordStat?.box >= 1 && wordStat?.box <= 5) ? wordStat.box : 1;
+          const isFlagged = (wordStat && wordStat.isFlagged) ? 20.0 : 0.0;
 
-          const isMatureOrGraduated = (box === 5) && (streak >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated);
-          const effectiveMistakes = isMatureOrGraduated ? 0 : Math.min(mistakes, 6);
+          // 1. 掌握度缺口 D (Mastery Deficit)
+          const mastery = isUnlearned ? 20.0 : (typeof wordStat.masteryScore === 'number' ? wordStat.masteryScore : 35.0);
+          const gap = Math.max(0.0, 100.0 - mastery);
 
-          const isSafeMature = (
-            (tested >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated) &&
-            mastery >= 80 &&
-            (streak >= 3 || wordStat?.exemptUntilDue || wordStat?.isGraduated) &&
-            !isFlagged &&
-            nextReview > (now + 86400000)
-          );
-
-          if (isSafeMature) {
-            const baseScore = Math.max(0.01, ((100.0 - mastery) * 0.02));
-            return {
-              score: baseScore,
-              debug: {
-                word: wordObj?.word || '',
-                box,
-                tested,
-                mastery,
-                mistakes: 0,
-                isFlagged: false,
-                recall: 99,
-                risk: 1,
-                stability: 15.0,
-                effStability: 15.0,
-                respTimeMs: rawRespTime,
-                T_base,
-                lambda: Math.round(lambda * 100) / 100,
-                pHesitation: 0,
-                familyGroup: wordObj?.group || '',
-                familyErrorRate: 0,
-                pRootBoost: 0,
-                rOverdue: -1,
-                dueMultiplier: 1.0,
-                recencyStep: -1,
-                penalty: 0,
-                queueType: context.queueType || 'review',
-                pruned: true
-              }
-            };
-          }
-
-          let baseStability;
-          if (tested < 3) {
-            const shortTermS = 0.15 + (tested * 0.18) + (streak * 0.12);
-            baseStability = Math.min(0.8, Math.max(0.25, shortTermS));
+          // 2. ★ 统一由 CRSE.evaluateMemoryState 导出当前真实遗忘风险指数 Risk (绝对主导变量，彻底废除 90/60/25/5 硬编码)
+          let risk = 0.0;
+          let memState = null;
+          if (isUnlearned) {
+            risk = 100.0; // 未学词天然具备最高认知开荒风险
           } else {
-            baseStability = Math.max(0.8, 1.0 + 1.6 * streak + Math.pow(Math.max(0, mastery) / 28.0, 2.1));
-          }
-
-          const effDamping = 1.0 + 0.5 * (lambda - 1.0);
-          const softFloor = 0.25 + 0.15 * Math.min(tested, 5);
-          const S_eff = Math.max(softFloor, baseStability / Math.max(0.1, effDamping));
-
-          const baseRiskInfo = this.calculateMemoryRisk(wordStat, baseStability);
-          const riskInfo = this.calculateMemoryRisk(wordStat, S_eff);
-
-          const pHesitation = (lambda > 1.0) ? Math.min(12.0, (lambda - 1.0) * 12.0) : 0.0;
-
-          // ★ 核心法则：盒子层级倒序（Leitner 原则，盒 1 拥有最高基础权值）
-          const boxPriorityMap = { 1: 90.0, 2: 60.0, 3: 25.0, 4: 5.0, 5: 0.0 };
-          const baseBoxScore = boxPriorityMap[box] ?? 90.0;
-
-          // 连胜阻尼：连胜越高说明当前盒记忆越稳，轻微抑制
-          const streakDamping = Math.min(25.0, streak * 5.0);
-
-          let P = baseBoxScore + (riskInfo.risk * 0.35) + ((100.0 - mastery) * 0.40) + (effectiveMistakes * 12.0 * 0.20) + isFlagged + pHesitation - streakDamping;
-
-          let familyErrorRate = 0.0;
-          if (context && typeof context.familyErrorRate === 'number' && !isNaN(context.familyErrorRate)) {
-            familyErrorRate = context.familyErrorRate;
-          } else if (context && context.familyStatsMap && wordObj?.group) {
-            familyErrorRate = context.familyStatsMap.get(wordObj.group) || 0.0;
-          } else if (wordObj && wordObj.group) {
-            familyErrorRate = Algorithms.RootAnalytics.getFamilyErrorRate(wordObj.group, context.pool || [], context.packStats || {});
-          }
-
-          let pRootBoost = 0.0;
-          if (familyErrorRate >= 0.35) {
-            pRootBoost = familyErrorRate * 25.0;
-            P += pRootBoost;
-          }
-
-          let rOverdue = -1.0;
-          let dueMultiplier = 1.0;
-          if (lastReviewed > 0 && nextReview > 0) {
-            const boxCfg = Algorithms.Leitner.getConfig(box);
-            const boxIntervalMs = (boxCfg && boxCfg.ms) ? boxCfg.ms : 86400000;
-            const deltaT = now - nextReview;
-            rOverdue = deltaT / boxIntervalMs;
-
-            if (rOverdue >= 0) {
-              // 只有低阶盒 (Box 1~3) 享受逾期乘数；高阶成熟盒 (Box 4/5) 严禁逾期反客为主
-              const maxMultiplier = (box <= 2) ? 2.5 : (box === 3 ? 1.6 : 1.15);
-              dueMultiplier = Math.min(maxMultiplier, 1.2 + Math.min(1.5, rOverdue));
-              P = P * dueMultiplier;
+            memState = Algorithms.AdaptiveEngine.CRSE.evaluateMemoryState(wordStat);
+            risk = memState.risk;
+            if (box === 1) {
+              risk = Math.max(75.0, risk); // 盒 1 处于临界形成期，锁定脆弱高风险
             }
           }
 
-          // ★ 防连续考同一词冷却保护 (Recency Cooldown)
+          // 3. 未克服错题紧迫度补偿 U
+          const hasUnresolvedMistake = (!isUnlearned && streak === 0 && mistakes > 0);
+          const mistakeBonus = hasUnresolvedMistake ? Math.min(4, mistakes) * 8.0 : 0.0;
+
+          // 4. 词根连带渗透加权 (引入词频权重阻尼与动态衰减)
+          let rootBoost = 0.0;
+          if (wordObj && wordObj.group) {
+            const isHighFreq = Boolean(
+              wordObj.isCore || 
+              (wordObj.part && wordObj.part.includes('核心')) || 
+              (wordObj.star && wordObj.star >= 4)
+            );
+            if (context.packWords && context.packStats) {
+              const postRate = Algorithms.AdaptiveEngine.BayesianRoot.computeFamilyPosterior(wordObj.group, context.packWords, context.packStats);
+              rootBoost = Algorithms.AdaptiveEngine.BayesianRoot.calculatePercolationBoost(wordObj.group, tested, postRate, isHighFreq);
+            } else if (Algorithms.RootAnalytics && typeof Algorithms.RootAnalytics.getGroupDecayFactor === 'function') {
+              const decay = Algorithms.RootAnalytics.getGroupDecayFactor(wordObj.group);
+              rootBoost = (isHighFreq ? 9.0 : 20.0) * decay;
+            }
+          }
+
+          // 5. 反应时提取潜伏期迟疑惩罚
+          const pHesitation = (lambda > 1.0) ? Math.min(10.0, (lambda - 1.0) * 10.0) : 0.0;
+
+          // ★ 统一自适应综合得分 P(w)
+          let P = (risk * 0.50) + (gap * 0.40) + mistakeBonus + isFlagged + rootBoost + pHesitation;
+
+          // 6. 防短程连续考硬冷却 (Recency Lockout)
           let recencyPenalty = 0.0;
           let recencyStep = -1;
           if (recentBuffer && recentBuffer.length > 0 && wordObj && wordObj.word) {
@@ -5592,40 +5608,29 @@
             if (lastIdx !== -1) {
               recencyStep = recentBuffer.length - lastIdx;
               if (recencyStep <= 4) {
-                recencyPenalty = 500.0; // 4 题内彻底冷却
+                recencyPenalty = 9999.0; // 4 题内彻底阻断
               } else {
-                recencyPenalty = Math.max(0.0, 120.0 * Math.exp(-(recencyStep - 4) / 1.8));
+                recencyPenalty = Math.max(0.0, 100.0 * Math.exp(-(recencyStep - 4) / 1.8));
               }
               P = Math.max(0.001, P - recencyPenalty);
             }
           }
 
           return {
-            score: Math.max(0.001, P),
+            score: Math.max(0.001, Math.round(P * 10) / 10),
             debug: {
               word: wordObj?.word || '',
               box,
               tested,
-              mastery,
+              mastery: Math.round(mastery),
+              gap: Math.round(gap),
+              risk: Math.round(risk),
               mistakes,
-              isFlagged: Boolean(isFlagged),
-              recall: riskInfo.recall,
-              risk: riskInfo.risk,
-              stability: baseRiskInfo.stability,
-              effStability: riskInfo.effectiveStability,
-              respTimeMs: rawRespTime,
-              T_base,
-              lambda: Math.round(lambda * 100) / 100,
+              rootBoost: Math.round(rootBoost * 10) / 10,
               pHesitation: Math.round(pHesitation * 10) / 10,
-              familyGroup: wordObj?.group || '',
-              familyErrorRate: Math.round(familyErrorRate * 1000) / 1000,
-              pRootBoost: Math.round(pRootBoost * 10) / 10,
-              rOverdue: Math.round(rOverdue * 100) / 100,
-              dueMultiplier: Math.round(dueMultiplier * 100) / 100,
               recencyStep,
-              penalty: Math.round(recencyPenalty * 10) / 10,
-              queueType: context.queueType || 'review',
-              pruned: false
+              penalty: Math.round(recencyPenalty),
+              queueType: context.queueType || 'review'
             }
           };
         }
@@ -5856,6 +5861,7 @@
       let adaptiveFlushTimer = null;
       const DEBOUNCE_BASE_MS = 600;
       const MAX_SLIDING_WINDOW_MS = 1500;
+      const memoryStatsCache = {};
 
       function safeSetItem(key, val) {
         if (memoryOnlyMode || typeof localStorage === 'undefined') return false;
@@ -5912,20 +5918,27 @@
             } catch (_) {}
           }
           localStorage.removeItem('morpho_previous_cloud_backup');
+          for (const key of Object.keys(localStorage)) {
+            if (key.startsWith('morpho_stats_')) {
+              localStorage.removeItem(key);
+            }
+          }
         } catch (_) {}
       }
 
       return {
         async initDB() {
           if (typeof window === 'undefined' || !('indexedDB' in window)) return null;
+          if (dbInstance) return dbInstance;
           return new Promise((resolve) => {
             try {
-              const req = indexedDB.open('MorphoAppDB', 2);
+              const req = indexedDB.open('MorphoAppDB', 3);
               req.onupgradeneeded = (e) => {
                 const db = e.target.result;
                 if (!db.objectStoreNames.contains('events')) db.createObjectStore('events', { keyPath: 'id' });
                 if (!db.objectStoreNames.contains('audio')) db.createObjectStore('audio', { keyPath: 'key' });
                 if (!db.objectStoreNames.contains('vocab_cache')) db.createObjectStore('vocab_cache', { keyPath: 'id' });
+                if (!db.objectStoreNames.contains('stats')) db.createObjectStore('stats', { keyPath: 'id' });
               };
               req.onsuccess = (e) => {
                 dbInstance = e.target.result;
@@ -5936,6 +5949,105 @@
               resolve(null);
             }
           });
+        },
+
+        async loadAllStatsFromDB() {
+          const db = await this.initDB();
+          if (!db) return {};
+          return new Promise((resolve) => {
+            try {
+              const tx = db.transaction(['stats'], 'readonly');
+              const store = tx.objectStore('stats');
+              const req = store.getAll();
+              req.onsuccess = () => {
+                const result = {};
+                (req.result || []).forEach(item => {
+                  if (item && item.id) {
+                    result[item.id] = item.data;
+                  }
+                });
+                resolve(result);
+              };
+              req.onerror = () => resolve({});
+            } catch (_) {
+              resolve({});
+            }
+          });
+        },
+
+        async saveStatsToDB(packId, statsDict) {
+          const db = await this.initDB();
+          if (!db || !packId || !statsDict) return false;
+          return new Promise((resolve) => {
+            try {
+              const tx = db.transaction(['stats'], 'readwrite');
+              const store = tx.objectStore('stats');
+              store.put({ id: packId, data: statsDict, updatedAt: Date.now() });
+              tx.oncomplete = () => resolve(true);
+              tx.onerror = () => resolve(false);
+            } catch (_) {
+              resolve(false);
+            }
+          });
+        },
+
+        fallbackLoadFromLocalStorage() {
+          const result = {};
+          if (typeof localStorage === 'undefined') return result;
+          for (const key of Object.keys(localStorage)) {
+            if (key.startsWith('morpho_stats_')) {
+              const packId = key.slice('morpho_stats_'.length);
+              try {
+                result[packId] = JSON.parse(localStorage.getItem(key) || '{}');
+              } catch (_) {}
+            }
+          }
+          return result;
+        },
+
+        purgeLegacyStatsFromLocalStorage() {
+          if (typeof localStorage === 'undefined') return;
+          try {
+            const keysToRemove = Object.keys(localStorage).filter(k =>
+              k.startsWith('morpho_stats_') ||
+              k === 'morpho_previous_cloud_backup'
+            );
+            keysToRemove.forEach(k => localStorage.removeItem(k));
+            console.log(`[Storage] 成功从 localStorage 清除 ${keysToRemove.length} 个历史冗余 key，存储空间完全释放！`);
+          } catch (_) {}
+        },
+
+        async initStorage() {
+          const db = await this.initDB();
+          let idbStats = {};
+          if (db) {
+            try {
+              idbStats = await this.loadAllStatsFromDB();
+            } catch (e) {
+              console.warn('[Storage] loadAllStatsFromDB error:', e);
+            }
+          }
+
+          const hasIdbStats = idbStats && Object.keys(idbStats).length > 0;
+          if (hasIdbStats) {
+            Object.assign(memoryStatsCache, idbStats);
+            console.log('[Storage] 已从 IndexedDB 成功预热加载词包统计，总词包数:', Object.keys(idbStats).length);
+          } else {
+            console.log('[Storage] IndexedDB 为空，正在检查并从 localStorage 平滑迁移...');
+            const localStats = this.fallbackLoadFromLocalStorage();
+            if (Object.keys(localStats).length > 0) {
+              for (const [pId, dict] of Object.entries(localStats)) {
+                memoryStatsCache[pId] = dict;
+                if (db) {
+                  await this.saveStatsToDB(pId, dict);
+                }
+              }
+              if (db) {
+                this.purgeLegacyStatsFromLocalStorage();
+                console.log('[Storage] 平滑迁移完毕，旧版 localStorage 存储空间已彻底释放！');
+              }
+            }
+          }
         },
 
         async cachePacksToDB(packs) {
@@ -5999,17 +6111,25 @@
         statsWriteTimers: {},
 
         getStats(packId) {
+          if (memoryStatsCache[packId]) {
+            return memoryStatsCache[packId];
+          }
           if (this.statsWriteBuffer && this.statsWriteBuffer[packId]) {
             return this.statsWriteBuffer[packId];
           }
           try {
-            return JSON.parse((typeof localStorage !== 'undefined' ? localStorage.getItem(`morpho_stats_${packId}`) : null) || '{}');
-          } catch (_) {
-            return {};
-          }
+            const fromLs = JSON.parse((typeof localStorage !== 'undefined' ? localStorage.getItem(`morpho_stats_${packId}`) : null) || '{}');
+            if (fromLs && Object.keys(fromLs).length > 0) {
+              memoryStatsCache[packId] = fromLs;
+              return fromLs;
+            }
+          } catch (_) {}
+          return {};
         },
 
         saveStats(packId, statsDict, immediate = false) {
+          if (!packId || !statsDict) return;
+          memoryStatsCache[packId] = statsDict;
           if (!this.statsWriteBuffer) this.statsWriteBuffer = {};
           this.statsWriteBuffer[packId] = statsDict;
           this.markDirty();
@@ -6046,14 +6166,14 @@
         },
 
         flushStats(packId = null) {
-          if (!this.statsWriteBuffer || typeof localStorage === 'undefined') return;
           if (packId) {
             if (this.statsWriteTimers && this.statsWriteTimers[packId]) {
               clearTimeout(this.statsWriteTimers[packId]);
               delete this.statsWriteTimers[packId];
             }
-            if (this.statsWriteBuffer[packId]) {
-              safeSetItem(`morpho_stats_${packId}`, this.statsWriteBuffer[packId]);
+            if (this.statsWriteBuffer && this.statsWriteBuffer[packId]) {
+              const dict = this.statsWriteBuffer[packId];
+              this.saveStatsToDB(packId, dict);
               delete this.statsWriteBuffer[packId];
             }
           } else {
@@ -6061,24 +6181,30 @@
               for (const tid of Object.values(this.statsWriteTimers)) clearTimeout(tid);
               this.statsWriteTimers = {};
             }
-            for (const [pId, dict] of Object.entries(this.statsWriteBuffer)) {
-              safeSetItem(`morpho_stats_${pId}`, dict);
+            if (this.statsWriteBuffer) {
+              for (const [pId, dict] of Object.entries(this.statsWriteBuffer)) {
+                this.saveStatsToDB(pId, dict);
+              }
+              this.statsWriteBuffer = {};
             }
-            this.statsWriteBuffer = {};
           }
         },
 
         getAllLocalStats() {
           this.flushStats();
           const result = {};
-          if (typeof localStorage === 'undefined') return result;
-          for (const key of Object.keys(localStorage)) {
-            if (!key.startsWith('morpho_stats_')) continue;
-            const packId = key.slice('morpho_stats_'.length);
-            try {
-              result[packId] = JSON.parse(localStorage.getItem(key) || '{}');
-            } catch (_) {
-              result[packId] = {};
+          for (const [pId, dict] of Object.entries(memoryStatsCache)) {
+            result[pId] = dict;
+          }
+          if (typeof localStorage !== 'undefined') {
+            for (const key of Object.keys(localStorage)) {
+              if (!key.startsWith('morpho_stats_')) continue;
+              const packId = key.slice('morpho_stats_'.length);
+              if (!result[packId]) {
+                try {
+                  result[packId] = JSON.parse(localStorage.getItem(key) || '{}');
+                } catch (_) {}
+              }
             }
           }
           return result;
@@ -12912,19 +13038,29 @@ ${errDetail}
         const st = AppState.get('packStats')[currentPackId]?.[word.word];
         const oldBox = st ? (st.box || 1) : 1;
         const now = Date.now();
+        const safeTargetBox = Math.max(1, Math.min(5, parseInt(targetBoxId, 10) || 1));
 
+        // ★ 核心锁定：记录本次作答的手动保送标记，强制使本次作答的所有自动升降逻辑作废！
+        AppState.update('currentManualBoxOverride', safeTargetBox);
+
+        // 取消可能的自动切题定时器，给用户留出充分的视觉确认与思考时间
+        if (typeof Views !== 'undefined' && Views.Choice && typeof Views.Choice.cancelAutoAdvance === 'function') {
+          Views.Choice.cancelAutoAdvance();
+        }
+
+        const cfg = Algorithms.Leitner.getConfig(safeTargetBox);
         App.broadcastWordStatUpdate(currentPackId, word.word, (item) => {
-          item.box = targetBoxId;
+          item.box = safeTargetBox;
           item.lastReviewed = now;
-          item.nextReviewDate = now + Algorithms.Leitner.getConfig(targetBoxId).ms;
+          item.nextReviewDate = now + cfg.ms;
           item.stability = Math.max((typeof item.stability === 'number' && item.stability > 0) ? item.stability : 0,
-            Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(targetBoxId));
-          if (targetBoxId === 5) {
+            Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(safeTargetBox));
+          if (safeTargetBox === 5) {
             item.streak = Math.max(item.streak || 0, 5);
             item.masteryScore = Math.max(item.masteryScore || 0, 95);
             item.isGraduated = true;
             item.exemptUntilDue = true;
-          } else if (targetBoxId === 1) {
+          } else if (safeTargetBox === 1) {
             item.streak = 0;
             item.masteryScore = Math.min(item.masteryScore || 35, 20);
             item.isGraduated = false;
@@ -12932,17 +13068,30 @@ ${errDetail}
           } else {
             item.isGraduated = false;
             item.exemptUntilDue = false;
+            if (safeTargetBox === 2) item.masteryScore = Math.max(item.masteryScore || 0, 50);
+            else if (safeTargetBox === 3) item.masteryScore = Math.max(item.masteryScore || 0, 70);
+            else if (safeTargetBox === 4) item.masteryScore = Math.max(item.masteryScore || 0, 85);
           }
           item.level = Algorithms.Scoring.getMasteryLevel(item.masteryScore);
         });
 
+        // 若撤销栈顶属于当前词，同步将其记录的手动盒号更新覆盖
+        if (App.statUndoStack && App.statUndoStack.length > 0) {
+          const topUndo = App.statUndoStack[App.statUndoStack.length - 1];
+          if (topUndo && topUndo.wordName === word.word) {
+            topUndo.manualOverriddenBox = safeTargetBox;
+          }
+        }
+
         const updatedSt = AppState.get('packStats')[currentPackId]?.[word.word] || {};
-        Services.Storage.logEvent('BOX', word.word, currentPackId, { box: targetBoxId, lvl: updatedSt.level, mastery: updatedSt.masteryScore, t: now });
-        this.triggerHopBadge(oldBox, targetBoxId, targetBoxId >= oldBox);
+        Services.Storage.logEvent('BOX', word.word, currentPackId, { box: safeTargetBox, lvl: updatedSt.level, mastery: updatedSt.masteryScore, t: now, manual: true });
+        this.triggerHopBadge(oldBox, safeTargetBox, safeTargetBox >= oldBox);
         this.render(word);
         App.updateDueBadge();
         this.markMatrixDirty();
         this.renderBoxes();
+
+        Services.Sync.showToast(`📌 已手动保送至【${cfg.name}】（本次自动升降已作废锁定）`, 'info', 1800);
       },
 
       renderMasteryMatrix(force = false) {
@@ -15010,6 +15159,7 @@ ${errDetail}
 
         AppState.update('currentPackId', packId);
         this.statUndoStack = [];
+        AppState.update('recentPerformanceWindow', []);
         this.adaptiveStepCounter = 0;
         Algorithms.RootAnalytics.markFamilyCacheDirty();
         const packDropdown = typeof document !== 'undefined' ? document.getElementById('pack-dropdown') : null;
@@ -15447,29 +15597,57 @@ ${errDetail}
           const recentBuf = AppState.get('recentQuestionBuffer') || [];
           const recentLocked = recentBuf.slice(-4); // 4 题硬冷却
 
-          // ★ 方案三：心流与疲劳感知自适应调节器 (Cognitive Flow & Load Adapter)
-          // 维护最近 10 题表现滑动窗口，动态自适应微调玻尔兹曼温度 τ 与开荒配额
+          // ★ 方案三优化升级：灵敏型心流与认知负荷自适应调节器 (Resilient Flow & Cognitive Load Adapter)
+          // 维护最近 10 题表现滑动窗口，从第 3 题起自适应感知，基于【正确率 + 连胜/连错】双轨驱动
           const flowWindow = AppState.get('recentPerformanceWindow') || [];
           let tau = 24.0;
-          let box1Weight = 0.50; // 基准为用户设定的严格五五分 (50% : 50%)
-          let flowTag = '常态五五';
+          let box1Weight = 0.50; // 基准：严格五五开 (50% 开荒 : 50% 温故)
+          let flowStateTitle = '常态五五';
+          let flowDetailTip = '';
 
-          if (flowWindow.length >= 6) {
+          const windowLen = flowWindow.length;
+          if (windowLen >= 3) {
             const correctCount = flowWindow.filter(item => item.ok).length;
-            const acc = correctCount / flowWindow.length;
-            const avgRt = flowWindow.reduce((sum, item) => sum + item.rt, 0) / flowWindow.length;
-
-            if (acc >= 0.83 && avgRt < 2600) {
-              // 心流高效态：思维敏捷、正确率高 -> 轻微上调开荒配额至 58%，稍微收敛温度聚焦攻坚
-              box1Weight = 0.58;
-              tau = 19.0;
-              flowTag = '心流高效';
-            } else if (acc <= 0.50 || avgRt > 4500) {
-              // 认知疲劳/受挫态：易错或频繁迟疑 -> 自动提升温故配额至 65%，升高温度平滑热涨落，减负巩固
-              box1Weight = 0.35; // 高阶温故提升至 65%
-              tau = 30.0;
-              flowTag = '减负加固';
+            const acc = correctCount / windowLen;
+            
+            // 计算当前连续答对或答错次数
+            let currentStreak = 0;
+            for (let i = windowLen - 1; i >= 0; i--) {
+              if (flowWindow[i].ok) currentStreak++;
+              else break;
             }
+            let currentFailStreak = 0;
+            for (let i = windowLen - 1; i >= 0; i--) {
+              if (!flowWindow[i].ok) currentFailStreak++;
+              else break;
+            }
+
+            // 过滤有效反应时 (剔除 > 15s 的离开/走神样本)
+            const validRts = flowWindow.map(item => item.rt).filter(rt => rt > 100 && rt < 15000);
+            const avgRt = validRts.length > 0 ? (validRts.reduce((a, b) => a + b, 0) / validRts.length) : 2500;
+
+            // 触发心流高效态：当前连对 ≥ 3，或 (做满 5 题且正确率 ≥ 80% 且节奏良好)
+            const isHighFlow = (currentStreak >= 3 && avgRt < 4200) || (windowLen >= 5 && acc >= 0.80 && avgRt < 3800);
+            // 触发减负加固态：连续错题 ≥ 2，或 (做满 5 题且正确率 ≤ 50%)
+            const isFatigued = (currentFailStreak >= 2) || (windowLen >= 5 && acc <= 0.50);
+
+            if (isHighFlow) {
+              box1Weight = 0.58; // 开荒提速至 58%
+              tau = 19.0;
+              flowStateTitle = '⚡心流高效';
+              flowDetailTip = `连对:${currentStreak} | 开荒58%:温故42%`;
+            } else if (isFatigued) {
+              box1Weight = 0.35; // 温故加固升至 65%
+              tau = 30.0;
+              flowStateTitle = '🛡️减负加固';
+              flowDetailTip = `近错:${windowLen - correctCount} | 开荒35%:温故65%`;
+            } else {
+              flowStateTitle = '⚖️常态五五';
+              flowDetailTip = `正确率:${Math.round(acc * 100)}% | 开荒50%:温故50%`;
+            }
+          } else {
+            flowStateTitle = '⚖️常态五五';
+            flowDetailTip = `冷启动中 (${windowLen}/3) | 开荒50%:温故50%`;
           }
 
           // 动态归一化五盒宏观配额 (高阶盒内部比例保持 24:14:8:4)
@@ -15577,32 +15755,17 @@ ${errDetail}
               chosenProb = BASE_BOX_WEIGHTS[1] * 0.50;
             }
           } else {
-            // 盒 2 ~ 盒 5
+            // ★ 单一统一调度：直接统一调用 Ebbinghaus.calculateWordPriorityDetailed 打分内核
             const scoredInner = [];
             for (let i = 0; i < targetPool.length; i++) {
               const w = targetPool[i];
               const st = stDict[w.word];
-              const mastery = (st && typeof st.masteryScore === 'number') ? st.masteryScore : 50;
-              const gap = Math.max(0, 100 - mastery);
-
-              const stability = (st && typeof st.stability === 'number' && st.stability > 0)
-                ? st.stability
-                : Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(targetBox);
-              const deltaDays = Math.max(0, (now - (st?.lastReviewed || now)) / 86400000);
-              const recall = Math.exp(-deltaDays / Math.max(0.1, stability));
-              const risk = Math.max(0.0, Math.min(100.0, (1.0 - recall) * 100.0));
-
-              // 结合母词族在线动态衰减因子
-              let rootBoost = 0;
-              if (w.group && Algorithms.RootAnalytics && typeof Algorithms.RootAnalytics.getGroupDecayFactor === 'function') {
-                const decay = Algorithms.RootAnalytics.getGroupDecayFactor(w.group);
-                rootBoost = 20.0 * decay;
-              }
-
-              const mistakeBoost = (st && (st.streak || 0) === 0) ? Math.min(4, st.mistakes || 0) * 8 : 0;
-              const P = (gap * 0.50) + (risk * 0.50) + mistakeBoost + rootBoost;
-
-              scoredInner.push({ word: w, score: P, gap: Math.round(gap), risk: Math.round(risk) });
+              const detailed = Algorithms.Ebbinghaus.calculateWordPriorityDetailed(w, st, recentBuf, targetPool.length, {
+                mode: AppState.get('currentMode'),
+                packWords: pool,
+                packStats: stDict
+              });
+              scoredInner.push({ word: w, score: detailed.score, gap: detailed.debug.gap, risk: detailed.debug.risk });
             }
 
             let maxInner = -Infinity;
@@ -15633,12 +15796,12 @@ ${errDetail}
             chosenType = `盒${targetBox}温故`;
           }
 
-          // 4. 更新顶部 HUD
+          // 4. 更新顶部 HUD：极简高雅呈现，精细调试指标收拢至 Hover Tooltip
           const targetIndex = pool.indexOf(chosenWord);
           const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
           if (progEl) {
-            const probPct = (chosenProb * 100).toFixed(1);
-            progEl.innerText = `🎯 [${chosenType}] ${chosenWord.word} (P:${chosenP} | 缺口:${chosenGap}% | 风险:${chosenRisk}% | 配额:${Math.round(BASE_BOX_WEIGHTS[targetBox]*100)}% | ${flowTag}) ${targetIndex + 1}/${pool.length}`;
+            progEl.innerText = `🎯 [${chosenType}] ${targetIndex + 1} / ${pool.length}`;
+            progEl.title = `【智能自适应出题详情】\n· 策略: ${chosenType}\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 心流模式: ${flowStateTitle} (${flowDetailTip})\n· 记忆缺口: ${chosenGap}% | 遗忘风险: ${chosenRisk}% | 综合权重 P: ${chosenP}`;
           }
 
           return chosenWord;
@@ -15746,7 +15909,8 @@ ${errDetail}
               }
             }
             if (progEl) {
-              progEl.innerText = `🧠 加权进阶 (生词+盒1~3): 待攻坚 ${candidateCount} 词 / 全库 ${pool.length}`;
+              progEl.innerText = `🧠 进阶: ${candidateCount} 待巩固 / ${pool.length}`;
+              progEl.title = `生词与盒1~3进阶专练: 待攻坚 ${candidateCount} 词 / 全库 ${pool.length} 词`;
             }
             return pool[targetIndex];
           } else {
@@ -15768,6 +15932,7 @@ ${errDetail}
         }
       },
       nextQuestion() {
+        AppState.update('currentManualBoxOverride', null); // 换题重置手动保送标记
         Services.Audio.stopAll();
         Views.Choice.cancelAutoAdvance();
 
@@ -16109,7 +16274,8 @@ ${errDetail}
           masteryEl.style.color = mScore >= 80 ? 'var(--success)' : (mScore >= 50 ? 'var(--primary)' : 'var(--muted)');
         }
         if (riskEl) {
-          riskEl.innerText = `遗忘风险: ${riskData.risk}%`;
+          riskEl.innerText = `风险: ${riskData.risk}%`;
+          riskEl.title = `基于艾宾浩斯负指数模型预测的当期遗忘概率: ${riskData.risk}%`;
           riskEl.className = `risk-pill ${riskData.risk > 50 ? 'danger' : (riskData.risk > 25 ? 'warning' : 'safe')}`;
         }
 
@@ -16303,9 +16469,16 @@ ${errDetail}
         const word = AppState.get('currentWord');
         if (!word) return;
         const now = performance.now();
-        const renderTime = AppState.get('currentQuestionRenderTime') || now;
-        const responseTimeMs = Math.max(100, Math.round(now - renderTime));
-        this.recordAnswerForWord(word.word, isCorrect, responseTimeMs, AppState.get('currentMode'));
+        const curMode = AppState.get('currentMode');
+        let responseTimeMs = 2000;
+        // ★ 闪卡模式神经提纯：优先使用翻卡时刻的纯提取潜伏期 (剔除背面看解析与例句的驻留时间)
+        if (curMode === 'flashcard' && typeof Views !== 'undefined' && Views.Flashcard && Views.Flashcard.cardRecallLatency > 0) {
+          responseTimeMs = Views.Flashcard.cardRecallLatency;
+        } else {
+          const renderTime = AppState.get('currentQuestionRenderTime') || now;
+          responseTimeMs = Math.max(100, Math.round(now - renderTime));
+        }
+        this.recordAnswerForWord(word.word, isCorrect, responseTimeMs, curMode);
       },
 
       recordAnswerForWord(wordName, isCorrect, responseTimeMs = 2000, mode = 'choice') {
@@ -16396,10 +16569,26 @@ ${errDetail}
           }
         );
 
-        const newBox = transition.box;
-        const newNextReviewDate = transition.nextReviewDate;
-        const newMastery = transition.masteryScore;
-        const newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+        let newBox = transition.box;
+        let newNextReviewDate = transition.nextReviewDate;
+        let newMastery = transition.masteryScore;
+        let newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+
+        // ★ 核心拦截：检测本次作答是否已被手动保送 (若已手动保送，自动升降盒强制彻底作废！)
+        const manualOverride = AppState.get('currentManualBoxOverride');
+        if (manualOverride && typeof manualOverride === 'number') {
+          newBox = manualOverride;
+          const boxCfg = Algorithms.Leitner.getConfig(newBox);
+          newNextReviewDate = now + (boxCfg ? boxCfg.ms : 86400000);
+          if (newBox === 5) {
+            newMastery = Math.max(newMastery, 95);
+            newStreak = Math.max(newStreak, 5);
+          } else if (newBox === 1) {
+            newMastery = Math.min(newMastery, 25);
+            newStreak = 0;
+          }
+          newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+        }
 
         const isFirstLearnEver = (oldTested === 0);
         this.broadcastWordStatUpdate(currentPackId, wordName, (st) => {
@@ -17173,11 +17362,11 @@ ${errDetail}
       if (layout) {
         layout.classList.toggle('companion-collapsed', isCollapsed);
       }
-      const btn = document.getElementById('companion-toggle-btn');
-      if (btn) {
+      const btns = document.querySelectorAll('#companion-toggle-btn, #companion-toggle-btn-quick, .companion-toggle-btn');
+      btns.forEach(btn => {
         btn.setAttribute('aria-expanded', String(!isCollapsed));
         btn.innerText = isCollapsed ? '▣ 展开辅助栏' : '▣ 收起辅助栏';
-      }
+      });
       localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
     };
 
@@ -18071,7 +18260,7 @@ ${errDetail}
       Services.Storage.flushStats();
       const data = {
         timestamp: new Date().toISOString(),
-        stats: AppState.get('packStats'),
+        stats: Services.Storage.getAllLocalStats ? Services.Storage.getAllLocalStats() : AppState.get('packStats'),
         activity: Services.Storage.getActivity(),
         notes: Services.Storage.getNotes()
       };
@@ -18082,6 +18271,44 @@ ${errDetail}
       a.download = `morpho_backup_${new Date().toISOString().slice(0, 10)}.json`;
       a.click();
       URL.revokeObjectURL(url);
+    };
+
+    window.importProgressBackup = (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (evt) => {
+        try {
+          const raw = evt.target.result;
+          const backup = JSON.parse(raw);
+          if (!backup || typeof backup !== 'object') throw new Error('无效的备份文件');
+          const stats = backup.stats || backup;
+          let count = 0;
+          if (typeof stats === 'object') {
+            for (const [packId, pData] of Object.entries(stats)) {
+              if (pData && typeof pData === 'object' && !Array.isArray(pData)) {
+                Services.Storage.saveStats(packId, pData, true);
+                count++;
+              }
+            }
+          }
+          if (backup.activity && Services.Storage.saveActivity) {
+            Services.Storage.saveActivity(backup.activity);
+          }
+          if (backup.notes && Services.Storage.saveNotes) {
+            Services.Storage.saveNotes(backup.notes);
+          }
+          if (typeof App !== 'undefined' && App.onDataMerged) {
+            App.onDataMerged({ refreshStage: true, silentAudio: true });
+          }
+          Services.Sync.showToast(`🎉 成功导入备份！已恢复 ${count} 个词包的学习记录。`, 'success', 3000);
+        } catch (err) {
+          UIModal.alert({ title: '导入失败', message: '解析备份文件失败: ' + err.message });
+        } finally {
+          e.target.value = '';
+        }
+      };
+      reader.readAsText(file, 'utf-8');
     };
 
     function parseWordsFileContent(content) {
@@ -18362,7 +18589,15 @@ ${errDetail}
       });
     }
 
-    function bootstrapApp() {
+    async function bootstrapApp() {
+      try {
+        if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.initStorage) {
+          await Services.Storage.initStorage();
+        }
+      } catch (err) {
+        console.warn("[Storage] initStorage failed in bootstrap:", err);
+      }
+
       try {
         DeviceTierEngine.sniff();
         initGlobalVisualViewportEngine();
@@ -18411,11 +18646,11 @@ ${errDetail}
           const layout = document.querySelector('.workspace-layout');
           if (panel) panel.classList.add('is-collapsed');
           if (layout) layout.classList.add('companion-collapsed');
-          const btn = document.getElementById('companion-toggle-btn');
-          if (btn) {
-            btn.setAttribute('aria-expanded', String(!isCollapsed));
+          const btns = document.querySelectorAll('#companion-toggle-btn, #companion-toggle-btn-quick, .companion-toggle-btn');
+          btns.forEach(btn => {
+            btn.setAttribute('aria-expanded', 'false');
             btn.innerText = '▣ 展开辅助栏';
-          }
+          });
         }
       } catch (e) {}
     }
