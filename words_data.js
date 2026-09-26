@@ -1,27 +1,84 @@
-// CET-4 科学词根全能终端 - 2767 核心高频全阶词典 (高配极简存储版)
+// CET-4 科学词根全能终端 - 3137 核心高频全阶词典 (高配极简存储版)
 if (typeof window === "undefined") { var window = global; }
 
 // =========================================================================
-// 0. 自动平滑继承并迁移用户的历史五盒进度与艾宾浩斯复习数据
+// 0. 自动平滑继承并多源安全融合用户的历史五盒进度与艾宾浩斯复习数据
 // =========================================================================
 if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   try {
-    var originalStats = localStorage.getItem("morpho_stats_all_2800") ||
-                        localStorage.getItem("morpho_stats_all_2257") ||
-                        localStorage.getItem("morpho_stats_all_4061") ||
-                        localStorage.getItem("morpho_stats_all_4050");
-    if (originalStats) {
-      localStorage.setItem("morpho_stats_all_2800", originalStats);
-      localStorage.setItem("morpho_stats_all_2257", originalStats);
+    var candidateKeys = [
+      "morpho_stats_all_2800",
+      "morpho_stats_all_2257",
+      "morpho_stats_all_3137",
+      "morpho_stats_all_3000",
+      "morpho_stats_all_3271",
+      "morpho_stats_all_3535",
+      "morpho_stats_all_3720",
+      "morpho_stats_all_4061",
+      "morpho_stats_all_4050"
+    ];
+
+    var mergedStats = null;
+
+    for (var i = 0; i < candidateKeys.length; i++) {
+      var raw = localStorage.getItem(candidateKeys[i]);
+      if (!raw || raw.length <= 2) continue;
+      try {
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && Object.keys(parsed).length > 0) {
+          if (!mergedStats) {
+            mergedStats = {};
+          }
+          for (var w in parsed) {
+            if (!parsed.hasOwnProperty(w)) continue;
+            var st = parsed[w];
+            if (!st || typeof st !== "object") continue;
+            if (!mergedStats[w]) {
+              mergedStats[w] = Object.assign({}, st);
+            } else {
+              var cur = mergedStats[w];
+              var curTime = cur.lastReviewed || 0;
+              var newTime = st.lastReviewed || 0;
+              if (newTime >= curTime) {
+                mergedStats[w] = Object.assign({}, cur, st, {
+                  box: Math.max(cur.box || 1, st.box || 1),
+                  tested: Math.max(cur.tested || 0, st.tested || 0),
+                  mistakes: Math.max(cur.mistakes || 0, st.mistakes || 0),
+                  streak: Math.max(cur.streak || 0, st.streak || 0),
+                  masteryScore: Math.max(cur.masteryScore || 35, st.masteryScore || 35)
+                });
+              } else {
+                cur.box = Math.max(cur.box || 1, st.box || 1);
+                cur.tested = Math.max(cur.tested || 0, st.tested || 0);
+                cur.mistakes = Math.max(cur.mistakes || 0, st.mistakes || 0);
+                cur.streak = Math.max(cur.streak || 0, st.streak || 0);
+                cur.masteryScore = Math.max(cur.masteryScore || 35, st.masteryScore || 35);
+              }
+            }
+          }
+        }
+      } catch (_) {}
     }
-    // 释放冗余拷贝
+
+    if (mergedStats && Object.keys(mergedStats).length > 0) {
+      var jsonStr = JSON.stringify(mergedStats);
+      localStorage.setItem("morpho_stats_all_2257", jsonStr);
+      localStorage.setItem("morpho_stats_all_2800", jsonStr);
+    }
+
+    // 释放冗余超大历史副本，给浏览器腾出宝贵存储配额
     localStorage.removeItem("morpho_stats_all_4061");
     localStorage.removeItem("morpho_stats_all_4050");
+    localStorage.removeItem("morpho_stats_all_3720");
+    localStorage.removeItem("morpho_stats_all_3535");
+    localStorage.removeItem("morpho_stats_all_3271");
+    localStorage.removeItem("morpho_stats_all_3137");
+    localStorage.removeItem("morpho_stats_all_3000");
   } catch (e) {}
 }
 
 // =========================================================================
-// 1. 全量唯一真实数据源 (Single Source of Truth) - 2767 核心高频词典常驻内存
+// 1. 全量唯一真实数据源 (Single Source of Truth) - 3137 核心高频词典常驻内存
 // =========================================================================
 (typeof window !== "undefined" ? window : global).WORDS_DATA = [
   {
@@ -1387,16 +1444,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "com-（共同） + pound（放置） -> 放在一起混合的复合体 -> 使加重，使恶化。"
   },
   {
-    "word": "depose",
-    "phonetic": "/dɪˈpəʊz/",
-    "pos": "vt.",
-    "meaning": "废黜， 罢免； 作证",
-    "part": "第一部分：超级核心母词族",
-    "group": "【5. pon / pos / posit 放置/摆设/立定】",
-    "analysis_type": "构词",
-    "analysis": "de-（向下） + pos（放置） -> 从王位职位上拉下来 -> 废黜，罢免。"
-  },
-  {
     "word": "deposit",
     "phonetic": "/dɪˈpɒzɪt/",
     "pos": "vt./n.",
@@ -2026,26 +2073,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "a-（ad- 朝向） + spect（看） -> 方面。"
   },
   {
-    "word": "conspicuous",
-    "phonetic": "/kənˈspɪkjuəs/",
-    "pos": "adj.",
-    "meaning": "显眼的， 引人注目的",
-    "part": "第一部分：超级核心母词族",
-    "group": "【8. spec / spect / spic 看/查验/审视】",
-    "analysis_type": "构词",
-    "analysis": "con-（完全） + spic（看） + -uous（易…的） -> 一眼就能完全看清的 -> 显眼的，引人注目的。",
-    "synonyms": [
-      {
-        "target": "obvious",
-        "pos": "adj.",
-        "for_sense": "引人注目的",
-        "usage": "upgrade",
-        "in_pack": false,
-        "nuance": "如立鹤群一眼瞧见"
-      }
-    ]
-  },
-  {
     "word": "expect",
     "phonetic": "/ɪkˈspekt/",
     "pos": "vt.",
@@ -2142,16 +2169,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【8. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
     "analysis": "re-（回） + spect（看） -> 方面，着眼点。"
-  },
-  {
-    "word": "respectable",
-    "phonetic": "/rɪˈspektəbl/",
-    "pos": "adj.",
-    "meaning": "值得尊敬的， 体面的",
-    "part": "第一部分：超级核心母词族",
-    "group": "【8. spec / spect / spic 看/查验/审视】",
-    "analysis_type": "构词",
-    "analysis": "respect（尊敬） + -able（值得…的） -> 值得受人尊敬的 -> 值得尊敬的，体面的。"
   },
   {
     "word": "respective",
@@ -2451,16 +2468,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【9. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
     "analysis": "revise（重看修正） + -ion（名词后缀） -> 修正纠错的稿件与过程 -> 修订，修改。"
-  },
-  {
-    "word": "subdivide",
-    "phonetic": "/ˌsʌbdɪˈvaɪd/",
-    "pos": "vt./vi.",
-    "meaning": "再分， 细分",
-    "part": "第一部分：超级核心母词族",
-    "group": "【9. vid / vis / view 看/看见/视线】",
-    "analysis_type": "构词",
-    "analysis": "sub-（再） + divide（分开） -> 再分，细分。"
   },
   {
     "word": "supervise",
@@ -4043,26 +4050,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "ad-（朝向） + spir-（呼吸） -> 渴望，有志于（to）。"
   },
   {
-    "word": "conspire",
-    "phonetic": "/kənˈspaɪə(r)/",
-    "pos": "vi.",
-    "meaning": "密谋， 图谋",
-    "part": "第一部分：超级核心母词族",
-    "group": "【22. spir / spirit 呼吸/精神/渴望】",
-    "analysis_type": "构词",
-    "analysis": "con-（共同） + spir-（呼吸） -> 密谋，图谋。"
-  },
-  {
-    "word": "dispirit",
-    "phonetic": "/dɪˈspɪrɪt/",
-    "pos": "vt.",
-    "meaning": "使沮丧， 使气馁",
-    "part": "第一部分：超级核心母词族",
-    "group": "【22. spir / spirit 呼吸/精神/渴望】",
-    "analysis_type": "构词",
-    "analysis": "dis-（剥离） + spirit（精神） -> 使沮丧，使气馁。"
-  },
-  {
     "word": "expire",
     "phonetic": "/ɪkˈspaɪə(r)/",
     "pos": "vi.",
@@ -5443,16 +5430,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "clam-（大声呼喊） -> 当众大声主张自身权益 -> 声称，主张。"
   },
   {
-    "word": "declaim",
-    "phonetic": "/dɪˈkleɪm/",
-    "pos": "vt./vi.",
-    "meaning": "演说， 慷慨激昂地陈述",
-    "part": "第一部分：超级核心母词族",
-    "group": "【34. claim / clam 呼喊/声称】",
-    "analysis_type": "构词",
-    "analysis": "de-（严肃彻底） + claim（高声朗诵） -> 演说，慷慨激昂地陈述。"
-  },
-  {
     "word": "declare",
     "phonetic": "/dɪˈkleə(r)/",
     "pos": "vt.",
@@ -5911,16 +5888,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【40. tang / tact / tag 触碰/接触/完整】",
     "analysis_type": "构词",
     "analysis": "in-（未曾） + tact（触碰） -> 完好无损的，完整无缺的。"
-  },
-  {
-    "word": "tangible",
-    "phonetic": "/ˈtændʒəbl/",
-    "pos": "adj.",
-    "meaning": "有形的， 实际的； 可触知的",
-    "part": "第一部分：超级核心母词族",
-    "group": "【40. tang / tact / tag 触碰/接触/完整】",
-    "analysis_type": "构词",
-    "analysis": "tang-（触碰） + -ible（可…的） -> 有形的，实际的。"
   },
   {
     "word": "contemporary",
@@ -6548,16 +6515,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【50. cand / cens 白/发光/燃烧】",
     "analysis_type": "构词",
     "analysis": "cand-（发白光照耀） + -le（小物体） -> 蜡烛。"
-  },
-  {
-    "word": "ascertain",
-    "phonetic": "/ˌæsəˈteɪn/",
-    "pos": "vt.",
-    "meaning": "查明， 弄清， 确定",
-    "part": "第二部分：高频专业词根族",
-    "group": "【51. cert / cern 确信/弄清/分辨】",
-    "analysis_type": "构词",
-    "analysis": "as-（去） + certain（弄清） -> 查明，弄清。"
   },
   {
     "word": "certain",
@@ -10623,16 +10580,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "proper-（自身拥有的） + -ty（名词后缀） -> 财产，资产。"
   },
   {
-    "word": "propriety",
-    "phonetic": "/prəˈpraɪəti/",
-    "pos": "n.",
-    "meaning": "得体， 妥当， 礼节； 正当性",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "proper（恰当的） + -iety（名词后缀） -> 得体，妥当。"
-  },
-  {
     "word": "purchase",
     "phonetic": "/ˈpɜːtʃəs/",
     "pos": "vt./n.",
@@ -11827,16 +11774,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "本义指“外面的” -> 彻底推向极限毫无保留的 -> 完全的，彻底的。"
   },
   {
-    "word": "vicar",
-    "phonetic": "/ˈvɪkə(r)/",
-    "pos": "n.",
-    "meaning": "教区牧师， 堂区神父",
-    "part": "第四部分：核心分类专题群",
-    "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
-    "analysis_type": "构词",
-    "analysis": "词根 vicarius（代理人） -> 教区牧师，堂区神父。"
-  },
-  {
     "word": "vital",
     "phonetic": "/ˈvaɪtl/",
     "pos": "adj.",
@@ -11937,16 +11874,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "ad-（朝向） + dit（给予） + -ion（名词后缀） -> 增加，添加物。"
   },
   {
-    "word": "alight",
-    "phonetic": "/əˈlaɪt/",
-    "pos": "vi./adj.",
-    "meaning": "下车， 栖落； 点着的， 灼热发光的",
-    "part": "第四部分：核心分类专题群",
-    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
-    "analysis_type": "构词",
-    "analysis": "a-（使动） + light（轻巧） -> 下车，栖落。"
-  },
-  {
     "word": "alike",
     "phonetic": "/əˈlaɪk/",
     "pos": "adj./adv.",
@@ -12035,16 +11962,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
     "analysis": "词根 bestia（不受驯化之野） -> 野兽，凶残动物。"
-  },
-  {
-    "word": "blight",
-    "phonetic": "/blaɪt/",
-    "pos": "n./vt.",
-    "meaning": "植物枯萎病； 破灭因素； 摧毁， 严重损害",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
-    "analysis_type": "构词",
-    "analysis": "族（使发白褪色） -> 植物枯萎病。"
   },
   {
     "word": "board",
@@ -17867,16 +17784,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "re-（向后） + tain（握在手中不撒） -> 保留，保持（所有权水分）。"
   },
   {
-    "word": "retribution",
-    "phonetic": "/ˌretrɪˈbjuːʃn/",
-    "pos": "n.",
-    "meaning": "应得的惩罚， 报应",
-    "part": "第二部分：高频专业词根族",
-    "group": "【42. tribut 给予/交纳/分发】",
-    "analysis_type": "构词",
-    "analysis": "re-（回） + tribut-（给予） + -ion，引申指应得的惩罚 -> 应得的惩罚，报应。"
-  },
-  {
     "word": "reveal",
     "phonetic": "/rɪˈviːl/",
     "pos": "vt.",
@@ -18937,16 +18844,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "termin-（界限） + -al（形容词） -> 航站楼。"
   },
   {
-    "word": "terminator",
-    "phonetic": "/ˈtɜːmɪneɪtə(r)/",
-    "pos": "n.",
-    "meaning": "终结者，终止者；终端匹配器，终端电阻；明暗界线，晨昏线",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "termin-（边界） + -ator（实施终结的强） -> 终结者，终止者。"
-  },
-  {
     "word": "thereby",
     "phonetic": "/ˌðeəˈbaɪ/",
     "pos": "adv.",
@@ -19127,16 +19024,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "ultim-（最远的） + -ate（形容词后缀） -> 最终的，终极的。"
   },
   {
-    "word": "uncountable",
-    "phonetic": "/ʌnˈkaʊntəbl/",
-    "pos": "adj.",
-    "meaning": "不可数的（名词概念）； 无数的， 数不清的不可胜数的",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "un-（不） + count（计数） + -able（能…的） -> 不可数的（名词概念）。"
-  },
-  {
     "word": "uncover",
     "phonetic": "/ʌnˈkʌvə(r)/",
     "pos": "vt.",
@@ -19155,16 +19042,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
     "analysis": "under（在…下方） + line（线） -> 在…下方划线。"
-  },
-  {
-    "word": "undervalue",
-    "phonetic": "/ˌʌndəˈvæljuː/",
-    "pos": "vt.",
-    "meaning": "对…评价过低， 轻视小看； 低估…的商业或市场价值",
-    "part": "第一部分：超级核心母词族",
-    "group": "【12. val / vail 强/价值】",
-    "analysis_type": "构词",
-    "analysis": "under-（在标尺线以下） + value（价值） -> 对…评价过低，轻视小看。"
   },
   {
     "word": "undo",
@@ -21787,16 +21664,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "源自拉丁词根 nitidus（经过细细擦洗） -> 整洁干净的，井井有条的。"
   },
   {
-    "word": "nimble",
-    "phonetic": "/ˈnɪmbl/",
-    "pos": "adj.",
-    "meaning": "敏捷灵活的，动作身形轻巧敏捷的；机智伶俐思维敏捷的；反应迅速极具机动灵活性的",
-    "part": "第一部分：超级核心母词族",
-    "group": "【33. nom / nym / nem 命名/法则/抓取】",
-    "analysis_type": "构词",
-    "analysis": "源自原始ēmilaz（极其善于眼疾） -> 敏捷灵活的，动作身形轻巧敏捷的。"
-  },
-  {
     "word": "nod",
     "phonetic": "/nɒk/",
     "pos": "v./n.",
@@ -22565,16 +22432,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
     "analysis": "源自希腊语 steira（不能受孕繁衍） -> 无菌的，经高温高压绝对消毒灭菌的。"
-  },
-  {
-    "word": "stout",
-    "phonetic": "/staʊt/",
-    "pos": "adj./n.",
-    "meaning": "粗壮结实的， 敦实厚重耐压的； 烈性黑啤酒",
-    "part": "第四部分：核心分类专题群",
-    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
-    "analysis_type": "构词",
-    "analysis": "本义指“傲然挺立毫无” -> 粗壮结实的，敦实厚重耐压的。"
   },
   {
     "word": "straight",
@@ -24027,16 +23884,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "un-（不） + certainty（确定性） -> 不确定性，变数。"
   },
   {
-    "word": "cardiovascular",
-    "phonetic": "/ˌkɑːdiəʊˈvæskjələ(r)/",
-    "pos": "adj.",
-    "meaning": "心血管的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【52. cord / card 心/核心】",
-    "analysis_type": "构词",
-    "analysis": "cardio-（心脏） + vascular（血管的） -> 心血管的。"
-  },
-  {
     "word": "cordial",
     "phonetic": "/ˈkɔːdiəl/",
     "pos": "adj.",
@@ -24125,16 +23972,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【58. equ / equi 平等/相同/公允】",
     "analysis_type": "构词",
     "analysis": "in-（不） + adequate（足够的） -> 不充分的，不够的。"
-  },
-  {
-    "word": "equilibrium",
-    "phonetic": "/ˌiːkwɪˈlɪbriəm/",
-    "pos": "n.",
-    "meaning": "平衡， 均衡； 平静",
-    "part": "第二部分：高频专业词根族",
-    "group": "【58. equ / equi 平等/相同/公允】",
-    "analysis_type": "构词",
-    "analysis": "equi-（相等） + libr-（天平称量） + -ium（物理状态后缀） -> 平衡，均衡。"
   },
   {
     "word": "equity",
@@ -24257,16 +24094,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "di-（分开） + lig-（挑选） + -ence，引申指勤奋 -> 勤奋，勤勉。"
   },
   {
-    "word": "illegible",
-    "phonetic": "/ɪˈledʒəbl/",
-    "pos": "adj.",
-    "meaning": "难以辨认的， 字迹模糊的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
-    "analysis_type": "构词",
-    "analysis": "il-（in- 不） + leg-（阅读） + -ible（可读的） -> 难以辨认的，字迹模糊的。"
-  },
-  {
     "word": "legacy",
     "phonetic": "/ˈleɡəsi/",
     "pos": "n.",
@@ -24347,26 +24174,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "源自意大利语 miniatura（用红铅粉画笔） -> 微型的，微小的。"
   },
   {
-    "word": "admonish",
-    "phonetic": "/ədˈmɒnɪʃ/",
-    "pos": "vt.",
-    "meaning": "训诫， 告诫， 责备",
-    "part": "第二部分：高频专业词根族",
-    "group": "【77. mon / monit 提醒/警告】",
-    "analysis_type": "构词",
-    "analysis": "ad-（朝向） + mon-（提醒） + -ish，引申指训诫 -> 训诫，告诫。"
-  },
-  {
-    "word": "monumental",
-    "phonetic": "/ˌmɒnjuˈmentl/",
-    "pos": "adj.",
-    "meaning": "巨大的； 不朽的， 纪念性的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【77. mon / monit 提醒/警告】",
-    "analysis_type": "构词",
-    "analysis": "monument（纪念碑） + -al（形容词后缀） -> 巨大的。"
-  },
-  {
     "word": "notify",
     "phonetic": "/ˈnəʊtɪfaɪ/",
     "pos": "vt.",
@@ -24397,26 +24204,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "not-（为人所知晓的） + -orious（形容词后缀） -> 臭名昭著的，声名狼藉的。"
   },
   {
-    "word": "novice",
-    "phonetic": "/ˈnɒvɪs/",
-    "pos": "n.",
-    "meaning": "新手， 初学者",
-    "part": "第二部分：高频专业词根族",
-    "group": "【80. nov / neo 新/新颖】",
-    "analysis_type": "构词",
-    "analysis": "nov-（新） + -ice（人） -> 新手，初学者。"
-  },
-  {
-    "word": "temperance",
-    "phonetic": "/ˈtempərəns/",
-    "pos": "n.",
-    "meaning": "节制， 克制； 戒酒",
-    "part": "第二部分：高频专业词根族",
-    "group": "【41. temp / tempor 时间/时代/适度】",
-    "analysis_type": "构词",
-    "analysis": "temper-（克制） + -ance（名词后缀） -> 节制，克制。"
-  },
-  {
     "word": "tribute",
     "phonetic": "/ˈtrɪbjuːt/",
     "pos": "n.",
@@ -24425,16 +24212,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【42. tribut 给予/交纳/分发】",
     "analysis_type": "构词",
     "analysis": "词根 tribut-（给予） -> 致敬，颂词。"
-  },
-  {
-    "word": "attributable",
-    "phonetic": "/əˈtrɪbjətəbl/",
-    "pos": "adj.",
-    "meaning": "归因于…的（to）",
-    "part": "第二部分：高频专业词根族",
-    "group": "【42. tribut 给予/交纳/分发】",
-    "analysis_type": "构词",
-    "analysis": "attribute（归因于） + -able（能…的） -> 归因于…的（to）。"
   },
   {
     "word": "procure",
@@ -24447,16 +24224,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "pro-（向前） + cure（关心） -> 获得，取得。"
   },
   {
-    "word": "digress",
-    "phonetic": "/daɪˈɡres/",
-    "pos": "vi.",
-    "meaning": "离题， 离开本题",
-    "part": "第二部分：高频专业词根族",
-    "group": "【44. grad / gress 走/步伐/阶段】",
-    "analysis_type": "构词",
-    "analysis": "di-（偏离） + gress（迈步走） -> 离题，离开本题。"
-  },
-  {
     "word": "prevalence",
     "phonetic": "/ˈprevələns/",
     "pos": "n.",
@@ -24465,16 +24232,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【45. val / vail 强壮/力量/价值】",
     "analysis_type": "构词",
     "analysis": "pre-（在前） + val-（强壮） + -ence，引申指流行 -> 流行，普遍存在。"
-  },
-  {
-    "word": "valiant",
-    "phonetic": "/ˈvæliənt/",
-    "pos": "adj.",
-    "meaning": "勇敢的， 英勇的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【45. val / vail 强壮/力量/价值】",
-    "analysis_type": "构词",
-    "analysis": "val-（强壮） + -i- + -ant（形容词后缀） -> 勇敢的，英勇的。"
   },
   {
     "word": "alienation",
@@ -24507,16 +24264,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "audit-（听） + -ory（形容词） -> 听觉的，听觉器官的。"
   },
   {
-    "word": "inaudible",
-    "phonetic": "/ɪnˈɔːdəbl/",
-    "pos": "adj.",
-    "meaning": "听不见的， 难以听清的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【48. audi / audit 听/声音】",
-    "analysis_type": "构词",
-    "analysis": "in-（无） + audible（听得见的） -> 听不见的，难以听清的。"
-  },
-  {
     "word": "battered",
     "phonetic": "/ˈbætəd/",
     "pos": "adj.",
@@ -24537,16 +24284,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "discern（辨别） + -ible（可…的） -> 可辨别的，看得清的。"
   },
   {
-    "word": "concord",
-    "phonetic": "/ˈkɒŋkɔːd/",
-    "pos": "n.",
-    "meaning": "和睦， 协调， 和谐",
-    "part": "第二部分：高频专业词根族",
-    "group": "【52. cord / card 心/核心】",
-    "analysis_type": "构词",
-    "analysis": "con-（共同） + cord（心） -> 和睦，协调。"
-  },
-  {
     "word": "cordially",
     "phonetic": "/ˈkɔːdiəli/",
     "pos": "adv.",
@@ -24565,16 +24302,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【54. damn / demn 损失/谴责/惩戒】",
     "analysis_type": "构词",
     "analysis": "damage（损害） + -ing（形容词后缀） -> 有破坏性的，有害的。"
-  },
-  {
-    "word": "docile",
-    "phonetic": "/ˈdəʊsaɪl/",
-    "pos": "adj.",
-    "meaning": "温顺的， 驯服的， 易管教的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【55. doc / doct 教导/文件/凭证】",
-    "analysis_type": "构词",
-    "analysis": "doc-（教导） + -ile（易…的） -> 温顺的，驯服的。"
   },
   {
     "word": "documentation",
@@ -24617,26 +24344,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "durable（耐用的） + -ility（名词后缀） -> 耐久性，坚固度。"
   },
   {
-    "word": "equitable",
-    "phonetic": "/ˈekwɪtəbl/",
-    "pos": "adj.",
-    "meaning": "公平的， 公正合理的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【58. equ / equi 平等/相同/公允】",
-    "analysis_type": "构词",
-    "analysis": "equity（公平公允） + -able（符合…的） -> 公平的，公正合理的。"
-  },
-  {
-    "word": "equivocal",
-    "phonetic": "/ɪˈkwɪvəkl/",
-    "pos": "adj.",
-    "meaning": "模棱两可的， 意义含糊的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【58. equ / equi 平等/相同/公允】",
-    "analysis_type": "构词",
-    "analysis": "equi-（同等） + voc-（声音） + -al，引申指模棱两可的 -> 模棱两可的，意义含糊的。"
-  },
-  {
     "word": "offender",
     "phonetic": "/əˈfendə(r)/",
     "pos": "n.",
@@ -24667,56 +24374,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "con-（完全） + fide（信任） -> 吐露隐私。"
   },
   {
-    "word": "confidant",
-    "phonetic": "/ˈkɒnfɪdænt/",
-    "pos": "n.",
-    "meaning": "知心朋友， 密友",
-    "part": "第二部分：高频专业词根族",
-    "group": "【60. fide / feder 信任/信仰/联盟】",
-    "analysis_type": "构词",
-    "analysis": "confide（吐露心声） + -ant（人） -> 知心朋友，密友。"
-  },
-  {
-    "word": "flora",
-    "phonetic": "/ˈflɔːrə/",
-    "pos": "n.",
-    "meaning": "（特定地区的）植物群",
-    "part": "第二部分：高频专业词根族",
-    "group": "【61. flor / flour 花/开花/繁荣】",
-    "analysis_type": "构词",
-    "analysis": "源自罗马神话司管繁花锦簇的春之花神芙罗拉（Flora） -> （特定地区的）植物群。"
-  },
-  {
-    "word": "florist",
-    "phonetic": "/ˈflɒrɪst/",
-    "pos": "n.",
-    "meaning": "花商， 花匠； 鲜花店",
-    "part": "第二部分：高频专业词根族",
-    "group": "【61. flor / flour 花/开花/繁荣】",
-    "analysis_type": "构词",
-    "analysis": "flor-（花朵） + -ist（专业人员） -> 花商，花匠。"
-  },
-  {
-    "word": "profusion",
-    "phonetic": "/prəˈfjuːʒn/",
-    "pos": "n.",
-    "meaning": "大量， 极其丰富",
-    "part": "第二部分：高频专业词根族",
-    "group": "【62. fuse / fund 浇灌/倾倒/熔化】",
-    "analysis_type": "构词",
-    "analysis": "pro-（向前） + fus-（流淌倾倒） + -ion，引申指大量 -> 大量，极其丰富。"
-  },
-  {
-    "word": "effusion",
-    "phonetic": "/ɪˈfjuːʒn/",
-    "pos": "n.",
-    "meaning": "溢出， 流出； 泻流",
-    "part": "第二部分：高频专业词根族",
-    "group": "【62. fuse / fund 浇灌/倾倒/熔化】",
-    "analysis_type": "构词",
-    "analysis": "ef-（ex- 向外） + fus-（倾倒） + -ion，引申指溢出 -> 溢出，流出。"
-  },
-  {
     "word": "gravitational",
     "phonetic": "/ˌɡrævɪˈteɪʃənl/",
     "pos": "adj.",
@@ -24725,16 +24382,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【63. grav / griev 沉重/庄重/痛苦】",
     "analysis_type": "构词",
     "analysis": "gravitation（重力） + -al（形容词后缀） -> 重力的，万有引力的。"
-  },
-  {
-    "word": "aggravation",
-    "phonetic": "/ˌæɡrəˈveɪʃn/",
-    "pos": "n.",
-    "meaning": "加重， 恶化； 愤懑",
-    "part": "第二部分：高频专业词根族",
-    "group": "【63. grav / griev 沉重/庄重/痛苦】",
-    "analysis_type": "构词",
-    "analysis": "ag-（ad- 加剧） + grav-（沉重） + -ation（名词后缀） -> 加重，恶化。"
   },
   {
     "word": "inhibition",
@@ -24747,16 +24394,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "inhibit（抑制） + -ion（名词后缀） -> 压抑，抑制。"
   },
   {
-    "word": "cohabit",
-    "phonetic": "/kəʊˈhæbɪt/",
-    "pos": "vi.",
-    "meaning": "同居， 共同生活",
-    "part": "第二部分：高频专业词根族",
-    "group": "【64. habit / hibit 居住/持有/拥有】",
-    "analysis_type": "构词",
-    "analysis": "co-（共同） + habit（居住生活） -> 同居，共同生活。"
-  },
-  {
     "word": "prejudiced",
     "phonetic": "/ˈpredʒədɪst/",
     "pos": "adj.",
@@ -24765,26 +24402,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【65. jur / jud / just 法律/审判/正义】",
     "analysis_type": "构词",
     "analysis": "prejudice（偏见） + -ed（形容词后缀） -> 有偏见的，有成见的。"
-  },
-  {
-    "word": "adjudicate",
-    "phonetic": "/əˈdʒuːdɪkeɪt/",
-    "pos": "vt./vi.",
-    "meaning": "判决， 裁决， 仲裁",
-    "part": "第二部分：高频专业词根族",
-    "group": "【65. jur / jud / just 法律/审判/正义】",
-    "analysis_type": "构词",
-    "analysis": "ad-（朝向） + judic-（法官判决） + -ate（动词后缀） -> 判决，裁决。"
-  },
-  {
-    "word": "laborious",
-    "phonetic": "/ləˈbɔːriəs/",
-    "pos": "adj.",
-    "meaning": "费力的， 吃力的， 艰难的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【66. labor 劳动/劳作/艰辛】",
-    "analysis_type": "构词",
-    "analysis": "labor（艰苦劳作） + -i- + -ous（形容词后缀） -> 费力的，吃力的。"
   },
   {
     "word": "collaboration",
@@ -24807,46 +24424,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "elect（挑选） + -ive（形容词） -> 选修的。"
   },
   {
-    "word": "levity",
-    "phonetic": "/ˈlevəti/",
-    "pos": "n.",
-    "meaning": "轻浮， 轻率， 轻佻",
-    "part": "第二部分：高频专业词根族",
-    "group": "【68. lev 轻/举起/升高】",
-    "analysis_type": "构词",
-    "analysis": "lev-（轻浮） + -ity（名词后缀） -> 轻浮，轻率。"
-  },
-  {
-    "word": "alleviation",
-    "phonetic": "/əˌliːviˈeɪʃn/",
-    "pos": "n.",
-    "meaning": "缓解， 减轻",
-    "part": "第二部分：高频专业词根族",
-    "group": "【68. lev 轻/举起/升高】",
-    "analysis_type": "构词",
-    "analysis": "alleviate（缓解减轻） + -ation（名词后缀） -> 缓解，减轻。"
-  },
-  {
-    "word": "libertarian",
-    "phonetic": "/ˌlɪbəˈteəriən/",
-    "pos": "n./adj.",
-    "meaning": "自由意志主义者",
-    "part": "第二部分：高频专业词根族",
-    "group": "【69. liber 自由/释放/称量】",
-    "analysis_type": "构词",
-    "analysis": "liber-（自由） + -t- + -arian（信奉者） -> 自由意志主义者。"
-  },
-  {
-    "word": "illiberal",
-    "phonetic": "/ɪˈlɪbərəl/",
-    "pos": "adj.",
-    "meaning": "缺乏自由的， 不宽容的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【69. liber 自由/释放/称量】",
-    "analysis_type": "构词",
-    "analysis": "il-（in- 不） + liberal（开明自由的） -> 缺乏自由的，不宽容的。"
-  },
-  {
     "word": "dislocate",
     "phonetic": "/ˈdɪsləkeɪt/",
     "pos": "vt.",
@@ -24867,16 +24444,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "allocate（拨配分派） + -ation（名词后缀） -> 拨款，配给。"
   },
   {
-    "word": "maxim",
-    "phonetic": "/ˈmæksɪm/",
-    "pos": "n.",
-    "meaning": "格言， 座右铭； 准则",
-    "part": "第二部分：高频专业词根族",
-    "group": "【71. magn / maj / max 巨大/伟大/最高】",
-    "analysis_type": "构词",
-    "analysis": "源自晚期拉丁语 maxima propositio（大前提/最崇高之真等 -> 格言，座右铭。"
-  },
-  {
     "word": "mandate",
     "phonetic": "/ˈmændeɪt/",
     "pos": "n./vt.",
@@ -24885,26 +24452,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【72. mand / mend 命令/委托/托付】",
     "analysis_type": "构词",
     "analysis": "mand-（手） + -ate，引申指授权 -> 授权，委托。"
-  },
-  {
-    "word": "countermand",
-    "phonetic": "/ˌkaʊntəˈmɑːnd/",
-    "pos": "vt.",
-    "meaning": "撤销（命令）， 取消",
-    "part": "第二部分：高频专业词根族",
-    "group": "【72. mand / mend 命令/委托/托付】",
-    "analysis_type": "构词",
-    "analysis": "counter-（反向） + mand（命令） -> 撤销（命令） -> 撤销（命令），取消。"
-  },
-  {
-    "word": "mediocrity",
-    "phonetic": "/ˌmiːdiˈɒkrəti/",
-    "pos": "n.",
-    "meaning": "平庸， 碌碌无为",
-    "part": "第二部分：高频专业词根族",
-    "group": "【73. med / medi 中间/居中】",
-    "analysis_type": "构词",
-    "analysis": "medi-（中间） + ocr-（陡峭山脊） + -ity，引申指平庸 -> 平庸，碌碌无为。"
   },
   {
     "word": "mediator",
@@ -24947,16 +24494,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "migr-（迁移） + -ant（人） -> 候鸟。"
   },
   {
-    "word": "diminution",
-    "phonetic": "/ˌdɪmɪˈnjuːʃn/",
-    "pos": "n.",
-    "meaning": "减少， 减低， 缩减",
-    "part": "第二部分：高频专业词根族",
-    "group": "【76. min / mini 微小/变小】",
-    "analysis_type": "构词",
-    "analysis": "di-（向下） + min-（变小） + -ution（名词后缀） -> 减少，减低。"
-  },
-  {
     "word": "minimal",
     "phonetic": "/ˈmɪnɪml/",
     "pos": "adj.",
@@ -24967,46 +24504,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "minim-（极小） + -al（形容词后缀） -> 极小的，极少的。"
   },
   {
-    "word": "premonition",
-    "phonetic": "/ˌpreməˈnɪʃn/",
-    "pos": "n.",
-    "meaning": "预感， 不祥前兆",
-    "part": "第二部分：高频专业词根族",
-    "group": "【77. mon / monit 提醒/警告】",
-    "analysis_type": "构词",
-    "analysis": "pre-（提前） + monit-（提醒） + -ion，引申指预感 -> 预感，不祥前兆。"
-  },
-  {
-    "word": "admonition",
-    "phonetic": "/ˌædməˈnɪʃn/",
-    "pos": "n.",
-    "meaning": "告诫， 劝告， 训诫",
-    "part": "第二部分：高频专业词根族",
-    "group": "【77. mon / monit 提醒/警告】",
-    "analysis_type": "构词",
-    "analysis": "admonish（训诫） + -ition（名词后缀） -> 告诫，劝告。"
-  },
-  {
-    "word": "normalization",
-    "phonetic": "/ˌnɔːməlaɪˈzeɪʃn/",
-    "pos": "n.",
-    "meaning": "正常化， 常态化",
-    "part": "第二部分：高频专业词根族",
-    "group": "【78. norm 规范/标准/常态】",
-    "analysis_type": "构词",
-    "analysis": "normalize（使恢复常态） + -ation（名词后缀） -> 正常化，常态化。"
-  },
-  {
-    "word": "normative",
-    "phonetic": "/ˈnɔːmətɪv/",
-    "pos": "adj.",
-    "meaning": "规范的， 标准的， 规范性的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【78. norm 规范/标准/常态】",
-    "analysis_type": "构词",
-    "analysis": "norm-（标准） + -ative（形容词后缀） -> 规范的，标准的。"
-  },
-  {
     "word": "noteworthy",
     "phonetic": "/ˈnəʊtwɜːði/",
     "pos": "adj.",
@@ -25015,26 +24512,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【79. not 知道/注意/标明】",
     "analysis_type": "构词",
     "analysis": "note（注意） + worthy（值得…的） -> 显著的，值得注意的。"
-  },
-  {
-    "word": "notoriety",
-    "phonetic": "/ˌnəʊtəˈraɪəti/",
-    "pos": "n.",
-    "meaning": "声名狼藉， 臭名昭著",
-    "part": "第二部分：高频专业词根族",
-    "group": "【79. not 知道/注意/标明】",
-    "analysis_type": "构词",
-    "analysis": "notor-（恶名昭彰） + -i- + -ety（名词后缀） -> 声名狼藉，臭名昭著。"
-  },
-  {
-    "word": "neolithic",
-    "phonetic": "/ˌniːəˈlɪθɪk/",
-    "pos": "adj.",
-    "meaning": "新石器时代的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【80. nov / neo 新/新颖】",
-    "analysis_type": "构词",
-    "analysis": "neo-（新） + lith-（石器） + -ic，引申指新石器时代的 -> 新石器时代的。"
   },
   {
     "word": "innovator",
@@ -25067,56 +24544,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "capt-（抓住） + -iv- + -ate（使动后缀） -> 迷住，吸引。"
   },
   {
-    "word": "capacious",
-    "phonetic": "/kəˈpeɪʃəs/",
-    "pos": "adj.",
-    "meaning": "容量大的， 宽敞的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【41. 核心词根 1：cap / capt / cept / cip（抓/拿/取）】",
-    "analysis_type": "构词",
-    "analysis": "capac-（容量充裕） + -i- + -ous（形容词后缀） -> 容量大的，宽敞的。"
-  },
-  {
-    "word": "intercede",
-    "phonetic": "/ˌɪntəˈsiːd/",
-    "pos": "vi.",
-    "meaning": "调停， 代为求情",
-    "part": "第二部分：高频专业词根族",
-    "group": "【42. 核心词根 2：ced / ceed / cess（走/退让）】",
-    "analysis_type": "构词",
-    "analysis": "inter-（在两者之间） + cede（走） -> 调停，代为求情。"
-  },
-  {
-    "word": "incisive",
-    "phonetic": "/ɪnˈsaɪsɪv/",
-    "pos": "adj.",
-    "meaning": "深刻的， 敏锐的； 锋利的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【43. 核心词根 3：cid / cis（切/杀）】",
-    "analysis_type": "构词",
-    "analysis": "in-（深入切入） + cis-（切割） + -ive（形容词后缀） -> 深刻的，敏锐的。"
-  },
-  {
-    "word": "disclaimer",
-    "phonetic": "/dɪsˈkleɪmə(r)/",
-    "pos": "n.",
-    "meaning": "免责声明",
-    "part": "第二部分：高频专业词根族",
-    "group": "【44. 核心词根 4：claim / clam（呼喊/叫喊）】",
-    "analysis_type": "构词",
-    "analysis": "dis-（否认） + claim（主张） + -er（名词后缀） -> 免责声明。"
-  },
-  {
-    "word": "clamorous",
-    "phonetic": "/ˈklæmərəs/",
-    "pos": "adj.",
-    "meaning": "吵闹的， 喧嚣的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【44. 核心词根 4：claim / clam（呼喊/叫喊）】",
-    "analysis_type": "构词",
-    "analysis": "clamor（喧嚷） + -ous（充满…的） -> 吵闹的，喧嚣的。"
-  },
-  {
     "word": "incorporate",
     "phonetic": "/ɪnˈkɔːpəreɪt/",
     "pos": "vt.",
@@ -25127,26 +24554,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "in-（置于内） + corpor-（身体） + -ate，引申指包含 -> 包含，吸收。"
   },
   {
-    "word": "credence",
-    "phonetic": "/ˈkriːdns/",
-    "pos": "n.",
-    "meaning": "信任， 相信； 可信度",
-    "part": "第二部分：高频专业词根族",
-    "group": "【47. 核心词根 7：cred / credit（相信/信任）】",
-    "analysis_type": "构词",
-    "analysis": "cred-（相信） + -ence（名词后缀） -> 某传闻在坊间的可信度信誉 -> 信任，相信。"
-  },
-  {
-    "word": "incredulous",
-    "phonetic": "/ɪnˈkredjələs/",
-    "pos": "adj.",
-    "meaning": "怀疑的， 不轻信的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【47. 核心词根 7：cred / credit（相信/信任）】",
-    "analysis_type": "构词",
-    "analysis": "in-（不） + cred-（相信） + -ulous（倾向于…的） -> 怀疑的，不轻信的。"
-  },
-  {
     "word": "concurrent",
     "phonetic": "/kənˈkʌrənt/",
     "pos": "adj.",
@@ -25155,16 +24562,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【48. 核心词根 8：cur / curs / cour（跑/发生/流动）】",
     "analysis_type": "构词",
     "analysis": "con-（共同） + curr-（奔跑） + -ent，引申指同时发生的 -> 同时发生的。"
-  },
-  {
-    "word": "cursory",
-    "phonetic": "/ˈkɜːsəri/",
-    "pos": "adj.",
-    "meaning": "粗略的， 草率的， 仓促的",
-    "part": "第二部分：高频专业词根族",
-    "group": "【48. 核心词根 8：cur / curs / cour（跑/发生/流动）】",
-    "analysis_type": "构词",
-    "analysis": "curs-（奔跑） + -ory（形容词后缀） -> 粗略的，草率的。"
   },
   {
     "word": "contradictory",
@@ -25185,36 +24582,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【50. 核心词根 10：duc / duct（引导/带领）】",
     "analysis_type": "构词",
     "analysis": "de-（向下） + duce（引导） -> 推论，推断。"
-  },
-  {
-    "word": "abduct",
-    "phonetic": "/æbˈdʌkt/",
-    "pos": "vt.",
-    "meaning": "诱拐， 绑架",
-    "part": "第二部分：高频专业词根族",
-    "group": "【50. 核心词根 10：duc / duct（引导/带领）】",
-    "analysis_type": "构词",
-    "analysis": "ab-（离开） + duct（引导） -> 诱拐，绑架。"
-  },
-  {
-    "word": "aqueduct",
-    "phonetic": "/ˈækwɪdʌkt/",
-    "pos": "n.",
-    "meaning": "引水渠， 高架渠",
-    "part": "第二部分：高频专业词根族",
-    "group": "【50. 核心词根 10：duc / duct（引导/带领）】",
-    "analysis_type": "构词",
-    "analysis": "aque-（水） + duct（引水管道） -> 引水渠，高架渠。"
-  },
-  {
-    "word": "conduit",
-    "phonetic": "/ˈkɒndjuɪt/",
-    "pos": "n.",
-    "meaning": "导管， 水管； 传达渠道",
-    "part": "第二部分：高频专业词根族",
-    "group": "【50. 核心词根 10：duc / duct（引导/带领）】",
-    "analysis_type": "构词",
-    "analysis": "con-（共同） + duit（引导） -> 导管，水管。"
   },
   {
     "word": "antibody",
@@ -25517,16 +24884,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "dis-（打破剥离） + illusion（美丽错觉幻想） -> 使醒悟，使幻灭。"
   },
   {
-    "word": "infallible",
-    "phonetic": "/ɪnˈfæləbl/",
-    "pos": "adj.",
-    "meaning": "绝对可靠的， 绝无错误的",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【81. 前缀群：否定与相反】",
-    "analysis_type": "构词",
-    "analysis": "in-（不） + fall-（失足跌倒出差） + -ible，引申指绝对可靠的 -> 绝对可靠的，绝无错误的。"
-  },
-  {
     "word": "illogical",
     "phonetic": "/ɪˈlɒdʒɪkl/",
     "pos": "adj.",
@@ -25545,16 +24902,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
     "analysis": "inter-（在两者中间） + cept（抓取捕获） -> 中途拦截，截获。"
-  },
-  {
-    "word": "transient",
-    "phonetic": "/ˈtrænziənt/",
-    "pos": "adj./n.",
-    "meaning": "短暂的， 转瞬即逝的； 流动的 n. 过客",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "trans-（穿过） + it（走过） + -ent，如浮云过隙匆匆穿过片刻不停留的 -> 短暂的，转瞬即逝的。"
   },
   {
     "word": "subconscious",
@@ -25597,46 +24944,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "out-（超越胜出） + perform（表现做工） -> 胜过，做得比…好。"
   },
   {
-    "word": "transpose",
-    "phonetic": "/trænˈspəʊz/",
-    "pos": "vt.",
-    "meaning": "颠倒位置， 使互换位置； 变调",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "trans-（跨越对调） + pos（放置） -> 颠倒位置，使互换位置。"
-  },
-  {
-    "word": "paramount",
-    "phonetic": "/ˈpærəmaʊnt/",
-    "pos": "adj.",
-    "meaning": "至关重要的， 首要的； 至高无上的",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "para- + mount（拔地而起巍峨） -> 至关重要的，首要的。"
-  },
-  {
-    "word": "circumscribe",
-    "phonetic": "/ˈsɜːkəmskraɪb/",
-    "pos": "vt.",
-    "meaning": "限制， 约束； 在…周围画线",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "circum-（环绕四面） + scrib（画线写下） -> 限制，约束。"
-  },
-  {
-    "word": "extraterrestrial",
-    "phonetic": "/ˌekstrətəˈrestriəl/",
-    "pos": "adj./n.",
-    "meaning": "地球外的， 宇宙的 n. 外星人",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "extra-（在外部） + terrestri-（地球陆地） + -al，引申指地球外的 -> 地球外的，宇宙的。"
-  },
-  {
     "word": "intercity",
     "phonetic": "/ˌɪntəˈsɪti/",
     "pos": "adj.",
@@ -25647,16 +24954,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "inter-（在两者之间穿） + city（都市） -> 城市间的，城际的（交通客运）。"
   },
   {
-    "word": "periphery",
-    "phonetic": "/pəˈrɪfəri/",
-    "pos": "n.",
-    "meaning": "外围， 周边； 边缘地区",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【82. 前缀群：空间方位与位移】",
-    "analysis_type": "构词",
-    "analysis": "peri-（环绕周围） + pher（运载带出） + -y，引申指外围 -> 外围，周边。"
-  },
-  {
     "word": "precedent",
     "phonetic": "/ˈpresɪdənt/",
     "pos": "n./adj.",
@@ -25665,16 +24962,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【83. 前缀群：时间与递进】",
     "analysis_type": "构词",
     "analysis": "pre-（提前走在前面） + ced-（走过） + -ent，引申指先例 -> 先例，前例。"
-  },
-  {
-    "word": "posterity",
-    "phonetic": "/pɒˈsterəti/",
-    "pos": "n.",
-    "meaning": "后代， 后世子孙",
-    "part": "第三部分：核心高频构词前缀族",
-    "group": "【83. 前缀群：时间与递进】",
-    "analysis_type": "构词",
-    "analysis": "post-（在后面降生） + -er- + -ity，引申指后代 -> 后代，后世子孙。"
   },
   {
     "word": "prolong",
@@ -26347,26 +25634,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "con-（共同） + cess-（退让） + -ion，引申指让步 -> 让步。"
   },
   {
-    "word": "conglomerate",
-    "phonetic": "/kənˈɡlɒmərət/",
-    "pos": "n.",
-    "meaning": "企业集团， 跨行业综合企业",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "con-（共同） + glomer-（球团） + -ate，引申指企业集团 -> 企业集团，跨行业综合企业。"
-  },
-  {
-    "word": "consortium",
-    "phonetic": "/kənˈsɔːtiəm/",
-    "pos": "n.",
-    "meaning": "财团， 联合体",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "con-（共同） + sort-（命运） + -ium，引申指财团 -> 财团，联合体。"
-  },
-  {
     "word": "consumerism",
     "phonetic": "/kənˈsjuːmərɪzəm/",
     "pos": "n.",
@@ -26405,16 +25672,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
     "analysis": "de-（向下） + preci-（价格） + -ation（名词后缀） -> 折旧。"
-  },
-  {
-    "word": "disbursement",
-    "phonetic": "/dɪsˈbɜːsmənt/",
-    "pos": "n.",
-    "meaning": "支出， 拨付款项",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "dis-（向外） + bourse（钱包） + -ment，引申指支出 -> 支出，拨付款项。"
   },
   {
     "word": "diversification",
@@ -26457,16 +25714,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "down（向下） + turn（转弯转折） -> 衰退，低迷。"
   },
   {
-    "word": "embargo",
-    "phonetic": "/ɪmˈbɑːɡəʊ/",
-    "pos": "n./vt.",
-    "meaning": "禁运； 封锁 vt. 禁运",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "em-（in- 进入） + bar-（横木门闩） + -go，引申指禁运 -> 禁运。"
-  },
-  {
     "word": "endorsement",
     "phonetic": "/ɪnˈdɔːsmənt/",
     "pos": "n.",
@@ -26497,16 +25744,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "词根 equity（股本权益） -> 的复数形态 -> 股票，股本（复数）。"
   },
   {
-    "word": "eviction",
-    "phonetic": "/ɪˈvɪkʃn/",
-    "pos": "n.",
-    "meaning": "逐出， 没收； 依法驱逐",
-    "part": "第四部分：核心分类专题群",
-    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
-    "analysis_type": "构词",
-    "analysis": "e-（出） + vict-（征服） + -ion，引申指逐出 -> 逐出，没收。"
-  },
-  {
     "word": "exemption",
     "phonetic": "/ɪɡˈzempʃn/",
     "pos": "n.",
@@ -26515,16 +25752,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
     "analysis": "ex-（出） + empt-（购买） + -ion，引申指免除 -> 免除，豁免。"
-  },
-  {
-    "word": "alumnus",
-    "phonetic": "/əˈlʌmnəs/",
-    "pos": "n.",
-    "meaning": "校友（男或通称）",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "al-（滋养） + -umnus（被抚育长大的） -> 校友（男或通称）。"
   },
   {
     "word": "analysis",
@@ -26577,16 +25804,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "col-（com- 共） + leg-（委派） -> 学院。"
   },
   {
-    "word": "colloquium",
-    "phonetic": "/kəˈləʊkwiəm/",
-    "pos": "n.",
-    "meaning": "学术座谈会， 讨论会",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "col-（com- 共） + loqu-（言语） + -ium（场所） -> 学术座谈会，讨论会。"
-  },
-  {
     "word": "conference",
     "phonetic": "/ˈkɒnfərəns/",
     "pos": "n.",
@@ -26605,16 +25822,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
     "analysis": "data（数据资料） + base（基础基地） -> 数据库。"
-  },
-  {
-    "word": "dissertation",
-    "phonetic": "/ˌdɪsəˈteɪʃn/",
-    "pos": "n.",
-    "meaning": "博士学位论文， 专题论文",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "dis-（分开） + sert-（连接论述） + -ation，引申指博士学位论文 -> 博士学位论文，专题论文。"
   },
   {
     "word": "dormitory",
@@ -26847,16 +26054,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "para-（在旁） + deigma（展示范例） -> 范式，典范。"
   },
   {
-    "word": "pedagogy",
-    "phonetic": "/ˈpedəɡɒdʒi/",
-    "pos": "n.",
-    "meaning": "教育学， 教学方法",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "ped-（儿童） + agog-（引导） + -y，引申指教育学 -> 教育学，教学方法。"
-  },
-  {
     "word": "philosophy",
     "phonetic": "/fəˈlɒsəfi/",
     "pos": "n.",
@@ -26865,16 +26062,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
     "analysis": "philo-（热爱） + sophy（智慧） -> 哲学。"
-  },
-  {
-    "word": "plagiarism",
-    "phonetic": "/ˈpleɪdʒərɪzəm/",
-    "pos": "n.",
-    "meaning": "抄袭， 剽窃",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "词根 plagiarius（绑架拐卖自由） -> 抄袭，剽窃。"
   },
   {
     "word": "presentation",
@@ -27087,16 +26274,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "fellow（伙伴） + -ship，引申指研究生奖学金 -> 研究生奖学金。"
   },
   {
-    "word": "tenure",
-    "phonetic": "/ˈtenjə(r)/",
-    "pos": "n.",
-    "meaning": "终身职位； 任期",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "ten-（握住） + -ure（名词后缀） -> 终身职位。"
-  },
-  {
     "word": "vocational",
     "phonetic": "/vəʊˈkeɪʃənl/",
     "pos": "adj.",
@@ -27197,16 +26374,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "break（打破） + through（穿过） -> 重大突破。"
   },
   {
-    "word": "calibration",
-    "phonetic": "/ˌkælɪˈbreɪʃn/",
-    "pos": "n.",
-    "meaning": "校准， 标定",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "calibrate（校准刻度） + -ation（名词后缀） -> 校准，标定。"
-  },
-  {
     "word": "categorize",
     "phonetic": "/ˈkætəɡəraɪz/",
     "pos": "vt.",
@@ -27287,16 +26454,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "compute（计算） + -ation（名词后缀） -> 计算，估算。"
   },
   {
-    "word": "conceptualize",
-    "phonetic": "/kənˈseptʃuəlaɪz/",
-    "pos": "vt.",
-    "meaning": "概念化， 构想出",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "concept（概念） + -ual + -ize（使动后缀） -> 概念化，构想出。"
-  },
-  {
     "word": "qualitative",
     "phonetic": "/ˈkwɒlɪtətɪv/",
     "pos": "adj.",
@@ -27325,36 +26482,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
     "analysis": "question（提问） + -naire（集合文书） -> 调查问卷，调查表。"
-  },
-  {
-    "word": "interdisciplinary",
-    "phonetic": "/ˌɪntəˌdɪsəˈplɪnəri/",
-    "pos": "adj.",
-    "meaning": "跨学科的， 交叉学科的",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "inter-（在两者之间） + disciplinary（学科专业的） -> 跨学科的，交叉学科的。"
-  },
-  {
-    "word": "longitudinal",
-    "phonetic": "/ˌlɒŋɡɪˈtjuːdɪnl/",
-    "pos": "adj.",
-    "meaning": "纵向的； （学术研究）长期的， 追踪的",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "构词",
-    "analysis": "longitude（经线） + -inal，引申指纵向的 -> 纵向的。"
-  },
-  {
-    "word": "cohort",
-    "phonetic": "/ˈkəʊhɔːt/",
-    "pos": "n.",
-    "meaning": "（有共同特征的）一群人， 队列； 同龄群体",
-    "part": "第四部分：核心分类专题群",
-    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
-    "analysis_type": "引申",
-    "analysis": "古罗马步兵大队（大方阵） -> （有共同特征的）一群人，队列。"
   },
   {
     "word": "agricultural",
@@ -27405,16 +26532,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
     "analysis": "biology（生物学） + -ist（学者） -> 生物学家。"
-  },
-  {
-    "word": "biosphere",
-    "phonetic": "/ˈbaɪəʊsfɪə(r)/",
-    "pos": "n.",
-    "meaning": "生物圈",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "bio-（生命） + sphere（球层） -> 生物圈。"
   },
   {
     "word": "blizzard",
@@ -27627,16 +26744,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "fam-（饥饿饥馑） + -ine（名词后缀） -> 饥荒，饥饿。"
   },
   {
-    "word": "fauna",
-    "phonetic": "/ˈfɔːnə/",
-    "pos": "n.",
-    "meaning": "（某区域的）动物群",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "源自罗马神话司管野兽繁衍的山林原野动物女神福娜（Fauna） -> （某区域的）动物群。"
-  },
-  {
     "word": "forest",
     "phonetic": "/ˈfɒrɪst/",
     "pos": "n./vt.",
@@ -27695,16 +26802,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
     "analysis": "geo-（大地） + -logy（学科） -> 地质学。"
-  },
-  {
-    "word": "germination",
-    "phonetic": "/ˌdʒɜːmɪˈneɪʃn/",
-    "pos": "n.",
-    "meaning": "发芽， 萌芽； 生长",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "germin-（嫩芽） + -ation（名词后缀） -> 发芽，萌芽。"
   },
   {
     "word": "glacier",
@@ -27837,16 +26934,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "moist（潮湿润泽的） + -ure（名词后缀） -> 水分，湿度。"
   },
   {
-    "word": "monsoon",
-    "phonetic": "/ˌmɒnˈsuːn/",
-    "pos": "n.",
-    "meaning": "季风； 雨季",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "源自阿拉伯语 mausim（特定季节风向） -> 季风。"
-  },
-  {
     "word": "mountainous",
     "phonetic": "/ˈmaʊntənəs/",
     "pos": "adj.",
@@ -27917,16 +27004,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "past-（喂养） + -ure（场所后缀） -> 牧场，草地。"
   },
   {
-    "word": "photosynthesis",
-    "phonetic": "/ˌfəʊtəʊˈsɪnθəsɪs/",
-    "pos": "n.",
-    "meaning": "光合作用",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "photo-（光） + synthesis（综合合成） -> 光合作用。"
-  },
-  {
     "word": "planet",
     "phonetic": "/ˈplænɪt/",
     "pos": "n.",
@@ -27955,16 +27032,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
     "analysis": "pollute（污染环境） + -ant（物质） -> 污染物，污染物质。"
-  },
-  {
-    "word": "precipitation",
-    "phonetic": "/prɪˌsɪpɪˈteɪʃn/",
-    "pos": "n.",
-    "meaning": "降水， 降雨量； 沉淀",
-    "part": "第四部分：核心分类专题群",
-    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
-    "analysis_type": "构词",
-    "analysis": "pre-（在前） + cipit-（头朝下） + -ation，引申指降水 -> 降水，降雨量。"
   },
   {
     "word": "predator",
@@ -28477,16 +27544,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "con-（共同） + gest-（堆积） + -ion，引申指拥堵 -> 拥堵，拥挤。"
   },
   {
-    "word": "demolition",
-    "phonetic": "/ˌdeməˈlɪʃn/",
-    "pos": "n.",
-    "meaning": "拆除， 拆毁",
-    "part": "第四部分：核心分类专题群",
-    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
-    "analysis_type": "构词",
-    "analysis": "de-（彻底向下） + mol-（建造筑造施工） + -ition（名词后缀） -> 拆除，拆毁。"
-  },
-  {
     "word": "sanitation",
     "phonetic": "/ˌsænɪˈteɪʃn/",
     "pos": "n.",
@@ -28495,16 +27552,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
     "analysis": "sanit-（健康） + -ation（名词后缀） -> 环境卫生，公共卫生设施。"
-  },
-  {
-    "word": "thoroughfare",
-    "phonetic": "/ˈθʌrəfeə(r)/",
-    "pos": "n.",
-    "meaning": "主要干道， 大街",
-    "part": "第四部分：核心分类专题群",
-    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
-    "analysis_type": "构词",
-    "analysis": "thorough（通畅彻底） + fare（行走道路） -> 主要干道，大街。"
   },
   {
     "word": "commuter",
@@ -28535,16 +27582,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
     "analysis": "urban-（城市的） + -ization（过程后缀） -> 城市化。"
-  },
-  {
-    "word": "demographics",
-    "phonetic": "/ˌdeməˈɡræfɪks/",
-    "pos": "n.",
-    "meaning": "人口统计特征， 人口统计学",
-    "part": "第四部分：核心分类专题群",
-    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
-    "analysis_type": "构词",
-    "analysis": "demo-（民众） + graph-（记录测绘统计） + -ics（学科） -> 人口统计特征，人口统计学。"
   },
   {
     "word": "aid",
@@ -28787,16 +27824,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "im-（免除） + mun-（公共劳役） + -ity，原指古罗马公民享有免服兵役赋税特权，引申指免疫力 -> 免疫力，免疫性。"
   },
   {
-    "word": "insomnia",
-    "phonetic": "/ɪnˈsɒmniə/",
-    "pos": "n.",
-    "meaning": "失眠， 失眠症",
-    "part": "第四部分：核心分类专题群",
-    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
-    "analysis_type": "构词",
-    "analysis": "in-（无） + somn-（睡眠） + -ia（疾病后缀） -> 失眠，失眠症。"
-  },
-  {
     "word": "medication",
     "phonetic": "/ˌmedɪˈkeɪʃn/",
     "pos": "n.",
@@ -28897,16 +27924,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "analysis": "syn-（共同） + ptom-（掉落） -> 症状。"
   },
   {
-    "word": "syndrome",
-    "phonetic": "/ˈsɪndrəʊm/",
-    "pos": "n.",
-    "meaning": "综合征， 综合病症",
-    "part": "第四部分：核心分类专题群",
-    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
-    "analysis_type": "构词",
-    "analysis": "syn-（共同） + drom-（奔跑） -> 综合征，综合病症。"
-  },
-  {
     "word": "therapy",
     "phonetic": "/ˈθerəpi/",
     "pos": "n.",
@@ -28935,13 +27952,4743 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
     "analysis": "tox-（弓箭涂抹之毒） + -ic（形容词后缀） -> 有毒的，中毒的。"
+  },
+  {
+    "word": "trauma",
+    "phonetic": "/ˈtrɔːmə/",
+    "pos": "n.",
+    "meaning": "创伤，外伤；心理创伤",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自希腊语 （伤口） -> 创伤；外伤；心理创伤。"
+  },
+  {
+    "word": "vaccine",
+    "phonetic": "/ˈvæksiːn/",
+    "pos": "n.",
+    "meaning": "疫苗，菌苗",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 vacca（母牛），注入体内诱导产生长效抗体保护屏障的生物制剂 -> 疫苗；菌苗。"
+  },
+  {
+    "word": "virus",
+    "phonetic": "/ˈvaɪrəs/",
+    "pos": "n.",
+    "meaning": "病毒；毒素；电脑病毒",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 virus（粘稠毒液/毒汁），原义见词源，引申指病毒 -> 病毒；（计算机）病毒；病毒性疾病。"
+  },
+  {
+    "word": "collide",
+    "phonetic": "/kəˈlaɪd/",
+    "pos": "vi.",
+    "meaning": "碰撞，互撞；冲突（with）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "col-（= com- 共同） + lide / laedere（碰撞/打伤），引申指碰撞 -> 碰撞；相撞（with）；冲突。"
+  },
+  {
+    "word": "deform",
+    "phonetic": "/dɪˈfɔːm/",
+    "pos": "vt./vi.",
+    "meaning": "使变形，畸变",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/偏离/破坏） + form（形状形态），引申指使变形 -> 使变形；使扭曲畸变；使变丑陋。"
+  },
+  {
+    "word": "descend",
+    "phonetic": "/dɪˈsend/",
+    "pos": "vi./vt.",
+    "meaning": "下来，下降；下斜",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下） + scend（攀登/迈步），引申指下来 -> 下降；走下；降临。"
+  },
+  {
+    "word": "detach",
+    "phonetic": "/dɪˈtætʃ/",
+    "pos": "vt./vi.",
+    "meaning": "拆卸，分离；分派",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（脱离/解开） + tach（图钉/系紧），引申指拆卸 -> 拆卸；使分开；解开。"
+  },
+  {
+    "word": "eject",
+    "phonetic": "/ɪˈdʒekt/",
+    "pos": "vt./vi.",
+    "meaning": "喷出，弹出；驱逐",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "e-（向外） + ject（投掷/抛出），引申指喷出 -> 喷出；喷射；弹射。"
+  },
+  {
+    "word": "flatten",
+    "phonetic": "/ˈflætn/",
+    "pos": "v.",
+    "meaning": "使平坦，变平；击倒",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "flat（扁平平坦的） + -en（使动后缀），引申指使平坦 -> 使变平；夷平；把…压扁。"
+  },
+  {
+    "word": "friction",
+    "phonetic": "/ˈfrɪkʃn/",
+    "pos": "n.",
+    "meaning": "摩擦，摩擦力；冲突，摩擦",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "frict-（摩擦/揉搓） + -ion（名词后缀），引申指摩擦 -> 摩擦；摩擦力；冲突。"
+  },
+  {
+    "word": "impact",
+    "phonetic": "/ˈɪmpækt/",
+    "pos": "n./v.",
+    "meaning": "冲击，碰撞；重大影响 v. 冲击",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "im-（进入） + pact-（固定紧密相击），引申指冲击 -> 巨大冲击；撞击；重大影响。"
+  },
+  {
+    "word": "motion",
+    "phonetic": "/ˈməʊʃn/",
+    "pos": "n./v.",
+    "meaning": "运动，移动；提议 v. 打手势",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "mot-（移动/运动） + -ion（名词后缀），引申指运动 -> 运动；动；运转。"
+  },
+  {
+    "word": "paralyze",
+    "phonetic": "/ˈpærəlaɪz/",
+    "pos": "vt.",
+    "meaning": "使瘫痪，使麻痹；使丧失作用",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "para-（在旁/不正常） + lyze / lysis（松开解体），引申指使瘫痪 -> 使瘫痪；使麻痹；使丧失作用。"
+  },
+  {
+    "word": "revolve",
+    "phonetic": "/rɪˈvɒlv/",
+    "pos": "v.",
+    "meaning": "旋转；围绕；反复思考",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次/循环） + volv-（旋转/滚动） + -e，引申指旋转 -> 旋转；绕转；循环运转。"
+  },
+  {
+    "word": "strain",
+    "phonetic": "/streɪn/",
+    "pos": "v./n.",
+    "meaning": "拉伤；拉紧；拉力 n. 劳损",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 estreindre（紧紧勒住/勒紧拉紧），原义见词源，引申指拉伤 -> 极度紧张；重压；过度劳累。"
+  },
+  {
+    "word": "extinction",
+    "phonetic": "/ɪkˈstɪŋkʃn/",
+    "pos": "n.",
+    "meaning": "熄灭；灭绝，消亡",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "extinct（灭绝的） + -ion（名词后缀），引申指熄灭 -> 灭绝；绝种；熄灭。"
+  },
+  {
+    "word": "fertilizer",
+    "phonetic": "/ˈfɜːtəlaɪzə(r)/",
+    "pos": "n.",
+    "meaning": "肥料，化肥",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "fertilize（使土壤肥沃） + -er（物质），引申指肥料 -> 肥料；化学肥料；农用化肥。"
+  },
+  {
+    "word": "incentive",
+    "phonetic": "/ɪnˈsentɪv/",
+    "pos": "n./adj.",
+    "meaning": "激励，鼓励 n. 激励的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "in-（进入） + cant- / cent-（歌唱发声） + -ive，引申指激励 -> 激励；刺激；动力。"
+  },
+  {
+    "word": "inventory",
+    "phonetic": "/ˈɪnvəntri/",
+    "pos": "n./vt.",
+    "meaning": "存货，库存清单 vt. 盘点",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "in-（在内） + vent-（来/找到） + -ory，引申指存货 -> 详细存货清单；库存商品；库存量。"
+  },
+  {
+    "word": "overdraft",
+    "phonetic": "/ˈəʊvədrɑːft/",
+    "pos": "n.",
+    "meaning": "透支；透支额度",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "over-（超出） + draft（提取开出支票），引申指透支 -> 透支；透支额度；透支行为。"
+  },
+  {
+    "word": "portfolio",
+    "phonetic": "/pɔːtˈfəʊliəʊ/",
+    "pos": "n.",
+    "meaning": "投资组合；公文包；作品集",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "port-（携带/搬运） + folium（纸张/叶子），引申指投资组合 -> 投资组合（股票/证券）；（艺术家/建筑师的）作品夹；代表作选辑。"
+  },
+  {
+    "word": "premium",
+    "phonetic": "/ˈpriːmiəm/",
+    "pos": "n./adj.",
+    "meaning": "保险费；加价 adj. 优质的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "pre-（在前） + em-（拿取/购买），原指在诸多选择中抢先挑选最优质部位付，引申指保险费 -> 保险费；额外费用；溢价。"
+  },
+  {
+    "word": "retailer",
+    "phonetic": "/ˈriːteɪlə(r)/",
+    "pos": "n.",
+    "meaning": "零售商，零售店",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "retail（零售） + -er（人/机构），引申指零售商 -> 零售商；零售店；零售经营者。"
+  },
+  {
+    "word": "shareholder",
+    "phonetic": "/ˈʃeəhəʊldə(r)/",
+    "pos": "n.",
+    "meaning": "股东",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "share（股票份额） + holder（持有者），引申指股东 -> 股东；股票持有者。"
+  },
+  {
+    "word": "subsidiary",
+    "phonetic": "/səbˈsɪdiəri/",
+    "pos": "n./adj.",
+    "meaning": "子公司，分支机构 adj. 附带的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "sub-（在下方/辅助支撑） + -iary（形容词/名词后缀），引申指子公司 -> 子公司；附属机构；辅助的。"
+  },
+  {
+    "word": "achieve",
+    "phonetic": "/əˈtʃiːv/",
+    "pos": "vt.",
+    "meaning": "完成，实现，达到",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "a-（= ad- 朝向） + chief / chef（首领/顶峰），引申指完成 -> 完成；实现（抱负）；达到。"
+  },
+  {
+    "word": "achievement",
+    "phonetic": "/əˈtʃiːvmənt/",
+    "pos": "n.",
+    "meaning": "成就，成绩；达到",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "achieve（实现） + -ment（名词后缀），引申指成就 -> 成就；成绩；实现。"
+  },
+  {
+    "word": "aim",
+    "phonetic": "/eɪm/",
+    "pos": "n./v.",
+    "meaning": "目标，目的 v. 旨在",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 aesmer（估量/瞄准），原义见词源，引申指目标 -> 目标；目的；瞄准。"
+  },
+  {
+    "word": "anger",
+    "phonetic": "/ˈæŋɡə(r)/",
+    "pos": "n./vt.",
+    "meaning": "愤怒，气愤 vt. 激怒",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自古诺尔斯语 angr（痛苦/悲伤），原义见词源，引申指愤怒 -> 怒火；狂怒；气愤。"
+  },
+  {
+    "word": "assume",
+    "phonetic": "/əˈsjuːm/",
+    "pos": "vt.",
+    "meaning": "假定，假设；承担",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "as-（= ad- 朝向） + sume（拿取/抓起），引申指假定 -> 假定；假设；承担。"
+  },
+  {
+    "word": "assure",
+    "phonetic": "/əˈʃʊə(r)/",
+    "pos": "vt.",
+    "meaning": "向…保证；使确信",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "as-（= ad- 使） + sure（安全/笃定确信），引申指向…保证 -> 向…保证；使确信；确保。"
+  },
+  {
+    "word": "astonish",
+    "phonetic": "/əˈstɒnɪʃ/",
+    "pos": "vt.",
+    "meaning": "使十分惊讶，使大吃一惊",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "as-（彻底） + ton-（雷霆震响），如晴天霹雳自天而降将人震得目瞪口呆当场石化 -> 使十分惊讶；使大吃一惊；使惊愕。"
+  },
+  {
+    "word": "attitude",
+    "phonetic": "/ˈætɪtjuːd/",
+    "pos": "n.",
+    "meaning": "态度，看法；姿势",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自晚期拉丁语 aptitudo（适宜之姿势），原义见词源，引申指态度 -> 态度；看法；姿态。"
+  },
+  {
+    "word": "award",
+    "phonetic": "/əˈwɔːd/",
+    "pos": "vt./n.",
+    "meaning": "授予，给予 n. 奖，奖品",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "a-（= ex- 向外） + ward / guard（注视观察/守护），引申指授予 -> 奖；奖品；奖项。"
+  },
+  {
+    "word": "aware",
+    "phonetic": "/əˈweə(r)/",
+    "pos": "adj.",
+    "meaning": "意识到的，知晓的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "a-（处于） + ware（留心/防备），引申指意识到的 -> 意识到的；知道的；觉察到的。"
+  },
+  {
+    "word": "basic",
+    "phonetic": "/ˈbeɪsɪk/",
+    "pos": "adj.",
+    "meaning": "基本的，基础的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "base（底座/根基） + -ic（形容词后缀），引申指基本的 -> 基础的；基本的；根本的。"
+  },
+  {
+    "word": "basis",
+    "phonetic": "/ˈbeɪsɪs/",
+    "pos": "n.",
+    "meaning": "基础，根据，准则",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自希腊语 basis（底座/迈步基石），原义见词源，引申指基础 -> 基础；根据；原则。"
+  },
+  {
+    "word": "bear",
+    "phonetic": "/beə(r)/",
+    "pos": "vt./n.",
+    "meaning": "忍受；承担；生育 n. 熊",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 beran -> 忍受；承担；生育 n. 熊。"
+  },
+  {
+    "word": "behave",
+    "phonetic": "/bɪˈheɪv/",
+    "pos": "vi./vt.",
+    "meaning": "表现，表现得体；运转",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "be-（加强语气） + have（持有/掌控自己的举止动作），引申指表现 -> 表现；行为举止；举止端正。"
+  },
+  {
+    "word": "behavior",
+    "phonetic": "/bɪˈheɪvjə(r)/",
+    "pos": "n.",
+    "meaning": "行为，举止；运转情况",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "behave（表现举止） + -i- + -or（名词后缀），引申指行为 -> 行为；举止；表现。"
+  },
+  {
+    "word": "belief",
+    "phonetic": "/bɪˈliːf/",
+    "pos": "n.",
+    "meaning": "信念，信仰；坚信",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "be-（在内） + lief（珍爱/忠诚），引申指信念 -> 信仰；信念；相信。"
+  },
+  {
+    "word": "believe",
+    "phonetic": "/bɪˈliːv/",
+    "pos": "v.",
+    "meaning": "相信，信任；认为",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "be-（使） + lieve（珍惜爱重/信以为真），引申指相信 -> 相信；信任；认为。"
+  },
+  {
+    "word": "belong",
+    "phonetic": "/bɪˈlɒŋ/",
+    "pos": "vi.",
+    "meaning": "属于；适宜（to）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "be-（彻底） + long（属于/适宜），引申指属于 -> 属于；归…所有（to）；是…的成员。"
+  },
+  {
+    "word": "blame",
+    "phonetic": "/bleɪm/",
+    "pos": "vt./n.",
+    "meaning": "责备，归咎于 n. 责任",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 blasmer（渎神/责骂），原义见词源，引申指责备 -> 责怪；指责；归咎于。"
+  },
+  {
+    "word": "brave",
+    "phonetic": "/breɪv/",
+    "pos": "adj./vt.",
+    "meaning": "勇敢的 vt. 勇敢面对",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自意大利语 bravo（勇猛强横/桀骜不驯），原义见词源，引申指勇敢的 vt. 勇敢面对 -> 勇敢的；无畏的；英勇的人。"
+  },
+  {
+    "word": "cancel",
+    "phonetic": "/ˈkænsl/",
+    "pos": "vt.",
+    "meaning": "取消，撤销；废除",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁动词 cancellare（在手稿文字上划斜十字格子注销），原义见词源，引申指取消 -> 取消；撤销；废除。"
+  },
+  {
+    "word": "careful",
+    "phonetic": "/ˈkeəfl/",
+    "pos": "adj.",
+    "meaning": "小心的，细致的，周密的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "care（关心/担忧留心） + -ful（充满的），引申指小心的 -> 仔细的；小心的；认真的。"
+  },
+  {
+    "word": "cause",
+    "phonetic": "/kɔːz/",
+    "pos": "n./vt.",
+    "meaning": "原因；事业 vt. 导致",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 causa（原因/诉讼案件/缘由），原义见词源，引申指原因 -> 原因；起因；事业。"
+  },
+  {
+    "word": "center",
+    "phonetic": "/ˈsentə(r)/",
+    "pos": "n./v.",
+    "meaning": "中心，中枢 v. 集中",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自希腊语 kentron（圆规固定扎入纸面），原义见词源，引申指中心 -> 中心；中央；核心。"
+  },
+  {
+    "word": "central",
+    "phonetic": "/ˈsentrəl/",
+    "pos": "adj.",
+    "meaning": "中央的，核心的；中枢的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "center（中心） + -al（形容词后缀），引申指中央的 -> 中心的；中央的；主要的。"
+  },
+  {
+    "word": "chance",
+    "phonetic": "/tʃɑːns/",
+    "pos": "n./v.",
+    "meaning": "机会，机遇；偶然",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自晚期拉丁语 cadentia（掷骰子掉落下来的点数），原义见词源，引申指机会 -> 机会；良机；可能性。"
+  },
+  {
+    "word": "change",
+    "phonetic": "/tʃeɪndʒ/",
+    "pos": "v./n.",
+    "meaning": "改变，变更；零钱",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自晚期拉丁语 cambiare（以物易物互相交换），原义见词源，引申指改变 -> 改变；变化；更改。"
+  },
+  {
+    "word": "check",
+    "phonetic": "/tʃek/",
+    "pos": "v./n.",
+    "meaning": "检查，核对；支票",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 eschec（国际象棋将死！），在清单账本上仔细逐项核对查验排除差错 -> 检查；核对；抑制。"
+  },
+  {
+    "word": "choose",
+    "phonetic": "/tʃuːz/",
+    "pos": "vt./vi.",
+    "meaning": "选择，挑选；情愿",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自原始日耳曼语 *keusanan（用眼睛与心智认真品鉴挑选），指在多种可能中选定其一 -> vt./vi. 选择，挑选；情愿。"
+  },
+  {
+    "word": "clear",
+    "phonetic": "/klɪə(r)/",
+    "pos": "adj./v.",
+    "meaning": "清楚的；晴朗的 v. 清除",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁形容词 clarus（清澈透亮的/声名），原义见词源，引申指清楚的 -> 清晰的；明白的；清澈的。"
+  },
+  {
+    "word": "comfort",
+    "phonetic": "/ˈkʌmfət/",
+    "pos": "n./vt.",
+    "meaning": "安慰，慰藉 vt. 安慰",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "com-（彻底/加强语气） + fort（强壮/有力量），引申指安慰 -> 安慰；慰藉；舒服。"
+  },
+  {
+    "word": "compare",
+    "phonetic": "/kəmˈpeə(r)/",
+    "pos": "vt./vi.",
+    "meaning": "比较，对照；比作",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "com-（共同） + pare（成对/对等），引申指比较 -> 比较；对照；比作。"
+  },
+  {
+    "word": "condition",
+    "phonetic": "/kənˈdɪʃn/",
+    "pos": "n./vt.",
+    "meaning": "状况，状态；条件 vt. 调节",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + dict-（宣说） + -ion，引申指状况 -> 状况；状态；条件。"
+  },
+  {
+    "word": "confirm",
+    "phonetic": "/kənˈfɜːm/",
+    "pos": "vt.",
+    "meaning": "证实，肯定；批准",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "con-（彻底） + firm（稳固坚决），引申指证实 -> 证实；证明；进一步确认。"
+  },
+  {
+    "word": "consider",
+    "phonetic": "/kənˈsɪdə(r)/",
+    "pos": "v.",
+    "meaning": "考虑，细想；认为",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同/彻底） + sider（星辰），引申指反复权衡深思熟虑 -> 考虑；细想；认为。"
+  },
+  {
+    "word": "contain",
+    "phonetic": "/kənˈteɪn/",
+    "pos": "vt.",
+    "meaning": "包含，容纳；抑制",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + tain（握住/包容），引申指包含 -> 包含；容纳；抑制。"
+  },
+  {
+    "word": "continue",
+    "phonetic": "/kənˈtɪnjuː/",
+    "pos": "v.",
+    "meaning": "继续，连续；延伸",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + tin-（握住/连贯） + -ue，引申指继续 -> 继续；持续；延伸。"
+  },
+  {
+    "word": "control",
+    "phonetic": "/kənˈtrəʊl/",
+    "pos": "vt./n.",
+    "meaning": "控制，掌管；抑制",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自中世纪拉丁语 contrarotulus（对照轮流滚动的副账卷轴） -> 控制；支配；掌控。"
+  },
+  {
+    "word": "correct",
+    "phonetic": "/kəˈrekt/",
+    "pos": "adj./vt.",
+    "meaning": "正确的 vt. 改正，纠正",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "cor-（= com- 彻底） + rect（笔直直挺/端正），引申指正确的 vt. 改正 -> 正确的；对的；恰当得体的。"
+  },
+  {
+    "word": "cover",
+    "phonetic": "/ˈkʌvə(r)/",
+    "pos": "vt./n.",
+    "meaning": "覆盖；掩盖；涉及 n. 盖子",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 covrir（覆盖遮盖），原义见词源，引申指覆盖 -> 覆盖；遮盖；涵盖。"
+  },
+  {
+    "word": "create",
+    "phonetic": "/kriˈeɪt/",
+    "pos": "vt.",
+    "meaning": "创造，创作；引起",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "creat-（孕育生长/创制），艺术家或科学家从无到有凭借无羁想象力构等 -> 创造；创作；引起。"
+  },
+  {
+    "word": "crisis",
+    "phonetic": "/ˈkraɪsɪs/",
+    "pos": "n.",
+    "meaning": "危机，紧要关头",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自希腊语 krisis（分水岭/生死决断时刻），原义见词源，引申指危机 -> 危机；危急关头；紧要关头。"
+  },
+  {
+    "word": "crowd",
+    "phonetic": "/kraʊd/",
+    "pos": "n./v.",
+    "meaning": "人群，群众 v. 聚集",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 人群；群众 v. 聚集。"
+  },
+  {
+    "word": "danger",
+    "phonetic": "/ˈdeɪndʒə(r)/",
+    "pos": "n.",
+    "meaning": "危险，危险物；威胁",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 dangier（领主的生杀予夺绝对支配权），原义见词源，引申指危险 -> 危险；风险；威胁。"
+  },
+  {
+    "word": "date",
+    "phonetic": "/deɪt/",
+    "pos": "n./v.",
+    "meaning": "日期；约会 v. 注明日明",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 datum（给出之日期时刻） -> 日期；日子；年代。"
+  },
+  {
+    "word": "deal",
+    "phonetic": "/diːl/",
+    "pos": "v./n.",
+    "meaning": "处理；买卖 n. 协议；交易",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 处理；买卖 n. 协议；交易。"
+  },
+  {
+    "word": "decrease",
+    "phonetic": "/dɪˈkriːs/",
+    "pos": "v./n.",
+    "meaning": "减少，降低 n. 减退",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/减少） + crease（生长增加），引申指减少 -> 减少；减小；降低。"
+  },
+  {
+    "word": "design",
+    "phonetic": "/dɪˈzaɪn/",
+    "pos": "vt./n.",
+    "meaning": "设计，构想 n. 图样",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "de-（向外/彻底） + sign（画标记/绘制记号），引申指设计 -> 设计；构思；图案。"
+  },
+  {
+    "word": "destroy",
+    "phonetic": "/dɪˈstrɔɪ/",
+    "pos": "vt.",
+    "meaning": "破坏，摧毁；消灭",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/彻底破坏） + stroy / struct（建造/构筑），引申指破坏 -> 破坏；毁灭；摧毁。"
+  },
+  {
+    "word": "detail",
+    "phonetic": "/ˈdiːteɪl/",
+    "pos": "n./vt.",
+    "meaning": "细节，详情 vt. 详述",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "de-（彻底） + tail（剪切/切碎），引申指方案中一丝不苟的细枝末节 -> 细节；琐事；详情。"
+  },
+  {
+    "word": "develop",
+    "phonetic": "/dɪˈveləp/",
+    "pos": "v.",
+    "meaning": "发展；研制；显影",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "de-（解开/解封） + velop（包裹/卷绕），原指将包裹在厚厚襁褓中的事物一层层剥，引申指科技研发或疾病恶化 -> 发展；壮大；开发。"
+  },
+  {
+    "word": "development",
+    "phonetic": "/dɪˈveləpmənt/",
+    "pos": "n.",
+    "meaning": "发展，开发；研制",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "develop（发展开发） + -ment（名词后缀），引申指发展 -> 发展；成长；开发。"
+  },
+  {
+    "word": "difficult",
+    "phonetic": "/ˈdɪfɪkəlt/",
+    "pos": "adj.",
+    "meaning": "困难的，艰难的；难对付的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "dif-（不/非） + fic / fac（做） + -ult（形容词后缀），原义“不易做成的”，引申为任务繁重棘手 -> 困难的；艰难的；难对付的。"
+  },
+  {
+    "word": "difficulty",
+    "phonetic": "/ˈdɪfɪkəlti/",
+    "pos": "n.",
+    "meaning": "困难，难事；困境",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "difficult（困难的） + -y（名词后缀），引申指困难 -> 困难；困境；艰难险阻。"
+  },
+  {
+    "word": "direct",
+    "phonetic": "/dəˈrekt/",
+    "pos": "adj./vt.",
+    "meaning": "直接的 vt. 指导；指挥",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "di-（彻底） + rect（笔直直挺），引申指当面直截了当发号施令指挥排 -> 直接的；径直的；率直坦率的。"
+  },
+  {
+    "word": "direction",
+    "phonetic": "/dəˈrekʃn/",
+    "pos": "n.",
+    "meaning": "方向，方位；指导",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "direct（指引方向） + -ion（名词后缀），引申指方向 -> 方向；方位；指导。"
+  },
+  {
+    "word": "director",
+    "phonetic": "/dəˈrektə(r)/",
+    "pos": "n.",
+    "meaning": "主管，局长，主任；导演",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "direct（指导指挥） + -or（人），引申指主管 -> 导演；主管；主任。"
+  },
+  {
+    "word": "discover",
+    "phonetic": "/dɪˈskʌvə(r)/",
+    "pos": "vt.",
+    "meaning": "发现，发觉；露出",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "dis-（解开/移开） + cover（覆盖遮盖物），引申指发现 -> 发现；发觉；首度察觉到。"
+  },
+  {
+    "word": "discovery",
+    "phonetic": "/dɪˈskʌvəri/",
+    "pos": "n.",
+    "meaning": "发现，发觉；被发现的事物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "discover（发现） + -y（名词后缀），引申指发现 -> 发现；被发现的事物；重大新发现。"
+  },
+  {
+    "word": "discuss",
+    "phonetic": "/dɪˈskʌs/",
+    "pos": "vt.",
+    "meaning": "讨论，商讨；详述",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "dis-（向四方分开） + cuss-（击打/震荡摇晃），引申指讨论 -> 讨论；商讨；谈论。"
+  },
+  {
+    "word": "discussion",
+    "phonetic": "/dɪˈskʌʃn/",
+    "pos": "n.",
+    "meaning": "讨论，谈论；论述",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "discuss（讨论探讨） + -ion（名词后缀），引申指讨论 -> 讨论；商讨；谈论。"
+  },
+  {
+    "word": "distance",
+    "phonetic": "/ˈdɪstəns/",
+    "pos": "n./vt.",
+    "meaning": "距离，间距；远方 vt. 疏远",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "dis-（分离/相距） + st-（站立） + -ance（名词后缀），引申指距离 -> 距离；间距；远方。"
+  },
+  {
+    "word": "double",
+    "phonetic": "/ˈdʌbl/",
+    "pos": "adj./v./n.",
+    "meaning": "两倍的 v. 翻倍",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 duplus -> 两倍的 v. 翻倍。"
+  },
+  {
+    "word": "doubt",
+    "phonetic": "/daʊt/",
+    "pos": "n./v.",
+    "meaning": "怀疑，疑虑 v. 怀疑",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁动词 dubitare（内心在两者之间摇摆不定），原义见词源，引申指怀疑 -> 怀疑；疑惑；不确信。"
+  },
+  {
+    "word": "draw",
+    "phonetic": "/drɔː/",
+    "pos": "v./n.",
+    "meaning": "画；拉，吸引；得出 n. 平局",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 dragan -> 画；拉；吸引。"
+  },
+  {
+    "word": "dream",
+    "phonetic": "/driːm/",
+    "pos": "n./v.",
+    "meaning": "梦；梦想 v. 做梦；向往",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 梦；梦想 v. 做梦；向往。"
+  },
+  {
+    "word": "drive",
+    "phonetic": "/draɪv/",
+    "pos": "v./n.",
+    "meaning": "驾驶，驱使；推进 n. 驱力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 驾驶；驱使；推进 n. 驱力。"
+  },
+  {
+    "word": "drop",
+    "phonetic": "/drɒp/",
+    "pos": "v./n.",
+    "meaning": "落下，下降 n. 滴；微量",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 落下；下降 n. 滴；微量。"
+  },
+  {
+    "word": "during",
+    "phonetic": "/ˈdjʊərɪŋ/",
+    "pos": "prep.",
+    "meaning": "在…期间，在…过程中",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁动词 durare（持久/持续存在），原义见词源，引申指在…期间 -> 在…期间；在…过程中。"
+  },
+  {
+    "word": "earth",
+    "phonetic": "/ɜːθ/",
+    "pos": "n.",
+    "meaning": "地球；陆地；泥土，土壤",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 eorthe -> 地球；陆地；泥土。"
+  },
+  {
+    "word": "east",
+    "phonetic": "/iːst/",
+    "pos": "n./adj./adv.",
+    "meaning": "东方，东部 adj. 东方的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 -> 东方；东部 adj. 东方的。"
+  },
+  {
+    "word": "easy",
+    "phonetic": "/ˈiːzi/",
+    "pos": "adj.",
+    "meaning": "容易的，简单的；舒适的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 aisié（处于闲适状态），毫无阻碍磕绊信手拈来即可轻松办妥办成的 -> 容易的；轻易的；从容舒适的。"
+  },
+  {
+    "word": "effort",
+    "phonetic": "/ˈefət/",
+    "pos": "n.",
+    "meaning": "努力，尝试；成就",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "ef-（= ex- 向外） + fort（力量/强壮），引申指努力 -> 努力；艰难的尝试；努力的成果。"
+  },
+  {
+    "word": "electric",
+    "phonetic": "/ɪˈlektrɪk/",
+    "pos": "adj.",
+    "meaning": "电的，电动的；令人激动的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "electr-（琥珀） + -ic（形容词后缀），引申指电的 -> 电的；用电操作的；充满强电流的。"
+  },
+  {
+    "word": "electrical",
+    "phonetic": "/ɪˈlektrɪkl/",
+    "pos": "adj.",
+    "meaning": "电气的，电学上的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "electric（电的） + -al（形容词后缀），引申指电气的 -> 电气的；电学的；与电有关的（如 electr）。"
+  },
+  {
+    "word": "electronic",
+    "phonetic": "/ɪˌlekˈtrɒnɪk/",
+    "pos": "adj.",
+    "meaning": "电子的，电子学的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "electron（电子） + -ic（形容词后缀），引申指电子的 -> 电子的；电子学的；电子器件制造的。"
+  },
+  {
+    "word": "electronics",
+    "phonetic": "/ɪˌlekˈtrɒnɪks/",
+    "pos": "n.",
+    "meaning": "电子学；电子工业，电子设备",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "electronic（电子的） + -s（学科技术总称），引申指电子学 -> 电子学；微电子技术；电子工业。"
+  },
+  {
+    "word": "element",
+    "phonetic": "/ˈelɪmənt/",
+    "pos": "n.",
+    "meaning": "要素，元素；成分",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 elementum -> 要素；元素；成分。"
+  },
+  {
+    "word": "eliminate",
+    "phonetic": "/ɪˈlɪmɪneɪt/",
+    "pos": "vt.",
+    "meaning": "消除，排除；淘汰",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "e-（出/逐出） + limin-（门槛） + -ate，引申指消除 -> 消除；排除；淘汰。"
+  },
+  {
+    "word": "elimination",
+    "phonetic": "/ɪˌlɪmɪˈneɪʃn/",
+    "pos": "n.",
+    "meaning": "消除，根除；淘汰",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "eliminate（消除淘汰） + -ion（名词后缀），引申指消除 -> 消除；根除；淘汰赛。"
+  },
+  {
+    "word": "emerge",
+    "phonetic": "/ɪˈmɜːdʒ/",
+    "pos": "vi.",
+    "meaning": "浮现，出现；暴露",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "e-（向外/浮出） + merge（浸没于水中），引申指潜藏的事实真相逐渐大白于天 -> 浮现；显露；冒出。"
+  },
+  {
+    "word": "emergence",
+    "phonetic": "/ɪˈmɜːdʒəns/",
+    "pos": "n.",
+    "meaning": "出现，浮现；显现",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "emerge（浮现） + -ence（名词后缀），引申指出现 -> 出现；浮现；破土崛起。"
+  },
+  {
+    "word": "emphasis",
+    "phonetic": "/ˈemfəsɪs/",
+    "pos": "n.",
+    "meaning": "强调，重点；着重",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "em-（= en- 在内） + phas-（显现/发光展现） + -is，引申指强调 -> 强调；重点；着重。"
+  },
+  {
+    "word": "enable",
+    "phonetic": "/ɪˈneɪbl/",
+    "pos": "vt.",
+    "meaning": "使能够，使成为可能",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "en-（使动/赋予能力） + able（有能力的），引申指使能够 -> 使能够；使可能；赋予…能力权利。"
+  },
+  {
+    "word": "encounter",
+    "phonetic": "/ɪnˈkaʊntə(r)/",
+    "pos": "vt./n.",
+    "meaning": "遭遇，邂逅 n. 偶然相遇",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "en-（进入） + counter（相对/对抗），引申指遭遇 -> 偶遇；邂逅；遭遇（危险/困难）。"
+  },
+  {
+    "word": "encouragement",
+    "phonetic": "/ɪnˈkʌrɪdʒmənt/",
+    "pos": "n.",
+    "meaning": "鼓励，激励，促进",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "encourage（鼓励） + -ment（名词后缀），引申指鼓励 -> 鼓励；激励；促进因素。"
+  },
+  {
+    "word": "endanger",
+    "phonetic": "/ɪnˈdeɪndʒə(r)/",
+    "pos": "vt.",
+    "meaning": "危及，危害；使遭危险",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "en-（置于内） + danger（危险境地），引申指危及 -> 使处于危险境地；危及；危害（如 endang）。"
+  },
+  {
+    "word": "energy",
+    "phonetic": "/ˈenədʒi/",
+    "pos": "n.",
+    "meaning": "能源；能量，精力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "en-（在内） + erg-（工作/劳作） + -y，引申指能源 -> 能量；能源；精力。"
+  },
+  {
+    "word": "energetic",
+    "phonetic": "/ˌenəˈdʒetɪk/",
+    "pos": "adj.",
+    "meaning": "精力充沛的，充满活力的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "energy（能量/精力） + -etic（形容词后缀），引申指精力充沛的 -> 精力充沛的；充满活力的；积极雷厉风行的。"
+  },
+  {
+    "word": "enforcement",
+    "phonetic": "/ɪnˈfɔːsmənt/",
+    "pos": "n.",
+    "meaning": "执行，实施，强制",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "enforce（强制执行） + -ment（名词后缀），引申指执行 -> 强制执行；强行推行；实施。"
+  },
+  {
+    "word": "engage",
+    "phonetic": "/ɪnˈɡeɪdʒ/",
+    "pos": "v.",
+    "meaning": "从事，参与（in）；订婚",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "en-（置于内/以此抵押） + gage（誓约抵押物），引申指从事 -> 吸引；引起（注意）；从事。"
+  },
+  {
+    "word": "engagement",
+    "phonetic": "/ɪnˈɡeɪdʒmənt/",
+    "pos": "n.",
+    "meaning": "订婚；约定；参与",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "engage（订婚/投身） + -ment（名词后缀），引申指订婚 -> 订婚；婚约；约会。"
+  },
+  {
+    "word": "engine",
+    "phonetic": "/ˈendʒɪn/",
+    "pos": "n.",
+    "meaning": "发动机，引擎；机车",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 ingenium（天生聪明才智/巧妙发明），原义见词源，引申指发动机 -> 发动机；引擎；火车头机车。"
+  },
+  {
+    "word": "engineer",
+    "phonetic": "/ˌendʒɪˈnɪə(r)/",
+    "pos": "n./vt.",
+    "meaning": "工程师 vt. 精心策划",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "engine（精密动力引擎） + -eer（专业人员），引申指工程师 vt. 精心策划 -> 工程师；技师；工兵。"
+  },
+  {
+    "word": "engineering",
+    "phonetic": "/ˌendʒɪˈnɪərɪŋ/",
+    "pos": "n.",
+    "meaning": "工程，工程学",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "engineer（工程师业务） + -ing（学科名词后缀），引申指工程 -> 工程；工程学；工程设计与制造技术。"
+  },
+  {
+    "word": "enhance",
+    "phonetic": "/ɪnˈhɑːns/",
+    "pos": "vt.",
+    "meaning": "提高，增加，增强",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "en-（使动） + hance / haut（高傲/增高），引申指提高 -> 提高；增加；增强（品质/价值/吸引力）。"
+  },
+  {
+    "word": "enhancement",
+    "phonetic": "/ɪnˈhɑːnsmənt/",
+    "pos": "n.",
+    "meaning": "增加，增强；提高",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "enhance（增强提升） + -ment（名词后缀），引申指增加 -> 提高；增强；改善。"
+  },
+  {
+    "word": "enjoy",
+    "phonetic": "/ɪnˈdʒɔɪ/",
+    "pos": "vt.",
+    "meaning": "享受，喜爱；享有",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "en-（使置身于） + joy（欢欣喜悦），引申指享受 -> 享受；喜爱；欣赏。"
+  },
+  {
+    "word": "enjoyable",
+    "phonetic": "/ɪnˈdʒɔɪəbl/",
+    "pos": "adj.",
+    "meaning": "令人愉快的，有趣的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "enjoy（喜爱享受） + -able（能…的），让身心无比放松愉悦、回味无穷沉浸其中的 -> 令人愉快的；使人快乐的；有乐趣的。"
+  },
+  {
+    "word": "ensure",
+    "phonetic": "/ɪnˈʃʊə(r)/",
+    "pos": "vt.",
+    "meaning": "确保，保证，担保",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "en-（使成为） + sure（安全确信的），反复上锁检查电路万无一失确保意外绝对不会发生 -> 确保；保证；担保。"
+  },
+  {
+    "word": "enter",
+    "phonetic": "/ˈentə(r)/",
+    "pos": "v.",
+    "meaning": "进入；参加；输入",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 intra -> 进入；参加；输入。"
+  },
+  {
+    "word": "entertainment",
+    "phonetic": "/ˌentəˈteɪnmənt/",
+    "pos": "n.",
+    "meaning": "娱乐，消遣；招待",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "entertain（招待逗乐） + -ment（名词后缀），引申指娱乐 -> 娱乐；文娱节目；表演会。"
+  },
+  {
+    "word": "enthusiasm",
+    "phonetic": "/ɪnˈθjuːziæzəm/",
+    "pos": "n.",
+    "meaning": "热情，热忱；狂热",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "en-（进入） + the-（神明） + -us- + -iasm（名词后缀），引申指热情 -> 热情；热忱；极大狂热。"
+  },
+  {
+    "word": "entitle",
+    "phonetic": "/ɪnˈtaɪtl/",
+    "pos": "vt.",
+    "meaning": "给…权利；给…题名",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "en-（赋予） + title（头衔/法律权利资格），引申指给…权利 -> 给予…权利；赋予…资格（be entit）；给…题名命名。"
+  },
+  {
+    "word": "entity",
+    "phonetic": "/ˈentəti/",
+    "pos": "n.",
+    "meaning": "实体，独立存在物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "ent-（存在） + -ity（名词后缀），引申指实体 -> 实体；独立存在物；独立机构法人实体。"
+  },
+  {
+    "word": "entrance",
+    "phonetic": "/ˈentrəns/",
+    "pos": "n.",
+    "meaning": "入口，大门；进入",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "enter（进入） + -ance（场所名词后缀），引申指入口 -> 入口；大门；进入。"
+  },
+  {
+    "word": "entry",
+    "phonetic": "/ˈentri/",
+    "pos": "n.",
+    "meaning": "进入；入口；登记条目",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "enter（进入） + -y（名词后缀），引申指进入 -> 进入；入场；入口。"
+  },
+  {
+    "word": "envelope",
+    "phonetic": "/ˈenvələʊp/",
+    "pos": "n.",
+    "meaning": "信封；封套，外壳",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "en-（置于内） + velope（包裹/卷绕），引申指信封 -> 信封；封套；封皮。"
+  },
+  {
+    "word": "episode",
+    "phonetic": "/ˈepɪsəʊd/",
+    "pos": "n.",
+    "meaning": "剧集，一集；插曲，片段",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "epi-（在…旁/额外） + eisodos（进入通道），引申指电视剧集或人生小插曲 -> （电视剧的）一集；插曲；片段。"
+  },
+  {
+    "word": "equip",
+    "phonetic": "/ɪˈkwɪp/",
+    "pos": "vt.",
+    "meaning": "装备，配备；使具备",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "源自古诺尔斯语 skipa（装备船只/整军备战），原义见词源，引申指装备 -> 装备；配备；使具备（能力/素质）。"
+  },
+  {
+    "word": "equipment",
+    "phonetic": "/ɪˈkwɪpmənt/",
+    "pos": "n.",
+    "meaning": "设备，器材，装备",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "equip（装备配备） + -ment（名词后缀），引申指设备 -> 设备；装备；器材。"
+  },
+  {
+    "word": "era",
+    "phonetic": "/ˈɪərə/",
+    "pos": "n.",
+    "meaning": "时代，纪元，历史时期",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自晚期拉丁语 aera（计算年份的数字铜），原义见词源，引申指时代 -> 时代；纪元；历史时期。"
+  },
+  {
+    "word": "erase",
+    "phonetic": "/ɪˈreɪz/",
+    "pos": "vt.",
+    "meaning": "擦掉，抹去；消除",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "e-（向外/去除） + rase（刮擦/削去），引申指抹去痛苦记忆 -> 擦掉；抹去；消除（记忆/痕迹）。"
+  },
+  {
+    "word": "erect",
+    "phonetic": "/ɪˈrekt/",
+    "pos": "vt./adj.",
+    "meaning": "树立，建立；直立的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "e-（向上/出） + rect（笔直直立），引申指拔地而起建造大厦 -> 垂直的；竖立的；挺直的。"
+  },
+  {
+    "word": "aggregate",
+    "phonetic": "/ˈæɡrɪɡət/",
+    "pos": "n./adj.",
+    "meaning": "总计；聚集的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "ag-（= ad- 朝向） + greg-（羊群/聚集） + -ate，引申指总计 -> 总计；合计；聚集。"
+  },
+  {
+    "word": "bailout",
+    "phonetic": "/ˈbeɪlaʊt/",
+    "pos": "n.",
+    "meaning": "紧急财政援助，救助",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "bail（舀水救船脱险/保释） + out（向外脱困），引申指紧急财政援助 -> （尤指财政上的）紧急救助；援助款；紧急救援。"
+  },
+  {
+    "word": "cashier",
+    "phonetic": "/kæˈʃɪə(r)/",
+    "pos": "n.",
+    "meaning": "出纳员，收银员",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "cash（现款金库） + -ier（人），引申指出纳员 -> 出纳员；收银员；开除。"
+  },
+  {
+    "word": "consign",
+    "phonetic": "/kənˈsaɪn/",
+    "pos": "vt.",
+    "meaning": "托运，寄售",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + sign（签字盖印/委托），引申指托运 -> 托运；寄售；交付。"
+  },
+  {
+    "word": "condensation",
+    "phonetic": "/ˌkɒndenˈseɪʃn/",
+    "pos": "n.",
+    "meaning": "冷凝，凝结；水珠",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + dens-（致密/浓缩） + -ation，引申指冷凝 -> 凝结；冷凝；凝结物。"
+  },
+  {
+    "word": "degradation",
+    "phonetic": "/ˌdeɡrəˈdeɪʃn/",
+    "pos": "n.",
+    "meaning": "退化，恶化；降解",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下） + grad-（台阶/级别） + -ation，引申指退化 -> 降解；退化；退化变质。"
+  },
+  {
+    "word": "ecological",
+    "phonetic": "/ˌiːkəˈlɒdʒɪkl/",
+    "pos": "adj.",
+    "meaning": "生态的，生态学的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "ecology（生态学） + -ical（形容词后缀），引申指生态的 -> 生态的；生态学的；环保的。"
+  },
+  {
+    "word": "endangered",
+    "phonetic": "/ɪnˈdeɪndʒəd/",
+    "pos": "adj.",
+    "meaning": "濒危的，濒临灭绝的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "en-（置于） + danger（危险之中） + -ed（形容词后缀），引申指濒危的 -> 濒危的；面临灭绝危险的（如 endang）。"
+  },
+  {
+    "word": "evaporation",
+    "phonetic": "/ɪˌvæpəˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "蒸发，挥发",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "e-（出/向外） + vapor-（水蒸气） + -ation（名词后缀），引申指蒸发 -> 蒸发；挥发；消失。"
+  },
+  {
+    "word": "greenhouse",
+    "phonetic": "/ˈɡriːnhaʊs/",
+    "pos": "n.",
+    "meaning": "温室，暖房",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "green（绿色植物） + house（温室暖房），引申指温室 -> 温室；花房；暖房。"
+  },
+  {
+    "word": "collateral",
+    "phonetic": "/kəˈlætərəl/",
+    "pos": "n.",
+    "meaning": "抵押品，担保物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "col-（= com- 共同） + later-（侧面/身侧） + -al，引申指抵押品 -> 抵押品；担保物；附带的。"
+  },
+  {
+    "word": "installment",
+    "phonetic": "/ɪnˈstɔːlmənt/",
+    "pos": "n.",
+    "meaning": "分期付款；一期",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "in-（置于内） + stall-（位置/固定义务） + -ment，引申指分期付款 -> 分期付款；（分期付款的）一期付款；（连载小说的）一节。"
+  },
+  {
+    "word": "fiscal",
+    "phonetic": "/ˈfɪskl/",
+    "pos": "adj.",
+    "meaning": "财政的，国库的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自拉丁语 fiscus（装国库公款钱币的），原义见词源，引申指财政的 -> 财政的；国库的；会计的。"
+  },
+  {
+    "word": "creditor",
+    "phonetic": "/ˈkredɪtə(r)/",
+    "pos": "n.",
+    "meaning": "债权人，债主",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "credit-（借贷信任/授信） + -or（人），引申指债权人 -> 债权人；债主；贷方。"
+  },
+  {
+    "word": "debtor",
+    "phonetic": "/ˈdetə(r)/",
+    "pos": "n.",
+    "meaning": "债务人，借方",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "debt（欠款/债务） + -or（人），引申指债务人 -> 债务人；借方；欠债者。"
+  },
+  {
+    "word": "catastrophe",
+    "phonetic": "/kəˈtæstrəfi/",
+    "pos": "n.",
+    "meaning": "灾难，浩劫",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "cata-（彻底向下/翻转覆灭） + strophe（转动/回旋），引申指灾难 -> 大灾难；浩劫；惨败。"
+  },
+  {
+    "word": "abandon",
+    "phonetic": "/əˈbændən/",
+    "pos": "vt.",
+    "meaning": "放弃，遗弃；离弃",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "a-（处于） + bandon（宣告法外放逐/弃之不顾），引申指彻底放逐放弃或放浪形骸 -> 放弃；抛弃；遗弃。"
+  },
+  {
+    "word": "coherent",
+    "phonetic": "/kəʊˈhɪərənt/",
+    "pos": "adj.",
+    "meaning": "连贯的，条理清晰的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "co-（共同） + her-（黏附/粘连紧密） + -ent，引申指连贯的 -> 连贯的；条理分明的；一致的。"
+  },
+  {
+    "word": "comprehensive",
+    "phonetic": "/ˌkɒmprɪˈhensɪv/",
+    "pos": "adj.",
+    "meaning": "全面的，综合的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "com-（共同/完全） + prehens-（抓住包揽） + -ive，引申指全面的 -> 全面的；综合的；包罗万象的。"
+  },
+  {
+    "word": "contrast",
+    "phonetic": "/ˈkɒntrɑːst/",
+    "pos": "n./vt./vi.",
+    "meaning": "对比，对照 vt./vi. /kənˈtrɑːst/",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "contra-（相对/相反） + st-（站立），引申指对比 -> 对比；对照；悬殊差距。"
+  },
+  {
+    "word": "convince",
+    "phonetic": "/kənˈvɪns/",
+    "pos": "vt.",
+    "meaning": "说服，使确信",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "con-（彻底） + vince（征服/制服），引申指说服 -> 使确信；使信服；说服（某人做某事）。"
+  },
+  {
+    "word": "crucial",
+    "phonetic": "/ˈkruːʃl/",
+    "pos": "adj.",
+    "meaning": "至关重要的，关键的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "cruc-（十字路口生死关头） + -ial（形容词后缀），引申指至关重要的 -> 至关重要的；决定性的；关键性的。"
+  },
+  {
+    "word": "decline",
+    "phonetic": "/dɪˈklaɪn/",
+    "pos": "vi./vt./n.",
+    "meaning": "下降；衰落；婉拒",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/偏离） + clin-（倾斜/屈服），引申指帝国盛极而衰或礼貌客气婉拒 -> 下降；衰退；衰落。"
+  },
+  {
+    "word": "demonstrate",
+    "phonetic": "/ˈdemənstreɪt/",
+    "pos": "vt.",
+    "meaning": "证明，证实；演示",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "de-（彻底） + monstr-（展示/昭示） + -ate，引申指证明 -> 证明；证实；演示。"
+  },
+  {
+    "word": "deteriorate",
+    "phonetic": "/dɪˈtɪəriəreɪt/",
+    "pos": "vi./vt.",
+    "meaning": "恶化，变坏",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "deterior-（更恶化较差） + -ate（动词后缀），引申指恶化 -> 恶化；变坏；退化。"
+  },
+  {
+    "word": "distinguish",
+    "phonetic": "/dɪˈstɪŋɡwɪʃ/",
+    "pos": "vt./vi.",
+    "meaning": "辨别，区分；使显著",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "dis-（分开） + stingu-（戳刺/戳记号） + -ish，引申指辨别 -> 区分；辨别；甄别。"
+  },
+  {
+    "word": "exceed",
+    "phonetic": "/ɪkˈsiːd/",
+    "pos": "vt.",
+    "meaning": "超过，超越；胜过",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "ex-（向外/超出） + ceed（迈步前行），引申指超过 -> 超过；超出；超越（限制/规定）。"
+  },
+  {
+    "word": "explicit",
+    "phonetic": "/ɪkˈsplɪsɪt/",
+    "pos": "adj.",
+    "meaning": "清楚明确的，坦率的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "ex-（向外） + plic-（折叠/卷起） + -it，引申指清楚明确的 -> 清楚明白的；直截了当的；不含糊的。"
+  },
+  {
+    "word": "exploit",
+    "phonetic": "/ɪkˈsplɔɪt/",
+    "pos": "vt./n.",
+    "meaning": "开发，利用；剥削",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 esploit（向外展开施展），原义见词源，引申指开发 -> 开发；开采；利用。"
+  },
+  {
+    "word": "facilitate",
+    "phonetic": "/fəˈsɪlɪteɪt/",
+    "pos": "vt.",
+    "meaning": "促进，使便利",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "facil-（容易的/灵便的） + -itate（使动后缀），引申指促进 -> 促进；推动；使容易。"
+  },
+  {
+    "word": "foster",
+    "phonetic": "/ˈfɒstə(r)/",
+    "pos": "vt.",
+    "meaning": "培养，促进；抚养",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自古英语 fostrian（用食物喂养哺乳培育），原义见词源，引申指培养 -> 培养；促进；助长。"
+  },
+  {
+    "word": "frustrate",
+    "phonetic": "/frʌˈstreɪt/",
+    "pos": "vt.",
+    "meaning": "使沮丧，挫败",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "frustr-（落空/徒劳无功） + -ate（动词后缀），引申指使沮丧 -> 使沮丧；使灰心；阻挠。"
+  },
+  {
+    "word": "illustrate",
+    "phonetic": "/ˈɪləstreɪt/",
+    "pos": "vt.",
+    "meaning": "（用图等）说明，阐明",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "il-（在内/朝向） + lustr-（光亮照耀） + -ate，引申指（用图等）说明 -> （用图表/例子等）说明；阐述；为…作插图。"
+  },
+  {
+    "word": "imply",
+    "phonetic": "/ɪmˈplaɪ/",
+    "pos": "vt.",
+    "meaning": "暗示，含有…的意思",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "im-（进入） + ply（折叠），引申指暗示 -> 暗示；意指；含有…的意思。"
+  },
+  {
+    "word": "insight",
+    "phonetic": "/ˈɪnsaɪt/",
+    "pos": "n.",
+    "meaning": "洞察力，深刻见解",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "in-（深入内心内部） + sight（视线/眼界），引申指洞察力 -> 洞察力；深刻见解；顿悟。"
+  },
+  {
+    "word": "isolate",
+    "phonetic": "/ˈaɪsəleɪt/",
+    "pos": "vt.",
+    "meaning": "使隔离，使孤立",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自意大利语 isolato（如同置身孤岛），原义见词源，引申指使隔离 -> 使隔离；孤立；使脱离。"
+  },
+  {
+    "word": "motivate",
+    "phonetic": "/ˈməʊtɪveɪt/",
+    "pos": "vt.",
+    "meaning": "激励，激发；促动",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "motive（动机） + -ate（使动后缀），引申指激励 -> 激励；激发；驱使。"
+  },
+  {
+    "word": "objective",
+    "phonetic": "/əbˈdʒektɪv/",
+    "pos": "n./adj.",
+    "meaning": "目标，目的 adj. 客观的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "ob-（朝向/对着） + ject-（投掷） + -ive（形容词/名词后缀），引申指目标 -> 客观的；实事求是的；目标。"
+  },
+  {
+    "word": "profound",
+    "phonetic": "/prəˈfaʊnd/",
+    "pos": "adj.",
+    "meaning": "深奥的；深远的，深沉的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "pro-（向前） + fundus（深渊/底部），引申指深奥的 -> 深邃的；深奥的；渊博的。"
+  },
+  {
+    "word": "proportion",
+    "phonetic": "/prəˈpɔːʃn/",
+    "pos": "n.",
+    "meaning": "比例，比率；部分",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "pro-（依照） + portio（份额/部分），引申指比例 -> 比例；比率；部分。"
+  },
+  {
+    "word": "rational",
+    "phonetic": "/ˈræʃnəl/",
+    "pos": "adj.",
+    "meaning": "理性的，理智的；合理的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "rat-（计算/权衡） + -ion + -al，引申指理性的 -> 理性的；理智的；合理的。"
+  },
+  {
+    "word": "reluctant",
+    "phonetic": "/rɪˈlʌktənt/",
+    "pos": "adj.",
+    "meaning": "不情愿的，勉强的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "re-（反向/抗拒） + luct-（角力搏斗） + -ant，引申指不情愿的 -> 不情愿的；勉强的；抗拒的。"
+  },
+  {
+    "word": "trigger",
+    "phonetic": "/ˈtrɪɡə(r)/",
+    "pos": "vt./n.",
+    "meaning": "触发，引发 n. 扳机；诱因",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "源自中古荷兰语 trecker（拉动牵引拉发栓），原义见词源，引申指触发 -> （枪的）扳机；起因；诱因。"
+  },
+  {
+    "word": "vulnerable",
+    "phonetic": "/ˈvʌlnərəbl/",
+    "pos": "adj.",
+    "meaning": "脆弱的，易受伤害的（to）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "vulner-（创伤/伤口） + -able（易…的），引申指脆弱的 -> 易受攻击的；脆弱的；易受伤害的（to）。"
+  },
+  {
+    "word": "accountability",
+    "phonetic": "/əˌkaʊntəˈbɪləti/",
+    "pos": "n.",
+    "meaning": "问责性，负有责任",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "accountable（应负责任的） + -ility（名词后缀），引申指问责性 -> 有责任；问责制；可追责性。"
+  },
+  {
+    "word": "acquisition",
+    "phonetic": "/ˌækwɪˈzɪʃn/",
+    "pos": "n.",
+    "meaning": "收购；获得物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "ac-（= ad- 朝向） + quisit-（寻求获取） + -ion，引申指收购 -> 获得；习得；收购。"
+  },
+  {
+    "word": "anticipation",
+    "phonetic": "/ænˌtɪsɪˈpeɪʃn/",
+    "pos": "n.",
+    "meaning": "预料，期盼",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "anticipate（预先把握） + -ation（名词后缀），引申指预料 -> 预料；预期；期望。"
+  },
+  {
+    "word": "appraisal",
+    "phonetic": "/əˈpreɪzl/",
+    "pos": "n.",
+    "meaning": "评估，鉴定",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "appraise（评估定价） + -al（名词后缀），引申指评估 -> 评估；评价；估价。"
+  },
+  {
+    "word": "automation",
+    "phonetic": "/ˌɔːtəˈmeɪʃn/",
+    "pos": "n.",
+    "meaning": "自动化",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "auto-（自动） + mat-（思维运作） + -ation（名词后缀），引申指自动化 -> 自动化；自动化操作；自动控制系统。"
+  },
+  {
+    "word": "availability",
+    "phonetic": "/əˌveɪləˈbɪləti/",
+    "pos": "n.",
+    "meaning": "可利用性，可获得性",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "available（可获得的/有空的） + -ility（名词后缀），引申指可利用性 -> 可用性；可获得性；有效性。"
+  },
+  {
+    "word": "bureaucracy",
+    "phonetic": "/bjʊəˈrɒkrəsi/",
+    "pos": "n.",
+    "meaning": "官僚体制，繁文缛节",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "bureau（办公桌/带有抽屉） + -cracy（统治/权力体系），引申指官僚体制 -> 官僚主义；官僚机构；官僚体制。"
+  },
+  {
+    "word": "calculated",
+    "phonetic": "/ˈkælkjuleɪtɪd/",
+    "pos": "adj.",
+    "meaning": "蓄意的；精打细算的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "calculate（精密计算） + -ed（形容词后缀），引申指蓄意的 -> 预先计划好的；蓄意的；有计划的。"
+  },
+  {
+    "word": "commercialization",
+    "phonetic": "/kəˌmɜːʃəlaɪˈzeɪʃn/",
+    "pos": "n.",
+    "meaning": "商业化",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "commercial（商业的） + -ize + -ation（过程），引申指商业化 -> 商业化；商品化；市场化推广过程。"
+  },
+  {
+    "word": "compliance",
+    "phonetic": "/kəmˈplaɪəns/",
+    "pos": "n.",
+    "meaning": "顺从，合规",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "comply（顺从遵照执行） + -ance（名词后缀），引申指顺从 -> 顺从；服从；（对法规/标准的）合规。"
+  },
+  {
+    "word": "consumption",
+    "phonetic": "/kənˈsʌmpʃn/",
+    "pos": "n.",
+    "meaning": "消费；消耗",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "con-（彻底） + sumpt-（拿取耗尽） + -ion，引申指消费 -> 消耗；消费量；消费。"
+  },
+  {
+    "word": "convene",
+    "phonetic": "/kənˈviːn/",
+    "pos": "vi./vt.",
+    "meaning": "召集，开会；集合",
+    "part": "第一部分：超级核心母词族",
+    "group": "【14. ven / vent 来/到达/发生】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + vene（走来/到达），引申指召集 -> 召集；开会；集合。"
+  },
+  {
+    "word": "intervention",
+    "phonetic": "/ˌɪntəˈvenʃn/",
+    "pos": "n.",
+    "meaning": "干预，介入",
+    "part": "第一部分：超级核心母词族",
+    "group": "【14. ven / vent 来/到达/发生】",
+    "analysis_type": "构词",
+    "analysis": "inter-（在两者之间） + vent-（来/走入） + -ion，引申指干预 -> 干预；介入；调停。"
+  },
+  {
+    "word": "venue",
+    "phonetic": "/ˈvenjuː/",
+    "pos": "n.",
+    "meaning": "举办场地，会场",
+    "part": "第一部分：超级核心母词族",
+    "group": "【14. ven / vent 来/到达/发生】",
+    "analysis_type": "构词",
+    "analysis": "源自古法语 venue（到来/到达之场所），原义见词源，引申指举办场地 -> 举行地点；举办场所（比赛/会议/音乐会等）；（犯罪或诉讼发生的）审判地。"
+  },
+  {
+    "word": "diversify",
+    "phonetic": "/daɪˈvɜːsɪfaɪ/",
+    "pos": "vt./vi.",
+    "meaning": "使多样化；多元化经营",
+    "part": "第一部分：超级核心母词族",
+    "group": "【15. vert / vers 转/转向/反转】",
+    "analysis_type": "构词",
+    "analysis": "diverse（多样的） + -ify（使动后缀），引申指使多样化 -> 使多样化；使多元化；（投资中）分散投资。"
+  },
+  {
+    "word": "controversy",
+    "phonetic": "/ˈkɒntrəvɜːsi/",
+    "pos": "n.",
+    "meaning": "公开辩论，争论，争议",
+    "part": "第一部分：超级核心母词族",
+    "group": "【15. vert / vers 转/转向/反转】",
+    "analysis_type": "构词",
+    "analysis": "contra-（反对/逆着） + vers-（转动面对） + -y，引申指公开辩论 -> 争论；争议；辩论。"
+  },
+  {
+    "word": "controversial",
+    "phonetic": "/ˌkɒntrəˈvɜːʃl/",
+    "pos": "adj.",
+    "meaning": "引起争论的，有争议的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【15. vert / vers 转/转向/反转】",
+    "analysis_type": "构词",
+    "analysis": "controversy（争议辩论） + -ial（形容词后缀），引申指引起争论的 -> 引起争论的；有争议的；有分歧的。"
+  },
+  {
+    "word": "reconstruct",
+    "phonetic": "/ˌriːkənˈstrʌkt/",
+    "pos": "vt.",
+    "meaning": "重建，改建；重现",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "re-（重新） + construct（建造/搭建），引申指重建 -> 重建；再建；重塑。"
+  },
+  {
+    "word": "instrument",
+    "phonetic": "/ˈɪnstrəmənt/",
+    "pos": "n.",
+    "meaning": "仪器，器械；乐器",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "in-（在内） + stru-（构筑/建造） + -ment（工具手段），引申指仪器 -> 仪器；器械；乐器。"
+  },
+  {
+    "word": "accountable",
+    "phonetic": "/əˈkaʊntəbl/",
+    "pos": "adj.",
+    "meaning": "有责任的，应做解释的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "account（交代账目） + -able（能…的），引申指有责任的 -> 负有责任的；应作解释的；（对…）负责任的（to sb fo）。"
+  },
+  {
+    "word": "affluence",
+    "phonetic": "/ˈæfluəns/",
+    "pos": "n.",
+    "meaning": "富裕，富足",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "af-（= ad- 朝向） + flu-（流动/流淌） + -ence，引申指富裕 -> 富裕；富足；繁荣。"
+  },
+  {
+    "word": "broker",
+    "phonetic": "/ˈbrəʊkə(r)/",
+    "pos": "n.",
+    "meaning": "经纪人，中间人",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自盎格鲁-诺曼法语 brocour（启封酒桶零售小贩），原义见词源，引申指经纪人 -> 经纪人；中间人；掮客。"
+  },
+  {
+    "word": "competitor",
+    "phonetic": "/kəmˈpetɪtə(r)/",
+    "pos": "n.",
+    "meaning": "竞争者，对手",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "com-（共同） + petit-（追逐/角逐） + -or（人），引申指竞争者 -> 竞争者；竞争对手；参赛者。"
+  },
+  {
+    "word": "corporate",
+    "phonetic": "/ˈkɔːpərət/",
+    "pos": "adj.",
+    "meaning": "公司的，企业的；法人的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "corpor-（身体/实体法人） + -ate（形容词后缀），引申指公司的 -> 公司的；企业的；法人的。"
+  },
+  {
+    "word": "corporation",
+    "phonetic": "/ˌkɔːpəˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "大公司，法人企业",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "corporate（公司法人的） + -ion（名词后缀），引申指大公司 -> 大公司；大型企业集团；法人。"
+  },
+  {
+    "word": "default",
+    "phonetic": "/dɪˈfɔːlt/",
+    "pos": "vi./n.",
+    "meaning": "违约，不履行义务；默认",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（完全） + faillir / fail（失败/未能履职），引申指违约 -> 违约；不履行义务（尤指债务违约）；弃权。"
+  },
+  {
+    "word": "deflation",
+    "phonetic": "/ˌdiːˈfleɪʃn/",
+    "pos": "n.",
+    "meaning": "通货紧缩",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/排出） + flat-（吹气膨胀） + -ion，引申指通货紧缩 -> 通货紧缩；通缩；泄气。"
+  },
+  {
+    "word": "depreciate",
+    "phonetic": "/dɪˈpriːʃieɪt/",
+    "pos": "vt./vi.",
+    "meaning": "贬值，折旧；轻视",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下） + preci-（价格/价值） + -ate（动词后缀），引申指贬值 -> （资产等）贬值；跌价；折旧。"
+  },
+  {
+    "word": "derivative",
+    "phonetic": "/dɪˈrɪvətɪv/",
+    "pos": "adj./n.",
+    "meaning": "派生的 n. 金融衍生品",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（从…而来） + riv-（溪流/河流） + -ative，引申指派生的 n. 金融衍生品 -> 衍生工具；金融衍生产品；派生词。"
+  },
+  {
+    "word": "endorse",
+    "phonetic": "/ɪnˈdɔːs/",
+    "pos": "vt.",
+    "meaning": "赞同，支持；在支票背面背书",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "en-（置于上） + dorse（脊背/背面），引申为知名领袖或社会权威出面公开 -> （在支票背面）背书；签字；赞同。"
+  },
+  {
+    "word": "entrepreneur",
+    "phonetic": "/ˌɒntrəprəˈnɜː(r)/",
+    "pos": "n.",
+    "meaning": "创业家，企业家",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "entre-（在…之间） + preneur（承担者/抓取拿取者），引申指创业家 -> 创业者；企业家；开创者。"
+  },
+  {
+    "word": "analytical",
+    "phonetic": "/ˌænəˈlɪtɪkl/",
+    "pos": "adj.",
+    "meaning": "分析的，解析的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "analyze（分析） + -ical（形容词后缀），引申指分析的 -> 分析的；解析的；善于分析的。"
+  },
+  {
+    "word": "appendix",
+    "phonetic": "/əˈpendɪks/",
+    "pos": "n.",
+    "meaning": "附录；阑尾",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "ap-（= ad- 朝向） + pend-（悬挂/吊起） + -ix，引申指附录 -> 附录；补充材料；（人体解剖中的）阑尾。"
+  },
+  {
+    "word": "assimilate",
+    "phonetic": "/əˈsɪməleɪt/",
+    "pos": "vt./vi.",
+    "meaning": "吸收，同化；消化",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "as-（= ad- 使变得） + simil-（相似/相同） + -ate，引申指吸收 -> 吸收；消化（知识/营养）；使同化。"
+  },
+  {
+    "word": "attainment",
+    "phonetic": "/əˈteɪnmənt/",
+    "pos": "n.",
+    "meaning": "成就，造诣；达到",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "attain（达到/获取） + -ment（名词后缀），引申指成就 -> 达到；获得；造诣。"
+  },
+  {
+    "word": "classmate",
+    "phonetic": "/ˈklɑːsmeɪt/",
+    "pos": "n.",
+    "meaning": "同班同学",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "class（班级/教室） + mate（伙伴/同伴），引申指同班同学 -> 同班同学。"
+  },
+  {
+    "word": "cognition",
+    "phonetic": "/kɒɡˈnɪʃn/",
+    "pos": "n.",
+    "meaning": "认识，认知；感知",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "co-（共同） + gnit- / gno-（知晓/认知） + -ion，引申指认识 -> 认知；认知能力；知觉。"
+  },
+  {
+    "word": "commence",
+    "phonetic": "/kəˈmens/",
+    "pos": "vt./vi.",
+    "meaning": "开始，着手",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "com-（完全） + initiare（开启），引申指开始 -> 开始；着手；着手进行（commence）。"
+  },
+  {
+    "word": "competence",
+    "phonetic": "/ˈkɒmpɪtəns/",
+    "pos": "n.",
+    "meaning": "能力，胜任；管辖权",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "compete（胜任/竞争） + -ence（名词后缀），引申指能力 -> 能力；胜任力；管辖权。"
+  },
+  {
+    "word": "comprehension",
+    "phonetic": "/ˌkɒmprɪˈhenʃn/",
+    "pos": "n.",
+    "meaning": "理解，理解力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "comprehend（充分理解） + -ion（名词后缀），引申指理解 -> 理解；理解力；（语言教学中的）阅读理解练习。"
+  },
+  {
+    "word": "demonstration",
+    "phonetic": "/ˌdemənˈstreɪʃn/",
+    "pos": "n.",
+    "meaning": "示范，演示；证实",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "demonstrate（演示展示） + -ion（名词后缀），引申指示范 -> 示范；演示；证实。"
+  },
+  {
+    "word": "department",
+    "phonetic": "/dɪˈpɑːtmənt/",
+    "pos": "n.",
+    "meaning": "系，学部；（政府/机构）部门，局，司",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "de-（分开） + part（部分） + -ment（名词后缀），引申指系 -> 部门；大学系科。"
+  },
+  {
+    "word": "enrollment",
+    "phonetic": "/ɪnˈrəʊlmənt/",
+    "pos": "n.",
+    "meaning": "入学人数；注册，入会",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "enroll（注册学籍入册） + -ment（名词后缀），引申指入学人数 -> 入学；注册；招收。"
+  },
+  {
+    "word": "contamination",
+    "phonetic": "/kənˌtæmɪˈneɪʃn/",
+    "pos": "n.",
+    "meaning": "污染，玷污；污染物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + tam- / tag-（触碰/沾染） + -ination，引申指污染 -> 污染；弄脏；污染物。"
+  },
+  {
+    "word": "evolution",
+    "phonetic": "/ˌiːvəˈluːʃn/",
+    "pos": "n.",
+    "meaning": "进化，演变；渐进发展",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "e-（向外/展开） + volu（卷/转） + -tion（名词后缀），原义“向外展开卷轴”，引申为逐步展开、演化 -> 演变；演化；进化。"
+  },
+  {
+    "word": "hazardous",
+    "phonetic": "/ˈhæzədəs/",
+    "pos": "adj.",
+    "meaning": "危险的，有毒害的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "hazard（骰子游戏/危险运气） + -ous（充满的），引申指危险的 -> 危险的；冒险的；有害的（如 hazard）。"
+  },
+  {
+    "word": "purify",
+    "phonetic": "/ˈpjʊərɪfaɪ/",
+    "pos": "vt.",
+    "meaning": "净化，使纯净；提纯",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "pur-（纯净/无杂质） + -ify（使动后缀），引申指净化 -> 使纯净；净化；提纯。"
+  },
+  {
+    "word": "sanctuary",
+    "phonetic": "/ˈsæŋktʃuəri/",
+    "pos": "n.",
+    "meaning": "鸟兽保护区；避难所",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "sanct-（神圣） + -uary（场所后缀），引申指鸟兽保护区 -> 避难所；庇护所；（鸟兽）禁猎区。"
+  },
+  {
+    "word": "scarcity",
+    "phonetic": "/ˈskeəsəti/",
+    "pos": "n.",
+    "meaning": "缺乏，不足，紧缺",
+    "part": "第四部分：核心分类专题群",
+    "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
+    "analysis_type": "构词",
+    "analysis": "scarce（稀缺匮乏的） + -ity（名词后缀），引申指缺乏 -> 缺乏；不足；罕见。"
+  },
+  {
+    "word": "accelerator",
+    "phonetic": "/əkˈseləreɪtə(r)/",
+    "pos": "n.",
+    "meaning": "油门，加速器；促进剂",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "accelerate（加速加快） + -or（机器部件），引申指油门 -> （机动车的）油门；加速踏板；（物理学）粒子加速器。"
+  },
+  {
+    "word": "accommodate",
+    "phonetic": "/əˈkɒmədeɪt/",
+    "pos": "vt.",
+    "meaning": "容纳；为…提供住宿；迎合",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "ac-（= ad- 朝向） + commod-（便利合宜） + -ate，引申指容纳 -> 容纳；向…提供住处；迎合。"
+  },
+  {
+    "word": "accommodation",
+    "phonetic": "/əˌkɒməˈdeɪʃn/",
+    "pos": "n.",
+    "meaning": "住宿，膳宿；调节",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "accommodate（提供住宿） + -ion（名词后缀），引申指住宿 -> 住宿；住处；膳宿。"
+  },
+  {
+    "word": "administration",
+    "phonetic": "/ədˌmɪnɪˈstreɪʃn/",
+    "pos": "n.",
+    "meaning": "行政部门；管理，行政",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "administer（管理统领） + -ation（名词后缀），引申指行政部门 -> 行政管理；行政体制；政府。"
+  },
+  {
+    "word": "boarding",
+    "phonetic": "/ˈbɔːdɪŋ/",
+    "pos": "n.",
+    "meaning": "登船，登机",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "board（登船/提供伙食木板） + -ing（名词后缀），引申指登船 -> 登机；登船；寄宿（boarding）。"
+  },
+  {
+    "word": "citizenship",
+    "phonetic": "/ˈsɪtɪzənʃɪp/",
+    "pos": "n.",
+    "meaning": "公民身份；公民权利与义务",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "citizen（公民） + -ship（身份资格），引申指公民身份 -> 公民身份；国籍；公民资格。"
+  },
+  {
+    "word": "civilian",
+    "phonetic": "/səˈvɪliən/",
+    "pos": "n./adj.",
+    "meaning": "平民，百姓 adj. 平民的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "civil（平民的/民事的） + -ian（人），引申指平民 -> 平民；老百姓；平民的。"
+  },
+  {
+    "word": "councillor",
+    "phonetic": "/ˈkaʊnsələ(r)/",
+    "pos": "n.",
+    "meaning": "地方议会议员",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "council（议会/委员会） + -or（人员），引申指地方议会议员 -> 市议员；政务委员；地方议会成员（美式亦拼作 co）。"
+  },
+  {
+    "word": "demographic",
+    "phonetic": "/ˌdeməˈɡræfɪk/",
+    "pos": "adj./n.",
+    "meaning": "人口统计的 n. 特定人群",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "demo-（人口/民众） + graph-（统计描摹） + -ic（形容词后缀），引申指人口统计的 n. 特定人群 -> 人口统计学的；人口学的；特定人口群体的（如 target）。"
+  },
+  {
+    "word": "addiction",
+    "phonetic": "/əˈdɪkʃn/",
+    "pos": "n.",
+    "meaning": "沉溺，上瘾；嗜好",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "ad-（朝向/交付） + dict-（判决言说），引申指沉溺 -> 瘾；成瘾；沉溺。"
+  },
+  {
+    "word": "cognitive",
+    "phonetic": "/ˈkɒɡnətɪv/",
+    "pos": "adj.",
+    "meaning": "认知的，感知的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "cognit-（认知知晓） + -ive（形容词后缀），引申指认知的 -> 认知的；知觉的；认识过程的（cognitiv）。"
+  },
+  {
+    "word": "vitality",
+    "phonetic": "/vaɪˈtæləti/",
+    "pos": "n.",
+    "meaning": "活力，生机；持久生命力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
+    "analysis_type": "构词",
+    "analysis": "vit-（生命） + -ality（名词后缀），引申指活力 -> 生机；活力；生命力。"
+  },
+  {
+    "word": "attain",
+    "phonetic": "/əˈteɪn/",
+    "pos": "vt.",
+    "meaning": "达到，获得；完成",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "at-（= ad- 朝向） + tain / tangere（触碰接触），引申指经过十年寒窗苦读如愿摘得博 -> 达到；获得；实现（目标）。"
+  },
+  {
+    "word": "caption",
+    "phonetic": "/ˈkæpʃn/",
+    "pos": "n./vt.",
+    "meaning": "标题，说明文字 vt. 加标题",
+    "part": "第一部分：超级核心母词族",
+    "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
+    "analysis_type": "构词",
+    "analysis": "capt-（拿取/抓取） + -ion（名词后缀），原指法庭传票当场逮捕令，引申指标题 -> （图片/漫画的）说明文字；标题；（电影的）字幕。"
+  },
+  {
+    "word": "factual",
+    "phonetic": "/ˈfæktʃuəl/",
+    "pos": "adj.",
+    "meaning": "事实的，真实的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. fac / fact / fect / fic / ficient 做/制作/产生】",
+    "analysis_type": "构词",
+    "analysis": "fact（事实） + -ual（形容词后缀），引申指事实的 -> 事实的；基于事实的；真实的。"
+  },
+  {
+    "word": "constituent",
+    "phonetic": "/kənˈstɪtʃuənt/",
+    "pos": "n./adj.",
+    "meaning": "要素，成分 adj. 组成的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【3. sta / stat / stit / sist 站立/确立/安置/固定】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + stitu-（站立确立） + -ent（人/物），引申指要素 -> 选民；选区选民；成分。"
+  },
+  {
+    "word": "discourse",
+    "phonetic": "/ˈdɪskɔːs/",
+    "pos": "n.",
+    "meaning": "论述，话语；演讲",
+    "part": "第一部分：超级核心母词族",
+    "group": "【12. curr / curs / cours 跑/流动/进程】",
+    "analysis_type": "构词",
+    "analysis": "dis-（向各方/深入） + course（奔跑流淌），引申指论述 -> （学术严肃的）演说；演讲；论述。"
+  },
+  {
+    "word": "arbitration",
+    "phonetic": "/ˌɑːbɪˈtreɪʃn/",
+    "pos": "n.",
+    "meaning": "仲裁，公断",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "arbitr-（仲裁裁决） + -ation（名词后缀），引申指仲裁 -> 仲裁；公断；仲裁裁决程序。"
+  },
+  {
+    "word": "bilateral",
+    "phonetic": "/ˌbaɪˈlætərəl/",
+    "pos": "adj.",
+    "meaning": "双边的，双方的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "bi-（两个） + later-（侧面/边） + -al，引申指双边的 -> 双边的；双方参与的；（生物学）两侧对称的。"
+  },
+  {
+    "word": "boycott",
+    "phonetic": "/ˈbɔɪkɒt/",
+    "pos": "vt./n.",
+    "meaning": "联合抵制，拒绝购买",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "源自十九世纪爱尔兰严苛无情土地经纪人博伊考特上尉（Charles ），原义见词源，引申指联合抵制 -> 抵制；拒绝购买；拒绝参与。"
+  },
+  {
+    "word": "clearing",
+    "phonetic": "/ˈklɪərɪŋ/",
+    "pos": "n.",
+    "meaning": "（银行）票据交换，结算",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "clear（结清清爽） + -ing，引申指（银行）票据交换 -> （森林中的）空地；林中空地；（银行的）清算。"
+  },
+  {
+    "word": "contingency",
+    "phonetic": "/kənˈtɪndʒənsi/",
+    "pos": "n.",
+    "meaning": "意外事故；应急储备",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + ting- / tangere（接触碰到机缘） + -ency，引申指意外事故 -> 突发事件；不测风云；意外事故。"
+  },
+  {
+    "word": "cumulative",
+    "phonetic": "/ˈkjuːmjələtɪv/",
+    "pos": "adj.",
+    "meaning": "累积的，渐增的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "cumul-（堆叠） + -ative（形容词后缀），引申指累积的 -> 累积的；渐增的；累积而成的。"
+  },
+  {
+    "word": "devaluation",
+    "phonetic": "/ˌdiːˌvæljuˈeɪʃn/",
+    "pos": "n.",
+    "meaning": "（货币）贬值",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下降低） + value（价值） + -ation，引申指（货币）贬值 -> （货币的）法定贬值；贬值；贬低。"
+  },
+  {
+    "word": "dumping",
+    "phonetic": "/ˈdʌmpɪŋ/",
+    "pos": "n.",
+    "meaning": "倾销",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "dump（倾倒垃圾/抛卸） + -ing（名词后缀），引申指倾销 -> （商贸反垄断中的）倾销；低价抛售倾销；倾倒废弃物。"
+  },
+  {
+    "word": "globalization",
+    "phonetic": "/ˌɡləʊbəlaɪˈzeɪʃn/",
+    "pos": "n.",
+    "meaning": "全球化",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "global（全球的） + -ization（过程后缀），引申指全球化 -> 全球化；经济全球一体化进程。"
+  },
+  {
+    "word": "hedge",
+    "phonetic": "/hedʒ/",
+    "pos": "n./vt.",
+    "meaning": "对冲；套期保值",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "原指农田四周种植的茂密灌木树篱（用于圈护财产抵御风险），金融领域借指为防范资产价格剧烈波动而构建的风险防线 -> n. 树篱；套期保值，对冲手段；v. 防范风险，对冲。"
+  },
+  {
+    "word": "holding",
+    "phonetic": "/ˈhəʊldɪŋ/",
+    "pos": "n.",
+    "meaning": "控股公司；股份，财产",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "hold（握住/持有） + -ing + -s，引申指控股公司 -> 控股公司（常用 holdi）；持有资产；股票储备（常用复数 hol）。"
+  },
+  {
+    "word": "leverage",
+    "phonetic": "/ˈliːvərɪdʒ/",
+    "pos": "n./vt.",
+    "meaning": "杠杆比率；利用",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "lever（杠杆） + -age（名词/动词后缀），引申指杠杆比率 -> 杠杆作用；杠杆力；撬动借贷资金。"
+  },
+  {
+    "word": "compression",
+    "phonetic": "/kəmˈpreʃn/",
+    "pos": "n.",
+    "meaning": "压缩，压紧；浓缩",
+    "part": "第一部分：超级核心母词族",
+    "group": "【30. 母词族：press / pre- / prim-（压/先/第一）】",
+    "analysis_type": "构词",
+    "analysis": "com-（共同） + press-（挤压） + -ion，引申指压缩 -> 压缩；压紧；浓缩。"
+  },
+  {
+    "word": "adversary",
+    "phonetic": "/ˈædvəsəri/",
+    "pos": "n.",
+    "meaning": "对手，敌手",
+    "part": "第一部分：超级核心母词族",
+    "group": "【35. 母词族：vert / vers-（转/翻转）】",
+    "analysis_type": "构词",
+    "analysis": "ad-（朝向/对抗） + vers-（转动对着） + -ary（人），引申指对手 -> 敌手；对手；对抗者。"
+  },
+  {
+    "word": "deception",
+    "phonetic": "/dɪˈsepʃn/",
+    "pos": "n.",
+    "meaning": "欺骗，骗局；诡计",
+    "part": "第一部分：超级核心母词族",
+    "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
+    "analysis_type": "构词",
+    "analysis": "de-（向下/变坏） + cept（抓/拿取） + -ion（名词后缀），原指暗中做手脚把人拿捏住，引申指欺骗 -> 欺骗；骗局。"
+  },
+  {
+    "word": "merger",
+    "phonetic": "/ˈmɜːdʒə/",
+    "pos": "n.",
+    "meaning": "（企业）合并，兼并",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "merge（浸没/融合） + -er（名词后缀），引申指（企业）合并 -> 兼并；合并。"
+  },
+  {
+    "word": "liquidity",
+    "phonetic": "/lɪˈkwɪdəti/",
+    "pos": "n.",
+    "meaning": "流动性，变现能力；流动资金",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "liquid（液体的/流动的） + -ity（名词后缀），引申指流动性 -> 流动性；变现性。"
+  },
+  {
+    "word": "unacceptable",
+    "phonetic": "/ˌʌnəkˈseptəbl/",
+    "pos": "adj.",
+    "meaning": "无法接受的，绝对不能容忍的，突破底线不可容许的（unacceptable behavior / risk / conditions / loss）；令人完全无法接受的严峻后果",
+    "part": "第一部分：超级核心母词族",
+    "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
+    "analysis_type": "构词",
+    "analysis": "un-（否定前缀：绝对不/非） + acceptable（可接受的） -> 某项行径、安全隐患或者单边霸凌条款在性质上彻底公然践踏了国家宪法公民基本人权、国际法主权平等原则或者安全生产生命底线红线；在任何有起码良知与法治原则的人心天理面前属于自始至终绝对百分之百留不出哪怕半毫米容忍妥协空间的不可接受极端恶劣状态。"
+  },
+  {
+    "word": "participation",
+    "phonetic": "/pɑːˌtɪsɪˈpeɪʃn/",
+    "pos": "n.",
+    "meaning": "参与，参加，全过程积极深度参与（active citizen participation 公民广泛民主参与 / worker participation in management 工人参与企业民主管理）；分享，分担分担责任贡献",
+    "part": "第一部分：超级核心母词族",
+    "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
+    "analysis_type": "构词",
+    "analysis": "part-（部分/一份） + -i- + cip- / cap-（抓取等 -> 在一个宏大的集体事业、历史洪流或者民主法治决策共同体大沙盘中；每一个人都自觉主动伸出双手紧紧握住属于自己的一份沉甸甸神圣责任与主人翁权利、深度融入并贡献自己的心智汗水力量。"
+  },
+  {
+    "word": "constitutional",
+    "phonetic": "/ˌkɒnstɪˈtjuːʃənl/",
+    "pos": "adj./n.",
+    "meaning": "宪法的，宪政宪制合宪合法的（constitutional law 宪法 / constitutional rights 宪法赋予的基本权利 / constitutional amendment 宪法修正案）；（人体/生理）体质上的，本性固有的（a constitutional weakness 体质虚弱）；（为了强身健体而进行的）例行散步，保健性散步（take a morning constitutional 晨间散步健步走）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "constitution（国家根本大法宪法） + -al（形容词后缀），原义见词根，引申指宪法的 -> 国家的合宪法定的宪法层面的；人体生理体质本性上的；为健康强身而进行的例行日常散步（n.）。"
+  },
+  {
+    "word": "institutional",
+    "phonetic": "/ˌɪnstɪˈtjuːʃənl/",
+    "pos": "adj.",
+    "meaning": "制度的，体制上的，机制顶层设计维度的（institutional reform 制度性体制机制深化改革 / institutional barriers 体制性障碍藩篱）；机构的，具有法人机构专业投资者地位的（institutional investors 机构投资者）；（养老院/公立机构等）收容机构设施的；习以为常刻板惯性的（institutional bias 制度性系统性偏见）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "institution（制度/设立确立的社会公器） + -al（形容词后缀），原义见词根，引申指制度的 -> 国家深水区制度层面的体制上的；专业法人机构投资者的；福利收容机构设施的。"
+  },
+  {
+    "word": "unstable",
+    "phonetic": "/ʌnˈsteɪbl/",
+    "pos": "adj.",
+    "meaning": "不稳定的，动荡摇摆的，不牢固易倾覆垮塌的（an unstable structure / government）；（化学物质/同位素）易分解易变不稳定的（an unstable isotope 放射性不稳定同位素）；（情绪/精神）极其不稳定喜怒无常的（emotionally unstable）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "un-（否定前缀：不/非） + stable（稳定的） -> 重心高高悬空、地基松软摇晃、微风一吹便在重力失衡下拉扯倾斜随时可能轰然倒地砸个粉碎的危险摇晃物理状态；在核物理与化学前沿中指原子核内部质子中子比例严重失衡、强相互作用力无法克服库仑斥力而在数微秒内必须发生放射性裂变衰变并释放高能辐射粒子的易变不稳定物理化学物象（unstable）。"
+  },
+  {
+    "word": "statistical",
+    "phonetic": "/stəˈtɪstɪkl/",
+    "pos": "adj.",
+    "meaning": "统计的，统计学的大数据的，基于实证数理统计推断概率分析的（statistical analysis / significance 统计学显著性检验；statistical probability 统计概率）；统计数据维度的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "statistic（统计数字/国家管理数据） + -al（形容词后缀） -> 现代科学实证主义最高判官标准：完全摒弃基于极少数个案幸存者偏差所产生的盲人摸象主观臆断；在数理统计学大数定律与中心极限定理支撑下；调动大样本量双盲随机对照队列数据、通过严格回归分析、假设检验计算出p值（p-value）以量化评估某一科学结论是否在数学真理尺度上真正确凿具备不可被随机巧合所解释的统计学显著性权威属性。"
+  },
+  {
+    "word": "unsteady",
+    "phonetic": "/ʌnˈstedi/",
+    "pos": "adj.",
+    "meaning": "不稳定的，摇摇晃晃晃动不稳的，站立不稳步履踉跄的（unsteady on one's feet 走起路来脚步虚浮踉跄；unsteady hands 颤抖发抖不稳的双手）；断断续续忽明忽暗时强时弱的（unsteady breathing 呼吸微弱紊乱断续；unsteady flame 摇曳微弱不定的烛火）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "un-（否定前缀：不/非） + steady（坚固稳健平稳的） -> 双腿膝盖在重病大手术全麻初醒、严重高山缺氧或者极度饥寒交迫之下由于下肢肌肉肌张力严重不足导致身体重心左右剧烈晃动摇摆、每迈出一步都东倒西歪险象环生随时可能栽倒在地的极度虚弱失衡步态状态；引申指狂风中随时可能被一口气吹灭的摇曳不定的微弱烛火微光；或在极端焦虑重压下食指不由自主产生细微震颤发抖使得高倍瞄准镜十字线上下晃动无法锁死靶心的神经肌肉失控状态。"
+  },
+  {
+    "word": "substitution",
+    "phonetic": "/ˌsʌbstɪˈtjuːʃn/",
+    "pos": "n.",
+    "meaning": "替代，替换，代用（import substitution 发展经济学进口替代战略；the substitution of clean energy for fossil fuels 绿色能源对化石燃料的彻底替代）；经济学替代效应（the substitution effect）；体育比赛中的中途换人替补操作",
+    "part": "第一部分：超级核心母词族",
+    "group": "【2. sta / sist / st 站立/建立/停留】",
+    "analysis_type": "构词",
+    "analysis": "sub-（在…位置下方/取而代之） + stitut-（建立站立） +等 -> 当原本站在某一主力位置上的构件、球员、或者某一严重依赖外部进口的高风险供应链卡脖子核心关键原材料因断供、伤病或成本过高而被迫退场时；从后方迅速派遣并推上一个性能完全对等甚至更加过硬安全可靠的国产化全自主研发新力量挺身而出稳稳立在原位接替发挥相同甚至更优越主导功能的闭环大动作替换替代机制。"
+  },
+  {
+    "word": "submission",
+    "phonetic": "/səbˈmɪʃn/",
+    "pos": "n.",
+    "meaning": "提交，呈递，正式报送审查的文件论文（paper submission deadline 截稿日期；submission of tender bids 投标书递交）；顺从屈服，臣服投降服从（force the enemy into submission 迫使敌人彻底屈服投降）；法庭辩护意见",
+    "part": "第一部分：超级核心母词族",
+    "group": "【8. mit / mis 送/放/派】",
+    "analysis_type": "构词",
+    "analysis": "sub-（在…下方） + miss- / mit-（送出/放下） + -ion（名词后缀），原义见词根，引申指提交 -> 正式向官方呈递提交报送文件论文；政治军事上的屈膝屈服顺从投降；辩护大律师当庭向合议庭法官呈递的正式书面代理辩护意见。"
+  },
+  {
+    "word": "disposable",
+    "phonetic": "/dɪˈspəʊzəbl/",
+    "pos": "adj./n.",
+    "meaning": "一次性的，用后即扔丢弃的（disposable medical gloves/masks / disposable chopsticks）；可自由支配的，扣除税费后完全任由个人随心所欲支配花销的（disposable income 个人可支配收入）；一次性用品耗材（常用复数 disposables）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【5. pon / pos / pound 放置】",
+    "analysis_type": "构词",
+    "analysis": "dis-（分散/向外） + pos-（放置处理） + -able（能够…的形容词后缀），原义见词根，引申指一次性的 -> 一次性用后即弃的（disposab）；金融经济学扣除税费后可自由支配的（disposab）；一次性医疗卫生日用品耗材（n.）。"
+  },
+  {
+    "word": "opposition",
+    "phonetic": "/ˌɒpəˈzɪʃn/",
+    "pos": "n.",
+    "meaning": "反对，抗议，强烈反对抵制立场（strong popular opposition to the proposal 广大群众的强烈反对意见）；反对党，在野党反对派（the parliamentary opposition / the leader of the opposition 反对党领袖）；对立对抗，面对面对立位置状态；（天文学行星运行）冲，冲日现象（planetary opposition）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【5. pon / pos / pound 放置】",
+    "analysis_type": "构词",
+    "analysis": "op- / ob-（在…正对面面对面逆向而立） + posit-（放置站稳） + -ion（名词后缀），原义见词根，引申指反对 -> 强烈的社会反对与抵制抗议；议会合宪在野反对党派大集团；两相面对面对立状态。"
+  },
+  {
+    "word": "disposition",
+    "phonetic": "/ˌdɪspəˈzɪʃn/",
+    "pos": "n.",
+    "meaning": "性情，秉性脾气，天生个性倾向（a calm/cheerful disposition 沉着/开朗的性格）；（军事战略/兵力兵器）战役部署，战略兵力配置布局（strategic troop disposition 战略兵力展开部署）；处置，支配，合法处分处决财产（the testamentary disposition of assets 遗嘱处分财产）；倾向意向，倾向性意愿（a disposition to argue 爱争辩的倾向）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【5. pon / pos / pound 放置】",
+    "analysis_type": "构词",
+    "analysis": "dis-（分散/向各方） + posit-（放置/安排布署） + -ion（名词后缀），原义见词根，引申指性情 -> 先天脾气秉性性情；军事战略部队战役展开部署；民事实体法律财产的合法处分处置权。"
+  },
+  {
+    "word": "retrace",
+    "phonetic": "/rɪˈtreɪs/",
+    "pos": "vt.",
+    "meaning": "沿原路折返，顺着原先足迹脚印原路返回折回（retrace one's steps through the forest 顺原路折返）；追溯回溯，深层复盘梳理探索历史起源发展全脉络轨迹（retrace the origins of modern civilization 回溯现代文明起源；retrace the evolutionary pathway 追溯生物进化演变脉络）；描摹临摹",
+    "part": "第一部分：超级核心母词族",
+    "group": "【7. tra / tract 拉/引/抽】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次/反向向后） + trace（足迹/拉出的痕迹线索） -> 1. 物理动作：在风雪交加深山迷路大绝境关口、神智清醒的猎人低头死死盯住自己雪地上刚刚踩出的深深脚印一个脚印挨着一个脚印小心翼翼反向倒退原路平稳退回安全宿营地的自救大动作（retrace ）；2. 思想学术大境界：历史学家与古地质演化学家手持放大镜在卷帙浩瀚的传世典籍、考古地层探方与地壳古岩心标本中抽丝剥茧；跨越数百万年漫漫沧桑岁月之河。"
+  },
+  {
+    "word": "intensity",
+    "phonetic": "/ɪnˈtensəti/",
+    "pos": "n.",
+    "meaning": "强度，烈度（light/seismic/radiation intensity 光照/地震烈度/辐射剂量强度；energy intensity 能源利用强度）；（工作/训练/情感的）极其紧张激烈，高度白热化激烈度（the emotional/competitive intensity of the Olympic finals 奥运决战的白热化激烈程度）；剧烈强烈度",
+    "part": "第一部分：超级核心母词族",
+    "group": "【7. tra / tract 拉/引/抽】",
+    "analysis_type": "构词",
+    "analysis": "in-（向内/在内部） + tens-（拉紧绷紧） + -ity（物理状态名词后缀） -> 1. 物理科学最底层标量与矢量大概念：单位面积、单位时间或单位物理体积内所聚集穿透释放的物理能量、声光电磁辐射通量密度或者地壳破裂释放震波烈度大小的精确数学定量测量标尺（seismic ）；2. 竞技体育或前沿科技大攻关决战时刻：运动员在决胜最后三秒咬紧牙关全身每一束骨骼肌纤维与交感神经被极限拉扯绷紧到即将断裂的极限高压爆发对抗竞技强度；或学者面对世界难题通宵达旦脑力激荡高度白热化的心智投入状态。"
+  },
+  {
+    "word": "intentional",
+    "phonetic": "/ɪnˈtenʃənl/",
+    "pos": "adj.",
+    "meaning": "故意的，蓄意的，有意识有意图存心蓄谋的（intentional homicide 刑法故意杀人罪；intentional patent infringement 商业恶意蓄意侵权；intentional ambiguity 故意故意含糊其辞）；深思熟虑绝非偶然的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【7. tra / tract 拉/引/抽】",
+    "analysis_type": "构词",
+    "analysis": "intent-（意图/心智之箭射向特定靶标） + -ion + -al（形容词后缀） -> 彻底区别于过失疏忽（negligent）或意外偶发（accidental）；行为人在事前大脑前额叶心智沙盘深处对自身行为的性质、危害后果及其演进逻辑有着完全清晰、清醒的认知判断与严密预谋策划；在理智支配下主动、自觉按下执行键以追求该特定损害结果发生的具有极高主观恶性的大脑主观故意蓄意心理与法律状态。"
+  },
+  {
+    "word": "speculation",
+    "phonetic": "/ˌspekjuˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "投机，商业投机，金融短期高风险炒作（financial/currency/property speculation 金融/外汇/房地产投机炒作）；推测，猜想，缺乏确凿证据的主观理论猜测推断（pure speculation / widespread speculation 坊间充斥着各种揣测猜测）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【10. spec / spect / spic 看】",
+    "analysis_type": "构词",
+    "analysis": "specul-（望远镜眺望/在瞭望塔上侦察观望） + -ation（名词后缀），原义见词根，引申指投机 -> 金融与房地产短期逐利投机炒作；缺乏确凿事实依据的主观推测猜测揣测；形而上学深邃纯思辨构想。"
+  },
+  {
+    "word": "speculative",
+    "phonetic": "/ˈspekjələtɪv/",
+    "pos": "adj.",
+    "meaning": "投机性的，充满高风险投机炒作的（speculative bubble 投机性金融泡沫；speculative capital 跨国短期热钱投机资本）；推测的基于假设性假说的，思辨推理性未获实证检验的（a speculative hypothesis 尚待检验的推测性假说；speculative philosophy 思辨哲学）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【10. spec / spect / spic 看】",
+    "analysis_type": "构词",
+    "analysis": "speculat-（眺望观望） + -ive（形容词后缀），原义见词根，引申指投机性的 -> 金融高风险投机炒作的；学术理论推测性前瞻思辨的（与实证 empi）。"
+  },
+  {
+    "word": "individuality",
+    "phonetic": "/ˌɪndɪˌvɪdʒuˈæləti/",
+    "pos": "n.",
+    "meaning": "个性，个人独特性，不可替代的个人独特品格神韵，独立人格与个体鲜明特征（express one's individuality 充分彰显并释放个人鲜明个性；preserve cultural individuality 保留独特文化个性）；个体性不可分割性",
+    "part": "第二部分：高频专业词根族",
+    "group": "【46. div / vid 分开】",
+    "analysis_type": "构词",
+    "analysis": "individual（个人/不可分割的个体） + -ity（名词后缀） -> 彻底区别于千人一面抹杀个性的标准化工业克隆流水线产物；一个大写的人在思想灵魂、艺术审美与创新灵感深处所固有绽放散发出的那种天下无双、独一无二、带有强烈自我主体性意识与生命张力神采的不可复制的卓越个性品格境界。"
+  },
+  {
+    "word": "dictation",
+    "phonetic": "/dɪkˈteɪʃn/",
+    "pos": "n.",
+    "meaning": "口述记录，听写，由一人发音朗读由另一人记录或输入的听写练习（take dictation from one's supervisor 记录领导口述指令；vocabulary dictation test 单词听写测验）；（强权势力的）发号施令，强行命令霸道强加干预（resist foreign dictation 坚决坚决抵御境外外部霸权势力的强行发号施令与强权政治霸凌）；霸道主宰命令",
+    "part": "第一部分：超级核心母词族",
+    "group": "【11. dic / dict 说/宣称】",
+    "analysis_type": "构词",
+    "analysis": "dictat-（大声宣读发布法令/口述指令） + -ion（名词后缀），原义见词根，引申指口述记录 -> 口述记录与外语课堂听写练习；强权势力的傲慢发号施令霸道强加指令；独裁专断意志。"
+  },
+  {
+    "word": "indicative",
+    "phonetic": "/ɪnˈdɪkətɪv/",
+    "pos": "adj./n.",
+    "meaning": "表明的，指示性的，足以显示预示说明某种深层发展大趋势的（be indicative of future trends 足以说明预示未来大趋势；indicative prices 市场指导参考价格）；（语法学动词语气）陈述语气的，客观事实陈述的（the indicative mood 陈述语气，与 subjunctive 虚拟语气 相对）；陈述语气动词形态（n.）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【11. dic / dict 说/宣称】",
+    "analysis_type": "构词",
+    "analysis": "in-（朝向/指明） + dicat-（指明宣告宣称） + -ive（形容词后缀），原义见词根，引申指表明的 -> 足以指示预示表明说明深层大趋势特征的；商业市场指导性参考的；理论语法学客观陈述语气的（adj.）。"
+  },
+  {
+    "word": "predictable",
+    "phonetic": "/prɪˈdɪktəbl/",
+    "pos": "adj.",
+    "meaning": "可预测的，按常理合情合理可预见的可预期的（a predictable result/outcome 符合常理预料之中的必然结果；in a predictable manner 按照可预见的方式稳健推进）；（由于缺乏创意新意而）老套毫无惊喜意料之中的（a predictable Hollywood plot 毫无新意老套烂俗的好莱坞电影剧情）；循规蹈矩可预测的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【11. dic / dict 说/宣称】",
+    "analysis_type": "构词",
+    "analysis": "pre-（在…之前提前） + dict-（说话宣布） + -able（能够…的形容词后缀） -> 1. 经典自然物理定律与工业质量控制至高追求：一个系统其输出结果完全严格服从严密因果逻辑与数学物理定律支配、在输入特定自变量参数后没有任何不可控的随机突发跳变、完全能够在事前在计算机仿真模型沙盘上提前百分之百推导预见并精准掌控的极其可靠稳定的可预见可预期属性（highly p）；2. 文艺批判贬义色彩考点：某些商业快餐流水线剧本创作毫无起码文学艺术灵魂与人性深度挖掘、观众刚看到开场五分钟便能闭着眼睛把结尾剧情大团圆结局猜得八九不离十的极其老套烂俗毫无悬念意料之中的平庸属性。"
+  },
+  {
+    "word": "intercourse",
+    "phonetic": "/ˈɪntəkɔːs/",
+    "pos": "n.",
+    "meaning": "交往，交际往来，正式跨国跨区域学术商业文化思想深度友好大往来（commercial/cultural/intellectual intercourse 各国间经贸/文化/思想密切交流交际往来）；（生理学与法医学专有术语）性交，交媾（sexual intercourse）",
+    "part": "第一部分：超级核心母词族",
+    "group": "【17. cur / curs / cour / cours 跑/流动】",
+    "analysis_type": "构词",
+    "analysis": "inter-（在…之间相互） + course（奔跑流淌） -> 1. 国际政治学与人类文明史殿堂级恢弘大叙事词汇：两个拥有不同宗教信仰、不同肤色与制度传统的大洲主权国家民族；在彻底摒弃刀枪兵戎相见、跨越大洋大漠天堑障碍；派遣庞大商船队、文化学者与艺术大师使节团在彼此大都会与集市之间频繁穿梭往来、将丝绸、瓷器、造纸术与现代科学思想深度交织碰撞互通有无的波澜壮阔人类文明交流互鉴交往大往来（free fri）。"
+  },
+  {
+    "word": "attribution",
+    "phonetic": "/ˌætrɪˈbjuːʃn/",
+    "pos": "n.",
+    "meaning": "归因，归咎；归属，归属权",
+    "part": "第一部分：超级核心母词族",
+    "group": "【38. trib 给与/交付/分派】",
+    "analysis_type": "构词",
+    "analysis": "ad-（朝向） + tribut-（给予） + -ion（名词后缀），引申指归因 -> 归因；归结；作品署名归属。"
+  },
+  {
+    "word": "insecure",
+    "phonetic": "/ˌɪnsɪˈkjʊə/",
+    "pos": "adj.",
+    "meaning": "缺乏安全感的；不牢固的，危险的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【40. cur / cure 关心/照料/注意】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/非） + secure（安全的），处于充满担忧风险或物理结构晃动摇摇欲坠的状态 -> 缺乏安全感的；危险不固的。"
+  },
+  {
+    "word": "debatable",
+    "phonetic": "/dɪˈbeɪtəbl/",
+    "pos": "adj.",
+    "meaning": "有争议的，未定论的；成问题的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【49. bell / bat 战斗/敲打】",
+    "analysis_type": "构词",
+    "analysis": "de-（彻底） + bat（击打） + -able（能够…的） -> 观点存在分歧、尚有充足辩驳探讨空间的。"
+  },
+  {
+    "word": "unequal",
+    "phonetic": "/ʌnˈiːkwəl/",
+    "pos": "adj.",
+    "meaning": "不平等的，不相等的；不胜任的，力不从心的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【58. equ / equi 平等/相同/公允】",
+    "analysis_type": "构词",
+    "analysis": "un-（不/非） + equal（相等的） -> 权利、数量、机会存在显著倾斜偏私；引申指个人能力弱于所肩负的重任（unequal ）。"
+  },
+  {
+    "word": "collaborative",
+    "phonetic": "/kəˈlæbərətɪv/",
+    "pos": "adj.",
+    "meaning": "合作的，协作的，共同完成的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【66. labor 劳动/劳作/艰辛】",
+    "analysis_type": "构词",
+    "analysis": "col-（共同/一起） + labor（劳动/工作） + -ative（形容词后缀） -> 跨学科、跨部门成员共同投入智力与体力紧密协同完成的。"
+  },
+  {
+    "word": "collective",
+    "phonetic": "/kəˈlektɪv/",
+    "pos": "adj./n.",
+    "meaning": "集体的，共同的；集体，联合体",
+    "part": "第一部分：超级核心母词族",
+    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
+    "analysis_type": "构词",
+    "analysis": "col-（共同） + lect（收集/挑选） + -ive（形容词/名词后缀） -> 将社会中分散的各个成员挑选汇聚为一个坚强的整体。"
+  },
+  {
+    "word": "selective",
+    "phonetic": "/sɪˈlektɪv/",
+    "pos": "adj.",
+    "meaning": "有选择性的；挑剔的，严格筛选的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
+    "analysis_type": "构词",
+    "analysis": "select（挑选） + -ive（具…倾向的） -> 不盲目全盘接纳；而是经过细致严苛的标准进行鉴别过滤取舍。"
+  },
+  {
+    "word": "liberation",
+    "phonetic": "/ˌlɪbəˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "解放，释放；摆脱束缚，平权运动",
+    "part": "第一部分：超级核心母词族",
+    "group": "【69. liber 自由/释放/称量】",
+    "analysis_type": "构词",
+    "analysis": "liber-（自由） + -ate（动词后缀） + -ion（名词后缀） -> 从暴政枷锁、殖民压迫或落后陈腐思想禁锢中彻底挣脱重获人身自主。"
+  },
+  {
+    "word": "immigration",
+    "phonetic": "/ˌɪmɪˈɡreɪʃn/",
+    "pos": "n.",
+    "meaning": "移民入境，移居国内；移民局，入境检查",
+    "part": "第一部分：超级核心母词族",
+    "group": "【74. migr 迁移/流动】",
+    "analysis_type": "构词",
+    "analysis": "im-（进入/向内） + migr-（迁移） + -ation（名词后缀），引申指移民入境 -> 移民入境；入境审查。"
+  },
+  {
+    "word": "normality",
+    "phonetic": "/nɔːˈmæləti/",
+    "pos": "n.",
+    "meaning": "常态，正常状态；规范性",
+    "part": "第一部分：超级核心母词族",
+    "group": "【76. norm 规范/标准】",
+    "analysis_type": "构词",
+    "analysis": "norm-（标准/准则） + -ality（名词后缀），引申指常态 -> 常态；正常。"
+  },
+  {
+    "word": "antiquity",
+    "phonetic": "/ænˈtɪkwəti/",
+    "pos": "n.",
+    "meaning": "古老，古代；古物，古迹",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：anti- / ante- 在前/古老】",
+    "analysis_type": "构词",
+    "analysis": "antiq-（古老的） + -uity（名词后缀），引申指古老 -> 古代；古老；古玩。"
+  },
+  {
+    "word": "circulation",
+    "phonetic": "/ˌsɜːkjəˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "血液循环；流通，传播；发行量",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：circu- / circum- 环绕/周围】",
+    "analysis_type": "构词",
+    "analysis": "circul-（圆圈/环行） + -ation（名词后缀），引申指血液循环 -> 循环；流通；报刊发行量。"
+  },
+  {
+    "word": "foreseeable",
+    "phonetic": "/fɔːˈsiːəbl/",
+    "pos": "adj.",
+    "meaning": "可预见的，能预料到的",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：fore- 在前/预先】",
+    "analysis_type": "构词",
+    "analysis": "fore-（预先/在前） + see（看见） + -able（能…的），引申指可预见的 -> 可预见的（如 in the）。"
+  },
+  {
+    "word": "government",
+    "phonetic": "/ˈɡʌvənmənt/",
+    "pos": "n.",
+    "meaning": "政府，内阁；统治，政体；治理",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：社会治理与制度管理】",
+    "analysis_type": "构词",
+    "analysis": "govern（治理/掌舵） + -ment（名词后缀），引申指政府 -> 政府；政权体系。"
+  },
+  {
+    "word": "inferiority",
+    "phonetic": "/ɪnˌfɪəriˈɒrəti/",
+    "pos": "n.",
+    "meaning": "自卑，劣势；次等，下等地位",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：in- / infra- 向下/在下】",
+    "analysis_type": "构词",
+    "analysis": "inferior（次等的/较低的） + -ity（名词后缀），引申指自卑 -> 自卑感；下等。"
+  },
+  {
+    "word": "interactive",
+    "phonetic": "/ˌɪntərˈæktɪv/",
+    "pos": "adj.",
+    "meaning": "互动的，交互式的；相互作用的",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：inter- 相互/在…之间】",
+    "analysis_type": "构词",
+    "analysis": "inter-（相互之间） + act（行动/作为） + -ive（形容词后缀），引申指互动的 -> 交互式的；互动的。"
+  },
+  {
+    "word": "interpretation",
+    "phonetic": "/ɪnˌtɜːprɪˈteɪʃn/",
+    "pos": "n.",
+    "meaning": "解释，说明；演绎，艺术诠释；口译",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术与思维逻辑】",
+    "analysis_type": "构词",
+    "analysis": "interpret（解释/诠释） + -ation（名词后缀），引申指解释 -> 解释；诠释；口译。"
+  },
+  {
+    "word": "translation",
+    "phonetic": "/trænzˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "翻译，译文；转化，转变",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：trans- 穿过/跨越】",
+    "analysis_type": "构词",
+    "analysis": "trans-（跨越） + lat-（运送/携带） + -ion（名词后缀），引申指翻译 -> 翻译；转化。"
+  },
+  {
+    "word": "communication",
+    "phonetic": "/kəˌmjuːnɪˈkeɪʃn/",
+    "pos": "n.",
+    "meaning": "沟通，交流；通信，信息传递；交通联系",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "com-（共同） + mun-（服务/公共义务） + -ication（名词后缀），引申指沟通 -> 沟通交流；通信系统。"
+  },
+  {
+    "word": "communicative",
+    "phonetic": "/kəˈmjuːnɪkətɪv/",
+    "pos": "adj.",
+    "meaning": "善于交际的，健谈的；交际的，传达信息的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "communicate（交流） + -ive（具…特性的），引申指善于交际的 -> 善于交际的；交际性的。"
+  },
+  {
+    "word": "connective",
+    "phonetic": "/kəˈnektɪv/",
+    "pos": "adj./n.",
+    "meaning": "连接的；结缔的（生物学）；连接词",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "connect（连接） + -ive（形容词/名词后缀），引申指连接的 -> 连接的；结缔的。"
+  },
+  {
+    "word": "cooperative",
+    "phonetic": "/kəʊˈɒpərətɪv/",
+    "pos": "adj./n.",
+    "meaning": "合作的，协作的；合作社，协作组织",
+    "part": "第一部分：超级核心母词族",
+    "group": "【04. oper 工作/操作】",
+    "analysis_type": "构词",
+    "analysis": "co-（共同） + oper-（工作） + -ative（形容词/名词后缀），引申指合作的 -> 合作的；合作社。"
+  },
+  {
+    "word": "coordination",
+    "phonetic": "/kəʊˌɔːdɪˈneɪʃn/",
+    "pos": "n.",
+    "meaning": "协调，统筹配合；（动作）协调性",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "co-（共同） + ordin-（顺序/秩序） + -ation（名词后缀），引申指协调 -> 协调配合；协调动作。"
+  },
+  {
+    "word": "appreciative",
+    "phonetic": "/əˈpriːʃətɪv/",
+    "pos": "adj.",
+    "meaning": "感激的；欣赏的，赞赏的，有赏识力的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【45. val / vail / forc / fort 强壮/力量/价值】",
+    "analysis_type": "构词",
+    "analysis": "ad-（去/朝向） + preci-（价格/价值） + -ative（形容词后缀），引申指感激的 -> 感激的；赏识的。"
+  },
+  {
+    "word": "recharge",
+    "phonetic": "/ˌriːˈtʃɑːdʒ/",
+    "pos": "vt./vi.",
+    "meaning": "再充电；休整，恢复体力；再次控告",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次） + charge（装载/电荷/冲锋），引申指再充电 -> 再充电；恢复体力。"
+  },
+  {
+    "word": "classical",
+    "phonetic": "/ˈklæsɪkl/",
+    "pos": "adj.",
+    "meaning": "古典的，传统的，经典的；经典的（物理学）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "class-（等级/最高阶层） + -ic + -al（形容词后缀），引申指古典的 -> 古典的；传统的。"
+  },
+  {
+    "word": "consultation",
+    "phonetic": "/ˌkɒnslˈteɪʃn/",
+    "pos": "n.",
+    "meaning": "咨询，商讨；（医生）诊察，会诊",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "con-（共同） + sult-（坐/商议） + -ation（名词后缀），引申指咨询 -> 咨询；会诊。"
+  },
+  {
+    "word": "consumable",
+    "phonetic": "/kənˈsjuːməbl/",
+    "pos": "adj./n.",
+    "meaning": "可消费的，易损耗的；消耗品，耗材",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "consume（消耗/吞噬） + -able（能…的），引申指可消费的 -> 易耗的；消耗品。"
+  },
+  {
+    "word": "countable",
+    "phonetic": "/ˈkaʊntəbl/",
+    "pos": "adj.",
+    "meaning": "可数的，可计算的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "count（计数/清点） + -able（能…的），引申指可数的 -> 可数的。"
+  },
+  {
+    "word": "recount",
+    "phonetic": "/rɪˈkaʊnt/",
+    "pos": "vt./n.",
+    "meaning": "详细叙述，描述；重新清点（选票）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次） + count（计算/述说），引申指详细叙述 -> 叙述；重验选票。"
+  },
+  {
+    "word": "estimation",
+    "phonetic": "/ˌestɪˈmeɪʃn/",
+    "pos": "n.",
+    "meaning": "估计，预算；评价，看法，判断",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "estim-（衡量/评估） + -ation（名词后缀），引申指估计 -> 估计；评价。"
+  },
+  {
+    "word": "fashionable",
+    "phonetic": "/ˈfæʃnəbl/",
+    "pos": "adj.",
+    "meaning": "时髦的，流行的；豪华高级的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "fashion（时尚/风尚） + -able（符合…的），引申指时髦的 -> 时髦的；流行的。"
+  },
+  {
+    "word": "investigation",
+    "phonetic": "/ɪnˌvestɪˈɡeɪʃn/",
+    "pos": "n.",
+    "meaning": "调查，审查，调研，深入排查",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "in-（深入） + vestig-（脚印/踪迹） + -ation（名词后缀），引申为执法或科研中的严密取证调研 -> 调查；审查。"
+  },
+  {
+    "word": "marginal",
+    "phonetic": "/ˈmɑːdʒɪnl/",
+    "pos": "adj.",
+    "meaning": "微小的，边缘的；边际的（经济学）",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "margin（边缘/页边空白） + -al（形容词后缀），引申指微小的 -> 边缘的；边际的。"
+  },
+  {
+    "word": "negotiation",
+    "phonetic": "/nɪˌɡəʊʃiˈeɪʃn/",
+    "pos": "n.",
+    "meaning": "谈判，协商，磋商",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "neg-（不/非） + otium（闲暇），原指忙于公务商业事务，引申为利益双方为达成互惠协议进行 -> 商务谈判；磋商。"
+  },
+  {
+    "word": "nutritional",
+    "phonetic": "/njuˈtrɪʃənl/",
+    "pos": "adj.",
+    "meaning": "营养的，滋养的，食物营养价值的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
+    "analysis_type": "构词",
+    "analysis": "nutrition（营养） + -al（形容词后缀），引申指营养的 -> 营养的；食物成分的。"
+  },
+  {
+    "word": "occupational",
+    "phonetic": "/ˌɒkjuˈpeɪʃənl/",
+    "pos": "adj.",
+    "meaning": "职业的，工作引起的，由行业导致的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "occupation（职业/占有） + -al（形容词后缀），引申指职业的 -> 职业的。"
+  },
+  {
+    "word": "perplexity",
+    "phonetic": "/pəˈpleksəti/",
+    "pos": "n.",
+    "meaning": "困惑，迷茫，不知所措；复杂难懂的事物",
+    "part": "第一部分：超级核心母词族",
+    "group": "【24. ple / pli / plic 编织/重叠/折叠】",
+    "analysis_type": "构词",
+    "analysis": "per-（彻底） + plex-（编织交缠） + -ity（名词后缀），引申指困惑 -> 困惑迷茫；疑难复杂。"
+  },
+  {
+    "word": "assertive",
+    "phonetic": "/əˈsɜːtɪv/",
+    "pos": "adj.",
+    "meaning": "坚定自信的，果断的，坚决主张的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【82. ser / sert 连接/结合/编织】",
+    "analysis_type": "构词",
+    "analysis": "ad-（去/朝向） + sert-（连接/系住），引申指坚定自信的 -> 果断坚决的；充满自信的。"
+  },
+  {
+    "word": "inconvenience",
+    "phonetic": "/ˌɪnkənˈviːniəns/",
+    "pos": "n./vt.",
+    "meaning": "不便，麻烦；打扰，给…造成不便",
+    "part": "第一部分：超级核心母词族",
+    "group": "【14. ven / vent 来/到达/发生】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/非） + convenience（便利），打破了顺畅的生活动线带来的障碍干扰 -> 不便；带来麻烦。"
+  },
+  {
+    "word": "preventive",
+    "phonetic": "/prɪˈventɪv/",
+    "pos": "adj./n.",
+    "meaning": "预防性的，防患于未然的；预防措施",
+    "part": "第一部分：超级核心母词族",
+    "group": "【14. ven / vent 来/到达/发生】",
+    "analysis_type": "构词",
+    "analysis": "prevent（预防） + -ive（形容词/名词后缀），引申指预防性的 -> 预防性的；防护手段。"
+  },
+  {
+    "word": "reconstruction",
+    "phonetic": "/ˌriːkənˈstrʌkʃn/",
+    "pos": "n.",
+    "meaning": "重建，再建；复原，改造；重建时期",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次） + construct（建造） + -ion（名词后缀），引申指重建 -> 重建；复原。"
+  },
+  {
+    "word": "instructive",
+    "phonetic": "/ɪnˈstrʌktɪv/",
+    "pos": "adj.",
+    "meaning": "有教育意义的，有启发性的，增长见识的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "instruct（教导） + -ive（形容词后缀） -> 启迪心智大有裨益的。"
+  },
+  {
+    "word": "instructional",
+    "phonetic": "/ɪnˈstrʌkʃənl/",
+    "pos": "adj.",
+    "meaning": "教学的，指导性的，教育的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "instruction（教学/指令） + -al（形容词后缀），引申指教学的 -> 教学的。"
+  },
+  {
+    "word": "instrumental",
+    "phonetic": "/ˌɪnstrəˈmentl/",
+    "pos": "adj.",
+    "meaning": "起关键作用的，作为工具手段的；器乐的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【16. stru / struct 建造/构筑/堆叠】",
+    "analysis_type": "构词",
+    "analysis": "instrument（工具/乐器） + -al（形容词后缀），引申指起关键作用的 -> 起重要作用的；器乐的。"
+  },
+  {
+    "word": "incidental",
+    "phonetic": "/ˌɪnsɪˈdentl/",
+    "pos": "adj./n.",
+    "meaning": "附带的，次要的；偶然的；附带杂费",
+    "part": "第一部分：超级核心母词族",
+    "group": "【18. cis / cide 切/杀/决断】",
+    "analysis_type": "构词",
+    "analysis": "in-（在…上） + cid-（落下） + -ent + -al（形容词/名词后缀），引申指附带的 -> 附带的；杂项开支。"
+  },
+  {
+    "word": "incomplete",
+    "phonetic": "/ˌɪnkəmˈpliːt/",
+    "pos": "adj.",
+    "meaning": "不完整的，未完成的，残缺的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【19. ple / plen / plet 满/填满】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/非） + complete（完整的），缺少关键拼图或未达最终交付标准的 -> 不完整的；未结项的。"
+  },
+  {
+    "word": "depletion",
+    "phonetic": "/dɪˈpliːʃn/",
+    "pos": "n.",
+    "meaning": "耗尽，枯竭，大幅减少",
+    "part": "第一部分：超级核心母词族",
+    "group": "【19. ple / plen / plet 满/填满】",
+    "analysis_type": "构词",
+    "analysis": "de-（去除/剥离） + plet-（填满） + -ion（名词后缀），引申指耗尽 -> 枯竭；资源耗尽。"
+  },
+  {
+    "word": "fulfillment",
+    "phonetic": "/fʊlˈfɪlmənt/",
+    "pos": "n.",
+    "meaning": "履行，实现；满足感，成就感",
+    "part": "第一部分：超级核心母词族",
+    "group": "【19. ple / plen / plet 满/填满】",
+    "analysis_type": "构词",
+    "analysis": "fulfill（填满/实现） + -ment（名词后缀），引申指履行 -> 履行；成就感。"
+  },
+  {
+    "word": "possessive",
+    "phonetic": "/pəˈzesɪv/",
+    "pos": "adj./n.",
+    "meaning": "占有欲强的；所有格的；所有格",
+    "part": "第一部分：超级核心母词族",
+    "group": "【35. sid / sed / sess 坐/停留/沉淀】",
+    "analysis_type": "构词",
+    "analysis": "possess（拥有/占有） + -ive（形容词后缀），引申指占有欲强的 -> 占有欲强的；所有格的。"
+  },
+  {
+    "word": "impulsive",
+    "phonetic": "/ɪmˈpʌlsɪv/",
+    "pos": "adj.",
+    "meaning": "冲动的，鲁莽的，凭一时冲动的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【20. pel / puls 推动/驱逐/驱动】",
+    "analysis_type": "构词",
+    "analysis": "im-（内部向外） + puls-（推动/冲击） + -ive（形容词后缀），引申指冲动的 -> 冲动的；轻率的。"
+  },
+  {
+    "word": "aspiration",
+    "phonetic": "/ˌæspəˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "志向，抱负，渴望；（语音）送气",
+    "part": "第一部分：超级核心母词族",
+    "group": "【27. voc / vok 声音/呼唤】",
+    "analysis_type": "构词",
+    "analysis": "ad-（朝向） + spir-（呼吸/气息） + -ation（名词后缀），引申指志向 -> 志向；抱负。"
+  },
+  {
+    "word": "indifference",
+    "phonetic": "/ɪnˈdɪfrəns/",
+    "pos": "n.",
+    "meaning": "漠不关心，冷淡；不在乎，中立",
+    "part": "第一部分：超级核心母词族",
+    "group": "【23. fer / phor 运载/带来/承受】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/无） + difference（区别/差异），引申指漠不关心 -> 漠然冷淡；不在乎。"
+  },
+  {
+    "word": "fertility",
+    "phonetic": "/fəˈtɪləti/",
+    "pos": "n.",
+    "meaning": "肥沃，丰产；生育能力，繁殖力",
+    "part": "第一部分：超级核心母词族",
+    "group": "【23. fer / phor 运载/带来/承受】",
+    "analysis_type": "构词",
+    "analysis": "fertile（肥沃的） + -ity（名词后缀） -> 土壤富含养分能茁壮孕育庄稼、或机体具备繁育后代的能力。"
+  },
+  {
+    "word": "observable",
+    "phonetic": "/əbˈzɜːvəbl/",
+    "pos": "adj.",
+    "meaning": "看得见的，显著的；可观察到的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【30. serv / servat 保留/守护/服务】",
+    "analysis_type": "构词",
+    "analysis": "observe（观察/注意） + -able（能…的），引申指看得见的 -> 可察觉的；显著的。"
+  },
+  {
+    "word": "preservation",
+    "phonetic": "/ˌprezəˈveɪʃn/",
+    "pos": "n.",
+    "meaning": "保护，保存；维持，防腐",
+    "part": "第一部分：超级核心母词族",
+    "group": "【30. serv / servat 保留/守护/服务】",
+    "analysis_type": "构词",
+    "analysis": "pre-（预先） + serv-（守护/留存） + -ation（名词后缀），引申指保护 -> 保护；保存。"
+  },
+  {
+    "word": "conformity",
+    "phonetic": "/kənˈfɔːməti/",
+    "pos": "n.",
+    "meaning": "一致，符合；顺从，遵守，从众心理",
+    "part": "第一部分：超级核心母词族",
+    "group": "【25. form 形状/形式/塑造】",
+    "analysis_type": "构词",
+    "analysis": "conform（顺从） + -ity（名词后缀），引申指一致 -> 从众；遵从规范。"
+  },
+  {
+    "word": "informal",
+    "phonetic": "/ɪnˈfɔːml/",
+    "pos": "adj.",
+    "meaning": "非正式的，通俗的，随意的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【25. form 形状/形式/塑造】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/非） + formal（正规的），引申指非正式的 -> 非正式的；随意轻松的。"
+  },
+  {
+    "word": "information",
+    "phonetic": "/ˌɪnfəˈmeɪʃn/",
+    "pos": "n.",
+    "meaning": "信息，情报，资料；通知",
+    "part": "第一部分：超级核心母词族",
+    "group": "【25. form 形状/形式/塑造】",
+    "analysis_type": "构词",
+    "analysis": "in-（进入内心） + form（塑造形式） + -ation（名词后缀），原指将知识构想注入听众头脑中塑型，引申为消除不确定性的数据流 -> 信息；情报。"
+  },
+  {
+    "word": "formulation",
+    "phonetic": "/ˌfɔːmjuˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "构想，规划；明确表述；配方，制剂",
+    "part": "第一部分：超级核心母词族",
+    "group": "【25. form 形状/形式/塑造】",
+    "analysis_type": "构词",
+    "analysis": "formula（公式/小形式） + -ation（名词后缀），引申指构想 -> 规划制定；配方制剂。"
+  },
+  {
+    "word": "confinement",
+    "phonetic": "/kənˈfaɪnmənt/",
+    "pos": "n.",
+    "meaning": "监禁，禁闭；限制；（妇人）分娩期",
+    "part": "第一部分：超级核心母词族",
+    "group": "【26. fin / termin 界限/限制/终点/精细】",
+    "analysis_type": "构词",
+    "analysis": "confine（限制/关闭） + -ment（名词后缀），引申指监禁 -> 禁闭；分娩坐月子。"
+  },
+  {
+    "word": "definitive",
+    "phonetic": "/dɪˈfɪnətɪv/",
+    "pos": "adj.",
+    "meaning": "决定性的，最终的；最权威确凿的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【26. fin / termin 界限/限制/终点/精细】",
+    "analysis_type": "构词",
+    "analysis": "define（界定） + -itive（形容词后缀），引申指决定性的 -> 最终决定的；权威的。"
+  },
+  {
+    "word": "refinement",
+    "phonetic": "/rɪˈfaɪnmənt/",
+    "pos": "n.",
+    "meaning": "提炼，精炼；文雅，彬彬有礼；精细化改进",
+    "part": "第一部分：超级核心母词族",
+    "group": "【26. fin / termin 界限/限制/终点/精细】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次） + fine（纯净/极致） + -ment（名词后缀），引申指提炼 -> 精炼；文雅高贵；细化改进。"
+  },
+  {
+    "word": "sensation",
+    "phonetic": "/senˈseɪʃn/",
+    "pos": "n.",
+    "meaning": "感觉，知觉；轰动，引起轰动的人或事件",
+    "part": "第一部分：超级核心母词族",
+    "group": "【28. sens / sent 感觉/感受/意识】",
+    "analysis_type": "构词",
+    "analysis": "sens-（感觉/知觉） + -ation（名词后缀），引申为举国舆论为之震动沸腾的大热 -> 感觉；轰动全城的事物。"
+  },
+  {
+    "word": "sensitivity",
+    "phonetic": "/ˌsensəˈtɪvəti/",
+    "pos": "n.",
+    "meaning": "敏感性，灵敏度；善解人意；过敏",
+    "part": "第一部分：超级核心母词族",
+    "group": "【28. sens / sent 感觉/感受/意识】",
+    "analysis_type": "构词",
+    "analysis": "sensitive（敏感的） + -ity（名词后缀），引申指敏感性 -> 灵敏度；敏感度。"
+  },
+  {
+    "word": "sentimental",
+    "phonetic": "/ˌsentɪˈmentl/",
+    "pos": "adj.",
+    "meaning": "多愁善感的，感伤的；感情用事的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【28. sens / sent 感觉/感受/意识】",
+    "analysis_type": "构词",
+    "analysis": "sentiment（情感/情绪） + -al（形容词后缀），引申指多愁善感的 -> 伤感的；多愁善感的。"
+  },
+  {
+    "word": "declaration",
+    "phonetic": "/ˌdekləˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "宣言，宣告，正式声明；海关申报单",
+    "part": "第一部分：超级核心母词族",
+    "group": "【50. cand / cens 白/发光/燃烧】",
+    "analysis_type": "构词",
+    "analysis": "de-（彻底） + clar-（清楚/明亮） + -ation（名词后缀），引申指宣言 -> 宣言；申报。"
+  },
+  {
+    "word": "resignation",
+    "phonetic": "/ˌrezɪɡˈneɪʃn/",
+    "pos": "n.",
+    "meaning": "辞职，辞呈；顺从，无可奈何的听天由命",
+    "part": "第一部分：超级核心母词族",
+    "group": "【31. sign 标记/签名/记号】",
+    "analysis_type": "构词",
+    "analysis": "re-（向后/放弃） + sign（签字盖印放弃契约权力） + -ation（名词后缀），引申指辞职 -> 辞职；听天由命。"
+  },
+  {
+    "word": "report",
+    "phonetic": "/rɪˈpɔːt/",
+    "pos": "v.",
+    "meaning": "重新港口",
+    "part": "第一部分：超级核心母词族",
+    "group": "【36. port 搬运/携带/港口】",
+    "analysis_type": "构词",
+    "analysis": "re-（回/向后/再次/重复） + port（港口搬运），引申指重新港口 -> 重新港口。"
+  },
+  {
+    "word": "supportive",
+    "phonetic": "/səˈpɔːtɪv/",
+    "pos": "adj.",
+    "meaning": "支持的，鼓励的，提供宝贵帮助的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【23. fer / phor 运载/带来/承受】",
+    "analysis_type": "构词",
+    "analysis": "support（支持） + -ive（形容词后缀），引申指支持的 -> 给予支持的；关怀鼓励的。"
+  },
+  {
+    "word": "reflective",
+    "phonetic": "/rɪˈflektɪv/",
+    "pos": "adj.",
+    "meaning": "反射的，反光的；沉思的，深思熟虑的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【41. flect / flex 弯曲/折射】",
+    "analysis_type": "构词",
+    "analysis": "reflect（反射/深思） + -ive（形容词后缀），引申指反射的 -> 反射的；深思熟虑的。"
+  },
+  {
+    "word": "transitional",
+    "phonetic": "/trænˈzɪʃənl/",
+    "pos": "adj.",
+    "meaning": "过渡的，转变期的，过渡时期的",
+    "part": "第三部分：核心高频构词前缀族",
+    "group": "【前缀专题：trans- 穿过/跨越】",
+    "analysis_type": "构词",
+    "analysis": "transition（过渡） + -al（形容词后缀），引申指过渡的 -> 过渡性质的。"
+  },
+  {
+    "word": "reliability",
+    "phonetic": "/rɪˌlaɪəˈbɪləti/",
+    "pos": "n.",
+    "meaning": "可靠性，可信度；耐久性，稳健性",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "rely（信赖依靠） + -ability（名词后缀） -> 飞机发动机或航天服务器常年高负荷运转依然不崩溃的过硬质量。"
+  },
+  {
+    "word": "experimentation",
+    "phonetic": "/ɪkˌsperɪmenˈteɪʃn/",
+    "pos": "n.",
+    "meaning": "实验，尝试；科学试验过程",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "experiment（实验） + -ation（名词后缀），引申指实验 -> 科学实验；尝试。"
+  },
+  {
+    "word": "incoherent",
+    "phonetic": "/ˌɪnkəʊˈhɪərənt/",
+    "pos": "adj.",
+    "meaning": "语无伦次的，条理不清的；不相干的，松散分立的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "in-（不/非） + co-（共同） + her-（黏附/粘连），引申指语无伦次的 -> 语无伦次的；毫无条理的。"
+  },
+  {
+    "word": "frustration",
+    "phonetic": "/frʌˈstreɪʃn/",
+    "pos": "n.",
+    "meaning": "挫折，受挫；沮丧，灰心失落",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
+    "analysis_type": "构词",
+    "analysis": "frustrate（使受挫） + -ation（名词后缀），引申指挫折 -> 挫折；灰心沮丧。"
+  },
+  {
+    "word": "illustration",
+    "phonetic": "/ˌɪləˈstreɪʃn/",
+    "pos": "n.",
+    "meaning": "插图，图解；例证，阐明，说明",
+    "part": "第一部分：超级核心母词族",
+    "group": "【50. cand / cens 白/发光/燃烧】",
+    "analysis_type": "构词",
+    "analysis": "il-（在内/照向） + lustr-（光亮照耀） + -ation（名词后缀），引申指插图 -> 插图图解；生动例证。"
+  },
+  {
+    "word": "isolation",
+    "phonetic": "/ˌaɪsəˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "隔离，孤立；绝缘；孤独",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
+    "analysis_type": "构词",
+    "analysis": "isolate（使孤立） + -ation（名词后缀），物理隔绝或心理上的离群索居 -> 隔离；孤立状态。"
+  },
+  {
+    "word": "motivation",
+    "phonetic": "/ˌməʊtɪˈveɪʃn/",
+    "pos": "n.",
+    "meaning": "动机，动力；诱因，积极性",
+    "part": "第一部分：超级核心母词族",
+    "group": "【12. mot / mob / mov 动/移动】",
+    "analysis_type": "构词",
+    "analysis": "motive（动机） + -ation（名词后缀），引申指动机 -> 动机；内驱力。"
+  },
+  {
+    "word": "objectivity",
+    "phonetic": "/ˌɒbdʒekˈtɪvəti/",
+    "pos": "n.",
+    "meaning": "客观性，客观公正；实事求是",
+    "part": "第一部分：超级核心母词族",
+    "group": "【07. ject / jac 投/掷/扔】",
+    "analysis_type": "构词",
+    "analysis": "objective（客观的） + -ity（名词后缀） -> 不以人的主观意志为转移的纯粹实在属性。"
+  },
+  {
+    "word": "proportional",
+    "phonetic": "/prəˈpɔːʃənl/",
+    "pos": "adj.",
+    "meaning": "按比例的，成比例的；相称的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【38. trib 给与/交付/分派】",
+    "analysis_type": "构词",
+    "analysis": "proportion（比例） + -al（形容词后缀），引申指按比例的 -> 成比例的；相称的。"
+  },
+  {
+    "word": "acceleration",
+    "phonetic": "/əkˌseləˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "加速，加快；（物理学）加速度",
+    "part": "第四部分：核心分类专题群",
+    "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
+    "analysis_type": "构词",
+    "analysis": "ad-（去/朝向） + celer-（迅速敏捷） + -ation（名词后缀），引申指加速 -> 加速；加速度。"
+  },
+  {
+    "word": "accumulation",
+    "phonetic": "/əˌkjuːmjəˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "积累，积聚；堆积物，资本积累",
+    "part": "第一部分：超级核心母词族",
+    "group": "【38. trib 给与/交付/分派】",
+    "analysis_type": "构词",
+    "analysis": "ad-（朝向） + cumul-（堆叠） + -ation（名词后缀），引申指积累 -> 积累；聚集。"
+  },
+  {
+    "word": "amendment",
+    "phonetic": "/əˈmendmənt/",
+    "pos": "n.",
+    "meaning": "修正案，修改；宪法修正条款",
+    "part": "第一部分：超级核心母词族",
+    "group": "【18. cis / cide 切/杀/决断】",
+    "analysis_type": "构词",
+    "analysis": "a-（出/离开） + mend-（瑕疵缺陷） + -ment（名词后缀），引申指修正案 -> 修正案；修订。"
+  },
+  {
+    "word": "assimilation",
+    "phonetic": "/əˌsɪməˈleɪʃn/",
+    "pos": "n.",
+    "meaning": "同化，同化作用；吸收，消化理解",
+    "part": "第一部分：超级核心母词族",
+    "group": "【33. sent / ess / pres 存在/本质】",
+    "analysis_type": "构词",
+    "analysis": "ad-（去/变得） + simil-（相似/相同） + -ation（名词后缀），引申指同化 -> 同化；吸收消化。"
+  },
+  {
+    "word": "recognition",
+    "phonetic": "/ˌrekəɡˈnɪʃn/",
+    "pos": "n.",
+    "meaning": "认出，识别；认可，表彰；正式承认",
+    "part": "第一部分：超级核心母词族",
+    "group": "【11. gno / gni 知道/识别】",
+    "analysis_type": "构词",
+    "analysis": "re-（再次） + cognit-（知晓） + -ion（名词后缀），引申指认出 -> 认出；公认表彰；承认。"
+  },
+  {
+    "word": "commencement",
+    "phonetic": "/kəˈmensmənt/",
+    "pos": "n.",
+    "meaning": "开始，开端；（大学）毕业典礼",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "com-（加强） + initiare（开启） + -ment（名词后缀），引申指开始 -> 开始；毕业典礼。"
+  },
+  {
+    "word": "departmental",
+    "phonetic": "/ˌdiːpɑːtˈmentl/",
+    "pos": "adj.",
+    "meaning": "部门的，系别的，分部的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "department（部门/系科） + -al（形容词后缀），引申指部门的 -> 部门的；系科的。"
+  },
+  {
+    "word": "accidental",
+    "phonetic": "/ˌæksɪˈdentl/",
+    "pos": "adj.",
+    "meaning": "意外的，偶然的，非故意造成的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【18. cis / cide 切/杀/决断】",
+    "analysis_type": "构词",
+    "analysis": "ad-（去/朝向） + cid-（掉落/发生） + -ent + -al（形容词后缀），引申指意外的 -> 偶然的；突发的。"
+  },
+  {
+    "word": "adjustable",
+    "phonetic": "/əˈdʒʌstəbl/",
+    "pos": "adj.",
+    "meaning": "可调节的，可调式的，灵活可变的",
+    "part": "第一部分：超级核心母词族",
+    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
+    "analysis_type": "构词",
+    "analysis": "adjust（调整） + -able（能…的），座椅靠背或镜头焦距可以自由拉伸调校角度的 -> 可调节的。"
+  },
+  {
+    "word": "adjustment",
+    "phonetic": "/əˈdʒʌstmənt/",
+    "pos": "n.",
+    "meaning": "调整，调节；心理适应；校准",
+    "part": "第一部分：超级核心母词族",
+    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
+    "analysis_type": "构词",
+    "analysis": "adjust（调整） + -ment（名词后缀），引申指调整 -> 调整校正；心理适应。"
+  },
+  {
+    "word": "approachable",
+    "phonetic": "/əˈprəʊtʃəbl/",
+    "pos": "adj.",
+    "meaning": "和蔼可亲的，平易近人的；可接近的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
+    "analysis_type": "构词",
+    "analysis": "approach（走近/接近） + -able（能…的），引申指和蔼可亲的 -> 平易近人的；可接近的。"
+  },
+  {
+    "word": "intuition",
+    "phonetic": "/ˌɪntjuˈɪʃn/",
+    "pos": "n.",
+    "meaning": "直觉，直觉感知；直觉判断力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "in-（在内） + tuit-（注视/守护） + -ion（名词后缀），引申指直觉 -> 直觉；灵感。"
+  },
+  {
+    "word": "sublease",
+    "phonetic": "/ˈsʌbliːs/",
+    "pos": "vt./n.",
+    "meaning": "转租，分租；转租合同契约",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "sub-（次级） + lease（租赁），引申指转租 -> 转租；分租。"
+  },
+  {
+    "word": "influx",
+    "phonetic": "/ˈɪnflʌks/",
+    "pos": "n.",
+    "meaning": "涌入，流入；（人口/资金）大批汇聚",
+    "part": "第一部分：超级核心母词族",
+    "group": "【23. fer / phor 运载/带来/承受】",
+    "analysis_type": "构词",
+    "analysis": "in-（向内） + flux（流动），引申为外资或外国游客如潮水般大举 -> 涌入；汇集大潮。"
+  },
+  {
+    "word": "categorization",
+    "phonetic": "/ˌkætəɡəraɪˈzeɪʃn/",
+    "pos": "n.",
+    "meaning": "分类，归类，类别划分",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "category（范畴/门类） + -ization（过程），引申指分类 -> 分类归纳；范畴化。"
+  },
+  {
+    "word": "craft",
+    "phonetic": "/kræft/",
+    "pos": "n.",
+    "meaning": "船,飞行器",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 船；飞行器。"
+  },
+  {
+    "word": "data",
+    "phonetic": "/'dertǝ/",
+    "pos": "n.",
+    "meaning": "数据,资料",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 数据；资料。"
+  },
+  {
+    "word": "exploration",
+    "phonetic": "/eksplə'reıf(ə)n/",
+    "pos": "n.",
+    "meaning": "研究;勘探",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 研究；勘探。"
+  },
+  {
+    "word": "garbage",
+    "phonetic": "/ga:rbid3/",
+    "pos": "n.",
+    "meaning": "垃圾",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 垃圾。"
+  },
+  {
+    "word": "heat",
+    "phonetic": "/hi:t/",
+    "pos": "n.",
+    "meaning": "热能, 热量 v. 加热",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 热能；热量 v. 加热。"
+  },
+  {
+    "word": "installation",
+    "phonetic": "/ınstə'leif(ə)n/",
+    "pos": "n.",
+    "meaning": "安装;装置",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 安装；装置。"
+  },
+  {
+    "word": "install",
+    "phonetic": "/in'sto:1/",
+    "pos": "v.",
+    "meaning": "安装",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 安装。"
+  },
+  {
+    "word": "panel",
+    "phonetic": "/'pæn( )l/",
+    "pos": "n.",
+    "meaning": "专家咨询组;控制板",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 专家咨询组；控制板。"
+  },
+  {
+    "word": "roof",
+    "phonetic": "/ru:f/",
+    "pos": "n.",
+    "meaning": "屋顶 v. 遮蔽",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 屋顶 v. 遮蔽。"
+  },
+  {
+    "word": "ray",
+    "phonetic": "/rei/",
+    "pos": "n.",
+    "meaning": "光线",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 光线。"
+  },
+  {
+    "word": "spacecraft",
+    "phonetic": "/sperskræft/",
+    "pos": "n.",
+    "meaning": "宇宙飞船,航天器",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 宇宙飞船；航天器。"
+  },
+  {
+    "word": "tank",
+    "phonetic": "/tærŋk/",
+    "pos": "n.",
+    "meaning": "箱",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 箱。"
+  },
+  {
+    "word": "acre",
+    "phonetic": "/eıkər/",
+    "pos": "n.",
+    "meaning": "英亩",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 英亩。"
+  },
+  {
+    "word": "coast",
+    "phonetic": "/koust/",
+    "pos": "n.",
+    "meaning": "海岸",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 海岸。"
+  },
+  {
+    "word": "escape",
+    "phonetic": "/'skeip/",
+    "pos": "n.",
+    "meaning": "逃跑 v. 逃跑",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 逃跑 v. 逃跑。"
+  },
+  {
+    "word": "hunt",
+    "phonetic": "/hant/",
+    "pos": "n.",
+    "meaning": "打猎;追踪v. 打猎;追踪",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 打猎；追踪v. 打猎；追踪。"
+  },
+  {
+    "word": "island",
+    "phonetic": "/'aılənd/",
+    "pos": "n.",
+    "meaning": "岛",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 岛。"
+  },
+  {
+    "word": "invasive",
+    "phonetic": "/ın veısıv/",
+    "pos": "adj.",
+    "meaning": "侵入的,扩散性的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 侵入的；扩散性的。"
+  },
+  {
+    "word": "rainfall",
+    "phonetic": "/reinfo:1/",
+    "pos": "n.",
+    "meaning": "降雨;降雨量",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 降雨；降雨量。"
+  },
+  {
+    "word": "mainland",
+    "phonetic": "/meinlənd/",
+    "pos": "n.",
+    "meaning": "大陆",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 大陆。"
+  },
+  {
+    "word": "mammal",
+    "phonetic": "/mæm(ə)l/",
+    "pos": "n.",
+    "meaning": "哺乳动物",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 哺乳动物。"
+  },
+  {
+    "word": "mediterranean",
+    "phonetic": "/meditə reiniǝn/",
+    "pos": "n.",
+    "meaning": "地中海 adj. 地中海的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 地中海 adj. 地中海的。"
+  },
+  {
+    "word": "whale",
+    "phonetic": "/weil/",
+    "pos": "n.",
+    "meaning": "鲸",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 鲸。"
+  },
+  {
+    "word": "firefighter",
+    "phonetic": "/farǝrfaitər/",
+    "pos": "n.",
+    "meaning": "消防队员",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 消防队员。"
+  },
+  {
+    "word": "mall",
+    "phonetic": "/mo:l/",
+    "pos": "n.",
+    "meaning": "购物中心",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 购物中心。"
+  },
+  {
+    "word": "minister",
+    "phonetic": "/mınıstər/",
+    "pos": "n.",
+    "meaning": "部长,大臣",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 部长；大臣。"
+  },
+  {
+    "word": "malfunction",
+    "phonetic": "/mæl foŋkf( )n/",
+    "pos": "n.",
+    "meaning": "故障,失灵v. 出故障,失灵",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 故障；失灵v. 出故障；失灵。"
+  },
+  {
+    "word": "sticky",
+    "phonetic": "/'stıki/",
+    "pos": "adj.",
+    "meaning": "黏的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 黏的。"
+  },
+  {
+    "word": "scene",
+    "phonetic": "/si:n/",
+    "pos": "n.",
+    "meaning": "现场;事件",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 现场；事件。"
+  },
+  {
+    "word": "ability",
+    "phonetic": "/ə'bıləti/",
+    "pos": "n.",
+    "meaning": "能力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 能力。"
+  },
+  {
+    "word": "attorney",
+    "phonetic": "/ə't3:rni/",
+    "pos": "n.",
+    "meaning": "律师,检察官",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 律师；检察官。"
+  },
+  {
+    "word": "client",
+    "phonetic": "/'klaıənt/",
+    "pos": "n.",
+    "meaning": "客户",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 客户。"
+  },
+  {
+    "word": "consultant",
+    "phonetic": "/kən səltənt/",
+    "pos": "n.",
+    "meaning": "顾问",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 顾问。"
+  },
+  {
+    "word": "feasibility",
+    "phonetic": "/fi:zə bıləti/",
+    "pos": "n.",
+    "meaning": "可行性",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 可行性。"
+  },
+  {
+    "word": "interpreter",
+    "phonetic": "/in't3:rprətər/",
+    "pos": "n.",
+    "meaning": "口译员,译者",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 口译员；译者。"
+  },
+  {
+    "word": "laptop",
+    "phonetic": "/'læpta:p/",
+    "pos": "n.",
+    "meaning": "笔记本电脑",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 笔记本电脑。"
+  },
+  {
+    "word": "loyalty",
+    "phonetic": "/'lərəlti/",
+    "pos": "n.",
+    "meaning": "忠诚",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 忠诚。"
+  },
+  {
+    "word": "search",
+    "phonetic": "/s3:rtf/",
+    "pos": "n.",
+    "meaning": "搜查 v. 搜查",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 搜查 v. 搜查。"
+  },
+  {
+    "word": "stockbroker",
+    "phonetic": "/'sta:kbrookər/",
+    "pos": "n.",
+    "meaning": "股票经纪人",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "stock（股票） + broker（经纪人），引申指股票经纪人 -> 股票经纪人。"
+  },
+  {
+    "word": "testimony",
+    "phonetic": "/testimooni/",
+    "pos": "n.",
+    "meaning": "证言,口供",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 证言；口供。"
+  },
+  {
+    "word": "bonus",
+    "phonetic": "/bounǝs/",
+    "pos": "n.",
+    "meaning": "奖金",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 奖金。"
+  },
+  {
+    "word": "calorie",
+    "phonetic": "/'kæləri/",
+    "pos": "n.",
+    "meaning": "卡路里",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 卡路里。"
+  },
+  {
+    "word": "campaigner",
+    "phonetic": "/kæm peinər/",
+    "pos": "n.",
+    "meaning": "竞选者,活动家",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 竞选者；活动家。"
+  },
+  {
+    "word": "cell",
+    "phonetic": "/sel/",
+    "pos": "n.",
+    "meaning": "细胞",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 细胞。"
+  },
+  {
+    "word": "defence",
+    "phonetic": "/di'fens/",
+    "pos": "n.",
+    "meaning": "保卫,防御",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 保卫；防御。"
+  },
+  {
+    "word": "decade",
+    "phonetic": "/'dekeid/",
+    "pos": "n.",
+    "meaning": "十年",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 十年。"
+  },
+  {
+    "word": "envy",
+    "phonetic": "/'envi/",
+    "pos": "n.",
+    "meaning": "羡慕;嫉妒v. 羡慕;嫉妒",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 羡慕；嫉妒v. 羡慕；嫉妒。"
+  },
+  {
+    "word": "guard",
+    "phonetic": "/go:rd/",
+    "pos": "n.",
+    "meaning": "警卫v. 保护,守卫",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 警卫v. 保护；守卫。"
+  },
+  {
+    "word": "halt",
+    "phonetic": "/ho:lt/",
+    "pos": "n.",
+    "meaning": "停止v. 停止",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 停止v. 停止。"
+  },
+  {
+    "word": "giant",
+    "phonetic": "/dzaıənt/",
+    "pos": "n.",
+    "meaning": "巨人:伟人 adj. 巨大的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 巨人:伟人 adj. 巨大的。"
+  },
+  {
+    "word": "pearl",
+    "phonetic": "/p3:rl/",
+    "pos": "n.",
+    "meaning": "珍珠",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 珍珠。"
+  },
+  {
+    "word": "personality",
+    "phonetic": "/p3:rsə'næləti/",
+    "pos": "n.",
+    "meaning": "性格,个性",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 性格；个性。"
+  },
+  {
+    "word": "protein",
+    "phonetic": "/prooti:n/",
+    "pos": "n.",
+    "meaning": "蛋白质",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 蛋白质。"
+  },
+  {
+    "word": "struggle",
+    "phonetic": "/'strag(ә)1/",
+    "pos": "n.",
+    "meaning": "挣扎v. 挣扎;努力",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 挣扎v. 挣扎；努力。"
+  },
+  {
+    "word": "sort",
+    "phonetic": "/so:rt/",
+    "pos": "n.",
+    "meaning": "种类 v. 整理,分类",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 种类 v. 整理；分类。"
+  },
+  {
+    "word": "vary",
+    "phonetic": "/'veri/",
+    "pos": "v.",
+    "meaning": "变化,差异",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 变化；差异。"
+  },
+  {
+    "word": "due",
+    "phonetic": "/du:/",
+    "pos": "adj.",
+    "meaning": "到期的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 到期的。"
+  },
+  {
+    "word": "layoff",
+    "phonetic": "/'leı, :f/",
+    "pos": "n.",
+    "meaning": "裁员,解雇",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 裁员；解雇。"
+  },
+  {
+    "word": "cyber",
+    "phonetic": "/'saıbər/",
+    "pos": "adj.",
+    "meaning": "网络的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 网络的。"
+  },
+  {
+    "word": "contaminated",
+    "phonetic": "/kən'tæmınertıd/",
+    "pos": "adj.",
+    "meaning": "被感染的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 被感染的。"
+  },
+  {
+    "word": "digital",
+    "phonetic": "/dıdzıt(ə)l/",
+    "pos": "adj.",
+    "meaning": "数字的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 数字的。"
+  },
+  {
+    "word": "immunization",
+    "phonetic": "/ımjunǝ'zeıfn/",
+    "pos": "n.",
+    "meaning": "免疫",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 免疫。"
+  },
+  {
+    "word": "mortality",
+    "phonetic": "/mə:r'tæləti/",
+    "pos": "n.",
+    "meaning": "死亡,死亡率",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 死亡；死亡率。"
+  },
+  {
+    "word": "ward",
+    "phonetic": "/wɔ:rd/",
+    "pos": "n.",
+    "meaning": "病房",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 病房。"
+  },
+  {
+    "word": "overspeed",
+    "phonetic": "/ouvǝr spi:d/",
+    "pos": "n.",
+    "meaning": "超速v. 超速",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 超速v. 超速。"
+  },
+  {
+    "word": "tent",
+    "phonetic": "/tent/",
+    "pos": "n.",
+    "meaning": "帐篷",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 帐篷。"
+  },
+  {
+    "word": "underground",
+    "phonetic": "/Andər graond/",
+    "pos": "n.",
+    "meaning": "地铁",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 地铁。"
+  },
+  {
+    "word": "federation",
+    "phonetic": "/ˌfedəˈreɪʃn/",
+    "pos": "n.",
+    "meaning": "联邦，同盟，联合会",
+    "part": "第二部分：高频专业词根族",
+    "group": "【60. fide / feder / cred 信任/信仰/信念/联盟】",
+    "analysis_type": "构词",
+    "analysis": "feder-（联盟） + -ation（名词后缀），合起来即多个联邦成员结成的政权联盟 -> 联邦；联合会。"
+  },
+  {
+    "word": "comfortable",
+    "phonetic": "/ˈkʌmftəbl/",
+    "pos": "adj.",
+    "meaning": "舒适的，安逸的；宽裕的",
+    "part": "第二部分：高频专业词根族",
+    "group": "【45. val / vail / forc / fort 强壮/力量/价值】",
+    "analysis_type": "构词",
+    "analysis": "comfort（安慰/舒适） + -able（易…的），合起来即令人身心放松舒适惬意的 -> 舒适的。"
+  },
+  {
+    "word": "force",
+    "phonetic": "/fɔːs/",
+    "pos": "n./vt.",
+    "meaning": "n. 力量，武力；军队 vt. 强迫，迫使",
+    "part": "第二部分：高频专业词根族",
+    "group": "【45. val / vail / forc / fort 强壮/力量/价值】",
+    "analysis_type": "构词",
+    "analysis": "forc-（强大力量），合起来即施加外力逼迫就范 -> 力量；武力；强迫。"
+  },
+  {
+    "word": "fortune",
+    "phonetic": "/ˈfɔːtʃuːn/",
+    "pos": "n.",
+    "meaning": "命运；运气；财富，财产",
+    "part": "第四部分：核心分类专题群",
+    "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
+    "analysis_type": "构词",
+    "analysis": "fortun-（受命运之神眷顾），合起来即命中注定降临的财富与运气 -> 命运；运气；财富。"
+  },
+  {
+    "word": "fortunate",
+    "phonetic": "/ˈfɔːtʃənət/",
+    "pos": "adj.",
+    "meaning": "幸运的，侥幸的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "fortune（好运） + -ate（形容词后缀），合起来即被天赐好运笼罩的 -> 幸运的。"
+  },
+  {
+    "word": "photograph",
+    "phonetic": "/ˈfəʊtəɡrɑːf/",
+    "pos": "n./vt.",
+    "meaning": "n. 照片 vt. 给…拍照",
+    "part": "第一部分：超级核心母词族",
+    "group": "【27. scrib / script / graph / gram 写/画/记录】",
+    "analysis_type": "构词",
+    "analysis": "photo-（光） + graph（绘制/记录），合起来即用光学感光记录下来的画面 -> 照片。"
+  },
+  {
+    "word": "paragraph",
+    "phonetic": "/ˈpærəɡrɑːf/",
+    "pos": "n.",
+    "meaning": "段落，节；短讯",
+    "part": "第一部分：超级核心母词族",
+    "group": "【32. scrib / script 写/记录/文字】",
+    "analysis_type": "构词",
+    "analysis": "para-（在旁） + graph（写/画），引申为篇章中的自然段 -> 段落；节。"
+  },
+  {
+    "word": "biography",
+    "phonetic": "/baɪˈɒɡrəfi/",
+    "pos": "n.",
+    "meaning": "传记，传记文学",
+    "part": "第一部分：超级核心母词族",
+    "group": "【27. scrib / script / graph / gram 写/画/记录】",
+    "analysis_type": "构词",
+    "analysis": "bio-（生命/生平） + graph（写） + -y，合起来即记录某人生平一生传奇的文书 -> 传记。"
+  },
+  {
+    "word": "diagram",
+    "phonetic": "/ˈdaɪəɡræm/",
+    "pos": "n.",
+    "meaning": "图解，图表，示意图",
+    "part": "第一部分：超级核心母词族",
+    "group": "【27. scrib / script / graph / gram 写/画/记录】",
+    "analysis_type": "构词",
+    "analysis": "dia-（穿过/通过） + gram（画线图画），合起来即穿透直观展现结构的图表 -> 图解；图表。"
+  },
+  {
+    "word": "grammar",
+    "phonetic": "/ˈɡræmə/",
+    "pos": "n.",
+    "meaning": "语法，文法；语法书，基本原理",
+    "part": "第一部分：超级核心母词族",
+    "group": "【32. scrib / script 写/记录/文字】",
+    "analysis_type": "构词",
+    "analysis": "gramm-（字母/书写文字） + -ar（名词后缀），引申指语法 -> 语法；文法书。"
+  },
+  {
+    "word": "program",
+    "phonetic": "/ˈprəʊɡræm/",
+    "pos": "n./vt.",
+    "meaning": "n. 节目；程序；规划 vt. 编写程序",
+    "part": "第一部分：超级核心母词族",
+    "group": "【27. scrib / script / graph / gram 写/画/记录】",
+    "analysis_type": "构词",
+    "analysis": "pro-（提前） + gram（写出），合起来即预先公布写好的议程步骤 -> 程序；规划；节目。"
+  },
+  {
+    "word": "judicial",
+    "phonetic": "/dʒuˈdɪʃl/",
+    "pos": "adj.",
+    "meaning": "司法的，审判的，法官的",
+    "part": "第二部分：高频专业词根族",
+    "group": "【65. jur / jud / just 法律/审判/正义】",
+    "analysis_type": "构词",
+    "analysis": "judic-（裁判） + -ial（形容词后缀），合起来即行使国家法定审判权力的 -> 司法的；审判的。"
+  },
+  {
+    "word": "illegal",
+    "phonetic": "/ɪˈliːɡl/",
+    "pos": "adj.",
+    "meaning": "不合法的，非法的",
+    "part": "第二部分：高频专业词根族",
+    "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
+    "analysis_type": "构词",
+    "analysis": "il- / in-（不/非） + legal（合法的），合起来即跨过法律红线违法的 -> 非法的；不合法的。"
+  },
+  {
+    "word": "fraction",
+    "phonetic": "/ˈfrækʃn/",
+    "pos": "n.",
+    "meaning": "小部分，微量；分数，小数",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "fract-（破碎/折断） + -ion（名词后缀），引申指小部分 -> 分数；极小一部分。"
+  },
+  {
+    "word": "fragment",
+    "phonetic": "/ˈfræɡmənt/",
+    "pos": "n./v.",
+    "meaning": "碎片，残片；片段 v. 使成碎片，分裂",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "frag-（破损/打碎） + -ment（名词后缀），引申指碎片 -> 碎片；残片。"
+  },
+  {
+    "word": "framework",
+    "phonetic": "/ˈfreɪmwɜːk/",
+    "pos": "n.",
+    "meaning": "框架，结构；体系，体制，参照构架",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "frame（边框/骨架） + work（工事/作品），引申指框架 -> 框架；理论体系。"
+  },
+  {
+    "word": "frontier",
+    "phonetic": "/ˈfrʌntɪə/",
+    "pos": "n.",
+    "meaning": "国界，边疆；尖端前沿，未知领域",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "front（前线/正前方） + -ier（场所名词后缀），引申指国界 -> 边境；科学前沿。"
+  },
+  {
+    "word": "function",
+    "phonetic": "/ˈfʌŋkʃn/",
+    "pos": "n./vi.",
+    "meaning": "功能，作用；职务；函数 vi. 运转，发挥作用",
+    "part": "第四部分：核心分类专题群",
+    "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
+    "analysis_type": "构词",
+    "analysis": "funct-（履行/执行） + -ion（名词后缀），引申指功能 -> 功能；函数；运转。"
+  },
+  {
+    "word": "furious",
+    "phonetic": "/ˈfjʊəriəs/",
+    "pos": "adj.",
+    "meaning": "狂怒的，暴怒的；狂暴的，猛烈的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
+    "analysis_type": "构词",
+    "analysis": "fury（狂怒） + -ous（充满…的），引申指狂怒的 -> 狂怒的；狂暴的。"
+  },
+  {
+    "word": "garment",
+    "phonetic": "/ˈɡɑːmənt/",
+    "pos": "n.",
+    "meaning": "衣服，服装；外衣",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "garn-（装饰/配齐） + -ment（名词后缀），人类遮体御寒穿戴整齐的衣物装束 -> 衣服；服装。"
+  },
+  {
+    "word": "gasoline",
+    "phonetic": "/ˈɡæsəliːn/",
+    "pos": "n.",
+    "meaning": "汽油",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "gas（气体/轻质挥发物） + -ol（油/液体） + -ine（化学物后缀），引申指汽油 -> 汽油。"
+  },
+  {
+    "word": "glorious",
+    "phonetic": "/ˈɡlɔːriəs/",
+    "pos": "adj.",
+    "meaning": "辉煌的，光荣的，壮丽的；极好的",
+    "part": "第四部分：核心分类专题群",
+    "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
+    "analysis_type": "构词",
+    "analysis": "glory（光荣/荣耀） + -ous（充满…的），引申指辉煌的 -> 光荣辉煌的；壮丽的。"
   }
 ];
 
 (typeof window !== "undefined" ? window : global).CET4_FULL_VOCAB = (typeof window !== "undefined" ? window : global).WORDS_DATA;
 
 // =========================================================================
-// 2. 动态投影生成 VOCABULARY_PACKS (纯正 2767 高频考纲词库)
+// 2. 动态投影生成 VOCABULARY_PACKS (纯正 3137 高频考纲词库 - 对齐标准版)
 // =========================================================================
 (function() {
   const g = typeof window !== "undefined" ? window : global;
@@ -28960,7 +32707,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     all_2800: {
       id: "all_2800",
       category: "全书总库",
-      title: "【全书总库】CET-4 核心高频全阶词典 (全量 2767 词)",
+      title: "【全书总库】CET-4 核心高频全阶词典 (全量 " + all.length + " 词)",
       description: "纯正四级核心高频词库，彻底剔除后缀派生冗余与超纲生僻词，常考生义置顶，含四大板块、90 大分类群组。",
       words: all
     },
