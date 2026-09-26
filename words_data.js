@@ -213,7 +213,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
-    "analysis": "con-（共同） + ceiv-（抓取） -> 头脑捕捉构思 -> / 构想， 设想。",
+    "analysis": "con-（共同） + ceiv-（抓取） -> 在头脑中共同构思孕育 -> 构想，设想；怀孕。",
     "synonyms": [
       {
         "target": "devise",
@@ -500,7 +500,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "defect",
     "phonetic": "/ˈdiːfekt/",
     "pos": "n./vi.",
-    "meaning": "n. 缺点， 缺陷 vi. 叛变， 脱离",
+    "meaning": "n. 缺点，缺陷 vi. 叛变，脱离背叛",
     "part": "第一部分：超级核心母词族",
     "group": "【2. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -558,7 +558,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "effect",
     "phonetic": "/ɪˈfekt/",
     "pos": "n./vt.",
-    "meaning": "效果， 影响 vt. 产生， 招致",
+    "meaning": "n. 效果，影响 vt. 产生，实现，使发生（effect change）",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -666,7 +666,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "feature",
     "phonetic": "/ˈfiːtʃə(r)/",
     "pos": "n./vt.",
-    "meaning": "特征，特色；特写；面貌，vt.",
+    "meaning": "n. 特征，特色；特写专题 vt. 以…为特色，由…主演",
     "part": "第一部分：超级核心母词族",
     "group": "【2. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -963,7 +963,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "institute",
     "phonetic": "/ˈɪnstɪtjuːt/",
     "pos": "n./vt.",
-    "meaning": "研究所， 学院 vt. 创立",
+    "meaning": "vt. 建立，创立；实行（改革/制度） n. 研究所，学院",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -973,7 +973,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "institution",
     "phonetic": "/ˌɪnstɪˈtjuːʃn/",
     "pos": "n.",
-    "meaning": "机构， 学校； 制度",
+    "meaning": "n. 制度，体制，习俗；公共机构，高校",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -1129,7 +1129,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "steady",
     "phonetic": "/ˈstedi/",
     "pos": "adj./vt.",
-    "meaning": "adj. 稳定的， 稳固的 vt. 使稳定",
+    "meaning": "adj. 稳定的，稳固的；持续的 vt. 使稳定",
     "part": "第一部分：超级核心母词族",
     "group": "【3. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -1187,7 +1187,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "substitute",
     "phonetic": "/ˈsʌbstɪtjuːt/",
     "pos": "vt./n.",
-    "meaning": "vt. 代替， 替换 n. 代替者， 代用品",
+    "meaning": "vt. 代替，替换 n. 代替者，代用品",
     "part": "第一部分：超级核心母词族",
     "group": "【3. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -1237,7 +1237,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commission",
     "phonetic": "/kəˈmɪʃn/",
     "pos": "n./vt.",
-    "meaning": "n. 委员会； 佣金 vt. 委托",
+    "meaning": "n. 委员会；佣金，提成 vt. 委托，委任制作",
     "part": "第一部分：超级核心母词族",
     "group": "【4. mit / miss 送出/发射/委派/传达】",
     "analysis_type": "构词",
@@ -1247,7 +1247,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commit",
     "phonetic": "/kəˈmɪt/",
     "pos": "vt.",
-    "meaning": "承诺，致力于；犯（罪）；投入（资金/时间）",
+    "meaning": "vt. 致力于，承诺（commit to）；犯（错误/罪行）；投入（资金/时间）",
     "part": "第一部分：超级核心母词族",
     "group": "【4. mit / miss 送出/发射/委派/传达】",
     "analysis_type": "构词",
@@ -1277,7 +1277,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dismiss",
     "phonetic": "/dɪsˈmɪs/",
     "pos": "vt.",
-    "meaning": "下课， 解散； 不予理会",
+    "meaning": "vt. 不予考虑，驳回，不予理会；解雇，开除；解散",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -1361,7 +1361,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【4. mit / miss 送出/发射/委派/传达】",
     "analysis_type": "构词",
-    "analysis": "per-（彻底） + mit（放行） -> 放开道路准许通过 -> vt.ˈpɜːmɪt，许可证。",
+    "analysis": "per-（穿过） + mit-（放行） -> 放开通道允许通行 -> 准许，许可；许可证。",
     "synonyms": [
       {
         "target": "allow",
@@ -1447,7 +1447,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "deposit",
     "phonetic": "/dɪˈpɒzɪt/",
     "pos": "vt./n.",
-    "meaning": "存入； 付定金 n. 存款",
+    "meaning": "vt. 存入（银行）；沉淀，沉积 n. 存款；定金，押金；矿床",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -1497,7 +1497,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "impose",
     "phonetic": "/ɪmˈpəʊz/",
     "pos": "vt.",
-    "meaning": "把…强加于（on）； 征税， 处以罚款",
+    "meaning": "vt. 把…强加于（on）；征税，强制实行；处以罚款",
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / posit 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -1536,7 +1536,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "opposite",
     "phonetic": "/ˈɒpəzɪt/",
     "pos": "adj./prep./n.",
-    "meaning": "相反的；对面的，prep.",
+    "meaning": "adj. 相反的；对面的 n. 对立面 prep. 在…对面",
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / posit 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -1556,7 +1556,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "position",
     "phonetic": "/pəˈzɪʃn/",
     "pos": "n./vt.",
-    "meaning": "n. 位置； 职位； 立场 vt. 安置",
+    "meaning": "n. 立场，态度；职位；位置 vt. 安置，定位",
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / posit 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -1655,7 +1655,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "abstract",
     "phonetic": "/ˈæbstrækt/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 抽象的 n. 摘要 vt. 提炼， 抽取",
+    "meaning": "adj. 抽象的 n. 摘要，概要 vt. 提炼，抽取",
     "part": "第一部分：超级核心母词族",
     "group": "【6. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -1704,7 +1704,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contract",
     "phonetic": "/ˈkɒntrækt/",
     "pos": "n./vt./vi.",
-    "meaning": "合同，契约；收缩，缩减；感染（疾病）",
+    "meaning": "n. 合同，契约 vt./vi. 收缩，缩小；感染（疾病）；订立合同",
     "part": "第一部分：超级核心母词族",
     "group": "【6. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -1808,7 +1808,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trace",
     "phonetic": "/treɪs/",
     "pos": "vt./n.",
-    "meaning": "vt. 追踪， 追溯 n. 痕迹， 踪迹； 微量",
+    "meaning": "vt. 追溯，查出…的根源；追踪 n. 痕迹，踪迹；微量",
     "part": "第一部分：超级核心母词族",
     "group": "【6. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -1818,11 +1818,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "track",
     "phonetic": "/træk/",
     "pos": "n./vt.",
-    "meaning": "n. 跑道； 轨道； 足迹 vt. 跟踪， 追踪",
+    "meaning": "vt. 跟踪，追踪；监控进展 n. 轨道，跑道；踪迹，车辙",
     "part": "第一部分：超级核心母词族",
     "group": "【6. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
-    "analysis": "源自拉车拖拽留下的车辙压痕 -> 跑道。"
+    "analysis": "tract（拉/拖）同源 -> 原指车轮拖拽留下的车辙痕迹 -> 跑道，轨道；追踪。"
   },
   {
     "word": "tractor",
@@ -1838,11 +1838,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trail",
     "phonetic": "/treɪl/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 痕迹， 小径 vt./vi. 追踪， 拉拽",
+    "meaning": "n. 痕迹，踪迹；小径 vt./vi. 追踪，跟踪；落后拖后",
     "part": "第一部分：超级核心母词族",
     "group": "【6. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
-    "analysis": "拉拽拖行形成的林间小迹 -> 痕迹。"
+    "analysis": "tract（拉/拖）同源 -> 拖拽重物踩踏出的小路 -> 痕迹，小径；追踪。"
   },
   {
     "word": "treaty",
@@ -1981,7 +1981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义 -> / 伸展， 拉长  一段时间。"
+    "analysis": "string（拉紧）同源 -> 用力往两端拉长延展 -> 伸展，拉长；一段时间。"
   },
   {
     "word": "tend",
@@ -2011,7 +2011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【7. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
-    "analysis": "词根 tend-（伸出） -> 温柔的。"
+    "analysis": "tend-（伸出/递出），另意源自 tenuis（纤细柔软） -> 伸出手臂向官方正式递呈投标书或辞呈，另指肉质细嫩或为人温柔体贴 -> 投标，正式提交；偿付；温柔的；娇嫩脆弱的。"
   },
   {
     "word": "tense",
@@ -2056,11 +2056,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trend",
     "phonetic": "/trend/",
     "pos": "n./vi.",
-    "meaning": "n. 趋势， 倾向 vi. 倾向",
+    "meaning": "n. 发展趋势，倾向走向 vi. 趋向，倾向",
     "part": "第一部分：超级核心母词族",
     "group": "【7. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
-    "analysis": "源自延展偏向同一方向的发展路线 -> 趋势。"
+    "analysis": "tend（伸展/倾向）同源 -> 朝特定方向延展倾斜的发展路线 -> 趋势，倾向。"
   },
   {
     "word": "aspect",
@@ -2298,7 +2298,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【8. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
-    "analysis": "sus-（在下方） + spect（看） -> 从底下斜着眼睛怀疑地看 -> vt.ˈsʌspekt，嫌疑犯。"
+    "analysis": "sus-（sub- 在下方） + spect-（看） -> 从底下斜眼窥视、心存疑虑 -> 怀疑；嫌疑犯。"
   },
   {
     "word": "suspicion",
@@ -2338,7 +2338,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“构想” -> 装置，器械。"
+    "analysis": "dis-（分开） + vid-（设想/分割） -> 经巧妙构思设计出的机械器具 -> 装置，器械；策略。"
   },
   {
     "word": "devise",
@@ -2374,7 +2374,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "evidence",
     "phonetic": "/ˈevɪdəns/",
     "pos": "n./vt.",
-    "meaning": "n. 证据， 证明； 迹象 vt. 证实",
+    "meaning": "n. 证据，证明；迹象，征兆 vt. 证实，证明",
     "part": "第一部分：超级核心母词族",
     "group": "【9. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -2433,7 +2433,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "provide",
     "phonetic": "/prəˈvaɪd/",
     "pos": "vt./vi.",
-    "meaning": "提供，供给；规定；预防，准备（for）",
+    "meaning": "vt. 提供，供给；规定（the law provides that） conj. 假如（provided）",
     "part": "第一部分：超级核心母词族",
     "group": "【9. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -2497,7 +2497,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【9. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
-    "analysis": "源自 visus（看） -> 观点，见解。",
+    "analysis": "vid- / vis-（看见/审视） -> 站在高处举目远眺映入眼帘的辽阔风景，引申指头脑审视事物形成的立场判断 -> 观点，见解；看待视为；景色，视野。",
     "synonyms": [
       {
         "target": "perspective",
@@ -2572,7 +2572,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "addict",
     "phonetic": "/ˈædɪkt/",
     "pos": "n./vt.",
-    "meaning": "n. 上瘾者， 入迷的人 vt. 使上瘾， 使沉溺",
+    "meaning": "n. 上瘾者，入迷的人 vt. 使沉溺，使上瘾",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定】",
     "analysis_type": "构词",
@@ -2616,7 +2616,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定】",
     "analysis_type": "构词",
-    "analysis": "dict（说） + -ate（动词后缀） -> 口头宣说指令让人照办记录 -> / 口授。"
+    "analysis": "dict-（说话/宣判） + -ate（动词后缀） -> 口头宣读指令让人照办记录 -> 口授；命令，听写。"
   },
   {
     "word": "dictionary",
@@ -2708,7 +2708,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "conduct",
     "phonetic": "/kənˈdʌkt/",
     "pos": "vt./n.",
-    "meaning": "vt. 组织， 实施； 引导 n. 行为",
+    "meaning": "vt. 组织，实施（调研/实验）；引导 n. 行为，举止",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -2778,7 +2778,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "produce",
     "phonetic": "/prəˈdjuːs/",
     "pos": "vt./n.",
-    "meaning": "生产，制造；引起，产生；农产品",
+    "meaning": "vt. 引起，产生；生产，制造 n. 农产品（新鲜蔬果）",
     "part": "第一部分：超级核心母词族",
     "group": "【11. duc / duct 引导/带领/带来】",
     "analysis_type": "构词",
@@ -2914,7 +2914,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "current",
     "phonetic": "/ˈkʌrənt/",
     "pos": "adj./n.",
-    "meaning": "当前的，现行的；水流，气流；电流",
+    "meaning": "adj. 当前的，现行的 n. 思潮，潮流；水流，气流；电流",
     "part": "第一部分：超级核心母词族",
     "group": "【12. curr / curs / cours 跑/流动/进程】",
     "analysis_type": "构词",
@@ -3157,7 +3157,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【14. ven / vent 来/到达/发生】",
     "analysis_type": "构词",
-    "analysis": "e-（出） + vent（来） -> 事件，大事。"
+    "analysis": "e-（向外） + ven- / venire（前来/发生） -> 历史长河中突然从暗处显露破局而出的重大历史事变，体育借指比赛项目 -> 事件，重大事件；比赛项目；结果结局。"
   },
   {
     "word": "eventual",
@@ -3243,7 +3243,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "venture",
     "phonetic": "/ˈventʃə(r)/",
     "pos": "n./vi.",
-    "meaning": "风险投资； 冒险",
+    "meaning": "n. 商业风险投资，冒险项目 vi. 敢于冒险前往；冒险说出",
     "part": "第一部分：超级核心母词族",
     "group": "【14. ven / vent 来/到达/发生】",
     "analysis_type": "构词",
@@ -3293,7 +3293,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "convert",
     "phonetic": "/kənˈvɜːt/",
     "pos": "vt./vi.",
-    "meaning": "转变， 转换； 改变信仰",
+    "meaning": "vt./vi. 转变，转化（convert into）；改变信仰",
     "part": "第一部分：超级核心母词族",
     "group": "【15. vert / vers 转/转向/反转】",
     "analysis_type": "构词",
@@ -3503,7 +3503,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "structure",
     "phonetic": "/ˈstrʌktʃə(r)/",
     "pos": "n./vt.",
-    "meaning": "结构； 建筑物 vt. 组织",
+    "meaning": "n. 结构，构造；建筑物 vt. 组织，安排，系统构建",
     "part": "第一部分：超级核心母词族",
     "group": "【16. stru / struct 建造/构筑/堆叠】",
     "analysis_type": "构词",
@@ -3633,7 +3633,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "complete",
     "phonetic": "/kəmˈpliːt/",
     "pos": "adj./vt.",
-    "meaning": "完全的 vt. 完成",
+    "meaning": "vt. 完成，结束 adj. 完整的；完全的",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -3677,7 +3677,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“充满” -> 注入实体至无空隙 -> 装满，盛满。"
+    "analysis": "ple- / plen-（充满）同源 -> 注入实体直至内部饱满无空隙 -> 装满，盛满；满足。"
   },
   {
     "word": "fulfill",
@@ -3707,7 +3707,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "与 ple/plen 同源 -> 满的。"
+    "analysis": "ple- / plen-（充满）同源形容词 -> 盛满实体的，无遗漏的 -> 满的，完全的。"
   },
   {
     "word": "implement",
@@ -3753,7 +3753,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "supplement",
     "phonetic": "/ˈsʌplɪmənt/",
     "pos": "n./vt.",
-    "meaning": "补遗， 增刊 vt. 补充",
+    "meaning": "n. 补充物；增刊，副刊 vt. 补充，增补",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -3763,7 +3763,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "supply",
     "phonetic": "/səˈplaɪ/",
     "pos": "n./vt.",
-    "meaning": "供应， 物资 vt. 提供",
+    "meaning": "vt. 供应，提供（supply with） n. 供应，供给；日常用品，物资",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -3873,11 +3873,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "settle",
     "phonetic": "/ˈsetl/",
     "pos": "vt./vi.",
-    "meaning": "解决， 结算 vi. 定居",
+    "meaning": "vt. 解决（争端/难题）；清偿，结算 vi. 定居，安顿；沉淀",
     "part": "第一部分：超级核心母词族",
     "group": "【19. sed / sid / sess 坐/停留/安置/沉淀】",
     "analysis_type": "构词",
-    "analysis": "本义指“使坐下” -> 解决，结算。"
+    "analysis": "sed- / set-（坐下/固定） + -le（反复） -> 使某事安定落座、尘埃落定 -> 解决，结算；定居。"
   },
   {
     "word": "settlement",
@@ -3957,7 +3957,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根 puls-（推） -> 脉搏。"
+    "analysis": "pell- / puls-（推挤/跳动驱动） -> 心脏有规律收缩向血管壁强劲泵血所激起的节律性搏动 -> 脉搏，节拍；脉冲；搏动，跳动。"
   },
   {
     "word": "repel",
@@ -3967,13 +3967,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【20. pel / puls / peal 推/驱使/搏动】",
     "analysis_type": "构词",
-    "analysis": "re-（向后） + pel（击退） -> 击退。"
+    "analysis": "re-（向后/反向） + pel-（推动/驱赶） -> 挥动兵刃构筑护盾强力将迎面冲锋的敌军猛烈推挡击退，物理指磁极同性排斥 -> 击退，抵制；排斥；使厌恶反感。"
   },
   {
     "word": "advocate",
     "phonetic": "/ˈædvəkeɪt/",
     "pos": "vt./n.",
-    "meaning": "倡导 vt. 拥护者",
+    "meaning": "vt. 提倡，倡导，主张 n. 拥护者，提倡者",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -4087,7 +4087,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【22. spir / spirit 呼吸/精神/渴望】",
     "analysis_type": "构词",
-    "analysis": "词根 spiritus（呼吸） -> 精神，心灵。"
+    "analysis": "spir-（呼吸/生命气息） -> 支撑肉身存续不可或缺的呼吸元气，引申指神采奕奕的内心精神、勇气或烈酒 -> 精神，心灵；勇气，魄力；烈酒。"
   },
   {
     "word": "spiritual",
@@ -4367,7 +4367,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【25. form 形状/形式/塑造】",
     "analysis_type": "构词",
-    "analysis": "词根 form（外形模具） -> 形式，形状。"
+    "analysis": "mor- / morph-（外形轮廓/铸模）同源 -> 浇筑熔融金属所用的外模轮廓，引申指事物呈现出的外在组织形态或表格格式 -> 形式，形状；表格；形成，构成；产生。"
   },
   {
     "word": "formal",
@@ -4383,7 +4383,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "format",
     "phonetic": "/ˈfɔːmæt/",
     "pos": "n./vt.",
-    "meaning": "版式， 格式 vt. 格式化",
+    "meaning": "n. 版式，格式；总体设计 vt. 格式化；编排格式",
     "part": "第一部分：超级核心母词族",
     "group": "【25. form 形状/形式/塑造】",
     "analysis_type": "构词",
@@ -4553,11 +4553,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "finance",
     "phonetic": "/ˈfaɪnæns/",
     "pos": "n./vt.",
-    "meaning": "财政， 金融 vt. 资助",
+    "meaning": "vt. 为…提供资金，资助 n. 财政，金融；资金",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“清偿账目” -> 财政，金融。"
+    "analysis": "fin-（界限/终结） -> 原指支付款项以了结清偿账目债务 -> 财政，金融；资助。"
   },
   {
     "word": "financial",
@@ -4723,7 +4723,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "present",
     "phonetic": "/ˈpreznt/",
     "pos": "adj./n./vt.",
-    "meaning": "出席的，在场的；现在的；呈现，提出；赠送；礼物",
+    "meaning": "vt. 呈现，展现；提出（问题/观点）；赠送 adj. 出席的；现在的 n. 礼物",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -4773,7 +4773,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "scent",
     "phonetic": "/sent/",
     "pos": "n./vt.",
-    "meaning": "气味， 香味 vt. 嗅到",
+    "meaning": "n. 香味，气味；蛛丝马迹线索 vt. 嗅到；察觉",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -4783,7 +4783,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sense",
     "phonetic": "/sens/",
     "pos": "n./vt.",
-    "meaning": "感觉； 意义； 理智 vt. 察觉",
+    "meaning": "n. 感觉；意义，含义；理智常识 vt. 察觉，意识到",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -4933,7 +4933,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "press",
     "phonetic": "/pres/",
     "pos": "vt./n.",
-    "meaning": "压， 按； 新闻界， 出版界",
+    "meaning": "n. 新闻界，媒体出版界；报刊 vt. 敦促，催促；压，按",
     "part": "第一部分：超级核心母词族",
     "group": "【29. press / print 压/按/挤压/印刷】",
     "analysis_type": "构词",
@@ -4957,7 +4957,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【29. press / print 压/按/挤压/印刷】",
     "analysis_type": "构词",
-    "analysis": "本义指“按压压出的印” -> 打印，印刷。"
+    "analysis": "press（按压）的派生词 -> 涂墨模版用力下压留下印记 -> 打印，印刷；印迹。"
   },
   {
     "word": "repress",
@@ -5013,7 +5013,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "catalogue",
     "phonetic": "/ˈkætəlɒɡ/",
     "pos": "n./vt.",
-    "meaning": "目录 vt. 编入目录",
+    "meaning": "n. 目录，商品名册 vt. 编入目录，系统列出",
     "part": "第一部分：超级核心母词族",
     "group": "【30. log / logy / loqu 言语/理性/学科】",
     "analysis_type": "构词",
@@ -5083,7 +5083,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "flood",
     "phonetic": "/flʌd/",
     "pos": "n./v.",
-    "meaning": "n. 洪水； 大量 vt./vi. 淹没",
+    "meaning": "n. 洪水；大批，大量（a flood of） vt./vi. 淹没；大量涌入",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
@@ -5183,17 +5183,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stream",
     "phonetic": "/striːm/",
     "pos": "n./vi.",
-    "meaning": "小溪； 川流 vi. 流出",
+    "meaning": "n. 川流，小溪；流流不息潮流 vi. 涌出，流出",
     "part": "第一部分：超级核心母词族",
     "group": "【31. flu / flux / fluid 流/流动/溢出】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“流动之水” -> 小溪。"
+    "analysis": "PIE词根 *sreu-（流动） -> 奔流不息的自然水体 -> 小溪，川流；流出。"
   },
   {
     "word": "close",
     "phonetic": "/kləʊz/",
     "pos": "v./adj.",
-    "meaning": "关闭； 终止 adj. 亲密的",
+    "meaning": "adj. 密切的，仔细严密的；亲密的 vt./vi. 关闭；结束",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -5297,7 +5297,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【33. pend / pens 悬挂/称重/付出/依赖】",
     "analysis_type": "构词",
-    "analysis": "com-（共同） + pens-（称重） + -ate，放砝码平衡 -> / 补偿， 赔偿。"
+    "analysis": "com-（共同） + pens-（称重/付出） + -ate -> 在天平两端放置等重砝码使平衡 -> 补偿，赔偿；抵消。"
   },
   {
     "word": "depend",
@@ -5423,7 +5423,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "claim",
     "phonetic": "/kleɪm/",
     "pos": "vt./n.",
-    "meaning": "声称，主张；索赔；认领；索取",
+    "meaning": "vt. 声称，断言；索赔；夺去（生命） n. 索赔；声称；权利",
     "part": "第一部分：超级核心母词族",
     "group": "【34. claim / clam 呼喊/声称】",
     "analysis_type": "构词",
@@ -5507,7 +5507,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【35. sign / signi 标记/信号/迹象】",
     "analysis_type": "构词",
-    "analysis": "词根 signum（记号） -> 迹象。"
+    "analysis": "sec- / signum（切割刻下的识别记号） -> 刻在木石表面传达特定军令或权属的标志符号，引申指病情前兆或签署契约 -> 迹象，征兆；标记标牌；手势；签名签署。"
   },
   {
     "word": "signal",
@@ -5597,7 +5597,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【36. port 搬运/携带/港口】",
     "analysis_type": "构词",
-    "analysis": "词根 portus（港口） -> 港口，港市。"
+    "analysis": "port-（搬运/船只靠岸停泊门户） -> 位于江海交汇处供大型商船装卸货物旅客停靠的深水港湾要塞 -> 港口，港市；舱门，端口。"
   },
   {
     "word": "portable",
@@ -5617,7 +5617,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【36. port 搬运/携带/港口】",
     "analysis_type": "构词",
-    "analysis": "port（搬运） + -er（人） -> 搬运工。"
+    "analysis": "port-（搬运） + -er（人），另意源自 porta（城门卫兵） -> 在火车站码头协助旅客扛运沉重行囊箱包的专业力夫，另指守护大门的门卫 -> 搬运工；门卫，门房。"
   },
   {
     "word": "support",
@@ -5847,7 +5847,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“开辟出的道路” -> 路线，航线。"
+    "analysis": "rupt（断裂/打破）同源 -> 穿山辟石打破阻碍开通的道路 -> 路线，航线。"
   },
   {
     "word": "attach",
@@ -5907,7 +5907,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【41. temp / tempor 时间/时代/适度】",
     "analysis_type": "构词",
-    "analysis": "词根 temp-（适度调节） -> 脾气。"
+    "analysis": "temp-（适度调节/按比例混合） -> 铁匠淬火锤炼钢材使软硬韧性达到最佳平衡，引申指情绪脾气或缓和冲突 -> 脾气，情绪；韧度；调和，使缓和缓解。"
   },
   {
     "word": "temporary",
@@ -5946,7 +5946,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【42. tribut 给予/交纳/分发】",
     "analysis_type": "构词",
-    "analysis": "con-（共同） + tribut-（给予） -> 把个人力量交付集体 -> / 贡献， 捐赠。"
+    "analysis": "con-（共同） + tribut-（给予/交纳） -> 共同拿出财物力量交给集体 -> 贡献，捐赠；促成。"
   },
   {
     "word": "contribution",
@@ -6016,7 +6016,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根 cura（关心） -> 治愈，治好。"
+    "analysis": "cura（悉心照料关照/医疗照护） -> 医师运用药物疗法悉心照护患者使受损病灶彻底恢复健全机能 -> 治愈，治好；消除恶习；疗法；良药。"
   },
   {
     "word": "curiosity",
@@ -6032,7 +6032,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "curious",
     "phonetic": "/ˈkjʊəriəs/",
     "pos": "adj.",
-    "meaning": "好奇的； 古怪的",
+    "meaning": "adj. 好奇的，求知欲强的；奇特离奇的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -6284,7 +6284,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【45. val / vail 强壮/力量/价值】",
     "analysis_type": "构词",
-    "analysis": "词根 val-（有价值） -> 珍视，重视。"
+    "analysis": "val-（强壮/有力量价值） -> 一件货品在换取其他物资或服务时所展现出的客观对价力量，引申指人生价值准则 -> 价值；价值观；珍视，重视；评价估价。"
   },
   {
     "word": "alien",
@@ -6304,7 +6304,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 alter（另一个） -> 改变，更改。"
+    "analysis": "ali- / alter（另一个/改变转换） -> 擦去原先方案特征替换为另一种全新的安排样式 -> 改变，更改；改动，改建修改。"
   },
   {
     "word": "alternative",
@@ -6384,7 +6384,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根 audi-（听） -> 旁听（课程），n.。"
+    "analysis": "aud- / audit-（倾听/口头汇报账目） -> 古代罗马官吏当堂倾听财务账目口头背诵审查，大学借指仅到场旁听课程 -> 审计，查账；旁听（课程）；稽核。"
   },
   {
     "word": "auditorium",
@@ -6454,7 +6454,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【49. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
-    "analysis": "源自短促猛烈的重击刺戳 -> 猛击。"
+    "analysis": "punct-（刺/戳）同源 -> 握拳像尖锥般瞬间猛击重戳 -> 猛击；打孔；打孔机。"
   },
   {
     "word": "rebel",
@@ -6464,7 +6464,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【49. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
-    "analysis": "re-（反向） + bel（战争） -> 反叛。"
+    "analysis": "re-（反向） + bel- / bellum（战争搏杀） -> 面对残暴统治者悍然拔刀举起战旗发动武装流血暴动抗衡王权 -> 反叛，造反；反抗者，叛乱分子；反叛的反抗的。"
   },
   {
     "word": "rebellion",
@@ -6560,7 +6560,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "concern",
     "phonetic": "/kənˈsɜːn/",
     "pos": "v./n.",
-    "meaning": "涉及； 关心， 挂念",
+    "meaning": "vt. 涉及；使担忧，使挂念 n. 令人担忧的事；关切，关心",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -6594,7 +6594,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【52. cord / card 心/核心】",
     "analysis_type": "构词",
-    "analysis": "词根 cor-（心脏） -> 核心。"
+    "analysis": "cor-（心脏/最核心脏器） -> 位于果实或系统最中央、维系整体生命运转的最深枢纽 -> 核心，要点；果核；核心的，骨干的。"
   },
   {
     "word": "courage",
@@ -6741,7 +6741,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "doc-（教导） + -tor（人） -> 医生。"
+    "analysis": "doc-（教导/讲授学问） + -tor（人） -> 掌握最高精深学问并被授予教学布道资格的大学者，现代专指医治伤病的医生 -> 医生；博士；篡改伪造（账目/证据）。"
   },
   {
     "word": "document",
@@ -6969,7 +6969,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【59. fend / fens 防卫/击退】",
     "analysis_type": "构词",
-    "analysis": "源自 defence（防卫堡垒） -> 栅栏。"
+    "analysis": "fend- / defence（防御/保卫工事）演变 -> 环绕农庄四周插设木桩搭建用以抵御野兽家畜越界的栅栏篱笆 -> 栅栏，篱笆；围住，隔开；击剑。"
   },
   {
     "word": "offend",
@@ -7019,7 +7019,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【60. fide / feder 信任/信仰/联盟】",
     "analysis_type": "构词",
-    "analysis": "源自 fides（信仰信任） -> 信任，信心。"
+    "analysis": "fid- / fides（信任/忠贞不二誓约） -> 毫无保留将信任寄托于神明或挚友之上的坚定信念，引申为宗教信仰 -> 信任，信心；宗教信仰；信念。"
   },
   {
     "word": "faithful",
@@ -7059,7 +7059,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【61. flor / flour 花/开花/繁荣】",
     "analysis_type": "构词",
-    "analysis": "源自 flower（花） -> 面粉，粉末。"
+    "analysis": "flower（花朵/最精华之物）同源异形词 -> 研磨麦粒筛除粗糙麦麸后保留下洁白如花瓣般细腻的小麦精华粉末 -> 面粉，粉末；撒面粉于。"
   },
   {
     "word": "flourish",
@@ -7079,7 +7079,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【61. flor / flour 花/开花/繁荣】",
     "analysis_type": "构词",
-    "analysis": "词根 flor-（花朵绽放） -> 花。"
+    "analysis": "flor- / flos（花朵绽放盛开） -> 植物繁殖阶段绽放散发芬芳招引昆虫授粉的艳丽花朵，引申指事业走向鼎盛成熟 -> 花，开花植物；开花；发育成熟走向鼎盛。"
   },
   {
     "word": "confuse",
@@ -7119,7 +7119,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【62. fuse / fund 浇灌/倾倒/熔化】",
     "analysis_type": "构词",
-    "analysis": "re-（往回） + fus（倾倒） + -e，引申为倒掉的残渣废料 -> vt.ˈrefjuːs，废弃物。",
+    "analysis": "re-（回/退） + fus-（倾倒） + -e -> 往回泼倒拒不接受 -> 拒绝；[ˈrefjuːs] 倒掉的废弃物。",
     "antonyms": [
       {
         "target": "accept",
@@ -7247,7 +7247,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【64. habit / hibit 居住/持有/拥有】",
     "analysis_type": "构词",
-    "analysis": "词根 habit-（常年持有） -> 习惯，习性。"
+    "analysis": "hab-（拥有/保持/穿着打扮） -> 长期反复践行从而在机体神经深处牢牢固定下来的行事方式，亦指修道士僧袍装束 -> 习惯，习性；怪癖；习惯性动作；修道士道袍。"
   },
   {
     "word": "habitat",
@@ -7332,7 +7332,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "judge",
     "phonetic": "/dʒʌdʒ/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 法官， 裁判员 vt./vi. 审判； 评定， 判断",
+    "meaning": "vt./vi. 判断，断定；评定，评价 n. 法官；裁判员",
     "part": "第二部分：高频专业词根族",
     "group": "【65. jur / jud / just 法律/审判/正义】",
     "analysis_type": "构词",
@@ -7412,11 +7412,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "labor",
     "phonetic": "/ˈleɪbə(r)/",
     "pos": "n./vi.",
-    "meaning": "n. 劳动， 劳力； 劳工 vi. 艰苦劳作",
+    "meaning": "n. 劳动力，劳工；辛勤劳动 vi. 艰苦劳作，艰难前行",
     "part": "第二部分：高频专业词根族",
     "group": "【66. labor 劳动/劳作/艰辛】",
     "analysis_type": "构词",
-    "analysis": "词根 labor-（艰苦劳作） -> 劳动。"
+    "analysis": "lab-（沉重负荷/费力劳作） -> 消耗大量体力汗水克服自然阻力进行的重体力搬运劳作，引申指劳工阶层 -> 劳动，劳力；劳工阶层；分娩阵痛；艰苦劳作。"
   },
   {
     "word": "laboratory",
@@ -7476,7 +7476,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
     "analysis_type": "构词",
-    "analysis": "e-（向外） + lect（挑选） -> 选举。"
+    "analysis": "e-（向外） + lect-（挑选选拔） -> 众人通过一人一票公开投票从多位候选人中单独挑选确认领导者 -> 选举，推举；选择选定；当选的。"
   },
   {
     "word": "election",
@@ -7585,7 +7585,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
     "analysis_type": "构词",
-    "analysis": "se-（分开） + lect（挑选） -> 选择。"
+    "analysis": "se-（分开） + lect-（挑出） -> 按照严格苛刻的筛选标准从大批样本中将最出类拔萃者单独剔选出来 -> 选择，挑选；精选挑选出的；优等的，精选的。"
   },
   {
     "word": "selection",
@@ -7730,7 +7730,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【70. loc 地点/放置/位置】",
     "analysis_type": "构词",
-    "analysis": "loc（地点） + -al（的） -> 当地的。"
+    "analysis": "loc-（地点/位置） + -al -> 局限在特定城市集镇小区域地理边界之内的，引申指居住于该地的本地土著 -> 当地的，地方性的；局部的；当地人，本地居民。"
   },
   {
     "word": "locate",
@@ -7776,11 +7776,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "major",
     "phonetic": "/ˈmeɪdʒə(r)/",
     "pos": "adj./vi./n.",
-    "meaning": "主要的，重大的；少校",
+    "meaning": "adj. 主要的，重大的；主修的 vi. 主修（in） n. 专业；少校",
     "part": "第二部分：高频专业词根族",
     "group": "【71. magn / maj / max 巨大/伟大/最高】",
     "analysis_type": "构词",
-    "analysis": "词根 maj-（更大） -> 主要的，重大的。",
+    "analysis": "magn- / maj-（较大/更为重大的） -> 在规模影响上占据主导支配地位的，大学借指攻读主修的核心专业，军事指少校 -> 主要的，重大的；主修专业；少校；主修（in）。",
     "antonyms": [
       {
         "target": "minor",
@@ -7867,7 +7867,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "de-（彻底） + mand（要求） -> 要求。"
+    "analysis": "de-（强调） + mand-（委托/命令指令） -> 凭借权威或合同条款以不容置疑的口吻正式勒令交出某物，经济学指市场消费需求 -> 要求，请求；需要；需求，需求量。"
   },
   {
     "word": "demanding",
@@ -7952,7 +7952,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "means",
     "phonetic": "/miːnz/",
     "pos": "n.",
-    "meaning": "手段， 方法， 方式； 财富， 资产",
+    "meaning": "n. 手段，方法，途径；财富，资产（live beyond one's means）",
     "part": "第二部分：高频专业词根族",
     "group": "【73. med / medi 中间/居中】",
     "analysis_type": "构词",
@@ -8253,7 +8253,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【79. not 知道/注意/标明】",
     "analysis_type": "构词",
-    "analysis": "词根 not-（做出可见标记） -> 便条。"
+    "analysis": "gno- / not-（辨识/做出可见标志印记） -> 在羊皮纸边缘快速写下便于日后唤醒记忆的短小字条，引申指细心察觉注意到 -> 便条，笔记；注释；纸币；注意到；记录。"
   },
   {
     "word": "notice",
@@ -8608,7 +8608,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 circus（圆圈） -> 圆，圆圈。"
+    "analysis": "circ-（圆圈/环状回旋） + -le -> 平面上到定点距离完全相等的闭合几何圆环，引申指人员社交聚拢的圈子圈层 -> 圆，圆圈；圈子，社交界；环绕，盘旋围绕。"
   },
   {
     "word": "circuit",
@@ -8644,7 +8644,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "deliver",
     "phonetic": "/dɪˈlɪvə(r)/",
     "pos": "vt./vi.",
-    "meaning": "递送，交付；发表（讲话）；履行，兑现；接生",
+    "meaning": "vt. 履行，兑现（承诺）；发表（演讲）；递送，交付；接生",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -8768,13 +8768,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
-    "analysis": "与 fore 同源 -> 向前，往外。"
+    "analysis": "fore-（前面）的副词形式 -> 朝着正前方往外走 -> 向前，往外；以后。"
   },
   {
     "word": "forward",
     "phonetic": "/ˈfɔːwəd/",
     "pos": "adv./adj./vt.",
-    "meaning": "adv. 向前 adj. 前进的 vt. 转交",
+    "meaning": "vt. 推进，促进；转交，转发 adv. 向前 adj. 前进的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -8807,7 +8807,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
-    "analysis": "源自古希腊语掌舵操舟之意 -> 统治，治理。"
+    "analysis": "源自希腊语 kybernan（操舵驾舟） -> 掌握方向大局统领全局 -> 统治，治理；控制。"
   },
   {
     "word": "inferior",
@@ -9144,7 +9144,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
-    "analysis": "词根 prim-（第一） -> 首要的。"
+    "analysis": "prim-（第一位/最开始最初） -> 在重要性或时间序列上高居首位的，引申指身体精力处于一生最佳状态的黄金鼎盛期 -> 首要的；最好的，头等的；鼎盛期，黄金时期。"
   },
   {
     "word": "primitive",
@@ -9322,7 +9322,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "拟声",
-    "analysis": "本义拟声词 -> 雷。"
+    "analysis": "PIE拟声词根 *(s)ten-（轰鸣震响） -> 乌云翻滚的雷电震响 -> 雷，雷声；轰鸣。"
   },
   {
     "word": "transaction",
@@ -9517,7 +9517,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "promote",
     "phonetic": "/prəˈməʊt/",
     "pos": "vt.",
-    "meaning": "促进， 增进； 提升， 提拔； 促销",
+    "meaning": "vt. 促进，增进；提拔，晋升；促销推销",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【83. 前缀群：时间与递进】",
     "analysis_type": "构词",
@@ -9531,7 +9531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第三部分：核心高频构词前缀族",
     "group": "【83. 前缀群：时间与递进】",
     "analysis_type": "构词",
-    "analysis": "re-（回） + act（行动） -> 做出反应。"
+    "analysis": "re-（反向/回馈） + act-（行动做工） -> 遭受外界物理刺激或言语挑衅后神经系统瞬间作出的反射性反击回应 -> 做出反应；起化学反应；反抗抵制（to/against）。"
   },
   {
     "word": "reaction",
@@ -9581,7 +9581,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "com-（共同） + bin-（两个） -> 将两者绑合并作一处 -> / 结合， 联合  联合收割机。"
+    "analysis": "com-（共同） + bin-（两个一组） -> 将两者组合绑在一处协同运作 -> 结合，联合；联合收割机。"
   },
   {
     "word": "communicate",
@@ -9761,7 +9761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“讨价还价” -> 特价商品。"
+    "analysis": "bar-（争辩/交涉） -> 买卖双方反复商讨砍价成交 -> 讨价还价；特价商品。"
   },
   {
     "word": "behalf",
@@ -9811,7 +9811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 品牌，商标。"
+    "analysis": "burn（燃烧）同源 -> 用烧红烙铁在牲畜或商品上烙下所有权印记 -> 品牌，商标；烙印。"
   },
   {
     "word": "bribe",
@@ -9821,7 +9821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“施舍给乞丐的” -> 贿赂。"
+    "analysis": "源自古法语指施舍给乞丐的面包屑，引申为塞好处收买人心 -> 贿赂；行贿。"
   },
   {
     "word": "budget",
@@ -9831,7 +9831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“装钱币的皮革” -> 预算，vi.。"
+    "analysis": "源自古法语 bougette（装钱的小皮囊） -> 规划皮囊中所装金钱的开销 -> 预算；编预算。"
   },
   {
     "word": "business",
@@ -9851,7 +9851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“装钱的小钱箱” -> 现金，vt.。"
+    "analysis": "cap- / capsa（箱匣）同源 -> 原指装硬币的金库小钱箱，转指随时可支取的货币 -> 现金；兑现。"
   },
   {
     "word": "cattle",
@@ -9861,13 +9861,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义指“个人动产财产” -> 牛，牲口（总称）。"
+    "analysis": "capit-（头）同源，古时以牲畜头数计量财富（与 capital 同源） -> 牲口，牛（总称）。"
   },
   {
     "word": "charge",
     "phonetic": "/tʃɑːdʒ/",
     "pos": "v./n.",
-    "meaning": "收费，要价；主管，掌管；指控，控告；充电",
+    "meaning": "vt. 收费，要价；指控，控告 n. 主管，掌管（in charge of）；电荷",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -9881,7 +9881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "源自国际象棋将死与核查对照 -> 支票。"
+    "analysis": "check（核对/将死）同源变体 -> 开具凭证以便兑付时核对防伪 -> 支票。"
   },
   {
     "word": "classic",
@@ -9957,7 +9957,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "consume",
     "phonetic": "/kənˈsjuːm/",
     "pos": "vt./vi.",
-    "meaning": "vt. 消耗， 耗尽； 消费",
+    "meaning": "vt. 消耗，耗费；吃，喝；烧毁，吞噬",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -9997,7 +9997,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "count",
     "phonetic": "/kaʊnt/",
     "pos": "v./n.",
-    "meaning": "数数， 计算； 认为 n. 总数",
+    "meaning": "vi. 有重要意义，要紧，起作用 vt. 计算，计数 n. 总数",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -10007,7 +10007,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "custom",
     "phonetic": "/ˈkʌstəm/",
     "pos": "n./adj.",
-    "meaning": "海关， 关税； 风俗， 习惯； 定制的",
+    "meaning": "n. 风俗，社会传统习俗；海关关税（customs） adj. 定制的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -10209,7 +10209,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“走” -> 车费，船费。"
+    "analysis": "古英语 faran（去/行走/旅行） -> 乘车乘船长途出行所需支付的交通费用 -> 车费，船费；进展。"
   },
   {
     "word": "farewell",
@@ -10225,7 +10225,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fashion",
     "phonetic": "/ˈfæʃn/",
     "pos": "n./vt.",
-    "meaning": "流行式样， 风尚； 方式 vt. 塑造",
+    "meaning": "n. 方式，方法（in a... fashion）；时尚，时兴 vt. 塑造",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -10239,7 +10239,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "核心意象为“牛羊牲畜” -> 古代以牛羊支付酬劳封赏 -> 费，酬金。"
+    "analysis": "pecus（家畜牛羊财富）同源演变 -> 上古时代以牲口牛羊给付劳务换取酬劳，引申指现代各项专业服务规费与入场学费 -> 费，酬金；学费，入场费。"
   },
   {
     "word": "feedback",
@@ -10288,7 +10288,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "给烈马套上马鞍缰绳加以驾驭 -> 开发，治理。"
+    "analysis": "原指战马披挂整齐的鞍辔铠甲，引申为给自然力套上缰绳加以控制调度 -> 马具；开发，利用（自然力/潜能）。"
   },
   {
     "word": "herd",
@@ -10298,7 +10298,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "原始词根 -> 本义为“看护、守护” -> 兽群，牧群。"
+    "analysis": "PIE词根 *ker-（聚集/看护） -> 由牧人看护聚拢在一起行进的牛羊群 -> 兽群，牧群；放牧，聚集。"
   },
   {
     "word": "heritage",
@@ -10368,7 +10368,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "词根副词 item（同样地） -> 条，条款。"
+    "analysis": "item（拉丁语副词：同样地/并且记上一笔） -> 法律文书清单或账簿中逐项列明并另起一行记录的单独条款或商品 -> 条，条款；项目；一件商品物品；一条新闻。"
   },
   {
     "word": "loan",
@@ -10388,7 +10388,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "书页最外侧的留白边线 -> 差额，幅度。"
+    "analysis": "margo（边缘/界限） -> 书页边沿留出的空白余量，商贸引申为扣除成本后的盈余幅度 -> 页边空白；利润率；差额，幅度。"
   },
   {
     "word": "merchandise",
@@ -10448,7 +10448,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "原指紧绷发力的人体筋腱神经 -> 神经。"
+    "analysis": "源自希腊语 neuron（肌腱/琴弦/神经） -> 人体绷紧发力的筋弦，引申为面对危机的坚毅胆魄 -> 神经；勇气，胆魄。"
   },
   {
     "word": "nutrition",
@@ -10503,11 +10503,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "patent",
     "phonetic": "/ˈpætnt/",
     "pos": "n./vt.",
-    "meaning": "专利权 vt. 获得专利",
+    "meaning": "n. 专利权，专利证书 adj. 显而易见的 vt. 获得专利",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 patere（敞开） -> 专利权，vt.。"
+    "analysis": "pat- / patere（敞开门户/公开发布） -> 国王颁发带有皇家蜡封向全天下公开宣布授予某项技术独家垄断保护的特许公文 -> 专利权，专利证书；获得专利；显著显然的。"
   },
   {
     "word": "patience",
@@ -10677,7 +10677,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "词根 spolium（剥下敌人战利） -> 损坏。"
+    "analysis": "spolium（扒下剥去的兽皮战利品） -> 征战洗劫敌军营地剥夺一切财物，引申指过度溺爱纵容毁坏孩子心性或食物变质腐坏 -> 损坏破坏；宠坏溺爱；食物变质腐败；战利品掠夺物。"
   },
   {
     "word": "stake",
@@ -10697,7 +10697,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 股票。"
+    "analysis": "stick（木桩/树干）同源 -> 原指稳固树桩底座，后引申为固定累积的实物资产及股本凭证 -> 股票；库存，储备。"
   },
   {
     "word": "trade",
@@ -10707,7 +10707,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“既定轨迹” -> 贸易，商业。"
+    "analysis": "tread（踩踏/行走）同源 -> 原指商队长期往返踩踏出的既定行商贸易路线 -> 贸易，商业；交换。"
   },
   {
     "word": "trademark",
@@ -10766,7 +10766,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 via（道路） -> 经由，经过。"
+    "analysis": "vegh- / via（道路/通道轨迹） -> 沿着某一固定地理路网辗转前行，现代引申指经由特定媒介技术或渠道手段 -> 经由，经过；通过（途径/手段）。"
   },
   {
     "word": "victory",
@@ -10795,7 +10795,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“抵押保证” -> 工资，报酬。"
+    "analysis": "gage（抵押/誓约）同源 -> 原指立誓保证按劳定期发放的报酬对价 -> 工资，报酬；发动（战争）。"
   },
   {
     "word": "wealth",
@@ -10855,7 +10855,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
-    "analysis": "本义为支付与给予 -> 结出成果或被迫交出让步 -> 产生，出产。",
+    "analysis": "古英语 gieldan（支付/结出） -> 耕作土地结出收获回报，后转指受外力压迫交出权益让步 -> 产出，收益；屈服，让步。",
     "synonyms": [
       {
         "target": "cause",
@@ -10971,7 +10971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根 campus（平原） -> 大学校园，校区。"
+    "analysis": "camp-（平坦原野/露营广场） -> 远离闹市喧嚣坐落在开阔草地绿荫之中的大学校园建筑群及生活区 -> 大学校园，校区。"
   },
   {
     "word": "chemical",
@@ -11007,11 +11007,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "code",
     "phonetic": "/kəʊd/",
     "pos": "n.",
-    "meaning": "n. 准则； 代号； 密码 vt. 编码",
+    "meaning": "n. 法规，准则，规范；代号，密码；代码，编码 vt. 编码",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“法典” -> 把规范条文规整集合 -> 准则。"
+    "analysis": "codex（木板书册） -> 原指书写在木板上的法律法典总编，引申为系统化的规范条文或符号体系 -> 准则；代号，密码；编码。"
   },
   {
     "word": "consideration",
@@ -11061,7 +11061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "de-（向下） + gree（台阶） -> 学位。"
+    "analysis": "de-（向下） + gradus（台阶/步级） -> 顺着台阶逐级向上攀登所达到的高度刻度，引申指温度计刻度或大学颁授的学术阶梯文凭 -> 学位；度数（温度/角度）；程度等级。"
   },
   {
     "word": "digest",
@@ -11071,7 +11071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "di-（分开） + gest（运送） -> 将食物摄入分解运送至全身 -> / 消化。"
+    "analysis": "di-（分开） + gest-（运送/携带） -> 将食物分解摄取运送至体内，引申为研读领会书本知识 -> 消化；领会；文摘。"
   },
   {
     "word": "diplomat",
@@ -11141,7 +11141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“尝试” -> 短文，小论文。"
+    "analysis": "ex-（向外） + ag- / exagium（称量/试炼） -> 对个人思想观点进行初步尝试与权衡探讨的文章 -> 短文，小论文；散文。"
   },
   {
     "word": "expedition",
@@ -11197,11 +11197,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "file",
     "phonetic": "/faɪl/",
     "pos": "n./vt.",
-    "meaning": "档案， 文件； 归档， 整理； 正式提出（诉讼/申请）",
+    "meaning": "vt. 正式提出，提起（诉讼/申请）；归档 n. 档案，文件",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 filum（细线） -> 档案，文件。"
+    "analysis": "filum（细绳/穿起文件的线索） -> 古时用长细绳将账册公文按顺序穿孔串连保存，现代指分类归档的电子或纸质档案卷宗 -> 档案，卷宗文件；锉刀；归档；正式提出（诉讼/申请）。"
   },
   {
     "word": "forum",
@@ -11211,7 +11211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根 -> 论坛，讨论会。"
+    "analysis": "foris（在户外/门口） -> 古罗马集市公开露天广场，引申为公众讨论集思广益的平台 -> 论坛，讨论会；公开展厅。"
   },
   {
     "word": "freshman",
@@ -11241,7 +11241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“长廊” -> 陈列展示艺术品的长厅 -> 美术馆，画廊。"
+    "analysis": "源自晚期拉丁语 galeria（有顶连廊） -> 挂满绘画雕塑作品的艺术展示长廊 -> 美术馆，画廊；走廊。"
   },
   {
     "word": "geometry",
@@ -11261,7 +11261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“依据直觉揣摩” -> 猜测，推测。"
+    "analysis": "与 get（抓取）同源 -> 试图抓住线索在心中揣摩推断真相 -> 猜测，推测；估计。"
   },
   {
     "word": "ideal",
@@ -11391,7 +11391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根magister -> 硕士。"
+    "analysis": "magn- / magister（大/主导者） -> 某一技艺领域造诣最高者或居主导地位者 -> 大师；硕士；主人；精通。"
   },
   {
     "word": "masterpiece",
@@ -11551,13 +11551,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 理清头绪推算结果 -> 认为，估计。"
+    "analysis": "古英语 gerecenian（按序排好/理顺账目） -> 理清头绪推算结算出最终结果 -> 认为，估计；计算，料想。"
   },
   {
     "word": "regard",
     "phonetic": "/rɪˈɡɑːd/",
     "pos": "vt./n.",
-    "meaning": "把…看作，认为；尊重，看重；关于",
+    "meaning": "vt. 把…看作，认为（as）；看待 n. 尊重，关注；问候",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
@@ -11641,7 +11641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古诺斯语 skil（辨析） -> 技能，技艺。"
+    "analysis": "skel- / skein（剖开/区分明辨）同源 -> 经过长期严苛试错训练掌握的洞察微细分寸、精准操控工具的熟练手工技艺 -> 技能，技艺；熟练技巧；本领才干。"
   },
   {
     "word": "sophomore",
@@ -11661,7 +11661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“坚固挺立” -> 僵硬的，生硬的。"
+    "analysis": "PIE词根 *steip-（紧绷/硬实） -> 质地坚硬无法弯折，引申为态度死板或环境严酷 -> 僵硬的，生硬的；严酷的。"
   },
   {
     "word": "surgeon",
@@ -11737,7 +11737,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "term",
     "phonetic": "/tɜːm/",
     "pos": "n./vt.",
-    "meaning": "术语，专门词汇；学期；条款，条件；期限",
+    "meaning": "n. 术语，专有名词；学期；条款，条件（in terms of） vt. 称为",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -11771,7 +11771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“外面的” -> 彻底推向极限毫无保留的 -> 完全的，彻底的。"
+    "analysis": "out（向外）的比较级 -> 彻底放到最外面、毫无掩饰推到极致 -> 完全的，彻底的；说出，发声。"
   },
   {
     "word": "vital",
@@ -11821,17 +11821,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“命运女神” -> 怪异的，超自然的。"
+    "analysis": "源自古英语 wyrd（命运/造化女神） -> 带有命运超自然预言色彩的、不可思议的 -> 怪异的，超自然的；古怪的。"
   },
   {
     "word": "wild",
     "phonetic": "/waɪld/",
     "pos": "adj./n.",
-    "meaning": "野生的， 未驯化的； 狂热的； 荒野， 野外",
+    "meaning": "adj. 狂热的，失控的；野生的；荒谬的 n. 荒野",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 野生的，未驯化的。"
+    "analysis": "wood / will（意志）同源 -> 在森林荒野任由自然天性生长、不受人类规训管教的 -> 野生的，未驯化的；狂热的；荒野。"
   },
   {
     "word": "wise",
@@ -11841,7 +11841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“看见” -> 明智的，有远见的。"
+    "analysis": "vid- / wit（看见/知道）同源 -> 经历丰富、能洞见事物发展先机与规律的 -> 明智的，有远见的；博学的。"
   },
   {
     "word": "wit",
@@ -11851,7 +11851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“感知” -> 风趣，机智。"
+    "analysis": "weid- / vid-（看见/知晓） -> 头脑敏锐善于洞察事物、言语精妙机锋 -> 风趣，机智；才思，智力。"
   },
   {
     "word": "absorb",
@@ -11861,7 +11861,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "ab-（离去） + sorb（吮吸） -> 吸收。"
+    "analysis": "ab-（从外往内） + sorb-（吸吮吸入吞咽） -> 海绵孔隙将流动的清水彻底吸入内部饱胀封存，引申指精神极度专注深陷其中 -> 吸收（水分/知识）；同化；全神贯注于（be absorbed in）。"
   },
   {
     "word": "addition",
@@ -11941,7 +11941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 basis（底座） -> 基础，底部。"
+    "analysis": "basis（踏实踩稳的坚实底座/基石步阶） -> 承受建筑物全部自重荷载并深植大地的最底层底座，引申指设立军事基地或立论根基 -> 基础，底部；基地；基于，以…为根据（on/upon）。"
   },
   {
     "word": "basin",
@@ -11971,7 +11971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“厚木板” -> 登机，上船。"
+    "analysis": "原指加工平整的长条厚木板，引申指踏上跳板登船乘车，或众人围坐木桌议事的机构 -> 木板；登机，上船；董事会。"
   },
   {
     "word": "breeze",
@@ -11987,11 +11987,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bubble",
     "phonetic": "/ˈbʌbl/",
     "pos": "n./vi.",
-    "meaning": "气泡， 水泡； 资产泡沫； 冒泡， 洋溢",
+    "meaning": "n. 气泡；经济泡沫 vi. 冒泡；洋溢充斥着",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声构词法 -> 气泡，水泡。"
+    "analysis": "拟声词，模拟水下气体溢出水面破裂之声，引申为虚浮无支撑的金融泡沫 -> 气泡，水泡；资产泡沫；冒泡。"
   },
   {
     "word": "bucket",
@@ -12001,7 +12001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“带提手的木盆” -> 提桶，水桶。"
+    "analysis": "源自古法语 buquet（洗盆/桶） -> 带有弯曲提梁装运水液的容器 -> 提桶，水桶；一桶之量。"
   },
   {
     "word": "bug",
@@ -12031,7 +12031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“低矮繁密的丛” -> 灌木，灌木丛。"
+    "analysis": "与 box（灌木盒）同源 -> 从靠近地表处丛生分叉的低矮木本植物群落 -> 灌木，灌木丛；荒野。"
   },
   {
     "word": "carrot",
@@ -12071,7 +12071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "与 canal（运河）同源 -> 海峡，水道。"
+    "analysis": "canal / canna（空心芦苇/运河引水道） -> 夹在两片陆地之间供航运通航的深水水道海峡，引申指广播电视发射频段或商贸流通渠道 -> 海峡，水道；流通渠道；电视频道；引导调配。"
   },
   {
     "word": "chart",
@@ -12091,7 +12091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“刺骨之寒” -> 寒意，寒冷。"
+    "analysis": "cool / cold 同源派生 -> 温度骤降使人打寒战的刺骨凉意 -> 寒意，寒冷；使冰冷；寒冷的。"
   },
   {
     "word": "clash",
@@ -12101,7 +12101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声词 -> 发生冲突，猛烈撞击。"
+    "analysis": "拟声词，模拟金属铠甲兵器猛烈对撞击打的声响，引申为意见观点冲突 -> 发生冲突，猛烈撞击；冲突，抵触。"
   },
   {
     "word": "clay",
@@ -12111,17 +12111,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“粘稠” -> 黏土，陶土。"
+    "analysis": "cleave / cling（粘附）同源 -> 具有可塑性且遇水极易黏连在一起的土壤矿物 -> 黏土，陶土。"
   },
   {
     "word": "climate",
     "phonetic": "/ˈklaɪmət/",
     "pos": "n.",
-    "meaning": "气候； 风气， 环境",
+    "meaning": "n. 气候；社会风气，大环境舆论氛围",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 klima（地表倾斜度） -> 气候。"
+    "analysis": "klimat-（地球向太阳倾斜的角度带） -> 依据纬度受光热量不同划分的长期稳定大气物理状态，引申指特定时期的社会思潮风气 -> 气候；社会风气，大环境舆论氛围。"
   },
   {
     "word": "counterpart",
@@ -12161,7 +12161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“猛烈猛冲撞击” -> 猛冲，飞奔。"
+    "analysis": "拟声词，模拟像浪涛砸向礁石般迅猛前冲碰撞 -> 猛冲，飞奔；猛击；破折号。"
   },
   {
     "word": "dawn",
@@ -12171,7 +12171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“日出于东方” -> 夜尽天明破晓之时 -> 黎明，拂晓。"
+    "analysis": "day（白天）同源派生 -> 天色渐亮、黑夜初退迎来晨光时刻，引申为真理破晓被领悟 -> 黎明，拂晓；破晓，逐渐被领悟。"
   },
   {
     "word": "decay",
@@ -12381,7 +12381,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“平坦开阔的原” -> 田野，牧场。"
+    "analysis": "flat（平坦）同源 -> 视野开阔平展的原野田地，引申为特定学术研究深耕的专业领地 -> 田野，牧场；专业领域，学科。"
   },
   {
     "word": "fire",
@@ -12391,7 +12391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（火） -> 火，火灾。"
+    "analysis": "pur- / pyr-（烈火熊熊燃烧之光）同源 -> 物质剧烈氧化发光发热的高温火焰现象，引申为扣动扳机射击或老板暴怒开除员工 -> 火，火灾；射击，开火；解雇开除；点燃，激发热情。"
   },
   {
     "word": "fortnight",
@@ -12421,7 +12421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 结冰，冻结。"
+    "analysis": "frost（霜冻）同源 -> 液体遇极端严寒凝固成固态坚冰，引申为人员或账户僵住冻结 -> 结冰，冻结；僵住；严寒。"
   },
   {
     "word": "fuel",
@@ -12451,7 +12451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“词根字面” -> 光荣，荣誉。"
+    "analysis": "clew / call（称赞/呼喊）同源 -> 众人高声颂扬传颂其伟大功绩的光彩盛誉 -> 光荣，荣誉；壮丽；自豪。"
   },
   {
     "word": "glow",
@@ -12461,7 +12461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（发光） -> 发光，发热。"
+    "analysis": "gold / yellow（金黄光芒散发）同源 -> 炭火在没有明火烈焰的情况下持续向四周辐射散发红润温和的光与热 -> 发光，发热；容光焕发面色红润；红光，暖意。"
   },
   {
     "word": "glue",
@@ -12491,7 +12491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“被高高举起的” -> 天堂，天国。"
+    "analysis": "heave（抬高/举升）同源 -> 高高耸立仰望之上的辽阔苍穹，引申为至福安详的天国圣地 -> 天堂，天国；苍穹，天空。"
   },
   {
     "word": "hell",
@@ -12501,7 +12501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指地下的幽暗冥界 -> 极度痛苦的境地 -> 地狱。"
+    "analysis": "cell / hide（隐藏/地窖）同源 -> 深埋在地下黑暗幽闭深处受折磨之地 -> 地狱；苦难深渊。"
   },
   {
     "word": "heroin",
@@ -12601,7 +12601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“挂在衣服或包” -> 标明名称价格成分的铭牌 -> 标签，标牌。"
+    "analysis": "源自古法语 lambel（布条/带子） -> 缝制附着在物品外用以标识信息的小布条纸片 -> 标签，标牌；贴标签于；分类归类。"
   },
   {
     "word": "landlord",
@@ -12621,7 +12621,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“开阔林间空地” -> 草坪，草地。"
+    "analysis": "源自古法语 launde（林间开阔草地） -> 人工修剪平整规整的观赏性绿化草皮 -> 草坪，草地。"
   },
   {
     "word": "leadership",
@@ -12641,7 +12641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“发光” -> 照彻黑暗的物理辐射 -> 光线，光芒。"
+    "analysis": "PIE词根 *leuk-（发光） -> 驱散黑暗的明亮射线，引申为分量轻盈不沉重 -> 光线，光芒；轻的；点燃，照亮。"
   },
   {
     "word": "lightning",
@@ -12691,7 +12691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（变软） -> 熔化，融化。"
+    "analysis": "mild / smelt（温软消融化开）同源 -> 固体冰块或金属受热晶体结构解体坍塌转变成流动液态，引申指敌意怨恨软化消散 -> 熔化，融化；消散，软化；使变温和。"
   },
   {
     "word": "moist",
@@ -12701,7 +12701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“受水分浸润微” -> 湿润的，微湿的。"
+    "analysis": "源自拉丁语 mucidus（发霉多汁的） -> 空气中水汽弥漫、表皮微湿不干的 -> 湿润的，微湿的；多雨的。"
   },
   {
     "word": "moon",
@@ -12711,7 +12711,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“测量” -> 月亮，月球。"
+    "analysis": "PIE词根 *me-（测量）同源（古人用月相朔望周期计量月份） -> 夜空绕地球运行的卫星天体 -> 月亮，月球；卫星。"
   },
   {
     "word": "mud",
@@ -12721,7 +12721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“水土交融而成” -> 泥，泥浆。"
+    "analysis": "PIE词根 *meu-（湿滑/弄脏） -> 水土混合浸润形成黏稠湿软的稀烂地质 -> 泥，泥浆，淤泥。"
   },
   {
     "word": "naive",
@@ -12791,7 +12791,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 翻动板结土层以备春播 -> 犁。"
+    "analysis": "源自西北日耳曼语 -> 铁质入土翻转板结硬土的农耕翻土农具 -> 犁；耕地，犁田；艰难费力地前进。"
   },
   {
     "word": "pollute",
@@ -12801,7 +12801,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "词根 -> 弄脏，污染。"
+    "analysis": "pro-（向前） + lu- / lut-（泥污/洗） -> 把污秽烂泥泼洒入清水使浑浊变脏 -> 弄脏，污染；败坏。"
   },
   {
     "word": "pollution",
@@ -12821,7 +12821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义指“战利品” -> 猎物。"
+    "analysis": "源自拉丁语 praeda（战利品/捕获之物） -> 在食物链中被猛兽盯上猎杀捕食的目标 -> 猎物；捕食；捕食（on）。"
   },
   {
     "word": "randomly",
@@ -12841,13 +12841,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "与 rank（军阶）同源 -> 范围，幅度。"
+    "analysis": "rank（并列成行/阵列）同源变体 -> 军队并排成行展开拉出的战线长度跨度，引申指群山山脉连绵起伏或数值波动上限下限 -> 范围，幅度；山脉；射程；（在范围内）变化波动。"
   },
   {
     "word": "raw",
     "phonetic": "/rɔː/",
     "pos": "adj.",
-    "meaning": "生的，未经烹煮的；原始未加工的；未经训练的新手",
+    "meaning": "adj. 原始未加工的（raw data）；生的，未煮的；生疏的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -12867,7 +12867,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "resort",
     "phonetic": "/rɪˈzɔːt/",
     "pos": "n./vi.",
-    "meaning": "诉诸，求助于（to）；度假胜地，旅游区",
+    "meaning": "vi. 诉诸，求助于（to） n. 度假胜地；应对手法",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -12881,7 +12881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 腐烂，腐败。"
+    "analysis": "PIE词根 *reut-（瓦解/湿烂） -> 动植物有机体组织在细菌作用下变质分解软烂 -> 腐烂，腐败；腐朽过程。"
   },
   {
     "word": "rotate",
@@ -12921,7 +12921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 海豹。"
+    "analysis": "signum（记号/印记）同源 -> 压印蜡封以确立公文信件有效保密，另指外形似流线型皮袋的海生兽 -> 印章，封条；封存，盖印；海豹。"
   },
   {
     "word": "setting",
@@ -12941,7 +12941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“阴影” -> 阴凉处，遮阳处。"
+    "analysis": "shadow（影子）同源 -> 遮挡强光直射后所投射出的幽凉阴暗空间 -> 阴凉处，遮阳处；色调深浅；遮蔽。"
   },
   {
     "word": "shrink",
@@ -12951,7 +12951,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 收缩，缩小。"
+    "analysis": "PIE词根 *skreng-（卷曲/皱缩） -> 受热或遇冷受刺激导致体积整体向内抽搐缩小 -> 收缩，缩小；畏缩，退缩。"
   },
   {
     "word": "sightseeing",
@@ -13001,7 +13001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“衣服上的一小” -> 斑点，污点。"
+    "analysis": "spit（滴下/溅出）同源 -> 溅落液体在物体表面留下的独立圆点污痕，引申为特定经纬地理位置 -> 斑点，污点；地点，场所；发现，看出。"
   },
   {
     "word": "steam",
@@ -13011,7 +13011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“热气升腾散发” -> 水蒸气，蒸汽。"
+    "analysis": "古英语 steam（热气升腾） -> 水受热沸腾汽化升腾而出的高温雾状水汽 -> 水蒸气，蒸汽；冒热气；蒸煮。"
   },
   {
     "word": "straw",
@@ -13021,7 +13021,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“铺展” -> 麦秆，稻草。"
+    "analysis": "strew（散落/铺洒）同源 -> 脱粒收割后散落铺洒在田间用作饲料或垫料的干燥麦秆草茎 -> 麦秆，稻草；吸管。"
   },
   {
     "word": "sunlight",
@@ -13061,7 +13061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 摇摆，摇晃。"
+    "analysis": "swing（摆动）同源 -> 受外力推搡或风力吹拂前后左右晃动倾斜，引申为操控他人意志 -> 摇摆，摇晃；左右，影响。"
   },
   {
     "word": "swing",
@@ -13071,7 +13071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“挥舞” -> 摆动，摇摆。"
+    "analysis": "PIE词根 *sweng-（弧形舞动） -> 挂于悬空处绕固定轴来回大幅度弧度弧线摆动 -> 摆动，摇摆；秋千；剧烈转向。"
   },
   {
     "word": "tag",
@@ -13081,7 +13081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“服装或包裹悬” -> 标明属性代码便于溯源管理 -> 标签，标牌。"
+    "analysis": "tack（钉住/系附）同源 -> 系挂附着在商品或行李上用于标识信息特征的小挂签标签 -> 标签，标牌；给…贴标签；追踪标记。"
   },
   {
     "word": "talent",
@@ -13097,11 +13097,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tap",
     "phonetic": "/tæp/",
     "pos": "v./n.",
-    "meaning": "轻敲， 轻拍； 开发利用（潜能/资源）； 水龙头； 轻叩声",
+    "meaning": "vt. 开发，利用（潜能/资源）；轻敲 n. 水龙头；轻叩",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 轻敲，轻拍。"
+    "analysis": "拟声词，模拟手指指节或工具轻叩硬物的短促声响，另指打通桶壁安装的水嘴阀门 -> 轻敲，轻拍；水龙头；开发利用（潜能/资源）。"
   },
   {
     "word": "territory",
@@ -13121,7 +13121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（颤抖） -> 极度恐惧，惊恐。"
+    "analysis": "ters- / tremo（惊恐战栗/浑身发抖） -> 面对灭顶灾难或血腥杀戮时神经受剧震引发身躯不受控制地牙关打战发抖的极端惊骇 -> 极度恐惧，惊恐；恐怖活动，恐怖主义行为。"
   },
   {
     "word": "tide",
@@ -13131,7 +13131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 潮汐，潮水。"
+    "analysis": "time（时间）同源（古指按固定时间周期发生的自然律动） -> 海水受日月引力影响按时涨落的水流潮水 -> 潮汐，潮水；潮流；安然度过（through）。"
   },
   {
     "word": "tissue",
@@ -13141,7 +13141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“交织而成的精” -> （动植物细胞）组织。"
+    "analysis": "tex- / tisse-（编织） -> 由细微纤维经纬交织而成的薄型织物，解剖学生物学借指细胞聚集结构 -> （动植物细胞）组织；纸巾，面巾纸；薄织物。"
   },
   {
     "word": "tourist",
@@ -13161,7 +13161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“原本指在原始” -> 垃圾，生活废弃物废品。"
+    "analysis": "tear / thresh（打碎/折断）同源 -> 原指残枝落叶碎渣废料，引申为无价值的生活废物烂货 -> 垃圾，废弃物；毫无价值的平庸劣作；彻底捣毁。"
   },
   {
     "word": "tunnel",
@@ -13171,7 +13171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“盛酒的大木桶” -> 隧道，地道。"
+    "analysis": "tun（大酒桶）同源 -> 原指形状如连排酒桶内膛般深邃圆拱形的贯穿地下通道 -> 隧道，地道；开挖地道。"
   },
   {
     "word": "twinkle",
@@ -13181,7 +13181,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“快速眨眼” -> 闪烁，闪耀。"
+    "analysis": "twink（眨眼）的反复小动作形式 -> 像眼睫毛轻快眨动一般闪烁微芒微光 -> 闪烁，闪耀；眨眼；闪亮眼神。"
   },
   {
     "word": "volcano",
@@ -13201,7 +13201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“旅行” -> 航行，航海。"
+    "analysis": "via（道路/航道） + -age（名词后缀） -> 沿漫长水道航线远渡重洋的探索征程 -> 航行，航海；远足出行。"
   },
   {
     "word": "wave",
@@ -13211,7 +13211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 波浪，波涛。"
+    "analysis": "PIE词根 *wegh-（起伏波动） -> 水面在风力推动下上下起伏跌宕推进的浪涛水峰 -> 波浪，波涛；挥手致意；波动起伏；挥动。"
   },
   {
     "word": "weed",
@@ -13221,7 +13221,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“无用乱生的田” -> 杂草，野草。"
+    "analysis": "PIE词根 *wedh-（野草灌木） -> 在农田花园中肆意滋生、争夺庄稼养分的杂乱野生草本 -> 杂草，野草；清除杂草；除草，剔除淘汰。"
   },
   {
     "word": "wheat",
@@ -13231,7 +13231,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（明亮） -> 小麦，小麦粒。"
+    "analysis": "white（洁白发光麦粒）同源派生 -> 成熟后穗头金黄、脱粒磨出的麦粉雪白如霜的大宗禾本科粮食作物 -> 小麦，小麦粒。"
   },
   {
     "word": "wicked",
@@ -13241,7 +13241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“巫师” -> 邪恶的，恶毒的。"
+    "analysis": "witch（女巫）同源派生 -> 心怀巫术般歹毒恶意、背离道义良知的 -> 邪恶的，恶毒的；极坏的。"
   },
   {
     "word": "withdraw",
@@ -13271,7 +13271,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（弯曲蠕动） -> 蠕虫，虫。"
+    "analysis": "wer- / vert-（旋转扭转/弯曲蠕动） -> 缺乏刚性骨骼支撑、在泥土腐殖质中依靠体壁肌肉环形收缩蠕动滑行的无脊椎软体小虫 -> 蠕虫，小虫；蠕动前行；暗中探听探查。"
   },
   {
     "word": "aboard",
@@ -13391,7 +13391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根 auctor（创造者） -> 作者，作家。"
+    "analysis": "aug- / auctor（使生长/开创增殖者） -> 凭借独创性智慧构思并亲笔撰写出一部全新文学哲学鸿篇巨制的开创著作人 -> 作者，作家；发起者；著作，撰写。"
   },
   {
     "word": "automobile",
@@ -13421,7 +13421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“行囊” -> 行李（总称）。"
+    "analysis": "bag（包袋包裹） + -age（总称名词后缀） -> 出行远游时所携带的箱包囊袋财物总称 -> 行李（总称）。"
   },
   {
     "word": "ban",
@@ -13431,7 +13431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 禁止，取缔。"
+    "analysis": "PIE词根 *bha-（宣告/法谕） -> 当权者公开颁布官方禁令诏书封杀某事 -> 禁止，取缔；禁令。"
   },
   {
     "word": "band",
@@ -13441,7 +13441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "与 bind（捆绑）同源 -> 志等 -> 乐队。"
+    "analysis": "bind（捆绑系紧）的派生名词 -> 用织物金属环绕包裹紧固物体的扁平带子，引申指志同道合围绕共同理想结合在一起的人群或乐队 -> 乐队；带子，箍；一群人；联合聚合起来。"
   },
   {
     "word": "bandage",
@@ -13481,7 +13481,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自晚期词根 capanna（茅舍） -> 船舱。"
+    "analysis": "capanna（草席芦苇搭成的简陋隐蔽棚屋） -> 建造在林海深处用粗大原木搭建的原木小屋，船舶航空工程借指密闭客舱驾驶舱 -> 船舱，客舱；机舱；小木屋，简易木棚。"
   },
   {
     "word": "cabinet",
@@ -13511,7 +13511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“开阔原野平原” -> 竞选运动。"
+    "analysis": "camp-（开阔原野/营地） -> 部队在原野营地集结展开有组织有目标的连续性军事战役或社会运动 -> 战役；竞选运动，大型宣传活动。"
   },
   {
     "word": "canteen",
@@ -13561,7 +13561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "词根 carpere（梳理羊毛） -> 地毯。"
+    "analysis": "carp-（梳理打理粗羊毛） -> 用厚实粗毛线细密织造铺设在冰冷石板地面上用于保暖缓冲降噪的纯毛铺地织物 -> 地毯；厚厚覆盖的一层；铺上地毯；训斥。"
   },
   {
     "word": "carriage",
@@ -13611,7 +13611,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "cit-（城市） + -zen（人） -> 公民。"
+    "analysis": "civ- / civitas（享有法律投票权的罗马城邦公民） -> 属于某一主权国家受宪法法律保护并享有政治权利承担保卫纳税义务的公民 -> 公民；市民，城镇居民。"
   },
   {
     "word": "civil",
@@ -13751,7 +13751,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“腹部贴近地面” -> 爬行，匍匐前进。"
+    "analysis": "crab（螃蟹）同源 -> 身体贴紧地面像节肢动物般多足缓慢蠕行 -> 爬行，匍匐前进；缓慢费力地移动；自由泳爬泳。"
   },
   {
     "word": "crew",
@@ -13761,7 +13761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“原指在战舰出” -> 全体机组人员，全体船员舰员。"
+    "analysis": "cresc- / recruit（生长/集结补充）同源 -> 船舶机动战车上齐心协力操纵设备的整套专业团队 -> 全体机组人员，全体船员；团队队伍。"
   },
   {
     "word": "crime",
@@ -13771,7 +13771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "词根 crimen（司法判决） -> 罪行，犯罪。"
+    "analysis": "cern- / crimen（法庭审判裁决指控之罪过） -> 严重践踏国家刑律法典、对人身财产秩序造成实质危害依法必须受刑罚严惩的罪行 -> 罪行，犯罪行为；罪过大错。"
   },
   {
     "word": "critic",
@@ -13787,11 +13787,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "curb",
     "phonetic": "/kɜːb/",
     "pos": "vt./n.",
-    "meaning": "控制， 抑制， 勒住； 路缘， 马路牙子",
+    "meaning": "vt. 控制，抑制（通胀/冲动） n. 路缘，马路牙子",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“弯曲” -> 控制，抑制。"
+    "analysis": "curv-（弯曲）同源 -> 原指勒紧马嘴下巴使马停步的弯铁勒带，引申为马路边的凸起石条边缘 -> 控制，抑制；路缘，马路牙子。"
   },
   {
     "word": "delegate",
@@ -13861,7 +13861,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“耽搁滞留” -> 居住，栖身。"
+    "analysis": "PIE词根 *dhwel-（迷糊滞留/定居） -> 停下脚步长期滞留安顿某处生活，引申指思维反复纠缠于某事 -> 居住，栖身；老是琢磨沉湎于（on）。"
   },
   {
     "word": "enforce",
@@ -13917,11 +13917,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fair",
     "phonetic": "/feə(r)/",
     "pos": "adj./adv./n.",
-    "meaning": "公正平等的；美丽的；晴朗的",
+    "meaning": "adj. 公正平等的；相当大的（a fair amount）；美丽的 n. 集市博览会",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 公正平等的。"
+    "analysis": "PIE词根 *fag-（适宜/匹配） -> 容貌端庄匀称秀丽，引申指为人处事按公道法则评判 -> 公正平等的；美丽的；晴朗的。"
   },
   {
     "word": "fellow",
@@ -13961,7 +13961,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "与 float（漂浮）同源 -> 舰队，船队。"
+    "analysis": "float / flow（在波涛水面平稳浮动前行） -> 在海军统帅统一号令下在大洋协同作战受阅的整支战舰编队，引申为运输车队 -> 舰队，船队；车队；飞速疾驰的；飞逝掠过。"
   },
   {
     "word": "flight",
@@ -13981,7 +13981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“成团聚集的群” -> （鸟兽或信徒）群。"
+    "analysis": "folk（群体）同源 -> 鸟类飞禽或羊群集结成大帮共同迁徙觅食，引申指信众蜂拥前往 -> （鸟兽或信徒）群；成群结队蜂拥前去。"
   },
   {
     "word": "forbid",
@@ -14011,7 +14011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“装配” -> 布置装修（家具）。"
+    "analysis": "源自古法语 fournir（完成/置办） -> 添置家具器具使房屋具备完备居住条件 -> 布置装修（家具）；提供，供给配备。"
   },
   {
     "word": "gang",
@@ -14031,7 +14031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自法语 garer（停放避风） -> 车库。"
+    "analysis": "gar- / ware（保卫/提供庇护避风港） -> 住宅附属专门用于停放汽车机动车避免风吹雨淋风沙腐蚀的封闭车库，引申为修车厂 -> 车库；汽车修理厂；停入车库。"
   },
   {
     "word": "guilt",
@@ -14041,7 +14041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“应受惩戒的过” -> 内疚，负罪感。"
+    "analysis": "古英语 gylt（罪过/欠债） -> 违背法律良知欠下应偿债务，内心受谴责的心理重压 -> 内疚，负罪感；犯罪行为，有罪判决。"
   },
   {
     "word": "harbour",
@@ -14131,7 +14131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "词根 diurnus（一天的） -> 旅行，旅程。"
+    "analysis": "diurnum / jour（一天的工作行程） -> 中世纪旅人从黎明出发到日落投宿一天之内跨越跋涉的路途，引申指长途探索或人生心路历程 -> 旅行，旅程；人生成长心路历程；去旅行远行。"
   },
   {
     "word": "kilometer",
@@ -14151,7 +14151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "lay（铺设） + -er（物） -> 层，层次。"
+    "analysis": "lay（水平平放铺垫） + -er（物） -> 平行铺展在另一物质表面之上、具有特定厚度密度分界线的单独薄层构造 -> 层，层次；阶层；分层堆放放置。"
   },
   {
     "word": "layman",
@@ -14171,7 +14171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“合乎法律伦理” -> 忠诚的，忠贞不渝的。"
+    "analysis": "lex / leg-（法律）同源 -> 恪守誓约法律规范、不背弃君主挚友的品格 -> 忠诚的，忠贞不渝的；坚定义气的。"
   },
   {
     "word": "magnetic",
@@ -14401,7 +14401,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“王室统治的疆” -> 王国，国度。"
+    "analysis": "reg- / rex（统治/王者） -> 君王统治法令所及的广阔疆域国度，引申为学术活动研究领域 -> 王国，国度；学术或活动领域，范围。"
   },
   {
     "word": "release",
@@ -14451,7 +14451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“坐” -> 马鞍，鞍状物。"
+    "analysis": "sed- / sit（坐）同源 -> 安放在马背上供骑手平稳安坐的皮革垫具，引申为强加沉重包袱 -> 马鞍，鞍状物；车座；给…装上马鞍；使承担重负。"
   },
   {
     "word": "scar",
@@ -14471,7 +14471,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“被挑拣剔除剩” -> 缺乏的，罕见的。"
+    "analysis": "ex-（出） + carp-（采摘） -> 采摘殆尽难以在市面觅得寻见的 -> 缺乏的，罕见的；稀少的。"
   },
   {
     "word": "scare",
@@ -14491,7 +14491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“斜跨肩头的朝” -> 围巾，披肩。"
+    "analysis": "源自古法语 escharpe（朝圣者斜跨皮袋带子） -> 围绕脖颈肩头用以御寒防风的长条毛织物 -> 围巾，披肩，头巾。"
   },
   {
     "word": "senator",
@@ -14511,7 +14511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“盾牌构筑的坚” -> 庇护所，避难处。"
+    "analysis": "shield（盾牌） + troop（队伍）同源派生 -> 提供掩体庇护使人不被风吹雨淋敌火袭击的安全隐蔽所 -> 庇护所，避难处；遮蔽；庇护，掩蔽，保护。"
   },
   {
     "word": "sidewalk",
@@ -14561,7 +14561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“尖锐刺戳” -> 木棍，枝条。"
+    "analysis": "PIE词根 *steig-（尖锐穿刺） -> 削尖可刺入地面的小树枝手杖，引申为紧紧扎住粘连或坚守立场 -> 木棍，枝条；手杖；刺入；粘贴；坚持坚守（to）。"
   },
   {
     "word": "summit",
@@ -14571,17 +14571,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根 summus（最高的） -> 最高峰，山顶。"
+    "analysis": "sum- / summus（最高点/顶峰极点） -> 经过艰苦绝伦攀登最终双脚踏立其上的阿尔卑斯雪山最高绝顶，引申指多国元首最高层外交会晤 -> 最高峰，山顶；最高点顶峰；国家元首首脑会议，国际峰会。"
   },
   {
     "word": "tailor",
     "phonetic": "/ˈteɪlə(r)/",
     "pos": "n./vt.",
-    "meaning": "裁缝； 裁缝师； 量身定制， 量体剪裁",
+    "meaning": "vt. 量身定制，使适应（tailored to） n. 裁缝",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“用剪刀剪裁布” -> 量体裁衣精准修剪 -> 裁缝。"
+    "analysis": "tall- / taliare（剪开/分割） -> 挥剪开料精准量体裁衣的专业手艺人 -> 裁缝，缝纫师；量身定制，量体剪裁。"
   },
   {
     "word": "take-off",
@@ -14631,7 +14631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "源自 troll（滚动） -> 手推车，行李推车。"
+    "analysis": "troll（圆滚滚动/推拉前行） -> 底部安装万向滑轮便于旅客推拉承载大件沉重行李的手推车，另指依靠车顶电极滑轮触网取电的有轨电车 -> 手推车，行李推车；有轨电车。"
   },
   {
     "word": "unveil",
@@ -14871,7 +14871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“男子下颌生长” -> 络腮胡子，下巴胡须。"
+    "analysis": "barba（倒刺/下巴浓密毛发）同源 -> 男子青春期成熟后在下巴和脸腮两侧自然丛生蓄留的浓密毛发 -> 络腮胡子，下巴胡须；公然反对抗衡（beard）。"
   },
   {
     "word": "bitter",
@@ -14881,7 +14881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“像被尖齿凶狠” -> 苦味的。"
+    "analysis": "bite（咬）同源派生 -> 尝起来像被狠狠咬了一口般辛辣难咽，引申指惨烈痛苦或怨恨宿怨 -> 苦味的；极其痛苦惨烈的；充满敌意怨恨的；严寒刺骨的。"
   },
   {
     "word": "bleed",
@@ -14891,7 +14891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“血” -> 流血，出血。"
+    "analysis": "blood（血液）的动词形式 -> 血管破损鲜血顺创口外流涌出，引申为勒索压榨干资金 -> 流血，出血；榨取，勒索钱财。"
   },
   {
     "word": "blush",
@@ -14901,7 +14901,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“像烈火燃烧般” -> 脸红，羞愧发红。"
+    "analysis": "blink / blaze（闪耀/火光）同源 -> 脸颊毛细血管充血瞬间泛起红晕，引申为惭愧害羞 -> 脸红，羞愧发红；害羞，惭愧；红晕。"
   },
   {
     "word": "breed",
@@ -14911,7 +14911,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（温热孵化使胚） -> 繁殖，繁育饲育。"
+    "analysis": "brood（温热体温孵化卵卵）同源 -> 鸟兽母体利用自身恒定体温孵化受精卵孕育幼崽，引申指人工选育遗传的优良家畜品种或同类脾性之人 -> 繁殖，繁育饲育；优良品种；类型风格之人。"
   },
   {
     "word": "bruise",
@@ -14921,7 +14921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“粉碎” -> 青肿，瘀伤。"
+    "analysis": "break（打碎/折断）同源 -> 表皮受钝物猛烈撞击但未破裂、皮下毛细血管破裂形成的青紫瘀斑 -> 青肿，瘀伤；擦伤碰伤；击伤，使皮肉瘀青。"
   },
   {
     "word": "carrier",
@@ -14951,7 +14951,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“上下颚” -> 面颊，脸蛋。"
+    "analysis": "PIE词根 *g'enu-（下巴/脸腮） -> 位于面部鼻子两侧丰满鼓起的部分，引申为厚颜无耻 -> 面颊，脸蛋；厚颜无耻，放肆无礼。"
   },
   {
     "word": "clumsy",
@@ -14961,7 +14961,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“手脚被严寒冻” -> 笨拙的，笨手笨脚的。"
+    "analysis": "clump（笨重土块）同源 -> 动作僵硬迟钝像木石土块般不灵活利索的 -> 笨拙的，笨手笨脚的；不得体的，拙劣的。"
   },
   {
     "word": "comedy",
@@ -15151,7 +15151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 极其认真的，诚恳真挚的。"
+    "analysis": "PIE词根 *er-（热切/认真） -> 态度郑重端肃、绝无戏谑怠慢轻浮之心的 -> 极其认真的，诚恳真挚的；严肃诚意；郑重认真。"
   },
   {
     "word": "ease",
@@ -15161,7 +15161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“闲适” -> 容易。"
+    "analysis": "源自古法语 aise（舒适便利） -> 身心松弛毫无紧绷压力障碍的安宁顺遂状态 -> 容易；舒适，悠闲；缓和，减轻。"
   },
   {
     "word": "emergency",
@@ -15201,7 +15201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“使疲惫疲劳” -> 疲劳，劳累。"
+    "analysis": "fat-（说话/张嘴喘息） + ag-（驱使） -> 连续超负荷运转劳累至张口喘气体力耗尽 -> 疲劳，劳累；使疲乏。"
   },
   {
     "word": "fear",
@@ -15211,7 +15211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“前路未知的凶” -> 害怕，恐惧。"
+    "analysis": "PIE词根 *per-（危险/试炼） -> 面对突如其来的致命危险侵袭时所产生的惊恐战栗戒备本能 -> 害怕，恐惧；忧虑担心；畏惧害怕（唯恐）。"
   },
   {
     "word": "fierce",
@@ -15231,7 +15231,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“附着在骨骼表” -> 肉，肌肉。"
+    "analysis": "PIE词根 *pleik-（剥皮/肉块） -> 覆盖在动物骨骼之外丰满红润的肌肉软组织，引申为凡俗肉身 -> 肉，肌肉，皮肉；肉体；果肉；充实丰满。"
   },
   {
     "word": "frighten",
@@ -15321,7 +15321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“健全” -> 治愈，愈合。"
+    "analysis": "whole（完整/健全）同源 -> 使破损受创的肢体机能重新弥合恢复健全原貌 -> 治愈，愈合；调解矛盾。"
   },
   {
     "word": "hesitate",
@@ -15341,7 +15341,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“完好无损的” -> 神圣的，圣洁的。"
+    "analysis": "whole / hale（完好无缺/神圣纯洁）同源 -> 纯洁无瑕受到神圣敬仰保佑的超凡事物 -> 神圣的，圣洁的；受到极度虔诚敬奉的。"
   },
   {
     "word": "horror",
@@ -15411,7 +15411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "舌头在物体表面轻刷划过 -> 舔，舔吃。"
+    "analysis": "PIE拟声词根 *leigh-（用舌尖卷食） -> 伸出湿润舌头在物体表面轻轻卷拂品尝涂抹 -> 舔，舔吃；轻轻卷过擦过；一舔之量。"
   },
   {
     "word": "lump",
@@ -15461,7 +15461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "词根 merces（报酬） -> 仁慈，宽恕。"
+    "analysis": "merces（报酬/赎罪释放之代价） -> 战胜者或审判长面对战俘罪人放下屠刀、以慈悲宽宏之心免除其死罪极刑的垂怜恩赐 -> 仁慈，宽恕，怜悯；侥幸幸运之事；任由…宰割（at the mercy of）。"
   },
   {
     "word": "merit",
@@ -15491,7 +15491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（柔软的） -> 温和的，和缓的。"
+    "analysis": "mollis（柔软顺从/不刺手）同源 -> 性情如羊羔般温良和善毫无暴戾攻击性，引申指药力微弱不霸道或气候温暖适宜 -> 温和的，和缓的；轻微的；气候暖和宜人的。"
   },
   {
     "word": "modest",
@@ -15521,7 +15521,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“造成实质性肉” -> 令人讨厌的人或事物。"
+    "analysis": "noc- / noxi-（伤害/妨害） -> 虽然不致命但反复扰乱生活秩序、令人厌烦至极的人事物 -> 令人讨厌的人或事物；麻烦事；公害。"
   },
   {
     "word": "pale",
@@ -15541,7 +15541,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（扁平展开） -> 手掌，手心。"
+    "analysis": "palma（张开五指扁平铺展的手掌） -> 弯曲五指时手掌内侧皮肤细腻内凹有掌纹受力抓握的部位，植物学借指树叶如手掌张开的棕榈树 -> 手掌，手心；棕榈树，棕榈叶；将…藏于手心。"
   },
   {
     "word": "passive",
@@ -15561,7 +15561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根 pila（球） -> 药丸，药片。"
+    "analysis": "pila（紧密搓成的圆形实心小毛球） -> 药剂师将研磨成微粉的草药混合蜂蜜赋形剂在药板上搓制而成的圆形固体口服药丸小片剂 -> 药丸，药片；苦口良药（a bitter pill）。"
   },
   {
     "word": "pinch",
@@ -15571,7 +15571,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“用食指与拇指” -> 捏，掐。"
+    "analysis": "punct-（刺戳）同源变体 -> 用拇指和食指紧紧夹住肉体拧掐施压，引申为物资短缺紧缺拮据 -> 捏，掐，捏住；勒痛；一小撮；紧缺拮据。"
   },
   {
     "word": "powder",
@@ -15641,7 +15641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“摆放” -> 令人费解的难题，谜团。"
+    "analysis": "pose / oppose（提出难题）的反复动词形式 -> 摆出扑朔迷离的盘局使人头晕目眩百思不得其解 -> 使迷惑，使困惑难解；令人费解的难题，谜团；智力拼图。"
   },
   {
     "word": "ache",
@@ -15651,7 +15651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 疼痛。"
+    "analysis": "PIE拟声词根 *ag-（身体深处沉重钝痛） -> 持续不断沉闷发作的肌肉神经痛感 -> 疼痛；隐痛；渴望怀恋（for）。"
   },
   {
     "word": "blind",
@@ -15661,7 +15661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“模糊不清” -> 失明的，双目失明的。"
+    "analysis": "blend（混合浑浊）同源 -> 眼前光线混沌受阻、视觉神经彻底失灵丧失分辨力 -> 失明的，双目失明的；盲目的；使失明；百叶窗。"
   },
   {
     "word": "deaf",
@@ -15671,7 +15671,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“神经呆滞麻木” -> 聋的，听不见的。"
+    "analysis": "PIE词根 *dheubh-（浑浊迷蒙/感知迟钝） -> 听觉器官受损使外界声音隔绝如入雾中，引申指置若罔闻不愿倾听 -> 聋的，听不见的；充耳不闻拒绝理睬的（deaf to）。"
   },
   {
     "word": "dumb",
@@ -15681,7 +15681,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（知觉麻木） -> 哑的，不能说话的。"
+    "analysis": "dheubh-（失去知觉/感知麻木） -> 因先天神经缺陷或舌头损伤无法发出清晰语音表达意图的失语状态，引申为目瞪口呆说不出话 -> 哑的，不能说话的；目瞪口呆哑口无言的；愚蠢的（口语）。"
   },
   {
     "word": "cough",
@@ -15701,7 +15701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根febris -> 发烧，发热。"
+    "analysis": "ferv-（沸腾/灼热）同源 -> 身体免疫系统抗击外邪导致体温飙升燥热滚烫 -> 发烧，发热；狂热状态；使发烧。"
   },
   {
     "word": "illness",
@@ -15731,7 +15731,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“遭受撕裂刺痛” -> 疼痛发炎的，酸痛的。"
+    "analysis": "sair（肉体剧痛受创发炎）同源 -> 皮肤黏膜擦破后暴露在空气中遭受盐汗浸渍的灼痛感，引申指内心触痛气恼 -> 疼痛发炎的，酸痛的；痛处，疮伤；气恼恼火的。"
   },
   {
     "word": "poison",
@@ -15761,7 +15761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义 -> 喉咙，咽喉。"
+    "analysis": "PIE词根 *ter-（穿过/咽下） -> 位于颈部连接口腔与食道气管的吞咽呼吸枢纽狭窄腔体 -> 喉咙，咽喉；狭窄通道。"
   },
   {
     "word": "lung",
@@ -15771,7 +15771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义 -> 肺，肺部。"
+    "analysis": "light（轻的）同源（屠夫宰牲时肺部充气能浮于水面因而称轻脏器） -> 胸腔内负责气体交换的呼吸器官 -> 肺，肺部。"
   },
   {
     "word": "liver",
@@ -15781,7 +15781,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义 -> 肝脏。"
+    "analysis": "life / live（生命/活着）同源（古代人视肝脏为气血造血与生命维系的最核心脏器） -> 人体最大内脏消化代谢器官 -> 肝脏；生活者。"
   },
   {
     "word": "kidney",
@@ -15791,13 +15791,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“腰腹内脏” -> 肾，肾脏。"
+    "analysis": "古英语 cwid（子宫） + ey（卵形蛋） -> 形状如椭圆蚕豆卵形、深藏腹部后侧的滤水排毒脏器 -> 肾，肾脏；脾气秉性类型。"
   },
   {
     "word": "stomach",
     "phonetic": "/ˈstʌmək/",
     "pos": "n./vt.",
-    "meaning": "胃， 腹部； 食欲， 胃口； 忍受， 容忍",
+    "meaning": "vt. 忍受，容忍（cannot stomach） n. 胃，腹部；食欲",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
@@ -15821,7 +15821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“支撑人体四肢” -> 骨头，骨骼。"
+    "analysis": "PIE词根 *bhei-（打击挺立） -> 支撑人体软组织框架并保护内脏的钙化坚硬骨架结构 -> 骨头，骨骼；骨质；核心本质（争论焦点）。"
   },
   {
     "word": "muscle",
@@ -15831,7 +15831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根 musculus（小老鼠） -> 肌肉。"
+    "analysis": "mus（小老鼠） + -culus（小缩微后缀） -> 肌肉收缩隆起并在皮下快速窜动滑行时形貌宛如一只敏捷窜动的小灰鼠 -> 肌肉；力量，肌肉力量实力；强行推挤挤入。"
   },
   {
     "word": "tooth",
@@ -15841,7 +15841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（咀嚼进食之齿） -> 牙齿。"
+    "analysis": "ed- / dens（用来咀嚼研磨食物之尖齿）同源 -> 镶嵌在人畜上下颌骨牙槽内表面覆有坚硬牙釉质的咀嚼器官，法律比喻引申指执行威慑力 -> 牙齿；齿状物；威力，刚性约束效力（复数teeth）。"
   },
   {
     "word": "tongue",
@@ -15851,7 +15851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（用以辨味发音） -> 舌头。"
+    "analysis": "dingua / lingua（口腔内辨味与发音器官） -> 位于口腔底部灵活运动感受酸甜苦辣并协助精确发声的气管器官，引申为语言母语 -> 舌头；母语，语言；说话语调；鞋舌。"
   },
   {
     "word": "breast",
@@ -15861,7 +15861,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（隆起膨胀） -> 胸脯，胸膛。"
+    "analysis": "burst / sprout（向前隆起膨胀）同源 -> 人体锁骨下方肋骨拱卫心肺的胸膛正面，亦指女性哺育乳房 -> 胸脯，胸膛；乳房；胸怀内心深处；挺胸面对。"
   },
   {
     "word": "chin",
@@ -15871,7 +15871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（下巴） -> 下巴，颏部。"
+    "analysis": "genu-（下巴/颌部骨骼）同源 -> 位于下嘴唇下方骨骼凸出的人体面部下端，成语借指昂起头颅直面挫折 -> 下巴，颏部；保持乐观昂扬（keep one's chin up）。"
   },
   {
     "word": "forehead",
@@ -15891,7 +15891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“能灵活自如翻” -> 手腕，腕关节。"
+    "analysis": "writhe / twist（扭转）同源 -> 允许手掌在前臂前端进行全方位灵活旋转扭转的活动关节 -> 手腕，腕关节；腕部。"
   },
   {
     "word": "ankle",
@@ -15901,7 +15901,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（弯曲成折角） -> 踝，脚踝。"
+    "analysis": "ang-（弯曲成折角）同源 -> 连接小腿与足部、允许脚掌全方位受力转动的滑车关节部位 -> 踝，脚踝，踝关节。"
   },
   {
     "word": "thumb",
@@ -15911,7 +15911,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（肿大粗壮） -> 大拇指。"
+    "analysis": "tum-（肿大粗壮隆起）同源 -> 手掌五指中最粗壮、具有强劲对指抓握能力的独立第一指 -> 大拇指；竖起大拇指赞许；翘起拇指搭便车（thumb a lift）。"
   },
   {
     "word": "heel",
@@ -15921,7 +15921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“弯曲的足后凸” -> 脚后跟，踵部。"
+    "analysis": "PIE词根 *keng-（弯曲拐弯处） -> 人体足部后方圆弧形承托全身重心的后踵骨骼部位 -> 脚后跟，踵部；鞋后跟；紧跟在后（at/on）。"
   },
   {
     "word": "panic",
@@ -15971,7 +15971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声词 -> 窒息，使噎住。"
+    "analysis": "cheek / jaw（面颊喉头塞紧）同源 -> 异物卡塞咽喉气管造成呼吸断绝窒息，引申为紧张发挥失常 -> 窒息，使噎住；扼杀阻塞；紧张失常。"
   },
   {
     "word": "sorrow",
@@ -15981,7 +15981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "源自原始ō（如同心尖被钝） -> 悲伤，悲痛。"
+    "analysis": "sore（身心遭受创伤剧痛）同源 -> 亲人故去或遭遇大祸心如刀割积聚的沉痛创伤，引申指令人痛惜之事 -> 悲伤，悲痛；伤心事；由衷悲伤痛惜。"
   },
   {
     "word": "mourn",
@@ -15991,7 +15991,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "因痛失挚爱而悲伤致哀 -> 哀悼，悼念逝者。"
+    "analysis": "PIE词根 *smer-（心头铭记忧思） -> 失去亲友挚爱时深怀悲痛在心中沉痛缅怀哀思 -> 哀悼，悼念逝者；为…深感痛惜惋惜。"
   },
   {
     "word": "regret",
@@ -16011,7 +16011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（发光闪耀） -> 高兴的，欣慰的。"
+    "analysis": "glint / gleam（光亮光滑发光）同源 -> 卸下千斤重担内心如沐春风喜形于色毫无阴霾，引申指乐意效劳 -> 高兴的，欣慰的；乐意效劳的；令人愉悦的。"
   },
   {
     "word": "cheerful",
@@ -16027,7 +16027,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "content",
     "phonetic": "/kənˈtent/ (adj.), /ˈkɒntent/ (n.)",
     "pos": "adj./vt./n.",
-    "meaning": "满意的， 知足常乐的； 使满意满足； 内容， 容量， 目录",
+    "meaning": "n. 内容，容量，含量；目录 adj. 满意的 vt. 使满足",
     "part": "第一部分：超级核心母词族",
     "group": "【20. ten / tain / tin 握/持/容纳】",
     "analysis_type": "构词",
@@ -16041,7 +16041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“假装无力” -> 微弱暗淡的，不明显的。"
+    "analysis": "feign（假装做作）同源 -> 气血不济眼前一黑瘫软倒下宛如假死，引申为光芒微弱模糊 -> 微弱暗淡的；眩晕欲厥的；昏厥，晕倒。"
   },
   {
     "word": "dizzy",
@@ -16051,7 +16051,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“愚钝发懵” -> 头晕目眩的，眩晕的。"
+    "analysis": "daze / dull（愚钝发懵昏乱）同源 -> 大脑供血供氧不足眼前景物如同风车飞转站立不稳的眩晕失衡状态 -> 头晕目眩的，眩晕的；飞旋混乱的；使发昏发晕。"
   },
   {
     "word": "optimistic",
@@ -16091,7 +16091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“尖锐锋利” -> 热切渴望的，急不可耐的。"
+    "analysis": "ac- / acrid（尖锐锋利）同源 -> 像刀尖般锐利敏捷急不可耐向前争先，引申为求知若渴 -> 热切渴望的，急不可耐的；充满热忱激情的。"
   },
   {
     "word": "enthusiastic",
@@ -16151,7 +16151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【41. cid / cas 落下/降临/发生】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 情况，事实境况。"
+    "analysis": "cad- / cas-（降落/落下） -> 命运巧合偶然掉落发生的事情境遇，另指封装容器外壳 -> 情况，境况；箱盒容器；案件，病例。"
   },
   {
     "word": "chair",
@@ -16191,7 +16191,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“将身躯彻底没” -> 跳水。"
+    "analysis": "deep（深处）同源派生 -> 头朝下纵身跃入深水之中探索，引申指股价数值剧烈俯冲跌落 -> 跳水；潜水，深潜探索；暴跌，急剧俯冲。"
   },
   {
     "word": "drown",
@@ -16201,7 +16201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "与 drink（饮用）同源 -> 溺水，溺死。"
+    "analysis": "drink（大量吞咽水流）同源演化 -> 头部深陷急流肺部灌入大量液体导致呼吸断绝窒息身亡，引申指噪音淹没其他声响 -> 溺水，溺死，淹死；浸泡淹没；（噪音）压过淹没。"
   },
   {
     "word": "exotic",
@@ -16241,7 +16241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 跪，下跪。"
+    "analysis": "knee（膝盖）的动词形式 -> 弯曲双腿使膝盖骨紧贴地面以示虔诚臣服敬意 -> 跪，下跪；双膝着地祈祷致敬。"
   },
   {
     "word": "lag",
@@ -16277,7 +16277,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "launch",
     "phonetic": "/lɔːntʃ/",
     "pos": "vt./vi./n.",
-    "meaning": "发起，发动；推出，投放市场；发射",
+    "meaning": "vt. 发起，开展（活动/调查）；推出，投放市场；发射",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -16287,11 +16287,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lead",
     "phonetic": "/liːd/ (v./n.), /led/ (n.)",
     "pos": "v./n.",
-    "meaning": "带领，引领；导致引起；处于领先主导地位",
+    "meaning": "v. 导致，引起（to）；引领，带领；处于领先地位 n. 领先",
     "part": "第一部分：超级核心母词族",
     "group": "【17. it 行走】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“在前方手持火” -> 带领，引领。"
+    "analysis": "load / lode（道路轨迹）同源 -> 走在前方引路开道指明方向，引申指处于行业统领支配地位 -> 带领，引领；导致，引起；处于领先主导地位。"
   },
   {
     "word": "leap",
@@ -16301,7 +16301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“双足同时奋力” -> 飞跃，跳跃。"
+    "analysis": "run / spring 同源派生 -> 双足用力登离地面向空中大幅跃起飞跨，引申为数据或思维跳跃式剧增 -> 飞跃，跳跃；剧增，猛涨；质的飞跃。"
   },
   {
     "word": "left-handed",
@@ -16357,7 +16357,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lift",
     "phonetic": "/lɪft/",
     "pos": "vt./n.",
-    "meaning": "举起，提起；提升，振奋；解除",
+    "meaning": "vt. 撤销，解除（禁令/限制）；提升，举起 n. 电梯",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -16371,7 +16371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> （庞然大物或危机）赫然耸现，隐隐迫近。"
+    "analysis": "原指织布机复杂庞大的木构机架，引申指浓雾或黑暗中庞然巨物或潜在危机赫然迫近耸现 -> （庞然大物或危机）赫然耸现，隐隐迫近；织布机。"
   },
   {
     "word": "loophole",
@@ -16391,7 +16391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“被解开绳索彻” -> 松散的，未系紧的。"
+    "analysis": "lys- / lose（解开松开/释放）同源 -> 捆扎包裹货物的绳索被彻底松开脱扣，引申指组织纪律散漫或言辞不严密 -> 松散的，未系紧的；自由无拘的；不严谨的；放宽释放。"
   },
   {
     "word": "lower",
@@ -16451,7 +16451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ō（在国界边境树） -> 印记，痕迹。"
+    "analysis": "PIE词根 *mereg-（边界边界石） -> 古人在国境边陲树立削平的木桩石碑作为边界标志，引申指印记或批改分数 -> 标志，标记；印记，痕迹；分数，成绩；做标记。"
   },
   {
     "word": "mask",
@@ -16487,7 +16487,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "measure",
     "phonetic": "/ˈmeʒə(r)/",
     "pos": "v./n.",
-    "meaning": "量，测量度量；衡量评估；措施，办法",
+    "meaning": "n. 措施，办法；衡量标准 vt. 测量，度量；衡量评估",
     "part": "第二部分：高频专业词根族",
     "group": "【56. meter / metr 测量/计量】",
     "analysis_type": "构词",
@@ -16517,7 +16517,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "moderate",
     "phonetic": "/ˈmɒdərət/ (adj.), /ˈmɒdəreɪt/ (v.)",
     "pos": "adj./v./n.",
-    "meaning": "温和适度的，中等的；缓和，使适度；主持节制",
+    "meaning": "adj. 适度的，温和的；中等的 vt./vi. 缓和，节制",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
@@ -16561,7 +16561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 模具，铸模。"
+    "analysis": "mod-（尺寸尺度/模式） -> 浇筑熔融金属泥料使其定型硬化的中空模具，另指潮湿处丛生的霉菌 -> 模具，铸模；塑造打造成型；发霉霉菌。"
   },
   {
     "word": "multiply",
@@ -16581,7 +16581,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“绵羊” -> 专门指代供食用的成年羊肉 -> 羊肉。"
+    "analysis": "源自古法语 mouton（公羊） -> 专门用于烹饪食用的成年绵羊肉（与 live sheep 活羊区分） -> 羊肉。"
   },
   {
     "word": "namely",
@@ -16601,7 +16601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“餐桌上的高档纯白亚麻台布/桌布” + -kin（微小指小亲昵） -> 餐巾，餐巾纸。"
+    "analysis": "nape（台布小块） + -kin（小件后缀） -> 用餐时铺在膝上或用于擦拭嘴边油腻的小型方布方纸 -> 餐巾，餐巾纸；尿布。"
   },
   {
     "word": "narrate",
@@ -16671,7 +16671,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "合成杜邦公司人造词 -> 尼龙（合成聚酰胺纤维）。"
+    "analysis": "New York（纽约） + London（伦敦）合成命名 -> 20世纪杜邦公司实验室首创发明的强韧耐磨全人工合成聚酰胺纤维 -> 尼龙（合成聚酰胺纤维）；尼龙丝袜。"
   },
   {
     "word": "obscure",
@@ -16831,7 +16831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“拥有” -> 欠（债，钱）。"
+    "analysis": "own（拥有）同源演化（原指欠别人本属于别人的东西必须归还） -> 欠债欠钱，引申指功劳归于他人提携 -> 欠（债/钱）；归功于，得益于（to）；感激。"
   },
   {
     "word": "pace",
@@ -16891,7 +16891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“一小部分” -> 包裹，小包邮包。"
+    "analysis": "part-（部分） + -el（小件后缀） -> 分割切成的小份物品打包邮寄，引申为地皮地块 -> 包裹，小包邮包；一块，一片；打包，划分。"
   },
   {
     "word": "partial",
@@ -16931,7 +16931,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声词 -> 轻拍，抚摩。"
+    "analysis": "拟声词，模拟手掌或柔软手帕轻轻落在肩头面颊上的轻柔触碰 -> 轻拍，抚摩；轻拍声；小块；恰好的，顺口敷衍的。"
   },
   {
     "word": "pave",
@@ -16951,7 +16951,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "与 pike（尖头矛枪）同源 -> 山峰，顶峰。"
+    "analysis": "pike（尖头长矛）同源变体 -> 刺破云海耸入青天的险峻雪山最高尖角，引申指个人事业或物价达到巅峰 -> 山峰，顶峰；巅峰时期；达到最高峰；高峰期的。"
   },
   {
     "word": "peculiar",
@@ -16971,7 +16971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 同行，同龄人。"
+    "analysis": "par-（均等平齐）同源 -> 地位学识平起平坐的同辈中人，另指眯缝着眼睛在平视视线中细细打量 -> 同行，同龄人；贵族；仔细端详，凝视窥探。"
   },
   {
     "word": "penetrate",
@@ -17061,7 +17061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“为大军在崇山” -> 先驱者，倡导者。"
+    "analysis": "ped-（脚） + peon（步兵） -> 走在大军最前方逢山开路遇水搭桥的先头工兵，引申为学术开创者 -> 先驱者，倡导者，拓荒者；开拓，开创。"
   },
   {
     "word": "plain",
@@ -17091,7 +17091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "当众立下的庄重承诺 -> 庄严誓言，郑重承诺保证。"
+    "analysis": "pleg-（抵押担保立誓） -> 在宗庙法庭将佩剑或土地契约压在案前郑重向天起誓，违约甘受惩戒 -> 庄严誓言，保证；抵押典当担保；立誓保证。"
   },
   {
     "word": "plight",
@@ -17101,7 +17101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“潜伏巨大危险” -> 苦难，困境。"
+    "analysis": "pledge（抵押誓约）同源演化（原指身陷重重誓约担保连环套难以解脱） -> 极其艰难尴尬危险的处境 -> 苦难，困境，窘境。"
   },
   {
     "word": "point",
@@ -17131,7 +17131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自 pound（围栏） -> 池塘，小湖。"
+    "analysis": "pound（被石堤围栏合围的禁锢水面）演变 -> 在村落庭院中人工围筑堤岸用以养鱼蓄水饮牲口的浅水池 -> 池塘，小湖；人工蓄水池。"
   },
   {
     "word": "pork",
@@ -17181,17 +17181,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“将水流源源不” -> 倾倒，倒出（液体）。"
+    "analysis": "PIE拟声词根 *pur-（喷涌灌注） -> 将容器倾斜使液体连续不断哗哗流淌而出，引申指大雨倾盆或人潮涌出 -> 倾倒，倒出；倾盆而下；大批涌入涌出。"
   },
   {
     "word": "power",
     "phonetic": "/ˈpaʊə(r)/",
     "pos": "n./vt.",
-    "meaning": "力量，威力；电力，能源；政权，统治权",
+    "meaning": "n. 电力，能源；政权，权力；力量，能力 vt. 为…提供动力",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“拥有达成某事” -> 力量，威力。"
+    "analysis": "pot-（有能力的/强力的） -> 具备冲破阻碍实现预期意志的主控能量，引申指政治支配权或电能 -> 力量，威力；电力，能源；政权，统治权。"
   },
   {
     "word": "presume",
@@ -17227,7 +17227,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "project",
     "phonetic": "/ˈprɒdʒekt/ (n.), /prəˈdʒekt/ (v.)",
     "pos": "n./v.",
-    "meaning": "项目，工程；预测，推算；投影，展现",
+    "meaning": "n. 项目，工程 vt. 预测，推算；投射，放映",
     "part": "第一部分：超级核心母词族",
     "group": "【15. ject 投/掷/扔】",
     "analysis_type": "构词",
@@ -17307,7 +17307,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pursue",
     "phonetic": "/pəˈsjuː/",
     "pos": "vt.",
-    "meaning": "追求，致力于；追逐，追捕；继续进行",
+    "meaning": "vt. 致力于，追求（学业/目标）；追赶，追踪",
     "part": "第一部分：超级核心母词族",
     "group": "【30. sequ / secut 跟随】",
     "analysis_type": "构词",
@@ -17331,7 +17331,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "同源（妇女） -> 女王，王后。"
+    "analysis": "gwen-（生育母亲/妇女首领）同源 -> 部落城邦母仪天下或掌握最高统治王权的尊贵君主配偶或女性君王 -> 女王，王后；蜂王，蚁后；纸牌或棋局中的后。"
   },
   {
     "word": "quest",
@@ -17601,7 +17601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "re-（再次） + lay（放置） -> 接力赛。"
+    "analysis": "re-（重新） + lay（布设配置生力军） -> 沿途设立驿站由体力充沛的健儿战马分段飞速交接情报，引申指无线电信号中继 -> 接力赛；中继器，继电器；中继转播传送。"
   },
   {
     "word": "reliable",
@@ -17627,11 +17627,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "render",
     "phonetic": "/ˈrendə(r)/",
     "pos": "vt.",
-    "meaning": "使得， 致使； 翻译转译； 渲染（计算机三维建模图像）",
+    "meaning": "vt. 致使，使得；给予，提供（援助）；翻译转译；渲染呈现",
     "part": "第一部分：超级核心母词族",
     "group": "【37. don / dot / do 给予/奉献】",
     "analysis_type": "构词",
-    "analysis": "本义指“退还” -> 使得，致使。"
+    "analysis": "re-（回） + dare（给予） -> 将成果交付回馈官方，引申指致使变成某种状态，或计算机生成图形 -> 使得，致使；翻译，转译；渲染图形；呈现。"
   },
   {
     "word": "replace",
@@ -17691,7 +17691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“re- 彻底” -> 营救，拯救。"
+    "analysis": "re-（重新） + ex- + quatere（震动摆脱） -> 强行发力将身陷险境危难的人事物拉出泥潭挽救 -> 营救，拯救；紧急救助；金融救市纾困。"
   },
   {
     "word": "resemble",
@@ -17841,7 +17841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“圆边” -> （圆形物体的）外边缘 -> 外边缘，边沿。"
+    "analysis": "PIE词根 *rem-（边缘边框） -> 圆形碗盆容器或金属车轮的最外圈凸起轮廓边沿 -> 外边缘，边沿；轮圈，轮辋；环绕…边缘。"
   },
   {
     "word": "rip",
@@ -17851,7 +17851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声促音动词 -> 猛撕，扯开撕裂。"
+    "analysis": "拟声词，模拟纺织品或厚纸张被蛮力猛然撕扯开裂时发出的清脆裂响 -> 猛撕，扯开撕裂；强行扯下夺走；裂口，裂缝。"
   },
   {
     "word": "ripe",
@@ -17881,7 +17881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声促音大动词 -> 咆哮，怒吼。"
+    "analysis": "PIE拟声词根 *reu-（咆哮怒号） -> 猛兽咽喉深处迸发出的震天咆哮吼声，引申指发动机引擎轰鸣 -> 咆哮，怒吼；轰鸣，呼啸作响；哄堂大笑。"
   },
   {
     "word": "root",
@@ -17891,7 +17891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（深埋于地下吸） -> 植物根，根系。"
+    "analysis": "rad- / radix（向下深深扎入泥土吸收养料之根） -> 植物深埋地底固定植株并汲取水份营养的根系，引申指事物深层本原或核心语素 -> 植物根，根系；词根；根本原因，祸根；扎根于（in）。"
   },
   {
     "word": "rough",
@@ -18021,7 +18021,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“表面切削有螺” -> 螺丝，螺钉。"
+    "analysis": "scrofa（螺旋盘旋母猪尾） -> 表面刻有螺旋纹理受旋转扭力咬紧木石的金属紧固螺钉 -> 螺丝，螺钉；螺旋桨；用螺丝拧紧固紧。"
   },
   {
     "word": "second-hand",
@@ -18111,17 +18111,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“水体深度仅能” -> 浅的，水浅不深的。"
+    "analysis": "shoal（沙洲浅滩）同源 -> 水位极低未没脚面，引申为思考认知浮于表面缺乏厚度深度 -> 浅的，水浅的；肤浅浅薄的；浅滩水洼。"
   },
   {
     "word": "shape",
     "phonetic": "/ʃeɪp/",
     "pos": "n./v.",
-    "meaning": "形状，外形轮廓；健康体态身体状况；塑造，决定影响…的发展形态",
+    "meaning": "vt. 塑造，决定…的发展；成型 n. 形状，外形；健康体态",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“用利刃砍削刻” -> 形状，外形轮廓。"
+    "analysis": "skep- / shape（用利刃砍削刻凿成型） -> 雕刻家挥舞刻刀在木石原料上削出优美轮廓立体外观，引申指身体状态或塑造思想 -> 形状，外形轮廓；健康体态状况；塑造，决定…形态。"
   },
   {
     "word": "sharp",
@@ -18131,7 +18131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "刃口极其纤薄能切割 -> 锋利的，尖锐的。"
+    "analysis": "shear（剪切）同源派生 -> 刀刃极其纤薄能瞬间切断物体，引申指头脑机敏观察入微或折线陡峭剧烈 -> 锋利的，尖锐的；敏锐机警的；急剧剧烈的。"
   },
   {
     "word": "shave",
@@ -18141,7 +18141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“用贴合皮肉的” -> 剃须，刮脸。"
+    "analysis": "scrape（刮削）同源 -> 用锋利刀刃贴着皮肤表面平推刮除胡须毛发，引申指微调预算额度 -> 剃须，刮脸；削减扣除；侥幸脱险（close shave）。"
   },
   {
     "word": "shed",
@@ -18161,7 +18161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“完全纯净毫无” -> 完全的，纯粹的。"
+    "analysis": "shine（光洁透亮）同源派生 -> 纯净得毫无杂质半点掺假，或崖壁平滑陡直如刀削垂直而下 -> 完全的，纯粹的；极陡峭险峻的；薄如蝉翼的。"
   },
   {
     "word": "shield",
@@ -18171,7 +18171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "抵挡刀剑弓箭的防护板 -> 盾牌，防御护盾。"
+    "analysis": "PIE词根 *skel-（劈开木板） -> 古代战士左臂佩戴用于格挡箭矢刀斧重击的木质蒙皮防具 -> 盾牌，防御护盾；防护罩；保护，庇护。"
   },
   {
     "word": "shift",
@@ -18181,7 +18181,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“彼此分工安排” -> 转移，移动。"
+    "analysis": "skep- / shape（改变形态/轮流） -> 从原有位置朝侧方挪开变换位置，引申指工业流水线分批轮换上岗 -> 转移，移动；转变转换；轮班工作时间。"
   },
   {
     "word": "shiver",
@@ -18271,7 +18271,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声爆发性动词 -> 巴掌拍打，用手掌猛击。"
+    "analysis": "拟声词，模拟手掌平展开来带着风声结结实实拍在脸颊或桌案上的脆响 -> 巴掌拍打，用手掌猛击；拍打声，耳光；猛放。"
   },
   {
     "word": "slice",
@@ -18281,7 +18281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“从木桩或坚硬” -> 薄片，切片。"
+    "analysis": "slit / split（劈开裂开）同源 -> 锋利刀刃水平划过薄薄片下的肉块面包，引申指利润配额中分走的一杯羹 -> 薄片，切片；一份份额；切成薄片。"
   },
   {
     "word": "slight",
@@ -18291,7 +18291,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根族核心意象 -> 微小的，微不足道的。"
+    "analysis": "PIE词根 *slei-（平滑单薄） -> 分量轻微体积纤细不足挂齿，引申为社交场合看不起对方怠慢冷落 -> 微小的，微不足道的；轻视，怠慢；纤细瘦弱的。"
   },
   {
     "word": "slope",
@@ -18301,7 +18301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“向下倾斜滑落” -> 斜坡，斜面。"
+    "analysis": "slip（滑落）同源派生 -> 表面倾斜导致重物极易自然向下滑脱的倾斜坡面 -> 斜坡，斜面；斜率，坡度；倾斜。"
   },
   {
     "word": "slump",
@@ -18311,7 +18311,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "拟声重坠动词 -> 突然暴跌，骤降骤减。"
+    "analysis": "slumpf（泥泞跌落）拟声演变 -> 像失去骨架支撑般轰然瘫软跌坐，经济学借指景气指数直线跳水暴跌 -> 突然暴跌，骤降骤减；无力倒下瘫软；萧条萎靡期。"
   },
   {
     "word": "smash",
@@ -18341,7 +18341,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“彻底浸润于汤” -> 浸泡，在液体中浸湿湿透。"
+    "analysis": "suck（吸吮）同源演化 -> 长期将物体浸泡在清澈液体中使其纤维内部饱饱吸足水分湿透 -> 浸泡，浸湿透；浸透，湿透；吸收吸取（in/up）。"
   },
   {
     "word": "sole",
@@ -18351,7 +18351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 唯一的，仅有的。"
+    "analysis": "solus（孤单唯一）同源，另指贴地的脚底板 -> 排除一切其他可能仅存其一的独占专属特权 -> 唯一的，仅有的；独占专用的；脚底板，鞋底。"
   },
   {
     "word": "sophisticated",
@@ -18381,7 +18381,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声促音大动词（由 plas） -> 泼洒，飞溅。"
+    "analysis": "plash（飞沫四溅）同源拟音构词 -> 重物从高处砸落水面激起晶莹水花浪沫飞射四溅，引申指大笔挥霍资金 -> 泼洒，飞溅；使溅起水花；扑通溅水声；引人注目的展示。"
   },
   {
     "word": "split",
@@ -18431,7 +18431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“骑手牛皮长筒” -> 马刺，靴后金属踢马刺。"
+    "analysis": "spurn（用足后跟踢蹬）同源 -> 骑手骑马时皮靴后帮镶嵌带有尖齿用以刺踢马腹加速的金属刺靴，引申为精神鞭策鼓舞 -> 马刺，踢马刺；激励鞭策动力；支脉分支；激励促进。"
   },
   {
     "word": "spy",
@@ -18441,7 +18441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【3. spec / spect / spic 看】",
     "analysis_type": "构词",
-    "analysis": "本义指“暗中窥探察看” -> 间谍，特工。"
+    "analysis": "spec- / spic-（看/审视）同源变体 -> 潜伏在暗影视线盲区偷偷侦察刺探敌情机密的核心人员 -> 间谍，特工；暗中监视刺探；暗中从事侦察。"
   },
   {
     "word": "squeeze",
@@ -18451,7 +18451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 压榨，挤压。"
+    "analysis": "ex- + quatere（用力压扁摇晃） -> 从两端或周围施加巨大向心压力逼出汁液或压缩空间 -> 压榨，挤压；紧挤；勒索；拥挤拮据。"
   },
   {
     "word": "stain",
@@ -18461,7 +18461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“使原有的纯净” -> 污染，玷污弄脏。"
+    "analysis": "distain（褪色/弄脏）演化 -> 色素油污渗透进纤维内部难以清洗的显眼斑渍，引申为名誉蒙羞受损 -> 污染，玷污弄脏；着色染色；污渍，污斑。"
   },
   {
     "word": "stale",
@@ -18501,7 +18501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“高耸如断崖直” -> 陡峭险峻的，极倾斜的。"
+    "analysis": "steep- / steeplechase（高耸塔楼直冲云霄） -> 山崖断壁如斧劈刀削般以近乎垂直九十度的险峻仰角耸立，引申指价格骤增或过分离谱 -> 陡峭险峻的；急剧大幅的；过高的；浸泡。"
   },
   {
     "word": "steer",
@@ -18511,17 +18511,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "操纵船舵掌控行进方向 -> 驾驶掌舵操纵方向。"
+    "analysis": "starboard / steer 同源 -> 双手握住船舵或车辆方向盘校正航向，引申指领导团队渡过难关 -> 驾驶掌舵操纵；引导引领，带领；阉公牛。"
   },
   {
     "word": "stem",
     "phonetic": "/stem/",
     "pos": "n./v.",
-    "meaning": "植物茎，树干；高脚杯把；词干",
+    "meaning": "vi. 源自，起源于（from） vt. 遏制，阻止 n. 植物茎，树干；词干",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（挺立站立） -> 植物茎，树干。"
+    "analysis": "stand（挺拔矗立）同源 -> 支撑植物枝叶花果向上承重输送水肥养分的挺拔主干支茎，另指高脚杯立柱细柄 -> 植物茎，树干；高脚杯把；词干；遏制制止（stem the tide）。"
   },
   {
     "word": "stimulate",
@@ -18571,7 +18571,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“在比武场中拼” -> 努力奋斗，竭尽全力力争。"
+    "analysis": "strife（争斗冲突）的动词形式 -> 咬紧牙关顶着巨大阻力奋起抗争竭力向前突破 -> 努力奋斗，竭尽全力力争；斗争对抗（for/against）。"
   },
   {
     "word": "stroll",
@@ -18591,7 +18591,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“织物原料” -> 往空隙内填塞的填充料 -> 东西。"
+    "analysis": "stop（塞住塞紧）同源 -> 原指填塞在枕头床垫内部柔软蓬松的填充物，泛指一切杂乱材料物品 -> 东西，材料；填满，塞满；塞进。"
   },
   {
     "word": "subject",
@@ -18641,7 +18641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【30. sequ / secut 跟随】",
     "analysis_type": "构词",
-    "analysis": "本义指“紧追不放” -> 控告，提起民事诉讼。"
+    "analysis": "sequi（跟随/追逐） -> 紧追不舍在法庭上向侵害人讨要说法追究民事侵权违约责任 -> 控告，提起民事诉讼；请求，乞求（求和）。"
   },
   {
     "word": "summary",
@@ -18721,7 +18721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 吞下，咽下。"
+    "analysis": "PIE词根 *swel-（咕咚吞咽） -> 喉咙肌肉收缩将口腔内的食物药片压送入胃部食道，引申为强咽恶气 -> 吞下，咽下；吞并，吞噬侵吞；勉强忍受。"
   },
   {
     "word": "swear",
@@ -18731,7 +18731,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“在神坛或氏族” -> 庄严起誓，发誓。"
+    "analysis": "and- + swear（在神前大声庄严起誓） -> 在宗庙法庭神坛当众呼请神明鉴察自己的誓言忠贞，引申为愤极口出恶言爆粗 -> 庄严起誓，发誓；诅咒，咒骂爆粗口；坚信确定。"
   },
   {
     "word": "swell",
@@ -18741,7 +18741,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ą（微观细胞吸水） -> 膨胀，肿胀。"
+    "analysis": "PIE词根 *swel-（受热或吸水隆起） -> 细胞组织大量吸足水份向外显著膨胀隆起，海事引申指无风自涌的长浪 -> 膨胀，肿胀；增加，壮大；长涌浪。"
   },
   {
     "word": "swift",
@@ -18761,7 +18761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（用于刺击伤敌） -> 剑，利剑。"
+    "analysis": "PIE词根 *swer-（用于劈砍刺击伤敌之利刃） -> 双面开刃、带有剑格护手用以刺击格杀敌军甲士的长金属兵刃 -> 剑，利剑；武装力量，武力；尚方宝剑。"
   },
   {
     "word": "symbol",
@@ -18781,7 +18781,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“由 tabl” -> 药片，片剂。"
+    "analysis": "tabula（平板书板） + -et（小件后缀） -> 压制成薄扁平块状的小型药丸片剂，现代引申为便携式触控平板 -> 药片，片剂；平板电脑；纪念石碑，铭牌。"
   },
   {
     "word": "tackle",
@@ -18801,17 +18801,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（房屋） -> 驯服的，温顺温和的。"
+    "analysis": "dom- / domus（家宅驯养）同源 -> 猛兽野性经世代圈养人工规训被彻底消磨平复、亲近顺从人类 -> 驯服的，温顺温和的；枯燥平淡乏味的；驯化，驯服。"
   },
   {
     "word": "target",
     "phonetic": "/ˈtɑːɡɪt/",
     "pos": "n./vt.",
-    "meaning": "目标，靶子；战略指标目标；针对，面向定位以…为靶向",
+    "meaning": "vt. 把…作为目标，针对；面向定位 n. 目标，指标；标靶",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“轻装步兵随身” -> 目标，靶子。"
+    "analysis": "targe（圆形小皮盾） + -et（小件后缀） -> 立在靶场供弓箭手瞄准射击的标靶红心，引申指经营战略指标 -> 目标，靶子；战略指标；瞄准针对定位以…为靶向。"
   },
   {
     "word": "tedious",
@@ -18901,7 +18901,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“紧密无缝隙的” -> 紧的，牢固的。"
+    "analysis": "tie（绑紧）同源派生 -> 绳索各端用力拉伸牢牢捆扎结实毫无松动，引申为时间仓促或银根紧缩 -> 紧的，牢固的；紧凑的，拮据的；严厉的；紧紧地。"
   },
   {
     "word": "tolerate",
@@ -18941,7 +18941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“围绕中心旋转” -> 旅行，观光游历。"
+    "analysis": "torn- / turn（旋转转圈） -> 沿着规划好的闭环路线出发周游多地最终返回原点的旅程 -> 旅行，观光游历；巡回（演说赛事）；巡视巡查；游历参观。"
   },
   {
     "word": "towel",
@@ -18951,7 +18951,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“系 ” -> 毛巾，浴巾。"
+    "analysis": "wash / towel 同源派生 -> 表面密布柔软棉圈具有极强吸水效能用以吸拭体表水分的布匹 -> 毛巾，浴巾；手巾；用毛巾擦干身体。"
   },
   {
     "word": "tower",
@@ -18961,7 +18961,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“巨石高筑直插” -> 塔，高楼。"
+    "analysis": "源自希腊语 tyrris（高筑防御堡垒塔楼） -> 垂直拔地而起俯瞰四周四野的高耸建筑，引申指威仪凌驾于常人 -> 塔，塔楼；高耸，巍然耸立凌驾于（over）。"
   },
   {
     "word": "trap",
@@ -18971,7 +18971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“踏板” -> 猎物踩中弹起锁住的夹具 -> 陷阱。"
+    "analysis": "tramp（重重踏足踩踏）同源 -> 布设在兽道林间、猎物一旦踩中弹簧机关便猛然弹起死死咬住皮肉的金属猎夹 -> 陷阱，圈套；诱捕，设圈套诱骗；使陷入困境困住。"
   },
   {
     "word": "tremble",
@@ -19011,7 +19011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "源自 tone（声音） -> 曲调，旋律。"
+    "analysis": "tone（声音音调高低）同源变体 -> 各音符依据和弦法则精密调谐组合成的悦耳歌调，引申指旋转旋钮调整收音机电视频率 -> 曲调，旋律；调谐，调整调校；收听收看，换台调频。"
   },
   {
     "word": "ultimate",
@@ -19281,7 +19281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōną（身躯双腿在微） -> 漫步，闲逛。"
+    "analysis": "wend / wind（曲折蜿蜒盘旋）同源 -> 不受固定道路规束在旷野中信步悠闲转悠漫步，引申指思维神游离题 -> 漫步，闲逛；偏离正轨，迷失走散；神游漫游。"
   },
   {
     "word": "watertight",
@@ -19311,7 +19311,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（将经线与纬线） -> 编织，织造。"
+    "analysis": "PIE词根 *webh-（经纬交错穿插） -> 纺织女工挥动飞梭将纵横经纬纱线紧密交织成布匹，引申指构思编织情节故事 -> 编织，织造；穿行穿梭；编排编造（故事）。"
   },
   {
     "word": "well-being",
@@ -19351,7 +19351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "拟声轻音大动词 -> 低语，耳语。"
+    "analysis": "PIE拟声词根 *kwei-（轻柔嘶嘶风声） -> 喉咙振动降到最低、只靠微弱气流贴着耳根悄悄说出的话语 -> 低语，耳语；沙沙作响；耳语声。"
   },
   {
     "word": "whistle",
@@ -19361,7 +19361,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "拟声高频尖音词 -> 口哨，哨子。"
+    "analysis": "拟声词，气流高速挤压通过微张双唇或狭窄气孔时迸发出的清脆尖锐声响 -> 口哨，哨子；汽笛声；吹口哨，鸣笛。"
   },
   {
     "word": "whole",
@@ -19371,7 +19371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“完好无损没有” -> 完整的，完好无损的。"
+    "analysis": "hail / healthy（完整无损完好健康）同源 -> 躯体和灵魂没有遭受半点切割削减保持天地原始健全无缺的完满状态 -> 完整的，完好无损的；全部的整个的；整体全貌。"
   },
   {
     "word": "widen",
@@ -19411,7 +19411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（编织） -> 金属丝，铁丝。"
+    "analysis": "vir-（柔韧转弯弯折）同源 -> 熔融金属拉丝延展加工成具有良好导电导热性且可任意弯折的细长金属丝绳 -> 金属丝，铁丝；电线，导线；电汇款项；安装窃听器。"
   },
   {
     "word": "witness",
@@ -19451,7 +19451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“用柔软织物或” -> 包裹，包扎。"
+    "analysis": "warp（弯曲缠绕）同源 -> 将柔软纸张布匹在物体外层层层层卷曲包裹紧实以防受损泄露 -> 包裹，包扎；披肩围巾；圆满收官收尾（wrap up）。"
   },
   {
     "word": "wreck",
@@ -19511,7 +19511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根 acutus（尖锐的） -> 急性的。"
+    "analysis": "ac-（尖锐/刺针） + -ute -> 尖端如钢针般锋利刺人，医学引申指突发急剧进展迅速的危重病症，思维指洞察敏锐 -> 急性的；敏锐的；尖锐的，严重的；锐角。"
   },
   {
     "word": "ahead",
@@ -19561,7 +19561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 angulus（角） -> 角，角度。"
+    "analysis": "ang-（弯曲成折角/拐角） + -le -> 两条直线从同一顶点向外延展所夹出的几何交角，引申指观察分析问题的独特视角 -> 角，角度；观察视角；斜移，斜向移动。"
   },
   {
     "word": "anyway",
@@ -19601,7 +19601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 arcus（弯曲紧绷的强） -> 弧，弧形。"
+    "analysis": "arcus（弓形弯月） -> 几何圆周上任意截取的一段平滑优美弯曲曲线，电气工程指高压放电击穿空气形成的耀眼弧光 -> 弧，弧形；电弧；划出弧线，呈弧形飞过。"
   },
   {
     "word": "arch",
@@ -19611,7 +19611,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 拱门，拱形结构。"
+    "analysis": "arcus（弓形/弯曲） -> 顶部呈优美受力弧线跨越空间的建筑物构件，引申指足弓或身体后仰拱起 -> 拱门，拱形结构；足弓；弓起使成拱形。"
   },
   {
     "word": "area",
@@ -19651,7 +19651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "同源（古罗马战车两） -> 轴，旋转中心轴。"
+    "analysis": "ag- / axis（带动车轮旋转承重的中心轴销） -> 车辆左右两只轮子正中间用以支撑底盘做旋转转动的核心枢轴，引申指几何坐标轴 -> 轴，旋转中心轴；坐标轴；枢纽核心轴心。"
   },
   {
     "word": "backward",
@@ -19671,7 +19671,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "同源（利用干燥温热） -> 烘烤，烘焙。"
+    "analysis": "bhog-（在温热红炭上烘暖烤熟）同源 -> 将发酵面团放置在密闭烤炉内借助高温干热烘烤出焦香酥脆面包，工业指窑炉烧砖烧瓷 -> 烘烤，烘焙；烤热烤焦；高温烧结固化。"
   },
   {
     "word": "bald",
@@ -19681,7 +19681,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“原本长满浓密” -> 秃顶的，头顶脱发的。"
+    "analysis": "ball / blaze（苍白光秃圆球）同源 -> 头顶毛囊萎缩脱落露出光滑发亮的头皮，引申为毫无修饰掩盖的真相 -> 秃顶的，头顶脱发的；光秃寸草不生的；直截了当的。"
   },
   {
     "word": "bang",
@@ -19691,7 +19691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声强爆音词 -> 砰的一声巨响，猛烈撞击敲打。"
+    "analysis": "拟声词，模拟两件沉重硬物高速正面撞击或枪炮轰鸣时骤然爆发的震耳巨响 -> 砰的一声巨响，猛烈撞击敲打；猛摔，砰地关上；正好径直地。"
   },
   {
     "word": "bare",
@@ -19721,7 +19721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 树皮。"
+    "analysis": "break（脱落碎皮）同源，另指拟声犬吠 -> 树木主干外层起到防寒防虫保水功效的粗糙木栓层质地 -> 树皮；犬吠声，狗叫；吠叫，狂吠。"
   },
   {
     "word": "barren",
@@ -19731,7 +19731,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "本义指“干燥龟裂沙化” -> 贫瘠荒芜的，寸草不生的。"
+    "analysis": "源自古法语 baraigne（无法受孕产仔的母兽） -> 土地极度贫瘠缺乏有机养分无法孕育庄稼果实，引申指思维枯竭 -> 贫瘠荒芜的；不结果实的，不育的；毫无成果的。"
   },
   {
     "word": "barrier",
@@ -19751,7 +19751,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 蝙蝠（哺乳动物）。"
+    "analysis": "beat（击打）同源（击球之棒），另指中世纪拟声借用指暮色中扑翼飞舞的翼手目哺乳动物 -> 蝙蝠；球棒，球拍；击球；眨眼（not bat an eye）。"
   },
   {
     "word": "beam",
@@ -19761,7 +19761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“生长挺拔的巨” -> （建筑核心承重）大梁 -> 大梁，横梁。"
+    "analysis": "baum / boom（粗壮笔直的挺拔大树木） -> 房屋顶棚横跨左右承担整座屋顶全部垂直荷载的受力主大梁，另指投射出的平行光柱 -> 大梁，横梁；光束，光柱；灿烂微笑面露喜色。"
   },
   {
     "word": "bend",
@@ -19771,7 +19771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（用绳索把两头） -> 弯曲，使折弯曲折。"
+    "analysis": "band / bind（拉紧绳索把两端向内勒弯） -> 强行对笔直材料施加侧向杠杆力使之产生永久弧形弯曲变形，引申指意志屈从顺服 -> 弯曲，使折弯曲折；屈服，弯腰顺从；转弯处，急转弯道。"
   },
   {
     "word": "beneath",
@@ -19801,7 +19801,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 捆绑，捆扎。"
+    "analysis": "bend / band（弯曲系扎）同源 -> 用皮条绳索紧紧环绕打结使物体聚拢无法散开，引申为合同法律条文约束 -> 捆绑，捆扎；约束；凝固；使结合。"
   },
   {
     "word": "blade",
@@ -19811,7 +19811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ą（像一柄薄平扁） -> 刀刃，刀片。"
+    "analysis": "flat / broad（扁平展开）同源 -> 刀剑上锻造极其扁平纤薄锋利用于斩切的受力面，植物学借指狭长草叶叶片 -> 刀刃，刀片；桨叶，叶片；草叶。"
   },
   {
     "word": "blank",
@@ -19821,17 +19821,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“洁白无瑕如白” -> 空白的，未填写的。"
+    "analysis": "blanc（白色/光亮无墨） -> 纸面上完全未曾留下墨水笔迹一片雪白，引申指眼神表情空洞茫然 -> 空白的，未填写的；空虚茫然的；空白处，空格。"
   },
   {
     "word": "blanket",
     "phonetic": "/ˈblæŋkɪt/",
     "pos": "n./vt./adj.",
-    "meaning": "毛毯，羊毛毯；厚厚的覆盖层遮蔽层；全面覆盖笼罩",
+    "meaning": "n. 毛毯；厚覆盖层（a blanket of snow） vt. 全面覆盖笼罩",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“纯白色的原色” -> 毛毯，羊毛毯。"
+    "analysis": "blanc（白色羊毛原色） + -et（织物后缀） -> 质地厚实紧密铺在床上保暖的纯羊毛织物，引申为如雪被般彻底覆盖 -> 毛毯，羊毛毯；厚覆盖层；全面覆盖笼罩。"
   },
   {
     "word": "blast",
@@ -19851,7 +19851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“在黑暗中光芒” -> 熊熊烈火，烈焰大火。"
+    "analysis": "blink / flash（强烈白光闪耀迸发）同源 -> 枯木受烈火吞噬瞬间窜起数米之高照亮四野夜空的熊熊熊大火，引申指开创道路 -> 熊熊烈火，烈焰；光彩夺目璀璨；熊熊燃烧；开辟道路（blaze a trail）。"
   },
   {
     "word": "blend",
@@ -19871,7 +19871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "祈求神明护佑平安 -> 保佑，祈求赐福。"
+    "analysis": "blood（古代涂抹祭血祈神）演化 -> 祈请神明垂怜眷顾降下福祉恩泽，引申为幸运拥有天生禀赋 -> 保佑，祈求赐福；使有幸拥有（with）；祝圣。"
   },
   {
     "word": "blink",
@@ -19891,7 +19891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“木桩” -> 街区。"
+    "analysis": "balk（粗大方木料）同源 -> 放置在道路中央横断通行的巨大方木石块，引申指城市网格街区或阻塞 -> 街区；障碍物；大块；堵塞，拦截阻挡。"
   },
   {
     "word": "blossom",
@@ -19921,7 +19921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“由于长期使用” -> 钝的，不锋利的。"
+    "analysis": "blind（模糊失明）同源变体 -> 刀刃磨损钝化丧失切割锋芒，引申指说话直来直去不加委婉辞令包裹 -> 钝的，不锋利的；言辞直截了当的；使迟钝减弱。"
   },
   {
     "word": "blur",
@@ -19931,7 +19931,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“水墨未干受水” -> 变得模糊不清，使模糊难以辨认。"
+    "analysis": "blot / slur（污斑涂抹）同源 -> 镜头对焦失准或泪水蒙眼使清晰边界晕散成一团模糊光影 -> 变得模糊不清，使模糊；模糊的印记；记忆中的模糊影像。"
   },
   {
     "word": "boast",
@@ -19941,7 +19941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“在篝火酒宴上” -> 自豪地拥有享有。"
+    "analysis": "bogh- / boast（张扬膨胀） -> 挺起胸膛向众人大肆吹嘘炫耀自己的财富成就，引申为自豪地享有优势 -> 自豪地拥有享有；夸耀，吹嘘吹大话；吹嘘夸口之词。"
   },
   {
     "word": "boil",
@@ -19971,7 +19971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（从强弓弩机或） -> 螺栓，坚固紧固件螺栓。"
+    "analysis": "beld- / blow（重击/撞击射出） -> 原指带有沉重金属头的破甲强弩短箭，引申指贯穿门框的金属门栓或机械紧固高强度螺栓 -> 螺栓，坚固紧固件；门栓闩锁；一道闪电；飞奔窜出。"
   },
   {
     "word": "bomb",
@@ -19981,7 +19981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声巨响词（源自希腊语 ） -> 炸弹。"
+    "analysis": "bombos（希腊语拟声词：轰隆巨响爆炸） -> 外壳铸铁内部装填高爆炸药投掷后瞬间粉碎造成毁灭性杀伤的大型爆炸武器 -> 炸弹；核弹；投弹轰炸；彻底惨败（口语）。"
   },
   {
     "word": "bond",
@@ -19991,27 +19991,27 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 债券。"
+    "analysis": "bind / band（捆扎联系）的派生名词 -> 维系人际关系不可割舍的纽带情感，金融借指发行还本付息的债务契约 -> 债券；纽带，联系；结合，凝结。"
   },
   {
     "word": "boom",
     "phonetic": "/buːm/",
     "pos": "vi./n.",
-    "meaning": "繁荣， 激增 n. 繁荣期",
+    "meaning": "vi./n. 激增，繁荣昌盛；繁荣期；轰鸣隆隆作响",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自拟声词 -> 繁荣，激增。"
+    "analysis": "拟声词，模拟深沉雄浑的隆隆轰鸣声响，经济学借指市场需求与产值如火箭般爆发式飞跃 -> 繁荣，激增；繁荣期；发出低沉隆隆轰鸣声。"
   },
   {
     "word": "boost",
     "phonetic": "/buːst/",
     "pos": "vt./n.",
-    "meaning": "提升， 增加， 促进",
+    "meaning": "vt. 提振，增加，促进；托举 n. 帮助，激励",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自美式俚语 -> 提升，增加。"
+    "analysis": "bowse / boast（向上撑起托举） -> 从底部双手用力托举使高度抬升，引申为通过政策或资金大幅提振 -> 提升，增加，促进；托举；提振。"
   },
   {
     "word": "border",
@@ -20021,7 +20021,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“衣服边缘” -> 边界，国界。"
+    "analysis": "board（木板边缘）同源派生 -> 划分两片领土主权或地块归属的最外侧界线隔离带 -> 边界，国界；边沿；邻近，毗邻（on）。"
   },
   {
     "word": "bounce",
@@ -20031,7 +20031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“猛击弹回” -> 反弹，弹起。"
+    "analysis": "bum（重重落地反弹）拟声派生 -> 弹性物体在重力与地面反作用力下瞬间被弹起升空，引申为走出低谷重振 -> 反弹，弹起；弹跳；弹力；活力；恢复元气（bounce back）。"
   },
   {
     "word": "bound",
@@ -20041,7 +20041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【2. sta / sist / st 站立/建立/停留】",
     "analysis_type": "构词",
-    "analysis": "词根 bind（捆绑） -> 一定必然的。"
+    "analysis": "bind（被绳索捆绑约束束缚）的过去分词作形容词 -> 受到物理规律、法律条文或铁定逻辑约束无法挣脱的，航运引申指开往指定目的地 -> 一定必然的；受约束绑定的；开往奔向的（bound for）。"
   },
   {
     "word": "boundary",
@@ -20061,7 +20061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（弯曲成优美弧） -> 鞠躬弯腰致敬。"
+    "analysis": "bheug-（身体或树枝向下折弯成弓形） -> 遇见长官尊长时收拢双臂从腰部向前深鞠躬致敬，另指拉满如弯月般发射箭矢的弓箭 -> 鞠躬弯腰致敬；屈服低头顺从；弓箭；船头。"
   },
   {
     "word": "bowl",
@@ -20071,7 +20071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“由整块圆木或” -> 碗，深钵深盆。"
+    "analysis": "ball / bulb（圆球隆起）同源 -> 中部向下深凹圆弧形盛装汤羹饭食的圆形敞口器皿，另指深陷盆地地形 -> 碗，深钵；盆地，天然碗状体育场；保龄球；滚球。"
   },
   {
     "word": "box",
@@ -20081,7 +20081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根核心意象引申 -> 盒子，箱子。"
+    "analysis": "源自希腊语 pyxos（黄杨木制成的坚实箱匣） -> 用木板纸板拼接而成的长方体封闭储物容器，另指剧场包厢 -> 盒子，箱子；包厢；方框；拳击（box）。"
   },
   {
     "word": "brake",
@@ -20101,7 +20101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“从树干上生长” -> 分支，分科。"
+    "analysis": "源自晚期拉丁语 branca（爪状枝杈） -> 树木主干向四周伸展分叉的大枝杈，引申指企业跨区域设立的支行分部 -> 分支，分科；树枝；分部，分行；分支（out）。"
   },
   {
     "word": "breadth",
@@ -20121,7 +20121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（在外在暴力猛） -> 打破，折断碎裂。"
+    "analysis": "bhreg-（暴力击打使成碎片）同源 -> 外力重击超出材料极限导致器皿骨骼生硬断裂为两截碎裂，引申指打破纪录破坏规章 -> 打破，折断碎裂；违反破坏（规则）；中断，暂停休息。"
   },
   {
     "word": "brick",
@@ -20151,7 +20151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（在墨黑夜空中） -> 明亮的，光芒四射的。"
+    "analysis": "bhereg-（在夜色中光耀夺目闪亮）同源 -> 表面光滑反射出刺目耀眼强光，引申指孩童天资颖悟聪慧绝顶或前程远大 -> 明亮的，光芒四射的；聪颖伶俐的；前途一片光明的。"
   },
   {
     "word": "brilliant",
@@ -20171,7 +20171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“水面涨满紧贴” -> （茶杯草帽的）帽檐。"
+    "analysis": "rim（边沿）同源变体 -> 杯碗边缘或礼帽外翻伸出的帽檐，引申指情绪或液体盈溢充盈即将溢出 -> （茶杯草帽的）帽檐；边缘；充盈洋溢，满溢而出（with）。"
   },
   {
     "word": "brisk",
@@ -20181,7 +20181,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "步履干脆利落不拖沓 -> 轻快敏捷充满生机活力的。"
+    "analysis": "brusque / break（脆性清脆/敏捷利索） -> 步履干脆利落不拖泥带水，引申指秋高气爽微凉提神的空气或商铺生意红火活跃 -> 轻快敏捷充满生机活力的；清爽凛冽的；生意兴隆活跃的。"
   },
   {
     "word": "brittle",
@@ -20191,7 +20191,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“极易受外力击” -> 易碎的，脆性的。"
+    "analysis": "break（打碎断裂） + -le（易态后缀） -> 硬度极高但韧性严重不足、受外力震动极易清脆崩解粉碎的 -> 易碎的，脆性的；脆弱易裂的；尖锐生硬的。"
   },
   {
     "word": "broad",
@@ -20201,7 +20201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 宽广的，辽阔的。"
+    "analysis": "PIE词根 *bher-（开阔展开） -> 空间跨度从左至右极其开阔辽远，引申指涉猎广泛全面或大体粗略 -> 宽广的，辽阔的；广泛的；概括明晰的。"
   },
   {
     "word": "broadcast",
@@ -20251,7 +20251,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“由 boul” -> 子弹，弹头弹丸。"
+    "analysis": "bulla（圆球气泡） + -et（小件后缀） -> 由枪械枪管膛线高速旋转射出的铅芯金属杀伤弹丸 -> 子弹，弹头；项目符号小黑点；咬紧牙关硬挺（bite the bullet）。"
   },
   {
     "word": "bundle",
@@ -20261,7 +20261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（捆绑） -> 捆，扎。"
+    "analysis": "bind / band（捆扎成团） + -le -> 将散落零碎的柴草衣服用麻绳紧密包扎束缚成的大包裹卷，商业借指软件或套餐捆绑打包 -> 捆，扎；包裹，包袱；一大笔钱；捆绑销售打包。"
   },
   {
     "word": "burden",
@@ -20271,7 +20271,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（搬运） -> 负担，重担。"
+    "analysis": "bher- / bear（用肩膀背负承重）同源派生名词 -> 农人或战马脊梁上背负的沉重货箱包袱，引申指令人喘不过气来的经济精神重荷 -> 负担，重担；沉重的心理包袱；使负重担，压迫加重负担。"
   },
   {
     "word": "burn",
@@ -20281,7 +20281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（水沸腾腾跃或） -> 燃烧，着火。"
+    "analysis": "bhrevi-（水沸腾腾跃翻滚/烈焰狂燃） -> 物质与氧气剧烈反应产生烈火浓烟并释放巨大光热高温，引申指皮肤烫伤或内心愤懑灼痛 -> 燃烧，着火；烧伤，烫伤；灼痛，心头刺痛；消耗热量。"
   },
   {
     "word": "burst",
@@ -20291,7 +20291,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 爆裂，爆炸。"
+    "analysis": "break（猛烈碎裂）同源变体 -> 内部承受巨大膨胀压力超出极限瞬间向外崩裂炸开，引申为情感骤然宣泄 -> 爆裂，爆炸；突然爆发（into tears/laughter）；突发阵雨。"
   },
   {
     "word": "bury",
@@ -20301,7 +20301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“将亲人遗体” -> 埋葬，安葬逝者。"
+    "analysis": "borough / burrow（洞穴掩藏）同源 -> 在泥土岩石深处挖掘坑穴将逝者遗骨或宝藏深深掩藏其中 -> 埋葬，安葬；掩埋深埋；将身躯沉浸埋入（bury oneself in）。"
   },
   {
     "word": "cage",
@@ -20351,7 +20351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（用尖锐刻刀在） -> 雕刻，刻凿雕琢。"
+    "analysis": "gerbh-（用尖锐石器在木石上划刻印记） -> 雕塑名匠手握刻刀在坚硬大理石或木料上精雕细琢剥离多余材质，西餐借指分切大块烤肉 -> 雕刻，刻凿雕琢；切开切碎（烤肉）；开辟开拓（carve out）。"
   },
   {
     "word": "cast",
@@ -20391,7 +20391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“用木板或石膏” -> 天花板，顶棚。"
+    "analysis": "caelum（天空/穹顶） -> 房屋建筑室内最顶端封闭遮蔽房梁的结构面，引申为法规价格指标的最高顶格线 -> 天花板，顶棚；最高上限，法定顶格限额；云底高度。"
   },
   {
     "word": "chain",
@@ -20411,7 +20411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 粉笔，v.。"
+    "analysis": "calx（石灰石）同源 -> 用天然碳酸钙或硫酸钙研磨压制用于在黑板上书写划线的白粉笔条 -> 粉笔；用粉笔写划；归咎于记在账上（chalk up to）。"
   },
   {
     "word": "chase",
@@ -20421,7 +20421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
-    "analysis": "本义指“在丛林中策马” -> 追赶，追捕追踪。"
+    "analysis": "capt- / catch（抓捕）同源变体 -> 迈开大步在后方紧追不舍全力擒获逃窜的目标，引申为矢志追求理想荣誉 -> 追赶，追捕；追求，追逐；驱逐赶跑；追逐追捕过程。"
   },
   {
     "word": "chew",
@@ -20431,7 +20431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（利用上下颌臼） -> 咀嚼，细细嚼碎。"
+    "analysis": "gyeue-（上下颚臼齿咬磨碾压） -> 咀嚼肌驱动上下排牙齿将大块粗纤维食物反复碾碎磨烂便于吞咽，引申指把文章深思细嚼琢磨 -> 咀嚼，细细嚼碎；反复深思嚼磨；严厉训斥痛骂（chew out）。"
   },
   {
     "word": "chip",
@@ -20441,7 +20441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“用锋利战斧在” -> 微芯片，集成电路芯片。"
+    "analysis": "chop（砍削切剁）同源 -> 用利刃削砍飞溅出的小木屑金属薄片，引申为微米级光刻集成的半导体集成电路硅片 -> 微芯片，集成电路芯片；碎片，碎屑；油炸土豆片薯片。"
   },
   {
     "word": "chop",
@@ -20451,7 +20451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "与 chip（碎屑）同源强化动词 -> 剁碎，劈。"
+    "analysis": "chap / chip（用利斧自上而下猛烈砍劈） -> 挥动重斧砍柴刀垂直向下猛砍瞬间切断硬木排骨，引申指大刀阔斧裁撤预算岗位 -> 剁碎，劈砍；大刀阔斧削减取消；排骨，带骨肉排；劈斩动作。"
   },
   {
     "word": "clap",
@@ -20461,7 +20461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声强拍词 -> 拍手鼓掌。"
+    "analysis": "拟声词，模拟两只手掌在胸前迎面猛烈碰击发出的清脆拍击声，引申为剧场观众鼓掌喝彩 -> 拍手鼓掌；猛拍轻拍；鼓掌声；雷声霹雳。"
   },
   {
     "word": "clasp",
@@ -20471,7 +20471,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“五指弯曲如钢” -> 紧握，紧抱紧抓金属搭扣扣钩。"
+    "analysis": "clip / clap（合拢锁紧）同源 -> 金属搭扣或双手双臂十指交叉紧紧扣死锁牢抱紧绝不松手 -> 紧握，紧抱；金属搭扣，扣钩；紧紧扣住锁死；抱牢。"
   },
   {
     "word": "claw",
@@ -20481,7 +20481,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "禽兽弯曲锐利的硬趾爪 -> 尖锐利爪，弯爪。"
+    "analysis": "cleave（撕裂抓取）同源 -> 猛禽猛兽足端生长用于攀爬抓捕撕裂猎物皮肉的尖锐弯曲角质指甲 -> 尖锐利爪，弯爪；大螯钳；用爪子撕扯抓挠。"
   },
   {
     "word": "climb",
@@ -20491,7 +20491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 攀登，爬。"
+    "analysis": "cleave / cling（攀附贴紧）同源 -> 身体手足并用紧紧抓附岩石树干向上逐级克服重力攀爬，引申为气温数值飙升 -> 攀登，爬；上升，逐步飙升。"
   },
   {
     "word": "cling",
@@ -20501,7 +20501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 紧贴。"
+    "analysis": "clump（黏连结团）同源 -> 像粘胶膏药般死死贴附在物体表面绝不剥离，引申指思想理念因循守旧绝不放弃 -> 紧贴；死死抱住；黏着依附；恪守坚守（to）。"
   },
   {
     "word": "clip",
@@ -20511,7 +20511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "双源融合词 -> 夹子，回形针发夹。"
+    "analysis": "cleave / chop（剪断/夹紧）同源（两义交融：一是金属回形针夹紧，二是园艺剪刀裁剪枝叶） -> 夹子，回形针；发夹；弹匣；微视频剪辑片段；修剪剪裁。"
   },
   {
     "word": "clothe",
@@ -20531,7 +20531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 紧握，紧抓。"
+    "analysis": "claw（爪子抓取）同源派生 -> 像鹰隼俯冲般伸出利爪五指并拢死死扣住攥在手心，机械工程指传递动力的结合器 -> 紧握，紧抓；离合器；关键危急时刻（in the clutch）。"
   },
   {
     "word": "coarse",
@@ -20561,7 +20561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【54. lud / lus 嬉戏/扮演/欺骗】",
     "analysis_type": "构词",
-    "analysis": "col-（共同） + lapse-（滑落） -> 整个结构一齐向内坍塌滑落 -> / 倒塌， 崩溃。"
+    "analysis": "col-（共同） + lapse-（滑落/滑跌） -> 承重支撑构件全部向中心失去平衡轰然塌陷垮塌，引申指体制神经崩溃 -> 倒塌，崩溃；塌陷瓦解；折叠收拢；虚脱倒下。"
   },
   {
     "word": "compact",
@@ -20601,7 +20601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（寒冷冰凉） -> 凉爽凉快的。"
+    "analysis": "gel- / cold（微带寒意/温度适中） -> 摆脱酷热燥热体感微凉舒适宜人的清新状态，引申指临危不乱处变不惊的沉着冷静或社交冷漠 -> 凉爽凉快的；冷静沉着镇定的；态度冷淡疏离的；使变凉冷却。"
   },
   {
     "word": "cord",
@@ -20631,7 +20631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 cornu（公牛或羚羊头） -> 角，墙角。"
+    "analysis": "cornu（动物头上弯曲硬角/向外凸起的折角） -> 建筑物两条墙壁交汇相交形成九十度折角夹角，引申指逼入穷途末路的绝境死角 -> 角，墙角；街角，路口拐角；逼入死角绝境；垄断囤积。"
   },
   {
     "word": "crack",
@@ -20641,7 +20641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自拟声词 -> 破裂。"
+    "analysis": "拟声词，模拟木石在重压下发出清脆开裂脆响并出现细微纹理，引申为密码破译或重拳打击 -> 破裂，砸开；裂纹，裂缝；清脆响声；破解攻破；重击。"
   },
   {
     "word": "crash",
@@ -20651,7 +20651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自拟声词 -> 碰撞，坠毁。"
+    "analysis": "拟声词，模拟高速飞行物或车辆发生剧烈对撞时伴随金属粉碎玻璃崩飞的毁灭性撞击声 -> 碰撞，坠毁；暴跌；撞车；破产崩溃；死机崩溃。"
   },
   {
     "word": "creep",
@@ -20661,7 +20661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ą（四肢贴紧冰冷） -> 蹑手蹑脚缓慢潜行，爬行匍匐前进。"
+    "analysis": "crawl（贴地缓慢爬行）同源 -> 身体紧贴地面屈膝弓背悄无声息向前移动，引申指阴暗小人悄悄滋生蔓延 -> 蹑手蹑脚潜行；爬行；悄悄蔓延；怪人令人厌恶者。"
   },
   {
     "word": "crisp",
@@ -20687,7 +20687,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cross",
     "phonetic": "/krɒs/",
     "pos": "v./n./adj.",
-    "meaning": "穿过， 跨越 n. 十字",
+    "meaning": "v. 穿过，跨越；交叉 adj. 生气的，恼怒的 n. 十字",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
@@ -20711,7 +20711,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“用重力压碎砸” -> 压碎，碾碎。"
+    "analysis": "cross / crash 同源拟声演变 -> 从上方或两侧施加无法承受的重力碾压使之内部粉碎粉碎成渣，引申指彻底压垮精神 -> 压碎，碾碎；压垮挫败；拥挤人潮；短暂迷恋（have a crush on）。"
   },
   {
     "word": "crust",
@@ -20721,7 +20721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "词根 crusta（滚烫热汤或烤） -> 地壳。"
+    "analysis": "krusto-（滚烫液体或熔岩冷却凝结成坚硬外表皮） -> 刚出炉新鲜面包表面酥脆焦黄的坚硬硬壳，地质学借指地球最外层岩石地壳圈层 -> 地壳；面包硬皮；硬壳硬结表面层；结成硬壳。"
   },
   {
     "word": "curl",
@@ -20737,7 +20737,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "curve",
     "phonetic": "/kɜːv/",
     "pos": "n./v.",
-    "meaning": "曲线，弧线；弯道；学习曲线",
+    "meaning": "n. 曲线；转弯处，曲线图 vt./vi. 弯曲，弯折",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -20751,7 +20751,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 黑暗的。"
+    "analysis": "PIE词根 *dher-（浑浊无光） -> 没有半点光线照明的漆黑深夜境地，引申指未被科学启蒙开智的蒙昧秘密状态 -> 黑暗的；暗色的；阴郁的；黑暗；黄昏时刻。"
   },
   {
     "word": "dense",
@@ -20791,7 +20791,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“光线受重度阴” -> 昏暗的，光线暗淡模糊的。"
+    "analysis": "dark / dumb（幽暗模糊失去光辉）同源 -> 强光被厚厚阴云尘暴遮蔽导致视线模糊难辨，引申指头脑愚钝缺乏聪慧灵气 -> 昏暗的，光线暗淡的；模糊不清的；迟钝愚钝的；使变暗淡。"
   },
   {
     "word": "downward",
@@ -20811,7 +20811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（紧贴地面克服） -> 拖，拉。"
+    "analysis": "dhragh- / draw（克服地面摩擦力费力拖动位移） -> 双手拉紧缰绳绳索在地面上费力拖拽沉重货物，流体力学借指空气阻力，引申指拖延时间 -> 拖，拉；拖延，缓慢费力前行；流体阻力，空气阻力；累赘拖累。"
   },
   {
     "word": "drift",
@@ -20821,7 +20821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 漂流，漂泊。"
+    "analysis": "drive（驱赶/驱动）的派生名词形式 -> 失去动力控制顺着水流风向随波逐流漂移，引申指演说文章的中心大意大势 -> 漂流，漂泊；漂移；大意，要旨，发展大势趋势。"
   },
   {
     "word": "dry",
@@ -20831,7 +20831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义 -> 干的，干燥的。"
+    "analysis": "drain（排水）同源派生 -> 表面或空气中水分被蒸发殆尽完全不潮湿，引申指行文索然无味枯燥乏味 -> 干的，干燥的；枯燥无味的；弄干，晒干（up）。"
   },
   {
     "word": "dull",
@@ -20841,7 +20841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“头脑被烈酒或” -> 枯燥乏味的，沉闷单调让人昏昏欲睡的。"
+    "analysis": "dole / dolt（迟钝麻木索然无味）同源 -> 刀刃缺乏锋芒无法切割，或讲座内容陈腐毫无生趣催人入眠，引申指经济萧条滞胀 -> 枯燥乏味的，沉闷单调的；迟钝笨拙的；不锋利的钝的；使迟钝萧条。"
   },
   {
     "word": "dust",
@@ -20851,7 +20851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（被微风狂风吹） -> 灰尘，尘土细碎微尘。"
+    "analysis": "dheu-（微尘随风扬起化为烟雾） -> 漂浮在空气中或散落沉降在家具地面上的微米级极细土壤碎屑微尘，引申指火化后的遗骸骨灰 -> 灰尘，尘土细碎微尘；遗骸骨灰；除尘，掸去灰尘擦净。"
   },
   {
     "word": "early",
@@ -20871,7 +20871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（尖锐突刺） -> 边缘，外缘边际。"
+    "analysis": "ak- / ac-（尖锐突刺/刀刃锋利锋芒） -> 刀剑上极薄锋利用于开刃切割的利刃边缘，引申指断崖边界或在博弈竞争中微弱的决定性胜势 -> 边缘，外缘边际；锋利的刀刃刀口；微弱但决定性的领先优势；缓缓移动。"
   },
   {
     "word": "elastic",
@@ -20921,7 +20921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“用木水平尺校” -> 甚至，连…都。"
+    "analysis": "PIE词根 *aim-（匹配/类似） -> 地面平整无凹坑毫无起伏，各方数量分量完全一致对等，引申为副词强调甚至连…都 -> 甚至，连…都；平坦平整的；均匀相等的；均分对等。"
   },
   {
     "word": "everywhere",
@@ -20971,7 +20971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“平淡无味” -> 逐渐褪色，变淡变浅。"
+    "analysis": "fat- / fatuous（索然无味/虚弱）同源 -> 色素在日光暴晒下分子结构瓦解色彩渐淡，引申指记忆生命声响慢慢消散衰微 -> 逐渐褪色，变淡变浅；逐渐消逝凋谢；衰微虚弱。"
   },
   {
     "word": "fast",
@@ -20981,7 +20981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "原始 本义为“坚固不可动摇紧密咬合在一起”（与等 -> 快速的，迅疾飞快的。"
+    "analysis": "fasten（系紧牢固）同源 -> 原指紧紧贴牢紧咬不放向前疾行，引申为行动迅捷飞驰，另指守戒禁食 -> 快速的，迅疾的；牢固紧固的；禁食，斋戒。"
   },
   {
     "word": "fasten",
@@ -21031,7 +21031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 浮动，漂浮。"
+    "analysis": "flow / fleet（随水漂荡）同源派生 -> 密度小于液体而在浮力托举下静止或游弋在水面之上，经济学指货币汇率自由浮动 -> 浮动，漂浮；浮起；浮标；浮动汇率（floating rate）。"
   },
   {
     "word": "flow",
@@ -21041,7 +21041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（如同奔腾大江） -> 流动，奔流涌动。"
+    "analysis": "pleu-（水流大浪滔滔奔流不息）同源 -> 水液体在重力推动下顺着河道坡面连绵不断毫无滞碍地向前涌动位移，引申指思路流畅车水马龙 -> 流动，奔流涌动；流畅连贯地流淌；车流，人流；涌出流淌。"
   },
   {
     "word": "fold",
@@ -21051,7 +21051,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【4. ple / pli / plic 折叠/倍/重】",
     "analysis_type": "构词",
-    "analysis": "同源（将原本平展的） -> 折叠，对折对卷。"
+    "analysis": "pel-（对折/重叠卷起）同源 -> 将原本一整张平展宽大的图纸布匹从中间对折减小面积整齐收纳，商业引申指企业因周转不灵倒闭关门 -> 折叠，对折对卷；交叉双臂（fold arms）；彻底破产倒闭关张；羊圈褶皱。"
   },
   {
     "word": "foul",
@@ -21061,7 +21061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（有机物腐烂变） -> 恶臭难闻令人作呕的。"
+    "analysis": "pu-（有机物腐败变质恶臭难闻） -> 垃圾尸体在细菌发酵分解下散发出的令人掩鼻作呕的浓烈腐臭，体育引申指违反体育道德的犯规动作 -> 恶臭难闻令人作呕的；邪恶肮脏令人唾弃的；极端恶劣狂暴的；犯规动作。"
   },
   {
     "word": "frame",
@@ -21071,7 +21071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“有益推进” -> 框架，骨架框框底盘承重构架。"
+    "analysis": "from- / perform（促进/构筑成型） -> 支撑整体建筑或机械外壳并承担所有荷载的受力主骨架，引申指起草法律宪章文本 -> 框架，骨架框框；体格身材；制定，起草拟定；陷害栽赃。"
   },
   {
     "word": "fresh",
@@ -21081,7 +21081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义指“词根字面” -> 新鲜的。"
+    "analysis": "frisc-（凉爽活泼）同源 -> 刚采摘捕捞未受氧化腐败保持原始生机活力的，引申指空气纯净清新或思维标新立异 -> 新鲜的；清新的；新型的新创的；精力充沛的。"
   },
   {
     "word": "frost",
@@ -21091,7 +21091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 霜，严寒。"
+    "analysis": "freeze（结冰冻结）同源派生名词 -> 水汽在寒冷晴朗的夜间降至零度以下在物体表面凝华结晶的白色冰晶 -> 霜，霜冻；严寒低温；结霜于；蒙上霜雪白发。"
   },
   {
     "word": "fry",
@@ -21121,7 +21121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“双眼瞳孔散发” -> 凝视，凝望。"
+    "analysis": "gasp（屏息张望）同源派生 -> 仿佛被眼前惊艳壮丽景象深深震慑而目光定格长久专注端详凝视 -> 凝视，凝望；专注长久的目光注视；凝望凝视目光。"
   },
   {
     "word": "gentle",
@@ -21141,7 +21141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "双源融合词 -> 瞥一眼，匆匆迅速看上一眼。"
+    "analysis": "glint / gleam（闪烁反光）同源派生 -> 视线像光束掠过物体表面般快速匆忙看了一眼，物理上指飞弹斜碰后滑脱反弹擦过 -> 瞥一眼，匆匆看一眼；闪烁反光；反弹擦过；匆匆一瞥。"
   },
   {
     "word": "glide",
@@ -21151,7 +21151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（发光） -> 滑行，滑翔。"
+    "analysis": "ghel-（平滑光洁顺畅滑落）同源 -> 依靠自身流线型气动布局或冰刀在没有多余发动机轰鸣下在平滑介质上无阻力平稳滑移 -> 滑行，滑翔；悄然流逝无声滑过；滑翔飞行运动；滑步。"
   },
   {
     "word": "glimpse",
@@ -21161,7 +21161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“闪烁微光” -> 一瞥，瞥见。"
+    "analysis": "gleam（微弱闪光）同源变体 -> 视线在遮蔽物移动间隙捕捉到短暂而若隐若现的一瞥，引申指对未来发展趋势的初步洞察窥见 -> 一瞥，瞥见；短暂展现；隐约闪现的一瞥。"
   },
   {
     "word": "globe",
@@ -21201,7 +21201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【1. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
-    "analysis": "本义指“伸手用五指像” -> 紧紧抓牢，紧握。"
+    "analysis": "grope / grab（伸手摸索抓取）同源 -> 张开手掌五指用力把物体紧紧扣在手心，引申指思维彻底吃透领悟深奥逻辑道理 -> 紧紧抓牢，紧握；彻底理解，透彻掌握；抓住机遇。"
   },
   {
     "word": "grind",
@@ -21211,7 +21211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（用两块巨大沉） -> 磨碎，碾碎研磨。"
+    "analysis": "ghrendh-（上下两块沉重大石磨盘相互碾磨） -> 借水力转动石磨将金黄硬麦粒强力研磨压碎成细腻麦粉，引申指枯燥乏味耗费精力的艰辛苦差事 -> 磨碎，碾碎研磨；咬牙切齿摩擦（grind teeth）；枯燥艰辛的苦差事。"
   },
   {
     "word": "grip",
@@ -21221,7 +21221,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 紧握，抓牢。"
+    "analysis": "grope / grab（抓紧）同源变体 -> 手掌肌肉收紧紧握不放，引申为轮胎紧咬路面的地面附着摩擦力或戏剧深攫人心 -> 紧握，抓牢；控制力；吸引力；手柄握把；紧紧抓住。"
   },
   {
     "word": "groan",
@@ -21231,13 +21231,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "拟声沉闷长音动词 -> 呻吟，发出痛苦低沉呻吟。"
+    "analysis": "PIE拟声词根 *ghren-（痛苦低吟） -> 伤员胸腔内部因剧烈创痛无法自抑发出的低沉沉闷呻吟声，引申为巨木受力挤压吱嘎叫 -> 呻吟，发出痛苦低吟；吱嘎受压呻吟；抱怨叹息。"
   },
   {
     "word": "gross",
     "phonetic": "/ɡrəʊs/",
     "pos": "adj./vt.",
-    "meaning": "总的， 毛重的 vt. 获得总收入",
+    "meaning": "adj. 总的，毛重的；显而易见的（gross error） vt. 总共赚得",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -21251,7 +21251,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（仅由顶端一个） -> 悬挂，吊挂挂在。"
+    "analysis": "kank-（将沉重物体仅由上方单点支撑垂悬于半空） -> 将大钟壁画或风铃用挂钩绳索固定在天花板或横梁上自然向下垂挂，引申指绞刑处决 -> 悬挂，吊挂挂在；处以绞刑，吊死绞死；悬垂垂挂垂落；徘徊逗留。"
   },
   {
     "word": "hard",
@@ -21261,7 +21261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（充满钢铁般不） -> 坚硬的，硬质的。"
+    "analysis": "kar- / krat-（具有坚实抵抗力/坚硬如石） -> 质地致密受指甲铁锤敲击毫无凹陷划痕的刚性坚固状态，引申指试题极其艰难棘手或训练艰苦 -> 坚硬的，硬质的；艰难困苦的；严厉苛刻的；努力刻苦地；猛烈地。"
   },
   {
     "word": "harsh",
@@ -21271,7 +21271,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“摸上去像马尾” -> 严酷恶劣无情的。"
+    "analysis": "hard / hirsute（粗糙刚硬多毛）同源 -> 质地如砂纸刺手，气味或声响刺耳刺目难以忍受，引申指执法处分严苛残酷不近人情 -> 严酷恶劣无情的；刺耳刺目的；粗糙严苛的。"
   },
   {
     "word": "haul",
@@ -21281,7 +21281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“水手在甲板上” -> 用力拖，使劲拉拽。"
+    "analysis": "hale / pull（用力拖曳）同源派生 -> 弯下腰板把重物或渔网费力沿着地面甲板大距离长途拖拉行进 -> 用力拖，使劲拉拽；长途卡车运输；一次捕获量，战利品。"
   },
   {
     "word": "heave",
@@ -21311,7 +21311,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“从这个既定出” -> 因此，所以。"
+    "analysis": "here（此处）的副词派生形式 -> 从这个基准点或这一既定前提事实顺理成章向下推导出逻辑必然结论 -> 因此，所以；自此以后，今后；由此地离开。"
   },
   {
     "word": "hiss",
@@ -21321,7 +21321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声摩擦尖锐气音词 -> 发出嘶嘶声。"
+    "analysis": "拟声词，模拟蛇吐信或高压蒸汽由极小裂隙喷射而出时爆发出的细长尖利气流摩擦声 -> 发出嘶嘶声；压低喉咙愤怒斥责；嘘声喝倒彩；嘶嘶声。"
   },
   {
     "word": "hit",
@@ -21351,7 +21351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“由流水在岩石” -> 中空的，空心的。"
+    "analysis": "hole（洞穴）同源派生形容词 -> 内部实质被掏空仅保留外层薄壳包裹，引申指言辞空洞虚伪毫无真情实感 -> 中空的，空心的；凹陷深陷的；山谷洼地；虚伪空洞的。"
   },
   {
     "word": "hook",
@@ -21361,7 +21361,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōkaz（弯曲成U形或） -> 钩子，铁钩鱼钩。"
+    "analysis": "PIE词根 *keg-（弯曲尖角） -> 金属条弯折打磨成带有倒刺用以钩挂悬挂重物或捕鱼的弯钩 -> 钩子，铁钩；挂钩；勾拳；钩住，挂住。"
   },
   {
     "word": "hop",
@@ -21371,7 +21371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（两腿蜷缩聚力） -> 单脚跳跃，单足蹦跳。"
+    "analysis": "kub-（弯曲双腿关节弹跳蹦起）同源拟音构词 -> 单足立地依靠小腿脚踝肌肉瞬间收缩弹力向前做短促轻快的连续跳跃跳动 -> 单脚跳跃，单足蹦跳；轻快跳跃；快速短暂的换乘旅程；短途飞行跳跃。"
   },
   {
     "word": "howl",
@@ -21381,7 +21381,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "拟声深长凄凉长音动词 -> 凄厉长嚎长啸。"
+    "analysis": "拟声词，模拟荒原孤狼仰天长啸长嗥时发出的绵长凄厉悲啼声，引申指暴风狂刮怒号呼啸 -> 凄厉长嚎长啸；怒号呼啸；痛哭哀嚎；长嚎哭叫声。"
   },
   {
     "word": "hug",
@@ -21401,7 +21401,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“宏伟崇高拔地” -> 巨大的，庞大无比的。"
+    "analysis": "high（高大）古法语同源演变 -> 体积体量容积恢弘广袤至极远超一般参照物尺度，引申指影响极其轰动深远 -> 巨大的，庞大无比的；恢弘浩瀚的；极轰动成功的。"
   },
   {
     "word": "hum",
@@ -21421,7 +21421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“调动腰背全部” -> 猛投，猛摔。"
+    "analysis": "whirl（旋转飞舞）拟声派生 -> 扬起手臂像掷铁饼般将沉重物体用尽全身蛮力猛摔狂掷而出，引申为大肆咆哮辱骂 -> 猛投，猛摔；厉声大肆辱骂斥责；猛扑冲向。"
   },
   {
     "word": "immense",
@@ -21481,7 +21481,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōnjaz（勇猛如猛禽） -> 敏锐机敏的。"
+    "analysis": "can / know（精明能干锋利）同源 -> 刀刃磨得极快极薄能瞬间切入，引申指思维机敏透彻或痛感寒风凛冽刺骨 -> 敏锐机敏的；白热化激烈的；凛冽刺骨的；渴望热衷于（on）。"
   },
   {
     "word": "kick",
@@ -21491,7 +21491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“利用腿部股四” -> 踢，踹。"
+    "analysis": "古诺尔斯语 kikna（小腿弯曲踢蹬） -> 膝关节发力带动足端向前猛烈弹射蹬击目标，引申指射击枪械后坐力或刺激兴奋快感 -> 踢，踹；后坐力反冲；极大的兴奋快感刺激；踢球动作。"
   },
   {
     "word": "knock",
@@ -21501,7 +21501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声重击词 -> 或等 -> 敲，打。"
+    "analysis": "拟声词，模拟手握指节重扣硬木门板发出的清脆重击声，引申指批评家挑刺痛批抨击 -> 敲，打；碰撞猛撞；严厉挑刺批评；敲击声；碰伤受挫。"
   },
   {
     "word": "knot",
@@ -21511,7 +21511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“将柔软绳头在” -> （绳索/领带打成的）结 -> （绳索小时）。"
+    "analysis": "knit（紧密编织穿插成团）同源 -> 绳索两端在反复交织受拉后形成无法自然滑脱的结实疙瘩纽结，航海借指航速节 -> （绳索领带打成的）结，绳结；节（航速海里/小时）；打结系紧。"
   },
   {
     "word": "late",
@@ -21521,7 +21521,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“行动迟缓疲惫” -> 迟到的，晚的。"
+    "analysis": "let / slow（迟缓松懈放缓）同源 -> 超过既定时刻表约定时间方才姗姗来迟，引申指已故前任先贤或深夜晚期 -> 迟到的，晚的；已故不久的；深夜的；晚期迟迟地。"
   },
   {
     "word": "lean",
@@ -21531,7 +21531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōną（身体偏离垂直） -> 倾斜，斜靠在倚靠在。"
+    "analysis": "clin-（倾斜倚靠）同源 -> 身体向一侧倾倒将重量托付于墙壁树干，引申指肉体精干无脂肪赘肉或立场偏向 -> 倾斜，倚靠；偏向倾向于；瘦削精干的，无肥肉的。"
   },
   {
     "word": "length",
@@ -21547,11 +21547,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "level",
     "phonetic": "/ˈlevl/",
     "pos": "n./adj./vt.",
-    "meaning": "水平面，水平线；水平高度水准等级；平坦平整的",
+    "meaning": "n. 水平，程度；水准等级 adj. 平坦平整的 vt. 使平整",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“古代石匠利用” -> 水平面，水平线。"
+    "analysis": "libra（天平称量平水） + -el -> 借助水平管水准仪校正达到毫无倾斜倾角绝对水平，引申指阶层段位发展层次 -> 水平面，水准；水平高度，等级标准；平坦的；使平整平坦。"
   },
   {
     "word": "limit",
@@ -21581,7 +21581,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōną（用特制金属锁） -> 锁上，锁紧锁死。"
+    "analysis": "lug-（弯曲环扣）同源 -> 门扇上安装的精密锁簧机械，一旦合上便能将门闩牢牢扣死确保安全 -> 锁，门锁锁具；水闸；锁上，锁紧锁死；锁定。"
   },
   {
     "word": "loop",
@@ -21591,7 +21591,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "同源（弯曲弯折闭合） -> 环，圆圈。"
+    "analysis": "leub-（弯折缠绕形成闭合圆环） -> 绳索电缆在两端弯折环绕交错扣合形成的空心圆圈圆环，程序设计借指反复执行的循环代码块 -> 环，圆圈；循环代码段；使成环形；在知情圈内（in the loop）。"
   },
   {
     "word": "loosen",
@@ -21611,7 +21611,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "同源（为人所听闻知） -> 响亮的，大声高分贝的。"
+    "analysis": "kleu- / hear（声音洪亮刺耳清晰可闻）同源 -> 声带剧烈震动激发出的高分贝强大声压震颤耳膜，引申指服饰颜色搭配刺眼花哨招摇 -> 响亮的，大声高分贝的；刺耳花哨俗气的；大声地，高声喧哗地。"
   },
   {
     "word": "mend",
@@ -21631,7 +21631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "拟声叠音轻柔词 -> 小声低语，私下嘟囔抱怨。"
+    "analysis": "拟声词，模拟隔壁房间或远方溪流压低声调连续传来含糊不清听不真切的细微嗡嗡低语声 -> 小声低语，私下嘀咕；发出潺潺声沙沙作响；轻柔低语；心脏杂音。"
   },
   {
     "word": "mutter",
@@ -21641,7 +21641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“拟声动词” -> 喃喃自语，自言自语低声抱怨。"
+    "analysis": "拟声词，模拟从牙缝中挤出含混不清低沉愤怒的咬牙切齿自言自语小声抱怨诅咒 -> 喃喃自语，低声抱怨；从牙缝中挤出咕哝声；低声咕哝抱怨之言。"
   },
   {
     "word": "narrow",
@@ -21651,7 +21651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“受到两侧绝壁” -> 狭窄的，窄小的逼仄的。"
+    "analysis": "near（靠近挤拢紧凑）同源 -> 两侧绝壁峡谷距离极其逼近通道宽度仅容单人侧身勉强挤过，引申指排查范围收窄限制 -> 狭窄的，窄小的；勉强的；变窄，缩小收窄；仔细审视。"
   },
   {
     "word": "neat",
@@ -21741,7 +21741,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“一块形状小巧” -> 补丁，小块补片（菜地）。"
+    "analysis": "piece（小片碎布）同源演变 -> 缝补在衣服鞋袜破洞处的小块布料皮革补丁，引申为暂时拼凑的应急修复软件补丁 -> 补丁，小块补片；小块菜地地块；临时修补修复；软件补丁。"
   },
   {
     "word": "pattern",
@@ -21767,11 +21767,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pitch",
     "phonetic": "/pɪtʃ/",
     "pos": "n./v.",
-    "meaning": "n. 球场； 沥青； 音调 vt. 投掷",
+    "meaning": "vt. 极力推介，推销（pitch an idea）；投掷 n. 球场；音调",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“固定钉住” -> 将木桩插入球场划界或投球 -> 球场。"
+    "analysis": "pix / bitumen（沥青漆黑黏稠物），另指球棒投掷点位高低 -> 划定划线比赛场地，投掷棒球，另指音阶高低频度 -> 球场；沥青；音调高低；投掷倾斜；极力推销兜售（pitch a product）。"
   },
   {
     "word": "pluck",
@@ -21781,7 +21781,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“用手指大拇指” -> 拔，拔除拔下。"
+    "analysis": "pull（拔除拽下）同源演变 -> 用食指拇指精准夹住鸡毛羽毛琴弦用力向外拔除拔弹，引申指鼓足勇气面对逆境 -> 拔，拔除拔下；弹拨琴弦；鼓起，振作勇气（pluck up courage）。"
   },
   {
     "word": "plunge",
@@ -21811,7 +21811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“采摘拔取” -> 抓住目标施加向己方张力 -> vt.n.，拉。"
+    "analysis": "古英语 pullian（用力拔出/拖拽） -> 抓住物体朝自身所在方向持续施加牵引拉力使之位移，引申为磁石吸引受众 -> 拉，拖，拔；拔出；吸引；拉力引力；牵引。"
   },
   {
     "word": "pure",
@@ -21831,7 +21831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 pulsare（推挤跳动） -> 向目标物体施加向前推力 -> vt.n.，推。"
+    "analysis": "puls- / pellere（驱使推动）同源 -> 将手掌双臂抵住物体向远离自身的方向全力施压向前位移，引申指督促推进项目执行 -> 推，推动；催促施压；推进，大力推行拓展。"
   },
   {
     "word": "quick",
@@ -21841,7 +21841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（拥有鲜活心跳） -> 迅速敏捷飞快的。"
+    "analysis": "gwi- / vivus（拥有活蹦乱跳心跳生命的） -> 神经反射弧极其敏捷、受到刺激瞬间能在几毫秒内做出规避动作，引申指头脑机灵敏悟 -> 迅速敏捷飞快的；机智机灵悟性极高的；敏锐的；刺到痛处核心（cut to the quick）。"
   },
   {
     "word": "radius",
@@ -21871,7 +21871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“把整只肥嫩全” -> 烤，烘烤。"
+    "analysis": "rostir（铁箅子火烤） -> 将大块肉类或根茎蔬菜直接放置在明火或烤箱炽热炭火上慢火烘烤至外焦里嫩 -> 烤，烘烤；烤熟的；慢火大块烤肉大餐；嘲弄痛斥。"
   },
   {
     "word": "roll",
@@ -21881,7 +21881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "词根 rotula（小轮子） -> 如滚轮般沿表面旋转前进 -> / 翻滚， 滚动  卷。"
+    "analysis": "rot- / rota（轮子转动） -> 圆柱形或球形物体绕自身轴心在平面上连续翻滚旋转推进，引申指成卷书卷人员名册 -> 翻滚，滚动；卷成卷状；卷轴；名单名册；隆隆声。"
   },
   {
     "word": "roam",
@@ -21891,7 +21891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“古代中世纪虔” -> 漫步，漫游。"
+    "analysis": "Rome（朝圣者漫行走向罗马圣城）演变 -> 步履闲适漫无目的在广袤田野山林中信步踱步漫步，现代借指通信跨区漫游 -> 漫步，漫游；四处闲逛；跨国漫游网络；漫游游荡。"
   },
   {
     "word": "round",
@@ -21911,7 +21911,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "双源同形异音异义词 -> 排，行。"
+    "analysis": "reach / rank（直线延展延伸） -> 沿横向直线并排排列整齐的人员队列或坐席座位，另指划船双桨协调拉动，或喧闹争吵 -> 排，行；划船；大声喧闹争吵吵闹争执。"
   },
   {
     "word": "rub",
@@ -21921,7 +21921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ōną（两手掌心或粗） -> 摩擦，揉搓。"
+    "analysis": "scrape（刮蹭摩擦）同源拟声演变 -> 两手或抹布紧贴物体表面施加压力来回反复摩擦，引申指涂抹药膏 -> 摩擦，揉搓；涂抹擦上；摩擦动作；难点障碍。"
   },
   {
     "word": "rugged",
@@ -21941,7 +21941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“在生死追捕中” -> 冲，奔。"
+    "analysis": "拟声演化，模拟水流冲开闸门急速狂涌推进的湍急声势，引申为仓促催促或黄金抢购狂潮 -> 冲，狂奔；急促仓促推进；突发激增狂潮；高峰期（rush hour）。"
   },
   {
     "word": "rust",
@@ -21981,7 +21981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“用粗刷刮拭” -> 持刷用力摩擦去除污垢 -> vt.n.，用力擦洗。"
+    "analysis": "shrub / scrape（用硬刷刮擦）同源 -> 握住毛刷沾水沾肥皂用尽臂力在物体表面反复强力来回刷洗污垢，引申指项目取消废止 -> 用力擦洗，刷洗；取消作废废止。"
   },
   {
     "word": "seize",
@@ -21991,7 +21991,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“中世纪封建领” -> 抓住，一把捉住。"
+    "analysis": "sed- / sit（坐下占有/封土安置） -> 铁掌出击一把稳准狠死死捉住捕获战机，机械借指发动机轴承严重磨损卡死抱死 -> 抓住，一把捉住；没收查扣；卡死抱死；侵袭击中。"
   },
   {
     "word": "sever",
@@ -22011,7 +22011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "快速左右来回晃动 -> 摇动，摇晃抖动。"
+    "analysis": "shock（受震动颤抖）同源派生 -> 双手握住物体前后剧烈摇晃摆动，引申指身躯因严寒恐惧发抖战栗，或摆脱纠缠 -> 摇动，摇晃抖动；颤抖发抖战栗；抖落摆脱；握手（shake hands）。"
   },
   {
     "word": "shatter",
@@ -22031,7 +22031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "散发耀眼夺目的光芒 -> 闪耀，照耀发光。"
+    "analysis": "sheer / sheen（光亮透彻透明）同源 -> 表面光滑向四周强烈反射折射出夺目光辉，引申指在某一学术行业领域才华出类拔萃 -> 闪耀，照耀发光；使锃亮抛光；才华卓越出众。"
   },
   {
     "word": "shove",
@@ -22061,7 +22061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“耸动” -> 双肩上耸表示不知情 -> 耸肩。"
+    "analysis": "shrink（畏缩收拢缩起）同源演变 -> 抬高双肩向脖颈收拢耸动这一特定肢体动作，在社交表达中传递无奈、困惑或毫不在乎 -> 耸肩；耸肩表示不屑一顾；耸肩动作（shrug off）。"
   },
   {
     "word": "shut",
@@ -22071,7 +22071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“将粗重金属门” -> 关闭，合上关紧。"
+    "analysis": "shoot（把木栓门闩推入插销槽锁死）演化 -> 将敞开的门窗扇叶紧密闭合压紧插销，引申指商店停业倒闭或勒令闭嘴 -> 关闭，合上关紧；关门歇业停业；闭嘴不语（shut up）。"
   },
   {
     "word": "sideways",
@@ -22091,7 +22091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "拟声深长深情出气词 -> 叹气，叹息。"
+    "analysis": "拟声词，模拟胸中积聚郁闷忧愁一口长气自肺部缓缓深沉呼出时发出的悠长叹息声 -> 叹气，叹息；发出沙沙如叹息般低回声；深长叹气声。"
   },
   {
     "word": "silent",
@@ -22111,7 +22111,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“拟声动词” -> 文火慢炖，微沸煨煮。"
+    "analysis": "拟声词，模拟火候调小至锅底边缘液体微弱冒出细密细小气泡微沸状态，引申指民怨暗潮涌动即将爆发 -> 文火慢炖，微沸煨煮；暗暗酝酿暗流涌动；文火微沸状态。"
   },
   {
     "word": "skate",
@@ -22121,7 +22121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“踩着高跷或绑” -> 溜冰鞋，滑冰鞋。"
+    "analysis": "古法语 eschace（高跷木桩） -> 底部镶嵌锋利金属冰刀或滑轮能够在光滑冰面冰场自由飞速滑行滑动的器具 -> 溜冰鞋，滑冰鞋；滑冰，溜冰；滑行滑过（skate over）。"
   },
   {
     "word": "ski",
@@ -22141,7 +22141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“双脚受欢欣愉” -> 蹦蹦跳跳，轻快小跳地迈步向前。"
+    "analysis": "spring（轻跳弹起）同源变体 -> 双足轻盈离地连续向前小跳跃蹦跳前进，引申指阅读中跳过不重要章节，或无故旷课逃班 -> 蹦蹦跳跳前进；跳过，略过；无故旷课逃班；轻快小跳。"
   },
   {
     "word": "slide",
@@ -22151,7 +22151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“平滑移动” -> 在光滑表面无阻碍滑移 -> / 滑动。"
+    "analysis": "slip / sled（雪橇滑行）同源 -> 物体底面贴着光滑倾斜表面毫无阻力平顺向下滑落位移，引申指局势不可遏制下滑恶化 -> 滑动，滑落；悄悄溜走；滑道滑梯；幻灯片；恶化下跌。"
   },
   {
     "word": "slim",
@@ -22171,7 +22171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“滑动” -> 足底或物体失控轻滑滑动 -> 滑倒。"
+    "analysis": "sleep / slide（滑移失控失足）同源 -> 双足底面与潮湿地面摩擦力丧失导致重心不稳身体向后滑倒跌倒，引申指便签纸条或疏忽犯错 -> 滑倒；悄悄溜走；纸条便签；疏漏差错（slip-up）。"
   },
   {
     "word": "slow",
@@ -22181,7 +22181,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“行动拖沓毫无” -> 缓慢的，慢速迟缓的。"
+    "analysis": "sloth（懒散怠惰树懒）同源派生 -> 双足沉重拖沓缺乏前行动能导致单位时间内位移极其微末迟缓，引申指放慢车速节奏 -> 缓慢的，慢速迟缓的；迟钝迟缓的；放慢，使减速减缓。"
   },
   {
     "word": "sluggish",
@@ -22201,7 +22201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“平整” -> 表面毫无毛刺凹凸阻隔 -> 光滑的。"
+    "analysis": "smear（涂抹平整）同源演变 -> 表面经过细细打磨抛光毫无毛刺颗粒极其平整滑顺，引申指沟通协调行程平稳顺畅无阻碍 -> 光滑的，平整的；平稳顺畅的；使平滑，消除阻碍。"
   },
   {
     "word": "snap",
@@ -22211,7 +22211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自拟声词 snap -> / 啪地折断。"
+    "analysis": "拟声词，模拟坚硬脆性物体在极限弯折下发出啪的一声清脆折断脆响，引申指相机快门咔嚓抓拍或情绪崩溃失控 -> 啪地折断；咔嚓拍下；突然崩溃失控咆哮；迅速敏捷的。"
   },
   {
     "word": "snatch",
@@ -22221,7 +22221,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“迅速咬住” -> 突然伸手强行抓取 -> 夺得。"
+    "analysis": "snack / snap（迅疾咬住夺取）同源 -> 趁对方猝不及防之际迅疾伸出利爪双手从对方怀中一把生硬强行夺走掠夺 -> 夺得，夺走抢走；抓紧紧抓时间；强行抢夺一把抢过。"
   },
   {
     "word": "sniff",
@@ -22231,7 +22231,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "拟声短促吸气词 -> 深吸气闻，抽动鼻子嗅。"
+    "analysis": "拟声词，模拟由于呼吸道发痒或辨别气味通过鼻孔深长短促抽吸气流发出的轻微吸鼻子声响 -> 深吸气闻，抽动鼻子嗅；嗅出察觉到蛛丝马迹；嗤之以鼻轻视；抽鼻吸气声。"
   },
   {
     "word": "snore",
@@ -22251,7 +22251,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "拟声断续抽泣词（本义） -> 抽泣，啜泣。"
+    "analysis": "拟声词，模拟由于极度悲伤委屈胸膈肌肉剧烈抽搐痉挛时发出断断续续窒息般的抽吸抽搐哭泣声 -> 抽泣，啜泣，抽噎着痛哭失声；啜泣声，抽噎声。"
   },
   {
     "word": "soft",
@@ -22311,7 +22311,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义为身体无疾无损 -> 结构扎实运转健康可靠 -> 健全的，完好的。"
+    "analysis": "son- / sonus（声音同源），另意源自 gesund（健康健全完好无损） -> 震动波传入耳膜引发听觉感知，另指逻辑缜密无破绽的合理论证或体魄强健健全 -> 声音；健全的，完好无损的；合理明智的。"
   },
   {
     "word": "sour",
@@ -22321,7 +22321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "同源（有机物在乳酸） -> 酸的，酸味的恶化变质。"
+    "analysis": "suh-ro-（因发酵酸化带有酸败刺鼻气味） -> 牛奶受乳酸菌过度酸化发酵变质凝结变酸难以下咽，引申指人际关系恶化生疏敌意 -> 酸的，酸味的；恶化变质的；使变酸变质；使人际关系恶化生嫌。"
   },
   {
     "word": "space",
@@ -22341,13 +22341,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“大拇指顶端与” -> 跨度，跨距。"
+    "analysis": "spin（纺纱拉伸测量）同源 -> 伸开五指从大拇指尖到小指尖张开的手掌间距，引申指桥梁两端桥墩间距或时间跨度 -> 跨度，跨距；持续时间跨度长度；横跨，跨及。"
   },
   {
     "word": "spare",
     "phonetic": "/speə(r)/",
     "pos": "adj./vt./n.",
-    "meaning": "adj. 备用的； 空闲的 vt. 抽出",
+    "meaning": "vt. 抽出，留出（时间/金钱）；饶恕 adj. 备用的；多余的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -22371,7 +22371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“破坏” -> 液体不受控越出边缘洒漏 -> / 溢出， 溅出  溢出物。"
+    "analysis": "split（分离分裂）同源派生 -> 液体或颗粒在剧烈晃动下越出容器边沿倾泻洒落地面 -> 溢出，溅出；溢出物；泄密走漏（spill the beans）。"
   },
   {
     "word": "spin",
@@ -22381,7 +22381,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“抽丝旋转” -> 手指快速绕轴捻纺或自转 -> / 旋转。"
+    "analysis": "span（拉伸纺线）同源 -> 手工纺车飞速绕轴心旋转将羊毛纤维搓捻成纺线，引申指陀螺旋转或舆论公关粉饰包装 -> 旋转；纺纱；旋转眩晕；公关曲解包装（spin control）。"
   },
   {
     "word": "spit",
@@ -22391,7 +22391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声词 -> / 吐痰， 吐出  唾液。"
+    "analysis": "拟声词，模拟舌尖与双唇用力将口中积聚口水或残渣迅猛向外喷吐的短促声响 -> 吐痰，吐出；唾液，唾沫；吐出残渣；下毛毛雨（spitting）。"
   },
   {
     "word": "sprint",
@@ -22411,7 +22411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古诺斯语 stakkr（草垛） -> 堆。"
+    "analysis": "stakkr（在原野中规整堆起的高耸干草垛） -> 将大批方木书本或货物一件件垂直向上整齐叠放形成的高耸垛子，引申指图书馆书库排架 -> 堆，垛；高耸烟囱；图书书库；堆积，堆叠整齐叠加。"
   },
   {
     "word": "step",
@@ -22451,7 +22451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“原本在围栏内” -> 走失，迷路走散。"
+    "analysis": "extravagari（游荡漫步于规定疆界之外） -> 家禽牲畜或无知幼儿走失脱离大队漫无目的四处游荡，引申指思想偏离主线 -> 走失，走散迷路；偏离正轨，离题；流浪走失的（stray animal）。"
   },
   {
     "word": "stride",
@@ -22467,11 +22467,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "strike",
     "phonetic": "/straɪk/",
     "pos": "v./n.",
-    "meaning": "突然想到，给…深刻印象；打击，撞击；罢工",
+    "meaning": "vt. 突然想到，给…留下深刻印象；打击，撞击 vi./n. 罢工",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义为挥击敲打 -> 灵感或危机猛烈撞击心头脑海 -> 突然想到，给…深刻印象。"
+    "analysis": "stroke（抚摸划动）同源强力变体 -> 挥舞手臂或武器向目标施加重拳击打，引申指工会集体停工抗议，或灵感突然降临心头 -> 打击，撞击；罢工；突然想到；给…留下深刻印象。"
   },
   {
     "word": "stroke",
@@ -22481,7 +22481,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自 strike（击打） -> 中风。"
+    "analysis": "strike（手臂挥舞向下重击）同源派生名词 -> 突然遭遇脑部血管破裂或血栓堵塞引发的致命中风脑卒中，另指毛笔画出的一笔或轻抚 -> 中风，脑卒中；重拳一击；笔画；击球动作；抚摸轻抚抚慰。"
   },
   {
     "word": "stumble",
@@ -22501,7 +22501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（通过口腔肌肉） -> 吸，吸吮吮吸。"
+    "analysis": "sug-（通过口腔面颊收缩负压吸吮汁液）同源拟音构词 -> 婴儿利用口腔收缩形成的负压将母乳或饮料经由细管强力抽取吸入咽喉，引申为抽干榨尽 -> 吸，吸吮吮吸；将…卷入吞噬；吸尽抽干榨取；差劲糟糕（口语）。"
   },
   {
     "word": "sweep",
@@ -22511,7 +22511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“拂拭摇动” -> 用扫帚快速划过地面 -> / 扫， 打扫。"
+    "analysis": "swoop / swoop（猛禽俯冲扑掠）同源 -> 挥动扫帚大面积贴地平掠将尘土落叶一扫而空，引申指飓风巨浪狂澜席卷平原 -> 扫，打扫；席卷席卷横扫；大获全胜；清扫动作。"
   },
   {
     "word": "tear",
@@ -22521,7 +22521,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "双源同形异音异义词 -> 撕开，扯破。"
+    "analysis": "拟声词根 *der-（撕裂剥皮） -> 两手紧抓织物纸张向相反方向用力拉拽导致纤维生硬断裂破损 -> 撕开，扯破；撕裂撕碎；破洞，裂口撕裂伤；眼泪泪水（tear）。"
   },
   {
     "word": "thaw",
@@ -22531,7 +22531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（吸吮温热春光） -> 解冻，融化。"
+    "analysis": "tai-（吸吮大地温热阳气使冰块消融） -> 严冬过后初春大地气温回升至零度以上、封冻的江河积雪自然化解软化成流水春潮 -> 解冻，融化；融雪天气解冻期；消除敌意使关系缓和缓冻。"
   },
   {
     "word": "thereafter",
@@ -22561,7 +22561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（紧密致密压实） -> 厚的，粗厚厚实的。"
+    "analysis": "tegu-（结构极其紧实粗壮压实）同源 -> 两个相对平行表面之间跨越的横截面尺度深厚粗壮，引申指汤汁粘稠浓郁或灌木密不透风 -> 厚的，粗厚厚实的；浓稠粘稠的；密密麻麻充斥着的；迟钝愚钝的。"
   },
   {
     "word": "thin",
@@ -22571,7 +22571,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【20. ten / tain / tin 握/持/容纳】",
     "analysis_type": "构词",
-    "analysis": "源自词根意为“伸展” -> 拉长延展至厚度极微的状态 -> 薄的。"
+    "analysis": "ten- / tend（拉长拉细）同源 -> 经过两端极限拉扯导致厚度截面极度狭窄扁平，引申指高山空气稀薄或身躯消瘦孱弱 -> 薄的；稀薄的；瘦弱的；变薄；使稀疏稀薄。"
   },
   {
     "word": "throw",
@@ -22581,7 +22581,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义āwan（身体腰腹与手） -> 投掷，抛。"
+    "analysis": "twist（身体旋转扭腰发力）演化 -> 借助手臂与腰腹旋转爆发力将沉重物体向远处猛力抛出 -> 投掷，抛扔；使陷入混乱困境；举办（宴会）。"
   },
   {
     "word": "tighten",
@@ -22611,7 +22611,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“极其细小微小” -> 极微小的，微细的。"
+    "analysis": "tine（树枝尖端细叉小刺）同源派生 -> 尺度细小微末到若不仔细端详极易被肉眼忽略，引申指微薄俸禄报酬 -> 极微小的，微细的；微薄微末的；小巧可爱的。"
   },
   {
     "word": "toss",
@@ -22621,7 +22621,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "拟声与轻快抛掷词（本义） -> 抛，扔。"
+    "analysis": "拟声词，模拟两手托住轻薄物体轻松将其向半空随意抛甩翻动 -> 顺手向上将硬币或球体随意抛扔，引申指夜不能寐在卧榻上辗转反侧反复翻身 -> 抛，扔；掷硬币决定；辗转反侧翻来覆去；剧烈颠簸摇晃抛掷。"
   },
   {
     "word": "tough",
@@ -22631,7 +22631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“有粘性” -> 质地致密不易受损 -> 艰难的。"
+    "analysis": "tow（粗麻纤维耐磨）同源 -> 质地致密粗糙即便遭受重锤弯折也绝不断裂变形，引申指性格坚韧刚毅或问题棘手严峻 -> 艰难的；坚韧的；严厉的；强硬强悍的；恶劣的。"
   },
   {
     "word": "tread",
@@ -22641,17 +22641,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始ą（用脚掌以坚实） -> 踩，踏。"
+    "analysis": "track / trip（用脚掌重重踏地）同源 -> 双足底面结结实实踩踏在松软泥土或梯级上，引申指行事极其谨慎如履薄冰 -> 踩，踏；踩出小路；如履薄冰小心行事；鞋底花纹。"
   },
   {
     "word": "trip",
     "phonetic": "/trɪp/",
     "pos": "n./vi.",
-    "meaning": "旅行， 出行 vi. 绊倒",
+    "meaning": "n. 旅行，出行 vi. 绊倒，失足；犯错",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“步履轻捷欢快” -> 旅行，出行。"
+    "analysis": "tramp / trip（轻快小步行走） -> 步履轻快地短途外出游历探亲，另指足尖不慎触碰到凸起障碍物而绊倒失去平衡 -> 旅行，出行；绊倒，绊倒失足；绊倒绊跤。"
   },
   {
     "word": "tug",
@@ -22661,7 +22661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“拉拽 -> 与 tow 同源” -> vt.n.，用力拉。"
+    "analysis": "tow / tie（牵引拖拽拉动）同源强力形式 -> 弓起身子咬紧牙关双手牢牢抓住粗大缆绳使劲全力猛拽拉动，航运指大马力拖船 -> 用力拉，猛拽；拖船；猛拉猛拽牵引动作。"
   },
   {
     "word": "twist",
@@ -22671,7 +22671,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“缠绕结合” -> 搓，捻。"
+    "analysis": "two（二合一搓捻）同源派生 -> 将两股甚至多股麻线棉纱交错反向扭转绞合在一起，引申指情节急转直下峰回路转 -> 搓，捻；拧；扭转；转折；曲折情节反转（plot twist）。"
   },
   {
     "word": "underneath",
@@ -22761,7 +22761,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "同源（介于冰冷与滚） -> 温暖暖和舒适的。"
+    "analysis": "gwh-er- / thermos（带有舒适热气微温） -> 温度介于冰冷与滚烫之间恰到好处令人惬意放松的温度区间，引申指胸怀慈悲博爱温情脉脉 -> 温暖暖和舒适的；富有同理心温情脉脉的；使变暖和，加温加热；热情和善的。"
   },
   {
     "word": "weak",
@@ -22831,7 +22831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "核心意象为“摇摆摆动” -> 眼皮快速开合动作以示暗号 -> vi.n.，眨眼。"
+    "analysis": "wing / wave（振翅快速扇动）同源 -> 单侧眼睑眼皮向下一闭一睁眨动眼皮，在社交中作为暗中使眼色交流默契暗号 -> 眨眼，使眼色；使眼色暗示；眨眼动作；小睡片刻（forty winks）。"
   },
   {
     "word": "wipe",
@@ -22841,7 +22841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自原始īpaną（手持吸水纯棉） -> 擦，揩。"
+    "analysis": "wip-（在表面来回挥动布条扫除） -> 拿抹布毛巾紧贴水渍油污桌面由近及远平推将污渍一擦而净，引申指彻底清零抹去债务纪录 -> 擦，揩，擦拭擦净；消除抹去；湿纸巾，一次性消毒湿巾；擦拭动作。"
   },
   {
     "word": "wring",
@@ -22851,7 +22851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "本义指“旋转扭曲” -> 用力双手向相反方向拧挤 -> 拧干。"
+    "analysis": "ring / wrench（旋转扭曲绞榨）同源 -> 双手向相反方向全力扭转湿透织物将浸润其中的水滴残液强力榨出挤出 -> 拧干，绞干；扭绞；榨取逼出；使痛心（wring one's heart）。"
   },
   {
     "word": "yawn",
@@ -22871,7 +22871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "源自原始ą（调动胸腔全部） -> 大叫，大声叫喊吼叫。"
+    "analysis": "拟声词，模拟胸腔咽喉深处猛然迸发声嘶力竭的高分贝尖锐吼叫 -> 大叫，大声叫喊吼叫；呐喊喝彩助威；尖叫呼喊声。"
   },
   {
     "word": "absurd",
@@ -22891,7 +22891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "ab-（偏离） + use（使用） -> 滥用。"
+    "analysis": "ab-（偏离正轨/不当） + use（使用利用） -> 滥用法律授予的公权力侵害公民合法权益，引申指肉体虐待儿童家庭暴力或恶语辱骂 -> 滥用；虐待伤害；恶毒辱骂痛骂；滥用行为弊端。"
   },
   {
     "word": "accelerate",
@@ -22981,7 +22981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "ad-（朝向） + apt（适合） -> 适应。"
+    "analysis": "ad-（朝向） + apt-（适合/匹配吻合） -> 改变生物生理习性或工程设计使之与全新严酷环境达到精准匹配，文艺借指小说改编剧本 -> 适应，适合；改编，改写（剧本著作）；改造使适宜。"
   },
   {
     "word": "adjust",
@@ -23071,7 +23071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“向前推进” -> 买得起，担负得起。"
+    "analysis": "for- / forth（向前/推进实施） -> 经济财力或时间精力充裕足以支撑推进某项支出计划而不致破产匮乏 -> 买得起，担负得起（负担得起）；提供，给予创造（条件/机会）。"
   },
   {
     "word": "afraid",
@@ -23081,7 +23081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、心理认知与情感意志】",
     "analysis_type": "构词",
-    "analysis": "本义指“因突发暴力骚” -> 害怕的，恐惧畏惧的。"
+    "analysis": "affray（受惊吓引发骚乱）的过去分词作形容词 -> 神经遭受突发剧烈惊吓导致心跳加速瑟瑟发抖，礼貌客套语引申为遗憾抱歉 -> 害怕的，恐惧畏惧的；恐怕，遗憾抱歉地（I'm afraid）。"
   },
   {
     "word": "agree",
@@ -23121,7 +23121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【19. leg / lig / lect 采集/阅读/选择】",
     "analysis_type": "构词",
-    "analysis": "本义指“将原本归属于” -> 允许，准许。"
+    "analysis": "loc- / allocate（分配安置），结合 laud-（赞同认可） -> 经官方权衡批准认可给予通行资质配额，引申为做预算时留出预留弹性空间 -> 允许，准许；预留，留出（时间/费用）；定期给予发放。"
   },
   {
     "word": "alone",
@@ -23261,7 +23261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【6. ced / ceed / cess 走/退让】",
     "analysis_type": "构词",
-    "analysis": "本义指“源自通俗拉丁” -> 古代的，古老的。"
+    "analysis": "ante-（在…之前/前方） + -ent -> 遥远年代历史长河上游祖先生活的古典时代，引申指古希腊罗马先贤哲人典籍 -> 古代的，古老的；年高德劭的；古代人，古希腊罗马哲人先贤。"
   },
   {
     "word": "announce",
@@ -23301,7 +23301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义指“面对法庭指控” -> 回答，答复。"
+    "analysis": "and-（反对/面对面对抗） + swear（发誓宣告） -> 在公开法庭面对面对质抗辩发誓回应指控，引申为重大难题的终极解答钥匙 -> 回答，答复；解法，答案；作出回应反击（answer back）。"
   },
   {
     "word": "appetite",
@@ -23511,7 +23511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "词根 arg-（明亮清楚） -> 争论，争辩。"
+    "analysis": "arg-（洁白发光/照亮显明） -> 在法庭辩论中摆出确凿证据将案情核心逻辑彻底阐释清楚、据理力争驳斥对方谬论 -> 争论，争辩；主张提出论点；论证表明说明（argue that）。"
   },
   {
     "word": "argument",
@@ -23531,7 +23531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（将两截骨骼在） -> 手臂，胳膊。"
+    "analysis": "ar-（各节骨骼紧密拼接嵌合） -> 连结肩膀与手腕能完成全方位灵活屈伸抓握活动的人体上肢胳膊，军事借指制式兵刃武器 -> 手臂，胳膊；长袖，扶手；武器，军械兵器；装备武装（arm with）。"
   },
   {
     "word": "armor",
@@ -23551,7 +23551,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“全体拿起武器” -> 陆军，野战正规军地面部队。"
+    "analysis": "arm-（武器装备武装） + -y（群体集合名词） -> 配备制式刀剑枪械受过系统严格纪律训练的庞大正规武装地面部队 -> 陆军，野战正规军地面部队；大群，大批军团。"
   },
   {
     "word": "arrange",
@@ -23611,7 +23611,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "同源（由柔韧弓弦张） -> 箭，箭矢。"
+    "analysis": "ar-（弓弦张紧对准目标飞射）同源 -> 由弓弦高速释放依靠尾羽保持空气动力平衡直刺猎物喉膛的尖锐刺杀箭矢，引申指指示方向箭头 -> 箭，箭矢；箭头指示标志；像箭一般飞速直奔目标飞射。"
   },
   {
     "word": "article",
@@ -23651,7 +23651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "同源（在烈火熊熊燃） -> 灰烬，烟灰。"
+    "analysis": "as-（在烈火中熊熊燃烧灼烧） -> 干燥柴草经熊熊大火完全氧化烧透后残留在炉灶瓦砾中细腻冰冷的灰色粉末矿物质，引申指逝者骨灰 -> 灰烬，烟灰；焦黑灰烬废墟残骸；逝者骨灰残骸。"
   },
   {
     "word": "assault",
@@ -23661,7 +23661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【63. sal / salt / sul 跃/跳】",
     "analysis_type": "构词",
-    "analysis": "as-（向） + sault-（跳跃） -> 飞身扑向对手 -> / 攻击， 突击。"
+    "analysis": "ad-（朝向） + salt- / salire（跳跃猛扑） -> 像扑食猛兽般腾空跃起朝敌方防线正面阵地发动突发性猛烈扑击撕裂 -> 攻击，突击；殴打；猛烈袭击，突击攻占。"
   },
   {
     "word": "assemble",
@@ -24101,7 +24101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【67. leg / lect / lig 收集/挑选/阅读/法律】",
     "analysis_type": "构词",
-    "analysis": "词根 leg-（委派） -> 遗产，遗留物。"
+    "analysis": "leg- / legatus（依法立遗嘱委派任命使节） -> 前辈先贤在与世长辞后通过遗嘱生前赠与给后世继承人完整继承的宝贵财富资产与精神遗产 -> 遗产，遗留物；历史遗赠历史产物；继承下来的财产。"
   },
   {
     "word": "elevation",
@@ -24121,7 +24121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第二部分：高频专业词根族",
     "group": "【68. lev 轻/举起/升高】",
     "analysis_type": "构词",
-    "analysis": "本义指“撬起工具” -> 杠杆，操纵杆。"
+    "analysis": "lev-（轻/抬升） + -er（工具） -> 借助支点撬重物的长条硬质传动杠杆工具，引申指利用优势施加政治杠杆施压撬动资源 -> 杠杆，操纵杆；撬动；施加杠杆作用以影响。"
   },
   {
     "word": "magnify",
@@ -24207,11 +24207,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tribute",
     "phonetic": "/ˈtrɪbjuːt/",
     "pos": "n.",
-    "meaning": "致敬， 颂词； 贡品",
+    "meaning": "n. 致敬，颂词；充分体现证明（a tribute to）；贡品",
     "part": "第二部分：高频专业词根族",
     "group": "【42. tribut 给予/交纳/分发】",
     "analysis_type": "构词",
-    "analysis": "词根 tribut-（给予） -> 致敬，颂词。"
+    "analysis": "tribu- / tribus（部落推选首领/交纳赋税配额） -> 战败藩属小国按照宗主国要求定期装车进献入京的珍稀贡品，现代借指对先驱由衷的致敬颂扬 -> 致敬，颂词悼词；进献贡品；充分体现展现（a tribute to）。"
   },
   {
     "word": "procure",
@@ -25061,7 +25061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 出价，投标。"
+    "analysis": "bode / beodan（宣布宣告出价） -> 在公开拍卖行或政府招标采购现场举牌宣读愿意支付或承揽的报价底线 -> 出价，投标；努力，争取（bid for power）；出价金额。"
   },
   {
     "word": "billion",
@@ -25081,7 +25081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 借，借入。"
+    "analysis": "borg / barrow（抵押担保物）同源演化 -> 以信用或抵押凭证为信托向他人借入款项实物并在约定日期归还 -> 借，借入；采用，借鉴汲取。"
   },
   {
     "word": "buyer",
@@ -25111,13 +25111,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 -> 硬币，vt.。"
+    "analysis": "cuneus（用来冲压货币印花的楔形金属冲模） -> 冲模砸在金银铜片上压制出的圆形官方硬币，引申指首创发明新词汇术语 -> 硬币；创造发明（新词/新表达）（coin a phrase）。"
   },
   {
     "word": "cost",
     "phonetic": "/kɒst/",
     "pos": "n./vt.",
-    "meaning": "成本， 价钱 vt. 花费",
+    "meaning": "n. 成本，代价；费用 vt. 耗费；使付出沉重代价",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -25127,7 +25127,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "credit",
     "phonetic": "/ˈkredɪt/",
     "pos": "n./vt.",
-    "meaning": "信用，信贷；学分；赞扬，功劳；信任",
+    "meaning": "n. 信用，信贷；学分；赞扬，功劳 vt. 把…归功于（to）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -25141,7 +25141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自 custom（日常进出港口） -> 海关。"
+    "analysis": "custom（历朝历代沿袭成俗的交易规制）复数形式 -> 国家在边境口岸关隘查验出入境旅客行李货物并依法征缴关税的专门主权监管机构 -> 海关；关税税款。"
   },
   {
     "word": "dealer",
@@ -25241,7 +25241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 fundus（底部） -> 基金，专款。"
+    "analysis": "fundus（深埋在土地下方的最深底座基石） -> 为特定公益事业、科研探索或养老医疗储备提供持续资金血液支持的雄厚专项专款资金池 -> 基金，专款；资金储备；资助，提供资金支持拨款。"
   },
   {
     "word": "inflation",
@@ -25281,7 +25281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“寄送出的物品” -> 发票，货单。"
+    "analysis": "en- + voyer（派遣发送送货） -> 货品装箱起运后随货向买方正式呈递列明品名数量金额催要货款的结算清单 -> 发票，货单；开票，开具发票。"
   },
   {
     "word": "lease",
@@ -25291,7 +25291,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“放手” -> 租约，vt.。"
+    "analysis": "lax- / lease（放手/松开租用） -> 双方签订受法律保护的租约将房产土地在固定租期内出让使用权并定期收取租金 -> 租约，租约合同；出租，租得；租用。"
   },
   {
     "word": "lend",
@@ -25301,7 +25301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 借出，把…借给。"
+    "analysis": "loan（借贷）同源派生动词 -> 暂时将自己拥有的多余资金或工具物件让渡给他人应急使用并期望其完整归还 -> 借出，把…借给；赋予，增添（色彩/力量）。"
   },
   {
     "word": "liability",
@@ -25321,7 +25321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“消散” -> 亏损。"
+    "analysis": "lose（丢失丧失）的派生名词形式 -> 由于投资失败灾荒战争导致既有本金资产或至亲生命被无情剥夺蒸发 -> 亏损，损失；丧失，失去；不知所措（at a loss）。"
   },
   {
     "word": "management",
@@ -25347,11 +25347,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "market",
     "phonetic": "/ˈmɑːkɪt/",
     "pos": "n./vt.",
-    "meaning": "市场； 行情 vt. 推销",
+    "meaning": "n. 市场；行情销路 vt. 推销，促销，推向市场",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "词根 mercatus（贸易集市） -> 市场。"
+    "analysis": "merc- / merx（买卖货品物料/贸易） -> 商贾云集货比三家以货币换取生活必需物资的公开交易集市，现代指特定行业整体供求行情 -> 市场，商场集市；行情销路；推销营销，推向市场销售。"
   },
   {
     "word": "millionaire",
@@ -25411,7 +25411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 便士。"
+    "analysis": "pan / pawn（担保小盘子/小铁片）同源 -> 英国货币体系中面值最小的铜铸辅币便士，引申指微不足道的微末钱财 -> 便士；微小的钱，微末代价（penny-wise）。"
   },
   {
     "word": "policy",
@@ -25441,7 +25441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“价值” -> 价格，代价。"
+    "analysis": "pretium（价值报酬代价）同源 -> 市场上购买某件特定商品或劳务服务所需支付的货币计量成本数额 -> 价格，代价；标价，定价；付出惨痛代价（pay the price）。"
   },
   {
     "word": "profit",
@@ -25467,7 +25467,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "rate",
     "phonetic": "/reɪt/",
     "pos": "n./vt.",
-    "meaning": "比率，率；速度；价格，费率；评估，评价",
+    "meaning": "n. 比率，率；速度；价格，费率 vt. 评估，评价；分级",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -25501,7 +25501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 销售，卖。"
+    "analysis": "sell（交付卖出）的派生名词形式 -> 通过买卖契约将货品所有权转移给买方换取对等货币收入的商业行为，商业引申指大减价打折促销 -> 销售，出售；削价出售，打折促销活动（on sale）。"
   },
   {
     "word": "saving",
@@ -25517,7 +25517,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "share",
     "phonetic": "/ʃeə(r)/",
     "pos": "n./v.",
-    "meaning": "分享，分担；份额；股份，股票",
+    "meaning": "n. 份额；股份，股票 vt./vi. 分享，分担；分摊",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -25531,7 +25531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自阿拉伯语 ta'rif（通告） -> 关税。"
+    "analysis": "ta'rif（阿拉伯语：港口张榜公布的进出口商品官方征税名录清单） -> 主权国家海关依据进出口货品类别由法律硬性规定的保护性关税税率表 -> 关税，关税税率；价目表，资费收费表。"
   },
   {
     "word": "tax",
@@ -25541,7 +25541,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "本义指“估税” -> 税款，税。"
+    "analysis": "tang- / taxare（触摸/评估清点财产以纳赋税） -> 政府根据公民财产收入依法强制征收充盈国库公共开支的法定义务款项 -> 税款，税；征税；使负重荷，考验极限（tax one's patience）。"
   },
   {
     "word": "advertisement",
@@ -26001,7 +26001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "本义çon（朗读） -> 课程。"
+    "analysis": "lect- / leg-（读/朗诵） -> 原指中世纪修道士每日大声朗读宣讲的经文篇章，引申为学堂传授的知识单元与教训 -> 课程，功课；教训，经验教训。"
   },
   {
     "word": "library",
@@ -26131,7 +26131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 -> 教学大纲，课程大纲。"
+    "analysis": "源自晚期拉丁语误读希腊语 sittuba（羊皮纸书名卷轴标签标贴） -> 详细列明一门课程学期教学进度、授课章节考查要点的指导大纲 -> 教学大纲，课程大纲。"
   },
   {
     "word": "symposium",
@@ -26151,7 +26151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 教，讲授。"
+    "analysis": "token / deik-（展示指示标示指明）同源 -> 站在讲台前通过言传身教向下一代展示知识真理、指明治学门径 -> 教，讲授；教导，训诫。"
   },
   {
     "word": "teacher",
@@ -26191,7 +26191,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 thesis（摆放） -> 学位论文。"
+    "analysis": "tithemi / the-（把论点郑重端庄立放在桌案前） -> 学者为摘取硕士博士高等学术文凭经过严谨论证撰写呈递的原创学术论文，引申指立论核心论点 -> 学位论文，毕业论文；论点，论题核心假设。"
   },
   {
     "word": "tutor",
@@ -26217,7 +26217,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "catalog",
     "phonetic": "/ˈkætəlɒɡ/",
     "pos": "n./vt.",
-    "meaning": "目录， 全目 vt. 编目",
+    "meaning": "n. 目录，商品名册 vt. 编入目录，系统列出",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -26561,7 +26561,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 botane（牧草） -> 植物学。"
+    "analysis": "botane（牧场上生机盎然供牲口啃食的青翠牧草植物） -> 系统研究从单细胞藻类到参天红杉所有绿色植物形态解剖生理遗传分类的生命科学 -> 植物学。"
   },
   {
     "word": "canyon",
@@ -26571,7 +26571,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自西班牙语 cañón（管子） -> 峡谷。"
+    "analysis": "cañón（西班牙语：像巨大圆管般深邃幽闭的岩石管道通道） -> 高原上河流经过数千万年奔腾下切侵蚀在岩层中雕凿出的深邃幽暗陡峭峡谷盆地 -> 峡谷，深谷幽堑。"
   },
   {
     "word": "carbon",
@@ -26581,7 +26581,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "词根 carbo（木炭） -> 碳。"
+    "analysis": "ker- / carbo（烈火熄灭后留下的黑炭木炭） -> 在元素周期表中排名第六、构成一切地球已知有机生命分子骨架最核心的化学元素，环保借指碳排放 -> 碳；碳排放，碳汇；复写纸。"
   },
   {
     "word": "climatic",
@@ -26601,7 +26601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 云，云彩。"
+    "analysis": "clod（沉重大土块/岩块）同源（古指天空中像黑压压巨石岩块团聚漂浮的厚重积雨云团） -> 凝聚悬浮于高空由微小水滴构成的云雾，引申指笼罩阴影疑云 -> 云，云彩；使阴暗，蒙上阴影；破坏。"
   },
   {
     "word": "cloudy",
@@ -26647,11 +26647,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "crop",
     "phonetic": "/krɒp/",
     "pos": "n./vt.",
-    "meaning": "农作物， 庄稼； 收成 vt. 收割",
+    "meaning": "n. 农作物，庄稼；收成 vi. 突发涌现（crop up） vt. 剪短",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 农作物，庄稼。"
+    "analysis": "croup（弯曲饱满圆头） -> 谷物农作物成熟后沉甸甸弯曲下垂的饱满穗头果实，引申指农田收获的庄稼收成或裁剪切去顶端 -> 农作物，庄稼；收成；收获收割；剪短修整。"
   },
   {
     "word": "cyclone",
@@ -26701,7 +26701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义指“干燥干瘪” -> 干旱，旱灾。"
+    "analysis": "dry（干燥）同源派生名词 -> 天空长期无云无雨降水严重匮乏导致土地龟裂江河断流干涸的极端干旱灾害 -> 干旱，旱灾；干涸状态；持久匮乏期。"
   },
   {
     "word": "ecology",
@@ -26821,7 +26821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 放牧，吃草。"
+    "analysis": "grass（青草）的动词形式 -> 牛羊牲畜在广袤草原上低头悠闲啃食新鲜草料，引申指子弹或皮肤表面浅浅擦伤擦破 -> 放牧，吃草；擦伤，擦破皮；轻微擦过。"
   },
   {
     "word": "harvest",
@@ -26831,7 +26831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 收获，收成。"
+    "analysis": "carp- / kerp-（采摘收割）同源 -> 秋分时节农人挥舞镰刀颗粒归仓收获辛勤耕耘的一季庄稼成果，引申指耕耘的回报收获 -> 收获，收成；收获季节；收割，采集。"
   },
   {
     "word": "haze",
@@ -26841,7 +26841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自未知海洋水手用语（可能与 ha） -> 薄雾。"
+    "analysis": "hawze / misty（空气中弥漫微细干颗粒导致视线模糊） -> 大气中因悬浮大量微细尘埃干烟雾颗粒导致水平能见度严重受阻的阴霾现象，引申指思维迷蒙昏乱 -> 薄雾；阴霾，霾；迷蒙昏乱状态；捉弄戏弄欺凌新生。"
   },
   {
     "word": "humidity",
@@ -26871,7 +26871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "ice（冰块） + berg（山脉） -> 冰山。"
+    "analysis": "ice（冰坚冰） + berg（高耸耸立的巨石大山） -> 脱离极地陆地冰川滑入冰海之中大部分山体隐没在水下的庞大漂浮淡水冰山，成语借指冰山一角 -> 冰山；潜藏的巨大危机（tip of the iceberg）。"
   },
   {
     "word": "irrigate",
@@ -27091,7 +27091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 暴风雨。"
+    "analysis": "stir / turb-（搅动骚乱狂暴）同源 -> 大气压剧烈骤变引发狂风暴雨电闪雷鸣的极端剧烈灾害天气，引申指怒气冲冲狂暴冲入攻袭 -> 暴风雨；风暴；猛攻，突袭冲入（storm into）。"
   },
   {
     "word": "sustainable",
@@ -27121,7 +27121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 木材，木料。"
+    "analysis": "PIE词根 *dem-（建造房屋木料） -> 适合砍伐后用于大兴土木搭建房屋栋梁船舶骨架的优质成材木料 -> 木材，木料；林木，树林；栋梁之材（timber）。"
   },
   {
     "word": "typhoon",
@@ -27141,7 +27141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "本义指“山谷低地” -> 山谷，溪谷。"
+    "analysis": "val-（凹陷低洼处） -> 夹在两座高耸起伏山脉群峦之间由流水常年冲刷侵蚀形成的平缓低洼狭长谷地 -> 山谷，溪谷；流水流域盆地。"
   },
   {
     "word": "vegetation",
@@ -27197,11 +27197,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bridge",
     "phonetic": "/brɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "桥梁； 纽带 vt. 架桥",
+    "meaning": "vt. 消除，弥合（分歧/差距）；架桥 n. 桥梁；纽带",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 桥梁。"
+    "analysis": "brow / plank（像横梁眉骨般横跨）同源 -> 凌空飞架于滔滔江河峡谷两侧上方供车马行人平稳安全穿行的跨河梁柱结构 -> 桥梁；纽带，桥梁作用；架桥跨越；弥合消除分歧（bridge the gap）。"
   },
   {
     "word": "building",
@@ -27351,7 +27351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“摆渡” -> 渡船，轮渡。"
+    "analysis": "fare（出行走航）同源 -> 长期往返穿梭于河流两岸码头固定水域接送车辆行人的客运渡船轮渡 -> 渡船，轮渡；摆渡，运送；运送渡过水面。"
   },
   {
     "word": "freight",
@@ -27361,7 +27361,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自中古荷兰语 vrecht（运货） -> 货物。"
+    "analysis": "fracht / fraught（承载满仓货品的沉重货船载重） -> 远洋货轮、集装箱班列或重型卡车长途运输的大宗进出口商业货物，另指需要支付的货运运费 -> 货物，大宗货运；货运运费；货运运送，装货运送。"
   },
   {
     "word": "harbor",
@@ -27371,7 +27371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 海港，港口。"
+    "analysis": "here（军队） + beorg（庇护躲藏处） -> 港湾天然水深浪静可供舰队商船躲避惊涛骇浪抛锚停泊的安全深水避风港 -> 海港，港口；避难所；心怀抱有（疑虑恶念）；窝藏庇护犯罪。"
   },
   {
     "word": "intersection",
@@ -27401,7 +27401,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 车道，行车道。"
+    "analysis": "line（线条）同源变体 -> 道路上用醒目白线平行漆划出的车辆各行其道的单独行车轨迹车道，亦指幽深狭窄小巷 -> 车道，行车道；小巷，狭窄弄堂；专用航线。"
   },
   {
     "word": "locomotive",
@@ -27491,7 +27491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“贴在墙壁门板” -> 票，车票。"
+    "analysis": "etiquette / stick（粘贴在表面的小标签小凭条） -> 印有日期座次防伪条码作为已付费乘车入场乘机凭据的纸条凭证，亦指违章罚单 -> 票，车票，入场门票；违章罚款单；售票，开罚单。"
   },
   {
     "word": "train",
@@ -27501,7 +27501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“被拖在后方长” -> 火车，列车。"
+    "analysis": "tract- / trahere（拉/拖拉牵引） -> 机车车头在铁轨上拖拽牵引一连串整排车厢风驰电掣前进，引申为按照标准规程系统训练培养技能 -> 火车，列车；训练，培养；循序渐进练习；长队。"
   },
   {
     "word": "travel",
@@ -27511,7 +27511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“辛劳苦役” -> 旅行，行进。"
+    "analysis": "travail（痛苦艰难肉体折磨劳作）演变（古时陆路行路坎坷盗贼横行出趟远门实为艰辛历练） -> 离开故土走向陌生远方游历探索的漫长旅途 -> 旅行，行进；漫游漫行；旅行出行历程。"
   },
   {
     "word": "traveler",
@@ -27531,7 +27531,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "词根 -> 卡车，货车。"
+    "analysis": "troch-（轮子滚动推车）同源 -> 专门配备坚固大梁底盘与大排量发动机用以在公路网络长途运输沉重集装箱货物的重型卡车 -> 卡车，货车；用卡车运送；交易往来（have no truck with）。"
   },
   {
     "word": "congestion",
@@ -27591,7 +27591,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "本义指“帮助” -> 援助，救助。"
+    "analysis": "ad-（朝向） + juvare（帮助协助） -> 伸出援助之手从旁协助危难者渡过险境难关，引申指医疗救护急救箱设备或助手 -> 援助，救助；救济金款项；辅助工具设施；协助。"
   },
   {
     "word": "assistance",
@@ -27681,7 +27681,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自词根核心本义 -> 血液。"
+    "analysis": "blow / bloom（旺盛涌动流淌生机）同源 -> 在心脏强劲搏动泵送下在循环血管网络内奔流不息输送氧气养分的红色生命血液 -> 血液；血统，家族血脉；屠杀杀戮。"
   },
   {
     "word": "breathe",
@@ -27701,7 +27701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "词根（螃蟹） -> 癌症，恶性肿瘤。"
+    "analysis": "源自希腊语 karkinos（螃蟹） -> 古希腊名医见恶性肿瘤充血血管向四周蔓延犹如蟹足横行，故以此命名 -> 癌症，恶性肿瘤；社会公害弊端。"
   },
   {
     "word": "capsule",
@@ -27767,7 +27767,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "disorder",
     "phonetic": "/dɪsˈɔːdə(r)/",
     "pos": "n./vt.",
-    "meaning": "混乱； 失调， 疾病 vt. 扰乱",
+    "meaning": "n. 失调，疾病（mental/eating disorder）；混乱，紊乱 vt. 扰乱",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -27861,7 +27861,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“哺乳奶妈” -> 护士，v.。"
+    "analysis": "nutr- / nutrire（滋养哺育） -> 在医院病房日夜守护患者伤员悉心护理照料健康、按医嘱执行药物注射的白衣天使 -> 护士；护理，照料；悉心照料调养；喂奶哺乳；心头暗自怀抱（nurse a grudge）。"
   },
   {
     "word": "pain",
@@ -27871,7 +27871,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "本义指“折磨” -> 疼痛。"
+    "analysis": "poena（惩罚罚金）同源（古人视身体剧烈受创痛苦为神明对恶行的降罚） -> 神经末梢感受器向大脑传递的极其剧烈难忍的不适感觉 -> 疼痛；痛苦，悲痛苦恼；使痛苦；费尽心思苦心（take pains）。"
   },
   {
     "word": "patient",
@@ -27961,7 +27961,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 （伤口） -> 创伤；外伤；心理创伤。"
+    "analysis": "trao- / tetraino（锐器刺穿撕裂皮肉造成的血腥外伤创口） -> 肉体遭受严重物理机械撞击摧毁的严重创伤，心理学引申指战争灾难留下的持久应激精神创伤 -> 创伤，外伤创口；严重心理创伤，精神创伤后遗症。"
   },
   {
     "word": "vaccine",
@@ -27981,7 +27981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 virus（粘稠毒液/毒汁），原义见词源，引申指病毒 -> 病毒；（计算机）病毒；病毒性疾病。"
+    "analysis": "源自拉丁语 virus（粘稠毒汁/致命毒液） -> 寄生在宿主细胞内部利用宿主核酸机器自我疯狂复制扩散的超微病原体 -> 病毒；（计算机破坏性木马）病毒；病毒性疾病流行。"
   },
   {
     "word": "collide",
@@ -28057,7 +28057,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "impact",
     "phonetic": "/ˈɪmpækt/",
     "pos": "n./v.",
-    "meaning": "冲击，碰撞；重大影响 v. 冲击",
+    "meaning": "n. 巨大冲击，重大影响 vt./vi. 产生重大影响；冲击撞击",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -28101,7 +28101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 estreindre（紧紧勒住/勒紧拉紧），原义见词源，引申指拉伤 -> 极度紧张；重压；过度劳累。"
+    "analysis": "stringere（紧紧拉扯勒紧） -> 肌肉纤维或钢缆在超出极限的强力向外暴力拉扯下出现纤维微细撕裂损伤，引申指精神极度紧绷压抑 -> 拉伤，扭伤；拉紧，使紧绷；极度紧张，重压负担；劳损。"
   },
   {
     "word": "extinction",
@@ -28231,7 +28231,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 aesmer（估量/瞄准），原义见词源，引申指目标 -> 目标；目的；瞄准。"
+    "analysis": "aesmer（估量瞄准测距） -> 闭上一只眼睛调整箭簇枪口使其视线轴线与远方靶心重合合为一线，引申为人生立志确立的奋斗方向 -> 目标，目的；旨在，志在以…为导向；瞄准。"
   },
   {
     "word": "anger",
@@ -28241,7 +28241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自古诺尔斯语 angr（痛苦/悲伤），原义见词源，引申指愤怒 -> 怒火；狂怒；气愤。"
+    "analysis": "angh-（紧勒咽喉使痛苦窒息） -> 遭受不公侮辱或侵害挑衅时胸中热血翻涌脖颈通红暴怒不能自已的激烈情绪 -> 愤怒，气愤；激怒，使狂怒发作。"
   },
   {
     "word": "assume",
@@ -28281,7 +28281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自晚期拉丁语 aptitudo（适宜之姿势），原义见词源，引申指态度 -> 态度；看法；姿态。"
+    "analysis": "aptitudo（适合/适宜之姿态摆设） -> 身体面向特定挑战所摆出的迎敌肢体架势，引申为内心对客观人事物持有的根本价值取向与立场 -> 态度，看法；姿态，立场立场姿势。"
   },
   {
     "word": "award",
@@ -28321,7 +28321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 basis（底座/迈步基石），原义见词源，引申指基础 -> 基础；根据；原则。"
+    "analysis": "源自希腊语 basis（双脚踏踏实实踩踏站稳的坚实底座步阶） -> 支撑整栋摩天大楼或整套严密哲学公理体系最底层的支柱基石 -> 基础，根据，准则；原则基石。"
   },
   {
     "word": "bear",
@@ -28391,7 +28391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 blasmer（渎神/责骂），原义见词源，引申指责备 -> 责怪；指责；归咎于。"
+    "analysis": "blas-（损害） + pheme-（说话） -> 面对事故灾难用言语厉声斥责指认其违背职责、将严重过错归咎于某人承担责任 -> 责备，指责；归咎于，把…归因于过错；责任，过错。"
   },
   {
     "word": "brave",
@@ -28401,7 +28401,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自意大利语 bravo（勇猛强横/桀骜不驯），原义见词源，引申指勇敢的 vt. 勇敢面对 -> 勇敢的；无畏的；英勇的人。"
+    "analysis": "barbarus / bravo（勇猛剽悍桀骜不驯） -> 面对刀光剑影狂风巨浪生死考验毫不退缩怯懦迎头痛击的英雄气概 -> 勇敢的，英勇无畏的；勇敢面对，直面硬顶挑战；英勇之人。"
   },
   {
     "word": "cancel",
@@ -28411,7 +28411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁动词 cancellare（在手稿文字上划斜十字格子注销），原义见词源，引申指取消 -> 取消；撤销；废除。"
+    "analysis": "cancelli（如铁栅栏格子般在文书公文上画叉涂抹作废） -> 官方提笔在文件或行程上画上斜红杠彻底废止协议效力 -> 取消，撤销；废除；相互抵消（cancel out）。"
   },
   {
     "word": "careful",
@@ -28427,11 +28427,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cause",
     "phonetic": "/kɔːz/",
     "pos": "n./vt.",
-    "meaning": "原因；事业 vt. 导致",
+    "meaning": "vt. 导致，引起 n. 原因，起因；事业，奋斗目标",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 causa（原因/诉讼案件/缘由），原义见词源，引申指原因 -> 原因；起因；事业。"
+    "analysis": "causa（法庭诉讼缘由/理由） -> 推动某一重大历史事态或物理反应在因果链条中率先破局发生的根源诱因，引申为崇高事业 -> 原因，起因；导致，引起招致；崇高事业奋斗目标。"
   },
   {
     "word": "center",
@@ -28441,7 +28441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 kentron（圆规固定扎入纸面），原义见词源，引申指中心 -> 中心；中央；核心。"
+    "analysis": "源自希腊语 kentron（画圆规时的尖锐固定圆心尖足） -> 圆周各点与其中点距离绝对均等的核心轴心位置，引申指机构决策大脑枢纽 -> 中心，中枢；核心聚焦点；集中于，围绕…为中心（on/around）。"
   },
   {
     "word": "central",
@@ -28461,7 +28461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自晚期拉丁语 cadentia（掷骰子掉落下来的点数），原义见词源，引申指机会 -> 机会；良机；可能性。"
+    "analysis": "cad- / cas-（跌落降落） -> 命运骰子在不可预知的概率随机碰撞中偶然落地滚出的幸运点数契机 -> 机会，机遇；偶然，巧合；冒风险尝试；碰巧偶然发生。"
   },
   {
     "word": "change",
@@ -28471,13 +28471,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自晚期拉丁语 cambiare（以物易物互相交换），原义见词源，引申指改变 -> 改变；变化；更改。"
+    "analysis": "camb- / exchange（货品物物交换交换位置） -> 抹去原有的样貌特征替换为崭新的形态外观格局，商业引申指大钞找零后的硬币散钱 -> 改变，变更；转变；零钱，找零硬币；蜕变改观。"
   },
   {
     "word": "check",
     "phonetic": "/tʃek/",
     "pos": "v./n.",
-    "meaning": "检查，核对；支票",
+    "meaning": "vt. 检查，核对；抑制，遏制 n. 支票；检查；账单",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -28491,7 +28491,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自原始日耳曼语 *keusanan（用眼睛与心智认真品鉴挑选），指在多种可能中选定其一 -> vt./vi. 选择，挑选；情愿。"
+    "analysis": "geus-（品尝体验挑选可口之物） -> 在陈列面前的多项备选项中依据内心标准权衡后伸手将其单独拿出采纳 -> 选择，挑选；情愿宁愿；抉择选择。"
   },
   {
     "word": "clear",
@@ -28501,7 +28501,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁形容词 clarus（清澈透亮的/声名），原义见词源，引申指清楚的 -> 清晰的；明白的；清澈的。"
+    "analysis": "clarus（声音响亮/天朗气清光芒照耀） -> 空气澄澈毫无云雾沙尘遮挡、言辞逻辑透彻毫无含混歧义，引申为排除清空障碍物 -> 清楚的，清晰的；晴朗明澈的；清除，清空排除障碍。"
   },
   {
     "word": "comfort",
@@ -28601,7 +28601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 covrir（覆盖遮盖），原义见词源，引申指覆盖 -> 覆盖；遮盖；涵盖。"
+    "analysis": "co-（完全） + operire（遮掩盖住隐藏） -> 在物体上方整面铺展厚实遮蔽物使其不受外界风霜侵袭或外人窥视，引申指资金覆盖支出 -> 覆盖，掩盖；涉及涵盖；给…投保；盖子，封面遮盖物。"
   },
   {
     "word": "create",
@@ -28621,7 +28621,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自希腊语 krisis（分水岭/生死决断时刻），原义见词源，引申指危机 -> 危机；危急关头；紧要关头。"
+    "analysis": "krinein（法庭审判辨析/决定生死转折决断时刻） -> 疾病发展到生死存亡仅在一线之间、或社会经济处于悬崖边缘的紧要关头 -> 危机，紧要关头；决定性转折点时刻。"
   },
   {
     "word": "crowd",
@@ -28631,7 +28631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 人群；群众 v. 聚集。"
+    "analysis": "curd / crud（压紧挤压凝固结块） -> 无数个体从四面八方自发汇聚涌向同一狭窄广场相互摩肩接踵挤在一处的人潮群体 -> 人群，群众；涌入，挤满；紧挨挤拢（into）。"
   },
   {
     "word": "danger",
@@ -28641,7 +28641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 dangier（领主的生杀予夺绝对支配权），原义见词源，引申指危险 -> 危险；风险；威胁。"
+    "analysis": "dominus（主人/君主绝对支配权生杀大权） -> 处于主宰者或凶残猛兽武器绝对杀伤威胁之下极易遭受灭顶之灾的境地 -> 危险，危险物；威胁，隐患危害。"
   },
   {
     "word": "date",
@@ -28661,7 +28661,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 处理；买卖 n. 协议；交易。"
+    "analysis": "part / divide（切分分配份额发牌） -> 在牌桌上向玩家发牌切分筹码，商业上引申为双方反复协商拍板定案签订互惠买卖协议 -> 处理应对（with）；买卖交易；协议，大买卖；发牌。"
   },
   {
     "word": "decrease",
@@ -28841,17 +28841,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁动词 dubitare（内心在两者之间摇摆不定），原义见词源，引申指怀疑 -> 怀疑；疑惑；不确信。"
+    "analysis": "duo-（两个） -> 头脑中同时出现两种截然相反互相矛盾的解释判断、举棋不定难以完全信服相信 -> 怀疑，疑虑；不信任怀疑；拿不准不确信。"
   },
   {
     "word": "draw",
     "phonetic": "/drɔː/",
     "pos": "v./n.",
-    "meaning": "画；拉，吸引；得出 n. 平局",
+    "meaning": "vt. 得出（结论/教训）；吸引（注意）；拉，拖；画 n. 平局",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 dragan -> 画；拉；吸引。"
+    "analysis": "drag / tract（拉拽牵引拖拽） -> 握住笔尖在纸上拉出优美墨线轮廓，另指用力拉紧绳索，或双方比分僵持最终平手 -> 画画，描绘；拉，拖拉；吸引吸收；得出结论；平局不分胜负。"
   },
   {
     "word": "dream",
@@ -28861,17 +28861,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 梦；梦想 v. 做梦；向往。"
+    "analysis": "draumr（幻象虚妄梦影） -> 沉睡时大脑皮层潜意识自发编织呈现出的逼真奇幻视听故事，引申指胸怀远大的理想憧憬 -> 梦，梦境；梦想，理想抱负；做梦；梦见向往（of）。"
   },
   {
     "word": "drive",
     "phonetic": "/draɪv/",
     "pos": "v./n.",
-    "meaning": "驾驶，驱使；推进 n. 驱力",
+    "meaning": "vt. 驱动，驱使；大力推进；驾驶 n. 驱力，冲劲；专项运动",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 驾驶；驱使；推进 n. 驱力。"
+    "analysis": "PIE词根 *dhreibh-（挥鞭策马驱赶向前） -> 挥动鞭子强迫牲口车辆沿着道路全速飞驰前行，引申指内心不可遏制的欲望内驱力 -> 驾驶，开动车辆；驱使，驱策推动；内驱力，冲劲；大力推进。"
   },
   {
     "word": "drop",
@@ -28881,7 +28881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 落下；下降 n. 滴；微量。"
+    "analysis": "drip（水滴圆点滴落）同源派生 -> 在重力作用下失去向上托力自由向下方坠落砸在地面，引申为产量股价微幅向下调整 -> 落下，下降；放弃丢下（drop out）；一滴，水滴；微量降幅。"
   },
   {
     "word": "during",
@@ -28891,7 +28891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁动词 durare（持久/持续存在），原义见词源，引申指在…期间 -> 在…期间；在…过程中。"
+    "analysis": "dur-（坚硬持续长久） -> 在某一段特定时间长度所涵盖的整个生命周期区间之内从头至尾贯穿 -> 在…期间，在…过程中从头至尾。"
   },
   {
     "word": "earth",
@@ -28901,7 +28901,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 eorthe -> 地球；陆地；泥土。"
+    "analysis": "er-（人类踏足其上辛勤耕耘的松软沃土大地）同源 -> 宇宙中孕育万物生灵蔚蓝行星地球，亦指地表可供播种耕作的泥土土壤与干燥陆地 -> 地球；陆地；泥土，土壤；接地线接地。"
   },
   {
     "word": "east",
@@ -28911,7 +28911,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然地理、动植物与环境保护】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 -> 东方；东部 adj. 东方的。"
+    "analysis": "PIE词根 *aus-（晨曦微露发光初升） -> 清晨旭日初升喷薄而出带来第一道曙光的地理方位朝向 -> 东方，东部；东方的，向东的；向东方地。"
   },
   {
     "word": "easy",
@@ -29107,7 +29107,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "engage",
     "phonetic": "/ɪnˈɡeɪdʒ/",
     "pos": "v.",
-    "meaning": "从事，参与（in）；订婚",
+    "meaning": "vi. 从事，参与（in） vt. 吸引（注意）；雇用；订婚",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
@@ -29131,7 +29131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 ingenium（天生聪明才智/巧妙发明），原义见词源，引申指发动机 -> 发动机；引擎；火车头机车。"
+    "analysis": "en-（在内） + gen-（生育产生智慧能量） -> 汇聚精密机械智慧结构在内部通过热能燃烧做功转化为强劲机械动力的动力机 -> 发动机，引擎；机车机头；推动力引擎。"
   },
   {
     "word": "engineer",
@@ -29211,7 +29211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 intra -> 进入；参加；输入。"
+    "analysis": "inter-（在两者内部/深入中间） -> 迈过门槛走向密闭建筑物或房间内部核心，引申指正式报名参加竞赛考试或在系统录入数据 -> 进入，走进；参加，加入；录入输入（enter data）。"
   },
   {
     "word": "entertainment",
@@ -29301,7 +29301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会生活、城市建设与交通文明】",
     "analysis_type": "构词",
-    "analysis": "源自古诺尔斯语 skipa（装备船只/整军备战），原义见词源，引申指装备 -> 装备；配备；使具备（能力/素质）。"
+    "analysis": "skip / ship（战船整装出海） -> 在战船出航或探险队启程前装配齐备整套武器弹药干粮测量仪器装备 -> 装备，配备；使具备必要专业技能素养能力（with）。"
   },
   {
     "word": "equipment",
@@ -29321,7 +29321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自晚期拉丁语 aera（计算年份的数字铜），原义见词源，引申指时代 -> 时代；纪元；历史时期。"
+    "analysis": "aera（用于罗马帝国历法年代计数的小铜币算筹） -> 以重大历史革命发明或政权更迭为里程碑划分出的漫长而风格鲜明的发展时期 -> 时代，纪元，重大历史时期。"
   },
   {
     "word": "erase",
@@ -29471,7 +29471,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 fiscus（装国库公款钱币的），原义见词源，引申指财政的 -> 财政的；国库的；会计的。"
+    "analysis": "fiscus（古罗马皇帝盛装全国国库赋税钱粮的编织钱筐） -> 国家财政预算、公共税收征管及国库资金收支管理维度的 -> 财政的，国库收支维度的；会计年度的（fiscal year）。"
   },
   {
     "word": "creditor",
@@ -29537,7 +29537,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contrast",
     "phonetic": "/ˈkɒntrɑːst/",
     "pos": "n./vt./vi.",
-    "meaning": "对比，对照 vt./vi. /kənˈtrɑːst/",
+    "meaning": "n. 鲜明对比，对照 vt./vi. 与…形成对照，对比显出差异",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -29567,7 +29567,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "decline",
     "phonetic": "/dɪˈklaɪn/",
     "pos": "vi./vt./n.",
-    "meaning": "下降；衰落；婉拒",
+    "meaning": "vi./n. 下降，衰退；减少 vt. 婉言谢绝，婉拒",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -29627,11 +29627,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "exploit",
     "phonetic": "/ɪkˈsplɔɪt/",
     "pos": "vt./n.",
-    "meaning": "开发，利用；剥削",
+    "meaning": "vt. 开发，利用（潜能/资源）；剥削，榨取 n. 英勇事迹",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 esploit（向外展开施展），原义见词源，引申指开发 -> 开发；开采；利用。"
+    "analysis": "ex-（向外） + plic-（折叠） -> 将层层折叠的潜能资源完全摊开展平加以榨取利用，反向引申为资本家巧取豪夺剥削剩余价值 -> 开发，利用（自然潜能）；剥削榨取；英勇壮举功绩。"
   },
   {
     "word": "facilitate",
@@ -29651,7 +29651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自古英语 fostrian（用食物喂养哺乳培育），原义见词源，引申指培养 -> 培养；促进；助长。"
+    "analysis": "food / feed（食物喂养）同源派生 -> 提供充足养分和温暖环境悉心照料幼苗孤儿成长，引申指在政策上倾斜培育孵化创新生态 -> 培养，促进扶植；抚养照料；代养抚育的。"
   },
   {
     "word": "frustrate",
@@ -29701,7 +29701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自意大利语 isolato（如同置身孤岛），原义见词源，引申指使隔离 -> 使隔离；孤立；使脱离。"
+    "analysis": "insula（孤悬于大海中央的与世隔绝独立岛屿） -> 斩断与周边陆地一切交通联系将个体或病原体严格隔离在封闭空间之中 -> 使隔离，使孤立；脱敏分离提取；隔离的孤立的。"
   },
   {
     "word": "motivate",
@@ -29771,7 +29771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "源自中古荷兰语 trecker（拉动牵引拉发栓），原义见词源，引申指触发 -> （枪的）扳机；起因；诱因。"
+    "analysis": "trekker（向后拉紧拉动的金属扳机小构件） -> 扣动击发枪械撞针开火的弹簧扳机装置，引申指在复杂因果关系中瞬间点燃引发连锁爆发事件的导火索诱因 -> 触发，引发招致；扳机；诱因，导火索。"
   },
   {
     "word": "vulnerable",
@@ -29921,7 +29921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【14. ven / vent 来/到达/发生】",
     "analysis_type": "构词",
-    "analysis": "源自古法语 venue（到来/到达之场所），原义见词源，引申指举办场地 -> 举行地点；举办场所（比赛/会议/音乐会等）；（犯罪或诉讼发生的）审判地。"
+    "analysis": "ven- / venire（前来聚拢到达） -> 各方受邀嘉宾从天南海北齐聚一堂举行大型体育赛事峰会演唱会的专用封闭举办场所 -> 举办场地，比赛会场；会议活动聚集地。"
   },
   {
     "word": "diversify",
@@ -30001,7 +30001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自盎格鲁-诺曼法语 brocour（启封酒桶零售小贩），原义见词源，引申指经纪人 -> 经纪人；中间人；掮客。"
+    "analysis": "broc-（凿开酒桶品酒/推销葡萄酒的小商贩） -> 在买卖双方之间穿针引线撮合交易达成并按比例收取佣金的专业中间商 -> 经纪人，中间商；股票外汇代理商；撮合达成协议。"
   },
   {
     "word": "competitor",
@@ -30471,7 +30471,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "源自十九世纪爱尔兰严苛无情土地经纪人博伊考特上尉（Charles ），原义见词源，引申指联合抵制 -> 抵制；拒绝购买；拒绝参与。"
+    "analysis": "源自19世纪爱尔兰严苛土地经纪人 Charles Boycott 遭全镇佃农商人绝交抵制之历史事件 -> 众人结成统一战线共同坚决拒绝采购使用该国货物以示抗议 -> 联合抵制，拒绝购买使用；抵制行动。"
   },
   {
     "word": "clearing",
@@ -30541,7 +30541,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "原指农田四周种植的茂密灌木树篱（用于圈护财产抵御风险），金融领域借指为防范资产价格剧烈波动而构建的风险防线 -> n. 树篱；套期保值，对冲手段；v. 防范风险，对冲。"
+    "analysis": "原指农庄四周种植密集带刺灌木组成的防御树篱藩篱，金融借指在现货与期货两个相反方向建仓锁定风险敞口 -> 对冲；套期保值；树篱树丛；防范规避风险（hedge against）。"
   },
   {
     "word": "holding",
@@ -30641,7 +30641,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【2. sta / sist / st 站立/建立/停留】",
     "analysis_type": "构词",
-    "analysis": "constitution（国家根本大法宪法） + -al（形容词后缀），原义见词根，引申指宪法的 -> 国家的合宪法定的宪法层面的；人体生理体质本性上的；为健康强身而进行的例行日常散步（n.）。"
+    "analysis": "constitution（国家根本大法宪法/身体体质） + -al（的） -> 恪守根本法典具有最高法律效力的，另指人体天生体魄机制 -> 宪法的，合宪法定的；体质上的，本性固有的；强身晨间散步（n.）。"
   },
   {
     "word": "institutional",
@@ -30651,7 +30651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【2. sta / sist / st 站立/建立/停留】",
     "analysis_type": "构词",
-    "analysis": "institution（制度/设立确立的社会公器） + -al（形容词后缀），原义见词根，引申指制度的 -> 国家深水区制度层面的体制上的；专业法人机构投资者的；福利收容机构设施的。"
+    "analysis": "institution（制度体系/公共常设法人机构） + -al（的） -> 触及体制顶层机制设计深水区层面的，另指具备雄厚资金的法人专业机构投资者 -> 制度的，体制上的，机制维度的；专业法人机构的；制度性固有的。"
   },
   {
     "word": "unstable",
@@ -30701,7 +30701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【8. mit / mis 送/放/派】",
     "analysis_type": "构词",
-    "analysis": "sub-（在…下方） + miss- / mit-（送出/放下） + -ion（名词后缀），原义见词根，引申指提交 -> 正式向官方呈递提交报送文件论文；政治军事上的屈膝屈服顺从投降；辩护大律师当庭向合议庭法官呈递的正式书面代理辩护意见。"
+    "analysis": "sub-（在下方） + miss-（送出/放下兵刃） + -ion -> 恭恭敬敬双手将研究论文或投标文件呈递报送上位者审阅，军事上指放下兵器屈膝顺从投降 -> 提交，呈递，报送审查之物；顺从屈服，臣服投降；法庭辩护意见。"
   },
   {
     "word": "disposable",
@@ -30711,7 +30711,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / pound 放置】",
     "analysis_type": "构词",
-    "analysis": "dis-（分散/向外） + pos-（放置处理） + -able（能够…的形容词后缀），原义见词根，引申指一次性的 -> 一次性用后即弃的（disposab）；金融经济学扣除税费后可自由支配的（disposab）；一次性医疗卫生日用品耗材（n.）。"
+    "analysis": "dis-（分散/向外） + pos-（放置/处理） + -able（可…的） -> 用后即可随手弃置无需回收的卫生耗材，经济学指扣除强制税费后完全可由个人自主开销花销的资金 -> 一次性的，用后即弃的；可自由支配花销的（disposable income）；一次性耗材（复数）。"
   },
   {
     "word": "opposition",
@@ -30721,7 +30721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / pound 放置】",
     "analysis_type": "构词",
-    "analysis": "op- / ob-（在…正对面面对面逆向而立） + posit-（放置站稳） + -ion（名词后缀），原义见词根，引申指反对 -> 强烈的社会反对与抵制抗议；议会合宪在野反对党派大集团；两相面对面对立状态。"
+    "analysis": "op- / ob-（正对面反向而立） + posit-（放置/站立） + -ion -> 站在执政当局立场正对面发起强烈抨击抵制的在野抗议阵营 -> 反对，抗议；在野反对党派；两相面对面对立状态；冲日对冲现象。"
   },
   {
     "word": "disposition",
@@ -30731,7 +30731,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【5. pon / pos / pound 放置】",
     "analysis_type": "构词",
-    "analysis": "dis-（分散/向各方） + posit-（放置/安排布署） + -ion（名词后缀），原义见词根，引申指性情 -> 先天脾气秉性性情；军事战略部队战役展开部署；民事实体法律财产的合法处分处置权。"
+    "analysis": "dis-（分开向各方） + posit-（安排布局/放置） + -ion -> 造物主为个体在灵魂深处安排放置好的天生性情脾气，军事上指兵力兵器战略战役展开部署 -> 性情，秉性脾气；军事战略兵力部署；合法处置财产处分权；倾向意向。"
   },
   {
     "word": "retrace",
@@ -30771,7 +30771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【10. spec / spect / spic 看】",
     "analysis_type": "构词",
-    "analysis": "specul-（望远镜眺望/在瞭望塔上侦察观望） + -ation（名词后缀），原义见词根，引申指投机 -> 金融与房地产短期逐利投机炒作；缺乏确凿事实依据的主观推测猜测揣测；形而上学深邃纯思辨构想。"
+    "analysis": "specul-（在瞭望塔上登高眺望/远距离观望） + -ation -> 未掌握确凿内部事实证据仅凭蛛丝马迹在脑海中做出的主观理论推测揣测，金融借指短期逐利高风险炒作 -> 投机炒作，金融高风险投机；主观理论推测猜想；纯思辨推论。"
   },
   {
     "word": "speculative",
@@ -30781,7 +30781,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【10. spec / spect / spic 看】",
     "analysis_type": "构词",
-    "analysis": "speculat-（眺望观望） + -ive（形容词后缀），原义见词根，引申指投机性的 -> 金融高风险投机炒作的；学术理论推测性前瞻思辨的（与实证 empi）。"
+    "analysis": "speculat-（眺望观望） + -ive（形容词后缀） -> 缺乏实证检验而建立在理论假设思辨模型之上的，另指资本市场上充满不确定性高杠杆追涨杀跌投机属性的 -> 投机性的，高风险投机炒作的；推测假说的，思辨推理性的。"
   },
   {
     "word": "individuality",
@@ -30801,7 +30801,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【11. dic / dict 说/宣称】",
     "analysis_type": "构词",
-    "analysis": "dictat-（大声宣读发布法令/口述指令） + -ion（名词后缀），原义见词根，引申指口述记录 -> 口述记录与外语课堂听写练习；强权势力的傲慢发号施令霸道强加指令；独裁专断意志。"
+    "analysis": "dict-（发号施令/口述说话） + -ation（名词后缀） -> 一人逐字逐句清晰发音朗读由另一人飞速伏案落笔记录的听写练习，政治上指外部霸权势力强行发号施令霸凌干涉 -> 听写，口述记录；发号施令，强行命令霸道干预。"
   },
   {
     "word": "indicative",
@@ -30811,7 +30811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第一部分：超级核心母词族",
     "group": "【11. dic / dict 说/宣称】",
     "analysis_type": "构词",
-    "analysis": "in-（朝向/指明） + dicat-（指明宣告宣称） + -ive（形容词后缀），原义见词根，引申指表明的 -> 足以指示预示表明说明深层大趋势特征的；商业市场指导性参考的；理论语法学客观陈述语气的（adj.）。"
+    "analysis": "in-（深入） + dic-（指示宣说） + -ative（有…倾向的） -> 从显微表象特征中足以敏锐洞见并充分说明未来深层发展大趋势指向的，语法指客观陈述语气 -> 表明的，指示性的，预示说明的（be indicative of）；陈述语气的；陈述语气形态。"
   },
   {
     "word": "predictable",
@@ -31801,7 +31801,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 船；飞行器。"
+    "analysis": "PIE词根 *ger-（扭转/用力） -> 原指具备高超熟练手工技巧的力量，后借指凝聚精密工程造船技艺的运载工具 -> 飞行器，船；工艺，手艺。"
   },
   {
     "word": "data",
@@ -31811,7 +31811,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 数据；资料。"
+    "analysis": "datum（给予之物）的复数 -> 原指数学哲学论证中预先给定的已知前提事实，现代引申为计算机处理的数值信息 -> 数据；资料。"
   },
   {
     "word": "exploration",
@@ -31821,7 +31821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 研究；勘探。"
+    "analysis": "ex-（向外） + plor-（呼喊/探查） + -ation -> 猎人或勘探者向外搜寻并在发现猎物或宝藏时高声呼喊 -> 勘探，探索；探险研究。"
   },
   {
     "word": "garbage",
@@ -31831,7 +31831,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 垃圾。"
+    "analysis": "源自古法语 garbeau（去除内脏杂物） -> 宰杀禽畜或日常生活清理丢弃的下脚料与废料 -> 垃圾，废弃物；无价值之物。"
   },
   {
     "word": "heat",
@@ -31841,7 +31841,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 热能；热量 v. 加热。"
+    "analysis": "PIE词根 *kai-（炎热/灼热） -> 分子剧烈运动释放出的高温能量，引申指物理加热或论辩激烈火爆 -> 热能，热量；加热；激烈。"
   },
   {
     "word": "installation",
@@ -31851,7 +31851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 安装；装置。"
+    "analysis": "install（安置/装设） + -ation -> 将设备或构件固定于预定位置使之具备运转功能的全过程 -> 安装；装置，设施。"
   },
   {
     "word": "install",
@@ -31861,17 +31861,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 安装。"
+    "analysis": "in-（进入） + stall（固定展位/坐席） -> 将机器部件或官员安置到位并牢固安设固定 -> 安装，设置；使就职。"
   },
   {
     "word": "panel",
     "phonetic": "/'pæn( )l/",
     "pos": "n.",
-    "meaning": "专家咨询组;控制板",
+    "meaning": "n. 专家咨询组，评审委员会；控制板，仪表盘",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 专家咨询组；控制板。"
+    "analysis": "pane（布片/平板木板） + -el -> 镶嵌在墙面或机台上的长方形薄板，引申指围坐桌前评判事务的专门小组 -> 专家咨询组，评审团；控制板，仪表盘。"
   },
   {
     "word": "roof",
@@ -31881,7 +31881,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 屋顶 v. 遮蔽。"
+    "analysis": "PIE词根 *hrof-（覆顶/屋脊横梁） -> 覆盖在房屋最顶层抵御风雨烈日的建筑构件，引申指遮蔽庇护 -> 屋顶；遮蔽，给…盖顶。"
   },
   {
     "word": "ray",
@@ -31891,7 +31891,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 光线。"
+    "analysis": "radius（车轮辐条/光芒射线） -> 像车轮辐条般从中心光源向四周直线辐射发散的光芒 -> 光线，射线；辐射线。"
   },
   {
     "word": "spacecraft",
@@ -31901,7 +31901,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 宇宙飞船；航天器。"
+    "analysis": "space（太空） + craft（飞船/运载器） -> 专门用于穿越大气层在浩瀚外太空航行探索的高科技运载工具 -> 宇宙飞船，航天器。"
   },
   {
     "word": "tank",
@@ -31911,7 +31911,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 箱。"
+    "analysis": "源自印地语 tankh（人工蓄水池塘） -> 原指盛装水液燃料的大型密闭铁箱容器，军事上为保密借指装甲战车 -> 箱，大容器；水箱；坦克。"
   },
   {
     "word": "acre",
@@ -31921,7 +31921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 英亩。"
+    "analysis": "PIE词根 *ag- / ager（开阔田地） -> 古代一头牛一天之内能够耕完的标准农田面积单位 -> 英亩（土地面积单位）。"
   },
   {
     "word": "coast",
@@ -31931,7 +31931,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 海岸。"
+    "analysis": "costa（肋骨/侧边） -> 陆地边缘如身体肋骨般横亘阻挡汹涌海浪拍击的海陆交界地带 -> 海岸，海滨；滑行，沿坡滑下。"
   },
   {
     "word": "escape",
@@ -31941,7 +31941,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 逃跑 v. 逃跑。"
+    "analysis": "ex-（脱出） + cappa（斗篷/披风） -> 抓捕争斗中扯脱斗篷金蝉脱壳夺路而走 -> 逃跑，逃脱；逃避，避开。"
   },
   {
     "word": "hunt",
@@ -31951,7 +31951,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 打猎；追踪v. 打猎；追踪。"
+    "analysis": "hentan（抓取/追捕）同源 -> 携带弓箭猎犬在荒野森林中追踪围捕猎杀野生兽禽，引申指四处搜寻目标 -> 打猎，猎取；追踪，搜寻；打猎猎捕过程。"
   },
   {
     "word": "island",
@@ -31961,7 +31961,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 岛。"
+    "analysis": "is-（水流） + land（陆地） -> 四面完全被浩瀚水流湖海环绕包围的孤立陆地板块 -> 岛，岛屿；安全岛。"
   },
   {
     "word": "invasive",
@@ -31971,7 +31971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 侵入的；扩散性的。"
+    "analysis": "in-（进入） + vas- / vad-（行走/踏入） + -ive -> 携外来强力物种或病原体未经许可大肆踏入破坏本土生态平衡的 -> 侵入的，侵袭性的；扩散性的。"
   },
   {
     "word": "rainfall",
@@ -31981,7 +31981,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 降雨；降雨量。"
+    "analysis": "rain（雨水） + fall（降落） -> 从天空中凝结跌落并汇聚测量出的自然水滴沉降总量 -> 降雨；降雨量。"
   },
   {
     "word": "mainland",
@@ -31991,7 +31991,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 大陆。"
+    "analysis": "main（主要的/主体） + land（陆地） -> 与周边星罗棋布零星孤岛相对立的辽阔主体大陆板块 -> 大陆，本土。"
   },
   {
     "word": "mammal",
@@ -32001,7 +32001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 哺乳动物。"
+    "analysis": "mamma（乳房/乳腺） + -al -> 雌性拥有特化乳腺分泌乳汁哺育幼崽成长的脊椎动物类群 -> 哺乳动物。"
   },
   {
     "word": "mediterranean",
@@ -32011,7 +32011,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 地中海 adj. 地中海的。"
+    "analysis": "medi-（中间） + terr-（陆地） + -an -> 夹在欧亚非三大大陆板块正中间被陆地团团环抱的内海 -> 地中海；地中海的。"
   },
   {
     "word": "whale",
@@ -32021,7 +32021,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 鲸。"
+    "analysis": "PIE词根 *(s)kwal-os（大型海兽） -> 栖息于广袤大洋之中体型极其庞大用肺呼吸喷水汽的海洋巨兽 -> 鲸，鲸鱼。"
   },
   {
     "word": "firefighter",
@@ -32031,7 +32031,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 消防队员。"
+    "analysis": "fire（大火） + fight（战斗） + -er（人） -> 面对熊熊火海与坍塌浓烟英勇冲入火场扑灭烈火营救群众的专业救援人员 -> 消防队员。"
   },
   {
     "word": "mall",
@@ -32041,7 +32041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 购物中心。"
+    "analysis": "pall-mall（木槌击球游戏林荫大道）演变 -> 两侧店铺林立供行人漫步闲逛购物的大型室内商业街区 -> 购物中心，商场；林荫步行街。"
   },
   {
     "word": "minister",
@@ -32051,7 +32051,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 部长；大臣。"
+    "analysis": "minus（较小/次席） + -ter（对比后缀） -> 辅佐最高君王国家首脑执掌某一特定行政部门权力的核心辅臣 -> 部长，大臣；牧师。"
   },
   {
     "word": "malfunction",
@@ -32061,7 +32061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 故障；失灵v. 出故障；失灵。"
+    "analysis": "mal-（坏/不良） + function（正常运转机能） -> 机器传动内部零件出现磨损阻滞导致无法执行既定工况指令 -> 故障，失灵；出故障，发生功能障碍。"
   },
   {
     "word": "sticky",
@@ -32071,7 +32071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 黏的。"
+    "analysis": "stick（粘贴/附着） + -y -> 表面带有粘液遇物即紧紧吸附难以撕下剥离的，引申指处境棘手尴尬 -> 黏的，黏性的；棘手的，难办的。"
   },
   {
     "word": "scene",
@@ -32081,7 +32081,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 现场；事件。"
+    "analysis": "skene（古希腊剧场后台木构舞台布景） -> 戏剧演员在布景前演绎情节悲欢离合的开阔舞台，引申指现实发生事故的地点 -> 现场，场景；舞台，布景；场面。"
   },
   {
     "word": "ability",
@@ -32091,7 +32091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 能力。"
+    "analysis": "able（具备能力的） + -ity（抽象名词后缀） -> 身心机能健全足以克服障碍胜任某项复杂技能挑战的综合素质 -> 能力，本领；才干。"
   },
   {
     "word": "attorney",
@@ -32101,7 +32101,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 律师；检察官。"
+    "analysis": "ad-（朝向） + tourn- / turn（委派/代办） -> 经当事人委托授权全权代表其出庭应诉辩护争取权益的法律专家 -> 律师；代理人；检察官。"
   },
   {
     "word": "client",
@@ -32111,7 +32111,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 客户。"
+    "analysis": "clin-（倾斜/依靠依附） -> 古罗马依附庇护于豪门贵族并定期寻求法律经济保护的平民，现代引申指购买专业服务的顾客 -> 客户，委托人；当事人。"
   },
   {
     "word": "consultant",
@@ -32121,7 +32121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 顾问。"
+    "analysis": "con-（共同） + sult- / salire（商议/跳向） + -ant -> 凭借专业深厚造诣受聘为企业机构答疑解惑出谋划策的高级专家 -> 顾问，咨询专家；会诊医生。"
   },
   {
     "word": "feasibility",
@@ -32131,7 +32131,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 可行性。"
+    "analysis": "feas- / fac-（做/实行） + -ibility -> 一项工程方案或投资计划在现有技术资金约束下能否顺利落地的可行程度 -> 可行性，实行的可能性。"
   },
   {
     "word": "interpreter",
@@ -32141,7 +32141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 口译员；译者。"
+    "analysis": "inter-（在两者之间） + pret- / price（估价/调解） -> 站在语言不通的双方中间现场实时转换言语促成沟通的口译专家 -> 口译员；解释者，译者。"
   },
   {
     "word": "laptop",
@@ -32151,7 +32151,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 笔记本电脑。"
+    "analysis": "lap（坐下时大腿膝盖形成的平坦平面） + top（顶部） -> 尺寸小巧便携、可直接稳妥放置在膝盖上移动办公的小型微电脑 -> 笔记本电脑，便携式计算机。"
   },
   {
     "word": "loyalty",
@@ -32161,7 +32161,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 忠诚。"
+    "analysis": "loyal（忠诚的） + -ty（名词后缀） -> 历经威逼利诱艰难考验依然坚守誓约法律、对组织挚友绝无背叛的赤胆忠心 -> 忠诚，忠实；忠心耿耿。"
   },
   {
     "word": "search",
@@ -32171,7 +32171,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 搜查 v. 搜查。"
+    "analysis": "circ- / cercier（围绕圆周环视查访） -> 围着特定区域不放过任何死角翻箱倒柜探查寻找蛛丝马迹 -> 搜查，搜寻；检索寻找；搜查行动。"
   },
   {
     "word": "stockbroker",
@@ -32191,7 +32191,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 证言；口供。"
+    "analysis": "testis（目击证人） + -mony（行为结果状态） -> 证人在法庭法官面前手按法典郑重立誓所陈述的案发真实口供证据 -> 证言，证词；口供；见证证明。"
   },
   {
     "word": "bonus",
@@ -32201,7 +32201,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 奖金。"
+    "analysis": "bonus（拉丁语：好的/善意的） -> 雇主在固定月薪之外因员工绩效卓越额外犒赏派发的大红包奖励 -> 奖金，红利；额外津贴；意外收获。"
   },
   {
     "word": "calorie",
@@ -32211,7 +32211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 卡路里。"
+    "analysis": "calor（热量/温度） + -ie -> 使一克水温度升高一摄氏度所必须吸收吸收的物理热量单位，营养学指摄入热能 -> 卡路里，卡（热量单位）。"
   },
   {
     "word": "campaigner",
@@ -32221,7 +32221,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 竞选者；活动家。"
+    "analysis": "campaign（战役/社会运动） + -er（人） -> 积极在基层组织集会演说为某一政治理念或慈善诉求奔走呼号的社会活动家 -> 竞选者；社会活动家，倡导者。"
   },
   {
     "word": "cell",
@@ -32231,7 +32231,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 细胞。"
+    "analysis": "cel-（隐藏/幽暗小室） -> 隐修院修道士独居清修的狭小隔间，胡克用显微镜观察软木薄片借指生命基本微观单元 -> 细胞；单人牢房；电池；蜂窝小室。"
   },
   {
     "word": "defence",
@@ -32241,7 +32241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 保卫；防御。"
+    "analysis": "de-（向下/偏离） + fendere（击打反击） -> 构筑城墙工事将敌方的箭矢刀斧重击挡在关隘之外以保家卫国 -> 保卫，防御；防守；辩护，答辩。"
   },
   {
     "word": "decade",
@@ -32251,7 +32251,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 十年。"
+    "analysis": "deca-（十） + -ade -> 日历上以整整十年为单位跨越沉淀的完整连续历史时间跨度 -> 十年，十年期。"
   },
   {
     "word": "envy",
@@ -32261,7 +32261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 羡慕；嫉妒v. 羡慕；嫉妒。"
+    "analysis": "in-（朝向） + vid-（看/带有嫉恨之眼） -> 眼红他人所享有的尊荣财富、内心翻江倒海滋生痛苦酸楚的嫉妒心境 -> 羡慕；嫉妒；羡慕嫉妒的对象。"
   },
   {
     "word": "guard",
@@ -32271,7 +32271,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 警卫v. 保护；守卫。"
+    "analysis": "ward / war-（警惕注视/戒备）同源 -> 顶盔贯甲手持兵刃日夜肃立戒备以阻绝外敌刺客入侵的哨兵警卫 -> 警卫，守卫；防卫装置；保卫，守卫。"
   },
   {
     "word": "halt",
@@ -32281,7 +32281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 停止v. 停止。"
+    "analysis": "hold（停住立足）同源变体 -> 军队行进中接到紧急旗语军令瞬间止步整队不再前进一步 -> 停止，停住；暂停中止；停顿止步。"
   },
   {
     "word": "giant",
@@ -32291,7 +32291,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 巨人:伟人 adj. 巨大的。"
+    "analysis": "源自希腊神话 Gigas（地母盖亚所生的力大无穷通天巨神） -> 身形极其巍峨庞大远超凡夫尺度的庞然大物，引申指各界巨擘泰斗 -> 巨人；伟人，巨头；巨大的，庞大的。"
   },
   {
     "word": "pearl",
@@ -32301,7 +32301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 珍珠。"
+    "analysis": "perna（外形像猪腿火腿的珠母贝） -> 珍珠贝体内受到异物刺激分泌珍珠质层层包裹凝结成的温润圆润宝珠 -> 珍珠；极有价值的人或事物。"
   },
   {
     "word": "personality",
@@ -32311,7 +32311,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 性格；个性。"
+    "analysis": "person-（戏剧假面具/角色） + -ality -> 个体在社会大舞台上呈现出的稳定独特性情风范与心理特征综合体 -> 性格，个性；人格魅力；名人。"
   },
   {
     "word": "protein",
@@ -32321,7 +32321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 蛋白质。"
+    "analysis": "proteios（处于第一位的/至关紧要的） -> 构成生命体细胞结构与酶催化功能最不可或缺的头等重要生物大分子 -> 蛋白质。"
   },
   {
     "word": "struggle",
@@ -32331,7 +32331,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 挣扎v. 挣扎；努力。"
+    "analysis": "strive / strike（抗争搏斗）同源拟声演化 -> 在逆境泥潭或重敌压迫下用尽全身骨力四肢奋起扭打挣脱抗衡 -> 挣扎，搏斗；努力奋斗，拼搏；艰难的斗争。"
   },
   {
     "word": "sort",
@@ -32341,7 +32341,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 种类 v. 整理；分类。"
+    "analysis": "sors / sort-（命运抽签分派的份额） -> 将杂乱无章混杂在一起的物料依据既定属性归入不同类别各自安放 -> 种类，类别；分类，整理；挑选（sort out）。"
   },
   {
     "word": "vary",
@@ -32351,17 +32351,17 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 变化；差异。"
+    "analysis": "varius（斑驳多彩/形形色色） -> 改变单一固定的样貌在不同时空展现出多姿多彩的差别变化 -> 变化，改变；相异，有差异；使多样化。"
   },
   {
     "word": "due",
     "phonetic": "/du:/",
     "pos": "adj.",
-    "meaning": "到期的",
+    "meaning": "adj. 预期的，预计的；到期的；应得的 prep. 由于，因为（due to）",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 到期的。"
+    "analysis": "debere（欠下应偿债务/归功于） -> 按照借贷契约或规章约定到期必须偿清结算的，引申指因为导致 -> 到期的；应付的；应得的；由于，因为（due to）。"
   },
   {
     "word": "layoff",
@@ -32371,7 +32371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 裁员；解雇。"
+    "analysis": "lay（放下） + off（离开脱离岗位） -> 经济萧条企业经营困难时资方命令工人放下工具解除用工合同让其离厂 -> 裁员，解雇；停工期。"
   },
   {
     "word": "cyber",
@@ -32381,7 +32381,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 网络的。"
+    "analysis": "cybernetics（源自希腊语 kybernetes 掌舵驾舟操控术） -> 涉及计算机网络虚拟空间、数字信息传输与控制工程的 -> 网络的，计算机虚拟空间的；信息技术的。"
   },
   {
     "word": "contaminated",
@@ -32391,7 +32391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 被感染的。"
+    "analysis": "con-（共同） + tam- / tang-（触摸接触） + -ated -> 洁净水源或食品被外界病原体有毒化学毒素触碰渗透污染致病 -> 被污染的，受感染的。"
   },
   {
     "word": "digital",
@@ -32401,7 +32401,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 数字的。"
+    "analysis": "digit（手指/脚趾数数计数） + -al -> 古人用十根手指扳指计数，现代借指将连续信息量化为离散0与1编码的电子科技 -> 数字的，数码的；手指的。"
   },
   {
     "word": "immunization",
@@ -32411,7 +32411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 免疫。"
+    "analysis": "im-（不/免除） + mun-（公共劳役/赋税义务） + -ization -> 使身体获得免于遭受外来病原体侵袭的生理免疫防卫屏障 -> 免疫接种，免疫法；免除。"
   },
   {
     "word": "mortality",
@@ -32421,7 +32421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 死亡；死亡率。"
+    "analysis": "mort-（死亡） + -ality -> 任何凡俗血肉之躯终究无法逃脱的肉体寂灭命运，人口学指死亡发生比率 -> 死亡；死亡率；必死性。"
   },
   {
     "word": "ward",
@@ -32431,7 +32431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 病房。"
+    "analysis": "guard / war-（守卫监视保护） -> 医院内由医护人员集中监视护理伤员病情的专门隔离病区房舍 -> 病房；受监护人（孤儿等）；保卫保护。"
   },
   {
     "word": "overspeed",
@@ -32441,7 +32441,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 超速v. 超速。"
+    "analysis": "over-（超过/过度） + speed（速度疾行） -> 机动车辆在公路网络上行驶超过法定标牌所限最高车速的安全违章行为 -> 超速，超速行驶；超速运转。"
   },
   {
     "word": "tent",
@@ -32451,7 +32451,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 帐篷。"
+    "analysis": "tend- / tens-（拉伸拉紧帷幔） -> 用坚固立柱支撑并将粗麻帆布向四周用防风绳牢牢拉伸固定的野外临时庇护棚屋 -> 帐篷；帐篷式遮盖物。"
   },
   {
     "word": "underground",
@@ -32461,7 +32461,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "源自古典词素生动意象（词根原始意象），合起来即生动勾勒出其在语境中的特征 -> 地铁。"
+    "analysis": "under-（在…下方） + ground（地表地面） -> 位于深厚地层地表泥土下方开凿运行的轨道交通列车网络 -> 地铁；地下的，秘密地下的；秘密组织。"
   },
   {
     "word": "federation",
@@ -32487,7 +32487,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "force",
     "phonetic": "/fɔːs/",
     "pos": "n./vt.",
-    "meaning": "n. 力量，武力；军队 vt. 强迫，迫使",
+    "meaning": "n. 力量，武力；军队，群体队伍（labor force） vt. 迫使",
     "part": "第二部分：高频专业词根族",
     "group": "【45. val / vail / forc / fort 强壮/力量/价值】",
     "analysis_type": "构词",
