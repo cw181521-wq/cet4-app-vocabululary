@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
-  <script src="words_data.js" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script></script>
+  <script src="words_data.js?v=4.0_thesaurus" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js?v=4.0_thesaurus'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
   <!-- 词组库增强引入：若 phrases_data.js 未找到则自动降级尝试 phrases_data_1200_universal.js -->
   <script src="phrases_data.js" onload="window.dispatchEvent(new CustomEvent('phrasesLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='phrases_data_1200_universal.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('phrasesLoaded'))}; s.onerror=function(){console.warn('词组库加载失败，请确保 phrases_data.js 或 phrases_data_1200_universal.js 与本页面同目录')}; document.head.appendChild(s);"></script>
   <style>
@@ -863,7 +863,7 @@
     @media print {
       body { background: #fff !important; color: #000 !important; font-size: 10pt; }
       .container { max-width: 100% !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
-      .header, .control-bar, .nav-tabs, .search-panel, #stage-area, #view-match, #view-upgrader, #view-root-dict, #view-mock, #view-mistakes, #view-tree, #view-manage, .desktop-companion-panel, #view-typing { display: none !important; }
+      .header, .control-bar, .nav-tabs, .search-panel, #stage-area, #view-match, #view-root-dict, #view-mock, #view-mistakes, #view-tree, #view-manage, .desktop-companion-panel, #view-typing { display: none !important; }
       #print-sheet-area { display: block !important; padding: 10mm 15mm; }
       .print-title { font-size: 16pt; font-weight: bold; text-align: center; margin-bottom: 4pt; }
       .print-sub { font-size: 9pt; color: #666; text-align: center; margin-bottom: 12pt; }
@@ -2296,12 +2296,7 @@
       animation: edgeGlowWarning 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
     }
 
-    body:not(.mode-speed_blitz-active) #speed-blitz-header,
-    body:not(.mode-speed_blitz-active) #speed-pause-overlay {
-      display: none !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
+
 
   
     /* 词组认知延伸看板与小品词胶囊样式 */
@@ -2509,13 +2504,10 @@
       <button class="tab-btn" onclick="switchMode('typing')">⌨️ 键盘极速盲打</button>
       <button class="tab-btn" onclick="switchMode('spell')">拼写填空</button>
       <button class="tab-btn" onclick="switchMode('flashcard')">智能闪卡</button>
-      <span class="mode-group-label">听力与速度</span>
-      <button class="tab-btn" onclick="switchMode('speed_blitz')">⚡ 三秒极速挑战</button>
-      <button class="tab-btn" onclick="switchMode('audio_clo')">🎧 盲听磨耳朵</button>
+      <span class="mode-group-label">专项突破</span>
       <button class="tab-btn" onclick="switchMode('confusables')">⚔️ 同根易混对决</button>
       <button class="tab-btn" onclick="switchMode('match_game')">🧩 短语消消乐</button>
       <button class="tab-btn" onclick="switchMode('phrases_drill')">📚 词组专练</button>
-      <button class="tab-btn" onclick="switchMode('vocab_upgrader')">✍️ 写作词汇升级</button>
       <button class="tab-btn" onclick="switchMode('root_dict')">🔍 词根逆向字典</button>
       <button class="tab-btn" onclick="switchMode('leitner_box')">📦 莱特纳五盒看板</button>
       <button class="tab-btn" onclick="switchMode('mock')">⏱️ 限时模考</button>
@@ -2537,7 +2529,6 @@
       <button class="mobile-pill-btn active" id="mpill-choice" onclick="switchMode('choice')">测试</button>
       <button class="mobile-pill-btn" id="mpill-flashcard" onclick="switchMode('flashcard')">闪卡</button>
       <button class="mobile-pill-btn" id="mpill-typing" onclick="switchMode('typing')">盲打</button>
-      <button class="mobile-pill-btn" id="mpill-speed_blitz" onclick="switchMode('speed_blitz')">极速</button>
       <button class="mobile-pill-btn" id="mpill-phrases_drill" onclick="switchMode('phrases_drill')">词组</button>
       <button class="mobile-pill-btn" id="mpill-mistakes_center" onclick="switchMode('mistakes_center')">错题</button>
       <button class="mobile-pill-btn more-btn" onclick="openMobileModeSheet()">全部模式 ☰</button>
@@ -2671,16 +2662,8 @@
           </div>
         </div>
 
-        <div class="sheet-group-title">⚡ 听力与反应速度突破</div>
+        <div class="sheet-group-title">⚡ 专项训练与对决</div>
         <div class="sheet-grid">
-          <div class="sheet-item" id="sheet-item-speed_blitz" onclick="selectModeFromSheet('speed_blitz')">
-            <span class="sheet-item-icon">⚡</span>
-            <div class="sheet-item-text"><strong>三秒极速挑战</strong><span>心跳倒计时连击</span></div>
-          </div>
-          <div class="sheet-item" id="sheet-item-audio_clo" onclick="selectModeFromSheet('audio_clo')">
-            <span class="sheet-item-icon">🎧</span>
-            <div class="sheet-item-text"><strong>盲听磨耳朵</strong><span>遮挡词形纯音辨析</span></div>
-          </div>
           <div class="sheet-item" id="sheet-item-confusables" onclick="selectModeFromSheet('confusables')">
             <span class="sheet-item-icon">⚔️</span>
             <div class="sheet-item-text"><strong>同根易混对决</strong><span>形近同族真题PK</span></div>
@@ -2697,10 +2680,6 @@
 
         <div class="sheet-group-title">📑 写作提分与全真拓展</div>
         <div class="sheet-grid">
-          <div class="sheet-item" id="sheet-item-vocab_upgrader" onclick="selectModeFromSheet('vocab_upgrader')">
-            <span class="sheet-item-icon">🌟</span>
-            <div class="sheet-item-text"><strong>写作词汇升级</strong><span>初中平庸词升四级</span></div>
-          </div>
           <div class="sheet-item" id="sheet-item-root_dict" onclick="selectModeFromSheet('root_dict')">
             <span class="sheet-item-icon">🔍</span>
             <div class="sheet-item-text"><strong>词根逆向字典</strong><span>解构全书同族词缀</span></div>
@@ -2842,22 +2821,7 @@
             </div>
           </div>
 
-          <div id="speed-blitz-header" style="display:none; margin-bottom:8px;">
-            <div class="speed-stats-bar" style="display:flex; justify-content:space-between; align-items:center;">
-              <span id="speed-lives">生命: ❤️❤️❤️</span>
-              <span id="speed-time-num" class="speed-time-num">3.0s</span>
-              <span style="color:var(--primary);" id="speed-score">得分: 0 (连击 x0)</span>
-            </div>
-            <div class="speed-timer-wrap" id="speed-timer-wrap" style="display:block; margin-top:6px;">
-              <div class="speed-timer-bar" id="speed-timer-bar"></div>
-            </div>
-          </div>
 
-          <div class="speed-pause-overlay" id="speed-pause-overlay" onclick="resumeSpeedBlitz()">
-            <div class="speed-pause-icon">⏸️</div>
-            <div class="speed-pause-title">极速挑战已自动暂停</div>
-            <div class="speed-pause-sub">页面失焦或切换时已自动冻结计时 · 点击屏幕或按 Space 键继续</div>
-          </div>
 
           <div class="word-hero-wrap">
             <div class="word-main" id="display-term">anticipate</div>
@@ -2884,13 +2848,7 @@
             <span class="speech-micro-tip" id="speech-micro-tip">🎧 连读音变提示: /kənˈsɪs.təv/ (辅元连读)</span>
           </div>
 
-          <div id="audio-autoplay-ctrl" style="margin-top:10px; display:none;">
-            <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
-              <button class="btn slow-btn" id="slow-repeat-btn" style="padding:6px 12px; font-size:0.82rem; background:var(--bg); border:1.5px solid var(--border); color:var(--text); border-radius:8px; font-weight:700;" onclick="speakCurrentWordSlowly()">🐢 0.75x 慢速辨音</button>
-              <button class="btn" id="repeat-audio-btn" style="padding:6px 12px; font-size:0.82rem; background:var(--primary-light); border:1.5px solid var(--primary); color:var(--primary); border-radius:8px; font-weight:700;" onclick="speakCurrentWord()">🔁 再次听音 (P)</button>
-            </div>
-            <button class="btn btn-primary" id="autoplay-stream-btn" style="width:100%; max-width:320px;" onclick="toggleAutoplayStream()">▶ 开启随身磨耳朵循环播报</button>
-          </div>
+
 
           <div class="flashcard-back" id="flashcard-back" style="display:none;">
             <div class="flashcard-back-inner">
@@ -2956,6 +2914,7 @@
           <span class="analysis-tag tag-gouci" id="analysis-tag">构词精解</span>
           <div class="analysis-content" id="analysis-content"></div>
           <div class="collocation-box" id="collocation-box" style="display:none;"></div>
+          <div class="syn-ant-box" id="syn-ant-box" style="display:none;"></div>
           <div class="family-radar-box" id="family-radar-box" style="display:none;">
             <div class="family-radar-head">
               <span>🌱 母词族家族雷达 (同根串记)</span>
@@ -3039,13 +2998,6 @@
       <div class="match-col" id="match-right-col"></div>
     </div>
     <div id="match-status" style="font-weight:700; text-align:center; font-size:1.1rem; color:var(--primary);"></div>
-  </div>
-
-  <!-- 3. 四级写作词汇升级器面板 -->
-  <div id="view-upgrader" class="upgrader-panel">
-    <h3 style="margin-bottom:8px; color:var(--text);">✍️ 四级写作与翻译 · 初中高分词汇升级矩阵</h3>
-    <p style="color:var(--muted); font-size:0.85rem; margin-bottom:14px;">点击下方初中平庸词，立即查看对应的四级高分词根词与替换语境：</p>
-    <div id="upgrader-cards-container"></div>
   </div>
 
   <!-- 4. 词根逆向解构字典面板 -->
@@ -3747,6 +3699,123 @@
     throw lastErr;
   }
   if (typeof window !== 'undefined') window.resilientFetch = resilientFetch;
+
+    function renderSynAntMatrix(word) {
+    if (!word) return '';
+    function cleanAndDedupGroups(groups) {
+      if (!Array.isArray(groups)) return [];
+      const result = [];
+      for (const grp of groups) {
+        if (!grp) continue;
+        const sense = grp.sense || '';
+        const rawItems = Array.isArray(grp.items) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
+        const items = [];
+        const seenWords = new Set();
+        for (const it of rawItems) {
+          const w = (typeof it === 'object' && it ? it.word : it || '').toLowerCase().trim();
+          if (w && !seenWords.has(w)) {
+            seenWords.add(w);
+            items.push(it);
+          }
+        }
+        if (items.length === 0) continue;
+        const currentWords = new Set(items.map(it => (typeof it === 'object' && it ? it.word : it || '').toLowerCase().trim()));
+        
+        let merged = false;
+        for (let i = 0; i < result.length; i++) {
+          const existingWords = new Set(result[i].items.map(it => (typeof it === 'object' && it ? it.word : it || '').toLowerCase().trim()));
+          if (currentWords.size === existingWords.size && [...currentWords].every(w => existingWords.has(w))) {
+            merged = true;
+            break;
+          }
+          if ([...currentWords].every(w => existingWords.has(w))) {
+            merged = true;
+            break;
+          }
+          if ([...existingWords].every(w => currentWords.has(w))) {
+            result[i] = { sense: result[i].sense, items: items.slice(0, 4) };
+            merged = true;
+            break;
+          }
+          const overlap = [...currentWords].filter(w => existingWords.has(w)).length;
+          if (overlap >= Math.min(currentWords.size, existingWords.size) && Math.min(currentWords.size, existingWords.size) >= 2) {
+            const combined = [...result[i].items];
+            const exW = new Set(combined.map(it => (typeof it === 'object' && it ? it.word : it || '').toLowerCase().trim()));
+            for (const it of items) {
+              const itW = (typeof it === 'object' && it ? it.word : it || '').toLowerCase().trim();
+              if (!exW.has(itW) && combined.length < 4) {
+                combined.push(it);
+                exW.add(itW);
+              }
+            }
+            result[i].items = combined;
+            merged = true;
+            break;
+          }
+        }
+        if (!merged) {
+          result.push({ sense, items: items.slice(0, 4) });
+        }
+      }
+      return result;
+    }
+
+    const synGroups = cleanAndDedupGroups(word.synonyms);
+    const antGroups = cleanAndDedupGroups(word.antonyms);
+    if (synGroups.length === 0 && antGroups.length === 0) return '';
+
+    let html = `
+      <div class="syn-ant-matrix" style="margin-top:10px; padding:10px 14px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; font-size:0.82rem; text-align:left; box-shadow:inset 0 1px 3px rgba(0,0,0,0.02);">
+        <div style="font-weight:800; font-size:0.78rem; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>🎯 核心考点语义透镜 (分义项精辨与反义对决)</span>
+        </div>
+    `;
+
+    synGroups.forEach(grp => {
+      const senseLabel = (typeof grp === 'object' && grp.sense) ? `近义 · ${grp.sense}` : '近义词';
+      const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
+      if (items.length > 0) {
+        html += `
+          <div style="display:flex; align-items:flex-start; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+            <span style="font-weight:700; color:#0369a1; background:#e0f2fe; padding:2px 8px; border-radius:6px; font-size:0.74rem; white-space:nowrap; margin-top:2px;">
+              ${Utils.escapeHTML(senseLabel)}
+            </span>
+            <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; flex:1;">
+              ${items.map(it => {
+                const wName = typeof it === 'object' ? it.word : it;
+                const wMean = (typeof it === 'object' && it.meaning) ? ` <span style="font-weight:normal; opacity:0.8; font-size:0.72rem;">(${Utils.escapeHTML(it.meaning)})</span>` : '';
+                return `<button class="syn-ant-pill-btn" style="border:1px solid var(--border, #cbd5e1); background:var(--card-bg, #ffffff); color:var(--primary, #0f766e); padding:3px 9px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-weight:700; display:inline-flex; align-items:center; transition:all 0.15s ease;" onclick="event.stopPropagation(); App.jumpToWord('${Utils.escapeHTML(wName)}');" title="点击跳转专练【${Utils.escapeHTML(wName)}】"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    antGroups.forEach(grp => {
+      const senseLabel = (typeof grp === 'object' && grp.sense) ? `反义 · ${grp.sense}` : '反义词';
+      const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
+      if (items.length > 0) {
+        html += `
+          <div style="display:flex; align-items:flex-start; flex-wrap:wrap; gap:6px; margin-bottom:4px;">
+            <span style="font-weight:700; color:#b91c1c; background:#fee2e2; padding:2px 8px; border-radius:6px; font-size:0.74rem; white-space:nowrap; margin-top:2px;">
+              ${Utils.escapeHTML(senseLabel)}
+            </span>
+            <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; flex:1;">
+              ${items.map(it => {
+                const wName = typeof it === 'object' ? it.word : it;
+                const wMean = (typeof it === 'object' && it.meaning) ? ` <span style="font-weight:normal; opacity:0.8; font-size:0.72rem;">(${Utils.escapeHTML(it.meaning)})</span>` : '';
+                return `<button class="syn-ant-pill-btn" style="border:1px solid var(--border, #cbd5e1); background:var(--card-bg, #ffffff); color:#dc2626; padding:3px 9px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-weight:700; display:inline-flex; align-items:center; transition:all 0.15s ease;" onclick="event.stopPropagation(); App.jumpToWord('${Utils.escapeHTML(wName)}');" title="点击跳转专练【${Utils.escapeHTML(wName)}】"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    html += `</div>`;
+    return html;
+  }
 
   const Utils = (function() {
     return {
@@ -4453,7 +4522,7 @@
           return;
         }
 
-        if (['choice', 'audio_clo', 'confusables', 'speed_blitz', 'mock'].includes(curMode)) {
+        if (['choice', 'confusables', 'mock'].includes(curMode)) {
           const hasAnswered = AppState.get('hasAnsweredChoice');
 
           // 若已作答 (已出解析)，主键盘数字键 1~5 自动解绑选项，直接作为保送快捷键！
@@ -5000,11 +5069,7 @@
       isTypingDrillActive: false,
       isTypingCompleted: false,
 
-      speedRemainingMs: 3000,
-      speedLives: 3,
-      speedScore: 0,
-      speedCombo: 0,
-      isSpeedBlitzPaused: false,
+
 
       recentQuestionBuffer: []
     };
@@ -5475,9 +5540,7 @@
           switch (mode) {
             case 'choice':
               return 1200;
-            case 'audio_clo':
             case 'confusables':
-            case 'speed_blitz':
               return 2000;
             case 'spell':
             case 'typing':
@@ -5976,6 +6039,10 @@
         },
 
         async saveStatsToDB(packId, statsDict) {
+          // 同步双写核心总库到 localStorage，确保词库脚本在加载第一毫秒即能无缝对齐五盒进度
+          if (isTotalPack(packId)) {
+            safeSetItem(`morpho_stats_${packId}`, statsDict);
+          }
           const db = await this.initDB();
           if (!db || !packId || !statsDict) return false;
           return new Promise((resolve) => {
@@ -6032,6 +6099,39 @@
           if (hasIdbStats) {
             Object.assign(memoryStatsCache, idbStats);
             console.log('[Storage] 已从 IndexedDB 成功预热加载词包统计，总词包数:', Object.keys(idbStats).length);
+
+            // 跨词包深度融合五盒统计：确保 all_2257 和 all_3000 均汇聚历史所有词汇进度
+            const totalCandidateKeys = ['all_2257', 'all_3000', 'all_2800', 'all_3137', 'all_3271', 'all_3535', 'all_3720', 'all_4061'];
+            const mergedTotal = {};
+            let mergedCount = 0;
+            totalCandidateKeys.forEach(k => {
+              if (idbStats[k]) {
+                for (const [w, st] of Object.entries(idbStats[k])) {
+                  if (!st) continue;
+                  if (!mergedTotal[w]) {
+                    mergedTotal[w] = { ...st };
+                    mergedCount++;
+                  } else {
+                    const cur = mergedTotal[w];
+                    const subTime = st.lastReviewed || 0;
+                    const curTime = cur.lastReviewed || 0;
+                    if (subTime >= curTime) {
+                      mergedTotal[w] = { ...cur, ...st, tested: Math.max(cur.tested || 0, st.tested || 0), mistakes: Math.max(cur.mistakes || 0, st.mistakes || 0), box: Math.max(cur.box || 1, st.box || 1) };
+                    }
+                  }
+                }
+              }
+            });
+
+            if (mergedCount > 0) {
+              memoryStatsCache['all_2257'] = { ...(memoryStatsCache['all_2257'] || {}), ...mergedTotal };
+              memoryStatsCache['all_3000'] = { ...(memoryStatsCache['all_3000'] || {}), ...mergedTotal };
+              if (db) {
+                await this.saveStatsToDB('all_2257', memoryStatsCache['all_2257']);
+                await this.saveStatsToDB('all_3000', memoryStatsCache['all_3000']);
+              }
+              console.log(`[Storage] 成功跨词包融合 ${mergedCount} 个单词历史五盒学习进度！`);
+            }
           } else {
             console.log('[Storage] IndexedDB 为空，正在检查并从 localStorage 平滑迁移...');
             const localStats = this.fallbackLoadFromLocalStorage();
@@ -7866,6 +7966,7 @@
             const targetPacks = new Set(relatedPacks);
             targetPacks.add(originPid);
             targetPacks.add('all_2257');
+            targetPacks.add('all_2800');
 
             targetPacks.forEach(pId => {
               if (!targetStats[pId]) targetStats[pId] = {};
@@ -8333,8 +8434,8 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
   const RouteDispatcher = (function() {
     const VALID_MODES = new Set([
-      'choice', 'typing', 'spell', 'flashcard', 'speed_blitz',
-      'audio_clo', 'confusables', 'match_game', 'phrases_drill', 'vocab_upgrader',
+      'choice', 'typing', 'spell', 'flashcard',
+      'confusables', 'match_game', 'phrases_drill',
       'root_dict', 'leitner_box', 'mock', 'mistakes_center', 'tree', 'manage'
     ]);
 
@@ -8828,16 +8929,27 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (subEl) subEl.innerText = word.phonetic || '';
 
         if (backEl) {
+          const synAntHtml = renderSynAntMatrix(word);
+          let embeddedInitHtml = '';
+          if (word && (word.analysis || word.collocation || synAntHtml)) {
+            const isExt = (word.analysis_type === '引申');
+            const tagClass = isExt ? 'tag-yinshen' : 'tag-gouci';
+            const tagTitle = isExt ? '语义引申逻辑' : '形态学构词精解';
+            embeddedInitHtml = `
+              <div class="flashcard-embedded-analysis" id="flashcard-embedded-analysis">
+                ${word.analysis ? `<span class="flashcard-analysis-tag ${tagClass}">${tagTitle}</span><div class="flashcard-analysis-text">${Utils.escapeHTML(word.analysis)}</div>` : ''}
+                ${word.collocation ? `<div class="flashcard-collocation-text">【核心搭配】: ${Utils.escapeHTML(word.collocation)}</div>` : ''}
+                ${synAntHtml}
+              </div>
+            `;
+          }
+
           backEl.style.display = 'grid';
           backEl.classList.remove('is-revealed');
           backEl.innerHTML = `
             <div class="flashcard-back-inner">
               <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word.pos || '')} ${Utils.escapeHTML(word.meaning || '')}</div>
-              <div class="flashcard-embedded-analysis" id="flashcard-embedded-analysis" style="display:none;">
-                <span class="flashcard-analysis-tag tag-gouci" id="flashcard-analysis-tag">形态学构词精解</span>
-                <div class="flashcard-analysis-text" id="flashcard-analysis-text"></div>
-                <div class="flashcard-collocation-text" id="flashcard-collocation-text" style="display:none;"></div>
-              </div>
+              ${embeddedInitHtml}
               <div class="flashcard-swipe-hint-mobile">‹ 左滑生疏 · 右滑掌握 ›</div>
             </div>
           `;
@@ -9039,11 +9151,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           const tagClass = isExt ? 'tag-yinshen' : 'tag-gouci';
           const tagTitle = isExt ? '语义引申逻辑' : '形态学构词精解';
 
+          const synAntHtml = (typeof renderSynAntMatrix === 'function') ? renderSynAntMatrix(word) : '';
           embeddedAnalysisHtml = `
             <div class="flashcard-embedded-analysis" id="flashcard-embedded-analysis">
-              <span class="flashcard-analysis-tag ${tagClass}">${tagTitle}</span>
-              <div class="flashcard-analysis-text">${Utils.escapeHTML(word.analysis || '')}</div>
+              ${word.analysis ? `<span class="flashcard-analysis-tag ${tagClass}">${tagTitle}</span><div class="flashcard-analysis-text">${Utils.escapeHTML(word.analysis)}</div>` : ''}
               ${word.collocation ? `<div class="flashcard-collocation-text">【核心搭配】: ${Utils.escapeHTML(word.collocation)}</div>` : ''}
+              ${synAntHtml}
             </div>
           `;
         }
@@ -10787,272 +10900,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    const SpeedBlitz = {
-      timerId: null,
-      lastTick: 0,
-
-      enter(prevMode) {
-        if (typeof document !== 'undefined') {
-          document.body.classList.add('mode-speed_blitz-active');
-          const header = document.getElementById('speed-blitz-header');
-          if (header) header.style.display = 'block';
-        }
-      },
-
-      leave(nextMode) {
-        if (typeof document !== 'undefined') {
-          document.body.classList.remove('mode-speed_blitz-active');
-          const header = document.getElementById('speed-blitz-header');
-          if (header) header.style.display = 'none';
-          const overlay = document.getElementById('speed-pause-overlay');
-          if (overlay) overlay.style.display = 'none';
-        }
-        this.cleanup();
-      },
-
-      render(word) {
-        this.cleanup();
-        if (typeof document !== 'undefined') {
-          document.body.classList.add('mode-speed_blitz-active');
-        }
-        const header = document.getElementById('speed-blitz-header');
-        if (header) header.style.display = 'block';
-
-        const lives = AppState.get('speedLives');
-        const score = AppState.get('speedScore');
-        const combo = AppState.get('speedCombo');
-
-        const livesEl = document.getElementById('speed-lives');
-        const scoreEl = document.getElementById('speed-score');
-        if (livesEl) livesEl.innerText = `生命: ${'❤️'.repeat(lives)}${'🖤'.repeat(3 - lives)}`;
-        if (scoreEl) scoreEl.innerText = `得分: ${score} (连击 x${combo})`;
-
-        Choice.render(word);
-
-        AppState.update('speedRemainingMs', 3000);
-        AppState.update('isSpeedBlitzPaused', false);
-        this.hidePauseOverlay();
-        this.updateUI();
-
-        this.lastTick = Date.now();
-        this.timerId = LifecycleScheduler.setInterval(() => {
-          if (AppState.get('isSpeedBlitzPaused')) {
-            this.lastTick = Date.now();
-            return;
-          }
-          const now = Date.now();
-          const delta = now - this.lastTick;
-          this.lastTick = now;
-
-          const rem = Math.max(0, AppState.get('speedRemainingMs') - delta);
-          AppState.update('speedRemainingMs', rem);
-          this.updateUI();
-
-          if (rem <= 0) {
-            this.cleanup();
-            this.handleAnswer(false, true);
-          }
-        }, 50);
-      },
-
-      updateUI() {
-        const rem = AppState.get('speedRemainingMs');
-        const sec = (rem / 1000).toFixed(1);
-        const timeNumEl = document.getElementById('speed-time-num');
-        const bar = document.getElementById('speed-timer-bar');
-
-        if (timeNumEl) {
-          timeNumEl.innerText = `${sec}s`;
-          timeNumEl.classList.remove('warning', 'danger');
-          if (rem <= 1000) timeNumEl.classList.add('danger');
-          else if (rem <= 2000) timeNumEl.classList.add('warning');
-        }
-
-        if (bar) {
-          const pct = (rem / 3000) * 100;
-          bar.style.width = `${pct}%`;
-          if (rem <= 1000) bar.style.background = '#ef4444';
-          else if (rem <= 2000) bar.style.background = '#f59e0b';
-          else bar.style.background = '#10b981';
-        }
-      },
-
-      pause() {
-        if (AppState.get('speedRemainingMs') <= 0) return;
-        AppState.update('isSpeedBlitzPaused', true);
-        const overlay = document.getElementById('speed-pause-overlay');
-        if (overlay) {
-          overlay.style.display = 'flex';
-          ModalStackManager.openModal('speed_pause', () => this.resume(), overlay);
-        }
-      },
-
-      resume() {
-        AppState.update('isSpeedBlitzPaused', false);
-        this.lastTick = Date.now();
-        this.hidePauseOverlay(false);
-      },
-
-      hidePauseOverlay(isPopState = false) {
-        const overlay = document.getElementById('speed-pause-overlay');
-        if (overlay) {
-          overlay.style.display = 'none';
-          ModalStackManager.dismissModal('speed_pause', { triggerHistoryBack: !isPopState });
-        }
-      },
-
-      handleAnswer(isCorrect, isTimeout = false) {
-        this.cleanup();
-        const feedbackEl = document.getElementById('feedback');
-
-        if (isCorrect) {
-          AppState.update('speedCombo', c => c + 1);
-          const combo = AppState.get('speedCombo');
-          AppState.update('speedScore', s => s + 10 * combo);
-          if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success); font-weight:bold;">⚡ 极速答对！+${10 * combo}分 (连击 x${combo})</span>`;
-          App.recordAnswer(true);
-          LifecycleScheduler.setTimeout(() => { if (AppState.get('currentMode') === 'speed_blitz') App.nextQuestion(); }, 350);
-        } else {
-          AppState.update('speedCombo', 0);
-          AppState.update('speedLives', l => Math.max(0, l - 1));
-          const lives = AppState.get('speedLives');
-
-          const livesEl = document.getElementById('speed-lives');
-          if (livesEl) livesEl.innerText = `生命: ${'❤️'.repeat(lives)}${'🖤'.repeat(3 - lives)}`;
-
-          if (feedbackEl) {
-            feedbackEl.innerHTML = isTimeout
-              ? `<span style="color:var(--danger); font-weight:bold;">⏰ 时间到！已扣除 1 点生命</span>`
-              : `<span style="color:var(--danger); font-weight:bold;">❌ 答错！已扣除 1 点生命</span>`;
-          }
-
-          App.recordAnswer(false);
-
-          if (lives <= 0) {
-            UIModal.alert({
-              title: '💥 极速挑战结算',
-              message: `极速挑战结束！最终得分: ${AppState.get('speedScore')}
-已自动保存本次训练成果。`
-            });
-            AppState.update('speedLives', 3);
-            AppState.update('speedScore', 0);
-            App.switchMode('choice');
-          } else {
-            LifecycleScheduler.setTimeout(() => { if (AppState.get('currentMode') === 'speed_blitz') App.nextQuestion(); }, 500);
-          }
-        }
-      },
-
-      cleanup() {
-        if (this.timerId) {
-          LifecycleScheduler.clearInterval(this.timerId);
-          this.timerId = null;
-        }
-        this.hidePauseOverlay(false);
-        if (typeof document !== 'undefined') {
-          if (AppState.get('currentMode') !== 'speed_blitz') {
-            document.body.classList.remove('mode-speed_blitz-active');
-            const header = document.getElementById('speed-blitz-header');
-            if (header) header.style.display = 'none';
-          }
-          const overlay = document.getElementById('speed-pause-overlay');
-          if (overlay) overlay.style.display = 'none';
-          const timeNumEl = document.getElementById('speed-time-num');
-          if (timeNumEl) timeNumEl.classList.remove('warning', 'danger');
-          const bar = document.getElementById('speed-timer-bar');
-          if (bar) bar.style.width = '100%';
-        }
-      }
-    };
-
-    const AudioCloze = {
-      autoplayTimer: null,
-      isAutoplaying: false,
-
-      enter(prevMode) {
-        const audioCtrl = document.getElementById('audio-autoplay-ctrl');
-        if (audioCtrl) audioCtrl.style.display = 'block';
-      },
-
-      leave(nextMode) {
-        this.cleanup();
-        const audioCtrl = document.getElementById('audio-autoplay-ctrl');
-        if (audioCtrl) audioCtrl.style.display = 'none';
-      },
-
-      render(word) {
-        this.cleanup();
-        const termEl = document.getElementById('display-term');
-        const subEl = document.getElementById('display-sub');
-        const audioCtrl = document.getElementById('audio-autoplay-ctrl');
-
-        if (termEl) termEl.innerText = '🎧 [ 盲听辨音中... ]';
-        if (subEl) subEl.innerText = '按 P 键重复发音，选择正确中文释义';
-        if (audioCtrl) audioCtrl.style.display = 'block';
-
-        Services.Audio.playWord(word.word);
-        Choice.render(word);
-      },
-
-      toggleAutoplay() {
-        this.isAutoplaying = !this.isAutoplaying;
-        const btn = document.getElementById('autoplay-stream-btn');
-        if (this.isAutoplaying) {
-          if (btn) {
-            btn.innerText = '⏸ 暂停随身磨耳朵循环';
-            btn.style.background = '#dc2626';
-          }
-          this.runAutoplayStep();
-        } else {
-          if (btn) {
-            btn.innerText = '▶ 开启随身磨耳朵循环播报';
-            btn.style.background = 'var(--primary)';
-          }
-          if (this.autoplayTimer) LifecycleScheduler.clearTimeout(this.autoplayTimer);
-        }
-      },
-
-      runAutoplayStep() {
-        if (!this.isAutoplaying) return;
-        const word = AppState.get('currentWord');
-        if (!word) return;
-
-        const wantEn = AppState.get('speakEnabledEn') !== false;
-        const wantZh = AppState.get('speakEnabledZh') !== false;
-
-        if (wantEn) Services.Audio.playWord(word.word);
-
-        this.autoplayTimer = LifecycleScheduler.setTimeout(() => {
-          if (!this.isAutoplaying) return;
-          if (wantZh && 'speechSynthesis' in window) {
-            const zhUtter = new SpeechSynthesisUtterance(word.meaning);
-            zhUtter.lang = 'zh-CN';
-            window.speechSynthesis.speak(zhUtter);
-          }
-          this.autoplayTimer = LifecycleScheduler.setTimeout(() => {
-            if (!this.isAutoplaying) return;
-            App.nextQuestion();
-            this.runAutoplayStep();
-          }, 2200);
-        }, wantEn ? 1800 : 0);
-      },
-
-      cleanup() {
-        if (this.autoplayTimer) {
-          LifecycleScheduler.clearTimeout(this.autoplayTimer);
-          this.autoplayTimer = null;
-        }
-        this.isAutoplaying = false;
-        const btn = document.getElementById('autoplay-stream-btn');
-        if (btn) {
-          btn.innerText = '▶ 开启随身磨耳朵循环播报';
-          btn.style.background = 'var(--primary)';
-        }
-        const audioCtrl = document.getElementById('audio-autoplay-ctrl');
-        if (audioCtrl) audioCtrl.style.display = 'none';
-      }
-    };
-
     const Confusables = {
       enter(prevMode) {},
       leave(nextMode) { Choice.cleanup(); },
@@ -11197,116 +11044,6 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       }
     };
 
-    const VocabUpgrader = {
-      UPGRADES: [
-        {
-          plain: "important (重要的)",
-          upgrades: [
-            { word: "vital", meaning: "至关重要的 (关乎生命存亡)", example: "Regular physical exercise plays a vital role in sustaining cardiovascular health." },
-            { word: "crucial", meaning: "决定性的，关键的 (处于十字路口)", example: "International collaboration is crucial for solving global climate challenges." },
-            { word: "essential", meaning: "必不可少的，本质的", example: "Critical thinking is an essential skill for university undergraduates." },
-            { word: "significant", meaning: "显著的，重大的 (值得专门立标记)", example: "The past decade witnessed significant breakthroughs in artificial intelligence." },
-            { word: "decisive", meaning: "决定性的，一锤定音的", example: "Effective leadership proved to be the decisive factor in overcoming the crisis." }
-          ]
-        },
-        {
-          plain: "change (改变，转变)",
-          upgrades: [
-            { word: "transform", meaning: "彻底改造，使改变形态", example: "Digital connectivity has transformed traditional educational paradigms." },
-            { word: "alter", meaning: "变更，轻度修改", example: "We cannot alter past events, but we can actively reshape our future trajectory." },
-            { word: "shift", meaning: "转移，转变焦点", example: "Societal attitudes have shifted towards prioritizing renewable sustainability." },
-            { word: "convert", meaning: "转变，转换信仰/用途", example: "Engineers developed innovative devices to convert solar energy into electricity." },
-            { word: "reform", meaning: "改革，革新弊端", example: "Comprehensive policies were implemented to reform municipal transport systems." }
-          ]
-        },
-        {
-          plain: "increase (增加，提高)",
-          upgrades: [
-            { word: "accelerate", meaning: "加速，提速", example: "Government funding will accelerate the deployment of green infrastructure." },
-            { word: "boost", meaning: "大幅提升，托举", example: "Active classroom discussion can boost student engagement and confidence." },
-            { word: "surge", meaning: "激增，如巨浪翻涌", example: "Online retail sales surged dramatically during the nationwide festival." },
-            { word: "multiply", meaning: "倍增，成倍增加", example: "Scientific innovations multiply our capacity to resolve complex global issues." }
-          ]
-        },
-        {
-          plain: "decrease (减少，降低)",
-          upgrades: [
-            { word: "diminish", meaning: "使缩减，使减到最低", example: "Unchecked pollution will diminish biodiversity across sensitive marine zones." },
-            { word: "decline", meaning: "衰退，下降", example: "Birth rates declined steadily throughout developed urban metropolitan areas." },
-            { word: "deplete", meaning: "大幅消耗，使枯竭", example: "Overfishing threatens to deplete marine ecological reserves irreversibly." },
-            { word: "shrink", meaning: "缩水，萎缩", example: "Polar ice caps shrink rapidly under persistent global warming trends." }
-          ]
-        },
-        {
-          plain: "show (表明，展示)",
-          upgrades: [
-            { word: "demonstrate", meaning: "证明，论证", example: "Empirical data demonstrates a strong correlation between literacy and prosperity." },
-            { word: "reveal", meaning: "揭示，揭露真相", example: "The investigative survey revealed unexpected trends in adolescent habits." },
-            { word: "illustrate", meaning: "阐明，图解", example: "Historical archives illustrate the evolution of international diplomatic treaties." },
-            { word: "indicate", meaning: "指示，暗示表明", example: "Recent economic indicators indicate a robust post-pandemic revival." }
-          ]
-        }
-      ],
-
-      enter(prevMode) {
-        const el = document.getElementById('view-upgrader');
-        if (el) el.style.display = 'block';
-        this.render();
-      },
-
-      leave(nextMode) {
-        const el = document.getElementById('view-upgrader');
-        if (el) el.style.display = 'none';
-      },
-
-      render() {
-        const container = document.getElementById('upgrader-cards-container');
-        if (!container) return;
-        container.innerHTML = '';
-
-        this.UPGRADES.forEach(group => {
-          const card = document.createElement('div');
-          card.className = 'upgrader-card';
-          card.innerHTML = `
-            <div class="upgrader-head">
-              <span>初中平庸词：<strong>${Utils.escapeHTML(group.plain)}</strong></span>
-              <span style="font-size:0.8rem; color:var(--muted);">四级提分映射</span>
-            </div>
-            <div style="font-size:0.85rem; color:var(--muted);">点击升级词查看深度考点例句：</div>
-            <div class="upgrader-pills">
-              ${group.upgrades.map((u, uIdx) => `<button class="upgrader-pill" onclick="Views.VocabUpgrader.showDetail('${Utils.escapeHTML(group.plain)}', ${uIdx})">⭐ ${Utils.escapeHTML(u.word)} (${Utils.escapeHTML(u.meaning)})</button>`).join('')}
-            </div>
-            <div id="upgrade-detail-${Utils.escapeHTML(group.plain.split(' ')[0])}" style="margin-top:10px; font-size:0.9rem; padding:10px; background:var(--card-bg); border-radius:8px; border:1px solid var(--border); display:none;"></div>
-          `;
-          container.appendChild(card);
-        });
-      },
-
-      showDetail(groupKey, uIdx) {
-        const plainWord = groupKey.split(' ')[0];
-        const group = this.UPGRADES.find(g => g.plain === groupKey);
-        if (!group) return;
-        const u = group.upgrades[uIdx];
-
-        const box = document.getElementById(`upgrade-detail-${plainWord}`);
-        if (!box) return;
-        box.style.display = 'block';
-        box.innerHTML = `
-          <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--primary); margin-bottom:4px;">
-            <span>${Utils.escapeHTML(u.word)}</span>
-            <button class="btn" style="padding:2px 6px; font-size:0.75rem;" onclick="Services.Audio.playWord('${Utils.escapeHTML(u.word)}')">🔊 发音</button>
-          </div>
-          <div><strong>释义：</strong>${Utils.escapeHTML(u.meaning)}</div>
-          <div style="margin-top:6px; color:#0369a1; font-style:italic;"><strong>真题高分句：</strong>${Utils.escapeHTML(u.example)}</div>
-        `;
-      },
-
-      cleanup() {}
-    };
-
-    // -----------------------------------------------------------------------
-    // [5.9.5 PhrasesDrill View - 词组专练系统 (已修复方法名与全环境多别名读取)]
-    // -----------------------------------------------------------------------
     const PhrasesDrill = {
       phrasesData: [],
       filteredPhrases: [],
@@ -13494,12 +13231,9 @@ ${errDetail}
       Typing,
       Spell,
       Flashcard,
-      SpeedBlitz,
-      AudioCloze,
       Confusables,
       MatchGame,
       PhrasesDrill,
-      VocabUpgrader,
       MockExam,
       MistakesCenter,
       Tree,
@@ -13510,12 +13244,9 @@ ${errDetail}
       typing: Typing,
       spell: Spell,
       flashcard: Flashcard,
-      speed_blitz: SpeedBlitz,
-      audio_clo: AudioCloze,
       confusables: Confusables,
       match_game: MatchGame,
       phrases_drill: PhrasesDrill,
-      vocab_upgrader: VocabUpgrader,
       mock: MockExam,
       mistakes_center: MistakesCenter,
       tree: Tree,
@@ -13599,18 +13330,23 @@ ${errDetail}
     });
     updateHeight();
   }
-  const App = (function() {
+  
+    function isTotalPack(packId) {
+      if (!packId) return false;
+      return packId === 'all_2257' || packId === 'all_2800' || packId === 'all_3000' || (typeof packId === 'string' && packId.startsWith('all_'));
+    }
+const App = (function() {
     const BUILTIN_WORDS = [
-      { word: "anticipate", phonetic: "/ænˈtɪsɪpeɪt/", pos: "vt.", meaning: "预料，预期；期望", group: "【cip, capt】抓，拿", analysis: "anti (前) + cip (抓) + ate → 提前抓取 → 预料", example: "We did not anticipate such rapid economic development in this region." },
-      { word: "spectacular", phonetic: "/spɛkˈtækjələr/", pos: "adj.", meaning: "壮观的，引人注目的；惊人的", group: "【spect】看", analysis: "spect (看) + acular (多的) → 让人忍不住一直看的 → 壮观的", example: "The national park offers a spectacular view of the mountain peaks." },
-      { word: "inspect", phonetic: "/ɪnˈspɛkt/", pos: "vt.", meaning: "视察，检查，审阅", group: "【spect】看", analysis: "in (向内) + spect (看) → 往里面仔细看 → 视察", example: "The safety officer arrived to inspect the mechanical facilities thoroughly." },
-      { word: "attribute", phonetic: "/əˈtrɪbjuːt/", pos: "vt.", meaning: "把…归因于；属性", group: "【tribut】给予", analysis: "ad (去) + tribut (给) + e → 把原因归给 → 归因于", example: "He attributes his success to hard work." },
-      { word: "conform", phonetic: "/kənˈfɔːm/", pos: "vi.", meaning: "遵守，符合；顺从", group: "【form】形状", analysis: "con (共同) + form (形状) → 形成相同的形状 → 顺从", example: "All products must conform to national safety standards." },
-      { word: "accelerate", phonetic: "/əkˈsɛləreɪt/", pos: "v.", meaning: "加速，促进", group: "【celer】速度", analysis: "ac (加强) + celer (速度) + ate → 加快速度 → 加速", example: "The government took steps to accelerate economic reform." },
-      { word: "substantial", phonetic: "/səbˈstænʃəl/", pos: "adj.", meaning: "大量的，实质的", group: "【sta】站立", analysis: "sub (在下) + stant (站立) + ial → 在底下站得稳的 → 牢固的、大量的", example: "There has been substantial progress." },
-      { word: "flexible", phonetic: "/ˈflɛksəbəl/", pos: "adj.", meaning: "易弯曲的，灵活的", group: "【flect, flex】弯曲", analysis: "flex (弯曲) + ible (可...的) → 能弯曲的 → 灵活的", example: "We need a more flexible working arrangement." },
-      { word: "eliminate", phonetic: "/ɪˈlɪmɪneɪt/", pos: "vt.", meaning: "消除，淘汰，根除", group: "【limin】门槛", analysis: "e (出) + limin (门槛) + ate → 逐出门槛之外 → 消除", example: "Regular exercise helps eliminate physical fatigue." },
-      { word: "negotiate", phonetic: "/nɪˈɡoʊʃieɪt/", pos: "v.", meaning: "谈判，协商", group: "【neg, otium】商务", analysis: "neg (不) + otium (空闲) + ate → 没有闲暇做买卖 → 谈判", example: "The two countries met to negotiate a trade agreement." }
+      { word: "anticipate", phonetic: "/ænˈtɪsɪpeɪt/", pos: "vt.", meaning: "预料，预期；期望", group: "【cip, capt】抓，拿", analysis: "anti (前) + cip (抓) + ate → 提前抓取 → 预料", synonyms: ["expect", "foresee"], antonyms: [], example: "We did not anticipate such rapid economic development in this region." },
+      { word: "spectacular", phonetic: "/spɛkˈtækjələr/", pos: "adj.", meaning: "壮观的，引人注目的；惊人的", group: "【spect】看", analysis: "spect (看) + acular (多的) → 让人忍不住一直看的 → 壮观的", synonyms: ["breathtaking", "magnificent"], antonyms: ["ordinary"], example: "The national park offers a spectacular view of the mountain peaks." },
+      { word: "inspect", phonetic: "/ɪnˈspɛkt/", pos: "vt.", meaning: "视察，检查，审阅", group: "【spect】看", analysis: "in (向内) + spect (看) → 往里面仔细看 → 视察", synonyms: ["examine", "check"], antonyms: ["ignore", "overlook"], example: "The safety officer arrived to inspect the mechanical facilities thoroughly." },
+      { word: "attribute", phonetic: "/əˈtrɪbjuːt/", pos: "vt.", meaning: "把…归因于；属性", group: "【tribut】给予", analysis: "ad (去) + tribut (给) + e → 把原因归给 → 归因于", synonyms: ["ascribe"], antonyms: [], example: "He attributes his success to hard work." },
+      { word: "conform", phonetic: "/kənˈfɔːm/", pos: "vi.", meaning: "遵守，符合；顺从", group: "【form】形状", analysis: "con (共同) + form (形状) → 形成相同的形状 → 顺从", synonyms: ["comply", "obey"], antonyms: ["defy", "rebel"], example: "All products must conform to national safety standards." },
+      { word: "accelerate", phonetic: "/əkˈsɛləreɪt/", pos: "v.", meaning: "加速，促进", group: "【celer】速度", analysis: "ac (加强) + celer (速度) + ate → 加快速度 → 加速", synonyms: ["speed", "quicken"], antonyms: ["decelerate", "delay"], example: "The government took steps to accelerate economic reform." },
+      { word: "substantial", phonetic: "/səbˈstænʃəl/", pos: "adj.", meaning: "大量的，实质的", group: "【sta】站立", analysis: "sub (在下) + stant (站立) + ial → 在底下站得稳的 → 牢固的、大量的", synonyms: ["considerable", "significant"], antonyms: ["trivial", "slight"], example: "There has been substantial progress." },
+      { word: "flexible", phonetic: "/ˈflɛksəbəl/", pos: "adj.", meaning: "易弯曲的，灵活的", group: "【flect, flex】弯曲", analysis: "flex (弯曲) + ible (可...的) → 能弯曲的 → 灵活的", synonyms: ["elastic", "adaptable"], antonyms: ["rigid", "stiff"], example: "We need a more flexible working arrangement." },
+      { word: "eliminate", phonetic: "/ɪˈlɪmɪneɪt/", pos: "vt.", meaning: "消除，淘汰，根除", group: "【limin】门槛", analysis: "e (出) + limin (门槛) + ate → 逐出门槛之外 → 消除", synonyms: ["remove", "eradicate"], antonyms: ["retain"], example: "Regular exercise helps eliminate physical fatigue." },
+      { word: "negotiate", phonetic: "/nɪˈɡoʊʃieɪt/", pos: "v.", meaning: "谈判，协商", group: "【neg, otium】商务", analysis: "neg (不) + otium (空闲) + ate → 没有闲暇做买卖 → 谈判", synonyms: ["bargain", "consult"], antonyms: [], example: "The two countries met to negotiate a trade agreement." }
     ];
 
     function normalizeWord(item) {
@@ -13638,6 +13374,8 @@ ${errDetail}
         collocation: item.collocation || '',
         sentenceEn: item.sentenceEn || item.example || '',
         sentenceCn: item.sentenceCn || '',
+        synonyms: Array.isArray(item.synonyms) ? item.synonyms : [],
+        antonyms: Array.isArray(item.antonyms) ? item.antonyms : [],
         isGhost: Boolean(item.isGhost)
       };
     }
@@ -13686,14 +13424,15 @@ ${errDetail}
         const allPStats = AppState.get('packStats') || {};
         const allPacks = AppState.get('allPacks') || {};
 
-        const existingTotal = allPStats['all_2257'] || Services.Storage.getStats('all_2257') || {};
+        // 汇集当前总库已有统计（优先 all_2257 与 all_2800）
+        const existingTotal = allPStats['all_2257'] || allPStats['all_2800'] || Services.Storage.getStats('all_2257') || Services.Storage.getStats('all_2800') || {};
         const aggregated = {};
         for (const [w, st] of Object.entries(existingTotal)) {
-          aggregated[w] = { ...st };
+          if (st) aggregated[w] = { ...st };
         }
 
         for (const [packId, pack] of Object.entries(allPacks)) {
-          if (packId === 'all_2257') continue;
+          if (isTotalPack(packId)) continue; // 核心：跳过总库自身，避免自我循环合并覆盖
           let pStat = allPStats[packId];
           if (!pStat || Object.keys(pStat).length === 0) {
             pStat = Services.Storage.getStats(packId);
@@ -13732,9 +13471,18 @@ ${errDetail}
           }
         }
 
+        // 全链路双向对齐：将聚合结果同步更新并存盘到所有总库母包 (all_2257, all_2800)
+        for (const pId of Object.keys(allPacks)) {
+          if (isTotalPack(pId)) {
+            allPStats[pId] = aggregated;
+            Services.Storage.saveStats(pId, aggregated, true);
+          }
+        }
         allPStats['all_2257'] = aggregated;
+        allPStats['all_2800'] = aggregated;
         AppState.update('packStats', allPStats);
         Services.Storage.saveStats('all_2257', aggregated, true);
+        Services.Storage.saveStats('all_2800', aggregated, true);
         return aggregated;
       },
 
@@ -13746,6 +13494,7 @@ ${errDetail}
         const targetPacks = new Set(relatedPacks);
         if (originPackId) targetPacks.add(originPackId);
         targetPacks.add('all_2257');
+        targetPacks.add('all_2800');
 
         targetPacks.forEach(pId => {
           if (!pStats[pId]) {
@@ -14834,6 +14583,16 @@ ${errDetail}
         if (typeof Services !== 'undefined' && Services.Storage && Services.Storage.loadPacksFromDB) {
           Services.Storage.loadPacksFromDB().then((cachedPacks) => {
             if (cachedPacks && typeof cachedPacks === 'object') {
+              const sampleWord = cachedPacks.all_2257?.words?.[0] || cachedPacks.all_2800?.words?.[0];
+              const isStaleCache = sampleWord && !('synonyms' in sampleWord);
+              if (isStaleCache) {
+                console.log('[Storage] 检测到本地 IndexedDB 词库缺少近反义词扩展字段，自动清除旧缓存并等待加载最新 words_data.js...');
+                try {
+                  const tx = dbInstance.transaction(['vocab_cache'], 'readwrite');
+                  tx.objectStore('vocab_cache').delete('primary_packs');
+                } catch (_) {}
+                return;
+              }
               const cachedTotal = Object.values(cachedPacks).reduce((sum, p) => sum + (p.words ? p.words.length : 0), 0);
               if (cachedTotal > 20) {
                 const currentTotal = AppState.get('allPacks')?.['all_2257']?.words?.length || 0;
@@ -14944,7 +14703,6 @@ ${errDetail}
         this.switchTheme(savedTheme);
 
         this.restorePreferences();
-        Views.VocabUpgrader.render();
         this.initDailyActivity();
         this.initCloudConfig();
 
@@ -15171,10 +14929,17 @@ ${errDetail}
         const pool = [...pack.words];
         let savedStats;
 
-        if (packId === 'all_2257') {
+        if (isTotalPack(packId)) {
           savedStats = this.getAggregatedStatsForTotal();
         } else {
-          savedStats = Services.Storage.getStats(packId);
+          savedStats = Services.Storage.getStats(packId) || {};
+          // ★ 五盒跨词包无缝对齐：若子单元中单词尚无独立记录，无损继承全书总库中该单词的历史五盒进度
+          const totalMasterStats = AppState.get('packStats')['all_2257'] || AppState.get('packStats')['all_2800'] || Services.Storage.getStats('all_2257') || Services.Storage.getStats('all_2800') || {};
+          pool.forEach(w => {
+            if (!savedStats[w.word] && totalMasterStats[w.word]) {
+              savedStats[w.word] = { ...totalMasterStats[w.word] };
+            }
+          });
         }
 
         pool.forEach(w => {
@@ -15339,7 +15104,7 @@ ${errDetail}
         AppState.update('dueReviewSession', session);
 
         const curMode = AppState.get('currentMode');
-        const isQuestionMode = ['choice', 'flashcard', 'spell', 'speed_blitz', 'audio_clo', 'confusables'].includes(curMode);
+        const isQuestionMode = ['choice', 'flashcard', 'spell', 'confusables'].includes(curMode);
         if (!isQuestionMode) {
           this.switchMode('choice');
         }
@@ -16214,20 +15979,8 @@ ${errDetail}
 
       renderCurrentView(options = { silent: false }) {
         const mode = AppState.get('currentMode');
-        const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'speed_blitz', 'audio_clo', 'confusables'].includes(mode);
+        const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'confusables'].includes(mode);
         if (!isQuestionMode) return;
-
-        if (typeof document !== 'undefined') {
-          if (mode !== 'speed_blitz') {
-            document.body.classList.remove('mode-speed_blitz-active');
-            const spHeader = document.getElementById('speed-blitz-header');
-            if (spHeader) spHeader.style.display = 'none';
-            const spOverlay = document.getElementById('speed-pause-overlay');
-            if (spOverlay) spOverlay.style.display = 'none';
-          } else {
-            document.body.classList.add('mode-speed_blitz-active');
-          }
-        }
 
         const word = AppState.get('currentWord');
         if (!word) return;
@@ -16303,9 +16056,7 @@ ${errDetail}
         }
 
         try {
-          if (mode === 'speed_blitz') Views.SpeedBlitz.render(word);
-          else if (mode === 'audio_clo') Views.AudioCloze.render(word);
-          else if (mode === 'confusables') Views.Confusables.render(word);
+          if (mode === 'confusables') Views.Confusables.render(word);
           else if (mode === 'choice') Views.Choice.render(word);
           else if (mode === 'spell') Views.Spell.render(word);
           else if (mode === 'flashcard') Views.Flashcard.render(word);
@@ -16332,7 +16083,7 @@ ${errDetail}
         } catch (_) {}
 
         const autoSpeak = typeof document !== 'undefined' ? document.getElementById('auto-speak-chk')?.checked : false;
-        if (!options?.silent && autoSpeak && mode !== 'spell' && mode !== 'audio_clo' && mode !== 'typing') {
+        if (!options?.silent && autoSpeak && mode !== 'spell' && mode !== 'typing') {
           Services.Audio.playWord(word.word);
         }
       },
@@ -16353,7 +16104,7 @@ ${errDetail}
         }
 
         const curMode = AppState.get('currentMode');
-        const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'speed_blitz', 'audio_clo', 'confusables'].includes(curMode);
+        const isQuestionMode = ['choice', 'typing', 'spell', 'flashcard', 'confusables'].includes(curMode);
         if (isQuestionMode && options.refreshStage) {
           this.renderCurrentView({ silent: options.silentAudio });
         }
@@ -16384,6 +16135,17 @@ ${errDetail}
           if (colocBox) {
             colocBox.innerText = `【核心考点搭配】：${word.collocation}`;
             colocBox.style.display = 'block';
+          }
+        }
+
+        const synBox = document.getElementById('syn-ant-box');
+        if (synBox) {
+          const synAntHtml = (typeof renderSynAntMatrix === 'function') ? renderSynAntMatrix(word) : '';
+          if (AppState.get('currentMode') !== 'flashcard' && synAntHtml) {
+            synBox.innerHTML = synAntHtml;
+            synBox.style.display = 'block';
+          } else {
+            synBox.style.display = 'none';
           }
         }
       },
@@ -16431,11 +16193,6 @@ ${errDetail}
         const cnEl = document.getElementById('sentence-cn-text');
         const badgeEl = document.getElementById('sentence-badge');
         if (!box || !enEl || !cnEl) return;
-
-        if (AppState.get('currentMode') === 'audio_clo' && !AppState.get('hasAnsweredChoice')) {
-          box.style.display = 'none';
-          return;
-        }
 
         const item = Services.Audio.preloadSentence(word.word, word);
         if (item && item.en) {
@@ -16831,18 +16588,7 @@ ${errDetail}
           this.commitBoxReinforceSession();
         }
 
-        if (prevMode === 'speed_blitz' || mode !== 'speed_blitz') {
-          if (typeof document !== 'undefined') {
-            document.body.classList.remove('mode-speed_blitz-active');
-            const spHeader = document.getElementById('speed-blitz-header');
-            if (spHeader) spHeader.style.display = 'none';
-            const spOverlay = document.getElementById('speed-pause-overlay');
-            if (spOverlay) spOverlay.style.display = 'none';
-          }
-          if (typeof Views !== 'undefined' && Views.SpeedBlitz && typeof Views.SpeedBlitz.cleanup === 'function') {
-            try { Views.SpeedBlitz.cleanup(); } catch (_) {}
-          }
-        }
+
 
         const fb = document.getElementById('feedback');
         if (fb) fb.innerHTML = '';
@@ -16854,7 +16600,7 @@ ${errDetail}
         if (analysisCard) analysisCard.style.display = 'none';
 
         const choiceContainer = document.getElementById('view-choice');
-        if (choiceContainer && mode !== 'choice' && mode !== 'audio_clo' && mode !== 'confusables' && mode !== 'speed_blitz') {
+        if (choiceContainer && mode !== 'choice' && mode !== 'confusables') {
           choiceContainer.innerHTML = '';
           choiceContainer.style.display = 'none';
         }
@@ -16886,12 +16632,9 @@ ${errDetail}
           typing: { name: '键盘极速盲打', icon: '⌨️' },
           spell: { name: '拼写填空', icon: '✍️' },
           flashcard: { name: '智能闪卡', icon: '🎴' },
-          speed_blitz: { name: '三秒极速挑战', icon: '⚡' },
-          audio_clo: { name: '盲听磨耳朵', icon: '🎧' },
           confusables: { name: '同根易混对决', icon: '⚔️' },
           match_game: { name: '短语消消乐', icon: '🧩' },
           phrases_drill: { name: '词组专练', icon: '📚' },
-          vocab_upgrader: { name: '写作词汇升级', icon: '📝' },
           root_dict: { name: '词根逆向字典', icon: '🔍' },
           leitner_box: { name: '莱特纳五盒看板', icon: '📦' },
           mock: { name: '限时模考', icon: '⏱️' },
@@ -16931,7 +16674,7 @@ ${errDetail}
           });
 
           const allPanels = [
-            'stage-area', 'view-match', 'view-upgrader', 'view-root-dict', 'view-phrases',
+            'stage-area', 'view-match', 'view-root-dict', 'view-phrases',
             'view-leitner', 'view-mock', 'view-mistakes', 'view-tree',
             'view-manage', 'view-typing', 'typing-history-panel'
           ];
@@ -16951,11 +16694,8 @@ ${errDetail}
             const el = document.getElementById('view-match');
             if (el) el.style.display = 'block';
             Views.MatchGame.render();
-          } else if (mode === 'vocab_upgrader') {
-            const el = document.getElementById('view-upgrader');
-            if (el) el.style.display = 'block';
-            Views.VocabUpgrader.render();
-          } else if (mode === 'root_dict') {
+
+              } else if (mode === 'root_dict') {
             const el = document.getElementById('view-root-dict');
             if (el) el.style.display = 'block';
             this.handleRootDictSearch(document.getElementById('root-dict-input')?.value || '');
@@ -17057,7 +16797,7 @@ ${errDetail}
             if (stageArea) stageArea.style.display = 'block';
             if (searchPanel) searchPanel.style.display = 'flex';
 
-            const isChoiceLike = ['choice', 'audio_clo', 'confusables', 'speed_blitz'].includes(mode);
+            const isChoiceLike = ['choice', 'confusables'].includes(mode);
             const choiceView = document.getElementById('view-choice');
             const spellView = document.getElementById('view-spell');
             if (choiceView) choiceView.style.display = isChoiceLike ? 'grid' : 'none';
@@ -17097,7 +16837,7 @@ ${errDetail}
               if (ds) ds.style.display = 'block';
               if (dl) dl.style.display = 'flex';
               if (un) un.style.display = 'block';
-              if (ac) ac.style.display = (mode === 'audio_clo') ? 'block' : 'none';
+              
             }
             this.renderCurrentView();
           }
@@ -17158,13 +16898,26 @@ ${errDetail}
       },
 
       jumpToWord(wordName) {
+        if (!wordName) return;
         const curPack = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[curPack]?.words || [];
-        const found = packWords.find(w => w.word === wordName);
+        let found = packWords.find(w => w.word.toLowerCase() === wordName.toLowerCase());
+        if (!found) {
+          const allPacks = AppState.get('allPacks') || {};
+          const allWords = allPacks['all_2800']?.words || allPacks['all_2257']?.words || [];
+          found = allWords.find(w => w.word.toLowerCase() === wordName.toLowerCase());
+        }
         if (found) {
           AppState.update('currentWord', found);
-          this.switchMode('choice');
-          this.showWordDetails(found);
+          if (AppState.get('currentMode') === 'flashcard') {
+            Views.Flashcard.renderCard(found);
+          } else {
+            this.switchMode('choice');
+            this.showWordDetails(found);
+          }
+          if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+            Services.Sync.showToast(`已跳转至近/反义词：${found.word}`, 'info', 1500);
+          }
         }
       },
 
@@ -17236,7 +16989,6 @@ ${errDetail}
 
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') {
-        if (AppState.get('currentMode') === 'speed_blitz') Views.SpeedBlitz.pause();
         Services.Storage.flushAll();
         if (Services.Sync.hasUnsyncedChanges()) {
           localStorage.setItem('morpho_sync_dirty', '1');
@@ -17288,8 +17040,6 @@ ${errDetail}
     window.giveHint = () => Views.Spell.giveHint();
     window.flipFlashcard = () => Views.Flashcard.flip();
     window.handleFlashcard = (k) => Views.Flashcard.handleSwipeDecision(k);
-    window.resumeSpeedBlitz = () => Views.SpeedBlitz.resume();
-    window.toggleAutoplayStream = () => Views.AudioCloze.toggleAutoplay();
     window.startNewMatchGame = () => Views.MatchGame.render();
     window.startMockExam = () => Views.MockExam.start();
     window.finishMockExam = () => Views.MockExam.finish();
@@ -17877,7 +17627,7 @@ ${errDetail}
       }
 
       let stDict = {};
-      if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
+      if (isTotalPack(currentPackId) && typeof App.getAggregatedStatsForTotal === 'function') {
         stDict = App.getAggregatedStatsForTotal();
       } else {
         stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
@@ -17948,7 +17698,7 @@ ${errDetail}
                 additional = Algorithms.Shuffle.deterministicShuffle(available, seed);
               } else {
                 let stDict = {};
-                if (currentPackId === 'all_2257' && typeof App.getAggregatedStatsForTotal === 'function') {
+                if (isTotalPack(currentPackId) && typeof App.getAggregatedStatsForTotal === 'function') {
                   stDict = App.getAggregatedStatsForTotal();
                 } else {
                   stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
