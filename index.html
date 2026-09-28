@@ -3765,10 +3765,7 @@
     if (synGroups.length === 0 && antGroups.length === 0) return '';
 
     let html = `
-      <div class="syn-ant-matrix" style="margin-top:10px; padding:10px 14px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; font-size:0.82rem; text-align:left; box-shadow:inset 0 1px 3px rgba(0,0,0,0.02);">
-        <div style="font-weight:800; font-size:0.78rem; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;">
-          <span>🎯 核心考点语义透镜 (分义项精辨与反义对决)</span>
-        </div>
+      <div class="syn-ant-matrix" style="margin-top:8px; padding:8px 12px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; font-size:0.82rem; text-align:left; box-shadow:inset 0 1px 3px rgba(0,0,0,0.02);">
     `;
 
     synGroups.forEach(grp => {
