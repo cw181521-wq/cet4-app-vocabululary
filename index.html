@@ -15,9 +15,9 @@
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <title>CET-4 科学词根与句法全能终端 (终极全功能版) - MorphoSyntax Pro</title>
-  <script src="words_data.js?v=4.0_thesaurus" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words.js?v=4.0_thesaurus'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
+  <script src="words_data.js?v=4.0_thesaurus" onload="window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='words_data (1).js'; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; s.onerror=function(){var s2=document.createElement('script'); s2.src='words_data.js?v=4.0_thesaurus'; s2.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; s2.onerror=function(){var s3=document.createElement('script'); s3.src='words.js?v=4.0_thesaurus'; s3.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s3);}; document.head.appendChild(s2);}; s.onload=function(){window.dispatchEvent(new CustomEvent('morphoWordsLoaded'))}; document.head.appendChild(s);"></script>
   <!-- 词组库增强引入：若 phrases_data.js 未找到则自动降级尝试 phrases_data_1200_universal.js -->
-  <script src="phrases_data.js" onload="window.dispatchEvent(new CustomEvent('phrasesLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='phrases_data_1200_universal.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('phrasesLoaded'))}; s.onerror=function(){console.warn('词组库加载失败，请确保 phrases_data.js 或 phrases_data_1200_universal.js 与本页面同目录')}; document.head.appendChild(s);"></script>
+  <script src="phrases_data.js" onload="window.dispatchEvent(new CustomEvent('phrasesLoaded'))" onerror="this.onerror=null; var s=document.createElement('script'); s.src='phrases_data_1200_universal.js'; s.onload=function(){window.dispatchEvent(new CustomEvent('phrasesLoaded'))}; s.onerror=function(){/* 可选词组库未就绪时静默忽略 */}; document.head.appendChild(s);"></script>
   <style>
     :root {
       --dynamic-viewport-h: 100vh;
@@ -28,64 +28,91 @@
       min-height: 100dvh;
     }
     :root[data-theme="light"] {
-      --bg: #eef3f2;
+      --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text: #172229;
-      --muted: #6b7b80;
-      --primary: #0f766e;
-      --primary-hover: #115e59;
-      --primary-light: #e6f5f2;
-      --success: #16a34a;
-      --success-light: #eaf8ee;
-      --error: #dc4c4c;
-      --error-light: #fff0f0;
-      --border: #d7e2e0;
-      --accent: #d97706;
-      --accent-light: #fff6e5;
-      --syn-s: #dc2626;
-      --syn-v: #0f766e;
-      --syn-o: #059669;
-      --syn-m: #6b7b80;
+      --card-subtle: #f1f5f9;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --muted: #64748b;
+      --primary: #0d9488;
+      --primary-hover: #0f766e;
+      --primary-light: #f0fdfa;
+      --primary-border: #99f6e4;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --error: #ef4444;
+      --error-light: #fef2f2;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --accent: #f59e0b;
+      --accent-light: #fffbeb;
+      --syn-s: #ef4444;
+      --syn-v: #0d9488;
+      --syn-o: #10b981;
+      --syn-m: #64748b;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(226, 232, 240, 0.8);
+      --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+      --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --shadow-lg: 0 16px 36px -4px rgba(15, 23, 42, 0.08), 0 6px 14px -2px rgba(15, 23, 42, 0.04);
     }
     :root[data-theme="dark"] {
-      --bg: #111b1d;
-      --card-bg: #182628;
-      --text: #edf6f4;
-      --muted: #9bb0ae;
-      --primary: #4fd1c5;
-      --primary-hover: #81e6d9;
-      --primary-light: #173d3a;
-      --success: #10b981;
-      --success-light: #064e3b;
+      --bg: #090d14;
+      --card-bg: #111722;
+      --card-subtle: #172030;
+      --text: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --muted: #8899ac;
+      --primary: #2dd4bf;
+      --primary-hover: #5eead4;
+      --primary-light: rgba(45, 212, 191, 0.12);
+      --primary-border: rgba(45, 212, 191, 0.28);
+      --success: #34d399;
+      --success-light: rgba(16, 185, 129, 0.15);
       --error: #f87171;
-      --error-light: #7f1d1d;
-      --border: #2b4140;
-      --accent: #f6ad55;
-      --accent-light: #78350f;
+      --error-light: rgba(239, 68, 68, 0.15);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+      --accent: #fbbf24;
+      --accent-light: rgba(245, 158, 11, 0.15);
       --syn-s: #f87171;
-      --syn-v: #4fd1c5;
+      --syn-v: #2dd4bf;
       --syn-o: #34d399;
-      --syn-m: #9bb0ae;
+      --syn-m: #8899ac;
+      --glass-bg: rgba(17, 23, 34, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.09);
+      --shadow-sm: 0 2px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 10px 28px -4px rgba(0, 0, 0, 0.65);
+      --shadow-lg: 0 20px 42px -6px rgba(0, 0, 0, 0.85);
     }
     :root[data-theme="sepia"] {
-      --bg: #f4ecd8;
-      --card-bg: #faf4e6;
-      --text: #3d2f1f;
-      --muted: #736048;
-      --primary: #92400e;
-      --primary-hover: #b45309;
-      --primary-light: #fef3c7;
+      --bg: #f5ede0;
+      --card-bg: #fbf7ee;
+      --card-subtle: #efe5d4;
+      --text: #332415;
+      --text-secondary: #594430;
+      --muted: #7d6852;
+      --primary: #9a3412;
+      --primary-hover: #c2410c;
+      --primary-light: #ffedd5;
+      --primary-border: #fed7aa;
       --success: #15803d;
       --success-light: #dcfce7;
       --error: #b91c1c;
       --error-light: #fee2e2;
-      --border: #e2d3b4;
+      --border: #e3d5c1;
+      --border-subtle: #ece0ce;
       --accent: #d97706;
       --accent-light: #fffbeb;
       --syn-s: #b91c1c;
-      --syn-v: #92400e;
+      --syn-v: #9a3412;
       --syn-o: #15803d;
-      --syn-m: #736048;
+      --syn-m: #7d6852;
+      --glass-bg: rgba(251, 247, 238, 0.85);
+      --glass-border: rgba(227, 213, 193, 0.8);
+      --shadow-sm: 0 2px 6px -1px rgba(51, 36, 21, 0.05);
+      --shadow-md: 0 8px 24px -3px rgba(51, 36, 21, 0.08);
+      --shadow-lg: 0 16px 36px -6px rgba(51, 36, 21, 0.12);
     }
 
     [inert] {
@@ -193,61 +220,73 @@
       to { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 20px 14px; display: flex; justify-content: center; min-height: 100vh; transition: background-color 0.18s ease, color 0.18s ease; }
-    .container { width: 100%; max-width: 960px; background: var(--card-bg); border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06), 0 8px 10px -6px rgba(0,0,0,0.02); padding: 26px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--border); }
-    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 10px; }
-    .logo-area { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .app-title { font-size: 1.25rem; font-weight: 800; color: var(--text); }
-    .pack-selector { padding: 6px 12px; border: 1.5px solid var(--primary); border-radius: 8px; font-weight: 700; color: var(--primary); background: var(--card-bg); cursor: pointer; outline: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 20px 14px; display: flex; justify-content: center; min-height: 100vh; transition: background-color 0.2s ease, color 0.2s ease; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+    .container { width: 100%; max-width: 960px; background: var(--card-bg); border-radius: 22px; box-shadow: var(--shadow-md); padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--border); transition: box-shadow 0.22s ease, border-color 0.22s ease; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .logo-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .app-title { font-size: 1.3rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .pack-selector { padding: 6px 14px; border: 1.5px solid var(--primary); border-radius: 10px; font-weight: 700; color: var(--primary); background: var(--card-bg); cursor: pointer; outline: none; transition: all 0.18s ease; box-shadow: var(--shadow-sm); }
+    .pack-selector:hover { background: var(--primary-light); }
     .top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .theme-select { padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.82rem; cursor: pointer; outline: none; }
-    .daily-target-box { display: flex; align-items: center; gap: 8px; background: var(--bg); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); }
-    .daily-bar-wrap { width: 80px; height: 7px; background: #cbd5e1; border-radius: 4px; overflow: hidden; }
-    .daily-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
-    .control-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; background: var(--bg); padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; border: 1px solid var(--border); }
+    .theme-select { padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); color: var(--text); font-size: 0.82rem; cursor: pointer; outline: none; transition: border-color 0.15s ease; }
+    .theme-select:hover { border-color: var(--primary); }
+    .daily-target-box { display: flex; align-items: center; gap: 8px; background: var(--card-subtle); padding: 6px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; border: 1px solid var(--border); box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); }
+    .daily-bar-wrap { width: 84px; height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .daily-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--success)); border-radius: 999px; width: 0%; transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    .control-bar { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; background: var(--card-subtle); padding: 12px 16px; border-radius: 14px; font-size: 0.85rem; border: 1px solid var(--border); box-shadow: inset 0 1px 2px rgba(0,0,0,0.015); }
     .ctrl-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .ctrl-label { display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none; font-weight: 600; }
-    select, input[type="text"], input[type="number"] { padding: 5px 9px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; outline: none; }
-    .nav-tabs { display: flex; gap: 5px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .tab-btn { padding: 7px 11px; border: none; background: none; border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 700; color: var(--muted); transition: 0.15s ease; }
-    .tab-btn.active { background: var(--primary); color: #fff; }
-    .tab-btn:hover:not(.active) { background: var(--primary-light); color: var(--primary); }
+    .ctrl-label { display: flex; align-items: center; gap: 5px; cursor: pointer; user-select: none; font-weight: 600; font-size: 0.84rem; }
+    select, input[type="text"], input[type="number"] { padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    select:focus, input[type="text"]:focus, input[type="number"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+    .nav-tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 10px; align-items: center; }
+    .tab-btn { padding: 7px 12px; border: none; background: transparent; border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-weight: 700; color: var(--muted); transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
+    .tab-btn.active { background: var(--primary) !important; color: #ffffff !important; box-shadow: 0 2px 8px rgba(13, 148, 136, 0.28) !important; transform: translateY(-1px); }
+    .tab-btn:hover:not(.active) { background: var(--primary-light); color: var(--primary); transform: translateY(-1px); }
     .search-panel { display: flex; gap: 8px; }
-    .search-input { flex: 1; padding: 9px 14px; font-size: 0.95rem; border: 1.5px solid var(--border); border-radius: 8px; background: var(--card-bg); color: var(--text); }
-    .stage-card { border: 1.5px solid var(--border); border-radius: 14px; padding: 26px 20px; text-align: center; position: relative; background: var(--card-bg); will-change: transform, opacity; }
+    .search-input { flex: 1; padding: 10px 16px; font-size: 0.95rem; border: 1.5px solid var(--border); border-radius: 10px; background: var(--card-bg); color: var(--text); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+    .stage-card { border: 1.5px solid var(--border); border-radius: 20px; padding: 32px 24px 26px; text-align: center; position: relative; background: var(--card-bg); box-shadow: var(--shadow-sm); will-change: transform, opacity; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
     .star-level { font-size: 0.88rem; color: var(--accent); font-weight: bold; white-space: nowrap; letter-spacing: 1px; }
-    .group-tip { font-size: 0.75rem; background: var(--bg); color: var(--muted); padding: 3px 8px; border-radius: 6px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid var(--border); }
+    .group-tip { font-size: 0.75rem; background: var(--card-subtle); color: var(--muted); padding: 4px 10px; border-radius: 8px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid var(--border); font-weight: 600; }
     .order-progress { font-size: 0.78rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
-    .word-main { font-size: 2.3rem; font-weight: 800; color: var(--text); margin-top: 14px; margin-bottom: 6px; }
-    .word-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 14px; }
-    .audio-btn { background: var(--bg); border: 1px solid var(--border); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 1.15rem; color: var(--text); will-change: transform; transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1); }
-    .dict-links-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .dict-pill { font-size: 0.76rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s ease; }
-    .dict-pill:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-    .speech-micro-tip { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; margin-top: 8px; }
-    .speed-timer-wrap { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-top: 10px; display: none; }
+    .word-main { font-size: 2.7rem; font-weight: 800; color: var(--text); letter-spacing: -0.025em; margin-top: 14px; margin-bottom: 6px; line-height: 1.15; }
+    .word-sub { color: var(--muted); font-size: 1.08rem; margin-bottom: 14px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0.03em; display: inline-flex; align-items: center; padding: 3px 12px; border-radius: 999px; background: var(--card-subtle); border: 1px solid var(--border); }
+    .audio-btn { background: var(--primary-light); border: 1.5px solid var(--primary); border-radius: 50%; width: 42px; height: 42px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 1.12rem; color: var(--primary); will-change: transform; box-shadow: 0 3px 10px rgba(13, 148, 136, 0.18); transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease; }
+    .audio-btn:hover { transform: scale(1.12); box-shadow: 0 6px 18px rgba(13, 148, 136, 0.32); }
+    .audio-btn:active { transform: scale(0.94); }
+    .dict-links-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .dict-pill { font-size: 0.76rem; font-weight: 700; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--card-bg); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: all 0.16s ease; }
+    .dict-pill:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); transform: translateY(-1px); }
+    .speech-micro-tip { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 9px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; margin-top: 8px; }
+    .speed-timer-wrap { width: 100%; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; margin-top: 10px; display: none; }
     .speed-timer-bar { height: 100%; width: 100%; background: var(--error); transition: width 0.05s linear; }
     .speed-stats-bar { display: flex; justify-content: space-between; font-weight: 800; margin-top: 6px; font-size: 0.9rem; }
     
-    .analysis-card { background: var(--bg); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-top: 16px; text-align: left; display: none; border: 1px solid var(--border); border-left-width: 4px; }
-    .analysis-tag { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px; }
+    .analysis-card { background: var(--card-subtle); border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 0 12px 12px 0; margin-top: 16px; text-align: left; display: none; border: 1px solid var(--border); border-left-width: 4px; }
+    .analysis-tag { display: inline-block; font-size: 0.75rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; margin-bottom: 6px; }
     .tag-gouci { background: #dbeafe; color: #1e40af; }
     .tag-yinshen { background: #fef3c7; color: #92400e; }
     .analysis-content { font-size: 0.95rem; color: var(--text); line-height: 1.55; }
     .collocation-box { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 0.9rem; color: #0284c7; font-weight: 600; }
-    .user-note-box { margin-top: 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; text-align: left; }
-    .note-textarea { width: 100%; height: 50px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; resize: vertical; outline: none; margin-top: 4px; }
-    .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
-    .opt-btn { width: 100%; padding: 14px 18px; text-align: left; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.16s ease, border-color 0.16s ease; position: relative; color: var(--text); user-select: none; -webkit-tap-highlight-color: transparent; will-change: transform; }
-    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--bg); }
+    .user-note-box { margin-top: 14px; background: var(--card-subtle); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; text-align: left; }
+    .note-textarea { width: 100%; height: 50px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); color: var(--text); font-size: 0.85rem; resize: vertical; outline: none; margin-top: 4px; transition: border-color 0.15s ease; }
+    .note-textarea:focus { border-color: var(--primary); }
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    .opt-btn { width: 100%; padding: 15px 18px; text-align: left; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 14px; font-size: 0.98rem; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease; position: relative; color: var(--text); user-select: none; -webkit-tap-highlight-color: transparent; will-change: transform, box-shadow; box-shadow: var(--shadow-sm); }
+    .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--card-bg); transform: translate3d(0, -2px, 0); box-shadow: var(--shadow-md); }
+    .opt-btn:active:not(:disabled) { transform: scale(0.99) translate3d(0, 0, 0); }
     .opt-header { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; }
     .opt-header-left { display: flex; align-items: center; flex: 1; min-width: 0; }
-    .opt-key { width: 24px; height: 24px; background: #e2e8f0; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; margin-right: 12px; color: #475569; flex-shrink: 0; }
-    .opt-text { font-weight: 600; flex: 1; word-break: break-word; }
-    .opt-toggle-badge { font-size: 0.72rem; font-weight: 700; color: var(--muted); padding: 2px 7px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); transition: all 0.15s ease; flex-shrink: 0; }
-    .opt-btn.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: #065f46 !important; }
-    .opt-btn.wrong { background: var(--error-light) !important; border-color: var(--error) !important; color: #991b1b !important; }
+    .opt-key { width: 26px; height: 26px; background: var(--card-subtle); border: 1px solid var(--border); border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; margin-right: 12px; color: var(--muted); flex-shrink: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: all 0.15s ease; }
+    .opt-btn:hover:not(:disabled) .opt-key { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .opt-text { font-weight: 600; flex: 1; word-break: break-word; line-height: 1.45; }
+    .opt-toggle-badge { font-size: 0.72rem; font-weight: 700; color: var(--muted); padding: 2px 7px; border-radius: 6px; background: var(--card-subtle); border: 1px solid var(--border); transition: all 0.15s ease; flex-shrink: 0; }
+    .opt-btn.correct { background: var(--success-light) !important; border-color: var(--success) !important; color: var(--text) !important; box-shadow: 0 0 18px rgba(16, 185, 129, 0.22) !important; transform: scale(1.006); }
+    .opt-btn.correct .opt-key { background: var(--success) !important; color: #ffffff !important; border-color: var(--success) !important; }
+    .opt-btn.wrong { background: var(--error-light) !important; border-color: var(--error) !important; color: var(--text) !important; box-shadow: 0 0 18px rgba(239, 68, 68, 0.22) !important; animation: optShake 0.24s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+    .opt-btn.wrong .opt-key { background: var(--error) !important; color: #ffffff !important; border-color: var(--error) !important; }
+    @keyframes optShake { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-4px, 0, 0); } 75% { transform: translate3d(4px, 0, 0); } }
     .opt-btn.can-expand { cursor: pointer; }
     .opt-btn.can-expand:hover { filter: brightness(0.98); }
     .opt-btn.can-expand:active .opt-toggle-badge { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
@@ -255,7 +294,8 @@
     .opt-detail-head { font-weight: 700; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
     .opt-badge { display: inline-block; font-size: 0.72rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; margin-right: 6px; }
     .spell-box { display: flex; gap: 8px; margin-top: 12px; }
-    .spell-input { flex: 1; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1.15rem; outline: none; background: var(--card-bg); color: var(--text); }
+    .spell-input { flex: 1; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-size: 1.15rem; outline: none; background: var(--card-bg); color: var(--text); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .spell-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
 
     .flashcard-back {
       border-top: 1.5px dashed var(--border);
@@ -489,9 +529,9 @@
     .compass-nodes-bar { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
     .compass-node { flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 6px 4px; text-align: center; cursor: pointer; transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease, border-color 0.18s ease; position: relative; will-change: transform; }
     .compass-node:hover { border-color: var(--primary); transform: translate3d(0, -2px, 0); }
-    .compass-node.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 10px rgba(14, 165, 233, 0.35); transform: scale(1.04); }
-    .compass-node.active::after { content: '●'; position: absolute; top: -5px; right: -3px; color: var(--primary); font-size: 10px; animation: cnodePulse 1.5s infinite; }
-    @keyframes cnodePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { transform: scale(1.04); } }
+    .compass-node.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 12px rgba(15, 118, 110, 0.28); transform: scale(1.03); }
+    .compass-node.active::after { content: ''; position: absolute; top: -3px; right: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 6px var(--primary); animation: cnodePulse 1.6s infinite ease-in-out; }
+    @keyframes cnodePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.2); } }
     .cnode-icon { font-size: 0.95rem; display: block; line-height: 1.1; }
     .cnode-title { font-size: 0.74rem; font-weight: 700; color: var(--text); display: block; margin-top: 2px; }
     .cnode-sub { font-size: 0.65rem; color: var(--muted); display: block; }
@@ -1333,7 +1373,7 @@
     }
 
     .stage-card.flashcard-stable-stage {
-      min-height: 280px;
+      min-height: clamp(380px, 48vh, 450px);
       contain: layout style;
       transition: min-height 0.18s cubic-bezier(0.16, 1, 0.3, 1),
                   background-color 0.18s ease,
@@ -2342,6 +2382,550 @@
       border-color: rgba(99, 102, 241, 0.4) !important;
     }
 
+    /* ==========================================================================
+       MorphoSyntax Pro - 终极现代化 UI 视觉升级层 (Modern Aesthetics Layer)
+       ========================================================================== */
+    .app-title {
+      font-size: 1.35rem !important;
+      font-weight: 850 !important;
+      letter-spacing: -0.025em !important;
+      background: linear-gradient(135deg, var(--text) 35%, var(--primary) 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    .pack-selector {
+      font-size: 0.88rem !important;
+      border-radius: 10px !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+    }
+    #top-due-btn {
+      background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.28) !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    #top-due-btn:hover {
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4) !important;
+    }
+    .daily-target-box {
+      border-radius: 999px !important;
+      padding: 6px 14px !important;
+      background: var(--card-subtle) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.02) !important;
+    }
+    .daily-bar-wrap {
+      border-radius: 999px !important;
+      height: 8px !important;
+    }
+    .sync-badge {
+      border-radius: 999px !important;
+      padding: 5px 12px !important;
+      font-size: 0.78rem !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
+    }
+
+    /* 模式导航栏分段器美化 */
+    .nav-tabs {
+      background: var(--card-subtle) !important;
+      padding: 6px 8px !important;
+      border-radius: 14px !important;
+      border: 1px solid var(--border) !important;
+      gap: 5px !important;
+      margin-top: 6px !important;
+      align-items: center !important;
+    }
+    .tab-btn {
+      padding: 7px 13px !important;
+      border-radius: 8px !important;
+      font-weight: 700 !important;
+      font-size: 0.84rem !important;
+      border: none !important;
+      background: transparent !important;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .tab-btn:hover:not(.active) {
+      background: rgba(13, 148, 136, 0.09) !important;
+      color: var(--primary) !important;
+      transform: translateY(-1px) !important;
+    }
+    .tab-btn.active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+      box-shadow: 0 3px 10px rgba(13, 148, 136, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
+    .mode-group-label {
+      font-size: 0.68rem !important;
+      font-weight: 800 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      color: var(--muted) !important;
+      padding: 0 6px !important;
+      opacity: 0.85;
+    }
+
+    /* 核心舞台卡片与词汇主视觉 */
+    .stage-card {
+      border: 1.5px solid var(--border) !important;
+      border-radius: 22px !important;
+      padding: 34px 26px 28px !important;
+      background: var(--card-bg) !important;
+      box-shadow: var(--shadow-sm) !important;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease !important;
+    }
+    .word-main {
+      font-size: clamp(3.0rem, 5.5vw, 4.4rem) !important;
+      font-weight: 850 !important;
+      letter-spacing: -0.03em !important;
+      color: var(--text) !important;
+      margin-top: 12px !important;
+      margin-bottom: 8px !important;
+      line-height: 1.12 !important;
+      text-rendering: optimizeLegibility !important;
+    }
+    .word-sub {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+      font-size: 1.08rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.04em !important;
+      padding: 4px 14px !important;
+      border-radius: 999px !important;
+      background: var(--card-subtle) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+    }
+    .audio-btn {
+      width: 44px !important;
+      height: 44px !important;
+      border-radius: 50% !important;
+      background: var(--primary-light) !important;
+      border: 1.5px solid var(--primary) !important;
+      font-size: 1.15rem !important;
+      color: var(--primary) !important;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.2) !important;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease !important;
+    }
+    .audio-btn:hover {
+      transform: scale(1.12) !important;
+      box-shadow: 0 6px 20px rgba(13, 148, 136, 0.35) !important;
+    }
+    .dict-pill {
+      font-size: 0.76rem !important;
+      font-weight: 700 !important;
+      padding: 4px 12px !important;
+      border-radius: 999px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--card-bg) !important;
+      color: var(--muted) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+      transition: all 0.16s ease !important;
+    }
+    .dict-pill:hover {
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+      background: var(--primary-light) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 3px 8px rgba(13, 148, 136, 0.15) !important;
+    }
+
+    /* 四选一选项卡按键质感升级 */
+    .opt-btn {
+      padding: 16px 20px !important;
+      border-radius: 14px !important;
+      border: 1.5px solid var(--border) !important;
+      background: var(--card-bg) !important;
+      box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease !important;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary) !important;
+      transform: translate3d(0, -2px, 0) !important;
+      box-shadow: 0 8px 20px -3px rgba(13, 148, 136, 0.15), 0 2px 6px rgba(0,0,0,0.03) !important;
+    }
+    .opt-key {
+      width: 28px !important;
+      height: 28px !important;
+      border-radius: 8px !important;
+      font-size: 0.8rem !important;
+      font-weight: 850 !important;
+      background: var(--card-subtle) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    }
+    .opt-btn.correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+      box-shadow: 0 0 0 1px var(--success), 0 8px 24px -4px rgba(16, 185, 129, 0.25) !important;
+      transform: scale(1.008) !important;
+    }
+    .opt-btn.wrong {
+      background: var(--error-light) !important;
+      border-color: var(--error) !important;
+      box-shadow: 0 0 0 1px var(--error), 0 8px 24px -4px rgba(239, 68, 68, 0.25) !important;
+    }
+
+    /* 辅助侧边卡片与模态框现代质感 */
+    .companion-card {
+      border-radius: 16px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--card-bg) !important;
+      box-shadow: var(--shadow-sm) !important;
+      padding: 16px !important;
+    }
+    .companion-card-header {
+      font-size: 0.88rem !important;
+      font-weight: 800 !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding-bottom: 10px !important;
+    }
+    .ui-modal-card {
+      border-radius: 22px !important;
+      border: 1.5px solid var(--border) !important;
+      box-shadow: 0 25px 60px -10px rgba(0,0,0,0.3) !important;
+    }
+
+    /* === 近义词与反义词左右双栏并列矩阵 === */
+    .syn-ant-matrix {
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: var(--card-subtle);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 0.82rem;
+      text-align: left;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+    .syn-ant-matrix.two-col-layout {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 16px !important;
+      align-items: start !important;
+    }
+    .syn-col-panel, .ant-col-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+    .syn-ant-matrix.two-col-layout .ant-col-panel {
+      border-left: 1px dashed var(--border);
+      padding-left: 16px;
+    }
+    .syn-ant-col-header {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      width: fit-content;
+      margin-bottom: 2px;
+      letter-spacing: 0.02em;
+    }
+    .syn-header-tag {
+      background: rgba(2, 132, 199, 0.12);
+      color: #0284c7;
+      border: 1px solid rgba(2, 132, 199, 0.25);
+    }
+    :root[data-theme="dark"] .syn-header-tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .ant-header-tag {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    :root[data-theme="dark"] .ant-header-tag {
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+      border-color: rgba(248, 113, 113, 0.3);
+    }
+    .syn-ant-row {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .syn-sense-badge {
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.73rem;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    :root[data-theme="dark"] .syn-sense-badge {
+      background: rgba(14, 165, 233, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+    .ant-sense-badge {
+      font-weight: 700;
+      color: #b91c1c;
+      background: #fee2e2;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.73rem;
+      white-space: nowrap;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    :root[data-theme="dark"] .ant-sense-badge {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .syn-ant-pills-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      flex: 1;
+      min-width: 0;
+    }
+    .syn-ant-pill-btn {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .syn-ant-pill-btn.syn-pill {
+      color: var(--primary);
+    }
+    .syn-ant-pill-btn.syn-pill:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(13, 148, 136, 0.2);
+    }
+    .syn-ant-pill-btn.ant-pill {
+      color: #dc2626;
+    }
+    :root[data-theme="dark"] .syn-ant-pill-btn.ant-pill {
+      color: #f87171;
+    }
+    .syn-ant-pill-btn.ant-pill:hover {
+      border-color: #ef4444;
+      background: var(--error-light);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(239, 68, 68, 0.2);
+    }
+    .syn-ant-pill-mean {
+      font-weight: normal;
+      opacity: 0.82;
+      font-size: 0.72rem;
+      margin-left: 2px;
+    }
+
+    /* 手机端移动屏幕自适应 */
+    @media (max-width: 680px) {
+      .syn-ant-matrix.two-col-layout {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .syn-ant-matrix.two-col-layout .ant-col-panel {
+        border-left: none !important;
+        border-top: 1px dashed var(--border) !important;
+        padding-left: 0 !important;
+        padding-top: 10px !important;
+      }
+    }
+
+    /* 永久隐藏卡片下方多余的红绿操作栏与重复便签栏，释放大量垂直可视空间 */
+    .flashcard-actions,
+    #flashcard-actions,
+    .user-note-box,
+    #user-note-box {
+      display: none !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+      overflow: hidden !important;
+    }
+
+    /* 彻底解除卡片与解析区域的固定高度限制，消除内部一切二级滚动条，随内容自然伸展 */
+    .flashcard-embedded-analysis,
+    #flashcard-embedded-analysis {
+      max-height: none !important;
+      overflow-y: visible !important;
+      scrollbar-width: none !important;
+    }
+    .stage-card,
+    #main-card {
+      max-height: none !important;
+      overflow-y: visible !important;
+    }
+
+    /* 紧凑化近反义词标签与胶囊微排版，进一步消除折行溢出 */
+    .syn-ant-matrix {
+      padding: 10px 12px !important;
+    }
+    .syn-ant-pill-btn {
+      padding: 2.5px 8px !important;
+      font-size: 0.77rem !important;
+      border-radius: 6px !important;
+      line-height: 1.35 !important;
+    }
+    .syn-sense-badge,
+    .ant-sense-badge {
+      padding: 2px 7px !important;
+      font-size: 0.72rem !important;
+      border-radius: 5px !important;
+      letter-spacing: 0.02em !important;
+    }
+
+    /* === 智能闪卡模式：专属纵向空间与视口黄金比例保障 === */
+    body.flashcard-mode-active,
+    body[data-active-mode="flashcard"] {
+      padding-top: 10px !important;
+      padding-bottom: 12px !important;
+    }
+    body.flashcard-mode-active .container,
+    body[data-active-mode="flashcard"] .container {
+      padding: 16px 24px 14px !important;
+      gap: 10px !important;
+    }
+    body.flashcard-mode-active .header,
+    body[data-active-mode="flashcard"] .header {
+      padding-bottom: 8px !important;
+    }
+    body.flashcard-mode-active #search-panel,
+    body[data-active-mode="flashcard"] #search-panel {
+      display: none !important;
+    }
+    body.flashcard-mode-active .stage-card,
+    body[data-active-mode="flashcard"] .stage-card {
+      padding: 18px 22px 16px !important;
+      min-height: clamp(380px, 48vh, 450px) !important;
+    }
+    body.flashcard-mode-active .word-main,
+    body[data-active-mode="flashcard"] .word-main {
+      font-size: clamp(3.2rem, 5.8vw, 4.5rem) !important;
+      font-weight: 850 !important;
+      letter-spacing: -0.035em !important;
+      line-height: 1.12 !important;
+      margin-top: 10px !important;
+      margin-bottom: 6px !important;
+    }
+    body.flashcard-mode-active .word-sub,
+    body[data-active-mode="flashcard"] .word-sub {
+      margin-bottom: 10px !important;
+      padding: 3px 14px !important;
+      font-size: 1.15rem !important;
+      font-weight: 600 !important;
+    }
+    body.flashcard-mode-active .audio-btn,
+    body[data-active-mode="flashcard"] .audio-btn {
+      width: 42px !important;
+      height: 42px !important;
+      font-size: 1.15rem !important;
+    }
+    /* 莱特纳五盒罗盘微型化单行常驻，释放大量上方空间 */
+    body.flashcard-mode-active .leitner-compass-wrap,
+    body[data-active-mode="flashcard"] .leitner-compass-wrap {
+      padding: 5px 12px !important;
+      margin-bottom: 6px !important;
+      gap: 4px !important;
+    }
+    body.flashcard-mode-active .compass-nodes-bar,
+    body[data-active-mode="flashcard"] .compass-nodes-bar {
+      gap: 4px !important;
+    }
+    body.flashcard-mode-active .compass-node,
+    body[data-active-mode="flashcard"] .compass-node {
+      padding: 3px 6px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 5px !important;
+      border-radius: 6px !important;
+    }
+    body.flashcard-mode-active .cnode-sub,
+    body[data-active-mode="flashcard"] .cnode-sub {
+      display: none !important;
+    }
+    body.flashcard-mode-active .cnode-icon,
+    body[data-active-mode="flashcard"] .cnode-icon {
+      font-size: 0.85rem !important;
+      line-height: 1 !important;
+    }
+    body.flashcard-mode-active .cnode-title,
+    body[data-active-mode="flashcard"] .cnode-title {
+      font-size: 0.74rem !important;
+      margin-top: 0 !important;
+    }
+    body.flashcard-mode-active .compass-arrow,
+    body[data-active-mode="flashcard"] .compass-arrow {
+      font-size: 0.72rem !important;
+    }
+    body.flashcard-mode-active .compass-status-bar,
+    body[data-active-mode="flashcard"] .compass-status-bar {
+      padding-top: 3px !important;
+      font-size: 0.72rem !important;
+      gap: 4px !important;
+    }
+    body.flashcard-mode-active .compass-mini-btn,
+    body[data-active-mode="flashcard"] .compass-mini-btn {
+      padding: 2px 7px !important;
+      font-size: 0.7rem !important;
+    }
+    /* 极端超多近反义词情况下的安全天花板与流畅微滚动条 */
+    body.flashcard-mode-active .flashcard-embedded-analysis,
+    body[data-active-mode="flashcard"] .flashcard-embedded-analysis {
+      max-height: calc(100vh - 310px) !important;
+      overflow-y: auto !important;
+      scrollbar-width: thin !important;
+    }
+
+    /* === 近反义词构词精解速查浮窗 (Quick-Peek Popover) === */
+    #morpho-popover-overlay {
+      z-index: 10050 !important;
+      background: rgba(15, 23, 42, 0.62) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .morpho-popover-card {
+      background: var(--card-bg) !important;
+      border: 1.5px solid var(--border) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.28) !important;
+      color: var(--text) !important;
+      animation: morphoPopoverSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      will-change: transform, opacity !important;
+    }
+    :root[data-theme="dark"] .morpho-popover-card {
+      background: rgba(24, 38, 40, 0.95) !important;
+      border-color: rgba(79, 209, 197, 0.3) !important;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6) !important;
+    }
+    :root[data-theme="sepia"] .morpho-popover-card {
+      background: rgba(250, 244, 230, 0.98) !important;
+      border-color: rgba(226, 211, 180, 0.95) !important;
+    }
+    @keyframes morphoPopoverSlide {
+      from { transform: translate3d(0, 14px, 0) scale(0.96); opacity: 0; }
+      to { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -2490,8 +3074,8 @@
     </div>
   </div>
 
-  <!-- 可折叠模式导航栏 -->
-  <div class="mode-nav-accordion" id="mode-nav-accordion">
+  <!-- 可折叠模式导航栏 (默认折叠以保障下方卡片拥有充裕垂直视口) -->
+  <div class="mode-nav-accordion is-collapsed" id="mode-nav-accordion">
     <div class="mode-nav-capsule-bar" id="mode-nav-capsule-bar" onclick="toggleModeNavAccordion()" title="点击收起/展开完整模式导航栏">
       <div class="mode-nav-capsule-pill">
         <span>当前模式:</span> <strong id="capsule-mode-name">🎯 四选一测试</strong>
@@ -3527,7 +4111,7 @@
     </div>
     <div class="tm-actions">
       <button class="btn btn-primary" onclick="Views.Typing.startNewRound()">🔄 开始下一批新词 (Enter)</button>
-      <button class="btn btn-secondary" id="tm-drill-btn" onclick="Views.Typing.drillMistakesFromMilestone()">🎯 集中复盘本轮错题 (M)</button>
+      <button class="btn btn-secondary" id="tm-drill-modal-btn-2" onclick="Views.Typing.drillMistakesFromMilestone()">🎯 集中复盘本轮错题 (M)</button>
       <button class="btn btn-mini" style="margin-top:4px;" data-role="cancel" onclick="Views.Typing.dismissMilestone()">返回查看当前词 (Esc)</button>
     </div>
   </div>
@@ -3764,53 +4348,76 @@
     const antGroups = cleanAndDedupGroups(word.antonyms);
     if (synGroups.length === 0 && antGroups.length === 0) return '';
 
+    const hasSyn = synGroups.length > 0;
+    const hasAnt = antGroups.length > 0;
+    const isTwoCol = hasSyn && hasAnt;
+
+    let synColHtml = '';
+    if (hasSyn) {
+      synColHtml += `<div class="syn-col-panel">`;
+      if (isTwoCol) {
+        synColHtml += `<div class="syn-ant-col-header syn-header-tag"><span>📘 近义词拓展</span></div>`;
+      }
+      synGroups.forEach(grp => {
+        const senseLabel = (typeof grp === 'object' && grp.sense) ? grp.sense : '近义词';
+        const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
+        if (items.length > 0) {
+          synColHtml += `
+            <div class="syn-ant-row">
+              <span class="syn-sense-badge">
+                ${Utils.escapeHTML(senseLabel)}
+              </span>
+              <div class="syn-ant-pills-wrap">
+                ${items.map(it => {
+                  const wName = typeof it === 'object' ? it.word : it;
+                  const rawMean = (typeof it === 'object' && it.meaning) ? it.meaning : '';
+                  const wMean = rawMean ? ` <span class="syn-ant-pill-mean">(${Utils.escapeHTML(rawMean)})</span>` : '';
+                  return `<button class="syn-ant-pill-btn syn-pill" onclick="event.stopPropagation(); App.showWordMorphologyModal('${Utils.escapeHTML(wName)}', { originWord: '${Utils.escapeHTML(word.word)}', sense: '${Utils.escapeHTML(senseLabel)}', isAntonym: false, fallbackMeaning: '${Utils.escapeHTML(rawMean)}' });" title="点击查看【${Utils.escapeHTML(wName)}】形态学构词精解与发音"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }
+      });
+      synColHtml += `</div>`;
+    }
+
+    let antColHtml = '';
+    if (hasAnt) {
+      antColHtml += `<div class="ant-col-panel">`;
+      if (isTwoCol) {
+        antColHtml += `<div class="syn-ant-col-header ant-header-tag"><span>📙 反义词对比</span></div>`;
+      }
+      antGroups.forEach(grp => {
+        const senseLabel = (typeof grp === 'object' && grp.sense) ? grp.sense : '反义词';
+        const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
+        if (items.length > 0) {
+          antColHtml += `
+            <div class="syn-ant-row">
+              <span class="ant-sense-badge">
+                ${Utils.escapeHTML(senseLabel)}
+              </span>
+              <div class="syn-ant-pills-wrap">
+                ${items.map(it => {
+                  const wName = typeof it === 'object' ? it.word : it;
+                  const rawMean = (typeof it === 'object' && it.meaning) ? it.meaning : '';
+                  const wMean = rawMean ? ` <span class="syn-ant-pill-mean">(${Utils.escapeHTML(rawMean)})</span>` : '';
+                  return `<button class="syn-ant-pill-btn ant-pill" onclick="event.stopPropagation(); App.showWordMorphologyModal('${Utils.escapeHTML(wName)}', { originWord: '${Utils.escapeHTML(word.word)}', sense: '${Utils.escapeHTML(senseLabel)}', isAntonym: true, fallbackMeaning: '${Utils.escapeHTML(rawMean)}' });" title="点击查看【${Utils.escapeHTML(wName)}】形态学构词精解与发音"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
+                }).join('')}
+              </div>
+            </div>
+          `;
+        }
+      });
+      antColHtml += `</div>`;
+    }
+
     let html = `
-      <div class="syn-ant-matrix" style="margin-top:8px; padding:8px 12px; background:var(--bg, #f8fafc); border:1px solid var(--border, #e2e8f0); border-radius:10px; font-size:0.82rem; text-align:left; box-shadow:inset 0 1px 3px rgba(0,0,0,0.02);">
+      <div class="syn-ant-matrix ${isTwoCol ? 'two-col-layout' : 'single-col-layout'}">
+        ${synColHtml}
+        ${antColHtml}
+      </div>
     `;
-
-    synGroups.forEach(grp => {
-      const senseLabel = (typeof grp === 'object' && grp.sense) ? `近义 · ${grp.sense}` : '近义词';
-      const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
-      if (items.length > 0) {
-        html += `
-          <div style="display:flex; align-items:flex-start; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
-            <span style="font-weight:700; color:#0369a1; background:#e0f2fe; padding:2px 8px; border-radius:6px; font-size:0.74rem; white-space:nowrap; margin-top:2px;">
-              ${Utils.escapeHTML(senseLabel)}
-            </span>
-            <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; flex:1;">
-              ${items.map(it => {
-                const wName = typeof it === 'object' ? it.word : it;
-                const wMean = (typeof it === 'object' && it.meaning) ? ` <span style="font-weight:normal; opacity:0.8; font-size:0.72rem;">(${Utils.escapeHTML(it.meaning)})</span>` : '';
-                return `<button class="syn-ant-pill-btn" style="border:1px solid var(--border, #cbd5e1); background:var(--card-bg, #ffffff); color:var(--primary, #0f766e); padding:3px 9px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-weight:700; display:inline-flex; align-items:center; transition:all 0.15s ease;" onclick="event.stopPropagation(); App.jumpToWord('${Utils.escapeHTML(wName)}');" title="点击跳转专练【${Utils.escapeHTML(wName)}】"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
-              }).join('')}
-            </div>
-          </div>
-        `;
-      }
-    });
-
-    antGroups.forEach(grp => {
-      const senseLabel = (typeof grp === 'object' && grp.sense) ? `反义 · ${grp.sense}` : '反义词';
-      const items = (typeof grp === 'object' && Array.isArray(grp.items)) ? grp.items : (Array.isArray(grp) ? grp : [grp]);
-      if (items.length > 0) {
-        html += `
-          <div style="display:flex; align-items:flex-start; flex-wrap:wrap; gap:6px; margin-bottom:4px;">
-            <span style="font-weight:700; color:#b91c1c; background:#fee2e2; padding:2px 8px; border-radius:6px; font-size:0.74rem; white-space:nowrap; margin-top:2px;">
-              ${Utils.escapeHTML(senseLabel)}
-            </span>
-            <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; flex:1;">
-              ${items.map(it => {
-                const wName = typeof it === 'object' ? it.word : it;
-                const wMean = (typeof it === 'object' && it.meaning) ? ` <span style="font-weight:normal; opacity:0.8; font-size:0.72rem;">(${Utils.escapeHTML(it.meaning)})</span>` : '';
-                return `<button class="syn-ant-pill-btn" style="border:1px solid var(--border, #cbd5e1); background:var(--card-bg, #ffffff); color:#dc2626; padding:3px 9px; border-radius:6px; font-size:0.78rem; cursor:pointer; font-weight:700; display:inline-flex; align-items:center; transition:all 0.15s ease;" onclick="event.stopPropagation(); App.jumpToWord('${Utils.escapeHTML(wName)}');" title="点击跳转专练【${Utils.escapeHTML(wName)}】"><strong>${Utils.escapeHTML(wName)}</strong>${wMean}</button>`;
-              }).join('')}
-            </div>
-          </div>
-        `;
-      }
-    });
-
-    html += `</div>`;
     return html;
   }
 
@@ -8795,25 +9402,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       },
 
       captureScrollPosition() {
-        this.pinnedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        // 彻底废除锁定旧卡片底部的机制，避免换题时将新卡片生硬钉在屏幕最下方
       },
 
       restoreScrollPosition() {
-        if (this.pinnedScrollY !== null && typeof this.pinnedScrollY === 'number') {
-          const targetY = this.pinnedScrollY;
-          window.scrollTo({
-            top: targetY,
-            left: 0,
-            behavior: 'instant'
-          });
-
-          requestAnimationFrame(() => {
-            window.scrollTo({
-              top: targetY,
-              left: 0,
-              behavior: 'instant'
-            });
-          });
+        if (typeof App !== 'undefined' && typeof App.ensureFlashcardInView === 'function') {
+          App.ensureFlashcardInView(false);
         }
       },
 
@@ -9179,7 +9773,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
           });
         }
 
-        if (this.isTouchDevice() && mainCard) {
+        if (mainCard) {
           requestAnimationFrame(() => {
             const rect = mainCard.getBoundingClientRect();
             const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -9759,7 +10353,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             actionsEl.innerHTML = `
               <button class="btn btn-primary" onclick="Views.Typing.startNewRound()">🎉 圆满结算本轮并开启新一轮 (Enter)</button>
               <button class="btn btn-secondary" onclick="Views.Typing.continueLargerPool(${goalData.oldLimit})">🚀 继续冲刺更大题量 (${goalData.oldLimit} 词)</button>
-              <button class="btn btn-secondary" id="tm-drill-btn" onclick="Views.Typing.drillMistakesFromMilestone()">🎯 集中复盘错题 (M)</button>
+              <button class="btn btn-secondary" id="tm-drill-modal-btn-1" onclick="Views.Typing.drillMistakesFromMilestone()">🎯 集中复盘错题 (M)</button>
               <button class="btn btn-mini" style="margin-top:4px;" data-role="cancel" onclick="Views.Typing.dismissMilestone()">返回继续练习 (Esc)</button>
             `;
           }
@@ -11429,7 +12023,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
               🔍 点击翻转卡片 (空格 / →)
             </button>
           </div>
-          <div id="flashcard-actions" style="display:none; gap:10px;">
+          <div id="flashcard-actions-modal" style="display:none; gap:10px;">
             <button class="btn" onclick="Views.PhrasesDrill.flashcardRate('hard')" style="flex:1; padding:12px; background:var(--error-light); color:var(--error); font-weight:700; border:none; border-radius:8px;">
               😣 生疏 (←)
             </button>
@@ -11443,7 +12037,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       flipFlashcard() {
         const ans = document.getElementById('flashcard-answer');
         const flipWrap = document.getElementById('flashcard-flip-btn-wrap');
-        const acts = document.getElementById('flashcard-actions');
+        const acts = document.getElementById('flashcard-actions-modal') || document.getElementById('flashcard-actions');
         if (ans) ans.style.display = 'block';
         if (flipWrap) flipWrap.style.display = 'none';
         if (acts) acts.style.display = 'flex';
@@ -14710,6 +15304,9 @@ const App = (function() {
 
         Services.Sync.autoPullOnLaunch();
         try { updateMobileNavBarVisibility(); } catch (_) {}
+        if (typeof document !== 'undefined' && document.body) {
+          document.body.setAttribute('data-active-mode', AppState.get('currentMode') || 'choice');
+        }
       },
 
       isStandaloneMode() {
@@ -15693,13 +16290,27 @@ const App = (function() {
           }
         }
       },
+      ensureFlashcardInView(smooth = false) {
+        if (AppState.get('currentMode') !== 'flashcard') return;
+        const mainCard = document.getElementById('main-card');
+        if (!mainCard) return;
+        requestAnimationFrame(() => {
+          const rect = mainCard.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+          if (rect.top < 65 || rect.bottom > vh - 20) {
+            mainCard.scrollIntoView({
+              behavior: smooth ? 'smooth' : 'instant',
+              block: 'nearest'
+            });
+          }
+        });
+      },
       nextQuestion() {
         AppState.update('currentManualBoxOverride', null); // 换题重置手动保送标记
         Services.Audio.stopAll();
         Views.Choice.cancelAutoAdvance();
 
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
-        const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
         const reinforceSession = AppState.get('boxReinforceSession');
         if (reinforceSession && reinforceSession.isActive) {
@@ -15756,11 +16367,8 @@ const App = (function() {
           this.renderCurrentView();
           this.updateDueSprintUI();
 
-          if (isFlashcard && lockedScrollY !== null) {
-            window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-            requestAnimationFrame(() => {
-              window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-            });
+          if (isFlashcard) {
+            this.ensureFlashcardInView(false);
           }
           return;
         }
@@ -15771,11 +16379,8 @@ const App = (function() {
           AppState.update('activePool', pool);
           AppState.update('currentWord', ghostWord);
           this.renderCurrentView();
-          if (isFlashcard && lockedScrollY !== null) {
-            window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-            requestAnimationFrame(() => {
-              window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-            });
+          if (isFlashcard) {
+            this.ensureFlashcardInView(false);
           }
           return;
         }
@@ -15825,11 +16430,8 @@ const App = (function() {
           if (found) {
             AppState.update('currentWord', found);
             this.renderCurrentView();
-            if (isFlashcard && lockedScrollY !== null) {
-              window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-              requestAnimationFrame(() => {
-                window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-              });
+            if (isFlashcard) {
+              this.ensureFlashcardInView(false);
             }
             return;
           }
@@ -15846,11 +16448,8 @@ const App = (function() {
 
         this.renderCurrentView();
 
-        if (isFlashcard && lockedScrollY !== null) {
-          window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-          requestAnimationFrame(() => {
-            window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-          });
+        if (isFlashcard) {
+          this.ensureFlashcardInView(false);
         }
       },
 
@@ -15865,7 +16464,6 @@ const App = (function() {
         let cursor = AppState.get('historyCursor');
 
         const isFlashcard = (AppState.get('currentMode') === 'flashcard');
-        const lockedScrollY = isFlashcard ? (window.scrollY || window.pageYOffset || 0) : null;
 
         const reinforceSession = AppState.get('boxReinforceSession');
         if (reinforceSession && reinforceSession.isActive && cursor > 0) {
@@ -15962,11 +16560,8 @@ const App = (function() {
           if (found) {
             AppState.update('currentWord', found);
             this.renderCurrentView();
-            if (isFlashcard && lockedScrollY !== null) {
-              window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-              requestAnimationFrame(() => {
-                window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
-              });
+            if (isFlashcard) {
+              this.ensureFlashcardInView(false);
             }
             return;
           }
@@ -16603,6 +17198,9 @@ const App = (function() {
         }
 
         AppState.update('currentMode', mode);
+        if (typeof document !== 'undefined' && document.body) {
+          document.body.setAttribute('data-active-mode', mode);
+        }
 
         try {
           let pool = this.getEffectivePool() || [];
@@ -16784,7 +17382,9 @@ const App = (function() {
               AppState.update('historyCursor', -1);
             }
             document.body.classList.remove('typing-mode-active');
-            if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') window.toggleModeNavAccordion(false);
+            if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') {
+              window.toggleModeNavAccordion(mode === 'flashcard');
+            }
             if (localStorage.getItem('morpho_utility_collapsed') !== '1') {
               const ctrlPanel = document.getElementById('utility-control-panel');
               if (ctrlPanel) ctrlPanel.classList.remove('is-collapsed');
@@ -16792,7 +17392,7 @@ const App = (function() {
 
             const stageArea = document.getElementById('stage-area');
             if (stageArea) stageArea.style.display = 'block';
-            if (searchPanel) searchPanel.style.display = 'flex';
+            if (searchPanel) searchPanel.style.display = (mode === 'flashcard') ? 'none' : 'flex';
 
             const isChoiceLike = ['choice', 'confusables'].includes(mode);
             const choiceView = document.getElementById('view-choice');
@@ -16894,20 +17494,42 @@ const App = (function() {
         this.nextQuestion();
       },
 
-      jumpToWord(wordName) {
-        if (!wordName) return;
+      findWordInAllPacks(wordName) {
+        if (!wordName) return null;
+        const target = wordName.trim().toLowerCase();
         const curPack = AppState.get('currentPackId');
         const packWords = AppState.get('allPacks')[curPack]?.words || [];
-        let found = packWords.find(w => w.word.toLowerCase() === wordName.toLowerCase());
-        if (!found) {
-          const allPacks = AppState.get('allPacks') || {};
-          const allWords = allPacks['all_2800']?.words || allPacks['all_2257']?.words || [];
-          found = allWords.find(w => w.word.toLowerCase() === wordName.toLowerCase());
+        let found = packWords.find(w => w && w.word && w.word.toLowerCase() === target);
+        if (found) return found;
+
+        const allPacks = AppState.get('allPacks') || {};
+        for (const pId in allPacks) {
+          const list = allPacks[pId]?.words || [];
+          found = list.find(w => w && w.word && w.word.toLowerCase() === target);
+          if (found) return found;
         }
+
+        if (typeof window !== 'undefined' && Array.isArray(window.WORDS_DATA)) {
+          found = window.WORDS_DATA.find(w => w && (w.word || '').toLowerCase() === target);
+          if (found) return found;
+        }
+        if (typeof window !== 'undefined' && Array.isArray(window.CET4_FULL_VOCAB)) {
+          found = window.CET4_FULL_VOCAB.find(w => w && (w.word || '').toLowerCase() === target);
+          if (found) return found;
+        }
+        return null;
+      },
+
+      jumpToWord(wordName) {
+        if (!wordName) return;
+        const found = this.findWordInAllPacks(wordName);
         if (found) {
           AppState.update('currentWord', found);
           if (AppState.get('currentMode') === 'flashcard') {
-            Views.Flashcard.renderCard(found);
+            this.renderCurrentView();
+            if (typeof this.ensureFlashcardInView === 'function') {
+              this.ensureFlashcardInView(false);
+            }
           } else {
             this.switchMode('choice');
             this.showWordDetails(found);
@@ -16915,6 +17537,161 @@ const App = (function() {
           if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
             Services.Sync.showToast(`已跳转至近/反义词：${found.word}`, 'info', 1500);
           }
+        }
+      },
+
+      showWordMorphologyModal(wordName, options = {}) {
+        if (!wordName) return;
+        const originWord = options.originWord || '';
+        const sense = options.sense || '';
+        const isAnt = Boolean(options.isAntonym);
+        const fallbackMeaning = options.fallbackMeaning || '';
+
+        const found = this.findWordInAllPacks(wordName);
+
+        let overlay = document.getElementById('morpho-popover-overlay');
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.id = 'morpho-popover-overlay';
+          overlay.className = 'ui-modal-overlay modal-overlay';
+          overlay.style.zIndex = '10050';
+          document.body.appendChild(overlay);
+
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+              App.closeWordMorphologyModal();
+            }
+          });
+        }
+
+        const relationLabel = isAnt ? '📙 反义词对比' : '📘 近义词拓展';
+        const relationBadgeClass = isAnt ? 'ant-header-tag' : 'syn-header-tag';
+        const displayWord = found ? found.word : wordName;
+        const displayPhonetic = (found && found.phonetic) ? found.phonetic : '';
+        const displayMeaning = (found && found.meaning) ? `${found.pos ? found.pos + ' ' : ''}${found.meaning}` : (fallbackMeaning ? fallbackMeaning : '暂无详细释义');
+        const displayGroup = (found && (found.group || found.part)) ? (found.group || found.part) : '';
+        const isExt = Boolean(found && found.analysis_type === '引申');
+        const tagClass = isExt ? 'tag-yinshen' : 'tag-gouci';
+        const tagTitle = isExt ? '语义引申逻辑' : '形态学构词精解';
+        const analysisText = (found && found.analysis) ? found.analysis : '';
+        const collocationText = (found && found.collocation) ? found.collocation : '';
+
+        let analysisSectionHtml = '';
+        if (analysisText || collocationText) {
+          analysisSectionHtml = `
+            <div class="flashcard-embedded-analysis" style="background:var(--card-subtle); border:1.5px dashed var(--border); border-radius:12px; padding:12px 14px; text-align:left; margin-top:8px;">
+              ${analysisText ? `
+                <div style="margin-bottom:6px;">
+                  <span class="flashcard-analysis-tag ${tagClass}" style="display:inline-block; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:6px; margin-bottom:6px;">${tagTitle}</span>
+                  <div class="flashcard-analysis-text" style="font-size:0.92rem; line-height:1.55; color:var(--text);">${Utils.escapeHTML(analysisText)}</div>
+                </div>
+              ` : ''}
+              ${collocationText ? `
+                <div class="flashcard-collocation-text" style="margin-top:6px; padding-top:6px; border-top:1px dashed var(--border); font-size:0.86rem; color:#0284c7; font-weight:600;">
+                  【核心搭配】: ${Utils.escapeHTML(collocationText)}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        } else {
+          analysisSectionHtml = `
+            <div style="background:var(--card-subtle); border:1.5px dashed var(--border); border-radius:12px; padding:14px; text-align:center; color:var(--muted); font-size:0.88rem; margin-top:8px;">
+              <span>💡 该词为拓展词汇，已收录基础中英映射。可通过下方按钮在词典库中深度检索。</span>
+            </div>
+          `;
+        }
+
+        const audioButtonHtml = `
+          <button class="audio-btn" type="button" style="width:36px; height:36px; font-size:1rem; flex-shrink:0;" onclick="event.stopPropagation(); if (typeof Services !== 'undefined' && Services.Audio) Services.Audio.playWord('${Utils.escapeHTML(displayWord)}');" title="朗读【${Utils.escapeHTML(displayWord)}】发音">
+            🔊
+          </button>
+        `;
+
+        overlay.innerHTML = `
+          <div class="ui-modal-card morpho-popover-card" role="dialog" aria-modal="true" style="max-width:470px; width:92%; position:relative; box-shadow:0 24px 50px rgba(0,0,0,0.28); border-radius:20px; padding:20px 22px;">
+            <!-- 顶栏状态与关闭按钮 -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; gap:8px;">
+              <div style="display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <span class="syn-ant-col-header ${relationBadgeClass}" style="margin:0; font-size:0.75rem; padding:3px 8px; border-radius:6px;">
+                  ${relationLabel}
+                </span>
+                ${originWord ? `<span style="font-size:0.76rem; color:var(--muted);">关联母词 <strong>${Utils.escapeHTML(originWord)}</strong></span>` : ''}
+                ${sense ? `<span style="font-size:0.74rem; background:var(--card-subtle); border:1px solid var(--border); padding:1px 6px; border-radius:4px; color:var(--muted);">${Utils.escapeHTML(sense)}</span>` : ''}
+              </div>
+              <button type="button" onclick="App.closeWordMorphologyModal()" style="background:transparent; border:none; color:var(--muted); font-size:1.3rem; line-height:1; cursor:pointer; padding:2px 6px; border-radius:6px; transition:all 0.15s ease;" title="关闭 (Esc)">
+                ✕
+              </button>
+            </div>
+
+            <!-- 单词主体、音标与释义 -->
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:4px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">
+                  <span style="font-size:2.1rem; font-weight:900; color:var(--text); letter-spacing:-0.02em; line-height:1.1;">
+                    ${Utils.escapeHTML(displayWord)}
+                  </span>
+                  ${displayPhonetic ? `
+                    <span style="font-size:0.95rem; color:var(--muted); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:var(--card-subtle); padding:2px 8px; border-radius:12px; border:1px solid var(--border);">
+                      ${Utils.escapeHTML(displayPhonetic)}
+                    </span>
+                  ` : ''}
+                </div>
+                ${audioButtonHtml}
+              </div>
+
+              ${displayGroup ? `
+                <div style="font-size:0.75rem; color:var(--primary); font-weight:700; background:var(--primary-light); border:1px solid var(--primary-border); padding:3px 10px; border-radius:8px; width:fit-content;">
+                  ${Utils.escapeHTML(displayGroup)}
+                </div>
+              ` : ''}
+
+              <div style="font-size:1.1rem; font-weight:800; color:var(--text); line-height:1.4; margin-top:2px;">
+                ${Utils.escapeHTML(displayMeaning)}
+              </div>
+            </div>
+
+            <!-- 形态学构词精解主体 -->
+            ${analysisSectionHtml}
+
+            <!-- 底部操作按钮 -->
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border);">
+              <button class="btn btn-sm" type="button" onclick="App.closeWordMorphologyModal()" style="background:var(--bg); border:1px solid var(--border); color:var(--muted); font-size:0.82rem; padding:6px 14px;">
+                ✕ 关闭 (Esc)
+              </button>
+              <button class="btn btn-sm btn-primary" type="button" onclick="App.closeWordMorphologyModal(); App.jumpToWord('${Utils.escapeHTML(displayWord)}');" style="font-size:0.82rem; padding:6px 16px; font-weight:700; box-shadow:0 2px 8px rgba(13,148,136,0.25);" title="切换到本题作为主线背词题目">
+                🎯 切换专练此词 →
+              </button>
+            </div>
+          </div>
+        `;
+
+        overlay.style.display = 'flex';
+        overlay.classList.add('open');
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+
+        if (typeof KeyRouter !== 'undefined' && typeof KeyRouter.pushModal === 'function') {
+          KeyRouter.pushModal({
+            element: overlay,
+            onEscape: () => App.closeWordMorphologyModal()
+          });
+        }
+      },
+
+      closeWordMorphologyModal() {
+        const overlay = document.getElementById('morpho-popover-overlay');
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+          if (typeof KeyRouter !== 'undefined' && typeof KeyRouter.popModal === 'function') {
+            KeyRouter.popModal(overlay);
+          }
+          setTimeout(() => {
+            if (overlay) {
+              overlay.style.display = 'none';
+              overlay.classList.remove('open');
+            }
+          }, 180);
         }
       },
 
