@@ -3319,6 +3319,18 @@
           </div>
           <button class="btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.74rem;" onclick="exitDueReviewSession(true)" title="退出冲刺并返回原主线题库">退出冲刺 ✕</button>
         </div>
+        <!-- 底部顺推会话实时状态条 -->
+        <div id="overlearning-bar" style="display:none; justify-content:space-between; align-items:center; background:linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%); border:1.5px solid rgba(16, 185, 129, 0.4); border-radius:12px; padding:8px 14px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:1.1rem; line-height:1;">🌊</span>
+            <div>
+              <span id="overlearning-title" style="font-weight:800; font-size:0.84rem; color:#10b981;">底部顺推中</span>
+              <span id="overlearning-desc" style="font-size:0.72rem; color:var(--muted); margin-left:4px;">(沉底打捞最久未见词)</span>
+            </div>
+            <span class="badge-mini" id="overlearning-badge" style="background:#10b981; color:#fff; font-weight:800; font-size:0.75rem;">剩余 0 词</span>
+          </div>
+          <button class="btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--text); cursor:pointer; font-size:0.74rem;" onclick="exitOverlearningSession(true)" title="退出顺推并返回主线题库">退出顺推 ✕</button>
+        </div>
 
         <!-- 单盒全面强化专享收益胶囊栏 -->
         <div id="box-reinforce-capsule" class="reinforce-capsule-wrap state-active" style="display:none;">
@@ -4130,8 +4142,29 @@
       <div class="tm-stat-box tm-stat-wide"><span class="tm-label">循环巩固</span><span class="tm-val" id="due-tm-cycled" style="color:#f59e0b;">3 词</span></div>
       <div class="tm-stat-box tm-stat-wide"><span class="tm-label">剩余到期词</span><span class="tm-val" id="due-tm-remain" style="color:#10b981;">0 词</span></div>
     </div>
-    <div class="tm-actions">
-      <button class="btn btn-primary" onclick="dismissDueMilestone()">🎉 圆满完成，返回主线学习 (Enter)</button>
+    <div class="tm-actions" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="dismissDueMilestone()">🎉 圆满完成，返回主线 (Enter)</button>
+      <button class="btn" style="background:#10b981; color:#fff; font-weight:700; border:none; padding:10px 18px; border-radius:8px; cursor:pointer;" onclick="dismissDueMilestone(); App.startOverlearningSession();">🌊 立即开启底部顺推</button>
+    </div>
+  </div>
+</div>
+
+<!-- 底部顺推通关 Milestone 仪式卡片弹窗 -->
+<div class="typing-milestone-overlay" id="overlearning-milestone-overlay" style="display:none;">
+  <div class="typing-milestone-card" role="dialog" aria-modal="true">
+    <div class="tm-trophy">🌊</div>
+    <h3 class="tm-title">恭喜完成底部顺推！</h3>
+    <p class="tm-sub" id="overlearning-tm-sub">已将词库最久未见的一批沉底词全部翻新</p>
+    <div class="tm-stats-grid">
+      <div class="tm-stat-box"><span class="tm-label">耗时</span><span class="tm-val" id="overlearning-tm-time">01:45</span></div>
+      <div class="tm-stat-box"><span class="tm-label">通关翻新</span><span class="tm-val" id="overlearning-tm-words" style="color:#10b981;">20 词</span></div>
+      <div class="tm-stat-box"><span class="tm-label">一次性稳固</span><span class="tm-val" id="overlearning-tm-perfect" style="color:#10b981;">18 词</span></div>
+      <div class="tm-stat-box tm-stat-wide"><span class="tm-label">回环修复</span><span class="tm-val" id="overlearning-tm-cycled" style="color:#f59e0b;">2 词</span></div>
+      <div class="tm-stat-box tm-stat-wide"><span class="tm-label">明日锁定迎战</span><span class="tm-val" id="overlearning-tm-remain" style="color:#ef4444;">2 词降至盒3</span></div>
+    </div>
+    <div class="tm-actions" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="dismissOverlearningMilestone()">完成顺推，返回主线</button>
+      <button class="btn" style="background:#10b981; color:#fff; font-weight:700; border:none; padding:10px 18px; border-radius:8px; cursor:pointer;" onclick="dismissOverlearningMilestone(); App.startOverlearningSession();">🌊 继续底部顺推</button>
     </div>
   </div>
 </div>
@@ -5585,6 +5618,18 @@
       historyCursor: -1,
 
       dueReviewSession: {
+        isActive: false,
+        scopeBoxId: null,
+        scopeName: '',
+        queue: [],
+        totalInitial: 0,
+        passedWords: new Set(),
+        mistakeWords: new Set(),
+        roundStartTime: 0,
+        backupContext: null
+      },
+
+      overlearningSession: {
         isActive: false,
         scopeBoxId: null,
         scopeName: '',
@@ -13660,6 +13705,7 @@ ${errDetail}
               ${box.dueWords.length > 0 ? `
                 <button class="box-action-btn box-btn-due" onclick="Views.Compass.filterDueWords(${box.id}, '${Utils.escapeHTML(box.name)}')">⚡ 专练到期 (${box.dueWords.length}词)</button>
               ` : ''}
+              <button class="box-action-btn box-btn-overlearning" style="background:transparent; border:1.5px solid #10b981; color:#10b981; font-weight:700;" onclick="App.startOverlearningSession(null, ${box.id}, '${Utils.escapeHTML(box.name)}')">🌊 底部顺推</button>
               <button class="box-action-btn box-btn-all" onclick="Views.Compass.filterBoxExact(${box.id}, '${Utils.escapeHTML(box.name)}')">📖 全盒强化 (${box.words.length}词)</button>
               <button class="box-btn-preview" onclick="Views.Compass.toggleDrawer(${box.id}, '${Utils.escapeHTML(box.name)}')">👁️ 展开词单预览</button>
             </div>
@@ -15849,6 +15895,248 @@ const App = (function() {
         this.nextQuestion();
       },
 
+      startOverlearningSession(count = null, boxId = null, boxName = '') {
+        const targetBoxId = (boxId !== undefined && boxId !== null) ? Number(boxId) : 5;
+        const targetName = boxName || (targetBoxId ? `盒 ${targetBoxId} 底部顺推` : '全库底部顺推');
+        const now = Date.now();
+        const currentPackId = AppState.get('currentPackId');
+        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
+        const stDict = AppState.get('packStats')[currentPackId] || {};
+
+        // 1. 过滤候选词：属于目标盒 (默认盒5)，排除今天已经答过的词
+        const todayStart = new Date().setHours(0, 0, 0, 0);
+        let candidates = packWords.filter(w => {
+          const st = stDict[w.word];
+          if (!st) return false;
+          if (targetBoxId !== null && (st.box ?? 1) !== targetBoxId) return false;
+          return true;
+        });
+
+        let unreviewedToday = candidates.filter(w => {
+          const st = stDict[w.word];
+          return !st || !st.lastReviewed || st.lastReviewed < todayStart;
+        });
+
+        const pool = unreviewedToday.length > 0 ? unreviewedToday : candidates;
+
+        if (pool.length === 0) {
+          Services.Sync.showToast(`当前【${targetName}】暂无沉底单词！`, 'info', 2500);
+          return false;
+        }
+
+        // 2. 严格按上次复习时间 lastReviewed 从小到大排序 (从词库最底部开始抽)
+        pool.sort((a, b) => {
+          const tA = stDict[a.word]?.lastReviewed || 0;
+          const tB = stDict[b.word]?.lastReviewed || 0;
+          return tA - tB;
+        });
+
+        // ★ 默认无上限：若未指定 count 或为 null，全量沉底词连续顺推！
+        const isUnlimited = (count === null || count === undefined || count <= 0 || count >= 9999);
+        const selectedWords = isUnlimited ? pool : pool.slice(0, count);
+
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
+        if (AppState.get('overlearningSession')?.isActive) {
+          this.exitOverlearningSession(false);
+        }
+
+        const backupContext = {
+          activePool: [...AppState.get('activePool')],
+          orderMode: AppState.get('orderMode'),
+          questionHistory: [...AppState.get('questionHistory')],
+          historyCursor: AppState.get('historyCursor'),
+          sequentialIndex: AppState.get('sequentialIndex'),
+          shuffleQueue: [...(AppState.get('shuffleQueue') || [])],
+          shufflePointer: AppState.get('shufflePointer'),
+          currentMode: AppState.get('currentMode')
+        };
+
+        const session = {
+          isActive: true,
+          scopeBoxId: targetBoxId,
+          scopeName: targetName,
+          isUnlimited: isUnlimited,
+          queue: [...selectedWords],
+          totalInitial: selectedWords.length,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: now,
+          backupContext: backupContext
+        };
+
+        AppState.update('overlearningSession', session);
+
+        const curMode = AppState.get('currentMode');
+        const isQuestionMode = ['choice', 'flashcard', 'spell', 'confusables'].includes(curMode);
+        if (!isQuestionMode) {
+          this.switchMode('choice');
+        }
+
+        this.updateOverlearningUI();
+        this.nextQuestion();
+        const tipMsg = isUnlimited
+          ? `🌊 已开启【${targetName}】，从最久未见词持续顺推！`
+          : `🌊 已开启【${targetName}】，精选 ${selectedWords.length} 个沉底词顺推！`;
+        Services.Sync.showToast(tipMsg, 'info', 2500);
+        return true;
+      },
+
+      exitOverlearningSession(restore = true) {
+        const session = AppState.get('overlearningSession');
+        if (!session || !session.isActive) return;
+
+        if (restore && session.backupContext) {
+          AppState.batchUpdate({
+            activePool: session.backupContext.activePool,
+            orderMode: session.backupContext.orderMode,
+            questionHistory: session.backupContext.questionHistory,
+            historyCursor: session.backupContext.historyCursor,
+            sequentialIndex: session.backupContext.sequentialIndex,
+            shuffleQueue: session.backupContext.shuffleQueue,
+            shufflePointer: session.backupContext.shufflePointer
+          });
+        }
+
+        AppState.update('overlearningSession', {
+          isActive: false,
+          scopeBoxId: null,
+          scopeName: '',
+          queue: [],
+          totalInitial: 0,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: 0,
+          backupContext: null
+        });
+
+        this.updateOverlearningUI();
+        this.updateDueBadge();
+        this.renderCurrentView();
+        Services.Sync.showToast('已退出底部顺推，返回主线学习', 'info', 1500);
+      },
+
+      updateOverlearningUI() {
+        const session = AppState.get('overlearningSession');
+        const bar = document.getElementById('overlearning-bar');
+        const title = document.getElementById('overlearning-title');
+        const desc = document.getElementById('overlearning-desc');
+        const badge = document.getElementById('overlearning-badge');
+        const progEl = document.getElementById('order-progress');
+
+        if (!session || !session.isActive) {
+          if (bar) bar.style.display = 'none';
+          return;
+        }
+
+        if (bar) bar.style.display = 'flex';
+        const isUnlimited = Boolean(session.isUnlimited);
+        if (title) title.innerText = `${session.scopeName || '底部顺推'}`;
+        if (desc) {
+          desc.innerText = isUnlimited
+            ? `(已翻新 ${session.passedWords.size} 词 · 回环错题 ${session.mistakeWords.size} 词 · 随练随退)`
+            : `(已翻新 ${session.passedWords.size} / 初始 ${session.totalInitial} 词 · 回环错题 ${session.mistakeWords.size} 词)`;
+        }
+        if (badge) {
+          badge.innerText = isUnlimited
+            ? `已翻新 ${session.passedWords.size} 词 / 剩余 ${session.queue.length} 词`
+            : `剩余 ${session.queue.length} 词`;
+        }
+
+        if (progEl) {
+          const passed = session.passedWords.size;
+          const total = session.totalInitial;
+          progEl.innerText = isUnlimited
+            ? `🌊 [底部顺推] 已翻新 ${passed} 词 · 剩余 ${session.queue.length} 词`
+            : `🌊 [底部顺推] 剩余 ${session.queue.length} / 共 ${total} 词 (已翻新 ${passed} 词)`;
+        }
+      },
+
+      showOverlearningMilestoneModal() {
+        const session = AppState.get('overlearningSession');
+        if (!session) return;
+
+        const overlay = document.getElementById('overlearning-milestone-overlay');
+        const elapsedMs = Math.max(1000, Date.now() - (session.roundStartTime || Date.now()));
+        const elapsedSec = Math.floor(elapsedMs / 1000);
+        const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+        const s = String(elapsedSec % 60).padStart(2, '0');
+
+        const total = session.totalInitial;
+        const cycledCount = session.mistakeWords.size;
+        const perfectCount = Math.max(0, total - cycledCount);
+
+        const timeEl = document.getElementById('overlearning-tm-time');
+        const wordsEl = document.getElementById('overlearning-tm-words');
+        const perfectEl = document.getElementById('overlearning-tm-perfect');
+        const cycledEl = document.getElementById('overlearning-tm-cycled');
+        const remainEl = document.getElementById('overlearning-tm-remain');
+
+        if (timeEl) timeEl.innerText = `${m}:${s}`;
+        if (wordsEl) wordsEl.innerText = `${total} 词`;
+        if (perfectEl) perfectEl.innerText = `${perfectCount} 词`;
+        if (cycledEl) cycledEl.innerText = `${cycledCount} 词`;
+        if (remainEl) remainEl.innerText = cycledCount > 0 ? `${cycledCount} 词已降入盒3 (明日迎战)` : `0 错题 全面稳固`;
+
+        if (session.backupContext) {
+          AppState.batchUpdate({
+            activePool: session.backupContext.activePool,
+            orderMode: session.backupContext.orderMode,
+            questionHistory: session.backupContext.questionHistory,
+            historyCursor: session.backupContext.historyCursor,
+            sequentialIndex: session.backupContext.sequentialIndex,
+            shuffleQueue: session.backupContext.shuffleQueue,
+            shufflePointer: session.backupContext.shufflePointer
+          });
+        }
+
+        AppState.update('overlearningSession', {
+          isActive: false,
+          scopeBoxId: null,
+          scopeName: '',
+          queue: [],
+          totalInitial: 0,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          roundStartTime: 0,
+          backupContext: null
+        });
+
+        this.updateOverlearningUI();
+        this.updateDueBadge();
+        Views.Compass.markBoxesDirty();
+        Views.Compass.markMatrixDirty();
+        Views.Compass.renderBoxes();
+
+        if (overlay) {
+          overlay.style.display = 'flex';
+          ModalStackManager.openModal('overlearning_milestone', (isPop) => this.dismissOverlearningMilestone(isPop), overlay);
+          KeyRouter.pushModal({
+            element: overlay,
+            onEscape: () => this.dismissOverlearningMilestone(),
+            onEnter: () => this.dismissOverlearningMilestone()
+          });
+        }
+
+        if (AppState.get('soundEffectsEnabled')) {
+          Services.Sfx.playFeedbackSound(true, 'arcade');
+        }
+      },
+
+      dismissOverlearningMilestone(isPopState = false) {
+        const overlay = document.getElementById('overlearning-milestone-overlay');
+        if (overlay) {
+          overlay.style.display = 'none';
+          KeyRouter.popModal(overlay);
+          ModalStackManager.dismissModal('overlearning_milestone', { triggerHistoryBack: !isPopState });
+        }
+        this.nextQuestion();
+      },
+
       pickNextWord(direction = 1) {
         const reinforceSession = AppState.get('boxReinforceSession');
         if (reinforceSession && reinforceSession.isActive) {
@@ -16113,8 +16401,49 @@ const App = (function() {
               chosenP = Math.round(chosenGap * 0.5 + chosenRisk * 0.5 + Math.min(4, stC.mistakes || 0) * 8);
               chosenProb = BASE_BOX_WEIGHTS[1] * 0.50;
             }
+          } else if (targetBox === 5) {
+            // ★ 针对 5 盒高阶复习：到期拦截 + 底部顺推 (消除卡顿与随机长尾漂移)
+            const dueInBox5 = targetPool.filter(w => Algorithms.Leitner.isWordDue(stDict[w.word], now));
+            let isOverlearning = false;
+
+            if (dueInBox5.length > 0) {
+              // 1. 若有到期词，优先消灭到期词 (按到期紧迫度排序)
+              dueInBox5.sort((a, b) => {
+                const dueA = stDict[a.word]?.nextReviewDate || 0;
+                const dueB = stDict[b.word]?.nextReviewDate || 0;
+                return dueA - dueB;
+              });
+              chosenWord = dueInBox5[0];
+              chosenType = '盒5到期';
+            } else {
+              // 2. 到期词已清空，自动启动【底部顺推】：排除今日已答词，严格按最久未见顺推！
+              isOverlearning = true;
+              const todayStart = new Date().setHours(0, 0, 0, 0);
+              let unreviewedToday = targetPool.filter(w => {
+                const st = stDict[w.word];
+                return !st || !st.lastReviewed || st.lastReviewed < todayStart;
+              });
+              const overlearningPool = unreviewedToday.length > 0 ? unreviewedToday : targetPool;
+              overlearningPool.sort((a, b) => {
+                const tA = stDict[a.word]?.lastReviewed || 0;
+                const tB = stDict[b.word]?.lastReviewed || 0;
+                return tA - tB;
+              });
+              chosenWord = overlearningPool[0];
+              chosenType = '底部顺推';
+            }
+
+            const chosenSt = stDict[chosenWord.word] || {};
+            const daysAgo = chosenSt.lastReviewed ? Math.floor((now - chosenSt.lastReviewed) / 86400000) : '未测';
+            chosenP = 60;
+            chosenGap = Math.round(100 - (chosenSt.masteryScore ?? 90));
+            chosenRisk = Math.min(100, Math.round(daysAgo === '未测' ? 80 : (daysAgo / 16) * 100));
+            if (isOverlearning) {
+              flowStateTitle = '🌊底部顺推';
+              flowDetailTip = `距上次:${daysAgo}天 | 由远及近顺推`;
+            }
           } else {
-            // ★ 单一统一调度：直接统一调用 Ebbinghaus.calculateWordPriorityDetailed 打分内核
+            // 盒 2, 3, 4 保持标准 Ebbinghaus 打分内核
             const scoredInner = [];
             for (let i = 0; i < targetPool.length; i++) {
               const w = targetPool[i];
@@ -16366,6 +16695,29 @@ const App = (function() {
 
           this.renderCurrentView();
           this.updateDueSprintUI();
+
+          if (isFlashcard) {
+            this.ensureFlashcardInView(false);
+          }
+          return;
+        }
+
+        const overSession = AppState.get('overlearningSession');
+        if (overSession && overSession.isActive) {
+          if (overSession.queue.length === 0) {
+            this.showOverlearningMilestoneModal();
+            return;
+          }
+          const nextWord = overSession.queue[0];
+          let history = AppState.get('questionHistory');
+          history.push(nextWord.word);
+          if (history.length > 100) history.shift();
+          AppState.update('questionHistory', history);
+          AppState.update('historyCursor', history.length - 1);
+          AppState.update('currentWord', nextWord);
+
+          this.renderCurrentView();
+          this.updateOverlearningUI();
 
           if (isFlashcard) {
             this.ensureFlashcardInView(false);
@@ -16885,6 +17237,28 @@ const App = (function() {
           }
         }
 
+        const overSession = AppState.get('overlearningSession');
+        if (overSession && overSession.isActive && overSession.queue.length > 0) {
+          const head = overSession.queue[0];
+          if (head && head.word === wordName) {
+            if (isCorrect) {
+              overSession.passedWords.add(wordName);
+              overSession.queue.shift();
+            } else {
+              overSession.mistakeWords.add(wordName);
+              const failed = overSession.queue.shift();
+              // 回环重测：隔 3 题或塞入队尾，确保当堂巩固
+              if (overSession.queue.length >= 3) {
+                overSession.queue.splice(3, 0, failed);
+              } else {
+                overSession.queue.push(failed);
+              }
+            }
+            AppState.update('overlearningSession', overSession);
+            this.updateOverlearningUI();
+          }
+        }
+
         AppState.update('roundTotal', r => r + 1);
         if (isCorrect) AppState.update('roundCorrect', r => r + 1);
         AppState.update('sessionAnswered', s => s + 1);
@@ -16922,6 +17296,18 @@ const App = (function() {
         let newNextReviewDate = transition.nextReviewDate;
         let newMastery = transition.masteryScore;
         let newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
+
+        // ★ 核心规则：针对 5 盒错题降级，降入 3 盒 (中期强化盒)，且下次复习锁定在明天！
+        if (!isCorrect && oldBox === 5) {
+          newBox = 3;
+          newNextReviewDate = now + 1 * 86400000; // 锁定明日到期必复！
+          transition.stability = 4.0;
+          Services.Sync.showToast('⚠️ 5 盒错题已转入 3 盒强化，锁定明日【到期复习】首批迎战！', 'warning', 2500);
+        } else if (!isCorrect && oldBox === 4) {
+          newBox = 2;
+          newNextReviewDate = now + 1 * 86400000;
+          transition.stability = 2.0;
+        }
 
         // ★ 核心拦截：检测本次作答是否已被手动保送 (若已手动保送，自动升降盒强制彻底作废！)
         const manualOverride = AppState.get('currentManualBoxOverride');
@@ -17825,6 +18211,9 @@ const App = (function() {
     window.closeLeitnerDrawer = () => Views.Compass.closeDrawer();
     window.jumpBoxFromCompass = (b) => Views.Compass.jumpBox(b);
 
+    window.startOverlearningSession = (count, boxId, boxName) => App.startOverlearningSession(count, boxId, boxName);
+    window.exitOverlearningSession = (restore = true) => App.exitOverlearningSession(restore);
+    window.dismissOverlearningMilestone = (isPop = false) => App.dismissOverlearningMilestone(isPop);
     window.startBoxReinforceSession = (boxId, boxName) => App.startBoxReinforceSession(boxId, boxName);
     window.startPreCommitSprint = () => App.startPreCommitSprint();
     window.handleBoxReinforceExit = (isEsc) => App.handleBoxReinforceExit(isEsc);

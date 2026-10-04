@@ -303,7 +303,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "potential",
-            "meaning": "潜在的/有潜力的"
+            "meaning": "潜力/潜能"
           }
         ]
       }
@@ -327,7 +327,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "capital",
     "phonetic": "/ˈkæpɪtl/",
     "pos": "n./adj.",
-    "meaning": "n. 首都，首府；资本，资金，资产；大写字母； adj. 资本的；死刑的",
+    "meaning": "首都，首府；资本，资金，资产；大写字母；资本的；死刑的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -393,7 +393,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "capture",
     "phonetic": "/ˈkæptʃə(r)/",
     "pos": "vt./n.",
-    "meaning": "vt. 俘获，捕获；记录； n. 捕获",
+    "meaning": "俘获，捕获；记录；捕获",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -424,7 +424,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "conceive",
     "phonetic": "/kənˈsiːv/",
     "pos": "vt./vi.",
-    "meaning": "vt./vi. 构想，设想；怀胎，怀孕",
+    "meaning": "构想，设想；怀胎，怀孕",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
@@ -456,16 +456,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "创造/创作"
           },
           {
-            "word": "design",
-            "meaning": "设计"
-          },
-          {
             "word": "devise",
             "meaning": "设计/发明"
-          },
-          {
-            "word": "formulate",
-            "meaning": "构想/系统阐述"
           },
           {
             "word": "invent",
@@ -590,10 +582,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "common",
             "meaning": "普通的/平常的"
-          },
-          {
-            "word": "conventional",
-            "meaning": "传统的/常规的"
           }
         ]
       }
@@ -613,7 +601,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "brilliant",
-            "meaning": "卓越非凡绝顶聪明"
+            "meaning": "卓越非凡的/极其出色的"
           },
           {
             "word": "extraordinary",
@@ -700,7 +688,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "notice",
-            "meaning": "注意到 n. 通"
+            "meaning": "注意到；通告"
           },
           {
             "word": "observe",
@@ -745,7 +733,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "principal",
     "phonetic": "/ˈprɪnsəpl/",
     "pos": "adj./n.",
-    "meaning": "adj. 主要的，首要的； n. 校长；本金",
+    "meaning": "主要的，首要的；校长；本金",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
@@ -901,7 +889,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "recipient",
     "phonetic": "/rɪˈsɪpiənt/",
     "pos": "n./adj.",
-    "meaning": "n. 接受者，收件人，领受者； adj. 接受的",
+    "meaning": "接受者，收件人，领受者；接受的",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
@@ -983,10 +971,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "sensitive",
             "meaning": "敏感的"
-          },
-          {
-            "word": "vulnerable",
-            "meaning": "脆弱的"
           }
         ]
       }
@@ -1081,7 +1065,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "defect",
     "phonetic": "/ˈdiːfekt/",
     "pos": "n./vi.",
-    "meaning": "n. 缺点，缺陷，瑕疵； vi. 叛变，脱离背叛",
+    "meaning": "缺点，缺陷，瑕疵；叛变，脱离背叛",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -1319,14 +1303,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "boom",
             "meaning": "激增/繁荣昌盛"
-          },
-          {
-            "word": "fortune",
-            "meaning": "命运/运气"
-          },
-          {
-            "word": "wealth",
-            "meaning": "财富/财产"
           }
         ]
       }
@@ -1374,7 +1350,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "effect",
     "phonetic": "/ɪˈfekt/",
     "pos": "n./vt.",
-    "meaning": "n. 效果，影响； vt. 产生，实现，使发生（effect change）",
+    "meaning": "效果，影响；产生，实现，使发生（effect change）",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -1602,7 +1578,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "faculty",
     "phonetic": "/ˈfæklti/",
     "pos": "n.",
-    "meaning": "n. 全体教职员；学院，系；能力，才能",
+    "meaning": "全体教职员；学院，系；能力，才能",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -1636,7 +1612,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "potential",
-            "meaning": "潜在的/有潜力的"
+            "meaning": "潜能/潜质"
           }
         ]
       }
@@ -1674,7 +1650,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "feature",
     "phonetic": "/ˈfiːtʃə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 特征，特色；特写专题；面貌； vt. 以…为特色，由…主演",
+    "meaning": "特征，特色；特写专题；面貌；以…为特色，由…主演",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -1713,7 +1689,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "corrupt",
-            "meaning": "腐败的/贪污的"
+            "meaning": "使腐败/败坏"
           },
           {
             "word": "pollute",
@@ -1758,7 +1734,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "manufacture",
     "phonetic": "/ˌmænjuˈfæktʃə(r)/",
     "pos": "vt./n.",
-    "meaning": "vt. 大量制造，生产；捏造； n. 制造；产品",
+    "meaning": "大量制造，生产；捏造；制造；产品",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -1815,7 +1791,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "perfect",
     "phonetic": "/ˈpɜːfɪkt/",
     "pos": "adj./vt.",
-    "meaning": "adj. 完美的，极佳的；完全的； vt. 使完善，改善",
+    "meaning": "完美的，极佳的；完全的；使完善，改善",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -1909,7 +1885,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sacrifice",
     "phonetic": "/ˈsækrɪfaɪs/",
     "pos": "vt./n.",
-    "meaning": "n. 牺牲；祭品； vt. 牺牲，献出；献祭",
+    "meaning": "牺牲；祭品；牺牲，献出；献祭",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -2026,12 +2002,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "促进/协助",
         "items": [
           {
-            "word": "aid",
-            "meaning": "援助/救助"
-          },
-          {
             "word": "clear",
-            "meaning": "清楚的"
+            "meaning": "扫清障碍/放行"
           },
           {
             "word": "facilitate",
@@ -2137,7 +2109,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "secure",
-            "meaning": "争取到/获得"
+            "meaning": "稳固的/安全的"
           },
           {
             "word": "stable",
@@ -2156,7 +2128,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "constant",
     "phonetic": "/ˈkɒnstənt/",
     "pos": "adj./n.",
-    "meaning": "adj. 不断的，持续的；恒定的； n. 常数，恒量",
+    "meaning": "不断的，持续的；恒定的；常数，恒量",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -2240,7 +2212,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "constitution",
     "phonetic": "/ˌkɒnstɪˈtjuːʃn/",
     "pos": "n.",
-    "meaning": "n. 宪法；章程；体质，构造",
+    "meaning": "宪法；章程；体质，构造",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -2422,7 +2394,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "instant",
     "phonetic": "/ˈɪnstənt/",
     "pos": "n./adj.",
-    "meaning": "n. 瞬间，刹那； adj. 立即的；速溶的",
+    "meaning": "瞬间，刹那；立即的；速溶的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -2445,10 +2417,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "即刻/迅速",
         "items": [
-          {
-            "word": "immediate",
-            "meaning": "立即的/即刻的"
-          },
           {
             "word": "prompt",
             "meaning": "迅速敏捷及时的"
@@ -2497,7 +2465,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "institute",
     "phonetic": "/ˈɪnstɪtjuːt/",
     "pos": "n./vt.",
-    "meaning": "n. 研究所，学院； vt. 建立，创立；实行（改革/制度）",
+    "meaning": "研究所，学院；建立，创立；实行（改革/制度）",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -2754,10 +2722,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "抗拒/抵挡",
         "items": [
           {
-            "word": "oppose",
-            "meaning": "反对/反抗"
-          },
-          {
             "word": "withstand",
             "meaning": "经受/承受"
           }
@@ -2851,7 +2815,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stable",
     "phonetic": "/ˈsteɪbl/",
     "pos": "adj./n.",
-    "meaning": "adj. 稳定的，牢固的；稳重的； n. 马厩",
+    "meaning": "稳定的，牢固的；稳重的；马厩",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -3018,7 +2982,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "steady",
     "phonetic": "/ˈstedi/",
     "pos": "adj./vt.",
-    "meaning": "adj. 稳定的，稳固的；持续的；平稳的； vt. 使稳定",
+    "meaning": "稳定的，稳固的；持续的；平稳的；使稳定",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -3132,7 +3096,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "substitute",
     "phonetic": "/ˈsʌbstɪtjuːt/",
     "pos": "vt./n.",
-    "meaning": "n. 代替者，代用品； vt. 代替，替换",
+    "meaning": "代替者，代用品；代替，替换",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -3177,7 +3141,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "withstand",
     "phonetic": "/wɪðˈstænd/",
     "pos": "vt.",
-    "meaning": "vt. 抵挡，反抗；经受，承受",
+    "meaning": "抵挡，反抗；经受，承受",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -3304,7 +3268,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "掩盖/遮蔽"
           },
           {
             "word": "veil",
@@ -3381,7 +3345,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commission",
     "phonetic": "/kəˈmɪʃn/",
     "pos": "n./vt.",
-    "meaning": "n. 委员会；佣金，提成； vt. 委托，委任制作",
+    "meaning": "委员会；佣金，提成；委托，委任制作",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
@@ -3394,7 +3358,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commit",
     "phonetic": "/kəˈmɪt/",
     "pos": "vt.",
-    "meaning": "vt. 犯（错误/罪行）；致力于，承诺（commit to）；投入（资金/时间）",
+    "meaning": "犯（错误/罪行）；致力于，承诺（commit to）；投入（资金/时间）",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
@@ -3666,7 +3630,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "missionary",
     "phonetic": "/ˈmɪʃənri/",
     "pos": "n./adj.",
-    "meaning": "n. 传教士； adj. 传教的",
+    "meaning": "传教士；传教的",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
@@ -3781,7 +3745,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "permit",
     "phonetic": "/pəˈmɪt/",
     "pos": "vt./vi./n.",
-    "meaning": "vt. 允许，准许；使成为可能； n. 许可证，执照",
+    "meaning": "允许，准许；使成为可能；许可证，执照",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
@@ -3834,7 +3798,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "submit",
     "phonetic": "/səbˈmɪt/",
     "pos": "vt./vi.",
-    "meaning": "vt. 提交，呈递； vi. 屈服，服从（to）",
+    "meaning": "提交，呈递；屈服，服从（to）",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
@@ -3918,7 +3882,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "component",
     "phonetic": "/kəmˈpəʊnənt/",
     "pos": "n./adj.",
-    "meaning": "n. 组成部分，成分，部件； adj. 组成的",
+    "meaning": "组成部分，成分，部件；组成的",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4007,7 +3971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "deposit",
     "phonetic": "/dɪˈpɒzɪt/",
     "pos": "vt./n.",
-    "meaning": "n. 存款；定金，押金；矿床； vt. 存入（银行）；沉淀，沉积",
+    "meaning": "存款；定金，押金；矿床；存入（银行）；沉淀，沉积",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -4043,7 +4007,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dispose",
     "phonetic": "/dɪˈspəʊz/",
     "pos": "vi./vt.",
-    "meaning": "vi. 处理，处置（of）； vt. 布置；使倾向于",
+    "meaning": "处理，处置（of）；布置；使倾向于",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4107,7 +4071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "遮盖/隐匿"
           },
           {
             "word": "veil",
@@ -4149,7 +4113,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "exposure",
     "phonetic": "/ɪkˈspəʊʒə(r)/",
     "pos": "n.",
-    "meaning": "n. 暴露；显露；曝光；接触，面临；揭发",
+    "meaning": "暴露；显露；曝光；接触，面临；揭发",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4220,10 +4184,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "compel",
             "meaning": "强迫/迫使"
-          },
-          {
-            "word": "force",
-            "meaning": "力量/武力"
           }
         ]
       }
@@ -4234,7 +4194,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "opponent",
     "phonetic": "/əˈpəʊnənt/",
     "pos": "n./adj.",
-    "meaning": "n. 对手，敌手；反对者； adj. 对立的",
+    "meaning": "对手，敌手；反对者；对立的",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4379,10 +4339,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "抗拒/抵挡",
         "items": [
           {
-            "word": "resist",
-            "meaning": "抵抗/抵制"
-          },
-          {
             "word": "withstand",
             "meaning": "经受/承受"
           }
@@ -4404,7 +4360,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "opposite",
     "phonetic": "/ˈɒpəzɪt/",
     "pos": "adj./prep./n.",
-    "meaning": "adj. 相反的；对面的； n. 对立面； prep. 在…对面",
+    "meaning": "相反的；对面的；对立面；在…对面",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4430,7 +4386,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "position",
     "phonetic": "/pəˈzɪʃn/",
     "pos": "n./vt.",
-    "meaning": "n. 位置；职位；立场，态度； vt. 安置，定位",
+    "meaning": "位置；职位；立场，态度；安置，定位",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4486,10 +4442,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "hostile",
             "meaning": "敌对的"
-          },
-          {
-            "word": "negative",
-            "meaning": "负面的/消极的"
           }
         ]
       },
@@ -4562,10 +4514,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "certain",
             "meaning": "确定的/无疑的"
-          },
-          {
-            "word": "confident",
-            "meaning": "确信的/有信心的"
           }
         ]
       }
@@ -4686,7 +4634,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "propose",
     "phonetic": "/prəˈpəʊz/",
     "pos": "vt./vi.",
-    "meaning": "vt. 提议，建议；打算； vi. 求婚",
+    "meaning": "提议，建议；打算；求婚",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -4717,7 +4665,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "abstract",
     "phonetic": "/ˈæbstrækt/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 抽象的； n. 摘要，概要； vt. 提炼，抽取",
+    "meaning": "抽象的；摘要，概要；提炼，抽取",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -4861,7 +4809,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contract",
     "phonetic": "/ˈkɒntrækt/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 合同，契约； vt./vi. 订立合同；收缩，缩小；感染（疾病）",
+    "meaning": "合同，契约；订立合同；收缩，缩小；感染（疾病）",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -4984,7 +4932,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "extract",
     "phonetic": "/ɪkˈstrækt/",
     "pos": "vt./n.",
-    "meaning": "vt. 提取，拔出；摘录； n. 提取物；摘录",
+    "meaning": "提取，拔出；摘录；提取物；摘录",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -5086,7 +5034,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "discount",
-            "meaning": "折扣 vt. 打"
+            "meaning": "折扣；打折"
           },
           {
             "word": "reduce",
@@ -5101,7 +5049,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trace",
     "phonetic": "/treɪs/",
     "pos": "vt./n.",
-    "meaning": "n. 痕迹，踪迹；微量； vt. 追溯，查出…的根源；追踪",
+    "meaning": "痕迹，踪迹；微量；追溯，查出…的根源；追踪",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -5151,7 +5099,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "track",
     "phonetic": "/træk/",
     "pos": "n./vt.",
-    "meaning": "n. 轨道，跑道；踪迹，车辙； vt. 跟踪，追踪；监控进展",
+    "meaning": "轨道，跑道；踪迹，车辙；跟踪，追踪；监控进展",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -5204,7 +5152,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trail",
     "phonetic": "/treɪl/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 痕迹，踪迹；小径； vt./vi. 追踪，跟踪；落后拖后",
+    "meaning": "痕迹，踪迹；小径；追踪，跟踪；落后拖后",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -5541,7 +5489,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "target",
-            "meaning": "把…作为目标"
+            "meaning": "目标/指标"
           }
         ]
       }
@@ -5575,7 +5523,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stretch",
     "phonetic": "/stretʃ/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 伸展，拉长；延伸； n. 一段时间，一段路程",
+    "meaning": "伸展，拉长；延伸；一段时间，一段路程",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -5616,7 +5564,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tend",
     "phonetic": "/tend/",
     "pos": "vi./vt.",
-    "meaning": "vi. 往往会，趋向于（to）； vt. 照料，看护",
+    "meaning": "往往会，趋向于（to）；照料，看护",
     "part": "第一部分：超级核心母词族",
     "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
@@ -5642,7 +5590,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tender",
     "phonetic": "/ˈtendə(r)/",
     "pos": "adj./vt./n.",
-    "meaning": "adj. 温柔体贴的；脆弱娇嫩的； vt./n. 投标，正式提交（辞呈/账单）；偿付",
+    "meaning": "温柔体贴的；脆弱娇嫩的；投标，正式提交（辞呈/账单）；偿付",
     "part": "第一部分：超级核心母词族",
     "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
@@ -5655,7 +5603,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tense",
     "phonetic": "/tens/",
     "pos": "adj./n./vt.",
-    "meaning": "n. 时态； adj. 紧张的；绷紧的； vt. 使拉紧",
+    "meaning": "时态；紧张的；绷紧的；使拉紧",
     "part": "第一部分：超级核心母词族",
     "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
@@ -5727,7 +5675,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trend",
     "phonetic": "/trend/",
     "pos": "n./vi.",
-    "meaning": "n. 发展趋势，倾向走向；潮流； vi. 趋向，倾向",
+    "meaning": "发展趋势，倾向走向；潮流；趋向，倾向",
     "part": "第一部分：超级核心母词族",
     "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
@@ -5911,10 +5859,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "地平线/眼界"
           },
           {
-            "word": "view",
-            "meaning": "观点/见解"
-          },
-          {
             "word": "vision",
             "meaning": "远见/洞察力"
           }
@@ -6011,7 +5955,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "special",
     "phonetic": "/ˈspeʃl/",
     "pos": "adj./n.",
-    "meaning": "adj. 特殊的；专门的； n. 特刊；特价商品",
+    "meaning": "特殊的；专门的；特刊；特价商品",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
@@ -6060,7 +6004,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "professional",
-            "meaning": "专业的/职业的"
+            "meaning": "专业人员/专家"
           }
         ]
       }
@@ -6097,7 +6041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "specific",
     "phonetic": "/spəˈsɪfɪk/",
     "pos": "adj./n.",
-    "meaning": "adj. 具体的，特定的； n. 细节；特效药",
+    "meaning": "具体的，特定的；细节；特效药",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
@@ -6117,7 +6061,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "abstract",
-            "meaning": "抽象的 n. 摘"
+            "meaning": "抽象的；摘要"
           },
           {
             "word": "vague",
@@ -6177,7 +6121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spectacular",
     "phonetic": "/spekˈtækjələ(r)/",
     "pos": "adj./n.",
-    "meaning": "adj. 壮观的，引人入胜的； n. 盛大演出",
+    "meaning": "壮观的，引人入胜的；盛大演出",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
@@ -6240,7 +6184,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "suspect",
     "phonetic": "/səˈspekt/",
     "pos": "vt./vi./n./adj.",
-    "meaning": "vt. 怀疑，推测；疑有； n. 犯罪嫌疑人； adj. 可疑的，不可信的",
+    "meaning": "怀疑，推测；疑有；犯罪嫌疑人；可疑的，不可信的",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
@@ -6373,10 +6317,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "怀疑/揣测",
         "items": [
           {
-            "word": "doubt",
-            "meaning": "怀疑"
-          },
-          {
             "word": "speculation",
             "meaning": "投机/商业投机"
           }
@@ -6477,7 +6417,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "divide",
     "phonetic": "/dɪˈvaɪd/",
     "pos": "v./n.",
-    "meaning": "分，划分；除； n. 分水岭",
+    "meaning": "分，划分；除；分水岭",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -6538,7 +6478,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "evidence",
     "phonetic": "/ˈevɪdəns/",
     "pos": "n./vt.",
-    "meaning": "n. 证据，证明；迹象，征兆； vt. 证实，证明",
+    "meaning": "证据，证明；迹象，征兆；证实，证明",
     "part": "第一部分：超级核心母词族",
     "group": "【09. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -6626,16 +6566,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "看不见的/无形的"
           },
           {
-            "word": "obscure",
-            "meaning": "晦涩难懂的"
-          },
-          {
             "word": "subtle",
             "meaning": "微妙隐晦的"
-          },
-          {
-            "word": "vague",
-            "meaning": "含糊不清的"
           }
         ]
       }
@@ -6687,10 +6619,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "显著/明显",
         "items": [
           {
-            "word": "noticeable",
-            "meaning": "显而易见的"
-          },
-          {
             "word": "prominent",
             "meaning": "显著突出的"
           }
@@ -6703,7 +6631,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "individual",
     "phonetic": "/ˌɪndɪˈvɪdʒuəl/",
     "pos": "adj./n.",
-    "meaning": "adj. 个别的；独特的； n. 个人，个体",
+    "meaning": "个别的；独特的；个人，个体",
     "part": "第一部分：超级核心母词族",
     "group": "【09. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -6779,7 +6707,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "provide",
     "phonetic": "/prəˈvaɪd/",
     "pos": "vt./vi.",
-    "meaning": "vt. 提供，供给；规定（the law provides that）； conj. 假如（provided）",
+    "meaning": "提供，供给；规定（the law provides that）；假如（provided）",
     "part": "第一部分：超级核心母词族",
     "group": "【09. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -6857,7 +6785,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "指导/指挥"
           },
           {
             "word": "manage",
@@ -6885,16 +6813,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "管理/治理"
           },
           {
-            "word": "direct",
-            "meaning": "直接的"
-          },
-          {
             "word": "govern",
             "meaning": "统治/治理"
-          },
-          {
-            "word": "manage",
-            "meaning": "管理/经营操持"
           }
         ]
       }
@@ -6918,7 +6838,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "view",
     "phonetic": "/vjuː/",
     "pos": "n./vt.",
-    "meaning": "n. 景色，风景；观点，见解；看待； vt. 把…视为；观察",
+    "meaning": "景色，风景；观点，见解；看待；把…视为；观察",
     "part": "第一部分：超级核心母词族",
     "group": "【09. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
@@ -6952,10 +6872,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "horizon",
             "meaning": "地平线/眼界"
-          },
-          {
-            "word": "perspective",
-            "meaning": "视角/观点"
           },
           {
             "word": "vision",
@@ -7110,7 +7026,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "addict",
     "phonetic": "/ˈædɪkt/",
     "pos": "n./vt.",
-    "meaning": "n. 上瘾者，入迷的人； vt. 使沉溺，使上瘾",
+    "meaning": "上瘾者，入迷的人；使沉溺，使上瘾",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定/宣称】",
     "analysis_type": "构词",
@@ -7212,7 +7128,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dictate",
     "phonetic": "/dɪkˈteɪt/",
     "pos": "vt./vi./n.",
-    "meaning": "vt./vi. 口授；命令，听写； n. 命令，指使",
+    "meaning": "口授；命令，听写；命令，指使",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定/宣称】",
     "analysis_type": "构词",
@@ -7388,7 +7304,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "conduct",
     "phonetic": "/kənˈdʌkt/",
     "pos": "vt./n.",
-    "meaning": "vt. 组织，实施（调研/实验）；引导； n. 行为，举止",
+    "meaning": "组织，实施（调研/实验）；引导；行为，举止",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -7454,7 +7370,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "discount",
-            "meaning": "折扣 vt. 打"
+            "meaning": "折扣；打折"
           },
           {
             "word": "reduce",
@@ -7519,7 +7435,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "prompt",
-            "meaning": "迅速敏捷及时的"
+            "meaning": "促使/激发"
           },
           {
             "word": "provoke",
@@ -7528,10 +7444,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "stimulate",
             "meaning": "刺激/促使发生"
-          },
-          {
-            "word": "trigger",
-            "meaning": "触发"
           }
         ]
       }
@@ -7568,7 +7480,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "produce",
     "phonetic": "/prəˈdjuːs/",
     "pos": "vt./n.",
-    "meaning": "vt. 生产，制造；引起，产生； n. 农产品（新鲜蔬果）",
+    "meaning": "生产，制造；引起，产生；农产品（新鲜蔬果）",
     "part": "第一部分：超级核心母词族",
     "group": "【11. duc / duct 引导/带领/带来】",
     "analysis_type": "构词",
@@ -7630,16 +7542,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "创造/创作"
           },
           {
-            "word": "generate",
-            "meaning": "产生/发生"
-          },
-          {
             "word": "manufacture",
             "meaning": "大量制造"
-          },
-          {
-            "word": "yield",
-            "meaning": "产生"
           }
         ]
       }
@@ -7878,7 +7782,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "discount",
-            "meaning": "折扣 vt. 打"
+            "meaning": "折扣；打折"
           },
           {
             "word": "subtract",
@@ -7946,7 +7850,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "current",
     "phonetic": "/ˈkʌrənt/",
     "pos": "adj./n.",
-    "meaning": "adj. 当前的，现行的； n. 思潮，潮流；水流，气流；电流",
+    "meaning": "当前的，现行的；思潮，潮流；水流，气流；电流",
     "part": "第一部分：超级核心母词族",
     "group": "【12. cur / curr / curs / cours 跑/流动/进程】",
     "analysis_type": "构词",
@@ -8073,7 +7977,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "general",
     "phonetic": "/ˈdʒenrəl/",
     "pos": "adj./n.",
-    "meaning": "adj. 总的，普遍的，全面的；常规的； n. 将军",
+    "meaning": "总的，普遍的，全面的；常规的；将军",
     "part": "第一部分：超级核心母词族",
     "group": "【13. gen / gener / gent 出生/产生/种类/高贵】",
     "analysis_type": "构词",
@@ -8173,14 +8077,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "manufacture",
             "meaning": "大量制造"
-          },
-          {
-            "word": "produce",
-            "meaning": "引起/产生"
-          },
-          {
-            "word": "yield",
-            "meaning": "产生"
           }
         ]
       }
@@ -8318,10 +8214,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "天然/真实",
         "items": [
           {
-            "word": "factual",
-            "meaning": "事实的/真实的"
-          },
-          {
             "word": "natural",
             "meaning": "自然的/天然的"
           }
@@ -8392,7 +8284,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "uncomfortable",
-            "meaning": "不舒服的"
+            "meaning": "不适/不便"
           }
         ]
       },
@@ -8428,14 +8320,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "便利/便利措施",
         "items": [
           {
-            "word": "comfort",
-            "meaning": "安慰"
-          },
-          {
-            "word": "ease",
-            "meaning": "容易"
-          },
-          {
             "word": "facility",
             "meaning": "设施/设备"
           }
@@ -8448,7 +8332,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "convention",
     "phonetic": "/kənˈvenʃn/",
     "pos": "n.",
-    "meaning": "n. 习俗，常规，惯例；大会；公约",
+    "meaning": "习俗，常规，惯例；大会；公约",
     "part": "第一部分：超级核心母词族",
     "group": "【14. ven / vent 来/到达/发生】",
     "analysis_type": "构词",
@@ -8523,11 +8407,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "brilliant",
-            "meaning": "卓越非凡绝顶聪明"
-          },
-          {
-            "word": "exceptional",
-            "meaning": "杰出的/卓越的"
+            "meaning": "卓越非凡的/极其出色的"
           },
           {
             "word": "prominent",
@@ -8759,14 +8639,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "协助/支持",
         "items": [
           {
-            "word": "aid",
-            "meaning": "援助/救助"
-          },
-          {
-            "word": "assist",
-            "meaning": "帮助/协助"
-          },
-          {
             "word": "support",
             "meaning": "支持/拥护"
           },
@@ -8895,24 +8767,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "利润/盈余",
         "items": [
           {
-            "word": "earnings",
-            "meaning": "利润/收益"
-          },
-          {
             "word": "margin",
             "meaning": "差额/幅度"
           },
           {
-            "word": "profit",
-            "meaning": "利润"
-          },
-          {
             "word": "surplus",
             "meaning": "过剩"
-          },
-          {
-            "word": "yield",
-            "meaning": "产生"
           }
         ]
       }
@@ -8923,7 +8783,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "venture",
     "phonetic": "/ˈventʃə(r)/",
     "pos": "n./vi.",
-    "meaning": "n. 商业风险投资，冒险项目； vi. 敢于冒险前往；冒险说出",
+    "meaning": "商业风险投资，冒险项目；敢于冒险前往；冒险说出",
     "part": "第一部分：超级核心母词族",
     "group": "【14. ven / vent 来/到达/发生】",
     "analysis_type": "构词",
@@ -9104,7 +8964,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "convert",
     "phonetic": "/kənˈvɜːt/",
     "pos": "vt./vi.",
-    "meaning": "vt./vi. 转变，转化（convert into）；改变信仰",
+    "meaning": "转变，转化（convert into）；改变信仰",
     "part": "第一部分：超级核心母词族",
     "group": "【15. vert / vers 转/转向/反转】",
     "analysis_type": "构词",
@@ -9188,7 +9048,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "uniform",
-            "meaning": "制服"
+            "meaning": "一致的/统一的"
           }
         ]
       }
@@ -9817,14 +9677,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "协助/支持",
         "items": [
           {
-            "word": "aid",
-            "meaning": "援助/救助"
-          },
-          {
-            "word": "assist",
-            "meaning": "帮助/协助"
-          },
-          {
             "word": "support",
             "meaning": "支持/拥护"
           },
@@ -9839,7 +9691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "clear",
-            "meaning": "清楚的"
+            "meaning": "放行/清除障碍"
           }
         ]
       }
@@ -9869,7 +9721,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "structure",
     "phonetic": "/ˈstrʌktʃə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 结构，构造；建筑物； vt. 组织，安排，系统构建",
+    "meaning": "结构，构造；建筑物；组织，安排，系统构建",
     "part": "第一部分：超级核心母词族",
     "group": "【16. stru / struct 建造/构筑/堆叠】",
     "analysis_type": "构词",
@@ -10245,11 +10097,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "complete",
     "phonetic": "/kəmˈpliːt/",
     "pos": "adj./vt.",
-    "meaning": "adj. 完整的；完全的； vt. 完成，结束",
+    "meaning": "完整的；完全的；完成，结束",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
-    "analysis": "com-（彻底） + plet-（填满） -> 完全的，vt.。",
+    "analysis": "com-（彻底） + plet-（填满） -> 完全的；使圆满。",
     "antonyms": [
       {
         "sense": "相对/受限",
@@ -10478,7 +10330,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "full",
     "phonetic": "/fʊl/",
     "pos": "adj./adv.",
-    "meaning": "adj. 满的；完全的； adv. 十分",
+    "meaning": "满的；完全的；十分",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -10501,7 +10353,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "implement",
     "phonetic": "/ˈɪmplɪment/",
     "pos": "vt./n.",
-    "meaning": "贯彻，实施； n. 工具",
+    "meaning": "贯彻，实施；工具",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -10557,10 +10409,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "conduct",
             "meaning": "组织/实施"
-          },
-          {
-            "word": "execute",
-            "meaning": "贯彻执行/实施"
           },
           {
             "word": "perform",
@@ -10629,11 +10477,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "plenty",
     "phonetic": "/ˈplenti/",
     "pos": "pron./n./adv.",
-    "meaning": "pron./n. 充足，大量； adv. 十分",
+    "meaning": "充足，大量；十分",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
-    "analysis": "plen-（充满） + -ty（名词后缀） -> 告别匮乏的充盈状态 -> pron.，n.。",
+    "analysis": "plen-（充满） + -ty（名词后缀） -> 告别匮乏的充盈状态 -> 充足，大量。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "plenty of (大量 / 很多)；plenty of time (大量时间)"
@@ -10642,7 +10490,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "supplement",
     "phonetic": "/ˈsʌplɪmənt/",
     "pos": "n./vt.",
-    "meaning": "n. 补充物；增刊，副刊； vt. 补充，增补",
+    "meaning": "补充物；增刊，副刊；补充，增补",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -10657,7 +10505,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "discount",
-            "meaning": "折扣 vt. 打"
+            "meaning": "折扣；打折"
           },
           {
             "word": "reduce",
@@ -10677,7 +10525,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "supply",
     "phonetic": "/səˈplaɪ/",
     "pos": "n./vt.",
-    "meaning": "vt. 供应，提供（supply with）； n. 供应，供给；日常用品，物资",
+    "meaning": "供应，提供（supply with）；供应，供给；日常用品，物资",
     "part": "第一部分：超级核心母词族",
     "group": "【18. ple / plet / plen / pli 满/填补/完成】",
     "analysis_type": "构词",
@@ -10823,11 +10671,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "resident",
     "phonetic": "/ˈrezɪdənt/",
     "pos": "n./adj.",
-    "meaning": "居民； adj. 居住的",
+    "meaning": "居民；居住的",
     "part": "第一部分：超级核心母词族",
     "group": "【19. sed / sid / sess 坐/停留/安置/沉淀】",
     "analysis_type": "构词",
-    "analysis": "reside（定居） + -ent（人） -> 居民，adj.。",
+    "analysis": "reside（定居） + -ent（人） -> 居民；定居的。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -10862,7 +10710,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "settle",
     "phonetic": "/ˈsetl/",
     "pos": "vt./vi.",
-    "meaning": "vt. 解决（争端/难题）； vi. 定居，安顿；沉淀；清偿",
+    "meaning": "解决（争端/难题）；定居，安顿；沉淀；清偿",
     "part": "第一部分：超级核心母词族",
     "group": "【19. sed / sid / sess 坐/停留/安置/沉淀】",
     "analysis_type": "构词",
@@ -10914,10 +10762,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "decide",
             "meaning": "决定/裁决"
-          },
-          {
-            "word": "resolve",
-            "meaning": "解决/下决心"
           }
         ]
       },
@@ -10926,7 +10770,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "steady",
-            "meaning": "稳定的/稳固的"
+            "meaning": "使稳定/使稳固"
           }
         ]
       }
@@ -10950,7 +10794,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "appeal",
     "phonetic": "/əˈpiːl/",
     "pos": "vi./n.",
-    "meaning": "呼吁，恳求；上诉； n. 吸引力",
+    "meaning": "呼吁，恳求；上诉；吸引力",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -11121,10 +10965,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "释放/排出",
         "items": [
           {
-            "word": "discharge",
-            "meaning": "准许出院/释放"
-          },
-          {
             "word": "eject",
             "meaning": "喷出/弹出"
           },
@@ -11199,7 +11039,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pulse",
     "phonetic": "/pʌls/",
     "pos": "n./vi.",
-    "meaning": "n. 脉搏；脉冲； vi. 搏动，跳动",
+    "meaning": "脉搏；脉冲；搏动，跳动",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -11251,11 +11091,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "advocate",
     "phonetic": "/ˈædvəkeɪt/",
     "pos": "vt./n.",
-    "meaning": "vt. 提倡，倡导，主张； n. 拥护者，提倡者",
+    "meaning": "提倡，倡导，主张；拥护者，提倡者",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "ad-（去） + voc-（呼唤） + -ate，引申指倡导 vt. 拥护者 -> 倡导，vt.。",
+    "analysis": "ad-（去） + voc-（呼唤） + -ate -> 倡导；拥护者。",
     "antonyms": [],
     "synonyms": [
       {
@@ -11338,7 +11178,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "prompt",
-            "meaning": "迅速敏捷及时的"
+            "meaning": "促使/激起"
           },
           {
             "word": "stimulate",
@@ -11665,7 +11505,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "uniform",
-            "meaning": "制服"
+            "meaning": "一致的/统一的"
           }
         ]
       }
@@ -11953,10 +11793,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "恶化/损毁",
         "items": [
           {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
-          {
             "word": "alter",
             "meaning": "改变/更改"
           },
@@ -11981,10 +11817,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "破坏/毁灭",
         "items": [
-          {
-            "word": "crush",
-            "meaning": "压碎/碾碎"
-          },
           {
             "word": "destroy",
             "meaning": "破坏/摧毁"
@@ -12023,14 +11855,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "改变/变更",
         "items": [
-          {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
-            "word": "convert",
-            "meaning": "转变/转化"
-          },
           {
             "word": "modify",
             "meaning": "修改/更改修饰"
@@ -12078,10 +11902,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "accumulate",
             "meaning": "积聚/堆积"
-          },
-          {
-            "word": "preserve",
-            "meaning": "保护"
           }
         ]
       }
@@ -12153,7 +11973,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "notice",
-            "meaning": "注意到 n. 通"
+            "meaning": "注意到；通告"
           },
           {
             "word": "perceive",
@@ -12172,7 +11992,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "preserve",
     "phonetic": "/prɪˈzɜːv/",
     "pos": "vt./n.",
-    "meaning": "保护，保存； n. 专属领域",
+    "meaning": "保护，保存；专属领域",
     "part": "第一部分：超级核心母词族",
     "group": "【24. serv / serf 保留/服务/守候】",
     "analysis_type": "构词",
@@ -12198,10 +12018,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "恶化/损毁",
         "items": [
-          {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
           {
             "word": "alter",
             "meaning": "改变/更改"
@@ -12258,14 +12074,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "改变/变更",
         "items": [
           {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
-            "word": "convert",
-            "meaning": "转变/转化"
-          },
-          {
             "word": "modify",
             "meaning": "修改/更改修饰"
           },
@@ -12312,10 +12120,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "accumulate",
             "meaning": "积聚/堆积"
-          },
-          {
-            "word": "conserve",
-            "meaning": "节约/保护"
           }
         ]
       },
@@ -12386,8 +12190,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "service",
     "phonetic": "/ˈsɜːvɪs/",
-    "pos": "n.",
-    "meaning": "n. 服务；公共设施；检修，维护； vt. 检修，维护",
+    "pos": "n./vt.",
+    "meaning": "服务；公共设施；检修，维护；检修，维护",
     "part": "第一部分：超级核心母词族",
     "group": "【24. serv / serf 保留/服务/守候】",
     "analysis_type": "构词",
@@ -12510,7 +12314,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "format",
     "phonetic": "/ˈfɔːmæt/",
     "pos": "n./vt.",
-    "meaning": "n. 版式，格式；总体设计； vt. 格式化；编排格式",
+    "meaning": "版式，格式；总体设计；格式化；编排格式",
     "part": "第一部分：超级核心母词族",
     "group": "【25. form 形状/形式/塑造】",
     "analysis_type": "构词",
@@ -12577,16 +12381,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "发明/构思",
         "items": [
           {
-            "word": "conceive",
-            "meaning": "构想/设想"
-          },
-          {
             "word": "create",
             "meaning": "创造/创作"
-          },
-          {
-            "word": "design",
-            "meaning": "设计"
           },
           {
             "word": "devise",
@@ -12724,20 +12520,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "改变/变更",
         "items": [
           {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
             "word": "convert",
             "meaning": "转变/转化"
-          },
-          {
-            "word": "modify",
-            "meaning": "修改/更改修饰"
-          },
-          {
-            "word": "shift",
-            "meaning": "转移/移动"
           },
           {
             "word": "vary",
@@ -12765,11 +12549,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "uniform",
     "phonetic": "/ˈjuːnɪfɔːm/",
     "pos": "n./adj.",
-    "meaning": "n. 制服； adj. 统一的，一致的",
+    "meaning": "制服；统一的，一致的",
     "part": "第一部分：超级核心母词族",
     "group": "【25. form 形状/形式/塑造】",
     "analysis_type": "构词",
-    "analysis": "uni-（单一） + form（形态） -> 制服，adj.。",
+    "analysis": "uni-（单一） + form（形态） -> 一致的；制服。",
     "antonyms": [
       {
         "sense": "相异/多元",
@@ -12883,7 +12667,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "abstract",
-            "meaning": "抽象的 n. 摘"
+            "meaning": "抽象的；摘要"
           },
           {
             "word": "vague",
@@ -12943,7 +12727,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "final",
     "phonetic": "/ˈfaɪnl/",
     "pos": "adj./n.",
-    "meaning": "最终的，决定性的； n. 决赛",
+    "meaning": "最终的，决定性的；决赛",
     "part": "第一部分：超级核心母词族",
     "group": "【26. fin / termin 界限/限制/结束/精细】",
     "analysis_type": "构词",
@@ -13005,7 +12789,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "finance",
     "phonetic": "/ˈfaɪnæns/",
     "pos": "n./vt.",
-    "meaning": "n. 财政，金融；资金； vt. 为…提供资金，资助",
+    "meaning": "财政，金融；资金；为…提供资金，资助",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -13083,7 +12867,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fine",
     "phonetic": "/faɪn/",
     "pos": "adj./vt./n.",
-    "meaning": "adj. 晴朗美好的；健康的；纤细精密的； vt./n. 罚款，处以罚款",
+    "meaning": "晴朗美好的；健康的；纤细精密的；罚款，处以罚款",
     "part": "第一部分：超级核心母词族",
     "group": "【26. fin / termin 界限/限制/结束/精细】",
     "analysis_type": "构词",
@@ -13457,7 +13241,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "present",
     "phonetic": "/ˈpreznt/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 出席的；现在的； n. 礼物；现在； vt. 呈现，展现；提出；赠送",
+    "meaning": "出席的；现在的；礼物；现在；呈现，展现；提出；赠送",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -13483,11 +13267,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "representative",
     "phonetic": "/ˌreprɪˈzentətɪv/",
     "pos": "n./adj.",
-    "meaning": "代表； adj. 典型的",
+    "meaning": "代表；典型的",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
-    "analysis": "represent（代表） + -ative（人） -> 代表，adj.。",
+    "analysis": "represent（代表） + -ative（人） -> 代表；典型的。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "representative of (表示 / 代表……的)；representative office (代表机构 / 办事处)"
@@ -13532,7 +13316,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "scent",
     "phonetic": "/sent/",
     "pos": "n./vt.",
-    "meaning": "n. 香味，气味；蛛丝马迹线索； vt. 嗅到；察觉",
+    "meaning": "香味，气味；蛛丝马迹线索；嗅到；察觉",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -13545,7 +13329,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sense",
     "phonetic": "/sens/",
     "pos": "n./vt.",
-    "meaning": "n. 感觉；意义，含义；理智常识； vt. 察觉，意识到",
+    "meaning": "感觉；意义，含义；理智常识；察觉，意识到",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -13561,7 +13345,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "notice",
-            "meaning": "注意到 n. 通"
+            "meaning": "注意到；通告"
           },
           {
             "word": "observe",
@@ -13591,7 +13375,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "absurd",
-            "meaning": "荒谬绝伦毫无逻辑"
+            "meaning": "荒谬的/荒唐的"
           },
           {
             "word": "irrational",
@@ -13786,8 +13570,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "express",
     "phonetic": "/ɪkˈspres/",
-    "pos": "vt./adj.",
-    "meaning": "vt. 表达，表示； adj. 特快的，快捷的；明确清晰的； n. 特快列车，快递业务",
+    "pos": "vt./adj./n.",
+    "meaning": "表达，表示；特快的，快捷的；明确清晰的；特快列车，快递业务",
     "part": "第一部分：超级核心母词族",
     "group": "【29. press / print 压/按/挤压/印刷】",
     "analysis_type": "构词",
@@ -13799,7 +13583,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "articulate",
-            "meaning": "清楚表达 adj"
+            "meaning": "清楚表达；表达清晰的"
           },
           {
             "word": "utter",
@@ -13924,7 +13708,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "press",
     "phonetic": "/pres/",
     "pos": "vt./n.",
-    "meaning": "vt. 压，按；催促，敦促； n. 新闻界，媒体出版界；报刊",
+    "meaning": "压，按；催促，敦促；新闻界，媒体出版界；报刊",
     "part": "第一部分：超级核心母词族",
     "group": "【29. press / print 压/按/挤压/印刷】",
     "analysis_type": "构词",
@@ -13986,7 +13770,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "print",
     "phonetic": "/prɪnt/",
     "pos": "vt./n.",
-    "meaning": "打印，印刷； n. 印迹",
+    "meaning": "打印，印刷；印迹",
     "part": "第一部分：超级核心母词族",
     "group": "【29. press / print 压/按/挤压/印刷】",
     "analysis_type": "构词",
@@ -14051,24 +13835,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       },
@@ -14175,11 +13947,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "catalogue",
     "phonetic": "/ˈkætəlɒɡ/",
     "pos": "n./vt.",
-    "meaning": "n. 目录，商品名册； vt. 编入目录，系统列出",
+    "meaning": "目录，商品名册；编入目录，系统列出",
     "part": "第一部分：超级核心母词族",
     "group": "【21. voc / vok / voice 声音/呼唤/主张】",
     "analysis_type": "构词",
-    "analysis": "cata-（向下） + log-（挑选） -> 目录，vt.。",
+    "analysis": "cata-（向下） + log-（挑选） -> 目录；编入目录。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -14304,7 +14076,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "flood",
     "phonetic": "/flʌd/",
     "pos": "n./v.",
-    "meaning": "n. 洪水；大批，大量（a flood of）； vt./vi. 淹没；大量涌入",
+    "meaning": "洪水；大批，大量（a flood of）；淹没；大量涌入",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -14342,7 +14114,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "steady",
-            "meaning": "稳定的/稳固的"
+            "meaning": "保持稳定/平稳"
           }
         ]
       }
@@ -14422,7 +14194,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "articulate",
-            "meaning": "清楚表达 adj"
+            "meaning": "清楚表达；表达清晰的"
           },
           {
             "word": "smooth",
@@ -14437,7 +14209,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fluid",
     "phonetic": "/ˈfluːɪd/",
     "pos": "n./adj.",
-    "meaning": "流体，液体； adj. 流动的",
+    "meaning": "流体，液体；流动的",
     "part": "第一部分：超级核心母词族",
     "group": "【31. flu / flux / fluid 流/流动/溢出】",
     "analysis_type": "构词",
@@ -14536,7 +14308,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stream",
     "phonetic": "/striːm/",
     "pos": "n./vi.",
-    "meaning": "n. 川流，小溪；流流不息潮流； vi. 涌出，流出",
+    "meaning": "川流，小溪；流流不息潮流；涌出，流出",
     "part": "第一部分：超级核心母词族",
     "group": "【31. flu / flux / fluid 流/流动/溢出】",
     "analysis_type": "构词",
@@ -14549,7 +14321,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "close",
     "phonetic": "/kləʊz/",
     "pos": "v./adj.",
-    "meaning": "vt./vi. 关闭；结束； adj. 密切的，仔细严密的；亲密的",
+    "meaning": "关闭；结束；密切的，仔细严密的；亲密的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -14670,7 +14442,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "遮掩/隐瞒"
           },
           {
             "word": "veil",
@@ -14879,7 +14651,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "compensate",
     "phonetic": "/ˈkɒmpenseɪt/",
     "pos": "vt./vi.",
-    "meaning": "vt./vi. 补偿，赔偿；抵消",
+    "meaning": "补偿，赔偿；抵消",
     "part": "第一部分：超级核心母词族",
     "group": "【33. pend / pens 悬挂/称重/付出/依赖】",
     "analysis_type": "构词",
@@ -15136,7 +14908,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "joint",
-            "meaning": "关节/骨节连接处"
+            "meaning": "联合的/共同的"
           }
         ]
       },
@@ -15170,7 +14942,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "suspend",
     "phonetic": "/səˈspend/",
     "pos": "vt.",
-    "meaning": "vt. 悬挂，吊；暂停，中止；使停职/停课",
+    "meaning": "悬挂，吊；暂停，中止；使停职/停课",
     "part": "第一部分：超级核心母词族",
     "group": "【33. pend / pens 悬挂/称重/付出/依赖】",
     "analysis_type": "构词",
@@ -15269,7 +15041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "claim",
     "phonetic": "/kleɪm/",
     "pos": "vt./n.",
-    "meaning": "vt. 声称，断言；索赔；夺去（生命）； n. 索赔；声称；权利",
+    "meaning": "声称，断言；索赔；夺去（生命）；索赔；声称；权利",
     "part": "第一部分：超级核心母词族",
     "group": "【34. claim / clam 呼喊/声称】",
     "analysis_type": "构词",
@@ -15355,10 +15127,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "claim",
             "meaning": "声称/断言"
-          },
-          {
-            "word": "proclaim",
-            "meaning": "宣告/宣布"
           }
         ]
       }
@@ -15416,10 +15184,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "claim",
             "meaning": "声称/断言"
-          },
-          {
-            "word": "declare",
-            "meaning": "宣布/公布"
           }
         ]
       }
@@ -15482,7 +15246,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "delegate",
-            "meaning": "代表 vt. 委"
+            "meaning": "代表；委派"
           }
         ]
       }
@@ -15520,7 +15284,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "resign",
     "phonetic": "/rɪˈzaɪn/",
     "pos": "vt./vi.",
-    "meaning": "vi./vt. 辞职；放弃（权利）",
+    "meaning": "辞职；放弃（权利）",
     "part": "第一部分：超级核心母词族",
     "group": "【35. sign / signi 标记/信号/迹象】",
     "analysis_type": "构词",
@@ -15533,7 +15297,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sign",
     "phonetic": "/saɪn/",
     "pos": "n./vt.",
-    "meaning": "迹象；标记； vt. 签名",
+    "meaning": "迹象；标记；签名",
     "part": "第一部分：超级核心母词族",
     "group": "【35. sign / signi 标记/信号/迹象】",
     "analysis_type": "构词",
@@ -15546,7 +15310,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "signal",
     "phonetic": "/ˈsɪɡnəl/",
     "pos": "n./vt.",
-    "meaning": "信号，暗号； vt. 发信号",
+    "meaning": "信号，暗号；发信号",
     "part": "第一部分：超级核心母词族",
     "group": "【35. sign / signi 标记/信号/迹象】",
     "analysis_type": "构词",
@@ -15625,7 +15389,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "core",
-            "meaning": "核心/要点"
+            "meaning": "核心的/关键的"
           },
           {
             "word": "crucial",
@@ -15652,7 +15416,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "export",
     "phonetic": "/ˈekspɔːt/",
     "pos": "v./n.",
-    "meaning": "出口，输出； n. 出口产品",
+    "meaning": "出口，输出；出口产品",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -15830,7 +15594,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "transport",
     "phonetic": "/ˈtrænspɔːt/",
     "pos": "n./vt.",
-    "meaning": "运输，运送； vt. 运输",
+    "meaning": "运输，运送；运输",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -15884,7 +15648,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "rigid",
-            "meaning": "刚硬僵直不易弯曲"
+            "meaning": "死板的/僵硬的"
           },
           {
             "word": "severe",
@@ -15927,7 +15691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "reflect",
     "phonetic": "/rɪˈflekt/",
     "pos": "vt./vi.",
-    "meaning": "vt. 反映，显示；反射（光热）； vi. 深思，反思，沉思回顾（on）",
+    "meaning": "反映，显示；反射（光热）；深思，反思，沉思回顾（on）",
     "part": "第一部分：超级核心母词族",
     "group": "【37. flect / flex 弯曲/折回/折射】",
     "analysis_type": "构词",
@@ -15943,7 +15707,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "deliberate",
-            "meaning": "故意的/蓄意的"
+            "meaning": "深思熟虑/仔细考虑"
           }
         ]
       }
@@ -15989,7 +15753,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "complete",
-            "meaning": "完成"
+            "meaning": "完全的/彻底的"
           },
           {
             "word": "total",
@@ -16144,10 +15908,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "decide",
             "meaning": "决定/裁决"
-          },
-          {
-            "word": "settle",
-            "meaning": "解决/清偿"
           }
         ]
       },
@@ -16219,11 +15979,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bankrupt",
     "phonetic": "/ˈbæŋkrʌpt/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 破产的； n. 破产者； vt. 使破产",
+    "meaning": "破产的；破产者；使破产",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "bank（长凳） + rupt（破裂） -> 破产的，n.。",
+    "analysis": "bank（长凳） + rupt（破裂） -> 破产的；破产者。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -16377,14 +16137,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "协助/支持",
         "items": [
           {
-            "word": "aid",
-            "meaning": "援助/救助"
-          },
-          {
-            "word": "assist",
-            "meaning": "帮助/协助"
-          },
-          {
             "word": "support",
             "meaning": "支持/拥护"
           },
@@ -16505,7 +16257,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "route",
     "phonetic": "/ruːt/",
     "pos": "n./vt.",
-    "meaning": "路线，航线； vt. 按路线发送",
+    "meaning": "路线，航线；按路线发送",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -16619,7 +16371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contact",
     "phonetic": "/ˈkɒntækt/",
     "pos": "n./vt.",
-    "meaning": "n. 联系；接触； vt. 与…取得联系",
+    "meaning": "联系；接触；与…取得联系",
     "part": "第一部分：超级核心母词族",
     "group": "【28. sens / sent 感觉/感受/意识】",
     "analysis_type": "构词",
@@ -16659,7 +16411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contemporary",
     "phonetic": "/kənˈtemprəri/",
     "pos": "adj./n.",
-    "meaning": "adj. 当代的；同时代的； n. 同代人",
+    "meaning": "当代的；同时代的；同代人",
     "part": "第二部分：高频专业词根族",
     "group": "【41. temp / tempor 时间/时代/适度】",
     "analysis_type": "构词",
@@ -16716,7 +16468,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "temper",
     "phonetic": "/ˈtempə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 脾气，情绪；韧度； vt. 调和，使缓和",
+    "meaning": "脾气，情绪；韧度；调和，使缓和",
     "part": "第二部分：高频专业词根族",
     "group": "【41. temp / tempor 时间/时代/适度】",
     "analysis_type": "构词",
@@ -16770,7 +16522,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "attribute",
     "phonetic": "/əˈtrɪbjuːt/",
     "pos": "vt./n.",
-    "meaning": "vt. 把…归因于（to）； n. 属性，特征",
+    "meaning": "把…归因于（to）；属性，特征",
     "part": "第二部分：高频专业词根族",
     "group": "【55. don / dot / dow 赠送/给予】",
     "analysis_type": "构词",
@@ -16797,7 +16549,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contribute",
     "phonetic": "/kənˈtrɪbjuːt/",
     "pos": "vi./vt.",
-    "meaning": "vi./vt. 贡献，捐赠（to）；促成，导致（to）；投稿",
+    "meaning": "贡献，捐赠（to）；促成，导致（to）；投稿",
     "part": "第二部分：高频专业词根族",
     "group": "【55. don / dot / dow 赠送/给予】",
     "analysis_type": "构词",
@@ -17029,7 +16781,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "secure",
     "phonetic": "/səˈkjʊə(r)/",
     "pos": "adj./vt.",
-    "meaning": "adj. 安全稳妥的；安心的； vt. 争取到，获得（资金/合同）；系紧固定",
+    "meaning": "安全稳妥的；安心的；争取到，获得（资金/合同）；系紧固定",
     "part": "第二部分：高频专业词根族",
     "group": "【44. cur / cura 照料/关心/医治】",
     "analysis_type": "构词",
@@ -17228,7 +16980,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "grade",
     "phonetic": "/ɡreɪd/",
     "pos": "n./vt.",
-    "meaning": "n. 年级；成绩；等级； vt. 分级，分等；批改",
+    "meaning": "年级；成绩；等级；分级，分等；批改",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -17268,11 +17020,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "graduate",
     "phonetic": "/ˈɡrædʒuət/",
     "pos": "vi./n./adj.",
-    "meaning": "vi. 毕业； n. 毕业生； adj. 研究生的",
+    "meaning": "毕业；毕业生；研究生的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "gradu-（台阶） + -ate -> 迈上人生新台阶 -> 毕业，n.。",
+    "analysis": "gradu-（台阶） + -ate -> 迈上人生新台阶 -> 毕业；毕业生。",
     "antonyms": [
       {
         "sense": "本科生/大学",
@@ -17304,7 +17056,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "progress",
     "phonetic": "/ˈprəʊɡres/",
     "pos": "n./vi.",
-    "meaning": "n. 进步，进展； vi. 前进，推进",
+    "meaning": "进步，进展；前进，推进",
     "part": "第二部分：高频专业词根族",
     "group": "【42. grad / gress 走/步伐/阶段】",
     "analysis_type": "构词",
@@ -17406,18 +17158,18 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "undergraduate",
     "phonetic": "/ˌʌndəˈɡrædʒuət/",
     "pos": "n./adj.",
-    "meaning": "本科生； adj. 本科的",
+    "meaning": "本科生；本科的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "under-（在…之下） + graduate（大学毕业生） -> 本科生，adj.。",
+    "analysis": "under-（在…之下） + graduate（大学毕业生） -> 大学本科生；大学本科的。",
     "antonyms": [
       {
         "sense": "研究生/毕业",
         "items": [
           {
             "word": "graduate",
-            "meaning": "毕业 n. 毕业"
+            "meaning": "毕业生；毕业"
           }
         ]
       }
@@ -17637,11 +17389,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "justify",
-            "meaning": "证明…是正当的"
-          },
-          {
-            "word": "verify",
-            "meaning": "核实/核验"
+            "meaning": "证明正当/辩白"
           }
         ]
       }
@@ -17665,7 +17413,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "valuable",
     "phonetic": "/ˈvæljuəbl/",
     "pos": "adj./n.",
-    "meaning": "adj. 贵重的，很有价值的； n. 贵重物品",
+    "meaning": "贵重的，很有价值的；贵重物品",
     "part": "第二部分：高频专业词根族",
     "group": "【43. val / vail / fort 强壮/力量/价值】",
     "analysis_type": "构词",
@@ -17678,7 +17426,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "value",
     "phonetic": "/ˈvæljuː/",
     "pos": "n./vt.",
-    "meaning": "n. 价值；价格；价值观； vt. 珍视，重视；评价",
+    "meaning": "价值；价格；价值观；珍视，重视；评价",
     "part": "第二部分：高频专业词根族",
     "group": "【43. val / vail / fort 强壮/力量/价值】",
     "analysis_type": "构词",
@@ -17701,7 +17449,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "alien",
     "phonetic": "/ˈeɪliən/",
     "pos": "adj./n.",
-    "meaning": "adj. 外国的；陌生的； n. 外侨；外星人",
+    "meaning": "外国的；陌生的；外侨；外星人",
     "part": "第二部分：高频专业词根族",
     "group": "【45. alter / ali 其他/变更/改变】",
     "analysis_type": "构词",
@@ -17799,18 +17547,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "转变/转化"
           },
           {
-            "word": "modify",
-            "meaning": "修改/更改修饰"
-          },
-          {
-            "word": "shift",
-            "meaning": "转移/移动"
-          },
-          {
-            "word": "transform",
-            "meaning": "使改变形态"
-          },
-          {
             "word": "vary",
             "meaning": "变化/差异"
           }
@@ -17823,7 +17559,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "alternative",
     "phonetic": "/ɔːlˈtɜːnətɪv/",
     "pos": "adj./n.",
-    "meaning": "adj. 供选择的，两者择一的； n. 替换物，抉择",
+    "meaning": "供选择的，两者择一的；替换物，抉择",
     "part": "第二部分：高频专业词根族",
     "group": "【45. alter / ali 其他/变更/改变】",
     "analysis_type": "构词",
@@ -17846,7 +17582,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "animal",
     "phonetic": "/ˈænɪml/",
     "pos": "n./adj.",
-    "meaning": "n. 动物，兽； adj. 动物的",
+    "meaning": "动物，兽；动物的",
     "part": "第二部分：高频专业词根族",
     "group": "【46. anim 生命/心智/气息】",
     "analysis_type": "构词",
@@ -17859,7 +17595,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "animate",
     "phonetic": "/ˈænɪmeɪt/",
     "pos": "vt./adj.",
-    "meaning": "vt. 赋予生命，使有生气； adj. 有生命的",
+    "meaning": "赋予生命，使有生气；有生命的",
     "part": "第二部分：高频专业词根族",
     "group": "【46. anim 生命/心智/气息】",
     "analysis_type": "构词",
@@ -17935,7 +17671,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "audio",
     "phonetic": "/ˈɔːdiəʊ/",
     "pos": "adj./n.",
-    "meaning": "adj. 声音的，音频的； n. 音频信号",
+    "meaning": "声音的，音频的；音频信号",
     "part": "第二部分：高频专业词根族",
     "group": "【47. audi / audit 听/声音】",
     "analysis_type": "构词",
@@ -17948,7 +17684,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "audit",
     "phonetic": "/ˈɔːdɪt/",
     "pos": "vt./n.",
-    "meaning": "旁听（课程）； n. 审计",
+    "meaning": "旁听（课程）；审计",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -17987,7 +17723,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "battle",
     "phonetic": "/ˈbætl/",
     "pos": "n./v.",
-    "meaning": "战役，战斗； v. 作战",
+    "meaning": "战役，战斗；作战",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -18000,7 +17736,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "beat",
     "phonetic": "/biːt/",
     "pos": "vt./vi./n.",
-    "meaning": "vt. 打败，战胜；敲打； vi. 跳动； n. 节拍",
+    "meaning": "打败，战胜；敲打；跳动；节拍",
     "part": "第二部分：高频专业词根族",
     "group": "【48. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
@@ -18013,7 +17749,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "combat",
     "phonetic": "/ˈkɒmbæt/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 战斗，格斗； vt. 与…斗争，抗击，防治（疾病/通胀）",
+    "meaning": "战斗，格斗；与…斗争，抗击，防治（疾病/通胀）",
     "part": "第二部分：高频专业词根族",
     "group": "【48. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
@@ -18026,7 +17762,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "debate",
     "phonetic": "/dɪˈbeɪt/",
     "pos": "n./v.",
-    "meaning": "辩论，争论； v. 辩论",
+    "meaning": "辩论，争论；辩论",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -18096,7 +17832,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "punch",
     "phonetic": "/pʌntʃ/",
     "pos": "vt./n.",
-    "meaning": "vt. 猛击；打孔； n. 重拳猛击；打孔机",
+    "meaning": "猛击；打孔；重拳猛击；打孔机",
     "part": "第二部分：高频专业词根族",
     "group": "【48. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
@@ -18109,7 +17845,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "rebel",
     "phonetic": "/rɪˈbel/",
     "pos": "vi./n.",
-    "meaning": "vi. 反叛，造反； n. 叛乱者，反抗者",
+    "meaning": "反叛，造反；叛乱者，反抗者",
     "part": "第二部分：高频专业词根族",
     "group": "【48. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
@@ -18305,7 +18041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "concern",
     "phonetic": "/kənˈsɜːn/",
     "pos": "v./n.",
-    "meaning": "n. 关切，关心；令人担忧的事； vt. 涉及；使担忧，使挂念",
+    "meaning": "关切，关心；令人担忧的事；涉及；使担忧，使挂念",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -18338,7 +18074,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "accord",
     "phonetic": "/əˈkɔːd/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 一致；协议； vt. 给予； vi. 符合",
+    "meaning": "一致；协议；给予；符合",
     "part": "第二部分：高频专业词根族",
     "group": "【51. cord / card 心/核心】",
     "analysis_type": "构词",
@@ -18391,7 +18127,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "accordance",
     "phonetic": "/əˈkɔːdns/",
     "pos": "n.",
-    "meaning": "n. 一致，和谐；依照，依据（in accordance with）",
+    "meaning": "一致，和谐；依照，依据（in accordance with）",
     "part": "第二部分：高频专业词根族",
     "group": "【51. cord / card 心/核心】",
     "analysis_type": "构词",
@@ -18404,7 +18140,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "core",
     "phonetic": "/kɔː(r)/",
     "pos": "n./adj.",
-    "meaning": "n. 核心，要点；果核； adj. 最核心的",
+    "meaning": "核心，要点；果核；最核心的",
     "part": "第二部分：高频专业词根族",
     "group": "【51. cord / card 心/核心】",
     "analysis_type": "构词",
@@ -18588,20 +18324,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "堵塞/阻碍"
           },
           {
-            "word": "curb",
-            "meaning": "控制"
-          },
-          {
-            "word": "inhibit",
-            "meaning": "抑制/约束"
-          },
-          {
             "word": "interrupt",
             "meaning": "打断/打扰"
-          },
-          {
-            "word": "limit",
-            "meaning": "界限/限度极限"
           },
           {
             "word": "obstruct",
@@ -18656,7 +18380,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "record",
     "phonetic": "/ˈrekɔːd/",
     "pos": "n./vt.",
-    "meaning": "n. 记录；唱片；履历； vt. 记录；录音",
+    "meaning": "记录；唱片；履历；记录；录音",
     "part": "第二部分：高频专业词根族",
     "group": "【51. cord / card 心/核心】",
     "analysis_type": "构词",
@@ -18740,7 +18464,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "culture",
     "phonetic": "/ˈkʌltʃə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 文化，文明；培养，培养物； vt. 培植，培养",
+    "meaning": "文化，文明；培养，培养物；培植，培养",
     "part": "第二部分：高频专业词根族",
     "group": "【52. cult / col 耕作/培养/崇拜】",
     "analysis_type": "构词",
@@ -18811,7 +18535,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "damage",
     "phonetic": "/ˈdæmɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "n. 损害，毁坏；赔偿金； vt. 损害",
+    "meaning": "损害，毁坏；赔偿金；损害",
     "part": "第二部分：高频专业词根族",
     "group": "【53. damn / demn 损失/谴责/惩戒】",
     "analysis_type": "构词",
@@ -18845,18 +18569,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "恢复/修复",
         "items": [
-          {
-            "word": "conserve",
-            "meaning": "节约/保护"
-          },
-          {
-            "word": "maintain",
-            "meaning": "维持/保持"
-          },
-          {
-            "word": "preserve",
-            "meaning": "保护"
-          },
           {
             "word": "recover",
             "meaning": "恢复/痊愈康复"
@@ -18913,10 +18625,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "loss",
             "meaning": "亏损/丧失"
-          },
-          {
-            "word": "ruin",
-            "meaning": "毁坏/破坏"
           }
         ]
       },
@@ -18944,7 +18652,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "doctor",
     "phonetic": "/ˈdɒktə(r)/",
     "pos": "n./vt.",
-    "meaning": "医生；博士； vt. 篡改",
+    "meaning": "医生；博士；篡改",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -18971,7 +18679,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "document",
     "phonetic": "/ˈdɒkjumənt/",
     "pos": "n./vt.",
-    "meaning": "n. 公文，文件；证件； vt. 记录，记载；用文件证明",
+    "meaning": "公文，文件；证件；记录，记载；用文件证明",
     "part": "第二部分：高频专业词根族",
     "group": "【54. doc / doct 教导/文件/凭证】",
     "analysis_type": "构词",
@@ -19002,7 +18710,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "documentary",
     "phonetic": "/ˌdɒkjuˈmentri/",
     "pos": "adj./n.",
-    "meaning": "adj. 文件的，记实的； n. 纪录片",
+    "meaning": "文件的，记实的；纪录片",
     "part": "第二部分：高频专业词根族",
     "group": "【54. doc / doct 教导/文件/凭证】",
     "analysis_type": "构词",
@@ -19041,7 +18749,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dose",
     "phonetic": "/dəʊs/",
     "pos": "n./vt.",
-    "meaning": "剂量，一剂； vt. 服药",
+    "meaning": "剂量，一剂；服药",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -19146,7 +18854,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "endure",
     "phonetic": "/ɪnˈdjʊə(r)/",
     "pos": "vt./vi.",
-    "meaning": "vt. 忍受，忍耐； vi. 持久，持续",
+    "meaning": "忍受，忍耐；持久，持续",
     "part": "第二部分：高频专业词根族",
     "group": "【56. dur 持久/坚硬/耐受】",
     "analysis_type": "构词",
@@ -19257,7 +18965,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "equal",
     "phonetic": "/ˈiːkwəl/",
     "pos": "adj./vt./n.",
-    "meaning": "平等的；相等的； vt. 等于",
+    "meaning": "平等的；相等的；等于",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -19347,7 +19055,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "equivalent",
     "phonetic": "/ɪˈkwɪvələnt/",
     "pos": "adj./n.",
-    "meaning": "等价的，等同的； n. 等价物",
+    "meaning": "等价的，等同的；等价物",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -19460,7 +19168,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "justify",
-            "meaning": "证明…是正当的"
+            "meaning": "为…辩护/证明合理"
           },
           {
             "word": "validate",
@@ -19551,7 +19259,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fence",
     "phonetic": "/fens/",
     "pos": "n./vt.",
-    "meaning": "n. 栅栏，篱笆； vt. 围住",
+    "meaning": "栅栏，篱笆；围住",
     "part": "第二部分：高频专业词根族",
     "group": "【58. fend / fens 防卫/击退】",
     "analysis_type": "构词",
@@ -19614,7 +19322,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "offensive",
     "phonetic": "/əˈfensɪv/",
     "pos": "adj./n.",
-    "meaning": "adj. 冒犯的，无礼的；进攻性的； n. 攻势",
+    "meaning": "冒犯的，无礼的；进攻性的；攻势",
     "part": "第二部分：高频专业词根族",
     "group": "【58. fend / fens 防卫/击退】",
     "analysis_type": "构词",
@@ -19766,10 +19474,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "certain",
             "meaning": "确定的/无疑的"
-          },
-          {
-            "word": "positive",
-            "meaning": "积极的/乐观的"
           }
         ]
       }
@@ -19829,7 +19533,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bloom",
     "phonetic": "/bluːm/",
     "pos": "n./vi.",
-    "meaning": "开花；繁盛； vi. 开花",
+    "meaning": "开花；繁盛；开花",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -19916,7 +19620,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "flower",
     "phonetic": "/ˈflaʊə(r)/",
     "pos": "n./vi.",
-    "meaning": "n. 花，开花的植物； vi. 开花；发育成熟",
+    "meaning": "花，开花的植物；开花；发育成熟",
     "part": "第二部分：高频专业词根族",
     "group": "【60. flor / flour 花/开花/繁荣】",
     "analysis_type": "构词",
@@ -20004,7 +19708,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "refuse",
     "phonetic": "/rɪˈfjuːz/",
     "pos": "vt./vi./n.",
-    "meaning": "vt./vi. 拒绝，谢绝； n. 废弃物，垃圾",
+    "meaning": "拒绝，谢绝；废弃物，垃圾",
     "part": "第二部分：高频专业词根族",
     "group": "【61. fuse / fund 浇灌/倾倒/熔化】",
     "analysis_type": "构词",
@@ -20092,7 +19796,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "moderate",
-            "meaning": "适度的/温和的"
+            "meaning": "缓和/节制"
           },
           {
             "word": "relieve",
@@ -20104,24 +19808,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "改善/提升",
         "items": [
           {
-            "word": "alleviate",
-            "meaning": "减轻/缓和"
-          },
-          {
-            "word": "ease",
-            "meaning": "容易"
-          },
-          {
             "word": "elevate",
             "meaning": "提升/举起"
           },
           {
             "word": "enhance",
             "meaning": "提高/增加"
-          },
-          {
-            "word": "moderate",
-            "meaning": "适度的/温和的"
           },
           {
             "word": "refine",
@@ -20137,7 +19829,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "grave",
     "phonetic": "/ɡreɪv/",
     "pos": "adj./n.",
-    "meaning": "n. 坟墓，墓穴； adj. 严峻的，极其严重的；严肃沉重的",
+    "meaning": "坟墓，墓穴；严峻的，极其严重的；严肃沉重的",
     "part": "第二部分：高频专业词根族",
     "group": "【62. grav / griev 沉重/庄重/痛苦】",
     "analysis_type": "构词",
@@ -20251,7 +19943,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "exhibit",
     "phonetic": "/ɪɡˈzɪbɪt/",
     "pos": "vt./n.",
-    "meaning": "vt. 展出，陈列；表现出； n. 展览品",
+    "meaning": "展出，陈列；表现出；展览品",
     "part": "第二部分：高频专业词根族",
     "group": "【63. habit / hibit 居住/持有/拥有】",
     "analysis_type": "构词",
@@ -20508,7 +20200,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "judge",
     "phonetic": "/dʒʌdʒ/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 法官；裁判员； vt./vi. 判断，断定；评定，评价",
+    "meaning": "法官；裁判员；判断，断定；评定，评价",
     "part": "第二部分：高频专业词根族",
     "group": "【64. jur / jud / just 法律/审判/正义】",
     "analysis_type": "构词",
@@ -20713,7 +20405,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "labor",
     "phonetic": "/ˈleɪbə(r)/",
     "pos": "n./vi.",
-    "meaning": "n. 劳动力，劳工；辛勤劳动； vi. 艰苦劳作，艰难前行",
+    "meaning": "劳动力，劳工；辛勤劳动；艰苦劳作，艰难前行",
     "part": "第二部分：高频专业词根族",
     "group": "【65. labor 劳动/劳作/艰辛】",
     "analysis_type": "构词",
@@ -20739,7 +20431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "labour",
     "phonetic": "/ˈleɪbə(r)/",
     "pos": "n./vi.",
-    "meaning": "劳动，劳力；分娩； vi. 劳作",
+    "meaning": "劳动，劳力；分娩；劳作",
     "part": "第二部分：高频专业词根族",
     "group": "【65. labor 劳动/劳作/艰辛】",
     "analysis_type": "构词",
@@ -20857,7 +20549,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "elect",
     "phonetic": "/ɪˈlekt/",
     "pos": "vt./adj.",
-    "meaning": "vt. 选举，推举；选择； adj. 当选的",
+    "meaning": "选举，推举；选择；当选的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -20910,7 +20602,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "intellectual",
     "phonetic": "/ˌɪntəˈlektʃuəl/",
     "pos": "adj./n.",
-    "meaning": "n. 知识分子； adj. 智力的，脑力的",
+    "meaning": "知识分子；智力的，脑力的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -20957,7 +20649,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "absurd",
-            "meaning": "荒谬绝伦毫无逻辑"
+            "meaning": "荒唐的/荒谬的"
           },
           {
             "word": "irrational",
@@ -20996,7 +20688,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lecture",
     "phonetic": "/ˈlektʃə(r)/",
     "pos": "n./vi.",
-    "meaning": "演讲，授课； vi. 讲课",
+    "meaning": "演讲，授课；讲课",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -21159,7 +20851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "select",
     "phonetic": "/sɪˈlekt/",
     "pos": "vt./adj.",
-    "meaning": "vt. 选择，挑选； adj. 精选的，优等的",
+    "meaning": "选择，挑选；精选的，优等的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -21182,10 +20874,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "推选/抉择",
         "items": [
-          {
-            "word": "choose",
-            "meaning": "选择/挑选"
-          },
           {
             "word": "elect",
             "meaning": "选举/推举"
@@ -21238,7 +20926,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "moderate",
-            "meaning": "适度的/温和的"
+            "meaning": "缓和/减轻"
           },
           {
             "word": "relieve",
@@ -21307,7 +20995,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "relief",
     "phonetic": "/rɪˈliːf/",
     "pos": "n.",
-    "meaning": "n. 缓解，减轻；宽慰，安心；救济品，救济",
+    "meaning": "缓解，减轻；宽慰，安心；救济品，救济",
     "part": "第二部分：高频专业词根族",
     "group": "【66. lev 轻/举起/升高】",
     "analysis_type": "构词",
@@ -21339,7 +21027,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "uncomfortable",
-            "meaning": "不舒服的"
+            "meaning": "不适/难受"
           }
         ]
       },
@@ -21403,7 +21091,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "relieve",
     "phonetic": "/rɪˈliːv/",
     "pos": "vt.",
-    "meaning": "vt. 缓解，减轻，消除（痛苦/负担）；解除；接替，换班",
+    "meaning": "缓解，减轻，消除（痛苦/负担）；解除；接替，换班",
     "part": "第二部分：高频专业词根族",
     "group": "【66. lev 轻/举起/升高】",
     "analysis_type": "构词",
@@ -21433,7 +21121,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "moderate",
-            "meaning": "适度的/温和的"
+            "meaning": "缓和/减缓"
           }
         ]
       }
@@ -21444,7 +21132,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "deliberate",
     "phonetic": "/dɪˈlɪbərət/",
     "pos": "adj./vt./vi.",
-    "meaning": "adj. 故意的，蓄意的；深思熟虑的，审慎的； vt./vi. 仔细考虑，反复商议",
+    "meaning": "故意的，蓄意的；深思熟虑的，审慎的；仔细考虑，反复商议",
     "part": "第二部分：高频专业词根族",
     "group": "【67. liber 自由/释放/称量】",
     "analysis_type": "构词",
@@ -21488,7 +21176,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "liberal",
     "phonetic": "/ˈlɪbərəl/",
     "pos": "adj./n.",
-    "meaning": "adj. 自由的；心胸宽广的；慷慨的； n. 自由主义者",
+    "meaning": "自由的；心胸宽广的；慷慨的；自由主义者",
     "part": "第二部分：高频专业词根族",
     "group": "【67. liber 自由/释放/称量】",
     "analysis_type": "构词",
@@ -21624,7 +21312,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "local",
     "phonetic": "/ˈləʊkl/",
     "pos": "adj./n.",
-    "meaning": "adj. 当地的，地方性的； n. 当地人",
+    "meaning": "当地的，地方性的；当地人",
     "part": "第二部分：高频专业词根族",
     "group": "【68. loc 地点/放置/位置】",
     "analysis_type": "构词",
@@ -21704,7 +21392,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "major",
     "phonetic": "/ˈmeɪdʒə(r)/",
     "pos": "adj./vi./n.",
-    "meaning": "adj. 主要的，重大的； vi. 主修（in）； n. 专业；少校",
+    "meaning": "主要的，重大的；主修（in）；专业；少校",
     "part": "第二部分：高频专业词根族",
     "group": "【69. magn / maj / max 巨大/伟大/最高】",
     "analysis_type": "构词",
@@ -21790,7 +21478,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "maximum",
     "phonetic": "/ˈmæksɪməm/",
     "pos": "adj./n.",
-    "meaning": "adj. 最大的，最高的； n. 最大值，最大限度",
+    "meaning": "最大的，最高的；最大值，最大限度",
     "part": "第二部分：高频专业词根族",
     "group": "【69. magn / maj / max 巨大/伟大/最高】",
     "analysis_type": "构词",
@@ -21933,7 +21621,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "demand",
     "phonetic": "/dɪˈmɑːnd/",
     "pos": "v./n.",
-    "meaning": "要求；需要； n. 需求",
+    "meaning": "要求；需要；需求",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -22059,10 +21747,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "即刻/迅速",
         "items": [
           {
-            "word": "instant",
-            "meaning": "立即的/速溶的"
-          },
-          {
             "word": "prompt",
             "meaning": "迅速敏捷及时的"
           },
@@ -22083,7 +21767,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "immediately",
     "phonetic": "/ɪˈmiːdiətli/",
     "pos": "adv./conj.",
-    "meaning": "adv. 立即，马上； conj. 一…就",
+    "meaning": "立即，马上；一…就",
     "part": "第二部分：高频专业词根族",
     "group": "【71. med / medi 中间/居中】",
     "analysis_type": "构词",
@@ -22096,7 +21780,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "intermediate",
     "phonetic": "/ˌɪntəˈmiːdiət/",
     "pos": "adj./n.",
-    "meaning": "adj. 中间的，中级的； n. 中间体",
+    "meaning": "中间的，中级的；中间体",
     "part": "第二部分：高频专业词根族",
     "group": "【71. med / medi 中间/居中】",
     "analysis_type": "构词",
@@ -22109,7 +21793,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mean",
     "phonetic": "/miːn/",
     "pos": "vt./adj./n.",
-    "meaning": "vt. 意思是；意味着；打算； adj. 吝啬刻薄的；卑鄙的； n. 平均值",
+    "meaning": "意思是；意味着；打算；吝啬刻薄的；卑鄙的；平均值",
     "part": "第二部分：高频专业词根族",
     "group": "【71. med / medi 中间/居中】",
     "analysis_type": "构词",
@@ -22172,7 +21856,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "meanwhile",
     "phonetic": "/ˈmiːnwaɪl/",
     "pos": "adv./n.",
-    "meaning": "adv. 与此同时，在此期间； n. 其间",
+    "meaning": "与此同时，在此期间；其间",
     "part": "第二部分：高频专业词根族",
     "group": "【71. med / medi 中间/居中】",
     "analysis_type": "构词",
@@ -22237,7 +21921,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "memorial",
     "phonetic": "/məˈmɔːriəl/",
     "pos": "adj./n.",
-    "meaning": "adj. 纪念的； n. 纪念碑，纪念馆",
+    "meaning": "纪念的；纪念碑，纪念馆",
     "part": "第二部分：高频专业词根族",
     "group": "【72. memor / member 记忆/纪念】",
     "analysis_type": "构词",
@@ -22518,7 +22202,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "minimum",
     "phonetic": "/ˈmɪnɪməm/",
     "pos": "adj./n.",
-    "meaning": "adj. 最小的，最低的； n. 最小值",
+    "meaning": "最小的，最低的；最小值",
     "part": "第二部分：高频专业词根族",
     "group": "【74. min / mini 微小/变小】",
     "analysis_type": "构词",
@@ -22596,14 +22280,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "主要/首要",
         "items": [
-          {
-            "word": "dominant",
-            "meaning": "占支配主导地位的"
-          },
-          {
-            "word": "major",
-            "meaning": "主要的/重大的"
-          },
           {
             "word": "primary",
             "meaning": "首要的/主要的"
@@ -22684,7 +22360,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "minute",
     "phonetic": "/ˈmɪnɪt/",
     "pos": "n./adj.",
-    "meaning": "n. 分钟，分；会议记录； adj. 极其微小的，细微的；详尽细致的",
+    "meaning": "分钟，分；会议记录；极其微小的，细微的；详尽细致的",
     "part": "第二部分：高频专业词根族",
     "group": "【74. min / mini 微小/变小】",
     "analysis_type": "构词",
@@ -22749,7 +22425,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "monitor",
     "phonetic": "/ˈmɒnɪtə(r)/",
     "pos": "vt./n.",
-    "meaning": "vt. 监控，监测； n. 监视器；班长",
+    "meaning": "监控，监测；监视器；班长",
     "part": "第二部分：高频专业词根族",
     "group": "【75. mon / monit 提醒/警告】",
     "analysis_type": "构词",
@@ -22918,10 +22594,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "原则/规范",
         "items": [
           {
-            "word": "code",
-            "meaning": "法规/准则"
-          },
-          {
             "word": "principle",
             "meaning": "原则/原理"
           }
@@ -22934,7 +22606,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "normal",
     "phonetic": "/ˈnɔːml/",
     "pos": "adj./n.",
-    "meaning": "adj. 正常的，正规的，标准的； n. 常态",
+    "meaning": "正常的，正规的，标准的；常态",
     "part": "第二部分：高频专业词根族",
     "group": "【76. norm 规范/标准/常态】",
     "analysis_type": "构词",
@@ -22975,7 +22647,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "notable",
     "phonetic": "/ˈnəʊtəbl/",
     "pos": "adj./n.",
-    "meaning": "adj. 显著的，著名的； n. 名人",
+    "meaning": "显著的，著名的；名人",
     "part": "第二部分：高频专业词根族",
     "group": "【77. not 知道/注意/标明】",
     "analysis_type": "构词",
@@ -22988,7 +22660,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "note",
     "phonetic": "/nəʊt/",
     "pos": "n./vt.",
-    "meaning": "n. 便条，笔记；注释；纸币； vt. 注意到；记录",
+    "meaning": "便条，笔记；注释；纸币；注意到；记录",
     "part": "第二部分：高频专业词根族",
     "group": "【77. not 知道/注意/标明】",
     "analysis_type": "构词",
@@ -23019,7 +22691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "notice",
     "phonetic": "/ˈnəʊtɪs/",
     "pos": "vt./n.",
-    "meaning": "vt. 注意到； n. 通知，通告；注意，关注",
+    "meaning": "注意到；通知，通告；注意，关注",
     "part": "第二部分：高频专业词根族",
     "group": "【77. not 知道/注意/标明】",
     "analysis_type": "构词",
@@ -23103,10 +22775,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "显著/明显",
         "items": [
-          {
-            "word": "evident",
-            "meaning": "明显的/明白的"
-          },
           {
             "word": "prominent",
             "meaning": "显著突出的"
@@ -23230,7 +22898,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "novel",
     "phonetic": "/ˈnɒvl/",
     "pos": "adj./n.",
-    "meaning": "n. （长篇）小说； adj. 新颖独特的，新奇的",
+    "meaning": "（长篇）小说；新颖独特的，新奇的",
     "part": "第二部分：高频专业词根族",
     "group": "【78. nov / neo 新/新颖】",
     "analysis_type": "构词",
@@ -23642,7 +23310,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mistake",
     "phonetic": "/mɪˈsteɪk/",
     "pos": "n./vt.",
-    "meaning": "n. 错误，过失； vt. 误解，弄错",
+    "meaning": "错误，过失；误解，弄错",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【81. 前缀群：否定与相反】",
     "analysis_type": "构词",
@@ -23809,7 +23477,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "指导/主管"
           },
           {
             "word": "govern",
@@ -23845,7 +23513,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "antique",
     "phonetic": "/ænˈtiːk/",
     "pos": "n./adj.",
-    "meaning": "n. 古董，古玩； adj. 古老的，过时的",
+    "meaning": "古董，古玩；古老的，过时的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -23871,7 +23539,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "circle",
     "phonetic": "/ˈsɜːkl/",
     "pos": "n./v.",
-    "meaning": "圆，圆圈；界； v. 环绕",
+    "meaning": "圆，圆圈；界；环绕",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -23941,11 +23609,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "deliver",
     "phonetic": "/dɪˈlɪvə(r)/",
     "pos": "vt./vi.",
-    "meaning": "vt. 递送，交付；发表（演讲）；履行，兑现（承诺）；接生",
+    "meaning": "递送，交付；发表（演讲）；履行，兑现（承诺）；接生",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
-    "analysis": "de-（彻底） + liver-（自由/释放，同 liberate） -> ① 把被扣押拘禁的人彻底解脱释放出来，专指帮助胎儿脱离母体产道重获新生 -> 接生，分娩；② 把手中的包裹货物脱手移交给收件人 -> 递送，交付；③ 把胸中构思已久的言辞释放给广大听众 -> 发表（演讲）；④ 把许下的诺言从空洞话语中解脱释放变为现实成果 -> 履行，兑现（承诺）。",
+    "analysis": "de-（彻底） + liver-（释放/自由，同liberate） -> ① 解脱拘禁帮助分娩 -> 接生，分娩；② 把手中的物品移交托付 -> 递送，交付；③ 表达思想兑现承诺 -> 发表；实现。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "deliver up (交出 / 放弃)；deliver from (从…处释放出来)"
@@ -24024,7 +23692,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "exterior",
     "phonetic": "/ɪkˈstɪəriə(r)/",
     "pos": "adj./n.",
-    "meaning": "adj. 外部的，外面的； n. 外部，外表",
+    "meaning": "外部的，外面的；外部，外表",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24140,10 +23808,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "杰出的/卓越的"
           },
           {
-            "word": "outstanding",
-            "meaning": "杰出的/出众的"
-          },
-          {
             "word": "prominent",
             "meaning": "显著突出的"
           },
@@ -24160,7 +23824,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fore",
     "phonetic": "/fɔː(r)/",
     "pos": "adj./adv./n.",
-    "meaning": "adj. 在前部的； adv. 在前头； n. 前部",
+    "meaning": "在前部的；在前头；前部",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24173,7 +23837,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "forecast",
     "phonetic": "/ˈfɔːkɑːst/",
     "pos": "n./vt.",
-    "meaning": "预测，天气预报； vt. 预报",
+    "meaning": "预测，天气预报；预报",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -24264,7 +23928,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "forward",
     "phonetic": "/ˈfɔːwəd/",
     "pos": "adv./adj./vt.",
-    "meaning": "adv. 向前；向未来； adj. 前面的，前进的； vt. 转交，转发；推进",
+    "meaning": "向前；向未来；前面的，前进的；转交，转发；推进",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24338,7 +24002,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "掌管/指导"
           },
           {
             "word": "manage",
@@ -24357,7 +24021,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "inferior",
     "phonetic": "/ɪnˈfɪəriə(r)/",
     "pos": "adj./n.",
-    "meaning": "adj. 较低的；劣等的，次等的（to）； n. 下级",
+    "meaning": "较低的；劣等的，次等的（to）；下级",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24443,7 +24107,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "interior",
     "phonetic": "/ɪnˈtɪəriə(r)/",
     "pos": "adj./n.",
-    "meaning": "adj. 内部的，内地的； n. 内部，内地",
+    "meaning": "内部的，内地的；内部，内地",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24689,7 +24353,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "outdoors",
     "phonetic": "/ˌaʊtˈdɔːz/",
     "pos": "adv./n.",
-    "meaning": "adv. 在户外，在野外； n. 户外",
+    "meaning": "在户外，在野外；户外",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24767,7 +24431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "overall",
     "phonetic": "/ˌəʊvərˈɔːl/",
     "pos": "adj./adv./n.",
-    "meaning": "adj. 全面的，总体的； adv. 总的说来； n. 工装裤",
+    "meaning": "全面的，总体的；总的说来；工装裤",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24955,7 +24619,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "overnight",
     "phonetic": "/ˌəʊvəˈnaɪt/",
     "pos": "adv./adj.",
-    "meaning": "adv. 一夜之间，在夜间； adj. 通宵的；一夜间的",
+    "meaning": "一夜之间，在夜间；通宵的；一夜间的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24968,7 +24632,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "overseas",
     "phonetic": "/ˌəʊvəˈsiːz/",
     "pos": "adv./adj.",
-    "meaning": "adv. 在海外，向海外； adj. 海外的，国外的",
+    "meaning": "在海外，向海外；海外的，国外的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -24993,7 +24657,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "指导/指引"
           },
           {
             "word": "manage",
@@ -25047,7 +24711,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "overtime",
     "phonetic": "/ˈəʊvətaɪm/",
     "pos": "n./adv.",
-    "meaning": "n. 加班，加班时间；加时赛； adv. 加班地",
+    "meaning": "加班，加班时间；加时赛；加班地",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -25073,7 +24737,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "preliminary",
     "phonetic": "/prɪˈlɪmɪnri/",
     "pos": "adj./n.",
-    "meaning": "adj. 预备的，初步的； n. 初步行动，预赛",
+    "meaning": "预备的，初步的；初步行动，预赛",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -25295,7 +24959,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "primitive",
     "phonetic": "/ˈprɪmətɪv/",
     "pos": "adj./n.",
-    "meaning": "adj. 原始的，早期的；简陋的； n. 原始人",
+    "meaning": "原始的，早期的；简陋的；原始人",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -25489,7 +25153,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "submarine",
     "phonetic": "/ˌsʌbməˈriːn/",
     "pos": "n./adj.",
-    "meaning": "n. 潜艇； adj. 水下的，海底的",
+    "meaning": "潜艇；水下的，海底的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -25675,7 +25339,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "thunder",
     "phonetic": "/ˈθʌndə(r)/",
     "pos": "n./vi.",
-    "meaning": "n. 雷，雷声； vi. 打雷；轰鸣",
+    "meaning": "雷，雷声；打雷；轰鸣",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "拟声",
@@ -25723,7 +25387,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "transit",
     "phonetic": "/ˈtrænzɪt/",
     "pos": "n./v.",
-    "meaning": "运输，公交；过境； v. 通过",
+    "meaning": "运输，公交；过境；通过",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -25814,7 +25478,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "transplant",
     "phonetic": "/trænsˈplɑːnt/",
     "pos": "vt./n.",
-    "meaning": "vt. 移植（器官/植物）；使迁移； n. （器官）移植手术；移植物",
+    "meaning": "移植（器官/植物）；使迁移；（器官）移植手术；移植物",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -25980,11 +25644,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "postgraduate",
     "phonetic": "/ˌpəʊstˈɡrædʒuət/",
     "pos": "n./adj.",
-    "meaning": "研究生； adj. 研究生的",
+    "meaning": "研究生；研究生的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "post-（在…之后） + graduate（大学本科毕业） -> 研究生，adj.。",
+    "analysis": "post-（在…之后） + graduate（大学本科毕业） -> 研究生；毕业后的。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -26154,11 +25818,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "clear",
-            "meaning": "清楚的"
-          },
-          {
-            "word": "facilitate",
-            "meaning": "促进/使便利"
+            "meaning": "清除障碍/扫除"
           }
         ]
       }
@@ -26208,7 +25868,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "ally",
     "phonetic": "/ˈælaɪ/",
     "pos": "n./vt./vi.",
-    "meaning": "n. 同盟国，盟友；支持者； vt./vi. 结盟，联合",
+    "meaning": "同盟国，盟友；支持者；结盟，联合",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【84. 前缀群：共同与强调强化】",
     "analysis_type": "构词",
@@ -26265,8 +25925,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "combine",
     "phonetic": "/kəmˈbaɪn/",
-    "pos": "v.",
-    "meaning": "vt./vi. 结合，联合； n. 联合企业；联合收割机",
+    "pos": "v./n.",
+    "meaning": "结合，联合；联合企业；联合收割机",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -26327,7 +25987,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "communicate",
     "phonetic": "/kəˈmjuːnɪkeɪt/",
     "pos": "v.",
-    "meaning": "vi. 沟通，交流；传达，传递； vt. 传达，传播",
+    "meaning": "沟通，交流；传达，传递；传达，传播",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -26731,10 +26391,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "突然出现"
           },
           {
-            "word": "emerge",
-            "meaning": "浮现/出现"
-          },
-          {
             "word": "occur",
             "meaning": "发生/出现"
           }
@@ -26960,7 +26616,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "benefit",
     "phonetic": "/ˈbenɪfɪt/",
     "pos": "n./v.",
-    "meaning": "利益，好处； v. 有益于",
+    "meaning": "利益，好处；有益于",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27021,7 +26677,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bill",
     "phonetic": "/bɪl/",
     "pos": "n./vt.",
-    "meaning": "n. 账单，清册；纸币，钞票；议案，法案；海报",
+    "meaning": "账单，清册；纸币，钞票；议案，法案；海报",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27034,7 +26690,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bother",
     "phonetic": "/ˈbɒðə(r)/",
     "pos": "v./n.",
-    "meaning": "打扰，烦扰； n. 麻烦",
+    "meaning": "打扰，烦扰；麻烦",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -27047,7 +26703,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "brand",
     "phonetic": "/brænd/",
     "pos": "n./vt.",
-    "meaning": "品牌，商标； vt. 铭刻",
+    "meaning": "品牌，商标；铭刻",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27072,8 +26728,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "budget",
     "phonetic": "/ˈbʌdʒɪt/",
-    "pos": "n./vi.",
-    "meaning": "n. 预算，开支规划； vt./vi. 编制预算，规划开销； adj. 廉价低成本的",
+    "pos": "n./v./adj.",
+    "meaning": "预算，开支规划；编制预算，规划开销；廉价低成本的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27165,7 +26821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cash",
     "phonetic": "/kæʃ/",
     "pos": "n./vt.",
-    "meaning": "现金； vt. 兑现",
+    "meaning": "现金；兑现",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27191,11 +26847,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "charge",
     "phonetic": "/tʃɑːdʒ/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 收费，要价；指控，控告；充电； n. 费用；掌管（in charge of）；电荷",
+    "meaning": "收费，要价；指控，控告；充电；费用；掌管（in charge of）；电荷",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "carr-（两轮运货车 carrus，装载负荷） -> ① 把沉重货物装上大车 -> 装载，负荷；② 物理学引申为使物体带上能量负荷 -> 充电，电荷；③ 商业上使买方承担价格支出负担 -> 收费，要价；④ 法律上把违法罪名压在当事人身上 -> 指控，控告；⑤ 将责任压给某人承担 -> 掌管，负责（in charge of）。",
+    "analysis": "carr-（两轮运货车，装载负荷） -> ① 把货物装上大车 -> 装载，负荷；② 物理引申使带上电荷 -> 充电；③ 商业上使买方承担价格 -> 收费；④ 法律把罪名压在身上 -> 指控。",
     "antonyms": [
       {
         "sense": "辩护/赦免",
@@ -27228,14 +26884,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "起诉/控告",
         "items": [
-          {
-            "word": "accuse",
-            "meaning": "指控/控告"
-          },
-          {
-            "word": "prosecute",
-            "meaning": "起诉/控告"
-          },
           {
             "word": "sue",
             "meaning": "控告"
@@ -27301,7 +26949,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commercial",
     "phonetic": "/kəˈmɜːʃl/",
     "pos": "adj./n.",
-    "meaning": "商业的，营利的； n. 广告",
+    "meaning": "商业的，营利的；广告",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -27342,7 +26990,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "遮蔽/隐藏"
           },
           {
             "word": "veil",
@@ -27393,7 +27041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "deliberate",
-            "meaning": "故意的/蓄意的"
+            "meaning": "商讨/审议"
           },
           {
             "word": "negotiate",
@@ -27446,10 +27094,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "节约/保存",
         "items": [
-          {
-            "word": "accumulate",
-            "meaning": "积聚/堆积"
-          },
           {
             "word": "conserve",
             "meaning": "节约/保护"
@@ -27504,10 +27148,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "花费/消耗",
         "items": [
           {
-            "word": "exhaust",
-            "meaning": "使筋疲力尽/耗尽"
-          },
-          {
             "word": "expend",
             "meaning": "花费/消耗"
           }
@@ -27519,10 +27159,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "destroy",
             "meaning": "破坏/摧毁"
-          },
-          {
-            "word": "exhaust",
-            "meaning": "使筋疲力尽/耗尽"
           },
           {
             "word": "ruin",
@@ -27583,7 +27219,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "counsel",
     "phonetic": "/ˈkaʊnsl/",
     "pos": "n./vt.",
-    "meaning": "忠告，劝告；律师； vt. 建议",
+    "meaning": "忠告，劝告；律师；建议",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -27596,7 +27232,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "count",
     "phonetic": "/kaʊnt/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 计算，计数；有重要意义，要紧，起作用； n. 总数",
+    "meaning": "计算，计数；有重要意义，要紧，起作用；总数",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -27609,7 +27245,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "custom",
     "phonetic": "/ˈkʌstəm/",
     "pos": "n./adj.",
-    "meaning": "n. 风俗，社会传统习俗；海关关税（customs）； adj. 定制的",
+    "meaning": "风俗，社会传统习俗；海关关税（customs）；定制的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -27797,10 +27433,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "发出/发射"
           },
           {
-            "word": "expel",
-            "meaning": "驱逐/开除"
-          },
-          {
             "word": "release",
             "meaning": "释放/放出"
           }
@@ -27980,7 +27612,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "entertain",
     "phonetic": "/ˌentəˈteɪn/",
     "pos": "v.",
-    "meaning": "vt. 款待，招待；使娱乐，使快乐；怀有，抱有（想法/疑虑）",
+    "meaning": "款待，招待；使娱乐，使快乐；怀有，抱有（想法/疑虑）",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -28020,7 +27652,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "estimate",
     "phonetic": "/ˈestɪmeɪt/",
     "pos": "vt./n.",
-    "meaning": "估计，估算； n. 预算，估计值",
+    "meaning": "估计，估算；预算，估计值",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -28064,7 +27696,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "executive",
     "phonetic": "/ɪɡˈzekjətɪv/",
     "pos": "n./adj.",
-    "meaning": "执行官，高管； adj. 行政的",
+    "meaning": "执行官，高管；行政的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -28077,7 +27709,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fare",
     "phonetic": "/feə(r)/",
     "pos": "n./vi.",
-    "meaning": "车费，船费； vi. 进展",
+    "meaning": "车费，船费；进展",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -28103,7 +27735,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fashion",
     "phonetic": "/ˈfæʃn/",
     "pos": "n./vt.",
-    "meaning": "n. 方式，方法（in a... fashion）；时尚，时兴； vt. 塑造",
+    "meaning": "方式，方法（in a... fashion）；时尚，时兴；塑造",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -28142,7 +27774,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "frequent",
     "phonetic": "/ˈfriːkwənt/",
     "pos": "adj./vt.",
-    "meaning": "adj. 经常的，频繁的； vt. 常去",
+    "meaning": "经常的，频繁的；常去",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -28450,7 +28082,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "loan",
     "phonetic": "/ləʊn/",
     "pos": "n./vt.",
-    "meaning": "贷款，借款； vt. 借出",
+    "meaning": "贷款，借款；借出",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -28466,7 +28098,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "mortgage",
-            "meaning": "按揭抵押贷款 v"
+            "meaning": "按揭贷款；抵押"
           }
         ]
       }
@@ -28477,7 +28109,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "margin",
     "phonetic": "/ˈmɑːdʒɪn/",
     "pos": "n.",
-    "meaning": "n. 页边空白；边缘；差额，幅度；利润率",
+    "meaning": "页边空白；边缘；差额，幅度；利润率",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -28591,11 +28223,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mortgage",
     "phonetic": "/ˈmɔːɡɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "按揭抵押贷款； vt. 抵押",
+    "meaning": "按揭抵押贷款；抵押",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "mort-（死亡） + gage（抵押） -> 按揭抵押贷款，vt.。",
+    "analysis": "mort-（死亡） + gage（抵押） -> 按揭抵押贷款；抵押。",
     "antonyms": [],
     "synonyms": [
       {
@@ -28638,7 +28270,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "deliberate",
-            "meaning": "故意的/蓄意的"
+            "meaning": "商议/商讨"
           }
         ]
       },
@@ -28758,8 +28390,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "patent",
     "phonetic": "/ˈpætnt/",
-    "pos": "n./vt.",
-    "meaning": "n. 专利权，专利证书； adj. 显而易见的； vt. 获得专利",
+    "pos": "n./adj./vt.",
+    "meaning": "专利权，专利证书；显而易见的；获得专利",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -28972,7 +28604,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "attribute",
-            "meaning": "把…归因于"
+            "meaning": "属性/特质"
           },
           {
             "word": "feature",
@@ -28987,7 +28619,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "purchase",
     "phonetic": "/ˈpɜːtʃəs/",
     "pos": "vt./n.",
-    "meaning": "购买，采购； n. 购买的物品",
+    "meaning": "购买，采购；购买的物品",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29032,7 +28664,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "purpose",
     "phonetic": "/ˈpɜːpəs/",
     "pos": "n.",
-    "meaning": "n. 目的，意图；意志，毅力",
+    "meaning": "目的，意图；意志，毅力",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29060,7 +28692,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "target",
-            "meaning": "把…作为目标"
+            "meaning": "目标/对象"
           }
         ]
       },
@@ -29068,24 +28700,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "目标/抱负",
         "items": [
           {
-            "word": "aim",
-            "meaning": "目标"
-          },
-          {
             "word": "ambition",
             "meaning": "雄心壮志/野心"
           },
           {
             "word": "aspiration",
             "meaning": "志向/抱负"
-          },
-          {
-            "word": "objective",
-            "meaning": "目标"
-          },
-          {
-            "word": "target",
-            "meaning": "把…作为目标"
           }
         ]
       }
@@ -29158,7 +28778,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sample",
     "phonetic": "/ˈsɑːmpl/",
     "pos": "n./vt.",
-    "meaning": "样品，标本；抽样调查； vt. 品尝；抽样",
+    "meaning": "样品，标本；抽样调查；品尝；抽样",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29215,7 +28835,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spoil",
     "phonetic": "/spɔɪl/",
     "pos": "vt./vi./n.",
-    "meaning": "损坏；宠坏；食物变质； n. 战利品",
+    "meaning": "损坏；宠坏；食物变质；战利品",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -29263,7 +28883,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stake",
     "phonetic": "/steɪk/",
     "pos": "n./vt.",
-    "meaning": "n. 赌注；利害攸关，利益；股份； vt. 下赌注",
+    "meaning": "赌注；利害攸关，利益；股份；下赌注",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -29290,7 +28910,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stock",
     "phonetic": "/stɒk/",
     "pos": "n./vt.",
-    "meaning": "股票；库存； vt. 储备",
+    "meaning": "股票；库存；储备",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29303,7 +28923,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trade",
     "phonetic": "/treɪd/",
     "pos": "n./v.",
-    "meaning": "贸易，商业； v. 交换",
+    "meaning": "贸易，商业；交换",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29351,7 +28971,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "treasure",
     "phonetic": "/ˈtreʒə(r)/",
     "pos": "n./vt.",
-    "meaning": "财宝，财富；珍品； vt. 珍爱，珍惜",
+    "meaning": "财宝，财富；珍品；珍爱，珍惜",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29520,7 +29140,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "wage",
     "phonetic": "/weɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "vt. 发动，开展，发起（战役/斗争/战争）； n. 工资，薪酬，工钱",
+    "meaning": "发动，开展，发起（战役/斗争/战争）；工资，薪酬，工钱",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -29582,10 +29202,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "贫困/匮乏",
         "items": [
           {
-            "word": "deficit",
-            "meaning": "赤字/亏损"
-          },
-          {
             "word": "poverty",
             "meaning": "贫困/贫穷"
           },
@@ -29628,10 +29244,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "credit",
             "meaning": "信用/信贷"
-          },
-          {
-            "word": "fortune",
-            "meaning": "命运/运气"
           }
         ]
       }
@@ -29678,7 +29290,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "worth",
     "phonetic": "/wɜːθ/",
     "pos": "adj./n.",
-    "meaning": "值…钱的；值得的； n. 价值",
+    "meaning": "值…钱的；值得的；价值",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -29704,7 +29316,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "yield",
     "phonetic": "/jiːld/",
     "pos": "vt./vi./n.",
-    "meaning": "vt. 产生，产出（产量/利润）； n. 产量，收益； vi. 屈服，让步（to）",
+    "meaning": "产生，产出（产量/利润）；产量，收益；屈服，让步（to）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "引申",
@@ -29821,20 +29433,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "利润/盈余",
         "items": [
           {
-            "word": "earnings",
-            "meaning": "利润/收益"
-          },
-          {
             "word": "margin",
             "meaning": "差额/幅度"
-          },
-          {
-            "word": "profit",
-            "meaning": "利润"
-          },
-          {
-            "word": "revenue",
-            "meaning": "财政收入/税收"
           },
           {
             "word": "surplus",
@@ -29888,16 +29488,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "创造/创作"
           },
           {
-            "word": "generate",
-            "meaning": "产生/发生"
-          },
-          {
             "word": "manufacture",
             "meaning": "大量制造"
-          },
-          {
-            "word": "produce",
-            "meaning": "引起/产生"
           }
         ]
       },
@@ -29917,7 +29509,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "academic",
     "phonetic": "/ˌækəˈdemɪk/",
     "pos": "adj./n.",
-    "meaning": "学术的；学院的； n. 学者",
+    "meaning": "学术的；学院的；学者",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -29956,11 +29548,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "articulate",
     "phonetic": "/ɑːˈtɪkjuleɪt/",
     "pos": "vt./adj.",
-    "meaning": "清楚表达； adj. 口才极好的",
+    "meaning": "清楚表达；口才极好的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
-    "analysis": "articulus（关节） + -ate，引申指清楚表达 adj. 口才极好的 -> 清楚表达，adj.。",
+    "analysis": "articulus（关节） + -ate -> 表达清晰的；清楚表达。",
     "antonyms": [],
     "synonyms": [
       {
@@ -29996,7 +29588,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "associate",
     "phonetic": "/əˈsəʊʃieɪt/",
     "pos": "v./n./adj.",
-    "meaning": "vt. 联想，联系； vi. 结交，交往； n. 伙伴，同事",
+    "meaning": "联想，联系；结交，交往；伙伴，同事",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -30092,8 +29684,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "chemical",
     "phonetic": "/ˈkemɪkl/",
-    "pos": "n.",
-    "meaning": "adj. 化学的； n. 化学品",
+    "pos": "adj./n.",
+    "meaning": "化学的；化学品",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30118,8 +29710,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "coach",
     "phonetic": "/kəʊtʃ/",
-    "pos": "n.",
-    "meaning": "n. 教练；长途客车；旅客车厢； vt. 训练，辅导",
+    "pos": "n./vt.",
+    "meaning": "教练；长途客车；旅客车厢；训练，辅导",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30149,8 +29741,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "code",
     "phonetic": "/kəʊd/",
-    "pos": "n.",
-    "meaning": "n. 法规，准则，规范；代号，密码；代码，编码； vt. 编码",
+    "pos": "n./vt.",
+    "meaning": "法规，准则，规范；代号，密码；代码，编码；编码",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30173,10 +29765,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "原则/规范",
         "items": [
-          {
-            "word": "norm",
-            "meaning": "规范/行为标准"
-          },
           {
             "word": "principle",
             "meaning": "原则/原理"
@@ -30251,7 +29839,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "degree",
     "phonetic": "/dɪˈɡriː/",
     "pos": "n.",
-    "meaning": "n. 度，度数；程度；学位",
+    "meaning": "度，度数；程度；学位",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30263,8 +29851,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "digest",
     "phonetic": "/daɪˈdʒest/",
-    "pos": "n.",
-    "meaning": "vt./vi. 消化；领会； n. 文摘",
+    "pos": "v./n.",
+    "meaning": "消化；领会；文摘",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30290,7 +29878,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "discipline",
     "phonetic": "/ˈdɪsəplɪn/",
     "pos": "n./vt.",
-    "meaning": "n. 纪律，风纪；学科，学术专业领域； vt. 管教，训导，惩戒",
+    "meaning": "纪律，风纪；学科，学术专业领域；管教，训导，惩戒",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -30436,7 +30024,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fancy",
     "phonetic": "/ˈfænsi/",
     "pos": "adj./vt./n.",
-    "meaning": "n. 想象力；喜好； adj. 昂贵的，别致的； vt. 想要；想象",
+    "meaning": "想象力；喜好；昂贵的，别致的；想要；想象",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -30528,7 +30116,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "file",
     "phonetic": "/faɪl/",
     "pos": "n./vt.",
-    "meaning": "n. 档案，文件；卷宗； vt. 归档；正式提出，提起（诉讼/申请）",
+    "meaning": "档案，文件；卷宗；归档；正式提出，提起（诉讼/申请）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -30663,7 +30251,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "disillusion",
-            "meaning": "使醒悟"
+            "meaning": "醒悟/幻灭"
           }
         ]
       }
@@ -30833,7 +30421,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "master",
     "phonetic": "/ˈmɑːstə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 大师；主人；硕士； vt. 精通，掌握",
+    "meaning": "大师；主人；硕士；精通，掌握",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -31151,7 +30739,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "regard",
     "phonetic": "/rɪˈɡɑːd/",
     "pos": "vt./n.",
-    "meaning": "vt. 把…看作，认为（as）；看待； n. 尊重，关注；问候",
+    "meaning": "把…看作，认为（as）；看待；尊重，关注；问候",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -31495,7 +31083,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "term",
     "phonetic": "/tɜːm/",
     "pos": "n./vt.",
-    "meaning": "n. 术语，专有名词；学期；条款，条件（in terms of）； vt. 把…称为",
+    "meaning": "术语，专有名词；学期；条款，条件（in terms of）；把…称为",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -31546,7 +31134,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "articulate",
-            "meaning": "清楚表达 adj"
+            "meaning": "清楚表达；表达清晰的"
           },
           {
             "word": "express",
@@ -31698,7 +31286,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "wild",
     "phonetic": "/waɪld/",
     "pos": "adj./n.",
-    "meaning": "adj. 狂热的，失控的；野生的；荒谬的； n. 荒野",
+    "meaning": "狂热的，失控的；野生的；荒谬的；荒野",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -31958,7 +31546,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "balance",
     "phonetic": "/ˈbæləns/",
     "pos": "n./v.",
-    "meaning": "平衡，均衡；结余； v. 平衡",
+    "meaning": "平衡，均衡；结余；平衡",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -31971,7 +31559,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "base",
     "phonetic": "/beɪs/",
     "pos": "n./vt.",
-    "meaning": "n. 基础，底部；基地； vt. 基于，以…为基础",
+    "meaning": "基础，底部；基地；基于，以…为基础",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -32010,11 +31598,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "board",
     "phonetic": "/bɔːd/",
     "pos": "vt./vi./n.",
-    "meaning": "n. 木板，牌子；董事会，理事会； vt./vi. 登上（飞机/船/车）",
+    "meaning": "木板，牌子；董事会，理事会；登上（飞机/船/车）",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "日耳曼原生词，原指一片扁平厚木板（plank） -> ① 铺在船舷与码头之间的跳板，引申为踏上跳板走上交通工具 -> 登机，上船，上车；② 摆在房中央供众人吃饭商谈的平木桌 -> 膳宿（board and lodging）；③ 众人围坐在长木桌旁掌舵决策的权力机构 -> 董事会，理事会；④ 挂在墙上的木制告示牌 -> 牌子，黑板。",
+    "analysis": "日耳曼原生词，原指一片扁平厚木板 -> ① 码头跳板，引申为踏上跳板 -> 登机，上船；② 摆在房中的长平木桌 -> 膳宿；委员会，董事会。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "board of supervisors (监事会 / 中西部及东部各州的县议会)；board chairman (董事长)"
@@ -32046,7 +31634,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bubble",
     "phonetic": "/ˈbʌbl/",
     "pos": "n./vi.",
-    "meaning": "n. 气泡；经济泡沫； vi. 冒泡；洋溢充斥着",
+    "meaning": "气泡；经济泡沫；冒泡；洋溢充斥着",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -32150,7 +31738,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "channel",
     "phonetic": "/ˈtʃænl/",
     "pos": "n./vt.",
-    "meaning": "n. 渠道，途径；海峡，水道；电视频道； vt. 引导，调配",
+    "meaning": "渠道，途径；海峡，水道；电视频道；引导，调配",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -32163,7 +31751,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "chart",
     "phonetic": "/tʃɑːt/",
     "pos": "n./vt.",
-    "meaning": "n. 图表；海图； vt. 绘制；规划",
+    "meaning": "图表；海图；绘制；规划",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -32299,11 +31887,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "damp",
     "phonetic": "/dæmp/",
     "pos": "adj./n./vt.",
-    "meaning": "潮湿的； n. 潮气； vt. 使潮湿",
+    "meaning": "潮湿的；潮气；使潮湿",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自中古低地德语 damp（水气） -> 潮湿的，n.。",
+    "analysis": "源自中古低地德语 damp（水气） -> 潮湿的；湿气。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "damp down (封火)；damp proof (防潮 / 防湿性)"
@@ -32394,18 +31982,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "恢复/修复",
         "items": [
           {
-            "word": "conserve",
-            "meaning": "节约/保护"
-          },
-          {
-            "word": "maintain",
-            "meaning": "维持/保持"
-          },
-          {
-            "word": "preserve",
-            "meaning": "保护"
-          },
-          {
             "word": "recover",
             "meaning": "恢复/痊愈康复"
           },
@@ -32457,10 +32033,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "damage",
             "meaning": "损害/毁坏"
-          },
-          {
-            "word": "deteriorate",
-            "meaning": "恶化/变坏"
           },
           {
             "word": "undermine",
@@ -32584,10 +32156,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "extract",
             "meaning": "提取/拔出"
-          },
-          {
-            "word": "obtain",
-            "meaning": "通过努力获得"
           }
         ]
       },
@@ -32656,7 +32224,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "target",
-            "meaning": "把…作为目标"
+            "meaning": "目的地/目标"
           }
         ]
       }
@@ -32764,11 +32332,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "draft",
     "phonetic": "/drɑːft/",
     "pos": "n./vt.",
-    "meaning": "vt. 起草，拟定； n. 草案，草稿；汇票；征兵，征召入伍",
+    "meaning": "起草，拟定；草案，草稿；汇票；征兵，征召入伍",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "与 draw（拉/拉扯/抽取）同源 -> ① 用笔在纸面上拖拉线条勾勒出未成形的轮廓雏形 -> 起草，草案，草稿；② 从民众中抽拔拉拽人员充入行伍 -> 征召入伍，征兵；③ 从银行账户中抽取资金划转的凭证 -> 汇票；④ 喝饮料时一口气吸拉进喉咙的量 -> 一饮之量；⑤ 门缝穿堂风把空气拉动吹过 -> 穿堂风。",
+    "analysis": "与 draw（拉/抽取）同源 -> ① 在纸面上拉出线条轮廓雏形 -> 起草，草案；② 从民众中抽调人员入伍 -> 征兵；③ 资金划转凭证 -> 汇票；④ 喝饮料一口气吸入 -> 一饮。",
     "antonyms": [],
     "synonyms": [
       {
@@ -32928,10 +32496,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "节约/保存",
         "items": [
           {
-            "word": "accumulate",
-            "meaning": "积聚/堆积"
-          },
-          {
             "word": "conserve",
             "meaning": "节约/保护"
           },
@@ -32985,10 +32549,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "花费/消耗",
         "items": [
           {
-            "word": "consume",
-            "meaning": "消耗/耗费"
-          },
-          {
             "word": "expend",
             "meaning": "花费/消耗"
           }
@@ -32997,10 +32557,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "消耗/摧毁",
         "items": [
-          {
-            "word": "consume",
-            "meaning": "消耗/耗费"
-          },
           {
             "word": "destroy",
             "meaning": "破坏/摧毁"
@@ -33070,7 +32626,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "field",
     "phonetic": "/fiːld/",
     "pos": "n./vt.",
-    "meaning": "n. 田野，牧场；专业领域，学科；现场实地； vt. 派选手上场",
+    "meaning": "田野，牧场；专业领域，学科；现场实地；派选手上场",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -33083,7 +32639,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fire",
     "phonetic": "/ˈfaɪə(r)/",
     "pos": "n./v.",
-    "meaning": "n. 火，火灾；热情； vt./vi. 点火，开火；解雇，开除",
+    "meaning": "火，火灾；热情；点火，开火；解雇，开除",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33162,7 +32718,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "freeze",
     "phonetic": "/friːz/",
     "pos": "v./n.",
-    "meaning": "结冰，冻结；僵住； n. 严寒",
+    "meaning": "结冰，冻结；僵住；严寒",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33189,7 +32745,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fuel",
     "phonetic": "/ˈfjuːəl/",
     "pos": "n./vt.",
-    "meaning": "n. 燃料； vt. 加燃料；煽动",
+    "meaning": "燃料；加燃料；煽动",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -33215,7 +32771,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "glory",
     "phonetic": "/ˈɡlɔːri/",
     "pos": "n./vi.",
-    "meaning": "光荣，荣誉；壮丽； vi. 自豪",
+    "meaning": "光荣，荣誉；壮丽；自豪",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -33562,7 +33118,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "light",
     "phonetic": "/laɪt/",
     "pos": "n./adj./v.",
-    "meaning": "n. 光线，光芒； adj. 轻的，轻松的；浅色的； vt. 点燃，照亮",
+    "meaning": "光线，光芒；轻的，轻松的；浅色的；点燃，照亮",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33631,7 +33187,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "march",
     "phonetic": "/mɑːtʃ/",
     "pos": "v./n.",
-    "meaning": "n. 三月；示威游行；行进，齐步前进； vi. 前进",
+    "meaning": "三月；示威游行；行进，齐步前进；前进",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33644,7 +33200,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "marine",
     "phonetic": "/məˈriːn/",
     "pos": "adj./n.",
-    "meaning": "海洋的；海产的； n. 水兵",
+    "meaning": "海洋的；海产的；水兵",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -33785,7 +33341,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "paste",
     "phonetic": "/peɪst/",
     "pos": "n./vt.",
-    "meaning": "n. 面团；膏状物，糊状物；糨糊； vt. 粘贴",
+    "meaning": "面团；膏状物，糊状物；糨糊；粘贴",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -33862,7 +33418,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "corrupt",
-            "meaning": "腐败的/贪污的"
+            "meaning": "污染/败坏"
           },
           {
             "word": "infect",
@@ -33894,7 +33450,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "prey",
     "phonetic": "/preɪ/",
     "pos": "n./vi.",
-    "meaning": "猎物；捕食； vi. 捕食（on）",
+    "meaning": "猎物；捕食；捕食（on）",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -33920,7 +33476,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "range",
     "phonetic": "/reɪndʒ/",
     "pos": "n./v.",
-    "meaning": "n. 范围，幅度；山脉；射程； vi. （在一定范围内）变化，变动",
+    "meaning": "范围，幅度；山脉；射程；（在一定范围内）变化，变动",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33933,7 +33489,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "raw",
     "phonetic": "/rɔː/",
     "pos": "adj.",
-    "meaning": "adj. 生的，未煮的；原始未加工的（raw data）；生疏的",
+    "meaning": "生的，未煮的；原始未加工的（raw data）；生疏的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -33983,7 +33539,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "resort",
     "phonetic": "/rɪˈzɔːt/",
     "pos": "n./vi.",
-    "meaning": "vi. 诉诸，求助于（to）； n. 度假胜地；应对手法",
+    "meaning": "诉诸，求助于（to）；度假胜地；应对手法",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -34097,26 +33653,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "建造/创立",
         "items": [
           {
-            "word": "assemble",
-            "meaning": "集合/召集"
-          },
-          {
-            "word": "construct",
-            "meaning": "建造/构建"
-          },
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
-          {
-            "word": "erect",
-            "meaning": "树立/建立"
-          },
-          {
-            "word": "establish",
-            "meaning": "建立/确立"
-          },
-          {
             "word": "institute",
             "meaning": "建立/创立"
           }
@@ -34138,10 +33674,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "制造/生产",
         "items": [
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
           {
             "word": "generate",
             "meaning": "产生/发生"
@@ -34204,10 +33736,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "毁灭/破坏",
         "items": [
           {
-            "word": "damage",
-            "meaning": "损害/毁坏"
-          },
-          {
             "word": "destruction",
             "meaning": "破坏/毁灭"
           },
@@ -34223,10 +33751,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "consume",
             "meaning": "消耗/耗费"
-          },
-          {
-            "word": "destroy",
-            "meaning": "破坏/摧毁"
           },
           {
             "word": "exhaust",
@@ -34254,7 +33778,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "seal",
     "phonetic": "/siːl/",
     "pos": "n./vt.",
-    "meaning": "n. 印章，封条；海豹； vt. 封上，盖印；封存，确定",
+    "meaning": "印章，封条；海豹；封上，盖印；封存，确定",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -34344,10 +33868,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "延伸/伸展",
         "items": [
-          {
-            "word": "expand",
-            "meaning": "扩大/膨胀"
-          },
           {
             "word": "extend",
             "meaning": "延伸/延长"
@@ -34669,7 +34189,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tap",
     "phonetic": "/tæp/",
     "pos": "v./n.",
-    "meaning": "n. 水龙头；轻叩，轻拍； vt. 开发，利用（潜能/资源）；轻敲",
+    "meaning": "水龙头；轻叩，轻拍；开发，利用（潜能/资源）；轻敲",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -34740,7 +34260,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tide",
     "phonetic": "/taɪd/",
     "pos": "n./v.",
-    "meaning": "潮汐，潮水；潮流； v. 渡过",
+    "meaning": "潮汐，潮水；潮流；渡过",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -34792,7 +34312,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tunnel",
     "phonetic": "/ˈtʌnl/",
     "pos": "n./v.",
-    "meaning": "隧道，地道； v. 挖地道",
+    "meaning": "隧道，地道；挖地道",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -34831,7 +34351,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "voyage",
     "phonetic": "/ˈvɔɪɪdʒ/",
     "pos": "n./vi.",
-    "meaning": "航行，航海； vi. 航行",
+    "meaning": "航行，航海；航行",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35055,14 +34575,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "花费/消耗",
         "items": [
           {
-            "word": "consume",
-            "meaning": "消耗/耗费"
-          },
-          {
-            "word": "exhaust",
-            "meaning": "使筋疲力尽/耗尽"
-          },
-          {
             "word": "expend",
             "meaning": "花费/消耗"
           }
@@ -35112,7 +34624,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "address",
     "phonetic": "/əˈdres/",
     "pos": "n./vt.",
-    "meaning": "n. 地址；演说，演讲； vt. 解决，处理，应对（难题）；对…发表演说",
+    "meaning": "地址；演说，演讲；解决，处理，应对（难题）；对…发表演说",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -35212,7 +34724,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "author",
     "phonetic": "/ˈɔːθə(r)/",
     "pos": "n./vt.",
-    "meaning": "作者，作家； vt. 著作",
+    "meaning": "作者，作家；著作",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -35264,7 +34776,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "ban",
     "phonetic": "/bæn/",
     "pos": "vt./n.",
-    "meaning": "禁止，取缔； n. 禁令",
+    "meaning": "禁止，取缔；禁令",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35330,11 +34842,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bandage",
     "phonetic": "/ˈbændɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "绷带； vt. 用绷带包扎",
+    "meaning": "绷带；用绷带包扎",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "band（布条） + -age（名词） -> 绷带，vt.。",
+    "analysis": "band（布条） + -age（名词） -> 绷带；用绷带包扎。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -35356,7 +34868,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bypass",
     "phonetic": "/ˈbaɪpɑːs/",
     "pos": "n./vt.",
-    "meaning": "旁路，绕道公路； vt. 绕过",
+    "meaning": "旁路，绕道公路；绕过",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35427,7 +34939,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "camp",
     "phonetic": "/kæmp/",
     "pos": "n./v.",
-    "meaning": "n. 野营地，阵营； vi./vt. 扎营，宿营",
+    "meaning": "野营地，阵营；扎营，宿营",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35440,7 +34952,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "campaign",
     "phonetic": "/kæmˈpeɪn/",
     "pos": "n./vi.",
-    "meaning": "竞选运动；战役； vi. 参加活动",
+    "meaning": "竞选运动；战役；参加活动",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35559,7 +35071,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cart",
     "phonetic": "/kɑːt/",
     "pos": "n./vt.",
-    "meaning": "手推车；马车； vt. 用车运",
+    "meaning": "手推车；马车；用车运",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -35894,11 +35406,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "court",
     "phonetic": "/kɔːt/",
     "pos": "n./vt.",
-    "meaning": "n. 法院，法庭；球场； vt. 招致（危险/灾祸），招惹；追求，献殷勤",
+    "meaning": "法院，法庭；球场；招致（危险/灾祸），招惹；追求，献殷勤",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "源自拉丁语 cors / cohors（用栅栏围拢的庭院/农庄大院） -> ① 众人围坐由君王审理仲裁的大堂院落 -> 法庭，法院；② 举行宫廷社交聚会的地方 -> 王宫，朝廷；③ 在宫廷里向王公贵族或女士极尽奉承讨好以求欢心 -> 奉承，向…求爱；④ 故意行事迎合他人或招惹事端 -> 招致，招惹（危险）；⑤ 封闭规整的球类运动平地 -> 球场。",
+    "analysis": "源自拉丁语 cors（围拢的庭院） -> ① 众人围坐由君王审理仲裁的大堂 -> 法庭，法院；② 宫廷聚会之所 -> 王宫，朝廷；③ 在宫廷奉承贵族 -> 奉承，讨好。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "court of law (法院)；court of justice (法院)"
@@ -35959,7 +35471,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "curb",
     "phonetic": "/kɜːb/",
     "pos": "vt./n.",
-    "meaning": "vt. 控制，抑制（通胀/冲动）； n. 路缘，马路牙子",
+    "meaning": "控制，抑制（通胀/冲动）；路缘，马路牙子",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -35998,24 +35510,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       }
@@ -36062,7 +35562,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "delegate",
     "phonetic": "/ˈdelɪɡət/",
     "pos": "n./vt.",
-    "meaning": "n. 代表； vt. 委派，授权",
+    "meaning": "代表；委派，授权",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -36151,10 +35651,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "丢弃/处置",
         "items": [
-          {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
           {
             "word": "dispose",
             "meaning": "处理"
@@ -36428,10 +35924,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "组织/实施"
           },
           {
-            "word": "implement",
-            "meaning": "贯彻"
-          },
-          {
             "word": "perform",
             "meaning": "执行/履行"
           }
@@ -36444,7 +35936,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "expert",
     "phonetic": "/ˈekspɜːt/",
     "pos": "n./adj.",
-    "meaning": "专家，行家； adj. 熟练的",
+    "meaning": "专家，行家；熟练的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -36494,11 +35986,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fair",
     "phonetic": "/feə(r)/",
     "pos": "adj./adv./n.",
-    "meaning": "adj. 公正平等的；合理的；美丽的； n. 集市，博览会",
+    "meaning": "公正平等的；合理的；美丽的；集市，博览会",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "日耳曼原生词，原指“外观匀称秀美”（古英语 fæger） -> ① 容貌端庄匀称无瑕疵 -> 美丽的；② 事情处理得不偏不倚、各方配比匀称公正 -> 公平合理的；③ 数量比例达到了令人满意的程度 -> 相当大的（a fair amount）；④ 另源自拉丁语 feria（节日圣日），节日期间聚集举行的交易集市 -> 博览会，集市。",
+    "analysis": "古英语 fæger（外观匀称秀美） -> ① 容貌端庄匀称 -> 美丽的；② 事情处理得各方配比匀称公正 -> 公平合理的；③ 数量比例令人满意 -> 相当大的。",
     "antonyms": [
       {
         "sense": "有偏见/偏袒",
@@ -36565,7 +36057,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "firm",
     "phonetic": "/fɜːm/",
     "pos": "adj./adv./n./v.",
-    "meaning": "n. 商行，公司； adj. 坚定的，牢固的，结实的",
+    "meaning": "商行，公司；坚定的，牢固的，结实的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -36670,7 +36162,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "flight",
     "phonetic": "/flaɪt/",
     "pos": "n.",
-    "meaning": "n. 飞行；航班，航程；一段楼梯；溃逃",
+    "meaning": "飞行；航班，航程；一段楼梯；溃逃",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -36811,7 +36303,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "garage",
     "phonetic": "/ˈɡærɑːʒ/",
     "pos": "n./vt.",
-    "meaning": "车库；修车厂； vt. 入库",
+    "meaning": "车库；修车厂；入库",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -37121,7 +36613,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "manage",
     "phonetic": "/ˈmænɪdʒ/",
     "pos": "v.",
-    "meaning": "vt./vi. 管理，经营；设法做成（manage to do）；勉力应对",
+    "meaning": "管理，经营；设法做成（manage to do）；勉力应对",
     "part": "第一部分：超级核心母词族",
     "group": "【02. fac / fact / fect / fic / ficient 做/制作/产生】",
     "analysis_type": "构词",
@@ -37133,7 +36625,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "指挥/主管"
           },
           {
             "word": "monitor",
@@ -37161,16 +36653,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "管理/治理"
           },
           {
-            "word": "direct",
-            "meaning": "直接的"
-          },
-          {
             "word": "govern",
             "meaning": "统治/治理"
-          },
-          {
-            "word": "supervise",
-            "meaning": "监督/管理"
           }
         ]
       }
@@ -37423,14 +36907,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "起诉/控告",
         "items": [
-          {
-            "word": "accuse",
-            "meaning": "指控/控告"
-          },
-          {
-            "word": "charge",
-            "meaning": "指控/控诉"
-          },
           {
             "word": "sue",
             "meaning": "控告"
@@ -37871,10 +37347,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "cover",
             "meaning": "覆盖/掩盖"
-          },
-          {
-            "word": "shield",
-            "meaning": "盾牌/防御护盾"
           }
         ]
       }
@@ -37995,7 +37467,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tailor",
     "phonetic": "/ˈteɪlə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 裁缝； vt. 量身定制，使适应（tailored to）",
+    "meaning": "裁缝；量身定制，使适应（tailored to）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -38034,7 +37506,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "traffic",
     "phonetic": "/ˈtræfɪk/",
     "pos": "n./v.",
-    "meaning": "n. 交通，车流量；非法交易； vt./vi. 非法买卖，走私，贩卖",
+    "meaning": "交通，车流量；非法交易；非法买卖，走私，贩卖",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -38088,7 +37560,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "遮挡/隐匿"
           },
           {
             "word": "veil",
@@ -38153,7 +37625,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "vehicle",
     "phonetic": "/ˈviːəkl/",
     "pos": "n.",
-    "meaning": "n. 车辆，交通工具；媒介，手段，载体",
+    "meaning": "车辆，交通工具；媒介，手段，载体",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -38345,7 +37817,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "workshop",
     "phonetic": "/ˈwɜːkʃɒp/",
     "pos": "n.",
-    "meaning": "n. 车间，工场；研讨会，讲习班",
+    "meaning": "车间，工场；研讨会，讲习班",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -38459,7 +37931,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "alarm",
     "phonetic": "/əˈlɑːm/",
     "pos": "n./vt.",
-    "meaning": "警报；惊慌； vt. 报警",
+    "meaning": "警报；惊慌；报警",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -38545,7 +38017,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "target",
-            "meaning": "把…作为目标"
+            "meaning": "抱负/志向"
           }
         ]
       }
@@ -38722,7 +38194,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bleed",
     "phonetic": "/bliːd/",
     "pos": "vi./vt.",
-    "meaning": "流血，出血； vt. 勒索",
+    "meaning": "流血，出血；勒索",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -38748,7 +38220,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "breed",
     "phonetic": "/briːd/",
     "pos": "v./n.",
-    "meaning": "n. 品种，种类； vt./vi. 繁殖，饲养，繁育；导致",
+    "meaning": "品种，种类；繁殖，饲养，繁育；导致",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -38888,10 +38360,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "dull",
             "meaning": "枯燥乏味的"
-          },
-          {
-            "word": "slow",
-            "meaning": "缓慢的"
           }
         ]
       }
@@ -38915,7 +38383,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "complex",
     "phonetic": "/ˈkɒmpleks/",
     "pos": "adj./n.",
-    "meaning": "adj. 复杂的；复合的； n. 综合体",
+    "meaning": "复杂的；复合的；综合体",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -38968,7 +38436,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "concentrate",
     "phonetic": "/ˈkɒnsntreɪt/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 全神贯注，专心致志（on）；集中，聚集；浓缩； n. 浓缩物",
+    "meaning": "全神贯注，专心致志（on）；集中，聚集；浓缩；浓缩物",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -39386,10 +38854,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "dull",
             "meaning": "枯燥乏味的"
-          },
-          {
-            "word": "sluggish",
-            "meaning": "行动迟缓笨拙的"
           }
         ]
       }
@@ -39445,7 +38909,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "ease",
     "phonetic": "/iːz/",
     "pos": "n./v.",
-    "meaning": "容易；舒适； v. 缓和，减轻",
+    "meaning": "容易；舒适；缓和，减轻",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -39560,14 +39024,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "便利/便利措施",
         "items": [
           {
-            "word": "comfort",
-            "meaning": "安慰"
-          },
-          {
-            "word": "convenience",
-            "meaning": "方便/便利"
-          },
-          {
             "word": "facility",
             "meaning": "设施/设备"
           }
@@ -39619,7 +39075,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fatigue",
     "phonetic": "/fəˈtiːɡ/",
     "pos": "n./v.",
-    "meaning": "疲劳，劳累； v. 使疲乏",
+    "meaning": "疲劳，劳累；使疲乏",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -40341,20 +39797,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "flexible",
             "meaning": "柔韧的/易弯曲的"
-          },
-          {
-            "word": "gentle",
-            "meaning": "温柔温和的"
           }
         ]
       },
       {
         "sense": "适度/温和",
         "items": [
-          {
-            "word": "moderate",
-            "meaning": "适度的/温和的"
-          },
           {
             "word": "modest",
             "meaning": "适度的/适中的"
@@ -40677,10 +40125,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "acclaim",
             "meaning": "欢呼/喝彩"
-          },
-          {
-            "word": "applaud",
-            "meaning": "鼓掌喝彩"
           }
         ]
       }
@@ -40789,7 +40233,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "puzzle",
     "phonetic": "/ˈpʌzl/",
     "pos": "n./v.",
-    "meaning": "vt. 使迷惑，使困惑难解； n. 令人费解的难题，谜团；智力拼图",
+    "meaning": "使迷惑，使困惑难解；令人费解的难题，谜团；智力拼图",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -40903,7 +40347,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fever",
     "phonetic": "/ˈfiːvə(r)/",
     "pos": "n./vt.",
-    "meaning": "发烧，发热；狂热； vt. 使发烧",
+    "meaning": "发烧，发热；狂热；使发烧",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -41033,7 +40477,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stomach",
     "phonetic": "/ˈstʌmək/",
     "pos": "n./vt.",
-    "meaning": "vt. 忍受，容忍（cannot stomach）； n. 胃，腹部；食欲",
+    "meaning": "忍受，容忍（cannot stomach）；胃，腹部；食欲",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -41451,7 +40895,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "content",
     "phonetic": "/kənˈtent/ (adj.), /ˈkɒntent/ (n.)",
     "pos": "adj./vt./n.",
-    "meaning": "n. 内容，容量，含量；目录； adj. 满意的，满足的； vt. 使满足",
+    "meaning": "内容，容量，含量；目录；满意的，满足的；使满足",
     "part": "第一部分：超级核心母词族",
     "group": "【20. ten / tain / tin 握/持/容纳/保持】",
     "analysis_type": "构词",
@@ -41538,10 +40982,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "隐蔽/微弱",
         "items": [
-          {
-            "word": "obscure",
-            "meaning": "晦涩难懂的"
-          },
           {
             "word": "subtle",
             "meaning": "微妙隐晦的"
@@ -41889,7 +41329,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "chair",
     "phonetic": "/tʃeə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 主席，主持人；大学教授职位；椅子； vt. 主持（会议/委员会）",
+    "meaning": "主席，主持人；大学教授职位；椅子；主持（会议/委员会）",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -41915,7 +41355,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "concrete",
     "phonetic": "/ˈkɒŋkriːt/ (n./adj.), /kənˈkriːt/ (v.)",
     "pos": "n./adj./v.",
-    "meaning": "adj. 具体的，有形的； n. 混凝土",
+    "meaning": "具体的，有形的；混凝土",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -41926,7 +41366,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "abstract",
-            "meaning": "抽象的 n. 摘"
+            "meaning": "抽象的；摘要"
           },
           {
             "word": "vague",
@@ -42128,7 +41568,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lead",
     "phonetic": "/liːd/ (v./n.), /led/ (n.)",
     "pos": "v./n.",
-    "meaning": "vt./vi. 引领，带领；导致，引起（to）；处于领先地位； n. 领先",
+    "meaning": "引领，带领；导致，引起（to）；处于领先地位；领先",
     "part": "第二部分：高频专业词根族",
     "group": "【42. grad / gress 走/步伐/阶段】",
     "analysis_type": "构词",
@@ -42277,7 +41717,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lift",
     "phonetic": "/lɪft/",
     "pos": "vt./n.",
-    "meaning": "vt. 提起，举起；撤销，解除（禁令/限制）； n. 电梯；搭便车",
+    "meaning": "提起，举起；撤销，解除（禁令/限制）；电梯；搭便车",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -42482,10 +41922,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "恶化/损毁",
         "items": [
           {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
-          {
             "word": "alter",
             "meaning": "改变/更改"
           },
@@ -42519,14 +41955,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "改变/变更",
         "items": [
-          {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
-            "word": "convert",
-            "meaning": "转变/转化"
-          },
           {
             "word": "modify",
             "meaning": "修改/更改修饰"
@@ -42609,7 +42037,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mark",
     "phonetic": "/mɑːk/",
     "pos": "n./v.",
-    "meaning": "n. 印记，痕迹；分数，成绩；标志； vt. 标记，做记号；批改",
+    "meaning": "印记，痕迹；分数，成绩；标志；标记，做记号；批改",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -42671,18 +42099,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "confess",
             "meaning": "坦白/供认"
-          },
-          {
-            "word": "demonstrate",
-            "meaning": "证明/证实"
-          },
-          {
-            "word": "disclose",
-            "meaning": "揭露/泄露"
-          },
-          {
-            "word": "exhibit",
-            "meaning": "展出/陈列"
           }
         ]
       }
@@ -42708,7 +42124,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mass",
     "phonetic": "/mæs/",
     "pos": "n./adj./v.",
-    "meaning": "n. 大量，众多；群众，大众；物理质量； adj. 大规模的",
+    "meaning": "大量，众多；群众，大众；物理质量；大规模的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -42810,7 +42226,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "measure",
     "phonetic": "/ˈmeʒə(r)/",
     "pos": "v./n.",
-    "meaning": "n. 措施，办法；度量单位； vt. 测量，度量；衡量，评估",
+    "meaning": "措施，办法；度量单位；测量，度量；衡量，评估",
     "part": "第二部分：高频专业词根族",
     "group": "【41. temp / tempor 时间/时代/适度】",
     "analysis_type": "构词",
@@ -42849,7 +42265,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "moderate",
     "phonetic": "/ˈmɒdərət/ (adj.), /ˈmɒdəreɪt/ (v.)",
     "pos": "adj./v./n.",
-    "meaning": "适度的，温和的；中等的； vt./vi. 缓和，节制",
+    "meaning": "适度的，温和的；中等的；缓和，节制",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -42908,10 +42324,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "适度/温和",
         "items": [
-          {
-            "word": "mild",
-            "meaning": "温和的/和缓的"
-          },
           {
             "word": "modest",
             "meaning": "适度的/适中的"
@@ -43048,20 +42460,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "改变/变更",
         "items": [
           {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
             "word": "convert",
             "meaning": "转变/转化"
-          },
-          {
-            "word": "shift",
-            "meaning": "转移/移动"
-          },
-          {
-            "word": "transform",
-            "meaning": "使改变形态"
           },
           {
             "word": "vary",
@@ -43267,10 +42667,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "有利/有益",
         "items": [
           {
-            "word": "positive",
-            "meaning": "积极的/乐观的"
-          },
-          {
             "word": "profitable",
             "meaning": "有利润的"
           }
@@ -43444,18 +42840,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "confess",
             "meaning": "坦白/供认"
-          },
-          {
-            "word": "demonstrate",
-            "meaning": "证明/证实"
-          },
-          {
-            "word": "disclose",
-            "meaning": "揭露/泄露"
-          },
-          {
-            "word": "exhibit",
-            "meaning": "展出/陈列"
           }
         ]
       },
@@ -43494,10 +42878,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "discernible",
             "meaning": "可辨别的"
-          },
-          {
-            "word": "evident",
-            "meaning": "明显的/明白的"
           },
           {
             "word": "noticeable",
@@ -43560,23 +42940,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "invisible",
             "meaning": "看不见的/无形的"
-          },
-          {
-            "word": "subtle",
-            "meaning": "微妙隐晦的"
-          },
-          {
-            "word": "vague",
-            "meaning": "含糊不清的"
-          }
-        ]
-      },
-      {
-        "sense": "隐蔽/微弱",
-        "items": [
-          {
-            "word": "faint",
-            "meaning": "微弱暗淡的"
           },
           {
             "word": "subtle",
@@ -43663,10 +43026,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "提取/汲取",
         "items": [
-          {
-            "word": "derive",
-            "meaning": "源自/源于"
-          },
           {
             "word": "draw",
             "meaning": "得出/吸引"
@@ -43969,10 +43328,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "exceptional",
             "meaning": "杰出的/卓越的"
-          },
-          {
-            "word": "extraordinary",
-            "meaning": "非同寻常的"
           },
           {
             "word": "prominent",
@@ -44447,7 +43802,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "plain",
     "phonetic": "/pleɪn/",
     "pos": "adj./n./adv.",
-    "meaning": "adj. 清晰显而易见的；朴素简朴的；坦诚的； n. 平原",
+    "meaning": "清晰显而易见的；朴素简朴的；坦诚的；平原",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -44682,7 +44037,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "point",
     "phonetic": "/pɔɪnt/",
     "pos": "n./v.",
-    "meaning": "n. 点，尖端；要点，核心观点；得分； vt./vi. 指向，指着",
+    "meaning": "点，尖端；要点，核心观点；得分；指向，指着",
     "part": "第一部分：超级核心母词族",
     "group": "【17. cid / cis 切/割/杀/断】",
     "analysis_type": "构词",
@@ -44818,7 +44173,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "power",
     "phonetic": "/ˈpaʊə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 力量，能力；权力，政权；电力，能源； vt. 为…提供动力",
+    "meaning": "力量，能力；权力，政权；电力，能源；为…提供动力",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -44880,7 +44235,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "project",
     "phonetic": "/ˈprɒdʒekt/ (n.), /prəˈdʒekt/ (v.)",
     "pos": "n./v.",
-    "meaning": "n. 项目，工程，计划； vt. 预测，推算；投射，放映",
+    "meaning": "项目，工程，计划；预测，推算；投射，放映",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
@@ -45051,10 +44406,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "笨拙的"
           },
           {
-            "word": "slow",
-            "meaning": "缓慢的"
-          },
-          {
             "word": "sluggish",
             "meaning": "行动迟缓笨拙的"
           }
@@ -45098,10 +44449,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "rapid",
             "meaning": "迅速飞快的"
-          },
-          {
-            "word": "swift",
-            "meaning": "极其迅速敏捷的"
           }
         ]
       },
@@ -45111,10 +44458,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "acute",
             "meaning": "急性的/敏锐的"
-          },
-          {
-            "word": "quick",
-            "meaning": "迅速敏捷飞快的"
           },
           {
             "word": "sharp",
@@ -45471,7 +44814,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "queue",
     "phonetic": "/kjuː/",
     "pos": "n./vi.",
-    "meaning": "n. （人或车辆排成的）行列，长队； vi. 排队等候",
+    "meaning": "（人或车辆排成的）行列，长队；排队等候",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -45523,7 +44866,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "raise",
     "phonetic": "/reɪz/",
     "pos": "vt./n.",
-    "meaning": "vt. 举起，抬高；筹集（资金）；抚养（子女）；提出（异议）； n. 加薪",
+    "meaning": "举起，抬高；筹集（资金）；抚养（子女）；提出（异议）；加薪",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -45536,7 +44879,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "rank",
     "phonetic": "/ræŋk/",
     "pos": "n./v./adj.",
-    "meaning": "n. 军衔，军阶；社会地位阶层；排，行列； vt./vi. 分级，列为",
+    "meaning": "军衔，军阶；社会地位阶层；排，行列；分级，列为",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -45658,7 +45001,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "recover",
     "phonetic": "/rɪˈkʌvə(r)/",
     "pos": "v.",
-    "meaning": "vi./vt. 恢复，痊愈康复；重新获得，找回；复苏挽回",
+    "meaning": "恢复，痊愈康复；重新获得，找回；复苏挽回",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
@@ -45904,7 +45247,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "direct",
-            "meaning": "直接的"
+            "meaning": "指导/统管"
           },
           {
             "word": "manage",
@@ -46457,10 +45800,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "heal",
             "meaning": "治愈/愈合"
-          },
-          {
-            "word": "remedy",
-            "meaning": "疗法"
           }
         ]
       }
@@ -46510,24 +45849,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       }
@@ -46604,24 +45931,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       }
@@ -46738,10 +46053,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "恶化/损毁",
         "items": [
           {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
-          {
             "word": "alter",
             "meaning": "改变/更改"
           },
@@ -46779,14 +46090,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "改变/变更",
         "items": [
-          {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
-            "word": "convert",
-            "meaning": "转变/转化"
-          },
           {
             "word": "modify",
             "meaning": "修改/更改修饰"
@@ -46867,7 +46170,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "掩盖/隐匿"
           },
           {
             "word": "veil",
@@ -46905,10 +46208,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "表明/暗示",
         "items": [
-          {
-            "word": "demonstrate",
-            "meaning": "证明/证实"
-          },
           {
             "word": "imply",
             "meaning": "暗示"
@@ -47097,28 +46396,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "聪颖/才智",
         "items": [
           {
-            "word": "acute",
-            "meaning": "急性的/敏锐的"
-          },
-          {
             "word": "bright",
             "meaning": "明亮的"
           },
           {
             "word": "intelligent",
             "meaning": "聪明的/有才智的"
-          },
-          {
-            "word": "keen",
-            "meaning": "敏锐机敏的"
-          },
-          {
-            "word": "sensible",
-            "meaning": "明智的"
-          },
-          {
-            "word": "sharp",
-            "meaning": "机敏的/敏锐的"
           }
         ]
       }
@@ -47490,7 +46773,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "scale",
     "phonetic": "/skeɪl/",
     "pos": "n./v.",
-    "meaning": "n. 规模，范围；天平，秤；比例（尺）；鱼鳞； vt. 攀登，攀越",
+    "meaning": "规模，范围；天平，秤；比例（尺）；鱼鳞；攀登，攀越",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -47577,7 +46860,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "schedule",
-    "phonetic": "/ˈʃedjuːl/ (英音), /ˈskedʒuːl/ (美音)",
+    "phonetic": "/ˈʃedjuːl/ (英), /ˈskedʒuːl/ (美)",
     "pos": "n./vt.",
     "meaning": "日程表，时间进度计划表；课程表；安排预定，排定进度",
     "part": "第四部分：核心分类专题群",
@@ -47915,7 +47198,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "shape",
     "phonetic": "/ʃeɪp/",
     "pos": "n./v.",
-    "meaning": "vt. 塑造，决定…的发展；成型； n. 形状，外形；健康体态",
+    "meaning": "塑造，决定…的发展；成型；形状，外形；健康体态",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -47986,10 +47269,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "敏捷/机灵",
         "items": [
-          {
-            "word": "acute",
-            "meaning": "急性的/敏锐的"
-          },
           {
             "word": "prompt",
             "meaning": "迅速敏捷及时的"
@@ -48143,10 +47422,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "cover",
             "meaning": "覆盖/掩盖"
-          },
-          {
-            "word": "shelter",
-            "meaning": "庇护所/避难处"
           }
         ]
       }
@@ -48232,20 +47507,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "改变/变更",
         "items": [
           {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
             "word": "convert",
             "meaning": "转变/转化"
-          },
-          {
-            "word": "modify",
-            "meaning": "修改/更改修饰"
-          },
-          {
-            "word": "transform",
-            "meaning": "使改变形态"
           },
           {
             "word": "vary",
@@ -48612,14 +47875,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "主要/首要",
         "items": [
           {
-            "word": "dominant",
-            "meaning": "占支配主导地位的"
-          },
-          {
-            "word": "major",
-            "meaning": "主要的/重大的"
-          },
-          {
             "word": "primary",
             "meaning": "首要的/主要的"
           },
@@ -48790,7 +48045,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sole",
     "phonetic": "/səʊl/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 唯一的，仅有的；专用的； n. 脚底板，鞋底",
+    "meaning": "唯一的，仅有的；专用的；脚底板，鞋底",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -49147,7 +48402,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "squeeze",
     "phonetic": "/skwiːz/",
     "pos": "v./n.",
-    "meaning": "压榨，挤压；紧挤； n. 拥挤",
+    "meaning": "压榨，挤压；紧挤；拥挤",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -49282,7 +48537,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stem",
     "phonetic": "/stem/",
     "pos": "n./v.",
-    "meaning": "n. 植物茎，树干；词干； vi. 源自，起源于（from）； vt. 遏制",
+    "meaning": "植物茎，树干；词干；源自，起源于（from）；遏制",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -49336,7 +48591,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "prompt",
-            "meaning": "迅速敏捷及时的"
+            "meaning": "促使/推动"
           },
           {
             "word": "provoke",
@@ -49430,7 +48685,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stuff",
     "phonetic": "/stʌf/",
     "pos": "n./vt.",
-    "meaning": "n. 东西，材料； vt. 填满，塞满",
+    "meaning": "东西，材料；填满，塞满",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -49443,11 +48698,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "subject",
     "phonetic": "/ˈsʌbdʒɪkt/ (n./adj.), /səbˈdʒekt/ (v.)",
     "pos": "n./adj./vt.",
-    "meaning": "n. 学科，科目；主题；实验对象，受试者； vt. 使遭受，使经受（to）",
+    "meaning": "学科，科目；主题；实验对象，受试者；使遭受，使经受（to）",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
-    "analysis": "sub-（在下方） + ject-（投掷，拉丁语 jacere） -> 被扔在君王或权柄统治之下的 -> ① 俯首称臣的人 -> 臣民；② 被置于权威支配力量之下、身不由己地承受磨难 -> 使遭受，使经受（to）；③ 投掷在案头摆在面前供剖析审视的对象 -> 实验对象，受试者；④ 知识分类体系下摆在面前深入研习的范畴 -> 学科，主题。",
+    "analysis": "sub-（在下方） + ject-（投掷） -> 扔在统治力量之下的 -> ① 臣服的人 -> 臣民；② 置于权威支配之下 -> 使遭受；③ 摆在面前探讨的事物 -> 主题，学科。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -49571,10 +48826,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "faint",
             "meaning": "微弱暗淡的"
-          },
-          {
-            "word": "obscure",
-            "meaning": "晦涩难懂的"
           }
         ]
       }
@@ -49849,10 +49100,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "恶化/损毁",
         "items": [
           {
-            "word": "abandon",
-            "meaning": "放弃/遗弃"
-          },
-          {
             "word": "alter",
             "meaning": "改变/更改"
           },
@@ -49894,14 +49141,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "改变/变更",
         "items": [
-          {
-            "word": "alter",
-            "meaning": "改变/更改"
-          },
-          {
-            "word": "convert",
-            "meaning": "转变/转化"
-          },
           {
             "word": "modify",
             "meaning": "修改/更改修饰"
@@ -50073,10 +49312,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "立即的/速溶的"
           },
           {
-            "word": "prompt",
-            "meaning": "迅速敏捷及时的"
-          },
-          {
             "word": "rapid",
             "meaning": "迅速飞快的"
           }
@@ -50176,7 +49411,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "target",
     "phonetic": "/ˈtɑːɡɪt/",
     "pos": "n./vt.",
-    "meaning": "vt. 把…作为目标，针对；面向定位； n. 目标，指标；标靶",
+    "meaning": "把…作为目标，针对；面向定位；目标，指标；标靶",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -50212,24 +49447,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "目标/抱负",
         "items": [
           {
-            "word": "aim",
-            "meaning": "目标"
-          },
-          {
             "word": "ambition",
             "meaning": "雄心壮志/野心"
           },
           {
             "word": "aspiration",
             "meaning": "志向/抱负"
-          },
-          {
-            "word": "objective",
-            "meaning": "目标"
-          },
-          {
-            "word": "purpose",
-            "meaning": "目的/意图"
           }
         ]
       }
@@ -50306,7 +49529,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "terminal",
     "phonetic": "/ˈtɜːmɪnl/",
     "pos": "n./adj.",
-    "meaning": "n. 航站楼；终点站；终端机； adj. 末端的，晚期的",
+    "meaning": "航站楼；终点站；终端机；末端的，晚期的",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -50366,7 +49589,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "thorough",
-    "phonetic": "/ˈθʌrə/ (英音), /ˈθɜːrəʊ/ (美音)",
+    "phonetic": "/ˈθʌrə/ (英), /ˈθɜːrəʊ/ (美)",
     "pos": "adj.",
     "meaning": "彻底的，完全的；极其细致周密的，一丝不苟滴水不漏的",
     "part": "第四部分：核心分类专题群",
@@ -50483,7 +49706,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "thrust",
     "phonetic": "/θrʌst/",
     "pos": "v./n.",
-    "meaning": "猛推，刺入；推进力； n. 关键",
+    "meaning": "猛推，刺入；推进力；关键",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -50660,7 +49883,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trap",
     "phonetic": "/træp/",
     "pos": "n./vt.",
-    "meaning": "n. 陷阱，圈套； vt. 诱捕；困住",
+    "meaning": "陷阱，圈套；诱捕；困住",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -51138,10 +50361,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "可辨别的"
           },
           {
-            "word": "evident",
-            "meaning": "明显的/明白的"
-          },
-          {
             "word": "noticeable",
             "meaning": "显而易见的"
           },
@@ -51161,10 +50380,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "definite",
             "meaning": "明确的/肯定的"
-          },
-          {
-            "word": "explicit",
-            "meaning": "清楚明确的"
           },
           {
             "word": "specific",
@@ -51203,10 +50418,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "看不见的/无形的"
           },
           {
-            "word": "obscure",
-            "meaning": "晦涩难懂的"
-          },
-          {
             "word": "subtle",
             "meaning": "微妙隐晦的"
           }
@@ -51217,7 +50428,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "abstract",
-            "meaning": "抽象的 n. 摘"
+            "meaning": "抽象的；摘要"
           }
         ]
       }
@@ -51516,18 +50727,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "confess",
             "meaning": "坦白/供认"
-          },
-          {
-            "word": "demonstrate",
-            "meaning": "证明/证实"
-          },
-          {
-            "word": "disclose",
-            "meaning": "揭露/泄露"
-          },
-          {
-            "word": "exhibit",
-            "meaning": "展出/陈列"
           }
         ]
       }
@@ -51600,11 +50799,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "justify",
-            "meaning": "证明…是正当的"
-          },
-          {
-            "word": "validate",
-            "meaning": "证实/验证"
+            "meaning": "证实/辩明"
           }
         ]
       },
@@ -52057,7 +51252,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "wreck",
     "phonetic": "/rek/",
     "pos": "n./vt.",
-    "meaning": "n. 残骸；失事，沉船； vt. 摧毁，破坏",
+    "meaning": "残骸；失事，沉船；摧毁，破坏",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -52095,26 +51290,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "建造/创立",
         "items": [
-          {
-            "word": "assemble",
-            "meaning": "集合/召集"
-          },
-          {
-            "word": "construct",
-            "meaning": "建造/构建"
-          },
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
-          {
-            "word": "erect",
-            "meaning": "树立/建立"
-          },
-          {
-            "word": "establish",
-            "meaning": "建立/确立"
-          },
           {
             "word": "institute",
             "meaning": "建立/创立"
@@ -52290,10 +51465,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "quick",
             "meaning": "迅速敏捷飞快的"
-          },
-          {
-            "word": "sharp",
-            "meaning": "机敏的/敏锐的"
           }
         ]
       }
@@ -52356,7 +51527,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "angle",
     "phonetic": "/ˈæŋɡl/",
     "pos": "n./vt.",
-    "meaning": "角，角度； vt. 斜移",
+    "meaning": "角，角度；斜移",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -52604,7 +51775,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bark",
     "phonetic": "/bɑːk/",
     "pos": "n./v.",
-    "meaning": "vi./n. 吠叫，犬吠声； n. 树皮",
+    "meaning": "吠叫，犬吠声；树皮",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -52829,14 +52000,14 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "blanket",
     "phonetic": "/ˈblæŋkɪt/",
     "pos": "n./vt./adj.",
-    "meaning": "n. 毛毯；厚覆盖层（a blanket of snow）； vt. 全面覆盖笼罩",
+    "meaning": "毛毯；厚覆盖层；全面覆盖笼罩",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
     "analysis": "blanc（白色羊毛原色） + -et（织物后缀） -> 质地厚实紧密铺在床上保暖的纯羊毛织物，引申为如雪被般彻底覆盖 -> 毛毯，羊毛毯；厚覆盖层；全面覆盖笼罩。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "blanket cylinder (毛毯辊筒 / 毛毯烘缸)；rubber blanket (橡胶垫 / 橡皮布)"
+    "collocation": "a blanket of snow (一层厚雪)；blanket policy (总括保险单)"
   },
   {
     "word": "blast",
@@ -52868,7 +52039,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "blend",
     "phonetic": "/blend/",
     "pos": "vt./vi./n.",
-    "meaning": "混合，调和；融合； n. 混合物",
+    "meaning": "混合，调和；融合；混合物",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -52907,7 +52078,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "block",
     "phonetic": "/blɒk/",
     "pos": "n./vt.",
-    "meaning": "n. 街区；大块木石；障碍物； vt. 堵塞，阻碍，阻挡",
+    "meaning": "街区；大块木石；障碍物；堵塞，阻碍，阻挡",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -52945,14 +52116,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "协助/支持",
         "items": [
-          {
-            "word": "aid",
-            "meaning": "援助/救助"
-          },
-          {
-            "word": "assist",
-            "meaning": "帮助/协助"
-          },
           {
             "word": "support",
             "meaning": "支持/拥护"
@@ -53149,7 +52312,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bond",
     "phonetic": "/bɒnd/",
     "pos": "n./v.",
-    "meaning": "债券；纽带； v. 结合",
+    "meaning": "债券；纽带；结合",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -53162,7 +52325,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "boom",
     "phonetic": "/buːm/",
     "pos": "vi./n.",
-    "meaning": "vi./n. 激增，繁荣昌盛；繁荣期；轰鸣隆隆作响",
+    "meaning": "激增，繁荣昌盛；繁荣期；轰鸣隆隆作响",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -53266,7 +52429,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "boost",
     "phonetic": "/buːst/",
     "pos": "vt./n.",
-    "meaning": "vt. 提振，增加，促进；托举； n. 帮助，激励",
+    "meaning": "提振，增加，促进；托举；帮助，激励",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -53348,7 +52511,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "border",
     "phonetic": "/ˈbɔːdə(r)/",
     "pos": "n./v.",
-    "meaning": "边界，国界； v. 邻近",
+    "meaning": "边界，国界；邻近",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -53361,7 +52524,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bounce",
     "phonetic": "/baʊns/",
     "pos": "vi./vt./n.",
-    "meaning": "反弹，弹起；弹跳； n. 弹力",
+    "meaning": "反弹，弹起；弹跳；弹力",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -53453,7 +52616,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "brake",
     "phonetic": "/breɪk/",
     "pos": "n./v.",
-    "meaning": "刹车，制动器； v. 刹车",
+    "meaning": "刹车，制动器；刹车",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -53466,7 +52629,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "branch",
     "phonetic": "/brɑːntʃ/",
     "pos": "n./vi.",
-    "meaning": "n. 树枝；分支，分科，分部； vi. 分支",
+    "meaning": "树枝；分支，分科，分部；分支",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -53518,11 +52681,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "brief",
     "phonetic": "/briːf/",
     "pos": "adj./vt./n.",
-    "meaning": "adj. 简短的，短暂的； vt. 向…作简要汇报，介绍情况； n. 概要，摘要",
+    "meaning": "简短的，短暂的；向…作简要汇报，介绍情况；概要，摘要",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
-    "analysis": "brev-（简短短小） + -e，引申指简短的 vt. 简短汇报 -> 简短的，vt.。",
+    "analysis": "brev-（简短短小） + -e -> 简短的；向…作简报。",
     "antonyms": [
       {
         "sense": "永久/持久",
@@ -54097,7 +53260,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cast",
     "phonetic": "/kɑːst/",
     "pos": "v./n.",
-    "meaning": "vt. 投射（光/影/疑虑）；投掷；选派演员； n. 全体演员阵容",
+    "meaning": "投射（光/影/疑虑）；投掷；选派演员；全体演员阵容",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -54110,14 +53273,14 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "catch",
     "phonetic": "/kætʃ/",
     "pos": "v./n.",
-    "meaning": "vt. 抓住，捕捉；赶上；感染（疾病）；领会； n. 捕捉；隐情，潜在难题（there's a catch）",
+    "meaning": "抓住，捕捉；赶上；感染（疾病）；领会；隐情，潜在难题",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
     "analysis": "源自通俗词根 captiare（在密林中四处） -> 接住，抓住。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "catch up (赶上 / 把…缠住)；catch up with (赶上 / 追上)"
+    "collocation": "there's a catch (事有蹊跷 / 有潜在难题)；catch a cold (感冒)"
   },
   {
     "word": "cease",
@@ -54212,7 +53375,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "chalk",
     "phonetic": "/tʃɔːk/",
     "pos": "n./v.",
-    "meaning": "粉笔； v. 用粉笔写",
+    "meaning": "粉笔；用粉笔写",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -54340,7 +53503,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "climb",
     "phonetic": "/klaɪm/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 攀登，爬；（气温/物价）攀升，激增； n. 攀登；上升",
+    "meaning": "攀登，爬；（气温/物价）攀升，激增；攀登；上升",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -54422,7 +53585,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "clip",
     "phonetic": "/klɪp/",
     "pos": "n./v.",
-    "meaning": "n. 夹子，回形针；视频剪辑片段； vt. 夹住；修剪，剪除",
+    "meaning": "夹子，回形针；视频剪辑片段；夹住；修剪，剪除",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -54497,7 +53660,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "collapse",
     "phonetic": "/kəˈlæps/",
     "pos": "vi./n.",
-    "meaning": "vi./n. 倒塌，崩溃；折叠",
+    "meaning": "倒塌，崩溃；折叠",
     "part": "第二部分：高频专业词根族",
     "group": "【48. bell / bat 战斗/敲打】",
     "analysis_type": "构词",
@@ -54551,7 +53714,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "compact",
     "phonetic": "/kəmˈpækt/ (adj.), /ˈkɒmpækt/ (n./v.)",
     "pos": "adj./n./v.",
-    "meaning": "adj. 紧凑的；结实的； vt. 压实",
+    "meaning": "紧凑的；结实的；压实",
     "part": "第二部分：高频专业词根族",
     "group": "【58. fend / fens 防卫/击退】",
     "analysis_type": "构词",
@@ -54676,7 +53839,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "crack",
     "phonetic": "/kræk/",
     "pos": "v./n.",
-    "meaning": "破裂；砸开； n. 裂纹，裂缝",
+    "meaning": "破裂；砸开；裂纹，裂缝",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -54689,7 +53852,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "crash",
     "phonetic": "/kræʃ/",
     "pos": "n./v.",
-    "meaning": "碰撞，坠毁；暴跌； v. 撞车",
+    "meaning": "碰撞，坠毁；暴跌；撞车",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -54755,7 +53918,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cross",
     "phonetic": "/krɒs/",
     "pos": "v./n./adj.",
-    "meaning": "v. 穿过，跨越；交叉； n. 十字，十字架； adj. 生气的，恼怒的",
+    "meaning": "穿过，跨越；交叉；十字，十字架；生气的，恼怒的",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -54844,26 +54007,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "建造/创立",
         "items": [
           {
-            "word": "assemble",
-            "meaning": "集合/召集"
-          },
-          {
-            "word": "construct",
-            "meaning": "建造/构建"
-          },
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
-          {
-            "word": "erect",
-            "meaning": "树立/建立"
-          },
-          {
-            "word": "establish",
-            "meaning": "建立/确立"
-          },
-          {
             "word": "institute",
             "meaning": "建立/创立"
           }
@@ -54942,7 +54085,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "crust",
     "phonetic": "/krʌst/",
     "pos": "n./v.",
-    "meaning": "n. 面包皮；硬外皮，硬壳；地壳",
+    "meaning": "面包皮；硬外皮，硬壳；地壳",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -54968,7 +54111,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "curve",
     "phonetic": "/kɜːv/",
     "pos": "n./v.",
-    "meaning": "曲线；转弯处，曲线图； vt./vi. 弯曲，弯折",
+    "meaning": "曲线；转弯处，曲线图；弯曲，弯折",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -54981,7 +54124,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dark",
     "phonetic": "/dɑːk/",
     "pos": "adj./n.",
-    "meaning": "黑暗的；暗色的； n. 黑暗",
+    "meaning": "黑暗的；暗色的；黑暗",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -55171,7 +54314,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "drift",
     "phonetic": "/drɪft/",
     "pos": "vi./n.",
-    "meaning": "vi. 漂流，漂移；无意间陷入； n. 大意，主旨，发展趋势；漂流",
+    "meaning": "漂流，漂移；无意间陷入；大意，主旨，发展趋势；漂流",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -55202,7 +54345,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dry",
     "phonetic": "/draɪ/",
     "pos": "adj./v.",
-    "meaning": "干的，干燥的； v. 弄干",
+    "meaning": "干的，干燥的；弄干",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -55326,7 +54469,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "early",
     "phonetic": "/ˈɜːli/",
     "pos": "adj./adv.",
-    "meaning": "早期的，早的； adv. 提早",
+    "meaning": "早期的，早的；提早",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -55436,7 +54579,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "elastic",
     "phonetic": "/ɪˈlæstɪk/",
     "pos": "adj./n.",
-    "meaning": "有弹性的；灵活的； n. 橡皮筋",
+    "meaning": "有弹性的；灵活的；橡皮筋",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -55631,10 +54774,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "contract",
             "meaning": "收缩/紧缩"
-          },
-          {
-            "word": "shrink",
-            "meaning": "收缩/缩小"
           }
         ]
       },
@@ -55804,7 +54943,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fast",
     "phonetic": "/fɑːst/",
     "pos": "adj./adv./v./n.",
-    "meaning": "adj./adv. 快速敏捷的；牢固紧固的； vi./n. 禁食，斋戒",
+    "meaning": "快速敏捷的；牢固紧固的；禁食，斋戒",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -55901,7 +55040,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "flat",
     "phonetic": "/flæt/",
     "pos": "adj./n./adv.",
-    "meaning": "adj. 平坦水平的； n. 单元房，公寓； adv. 断然彻底地",
+    "meaning": "平坦水平的；单元房，公寓；断然彻底地",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -55927,7 +55066,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "float",
     "phonetic": "/fləʊt/",
     "pos": "v./n.",
-    "meaning": "浮动，漂浮；浮起； n. 浮标",
+    "meaning": "浮动，漂浮；浮起；浮标",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -56077,7 +55216,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "frost",
     "phonetic": "/frɒst/",
     "pos": "n./v.",
-    "meaning": "霜，严寒； v. 结霜",
+    "meaning": "霜，严寒；结霜",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -56199,10 +55338,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "flexible",
             "meaning": "柔韧的/易弯曲的"
-          },
-          {
-            "word": "mild",
-            "meaning": "温和的/和缓的"
           }
         ]
       }
@@ -56367,7 +55502,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "grip",
     "phonetic": "/ɡrɪp/",
     "pos": "v./n.",
-    "meaning": "紧握，抓牢；吸引力； n. 控制",
+    "meaning": "紧握，抓牢；吸引力；控制",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -56393,7 +55528,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "gross",
     "phonetic": "/ɡrəʊs/",
     "pos": "adj./vt.",
-    "meaning": "adj. 总的，毛重的；显而易见的（gross error）； vt. 总共赚得",
+    "meaning": "总的，毛重的；显而易见的（gross error）；总共赚得",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -56592,7 +55727,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "hit",
     "phonetic": "/hɪt/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 击打，碰撞；袭击，重创；突然想到； n. 击打；成功之作",
+    "meaning": "击打，碰撞；袭击，重创；突然想到；击打；成功之作",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57043,7 +56178,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lean",
     "phonetic": "/liːn/",
     "pos": "v./adj.",
-    "meaning": "vi./vt. 倾斜，倚靠；倾向于； adj. 瘦的，无多余赘肉的",
+    "meaning": "倾斜，倚靠；倾向于；瘦的，无多余赘肉的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57089,7 +56224,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "level",
     "phonetic": "/ˈlevl/",
     "pos": "n./adj./vt.",
-    "meaning": "n. 水平，程度；水准等级； adj. 平坦的； vt. 使平整",
+    "meaning": "水平，程度；水准等级；平坦的；使平整",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57141,24 +56276,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       },
@@ -57218,7 +56341,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lock",
     "phonetic": "/lɒk/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 锁上，锁住；固定； n. 门锁，锁具",
+    "meaning": "锁上，锁住；固定；门锁，锁具",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57501,11 +56624,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "overhead",
     "phonetic": "/ˈəʊvəhed/",
     "pos": "n./adj.",
-    "meaning": "adj. 在头顶上的，架空的； n. 经常性开支，运营成本",
+    "meaning": "在头顶上的，架空的；经常性开支，运营成本",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "over（在头顶上方） + head（头部） -> 经常性开支，adj.。",
+    "analysis": "over（在头顶上方） + head（头部） -> 在头顶上的；经常性开支。",
     "antonyms": [
       {
         "sense": "收入/收益",
@@ -57642,7 +56765,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pitch",
     "phonetic": "/pɪtʃ/",
     "pos": "n./v.",
-    "meaning": "vt. 极力推介，推销（pitch an idea）；投掷； n. 球场；音调",
+    "meaning": "极力推介，推销（pitch an idea）；投掷；球场；音调",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -57668,7 +56791,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "plunge",
     "phonetic": "/plʌndʒ/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 纵身跳入；猛跌，骤降，暴跌；使陷入（困境）",
+    "meaning": "纵身跳入；猛跌，骤降，暴跌；使陷入（困境）",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57681,7 +56804,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pound",
     "phonetic": "/paʊnd/",
     "pos": "n./v.",
-    "meaning": "n. 磅；英镑； vt./vi. 连续猛击，捣碎；狂跳",
+    "meaning": "磅；英镑；连续猛击，捣碎；狂跳",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -57694,7 +56817,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pull",
     "phonetic": "/pʊl/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 拉，拖，拔；吸引； n. 拉力，引力",
+    "meaning": "拉，拖，拔；吸引；拉力，引力",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57754,7 +56877,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "push",
     "phonetic": "/pʊʃ/",
     "pos": "v./n.",
-    "meaning": "vt. n. 推，推动；催促",
+    "meaning": "推，推动；催促",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57825,10 +56948,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "acute",
             "meaning": "急性的/敏锐的"
-          },
-          {
-            "word": "prompt",
-            "meaning": "迅速敏捷及时的"
           },
           {
             "word": "sharp",
@@ -57904,7 +57023,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "roll",
     "phonetic": "/rəʊl/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 翻滚，滚动； n. 卷；名单",
+    "meaning": "翻滚，滚动；卷；名单",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -57948,7 +57067,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "round",
     "phonetic": "/raʊnd/",
     "pos": "adj./prep./adv./n./v.",
-    "meaning": "adj. 圆的； n. 回合；巡视",
+    "meaning": "圆的；回合；巡视",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -58078,7 +57197,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "scrub",
     "phonetic": "/skrʌb/",
     "pos": "v./n.",
-    "meaning": "vt. n. 用力擦洗；取消",
+    "meaning": "用力擦洗；取消",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -58216,26 +57335,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "建造/创立",
         "items": [
-          {
-            "word": "assemble",
-            "meaning": "集合/召集"
-          },
-          {
-            "word": "construct",
-            "meaning": "建造/构建"
-          },
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
-          {
-            "word": "erect",
-            "meaning": "树立/建立"
-          },
-          {
-            "word": "establish",
-            "meaning": "建立/确立"
-          },
           {
             "word": "institute",
             "meaning": "建立/创立"
@@ -58438,7 +57537,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "slide",
     "phonetic": "/slaɪd/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 滑动；悄悄溜走； n. 滑道",
+    "meaning": "滑动；悄悄溜走；滑道",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -58464,7 +57563,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "slip",
     "phonetic": "/slɪp/",
     "pos": "v./n.",
-    "meaning": "vi. 滑倒；溜走； n. 纸条；滑倒",
+    "meaning": "滑倒；溜走；纸条；滑倒",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -58517,10 +57616,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "敏捷/迅速",
         "items": [
           {
-            "word": "prompt",
-            "meaning": "迅速敏捷及时的"
-          },
-          {
             "word": "quick",
             "meaning": "迅速敏捷飞快的"
           },
@@ -58564,20 +57659,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "gradual",
             "meaning": "逐渐的/渐进的"
-          },
-          {
-            "word": "sluggish",
-            "meaning": "行动迟缓笨拙的"
           }
         ]
       },
       {
         "sense": "笨拙/迟钝",
         "items": [
-          {
-            "word": "clumsy",
-            "meaning": "笨拙的"
-          },
           {
             "word": "dull",
             "meaning": "枯燥乏味的"
@@ -58624,10 +57711,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "animated",
             "meaning": "充满活力的"
-          },
-          {
-            "word": "dynamic",
-            "meaning": "充满生机活力的"
           },
           {
             "word": "vivid",
@@ -58691,10 +57774,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "gradual",
             "meaning": "逐渐的/渐进的"
-          },
-          {
-            "word": "slow",
-            "meaning": "缓慢的"
           }
         ]
       }
@@ -58705,7 +57784,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "smooth",
     "phonetic": "/smuːð/",
     "pos": "adj./vt.",
-    "meaning": "adj. 光滑的；平稳的； vt. 使光滑",
+    "meaning": "光滑的；平稳的；使光滑",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -58727,7 +57806,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "articulate",
-            "meaning": "清楚表达 adj"
+            "meaning": "清楚表达；表达清晰的"
           },
           {
             "word": "fluent",
@@ -58742,7 +57821,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "snap",
     "phonetic": "/snæp/",
     "pos": "v./n./adj.",
-    "meaning": "vt./vi. 啪地折断；咔嚓拍下",
+    "meaning": "啪地折断；咔嚓拍下",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -58830,7 +57909,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "solid",
     "phonetic": "/ˈsɒlɪd/",
     "pos": "adj./n.",
-    "meaning": "adj. 坚固的；实心的； n. 固体",
+    "meaning": "坚固的；实心的；固体",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -58913,10 +57992,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "stable",
             "meaning": "稳定的"
-          },
-          {
-            "word": "tough",
-            "meaning": "艰难的/坚韧的"
           }
         ]
       }
@@ -58966,7 +58041,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sound",
     "phonetic": "/saʊnd/",
     "pos": "n./v./adj./adv.",
-    "meaning": "n. 声音； adj. 合理可靠的，明智的；健全的，完好无损的； v. 听起来",
+    "meaning": "声音；合理可靠的，明智的；健全的，完好无损的；听起来",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -58993,7 +58068,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sour",
     "phonetic": "/ˈsaʊə(r)/",
     "pos": "adj./v.",
-    "meaning": "adj. 酸的，酸味的；恶化变质的； v. 使变酸变质；使人际关系恶化变糟",
+    "meaning": "酸的，酸味的；恶化变质的；使变酸变质；使人际关系恶化变糟",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -59032,7 +58107,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spare",
     "phonetic": "/speə(r)/",
     "pos": "adj./vt./n.",
-    "meaning": "vt. 抽出，留出（时间/金钱）；饶恕； adj. 备用的；多余的",
+    "meaning": "抽出，留出（时间/金钱）；饶恕；备用的；多余的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59058,7 +58133,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spill",
     "phonetic": "/spɪl/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 溢出，溅出； n. 溢出物",
+    "meaning": "溢出，溅出；溢出物",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59071,7 +58146,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spin",
     "phonetic": "/spɪn/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 旋转；纺纱； n. 旋转",
+    "meaning": "旋转；纺纱；旋转",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59084,7 +58159,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "spit",
     "phonetic": "/spɪt/",
     "pos": "v./n.",
-    "meaning": "vi./vt. 吐痰，吐出； n. 唾液",
+    "meaning": "吐痰，吐出；唾液",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59110,7 +58185,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stack",
     "phonetic": "/stæk/",
     "pos": "n./vt.",
-    "meaning": "n. 堆，垛； vt. 堆积，堆叠",
+    "meaning": "堆，垛；堆积，堆叠",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59123,7 +58198,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "step",
     "phonetic": "/step/",
     "pos": "n./vi.",
-    "meaning": "n. 脚步；台阶；步骤； vi. 迈步",
+    "meaning": "脚步；台阶；步骤；迈步",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -59212,7 +58287,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "strike",
     "phonetic": "/straɪk/",
     "pos": "v./n.",
-    "meaning": "突然想到，给…留下深刻印象；打击，撞击； vi./n. 罢工",
+    "meaning": "突然想到，给…留下深刻印象；打击，撞击；罢工",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59261,7 +58336,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "stroke",
     "phonetic": "/strəʊk/",
     "pos": "n./vt.",
-    "meaning": "n. 中风；一击；笔画； vt. 抚摸",
+    "meaning": "中风；一击；笔画；抚摸",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59300,7 +58375,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "sweep",
     "phonetic": "/swiːp/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 扫，打扫；席卷； n. 清扫",
+    "meaning": "扫，打扫；席卷；清扫",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59578,10 +58653,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "耐用的/持久的"
           },
           {
-            "word": "solid",
-            "meaning": "坚固的"
-          },
-          {
             "word": "stable",
             "meaning": "稳定的"
           }
@@ -59607,7 +58678,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trip",
     "phonetic": "/trɪp/",
     "pos": "n./vi.",
-    "meaning": "n. 旅行，出行； vi. 绊倒，失足；犯错",
+    "meaning": "旅行，出行；绊倒，失足；犯错",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -59620,7 +58691,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tug",
     "phonetic": "/tʌɡ/",
     "pos": "v./n.",
-    "meaning": "vt. n. 用力拉，猛拽；拖船",
+    "meaning": "用力拉，猛拽；拖船",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59633,7 +58704,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "twist",
     "phonetic": "/twɪst/",
     "pos": "v./n.",
-    "meaning": "搓，捻；拧；扭转； n. 转折",
+    "meaning": "搓，捻；拧；扭转；转折",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59709,7 +58780,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "unwind",
     "phonetic": "/ˌʌnˈwaɪnd/",
     "pos": "v.",
-    "meaning": "vi. 放松；解开； vt. 展开",
+    "meaning": "放松；解开；展开",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59748,7 +58819,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "void",
     "phonetic": "/vɔɪd/",
     "pos": "adj./n./vt.",
-    "meaning": "adj. 无效的；空的； n. 空虚感",
+    "meaning": "无效的；空的；空虚感",
     "part": "第二部分：高频专业词根族",
     "group": "【80. vac / van 空/虚无】",
     "analysis_type": "构词",
@@ -59854,7 +58925,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "weight",
     "phonetic": "/weɪt/",
     "pos": "n./vt.",
-    "meaning": "n. 重量；重担，重压； vt. 加重",
+    "meaning": "重量；重担，重压；加重",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -59985,7 +59056,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "wink",
     "phonetic": "/wɪŋk/",
     "pos": "v./n.",
-    "meaning": "vi. n. 眨眼，使眼色",
+    "meaning": "眨眼，使眼色",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -60085,28 +59156,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "聪颖/才智",
         "items": [
           {
-            "word": "acute",
-            "meaning": "急性的/敏锐的"
-          },
-          {
             "word": "bright",
             "meaning": "明亮的"
           },
           {
             "word": "intelligent",
             "meaning": "聪明的/有才智的"
-          },
-          {
-            "word": "keen",
-            "meaning": "敏锐机敏的"
-          },
-          {
-            "word": "sensible",
-            "meaning": "明智的"
-          },
-          {
-            "word": "sharp",
-            "meaning": "机敏的/敏锐的"
           }
         ]
       }
@@ -60282,14 +59337,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "起诉/控告",
         "items": [
           {
-            "word": "charge",
-            "meaning": "指控/控诉"
-          },
-          {
-            "word": "prosecute",
-            "meaning": "起诉/控告"
-          },
-          {
             "word": "sue",
             "meaning": "控告"
           }
@@ -60460,10 +59507,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "通过努力获得"
           },
           {
-            "word": "procure",
-            "meaning": "获得/取得"
-          },
-          {
             "word": "secure",
             "meaning": "争取到/获得"
           }
@@ -60587,10 +59630,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "容纳"
           },
           {
-            "word": "adjust",
-            "meaning": "调整/调节"
-          },
-          {
             "word": "conform",
             "meaning": "顺从/遵守"
           }
@@ -60641,10 +59680,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "accommodate",
             "meaning": "容纳"
-          },
-          {
-            "word": "adapt",
-            "meaning": "适应/改编"
           },
           {
             "word": "conform",
@@ -61289,7 +60324,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "amount",
     "phonetic": "/əˈmaʊnt/",
     "pos": "n./vi.",
-    "meaning": "数量，总额； vi. 等同于",
+    "meaning": "数量，总额；等同于",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -61587,10 +60622,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "acclaim",
             "meaning": "欢呼/喝彩"
-          },
-          {
-            "word": "praise",
-            "meaning": "赞扬/表彰"
           }
         ]
       }
@@ -61679,7 +60710,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "apply",
     "phonetic": "/əˈplaɪ/",
     "pos": "v.",
-    "meaning": "vi. 申请（for）； vt. 应用，实施，使用；涂抹",
+    "meaning": "申请（for）；应用，实施，使用；涂抹",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -61708,7 +60739,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "delegate",
-            "meaning": "代表 vt. 委"
+            "meaning": "代表；委派"
           }
         ]
       }
@@ -61745,7 +60776,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "approach",
     "phonetic": "/əˈprəʊtʃ/",
     "pos": "vt./vi./n.",
-    "meaning": "vt./vi. 靠近，接近；探讨，处理； n. 方法，途径；接近",
+    "meaning": "靠近，接近；探讨，处理；方法，途径；接近",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -62114,7 +61145,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "assault",
     "phonetic": "/əˈsɔːlt/",
     "pos": "n./vt.",
-    "meaning": "n./vt. 攻击，突击；殴打",
+    "meaning": "攻击，突击；殴打",
     "part": "第一部分：超级核心母词族",
     "group": "【40. pel / puls / peal 推/驱使/搏动】",
     "analysis_type": "构词",
@@ -62521,7 +61552,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "avail",
     "phonetic": "/əˈveɪl/",
     "pos": "vt./vi./n.",
-    "meaning": "有益于，利用； n. 效用",
+    "meaning": "有益于，利用；效用",
     "part": "第二部分：高频专业词根族",
     "group": "【43. val / vail / fort 强壮/力量/价值】",
     "analysis_type": "构词",
@@ -62534,7 +61565,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "invalid",
     "phonetic": "/ɪnˈvælɪd/",
     "pos": "adj./n.",
-    "meaning": "无效的；作废的； n. 病弱者",
+    "meaning": "无效的；作废的；病弱者",
     "part": "第二部分：高频专业词根族",
     "group": "【43. val / vail / fort 强壮/力量/价值】",
     "analysis_type": "构词",
@@ -62557,7 +61588,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "alternate",
     "phonetic": "/ˈɔːltəneɪt/",
     "pos": "vi./vt./adj.",
-    "meaning": "交替，轮流； adj. 间隔的",
+    "meaning": "交替，轮流；间隔的",
     "part": "第二部分：高频专业词根族",
     "group": "【45. alter / ali 其他/变更/改变】",
     "analysis_type": "构词",
@@ -62662,7 +61693,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "notice",
-            "meaning": "注意到 n. 通"
+            "meaning": "注意到；通告"
           },
           {
             "word": "observe",
@@ -63105,7 +62136,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "diffuse",
     "phonetic": "/dɪˈfjuːz/",
     "pos": "vt./vi./adj.",
-    "meaning": "扩散，传播； adj. 冗长的",
+    "meaning": "扩散，传播；冗长的",
     "part": "第二部分：高频专业词根族",
     "group": "【61. fuse / fund 浇灌/倾倒/熔化】",
     "analysis_type": "构词",
@@ -63206,24 +62237,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "鼓励/支持"
           },
           {
-            "word": "endow",
-            "meaning": "资助/赋予"
-          },
-          {
             "word": "facilitate",
             "meaning": "促进/使便利"
           },
           {
-            "word": "finance",
-            "meaning": "为…提供资金"
-          },
-          {
             "word": "foster",
             "meaning": "培养/促进"
-          },
-          {
-            "word": "fund",
-            "meaning": "基金"
           }
         ]
       }
@@ -63261,7 +62280,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "prejudice",
     "phonetic": "/ˈpredʒədɪs/",
     "pos": "n./vt.",
-    "meaning": "偏见，成见； vt. 使怀偏见",
+    "meaning": "偏见，成见；使怀偏见",
     "part": "第二部分：高频专业词根族",
     "group": "【64. jur / jud / just 法律/审判/正义】",
     "analysis_type": "构词",
@@ -63419,7 +62438,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lever",
     "phonetic": "/ˈliːvə(r)/",
     "pos": "n./vt.",
-    "meaning": "杠杆，操纵杆； vt. 撬动",
+    "meaning": "杠杆，操纵杆；撬动",
     "part": "第二部分：高频专业词根族",
     "group": "【66. lev 轻/举起/升高】",
     "analysis_type": "构词",
@@ -63609,7 +62628,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "miniature",
     "phonetic": "/ˈmɪnətʃə(r)/",
     "pos": "adj./n.",
-    "meaning": "微型的，微小的； n. 缩影",
+    "meaning": "微型的，微小的；缩影",
     "part": "第二部分：高频专业词根族",
     "group": "【74. min / mini 微小/变小】",
     "analysis_type": "构词",
@@ -63728,10 +62747,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "获得/取得",
         "items": [
-          {
-            "word": "acquire",
-            "meaning": "获得/取得"
-          },
           {
             "word": "attain",
             "meaning": "达到/获得"
@@ -64215,7 +63230,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "elective",
     "phonetic": "/ɪˈlektɪv/",
     "pos": "adj./n.",
-    "meaning": "选修的；选出的； n. 选修课",
+    "meaning": "选修的；选出的；选修课",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -64739,7 +63754,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "subordinate",
     "phonetic": "/səˈbɔːdɪnət/",
     "pos": "adj./n.",
-    "meaning": "次要的；下级的； n. 下属",
+    "meaning": "次要的；下级的；下属",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -65065,7 +64080,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "surplus",
     "phonetic": "/ˈsɜːpləs/",
     "pos": "n./adj.",
-    "meaning": "过剩，盈余； adj. 多余的",
+    "meaning": "过剩，盈余；多余的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -65233,28 +64248,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "聪颖/才智",
         "items": [
           {
-            "word": "acute",
-            "meaning": "急性的/敏锐的"
-          },
-          {
             "word": "bright",
             "meaning": "明亮的"
           },
           {
             "word": "intelligent",
             "meaning": "聪明的/有才智的"
-          },
-          {
-            "word": "keen",
-            "meaning": "敏锐机敏的"
-          },
-          {
-            "word": "sensible",
-            "meaning": "明智的"
-          },
-          {
-            "word": "sharp",
-            "meaning": "机敏的/敏锐的"
           }
         ]
       },
@@ -65289,7 +64288,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "immortal",
     "phonetic": "/ɪˈmɔːtl/",
     "pos": "adj./n.",
-    "meaning": "不朽的，永生的； n. 不朽的人物",
+    "meaning": "不朽的，永生的；不朽的人物",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【81. 前缀群：否定与相反】",
     "analysis_type": "构词",
@@ -65386,7 +64385,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "disillusion",
     "phonetic": "/ˌdɪsɪˈluːʒn/",
     "pos": "vt./n.",
-    "meaning": "使醒悟，使幻灭； n. 幻灭，觉醒",
+    "meaning": "使醒悟，使幻灭；幻灭，觉醒",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【81. 前缀群：否定与相反】",
     "analysis_type": "构词",
@@ -65432,7 +64431,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "intercept",
     "phonetic": "/ˌɪntəˈsept/",
     "pos": "vt./n.",
-    "meaning": "中途拦截，截获； n. 截击",
+    "meaning": "中途拦截，截获；截击",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -65445,7 +64444,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "subconscious",
     "phonetic": "/ˌsʌbˈkɒnʃəs/",
     "pos": "adj./n.",
-    "meaning": "下意识的，潜意识的； n. 潜意识",
+    "meaning": "下意识的，潜意识的；潜意识",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【82. 前缀群：空间方位与位移】",
     "analysis_type": "构词",
@@ -65510,7 +64509,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "precedent",
     "phonetic": "/ˈpresɪdənt/",
     "pos": "n./adj.",
-    "meaning": "先例，前例；判例； adj. 在前的",
+    "meaning": "先例，前例；判例；在前的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【83. 前缀群：时间与次序递进】",
     "analysis_type": "构词",
@@ -65568,7 +64567,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "prerequisite",
     "phonetic": "/ˌpriːˈrekwəzɪt/",
     "pos": "n./adj.",
-    "meaning": "先决条件，前提； adj. 必备的",
+    "meaning": "先决条件，前提；必备的",
     "part": "第三部分：核心高频构词前缀族",
     "group": "【83. 前缀群：时间与次序递进】",
     "analysis_type": "构词",
@@ -65747,7 +64746,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "coin",
     "phonetic": "/kɔɪn/",
     "pos": "n./vt.",
-    "meaning": "硬币； vt. 创造（新词）",
+    "meaning": "硬币；创造（新词）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -65760,7 +64759,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cost",
     "phonetic": "/kɒst/",
     "pos": "n./vt.",
-    "meaning": "n. 成本，代价；费用； vt. 耗费；使付出沉重代价",
+    "meaning": "成本，代价；费用；耗费；使付出沉重代价",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -65773,7 +64772,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "credit",
     "phonetic": "/ˈkredɪt/",
     "pos": "n./vt.",
-    "meaning": "n. 信用，信贷；学分；赞扬，功劳； vt. 把…归功于（to）",
+    "meaning": "信用，信贷；学分；赞扬，功劳；把…归功于（to）",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -65807,7 +64806,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "mortgage",
-            "meaning": "按揭抵押贷款 v"
+            "meaning": "按揭贷款；抵押"
           }
         ]
       },
@@ -65900,11 +64899,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "discount",
     "phonetic": "/ˈdɪskaʊnt/",
     "pos": "n./vt.",
-    "meaning": "折扣； vt. 打折；忽视",
+    "meaning": "折扣；打折；忽视",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "dis-（去除） + count（计算总数） -> 折扣，vt.。",
+    "analysis": "dis-（去除） + count（计算总数） -> 折扣；打折。",
     "antonyms": [
       {
         "sense": "相加/增补",
@@ -65954,7 +64953,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "duty",
     "phonetic": "/ˈdjuːti/",
     "pos": "n.",
-    "meaning": "n. 责任，职责；关税，税收",
+    "meaning": "责任，职责；关税，税收",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66077,20 +65076,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "差额/幅度"
           },
           {
-            "word": "profit",
-            "meaning": "利润"
-          },
-          {
-            "word": "revenue",
-            "meaning": "财政收入/税收"
-          },
-          {
             "word": "surplus",
             "meaning": "过剩"
-          },
-          {
-            "word": "yield",
-            "meaning": "产生"
           }
         ]
       }
@@ -66257,7 +65244,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fund",
     "phonetic": "/fʌnd/",
     "pos": "n./vt.",
-    "meaning": "基金，专款； vt. 资助",
+    "meaning": "基金，专款；资助",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66345,7 +65332,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "interest",
     "phonetic": "/ˈɪntrəst/",
     "pos": "n./vt.",
-    "meaning": "n. 利息，利率；利益，权益，股权；兴趣； vt. 引起…的兴趣",
+    "meaning": "利息，利率；利益，权益，股权；兴趣；引起…的兴趣",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66371,7 +65358,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "invoice",
     "phonetic": "/ˈɪnvɔɪs/",
     "pos": "n./vt.",
-    "meaning": "发票，货单； vt. 开票",
+    "meaning": "发票，货单；开票",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66384,7 +65371,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "lease",
     "phonetic": "/liːs/",
     "pos": "n./vt.",
-    "meaning": "租约； vt. 出租，租得",
+    "meaning": "租约；出租，租得",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66582,7 +65569,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "market",
     "phonetic": "/ˈmɑːkɪt/",
     "pos": "n./vt.",
-    "meaning": "n. 市场，集市；行情，销路； vt. 推销，促销",
+    "meaning": "市场，集市；行情，销路；推销，促销",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66634,7 +65621,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "package",
     "phonetic": "/ˈpækɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "包裹；一揽子方案； vt. 包装",
+    "meaning": "包裹；一揽子方案；包装",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66735,7 +65722,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "price",
     "phonetic": "/praɪs/",
     "pos": "n./vt.",
-    "meaning": "价格，代价； vt. 定价",
+    "meaning": "价格，代价；定价",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66748,7 +65735,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "profit",
     "phonetic": "/ˈprɒfɪt/",
     "pos": "n./v.",
-    "meaning": "利润，收益； v. 获利",
+    "meaning": "利润，收益；获利",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66819,24 +65806,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "利润/盈余",
         "items": [
           {
-            "word": "earnings",
-            "meaning": "利润/收益"
-          },
-          {
             "word": "margin",
             "meaning": "差额/幅度"
           },
           {
-            "word": "revenue",
-            "meaning": "财政收入/税收"
-          },
-          {
             "word": "surplus",
             "meaning": "过剩"
-          },
-          {
-            "word": "yield",
-            "meaning": "产生"
           }
         ]
       }
@@ -66888,7 +65863,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "rate",
     "phonetic": "/reɪt/",
     "pos": "n./vt.",
-    "meaning": "n. 比率，率；速度；价格，费率； vt. 评估，评价；划分等级",
+    "meaning": "比率，率；速度；价格，费率；评估，评价；划分等级",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -66946,11 +65921,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "refund",
     "phonetic": "/ˈriːfʌnd/",
     "pos": "n./vt.",
-    "meaning": "退款； vt. 退还",
+    "meaning": "退款；退还",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "re-（回） + fund（资金） -> 退款，vt.。",
+    "analysis": "re-（回） + fund（资金） -> 退款；退还。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -66985,7 +65960,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "share",
     "phonetic": "/ʃeə(r)/",
     "pos": "n./v.",
-    "meaning": "vt./vi. 分享，分担；分摊； n. 份额；股份，股票",
+    "meaning": "分享，分担；分摊；份额；股份，股票",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -67011,7 +65986,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tax",
     "phonetic": "/tæks/",
     "pos": "n./vt.",
-    "meaning": "税款，税； vt. 征税",
+    "meaning": "税款，税；征税",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -67051,7 +66026,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "benchmark",
     "phonetic": "/ˈbentʃmɑːk/",
     "pos": "n./vt.",
-    "meaning": "基准，衡量标准； vt. 参照",
+    "meaning": "基准，衡量标准；参照",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -67204,11 +66179,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "convertible",
     "phonetic": "/kənˈvɜːtəbl/",
     "pos": "adj./n.",
-    "meaning": "可转换的； n. 敞篷车",
+    "meaning": "可转换的；敞篷车",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
-    "analysis": "convert（转变） + -ible（可…的） -> 可转换的，n.。",
+    "analysis": "convert（转变） + -ible（可…的） -> 可转换的；敞篷车。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -67683,7 +66658,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "experiment",
     "phonetic": "/ɪkˈsperɪmənt/",
     "pos": "n./vi.",
-    "meaning": "实验，试验； vi. 做实验",
+    "meaning": "实验，试验；做实验",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -67905,7 +66880,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "quiz",
     "phonetic": "/kwɪz/",
     "pos": "n./vt.",
-    "meaning": "小测验，知识竞赛； vt. 盘问",
+    "meaning": "小测验，知识竞赛；盘问",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -67931,7 +66906,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "study",
     "phonetic": "/ˈstʌdi/",
     "pos": "n./v.",
-    "meaning": "学习；研究；书房； v. 学习",
+    "meaning": "学习；研究；书房；学习",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -68071,7 +67046,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tutor",
     "phonetic": "/ˈtjuːtə(r)/",
     "pos": "n./vt.",
-    "meaning": "导师，家庭教师； vt. 辅导",
+    "meaning": "导师，家庭教师；辅导",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -68115,7 +67090,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "catalog",
     "phonetic": "/ˈkætəlɒɡ/",
     "pos": "n./vt.",
-    "meaning": "n. 目录，商品名册； vt. 编入目录，系统列出",
+    "meaning": "目录，商品名册；编入目录，系统列出",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -68143,7 +67118,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "使模糊/遮蔽"
           },
           {
             "word": "veil",
@@ -68595,7 +67570,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "avalanche",
     "phonetic": "/ˈævəlɑːnʃ/",
     "pos": "n./v.",
-    "meaning": "雪崩；大量涌来； v. 雪崩",
+    "meaning": "雪崩；大量涌来；雪崩",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -68712,7 +67687,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cloud",
     "phonetic": "/klaʊd/",
     "pos": "n./v.",
-    "meaning": "n. 云，阴云；阴影，疑云； vt. 使蒙上阴影，混淆",
+    "meaning": "云，阴云；阴影，疑云；使蒙上阴影，混淆",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -68776,8 +67751,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "crop",
     "phonetic": "/krɒp/",
-    "pos": "n./vt.",
-    "meaning": "n. 农作物，庄稼；收成； vi. 突发涌现（crop up）； vt. 剪短",
+    "pos": "n./vt./vi.",
+    "meaning": "农作物，庄稼；收成；突发涌现（crop up）；剪短",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -68815,12 +67790,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "desert",
     "phonetic": "/ˈdezət/",
-    "pos": "n./vt.",
-    "meaning": "n. 沙漠，荒原； vt. 抛弃，遗弃；离弃，开小差； adj. 荒无人烟的",
+    "pos": "n./vt./adj.",
+    "meaning": "沙漠，荒原；抛弃，遗弃；离弃，开小差；荒无人烟的",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
-    "analysis": "源自晚期词根 desertum（被遗弃废弃的） -> 沙漠，vt.。",
+    "analysis": "源自晚期词根 desertum（被遗弃废弃的） -> 沙漠；遗弃。",
     "antonyms": [
       {
         "sense": "保持/维持",
@@ -68957,7 +67932,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "forest",
     "phonetic": "/ˈfɒrɪst/",
     "pos": "n./vt.",
-    "meaning": "森林，林区； vt. 植树于",
+    "meaning": "森林，林区；植树于",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -68983,7 +67958,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fossil",
     "phonetic": "/ˈfɒsl/",
     "pos": "n./adj.",
-    "meaning": "化石；化石燃料； adj. 化石的",
+    "meaning": "化石；化石燃料；化石的",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69061,7 +68036,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "harvest",
     "phonetic": "/ˈhɑːvɪst/",
     "pos": "n./vt.",
-    "meaning": "收获，收成； vt. 收割",
+    "meaning": "收获，收成；收割",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69178,7 +68153,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "mineral",
     "phonetic": "/ˈmɪnərəl/",
     "pos": "n./adj.",
-    "meaning": "矿物，矿石； adj. 矿物的",
+    "meaning": "矿物，矿石；矿物的",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69254,7 +68229,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "nature",
     "phonetic": "/ˈneɪtʃə(r)/",
     "pos": "n.",
-    "meaning": "n. 大自然，自然界；本质，天性，根本特征",
+    "meaning": "大自然，自然界；本质，天性，根本特征",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69306,7 +68281,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pasture",
     "phonetic": "/ˈpɑːstʃə(r)/",
     "pos": "n./v.",
-    "meaning": "牧场，草地； v. 放牧",
+    "meaning": "牧场，草地；放牧",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69423,7 +68398,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "storm",
     "phonetic": "/stɔːm/",
     "pos": "n./v.",
-    "meaning": "暴风雨；风暴； v. 猛攻",
+    "meaning": "暴风雨；风暴；猛攻",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -69563,11 +68538,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bicycle",
     "phonetic": "/ˈbaɪsɪkl/",
     "pos": "n./vi.",
-    "meaning": "自行车； vi. 骑车",
+    "meaning": "自行车；骑车",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "bi-（两个） + cycle（车轮） -> 自行车，vi.。",
+    "analysis": "bi-（两个） + cycle（车轮） -> 自行车；骑自行车。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "bicycle frame (车架 / 自行车架)；bicycle pump (气汞 / 自行车打气筒)"
@@ -69576,7 +68551,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bridge",
     "phonetic": "/brɪdʒ/",
     "pos": "n./vt.",
-    "meaning": "n. 桥梁，桥；纽带； vt. 架桥；消除，弥合（分歧/差距）",
+    "meaning": "桥梁，桥；纽带；架桥；消除，弥合（分歧/差距）",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69667,11 +68642,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "commute",
     "phonetic": "/kəˈmjuːt/",
     "pos": "vi./n.",
-    "meaning": "乘车往返上下班； n. 通勤",
+    "meaning": "乘车往返上下班；通勤",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
-    "analysis": "com-（共同） + mute（变更） -> 乘车往返上下班，n.。",
+    "analysis": "com-（共同） + mute（变更） -> 乘车往返上下班；上下班路程。",
     "antonyms": [],
     "synonyms": [],
     "collocation": ""
@@ -69719,7 +68694,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "delay",
     "phonetic": "/dɪˈleɪ/",
     "pos": "vt./n.",
-    "meaning": "延误，推迟； n. 耽搁",
+    "meaning": "延误，推迟；耽搁",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69803,7 +68778,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "ferry",
     "phonetic": "/ˈferi/",
     "pos": "n./v.",
-    "meaning": "渡船，轮渡； v. 摆渡",
+    "meaning": "渡船，轮渡；摆渡",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69816,7 +68791,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "freight",
     "phonetic": "/freɪt/",
     "pos": "n./vt.",
-    "meaning": "货物；货运； vt. 运送",
+    "meaning": "货物；货运；运送",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69829,7 +68804,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "harbor",
     "phonetic": "/ˈhɑːbə(r)/",
     "pos": "n./vt.",
-    "meaning": "vt. 心怀，抱有（恶念/疑虑）；窝藏，庇护； n. 海港，港口",
+    "meaning": "心怀，抱有（恶念/疑虑）；窝藏，庇护；海港，港口",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69881,7 +68856,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "locomotive",
     "phonetic": "/ˌləʊkəˈməʊtɪv/",
     "pos": "n./adj.",
-    "meaning": "机车，火车头； adj. 运动的",
+    "meaning": "机车，火车头；运动的",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69933,7 +68908,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pedestrian",
     "phonetic": "/pəˈdestriən/",
     "pos": "n./adj.",
-    "meaning": "行人，步行者； adj. 徒步的",
+    "meaning": "行人，步行者；徒步的",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69959,7 +68934,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "station",
     "phonetic": "/ˈsteɪʃn/",
     "pos": "n./vt.",
-    "meaning": "车站；所；驻地； vt. 安置",
+    "meaning": "车站；所；驻地；安置",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69985,7 +68960,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "ticket",
     "phonetic": "/ˈtɪkɪt/",
     "pos": "n./vt.",
-    "meaning": "票，车票；罚单； vt. 售票",
+    "meaning": "票，车票；罚单；售票",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -69998,7 +68973,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "train",
     "phonetic": "/treɪn/",
     "pos": "n./v.",
-    "meaning": "n. 火车，列车；系列； vt./vi. 训练，培养",
+    "meaning": "火车，列车；系列；训练，培养",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -70029,7 +69004,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "travel",
     "phonetic": "/ˈtrævl/",
     "pos": "v./n.",
-    "meaning": "旅行，行进； n. 旅行",
+    "meaning": "旅行，行进；旅行",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -70055,7 +69030,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "truck",
     "phonetic": "/trʌk/",
     "pos": "n./vt.",
-    "meaning": "卡车，货车； vt. 用卡车运",
+    "meaning": "卡车，货车；用卡车运",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -70182,10 +69157,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "促进/协助",
         "items": [
-          {
-            "word": "assist",
-            "meaning": "帮助/协助"
-          },
           {
             "word": "clear",
             "meaning": "清楚的"
@@ -70479,7 +69450,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "diet",
     "phonetic": "/ˈdaɪət/",
     "pos": "n./vi.",
-    "meaning": "n. 国会，立法议会；日常饮食，特种食谱； vi. 节食",
+    "meaning": "国会，立法议会；日常饮食，特种食谱；节食",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70492,7 +69463,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "disorder",
     "phonetic": "/dɪsˈɔːdə(r)/",
     "pos": "n./vt.",
-    "meaning": "n. 混乱，紊乱；失调，疾病（mental/eating disorder）； vt. 扰乱",
+    "meaning": "混乱，紊乱；失调，疾病（mental/eating disorder）；扰乱",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70505,7 +69476,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "epidemic",
     "phonetic": "/ˌepɪˈdemɪk/",
     "pos": "n./adj.",
-    "meaning": "流行病；盛行； adj. 流行性的",
+    "meaning": "流行病；盛行；流行性的",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70518,7 +69489,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fracture",
     "phonetic": "/ˈfræktʃə(r)/",
     "pos": "n./v.",
-    "meaning": "骨折；破裂； v. 骨折",
+    "meaning": "骨折；破裂；骨折",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70609,7 +69580,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "nurse",
     "phonetic": "/nɜːs/",
     "pos": "n./v.",
-    "meaning": "护士； v. 护理，照料；喂奶",
+    "meaning": "护士；护理，照料；喂奶",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70622,7 +69593,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "pain",
     "phonetic": "/peɪn/",
     "pos": "n./vt.",
-    "meaning": "疼痛；痛苦； vt. 使痛苦",
+    "meaning": "疼痛；痛苦；使痛苦",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70635,11 +69606,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "patient",
     "phonetic": "/ˈpeɪʃnt/",
     "pos": "n./adj.",
-    "meaning": "adj. 有耐心的，能忍耐的； n. 病人",
+    "meaning": "有耐心的，能忍耐的；病人",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
-    "analysis": "pati-（承受） + -ent（人） -> 病人，adj.。",
+    "analysis": "pati-（承受） + -ent（人） -> 病人；有耐心的。",
     "antonyms": [],
     "synonyms": [],
     "collocation": "patient of (能忍受)；patient with (对……有耐心)"
@@ -70661,7 +69632,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "remedy",
     "phonetic": "/ˈremədi/",
     "pos": "n./vt.",
-    "meaning": "疗法；补救办法； vt. 纠正",
+    "meaning": "疗法；补救办法；纠正",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -70717,10 +69688,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "heal",
             "meaning": "治愈/愈合"
-          },
-          {
-            "word": "restore",
-            "meaning": "恢复/使复原"
           }
         ]
       }
@@ -71070,7 +70037,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "impact",
     "phonetic": "/ˈɪmpækt/",
     "pos": "n./v.",
-    "meaning": "巨大冲击，重大影响； vt./vi. 产生重大影响；冲击撞击",
+    "meaning": "巨大冲击，重大影响；产生重大影响；冲击撞击",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -71132,7 +70099,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "motion",
     "phonetic": "/ˈməʊʃn/",
     "pos": "n./v.",
-    "meaning": "运动，移动；提议； v. 打手势",
+    "meaning": "运动，移动；提议；打手势",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -71171,7 +70138,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "strain",
     "phonetic": "/streɪn/",
     "pos": "v./n.",
-    "meaning": "拉伤；拉紧；拉力； n. 劳损",
+    "meaning": "拉伤；拉紧；拉力；劳损",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -71246,7 +70213,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "incentive",
     "phonetic": "/ɪnˈsentɪv/",
     "pos": "n./adj.",
-    "meaning": "激励，鼓励； n. 激励的",
+    "meaning": "激励，鼓励；激励的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -71277,7 +70244,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "inventory",
     "phonetic": "/ˈɪnvəntri/",
     "pos": "n./vt.",
-    "meaning": "存货，库存清单； vt. 盘点",
+    "meaning": "存货，库存清单；盘点",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -71316,7 +70283,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "premium",
     "phonetic": "/ˈpriːmiəm/",
     "pos": "n./adj.",
-    "meaning": "保险费；加价； adj. 优质的",
+    "meaning": "保险费；加价；优质的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -71355,7 +70322,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "subsidiary",
     "phonetic": "/səbˈsɪdiəri/",
     "pos": "n./adj.",
-    "meaning": "子公司，分支机构； adj. 附带的",
+    "meaning": "子公司，分支机构；附带的",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -71470,7 +70437,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "aim",
     "phonetic": "/eɪm/",
     "pos": "n./v.",
-    "meaning": "目标，目的； v. 旨在",
+    "meaning": "目标，目的；旨在",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -71525,18 +70492,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "aspiration",
             "meaning": "志向/抱负"
-          },
-          {
-            "word": "objective",
-            "meaning": "目标"
-          },
-          {
-            "word": "purpose",
-            "meaning": "目的/意图"
-          },
-          {
-            "word": "target",
-            "meaning": "把…作为目标"
           }
         ]
       }
@@ -71547,7 +70502,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "anger",
     "phonetic": "/ˈæŋɡə(r)/",
     "pos": "n./vt.",
-    "meaning": "愤怒，气愤； vt. 激怒",
+    "meaning": "愤怒，气愤；激怒",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -71658,7 +70613,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "award",
     "phonetic": "/əˈwɔːd/",
     "pos": "vt./n.",
-    "meaning": "n. 奖，奖品； vt. 授予，给予，判给",
+    "meaning": "奖，奖品；授予，给予，判给",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -71746,7 +70701,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "bear",
     "phonetic": "/beə(r)/",
     "pos": "vt./n.",
-    "meaning": "vt. 忍受，容忍；承担，负荷；生育； n. 熊",
+    "meaning": "忍受，容忍；承担，负荷；生育；熊",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -71905,7 +70860,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "blame",
     "phonetic": "/bleɪm/",
     "pos": "vt./n.",
-    "meaning": "责备，归咎于； n. 责任",
+    "meaning": "责备，归咎于；责任",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -71980,7 +70935,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "brave",
     "phonetic": "/breɪv/",
     "pos": "adj./vt.",
-    "meaning": "勇敢的； vt. 勇敢面对",
+    "meaning": "勇敢的；勇敢面对",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -72067,7 +71022,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cause",
     "phonetic": "/kɔːz/",
     "pos": "n./vt.",
-    "meaning": "n. 原因，起因；事业，奋斗目标； vt. 导致，引起",
+    "meaning": "原因，起因；事业，奋斗目标；导致，引起",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -72141,7 +71096,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "center",
     "phonetic": "/ˈsentə(r)/",
     "pos": "n./v.",
-    "meaning": "中心，中枢； v. 集中",
+    "meaning": "中心，中枢；集中",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -72275,7 +71230,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "check",
     "phonetic": "/tʃek/",
     "pos": "v./n.",
-    "meaning": "vt. 检查，核对；抑制，遏制； n. 支票；检查；账单",
+    "meaning": "检查，核对；抑制，遏制；支票；检查；账单",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -72360,10 +71315,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "elect",
             "meaning": "选举/推举"
-          },
-          {
-            "word": "select",
-            "meaning": "选择"
           }
         ]
       }
@@ -72374,7 +71325,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "clear",
     "phonetic": "/klɪə(r)/",
     "pos": "adj./v.",
-    "meaning": "清楚的；晴朗的； v. 清除",
+    "meaning": "清楚的；晴朗的；清除",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -72491,7 +71442,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "comfort",
     "phonetic": "/ˈkʌmfət/",
     "pos": "n./vt.",
-    "meaning": "安慰，慰藉； vt. 安慰",
+    "meaning": "安慰，慰藉；安慰",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -72597,14 +71548,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "便利/便利措施",
         "items": [
           {
-            "word": "convenience",
-            "meaning": "方便/便利"
-          },
-          {
-            "word": "ease",
-            "meaning": "容易"
-          },
-          {
             "word": "facility",
             "meaning": "设施/设备"
           }
@@ -72630,7 +71573,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "condition",
     "phonetic": "/kənˈdɪʃn/",
     "pos": "n./vt.",
-    "meaning": "状况，状态；条件； vt. 调节",
+    "meaning": "状况，状态；条件；调节",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -72735,7 +71678,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "deliberate",
-            "meaning": "故意的/蓄意的"
+            "meaning": "深思熟虑/仔细商讨"
           },
           {
             "word": "reflect",
@@ -72849,7 +71792,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "correct",
     "phonetic": "/kəˈrekt/",
     "pos": "adj./vt.",
-    "meaning": "正确的； vt. 改正，纠正",
+    "meaning": "正确的；改正，纠正",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -72876,7 +71819,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "cover",
     "phonetic": "/ˈkʌvə(r)/",
     "pos": "vt./n.",
-    "meaning": "覆盖；掩盖；涉及； n. 盖子",
+    "meaning": "覆盖；掩盖；涉及；盖子",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -72978,16 +71921,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "消耗/耗费"
           },
           {
-            "word": "destroy",
-            "meaning": "破坏/摧毁"
-          },
-          {
             "word": "exhaust",
             "meaning": "使筋疲力尽/耗尽"
-          },
-          {
-            "word": "ruin",
-            "meaning": "毁坏/破坏"
           }
         ]
       }
@@ -73112,7 +72047,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "crowd",
     "phonetic": "/kraʊd/",
     "pos": "n./v.",
-    "meaning": "人群，群众； v. 聚集",
+    "meaning": "人群，群众；聚集",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -73180,20 +72115,20 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "date",
     "phonetic": "/deɪt/",
     "pos": "n./v.",
-    "meaning": "n. 日期；约会；时代，年代； vt. 注明日期；确定年代； vi. 追溯到（date back to）",
+    "meaning": "日期；约会；时代，年代；注明日期；确定年代；追溯到",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
     "analysis": "源自拉丁语 datum（给出之日期时刻） -> 日期；日子；年代。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "date of birth (出生日期)；date from (追溯到 / 始于)"
+    "collocation": "date back to (追溯到)；out of date (过时)"
   },
   {
     "word": "deal",
     "phonetic": "/diːl/",
     "pos": "v./n.",
-    "meaning": "n. 协议，交易；待遇； vi. 处理，应对（deal with）；做买卖",
+    "meaning": "协议，交易；待遇；处理，应对（deal with）；做买卖",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -73228,7 +72163,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "decrease",
     "phonetic": "/dɪˈkriːs/",
     "pos": "v./n.",
-    "meaning": "减少，降低； n. 减退",
+    "meaning": "减少，降低；减退",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -73297,7 +72232,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "design",
     "phonetic": "/dɪˈzaɪn/",
     "pos": "vt./n.",
-    "meaning": "设计，构想； n. 图样",
+    "meaning": "设计，构想；图样",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -73325,20 +72260,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "发明/构思",
         "items": [
           {
-            "word": "conceive",
-            "meaning": "构想/设想"
-          },
-          {
             "word": "create",
             "meaning": "创造/创作"
           },
           {
             "word": "devise",
             "meaning": "设计/发明"
-          },
-          {
-            "word": "formulate",
-            "meaning": "构想/系统阐述"
           },
           {
             "word": "invent",
@@ -73392,26 +72319,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "建造/创立",
         "items": [
           {
-            "word": "assemble",
-            "meaning": "集合/召集"
-          },
-          {
-            "word": "construct",
-            "meaning": "建造/构建"
-          },
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
-          {
-            "word": "erect",
-            "meaning": "树立/建立"
-          },
-          {
-            "word": "establish",
-            "meaning": "建立/确立"
-          },
-          {
             "word": "institute",
             "meaning": "建立/创立"
           }
@@ -73429,10 +72336,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "制造/生产",
         "items": [
-          {
-            "word": "create",
-            "meaning": "创造/创作"
-          },
           {
             "word": "generate",
             "meaning": "产生/发生"
@@ -73484,10 +72387,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "exhaust",
             "meaning": "使筋疲力尽/耗尽"
-          },
-          {
-            "word": "ruin",
-            "meaning": "毁坏/破坏"
           }
         ]
       }
@@ -73498,7 +72397,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "detail",
     "phonetic": "/ˈdiːteɪl/",
     "pos": "n./vt.",
-    "meaning": "细节，详情； vt. 详述",
+    "meaning": "细节，详情；详述",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -73612,8 +72511,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "direct",
     "phonetic": "/dəˈrekt/",
-    "pos": "adj./vt.",
-    "meaning": "adj. 直接的，径直的； vt. 指导，指引；针对，把…对准；导演； adv. 直接地",
+    "pos": "adj./vt./adv.",
+    "meaning": "直接的，径直的；指导，指引；针对，把…对准；导演；直接地",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -73655,14 +72554,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "govern",
             "meaning": "统治/治理"
-          },
-          {
-            "word": "manage",
-            "meaning": "管理/经营操持"
-          },
-          {
-            "word": "supervise",
-            "meaning": "监督/管理"
           }
         ]
       }
@@ -73700,7 +72591,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "director",
     "phonetic": "/dəˈrektə(r)/",
     "pos": "n.",
-    "meaning": "n. 主管，主任，负责人；董事，理事；导演",
+    "meaning": "主管，主任，负责人；董事，理事；导演",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -73783,7 +72674,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "distance",
     "phonetic": "/ˈdɪstəns/",
     "pos": "n./vt.",
-    "meaning": "距离，间距；远方； vt. 疏远",
+    "meaning": "距离，间距；远方；疏远",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -73796,7 +72687,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "double",
     "phonetic": "/ˈdʌbl/",
     "pos": "adj./v./n.",
-    "meaning": "两倍的； v. 翻倍",
+    "meaning": "两倍的；翻倍",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -73809,7 +72700,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "doubt",
     "phonetic": "/daʊt/",
     "pos": "n./v.",
-    "meaning": "怀疑，疑虑； v. 怀疑",
+    "meaning": "怀疑，疑虑；怀疑",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -73908,10 +72799,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "speculation",
             "meaning": "投机/商业投机"
-          },
-          {
-            "word": "suspicion",
-            "meaning": "怀疑/嫌疑"
           }
         ]
       }
@@ -73922,7 +72809,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "draw",
     "phonetic": "/drɔː/",
     "pos": "v./n.",
-    "meaning": "vt./vi. 画，划；拉，拖；吸引（注意）；得出（结论）； n. 平局",
+    "meaning": "画，划；拉，拖；吸引（注意）；得出（结论）；平局",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -73963,7 +72850,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "dream",
     "phonetic": "/driːm/",
     "pos": "n./v.",
-    "meaning": "梦；梦想； v. 做梦；向往",
+    "meaning": "梦；梦想；做梦；向往",
     "part": "第四部分：核心分类专题群",
     "group": "【89. 场景专题 5：身心健康、医疗生理与情绪心理】",
     "analysis_type": "构词",
@@ -73976,7 +72863,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "drive",
     "phonetic": "/draɪv/",
     "pos": "v./n.",
-    "meaning": "vt. 驱动，驱使；大力推进；驾驶； n. 驱力，冲劲；专项运动",
+    "meaning": "驱动，驱使；大力推进；驾驶；驱力，冲劲；专项运动",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -73989,7 +72876,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "drop",
     "phonetic": "/drɒp/",
     "pos": "v./n.",
-    "meaning": "v. 落下，下降；降低，减少；放弃，中途退出（drop out）； n. 下降，减少；一滴，微量",
+    "meaning": "落下，下降；降低，减少；放弃，中途退出（drop out）；下降，减少；一滴，微量",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -74135,7 +73022,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "east",
     "phonetic": "/iːst/",
     "pos": "n./adj./adv.",
-    "meaning": "东方，东部； adj. 东方的",
+    "meaning": "东方，东部；东方的",
     "part": "第四部分：核心分类专题群",
     "group": "【87. 场景专题 3：自然生态、地理环境与动植物】",
     "analysis_type": "构词",
@@ -74402,10 +73289,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "突然出现"
           },
           {
-            "word": "arise",
-            "meaning": "出现/发生"
-          },
-          {
             "word": "occur",
             "meaning": "发生/出现"
           }
@@ -74457,7 +73340,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "encounter",
     "phonetic": "/ɪnˈkaʊntə(r)/",
     "pos": "vt./n.",
-    "meaning": "遭遇，邂逅； n. 偶然相遇",
+    "meaning": "遭遇，邂逅；偶然相遇",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -74567,7 +73450,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "engage",
     "phonetic": "/ɪnˈɡeɪdʒ/",
     "pos": "v.",
-    "meaning": "vi. 从事，参与（in）； vt. 吸引（注意）；雇用；订婚",
+    "meaning": "从事，参与（in）；吸引（注意）；雇用；订婚",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -74663,7 +73546,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "engineer",
     "phonetic": "/ˌendʒɪˈnɪə(r)/",
     "pos": "n./vt.",
-    "meaning": "工程师； vt. 精心策划",
+    "meaning": "工程师；精心策划",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -74796,7 +73679,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "enter",
     "phonetic": "/ˈentə(r)/",
     "pos": "v.",
-    "meaning": "vt./vi. 进入；参加；输入",
+    "meaning": "进入；参加；输入",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -75498,10 +74381,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "丢弃/处置",
         "items": [
           {
-            "word": "discard",
-            "meaning": "丢弃/抛弃"
-          },
-          {
             "word": "dispose",
             "meaning": "处理"
           },
@@ -75607,7 +74486,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "contrast",
     "phonetic": "/ˈkɒntrɑːst/",
     "pos": "n./vt./vi.",
-    "meaning": "鲜明对比，对照； vt./vi. 与…形成对照，对比显出差异",
+    "meaning": "鲜明对比，对照；与…形成对照，对比显出差异",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -75698,7 +74577,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "decline",
     "phonetic": "/dɪˈklaɪn/",
     "pos": "vi./vt./n.",
-    "meaning": "vi./n. 下降，衰退；减少； vt. 婉言谢绝，婉拒",
+    "meaning": "下降，衰退；减少；婉言谢绝，婉拒",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -75854,8 +74733,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "demonstrate",
     "phonetic": "/ˈdemənstreɪt/",
-    "pos": "vt.",
-    "meaning": "vt. 证明，证实；表明，显露；演示，说明； vi. 举行示威游行",
+    "pos": "vt./vi.",
+    "meaning": "证明，证实；表明，显露；演示，说明；举行示威游行",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -75870,7 +74749,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "obscure",
-            "meaning": "晦涩难懂的"
+            "meaning": "掩盖/遮蔽"
           },
           {
             "word": "veil",
@@ -75915,10 +74794,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "indicate",
             "meaning": "指出/指示"
-          },
-          {
-            "word": "reveal",
-            "meaning": "揭露/揭示揭开"
           }
         ]
       }
@@ -75998,10 +74873,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "damage",
             "meaning": "损害/毁坏"
-          },
-          {
-            "word": "decay",
-            "meaning": "腐烂/腐朽"
           },
           {
             "word": "undermine",
@@ -76102,11 +74973,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "items": [
           {
             "word": "abstract",
-            "meaning": "抽象的 n. 摘"
-          },
-          {
-            "word": "vague",
-            "meaning": "含糊不清的"
+            "meaning": "抽象的；摘要"
           }
         ]
       }
@@ -76161,7 +75028,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "exploit",
     "phonetic": "/ɪkˈsplɔɪt/",
     "pos": "vt./n.",
-    "meaning": "vt. 开发，利用（潜能/资源）；剥削，榨取； n. 英勇事迹",
+    "meaning": "开发，利用（潜能/资源）；剥削，榨取；英勇事迹",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -76231,20 +75098,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "堵塞/阻碍"
           },
           {
-            "word": "curb",
-            "meaning": "控制"
-          },
-          {
-            "word": "inhibit",
-            "meaning": "抑制/约束"
-          },
-          {
             "word": "interrupt",
             "meaning": "打断/打扰"
-          },
-          {
-            "word": "limit",
-            "meaning": "界限/限度极限"
           },
           {
             "word": "obstruct",
@@ -76292,11 +75147,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           },
           {
             "word": "clear",
-            "meaning": "清楚的"
-          },
-          {
-            "word": "promote",
-            "meaning": "促进/增进"
+            "meaning": "扫除障碍/清理"
           }
         ]
       }
@@ -76350,20 +75201,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
             "meaning": "堵塞/阻碍"
           },
           {
-            "word": "curb",
-            "meaning": "控制"
-          },
-          {
-            "word": "inhibit",
-            "meaning": "抑制/约束"
-          },
-          {
             "word": "interrupt",
             "meaning": "打断/打扰"
-          },
-          {
-            "word": "limit",
-            "meaning": "界限/限度极限"
           },
           {
             "word": "obstruct",
@@ -76598,7 +75437,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "objective",
     "phonetic": "/əbˈdʒektɪv/",
     "pos": "n./adj.",
-    "meaning": "目标，目的； adj. 客观的",
+    "meaning": "目标，目的；客观的",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -76665,24 +75504,12 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "目标/抱负",
         "items": [
           {
-            "word": "aim",
-            "meaning": "目标"
-          },
-          {
             "word": "ambition",
             "meaning": "雄心壮志/野心"
           },
           {
             "word": "aspiration",
             "meaning": "志向/抱负"
-          },
-          {
-            "word": "purpose",
-            "meaning": "目的/意图"
-          },
-          {
-            "word": "target",
-            "meaning": "把…作为目标"
           }
         ]
       }
@@ -76793,7 +75620,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "trigger",
     "phonetic": "/ˈtrɪɡə(r)/",
     "pos": "vt./n.",
-    "meaning": "触发，引发； n. 扳机；诱因",
+    "meaning": "触发，引发；扳机；诱因",
     "part": "第四部分：核心分类专题群",
     "group": "【90. 场景专题 6：动作触碰、物理力量与核心特质】",
     "analysis_type": "构词",
@@ -76828,10 +75655,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "激发/诱发",
         "items": [
-          {
-            "word": "induce",
-            "meaning": "引诱/劝导"
-          },
           {
             "word": "prompt",
             "meaning": "迅速敏捷及时的"
@@ -76922,10 +75745,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "sensitive",
             "meaning": "敏感的"
-          },
-          {
-            "word": "susceptible",
-            "meaning": "易受影响的"
           }
         ]
       }
@@ -77436,7 +76255,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "derivative",
     "phonetic": "/dɪˈrɪvətɪv/",
     "pos": "adj./n.",
-    "meaning": "派生的； n. 金融衍生品",
+    "meaning": "派生的；金融衍生品",
     "part": "第四部分：核心分类专题群",
     "group": "【85. 场景专题 1：商业贸易、经济与金融生活】",
     "analysis_type": "构词",
@@ -77901,7 +76720,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "civilian",
     "phonetic": "/səˈvɪliən/",
     "pos": "n./adj.",
-    "meaning": "平民，百姓； adj. 平民的",
+    "meaning": "平民，百姓；平民的",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -77927,7 +76746,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "demographic",
     "phonetic": "/ˌdeməˈɡræfɪk/",
     "pos": "adj./n.",
-    "meaning": "人口统计的； n. 特定人群",
+    "meaning": "人口统计的；特定人群",
     "part": "第四部分：核心分类专题群",
     "group": "【88. 场景专题 4：社会公共、日常居住与文化生活】",
     "analysis_type": "构词",
@@ -78032,7 +76851,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "caption",
     "phonetic": "/ˈkæpʃn/",
     "pos": "n./vt.",
-    "meaning": "标题，说明文字； vt. 加标题",
+    "meaning": "标题，说明文字；加标题",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
@@ -78083,10 +76902,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         "sense": "天然/真实",
         "items": [
           {
-            "word": "genuine",
-            "meaning": "真正的/非人造的"
-          },
-          {
             "word": "natural",
             "meaning": "自然的/天然的"
           }
@@ -78099,7 +76914,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "constituent",
     "phonetic": "/kənˈstɪtʃuənt/",
     "pos": "n./adj.",
-    "meaning": "要素，成分； adj. 组成的",
+    "meaning": "要素，成分；组成的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
@@ -78378,11 +77193,11 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "unacceptable",
     "phonetic": "/ˌʌnəkˈseptəbl/",
     "pos": "adj.",
-    "meaning": "无法接受的，绝对不能容忍的，突破底线不可容许的（unacceptable behavior / risk / conditions / loss）；令人完全无法接受的严峻后果",
+    "meaning": "不可接受的，不能容忍的",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
-    "analysis": "un-（否定前缀：绝对不/非） + acceptable（可接受的） -> 某项行径、安全隐患或者单边霸凌条款在性质上彻底公然践踏了国家宪法公民基本人权、国际法主权平等原则或者安全生产生命底线红线；在任何有起码良知与法治原则的人心天理面前属于自始至终绝对百分之百留不出哪怕半毫米容忍妥协空间的不可接受极端恶劣状态。",
+    "analysis": "un-（不） + acceptable（可接受的） -> 彻底突破底线不可容忍的 -> 无法接受的，不能容忍的。",
     "antonyms": [
       {
         "sense": "合意/可接纳",
@@ -78395,56 +77210,56 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       }
     ],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "unacceptable behavior (不能接受的行为)；unacceptable risk (不可接受的风险)"
   },
   {
     "word": "participation",
     "phonetic": "/pɑːˌtɪsɪˈpeɪʃn/",
     "pos": "n.",
-    "meaning": "参与，参加，全过程积极深度参与（active citizen participation 公民广泛民主参与 / worker participation in management 工人参与企业民主管理）；分享，分担分担责任贡献",
+    "meaning": "参与，参加；分享，分担",
     "part": "第一部分：超级核心母词族",
     "group": "【01. cap / capt / cept / ceiv / cip 抓/拿/容纳/理解】",
     "analysis_type": "构词",
     "analysis": "part-（部分/一份） + -i- + cip- / cap-（抓取/参与） -> 主动握住属于自己的一份责任与权利、深度融入贡献力量 -> 参与，参加。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "citizen participation (公民参与)；active participation (积极参与)"
   },
   {
     "word": "constitutional",
     "phonetic": "/ˌkɒnstɪˈtjuːʃənl/",
     "pos": "adj./n.",
-    "meaning": "宪法的，宪政宪制合宪合法的（constitutional law 宪法 / constitutional rights 宪法赋予的基本权利 / constitutional amendment 宪法修正案）；（人体/生理）体质上的，本性固有的（a constitutional weakness 体质虚弱）；（为了强身健体而进行的）例行散步，保健性散步（take a morning constitutional 晨间散步健步走）",
+    "meaning": "宪法的，合宪的；体质上的；保健散步",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
     "analysis": "constitution（国家根本大法宪法/身体体质） + -al（的） -> 恪守根本法典具有最高法律效力的，另指人体天生体魄机制 -> 宪法的，合宪法定的；体质上的，本性固有的；强身晨间散步（n.）。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "constitutional rights (宪法权利)；constitutional amendment (宪法修正案)"
   },
   {
     "word": "institutional",
     "phonetic": "/ˌɪnstɪˈtjuːʃənl/",
     "pos": "adj.",
-    "meaning": "制度的，体制上的，机制顶层设计维度的（institutional reform 制度性体制机制深化改革 / institutional barriers 体制性障碍藩篱）；机构的，具有法人机构专业投资者地位的（institutional investors 机构投资者）；（养老院/公立机构等）收容机构设施的；习以为常刻板惯性的（institutional bias 制度性系统性偏见）",
+    "meaning": "制度的，体制上的；机构的，慈善机构的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
     "analysis": "institution（制度体系/公共常设法人机构） + -al（的） -> 触及体制顶层机制设计深水区层面的，另指具备雄厚资金的法人专业机构投资者 -> 制度的，体制上的，机制维度的；专业法人机构的；制度性固有的。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "institutional reform (体制改革)；institutional investor (机构投资者)"
   },
   {
     "word": "unstable",
     "phonetic": "/ʌnˈsteɪbl/",
     "pos": "adj.",
-    "meaning": "不稳定的，动荡摇摆的，不牢固易倾覆垮塌的（an unstable structure / government）；（化学物质/同位素）易分解易变不稳定的（an unstable isotope 放射性不稳定同位素）；（情绪/精神）极其不稳定喜怒无常的（emotionally unstable）",
+    "meaning": "不稳定的，易动荡摇摆的；（化学）易分解的；（情绪）不稳定的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
-    "analysis": "un-（否定前缀：不/非） + stable（稳定的） -> 重心高高悬空、地基松软摇晃、微风一吹便在重力失衡下拉扯倾斜随时可能轰然倒地砸个粉碎的危险摇晃物理状态；在核物理与化学前沿中指原子核内部质子中子比例严重失衡、强相互作用力无法克服库仑斥力而在数微秒内必须发生放射性裂变衰变并释放高能辐射粒子的易变不稳定物理化学物象（unstable）。",
+    "analysis": "un-（不） + stable（稳定的） -> 重心不稳易倾倒，或情绪/化学性质极易变动 -> 不稳定的；动荡的；易变的。",
     "antonyms": [
       {
         "sense": "稳定/恒定",
@@ -78491,30 +77306,30 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         ]
       }
     ],
-    "collocation": ""
+    "collocation": "unstable structure (不稳定结构)；emotionally unstable (情绪不稳定)"
   },
   {
     "word": "statistical",
     "phonetic": "/stəˈtɪstɪkl/",
     "pos": "adj.",
-    "meaning": "统计的，统计学的大数据的，基于实证数理统计推断概率分析的（statistical analysis / significance 统计学显著性检验；statistical probability 统计概率）；统计数据维度的",
+    "meaning": "统计的，统计学的，大数据的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
-    "analysis": "statistic（统计数字/国家管理数据） + -al（形容词后缀） -> 现代科学实证主义最高判官标准：完全摒弃基于极少数个案幸存者偏差所产生的盲人摸象主观臆断；在数理统计学大数定律与中心极限定理支撑下；调动大样本量双盲随机对照队列数据、通过严格回归分析、假设检验计算出p值（p-value）以量化评估某一科学结论是否在数学真理尺度上真正确凿具备不可被随机巧合所解释的统计学显著性权威属性。",
+    "analysis": "statistic（统计数据） + -al（形容词后缀） -> 基于数理大样本概率推断的 -> 统计的，统计学的。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "statistical analysis (统计分析)；statistical data (统计数据)"
+    "collocation": "statistical analysis (统计分析)；statistical significance (统计学显著性)"
   },
   {
     "word": "unsteady",
     "phonetic": "/ʌnˈstedi/",
     "pos": "adj.",
-    "meaning": "不稳定的，摇摇晃晃晃动不稳的，站立不稳步履踉跄的（unsteady on one's feet 走起路来脚步虚浮踉跄；unsteady hands 颤抖发抖不稳的双手）；断断续续忽明忽暗时强时弱的（unsteady breathing 呼吸微弱紊乱断续；unsteady flame 摇曳微弱不定的烛火）",
+    "meaning": "不稳定的，摇晃的，步履蹒跚的；断断续续的，忽明忽暗的",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
-    "analysis": "un-（否定前缀：不/非） + steady（坚固稳健平稳的） -> 双腿膝盖在重病大手术全麻初醒、严重高山缺氧或者极度饥寒交迫之下由于下肢肌肉肌张力严重不足导致身体重心左右剧烈晃动摇摆、每迈出一步都东倒西歪险象环生随时可能栽倒在地的极度虚弱失衡步态状态；引申指狂风中随时可能被一口气吹灭的摇曳不定的微弱烛火微光；或在极端焦虑重压下食指不由自主产生细微震颤发抖使得高倍瞄准镜十字线上下晃动无法锁死靶心的神经肌肉失控状态。",
+    "analysis": "un-（不/非） + steady（稳定的） -> 站立不稳或忽明忽暗的晃动状态 -> 不稳定的，摇晃的；步履蹒跚的。",
     "antonyms": [
       {
         "sense": "平稳/稳固",
@@ -78527,52 +77342,52 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       }
     ],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "unsteady hands (颤抖的双手)；unsteady on one's feet (脚步踉跄)"
   },
   {
     "word": "substitution",
     "phonetic": "/ˌsʌbstɪˈtjuːʃn/",
     "pos": "n.",
-    "meaning": "替代，替换，代用（import substitution 发展经济学进口替代战略；the substitution of clean energy for fossil fuels 绿色能源对化石燃料的彻底替代）；经济学替代效应（the substitution effect）；体育比赛中的中途换人替补操作",
+    "meaning": "替代，替换；（经济学）替代效应；中途换人",
     "part": "第一部分：超级核心母词族",
     "group": "【03. sta / stat / stit / sist 站立/确立/安置/固定】",
     "analysis_type": "构词",
-    "analysis": "sub-（在…位置下方/取而代之） + stitut-（建立站立） +等 -> 当原本站在某一主力位置上的构件、球员、或者某一严重依赖外部进口的高风险供应链卡脖子核心关键原材料因断供、伤病或成本过高而被迫退场时；从后方迅速派遣并推上一个性能完全对等甚至更加过硬安全可靠的国产化全自主研发新力量挺身而出稳稳立在原位接替发挥相同甚至更优越主导功能的闭环大动作替换替代机制。",
+    "analysis": "sub-（在下方/替代） + stitut-（建立/站立） + -ion -> 派遣替补人员或物品取代原有位置 -> 替代，替换；代用品。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "import substitution (进口替代)；substitution effect (替代效应)"
   },
   {
     "word": "submission",
     "phonetic": "/səbˈmɪʃn/",
     "pos": "n.",
-    "meaning": "提交，呈递，正式报送审查的文件论文（paper submission deadline 截稿日期；submission of tender bids 投标书递交）；顺从屈服，臣服投降服从（force the enemy into submission 迫使敌人彻底屈服投降）；法庭辩护意见",
+    "meaning": "提交，呈递；屈服，顺从，投降；辩护意见",
     "part": "第一部分：超级核心母词族",
     "group": "【04. mit / miss / mis / mess 送/放/派/发】",
     "analysis_type": "构词",
     "analysis": "sub-（在下方） + miss-（送出/放下兵刃） + -ion -> 恭恭敬敬双手将研究论文或投标文件呈递报送上位者审阅，军事上指放下兵器屈膝顺从投降 -> 提交，呈递，报送审查之物；顺从屈服，臣服投降；法庭辩护意见。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "paper submission (论文提交)；force into submission (迫使屈服)"
   },
   {
     "word": "disposable",
     "phonetic": "/dɪˈspəʊzəbl/",
     "pos": "adj./n.",
-    "meaning": "一次性的，用后即扔丢弃的（disposable medical gloves/masks / disposable chopsticks）；可自由支配的，扣除税费后完全任由个人随心所欲支配花销的（disposable income 个人可支配收入）；一次性用品耗材（常用复数 disposables）",
+    "meaning": "一次性的，用后即弃的；可自由支配的；一次性用品",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
     "analysis": "dis-（分散/向外） + pos-（放置/处理） + -able（可…的） -> 用后即可随手弃置无需回收的卫生耗材，经济学指扣除强制税费后完全可由个人自主开销花销的资金 -> 一次性的，用后即弃的；可自由支配花销的（disposable income）；一次性耗材（复数）。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "disposable income (可支配收入)；disposable chopsticks (一次性筷子)"
   },
   {
     "word": "opposition",
     "phonetic": "/ˌɒpəˈzɪʃn/",
     "pos": "n.",
-    "meaning": "反对，抗议，强烈反对抵制立场（strong popular opposition to the proposal 广大群众的强烈反对意见）；反对党，在野党反对派（the parliamentary opposition / the leader of the opposition 反对党领袖）；对立对抗，面对面对立位置状态；（天文学行星运行）冲，冲日现象（planetary opposition）",
+    "meaning": "反对，反抗；反对党，在野党；对立，对抗；（天文学）冲日",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
@@ -78589,65 +77404,65 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         ]
       }
     ],
-    "collocation": ""
+    "collocation": "strong opposition (强烈反对)；leader of the opposition (反对党领袖)"
   },
   {
     "word": "disposition",
     "phonetic": "/ˌdɪspəˈzɪʃn/",
     "pos": "n.",
-    "meaning": "性情，秉性脾气，天生个性倾向（a calm/cheerful disposition 沉着/开朗的性格）；（军事战略/兵力兵器）战役部署，战略兵力配置布局（strategic troop disposition 战略兵力展开部署）；处置，支配，合法处分处决财产（the testamentary disposition of assets 遗嘱处分财产）；倾向意向，倾向性意愿（a disposition to argue 爱争辩的倾向）",
+    "meaning": "性情，性格；战役部署；财产处分；倾向",
     "part": "第一部分：超级核心母词族",
     "group": "【05. pon / pos / posit / pound 放置/摆设/立定】",
     "analysis_type": "构词",
     "analysis": "dis-（分开向各方） + posit-（安排布局/放置） + -ion -> 造物主为个体在灵魂深处安排放置好的天生性情脾气，军事上指兵力兵器战略战役展开部署 -> 性情，秉性脾气；军事战略兵力部署；合法处置财产处分权；倾向意向。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "cheerful disposition (开朗的性格)；disposition of assets (财产处置)"
   },
   {
     "word": "retrace",
     "phonetic": "/rɪˈtreɪs/",
     "pos": "vt.",
-    "meaning": "沿原路折返，顺着原先足迹脚印原路返回折回（retrace one's steps through the forest 顺原路折返）；追溯回溯，深层复盘梳理探索历史起源发展全脉络轨迹（retrace the origins of modern civilization 回溯现代文明起源；retrace the evolutionary pathway 追溯生物进化演变脉络）；描摹临摹",
+    "meaning": "沿原路折返；追溯，回顾；描摹，临摹",
     "part": "第一部分：超级核心母词族",
     "group": "【06. tract / treat 拉/拖/抽取/牵引】",
     "analysis_type": "构词",
-    "analysis": "re-（再次/反向向后） + trace（足迹/拉出的痕迹线索） -> 1. 物理动作：在风雪交加深山迷路大绝境关口、神智清醒的猎人低头死死盯住自己雪地上刚刚踩出的深深脚印一个脚印挨着一个脚印小心翼翼反向倒退原路平稳退回安全宿营地的自救大动作（retrace ）；2. 思想学术大境界：历史学家与古地质演化学家手持放大镜在卷帙浩瀚的传世典籍、考古地层探方与地壳古岩心标本中抽丝剥茧；跨越数百万年漫漫沧桑岁月之河。",
+    "analysis": "re-（反向/向后） + trace（足迹/拉出的痕迹） -> 顺着原先的足迹原路返回，引申指回顾源头 -> 沿原路折返；追溯，回顾。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "retrace one's steps (折回原路)；retrace origins (追溯起源)"
   },
   {
     "word": "intensity",
     "phonetic": "/ɪnˈtensəti/",
     "pos": "n.",
-    "meaning": "强度，烈度（light/seismic/radiation intensity 光照/地震烈度/辐射剂量强度；energy intensity 能源利用强度）；（工作/训练/情感的）极其紧张激烈，高度白热化激烈度（the emotional/competitive intensity of the Olympic finals 奥运决战的白热化激烈程度）；剧烈强烈度",
+    "meaning": "强烈，剧烈；强度，烈度；紧张度",
     "part": "第一部分：超级核心母词族",
-    "group": "【06. tract / treat 拉/拖/抽取/牵引】",
+    "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
-    "analysis": "in-（向内/在内部） + tens-（拉紧绷紧） + -ity（物理状态名词后缀） -> 1. 物理科学最底层标量与矢量大概念：单位面积、单位时间或单位物理体积内所聚集穿透释放的物理能量、声光电磁辐射通量密度或者地壳破裂释放震波烈度大小的精确数学定量测量标尺（seismic ）；2. 竞技体育或前沿科技大攻关决战时刻：运动员在决胜最后三秒咬紧牙关全身每一束骨骼肌纤维与交感神经被极限拉扯绷紧到即将断裂的极限高压爆发对抗竞技强度；或学者面对世界难题通宵达旦脑力激荡高度白热化的心智投入状态。",
+    "analysis": "in-（向内/在内部） + tens-（拉紧绷紧） + -ity（状态名词后缀） -> 内部力量极限拉紧的状态 -> 强度，强烈；紧张；剧烈。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "intensity distribution (强度分布 / 强度分析)；intensity factor (强度因子 / 强度因素)"
+    "collocation": "intensity distribution (强度分布)；light intensity (光照强度)"
   },
   {
     "word": "intentional",
     "phonetic": "/ɪnˈtenʃənl/",
     "pos": "adj.",
-    "meaning": "故意的，蓄意的，有意识有意图存心蓄谋的（intentional homicide 刑法故意杀人罪；intentional patent infringement 商业恶意蓄意侵权；intentional ambiguity 故意故意含糊其辞）；深思熟虑绝非偶然的",
+    "meaning": "故意的，蓄意的，有意的；深思熟虑的",
     "part": "第一部分：超级核心母词族",
-    "group": "【06. tract / treat 拉/拖/抽取/牵引】",
+    "group": "【07. tend / tens / tent 伸展/拉紧/倾向】",
     "analysis_type": "构词",
-    "analysis": "intent-（意图/心智之箭射向特定靶标） + -ion + -al（形容词后缀） -> 彻底区别于过失疏忽（negligent）或意外偶发（accidental）；行为人在事前大脑前额叶心智沙盘深处对自身行为的性质、危害后果及其演进逻辑有着完全清晰、清醒的认知判断与严密预谋策划；在理智支配下主动、自觉按下执行键以追求该特定损害结果发生的具有极高主观恶性的大脑主观故意蓄意心理与法律状态。",
+    "analysis": "intent-（意图/目的） + -ion + -al（形容词后缀） -> 经过理智规划、抱有明确目的而为之 -> 故意的，蓄意的；有意的。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": "intentional crime (故意犯罪)；intentional injury (故意伤害)"
+    "collocation": "intentional act (故意行为)；intentional infringement (蓄意侵权)"
   },
   {
     "word": "speculation",
     "phonetic": "/ˌspekjuˈleɪʃn/",
     "pos": "n.",
-    "meaning": "投机，商业投机，金融短期高风险炒作（financial/currency/property speculation 金融/外汇/房地产投机炒作）；推测，猜想，缺乏确凿证据的主观理论猜测推断（pure speculation / widespread speculation 坊间充斥着各种揣测猜测）",
+    "meaning": "推测，猜想；投机，金融炒作",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
@@ -78668,85 +77483,85 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
         ]
       }
     ],
-    "collocation": ""
+    "collocation": "property speculation (房地产投机)；pure speculation (纯属推测)"
   },
   {
     "word": "speculative",
     "phonetic": "/ˈspekjələtɪv/",
     "pos": "adj.",
-    "meaning": "投机性的，充满高风险投机炒作的（speculative bubble 投机性金融泡沫；speculative capital 跨国短期热钱投机资本）；推测的基于假设性假说的，思辨推理性未获实证检验的（a speculative hypothesis 尚待检验的推测性假说；speculative philosophy 思辨哲学）",
+    "meaning": "投机性的，高风险投机的；推测的，假设性的，思辨的",
     "part": "第一部分：超级核心母词族",
     "group": "【08. spec / spect / spic 看/查验/审视】",
     "analysis_type": "构词",
     "analysis": "speculat-（眺望观望） + -ive（形容词后缀） -> 缺乏实证检验而建立在理论假设思辨模型之上的，另指资本市场上充满不确定性高杠杆追涨杀跌投机属性的 -> 投机性的，高风险投机炒作的；推测假说的，思辨推理性的。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "speculative bubble (投机泡沫)；speculative hypothesis (推测性假说)"
   },
   {
     "word": "individuality",
     "phonetic": "/ˌɪndɪˌvɪdʒuˈæləti/",
     "pos": "n.",
-    "meaning": "个性，个人独特性，不可替代的个人独特品格神韵，独立人格与个体鲜明特征（express one's individuality 充分彰显并释放个人鲜明个性；preserve cultural individuality 保留独特文化个性）；个体性不可分割性",
+    "meaning": "个性，独特性；独立人格；个体性",
     "part": "第一部分：超级核心母词族",
     "group": "【09. vid / vis / view 看/看见/视线】",
     "analysis_type": "构词",
     "analysis": "individual（个体/个人的） + -ity（名词后缀） -> 作为独立个体所具有的独特性格特征 -> 个性，个人特征。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "express one's individuality (彰显个性)；preserve individuality (保持独特性)"
   },
   {
     "word": "dictation",
     "phonetic": "/dɪkˈteɪʃn/",
     "pos": "n.",
-    "meaning": "口述记录，听写，由一人发音朗读由另一人记录或输入的听写练习（take dictation from one's supervisor 记录领导口述指令；vocabulary dictation test 单词听写测验）；（强权势力的）发号施令，强行命令霸道强加干预（resist foreign dictation 坚决坚决抵御境外外部霸权势力的强行发号施令与强权政治霸凌）；霸道主宰命令",
+    "meaning": "听写，口述记录；发号施令，强行命令",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定/宣称】",
     "analysis_type": "构词",
     "analysis": "dict-（发号施令/口述说话） + -ation（名词后缀） -> 一人逐字逐句清晰发音朗读由另一人飞速伏案落笔记录的听写练习，政治上指外部霸权势力强行发号施令霸凌干涉 -> 听写，口述记录；发号施令，强行命令霸道干预。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "take dictation (记录口述)；dictation test (听写测验)"
   },
   {
     "word": "indicative",
     "phonetic": "/ɪnˈdɪkətɪv/",
     "pos": "adj./n.",
-    "meaning": "表明的，指示性的，足以显示预示说明某种深层发展大趋势的（be indicative of future trends 足以说明预示未来大趋势；indicative prices 市场指导参考价格）；（语法学动词语气）陈述语气的，客观事实陈述的（the indicative mood 陈述语气，与 subjunctive 虚拟语气 相对）；陈述语气动词形态（； n. ）",
+    "meaning": "指示的，暗示的，表明的；（语法）陈述的",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定/宣称】",
     "analysis_type": "构词",
     "analysis": "in-（深入） + dic-（指示宣说） + -ative（有…倾向的） -> 从显微表象特征中足以敏锐洞见并充分说明未来深层发展大趋势指向的，语法指客观陈述语气 -> 表明的，指示性的，预示说明的（be indicative of）；陈述语气的；陈述语气形态。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "indicative of (表明 / 显示)；indicative mood (陈述语气)"
   },
   {
     "word": "predictable",
     "phonetic": "/prɪˈdɪktəbl/",
     "pos": "adj.",
-    "meaning": "可预测的，按常理合情合理可预见的可预期的（a predictable result/outcome 符合常理预料之中的必然结果；in a predictable manner 按照可预见的方式稳健推进）；（由于缺乏创意新意而）老套毫无惊喜意料之中的（a predictable Hollywood plot 毫无新意老套烂俗的好莱坞电影剧情）；循规蹈矩可预测的",
+    "meaning": "可预测的，意料之中的；老套的，无惊喜的",
     "part": "第一部分：超级核心母词族",
     "group": "【10. dic / dict 说/指示/断定/宣称】",
     "analysis_type": "构词",
     "analysis": "pre-（提前） + dict-（宣说） + -able（能…的） -> 1. 依因果逻辑可提前推导掌控的可靠属性（highly predictable）；2. 老套毫无悬念意料之中的平庸属性。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "predictable result (预料之中的结果)；predictable pattern (可预测模式)"
   },
   {
     "word": "intercourse",
     "phonetic": "/ˈɪntəkɔːs/",
     "pos": "n.",
-    "meaning": "交往，交际往来，正式跨国跨区域学术商业文化思想深度友好大往来（commercial/cultural/intellectual intercourse 各国间经贸/文化/思想密切交流交际往来）；（生理学与法医学专有术语）性交，交媾（sexual intercourse）",
+    "meaning": "交往，交际，思想文化交流；性交",
     "part": "第一部分：超级核心母词族",
     "group": "【12. cur / curr / curs / cours 跑/流动/进程】",
     "analysis_type": "构词",
-    "analysis": "inter-（在…之间相互） + course（奔跑流淌） -> 1. 国际政治学与人类文明史殿堂级恢弘大叙事词汇：两个拥有不同宗教信仰、不同肤色与制度传统的大洲主权国家民族；在彻底摒弃刀枪兵戎相见、跨越大洋大漠天堑障碍；派遣庞大商船队、文化学者与艺术大师使节团在彼此大都会与集市之间频繁穿梭往来、将丝绸、瓷器、造纸术与现代科学思想深度交织碰撞互通有无的波澜壮阔人类文明交流互鉴交往大往来（free fri）。",
+    "analysis": "inter-（在…之间相互） + course（奔跑流淌） -> 双方在思想、文化与商贸间的深入走动交流 -> 交往，交际；交流。",
     "antonyms": [],
     "synonyms": [],
-    "collocation": ""
+    "collocation": "commercial intercourse (经贸往来)；cultural intercourse (文化交流)"
   },
   {
     "word": "attribution",
@@ -79662,7 +78477,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "pos": "n.",
     "meaning": "志向，抱负，渴望；（语音）送气",
     "part": "第一部分：超级核心母词族",
-    "group": "【21. voc / vok / voice 声音/呼唤/主张】",
+    "group": "【22. spir / spirit 呼吸/精神/渴望】",
     "analysis_type": "构词",
     "analysis": "ad-（朝向） + spir-（呼吸/气息） + -ation（名词后缀），引申指志向 -> 志向；抱负。",
     "antonyms": [],
@@ -80008,7 +78823,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "pos": "adj.",
     "meaning": "支持的，鼓励的，提供宝贵帮助的",
     "part": "第一部分：超级核心母词族",
-    "group": "【23. fer / phor 运载/带来/承受】",
+    "group": "【36. port 搬运/携带/港口】",
     "analysis_type": "构词",
     "analysis": "support（支持） + -ive（形容词后缀），引申指支持的 -> 给予支持的；关怀鼓励的。",
     "antonyms": [],
@@ -80371,7 +79186,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "pos": "n.",
     "meaning": "涌入，流入；（人口/资金）大批汇聚",
     "part": "第一部分：超级核心母词族",
-    "group": "【23. fer / phor 运载/带来/承受】",
+    "group": "【31. flu / flux / fluid 流/流动/溢出】",
     "analysis_type": "构词",
     "analysis": "in-（向内） + flux（流动），引申为外资或外国游客如潮水般大举 -> 涌入；汇集大潮。",
     "antonyms": [],
@@ -80406,7 +79221,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "data",
-    "phonetic": "/'dertǝ/",
+    "phonetic": "/ˈdeɪtə/",
     "pos": "n.",
     "meaning": "数据，资料",
     "part": "第四部分：核心分类专题群",
@@ -80419,7 +79234,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "exploration",
-    "phonetic": "/eksplə'reıf(ə)n/",
+    "phonetic": "/ˌekspləˈreɪʃn/",
     "pos": "n.",
     "meaning": "研究；勘探",
     "part": "第四部分：核心分类专题群",
@@ -80446,7 +79261,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "garbage",
-    "phonetic": "/ga:rbid3/",
+    "phonetic": "/ˈɡɑːbɪdʒ/",
     "pos": "n.",
     "meaning": "垃圾",
     "part": "第四部分：核心分类专题群",
@@ -80459,9 +79274,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "heat",
-    "phonetic": "/hi:t/",
-    "pos": "n.",
-    "meaning": "热能，热量； v. 加热",
+    "phonetic": "/hiːt/",
+    "pos": "n./v.",
+    "meaning": "热能，热量；加热",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80472,7 +79287,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "installation",
-    "phonetic": "/ınstə'leif(ə)n/",
+    "phonetic": "/ˌɪnstəˈleɪʃn/",
     "pos": "n.",
     "meaning": "安装；装置",
     "part": "第四部分：核心分类专题群",
@@ -80485,7 +79300,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "install",
-    "phonetic": "/in'sto:1/",
+    "phonetic": "/ɪnˈstɔːl/",
     "pos": "v.",
     "meaning": "安装",
     "part": "第四部分：核心分类专题群",
@@ -80498,7 +79313,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "panel",
-    "phonetic": "/'pæn( )l/",
+    "phonetic": "/ˈpænl/",
     "pos": "n.",
     "meaning": "专家咨询组，评审委员会；控制板，仪表盘",
     "part": "第四部分：核心分类专题群",
@@ -80511,9 +79326,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "roof",
-    "phonetic": "/ru:f/",
-    "pos": "n.",
-    "meaning": "屋顶； v. 遮蔽",
+    "phonetic": "/ruːf/",
+    "pos": "n./v.",
+    "meaning": "屋顶；遮蔽",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80552,7 +79367,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "tank",
     "phonetic": "/tæŋk/",
     "pos": "n.",
-    "meaning": "n. 水箱，大型容器；坦克",
+    "meaning": "水箱，大型容器；坦克",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80563,7 +79378,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "acre",
-    "phonetic": "/eıkər/",
+    "phonetic": "/ˈeɪkə(r)/",
     "pos": "n.",
     "meaning": "英亩",
     "part": "第四部分：核心分类专题群",
@@ -80576,7 +79391,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "coast",
-    "phonetic": "/koust/",
+    "phonetic": "/kəʊst/",
     "pos": "n.",
     "meaning": "海岸",
     "part": "第四部分：核心分类专题群",
@@ -80589,9 +79404,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "escape",
-    "phonetic": "/'skeip/",
-    "pos": "n.",
-    "meaning": "逃跑； v. 逃跑",
+    "phonetic": "/ɪˈskeɪp/",
+    "pos": "v./n.",
+    "meaning": "逃跑；逃跑",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80603,8 +79418,8 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   {
     "word": "hunt",
     "phonetic": "/hant/",
-    "pos": "n.",
-    "meaning": "打猎；追踪； v. 打猎；追踪",
+    "pos": "n./v.",
+    "meaning": "打猎；追踪；打猎；追踪",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80617,7 +79432,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "island",
     "phonetic": "/ˈaɪlənd/",
     "pos": "n.",
-    "meaning": "n. 岛，岛屿；安全岛",
+    "meaning": "岛，岛屿；安全岛",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80628,7 +79443,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "invasive",
-    "phonetic": "/ın veısıv/",
+    "phonetic": "/ɪnˈveɪsɪv/",
     "pos": "adj.",
     "meaning": "侵入的，扩散性的",
     "part": "第四部分：核心分类专题群",
@@ -80641,7 +79456,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "rainfall",
-    "phonetic": "/reinfo:1/",
+    "phonetic": "/ˈreɪnfɔːl/",
     "pos": "n.",
     "meaning": "降雨；降雨量",
     "part": "第四部分：核心分类专题群",
@@ -80680,9 +79495,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "mediterranean",
-    "phonetic": "/meditə reiniǝn/",
-    "pos": "n.",
-    "meaning": "地中海； adj. 地中海的",
+    "phonetic": "/ˌmedɪtəˈreɪniən/",
+    "pos": "adj./n.",
+    "meaning": "地中海；地中海的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80695,7 +79510,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "whale",
     "phonetic": "/weil/",
     "pos": "n.",
-    "meaning": "n. 鲸，鲸鱼",
+    "meaning": "鲸，鲸鱼",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80706,7 +79521,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "firefighter",
-    "phonetic": "/farǝrfaitər/",
+    "phonetic": "/ˈfaɪəfaɪtə(r)/",
     "pos": "n.",
     "meaning": "消防队员",
     "part": "第四部分：核心分类专题群",
@@ -80719,7 +79534,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "mall",
-    "phonetic": "/mo:l/",
+    "phonetic": "/mɔːl/",
     "pos": "n.",
     "meaning": "购物中心",
     "part": "第四部分：核心分类专题群",
@@ -80732,7 +79547,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "minister",
-    "phonetic": "/mınıstər/",
+    "phonetic": "/ˈmɪnɪstə(r)/",
     "pos": "n.",
     "meaning": "部长，大臣",
     "part": "第四部分：核心分类专题群",
@@ -80745,9 +79560,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "malfunction",
-    "phonetic": "/mæl foŋkf( )n/",
-    "pos": "n.",
-    "meaning": "故障，失灵； v. 出故障，失灵",
+    "phonetic": "/ˌmælˈfʌŋkʃn/",
+    "pos": "n./v.",
+    "meaning": "故障，失灵；出故障，失灵",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80758,7 +79573,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "sticky",
-    "phonetic": "/'stıki/",
+    "phonetic": "/ˈstɪki/",
     "pos": "adj.",
     "meaning": "黏的",
     "part": "第四部分：核心分类专题群",
@@ -80771,7 +79586,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "scene",
-    "phonetic": "/si:n/",
+    "phonetic": "/siːn/",
     "pos": "n.",
     "meaning": "现场；事件",
     "part": "第四部分：核心分类专题群",
@@ -80784,7 +79599,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "ability",
-    "phonetic": "/ə'bıləti/",
+    "phonetic": "/əˈbɪləti/",
     "pos": "n.",
     "meaning": "能力",
     "part": "第四部分：核心分类专题群",
@@ -80829,7 +79644,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "attorney",
-    "phonetic": "/ə't3:rni/",
+    "phonetic": "/əˈtɜːni/",
     "pos": "n.",
     "meaning": "律师，检察官",
     "part": "第四部分：核心分类专题群",
@@ -80842,7 +79657,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "client",
-    "phonetic": "/'klaıənt/",
+    "phonetic": "/ˈklaɪənt/",
     "pos": "n.",
     "meaning": "客户",
     "part": "第四部分：核心分类专题群",
@@ -80855,7 +79670,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "consultant",
-    "phonetic": "/kən səltənt/",
+    "phonetic": "/kənˈsʌltənt/",
     "pos": "n.",
     "meaning": "顾问",
     "part": "第四部分：核心分类专题群",
@@ -80868,7 +79683,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "feasibility",
-    "phonetic": "/fi:zə bıləti/",
+    "phonetic": "/ˌfiːzəˈbɪləti/",
     "pos": "n.",
     "meaning": "可行性",
     "part": "第四部分：核心分类专题群",
@@ -80881,7 +79696,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "interpreter",
-    "phonetic": "/in't3:rprətər/",
+    "phonetic": "/ɪnˈtɜːprətə(r)/",
     "pos": "n.",
     "meaning": "口译员，译者",
     "part": "第四部分：核心分类专题群",
@@ -80894,7 +79709,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "laptop",
-    "phonetic": "/'læpta:p/",
+    "phonetic": "/ˈlæptɒp/",
     "pos": "n.",
     "meaning": "笔记本电脑",
     "part": "第四部分：核心分类专题群",
@@ -80907,7 +79722,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "loyalty",
-    "phonetic": "/'lərəlti/",
+    "phonetic": "/ˈlɔɪəlti/",
     "pos": "n.",
     "meaning": "忠诚",
     "part": "第四部分：核心分类专题群",
@@ -80920,9 +79735,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "search",
-    "phonetic": "/s3:rtf/",
-    "pos": "n.",
-    "meaning": "搜查； v. 搜查",
+    "phonetic": "/sɜːtʃ/",
+    "pos": "v./n.",
+    "meaning": "搜查；搜查",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -80947,7 +79762,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "stockbroker",
-    "phonetic": "/'sta:kbrookər/",
+    "phonetic": "/ˈstɒkbrəʊkə(r)/",
     "pos": "n.",
     "meaning": "股票经纪人",
     "part": "第四部分：核心分类专题群",
@@ -80960,7 +79775,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "testimony",
-    "phonetic": "/testimooni/",
+    "phonetic": "/ˈtestɪməni/",
     "pos": "n.",
     "meaning": "证言，口供",
     "part": "第四部分：核心分类专题群",
@@ -81009,7 +79824,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "bonus",
-    "phonetic": "/bounǝs/",
+    "phonetic": "/ˈbəʊnəs/",
     "pos": "n.",
     "meaning": "奖金",
     "part": "第四部分：核心分类专题群",
@@ -81022,7 +79837,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "calorie",
-    "phonetic": "/'kæləri/",
+    "phonetic": "/ˈkæləri/",
     "pos": "n.",
     "meaning": "卡路里",
     "part": "第四部分：核心分类专题群",
@@ -81035,7 +79850,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "campaigner",
-    "phonetic": "/kæm peinər/",
+    "phonetic": "/kæmˈpeɪnə(r)/",
     "pos": "n.",
     "meaning": "竞选者，活动家",
     "part": "第四部分：核心分类专题群",
@@ -81061,7 +79876,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "defence",
-    "phonetic": "/di'fens/",
+    "phonetic": "/dɪˈfens/",
     "pos": "n.",
     "meaning": "保卫，防御",
     "part": "第四部分：核心分类专题群",
@@ -81074,7 +79889,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "decade",
-    "phonetic": "/'dekeid/",
+    "phonetic": "/ˈdekeɪd/",
     "pos": "n.",
     "meaning": "十年",
     "part": "第四部分：核心分类专题群",
@@ -81087,9 +79902,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "envy",
-    "phonetic": "/'envi/",
-    "pos": "n.",
-    "meaning": "羡慕；嫉妒； v. 羡慕；嫉妒",
+    "phonetic": "/ˈenvi/",
+    "pos": "n./v.",
+    "meaning": "羡慕；嫉妒；羡慕；嫉妒",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81100,9 +79915,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "guard",
-    "phonetic": "/go:rd/",
-    "pos": "n.",
-    "meaning": "警卫； v. 保护，守卫",
+    "phonetic": "/ɡɑːd/",
+    "pos": "n./v.",
+    "meaning": "警卫；保护，守卫",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81113,9 +79928,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "halt",
-    "phonetic": "/ho:lt/",
-    "pos": "n.",
-    "meaning": "停止； v. 停止",
+    "phonetic": "/hɔːlt/",
+    "pos": "n./v.",
+    "meaning": "停止；停止",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81126,9 +79941,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "giant",
-    "phonetic": "/dzaıənt/",
-    "pos": "n.",
-    "meaning": "巨人:伟人； adj. 巨大的",
+    "phonetic": "/ˈdʒaɪənt/",
+    "pos": "n./adj.",
+    "meaning": "巨人，伟人；巨大的",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81139,7 +79954,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "pearl",
-    "phonetic": "/p3:rl/",
+    "phonetic": "/pɜːl/",
     "pos": "n.",
     "meaning": "珍珠",
     "part": "第四部分：核心分类专题群",
@@ -81152,7 +79967,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "personality",
-    "phonetic": "/p3:rsə'næləti/",
+    "phonetic": "/ˌpɜːsəˈnæləti/",
     "pos": "n.",
     "meaning": "性格，个性",
     "part": "第四部分：核心分类专题群",
@@ -81165,7 +79980,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "protein",
-    "phonetic": "/prooti:n/",
+    "phonetic": "/ˈprəʊtiːn/",
     "pos": "n.",
     "meaning": "蛋白质",
     "part": "第四部分：核心分类专题群",
@@ -81178,9 +79993,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "struggle",
-    "phonetic": "/'strag(ә)1/",
-    "pos": "n.",
-    "meaning": "挣扎； v. 挣扎；努力",
+    "phonetic": "/ˈstrʌɡl/",
+    "pos": "v./n.",
+    "meaning": "挣扎；挣扎；努力",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81191,9 +80006,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "sort",
-    "phonetic": "/so:rt/",
-    "pos": "n.",
-    "meaning": "种类； v. 整理，分类",
+    "phonetic": "/sɔːt/",
+    "pos": "n./v.",
+    "meaning": "种类；整理，分类",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81204,7 +80019,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "vary",
-    "phonetic": "/'veri/",
+    "phonetic": "/ˈveəri/",
     "pos": "v.",
     "meaning": "变化，差异",
     "part": "第四部分：核心分类专题群",
@@ -81269,9 +80084,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "due",
-    "phonetic": "/du:/",
-    "pos": "adj.",
-    "meaning": "adj. 预期的，预计的；到期的；应得的； prep. 由于，因为（due to）",
+    "phonetic": "/djuː/",
+    "pos": "adj./prep.",
+    "meaning": "预期的，预计的；到期的；应得的；由于，因为（due to）",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81282,7 +80097,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "layoff",
-    "phonetic": "/'leı, :f/",
+    "phonetic": "/ˈleɪɒf/",
     "pos": "n.",
     "meaning": "裁员，解雇",
     "part": "第四部分：核心分类专题群",
@@ -81317,7 +80132,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "cyber",
-    "phonetic": "/'saıbər/",
+    "phonetic": "/ˈsaɪbə(r)/",
     "pos": "adj.",
     "meaning": "网络的",
     "part": "第四部分：核心分类专题群",
@@ -81330,7 +80145,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "contaminated",
-    "phonetic": "/kən'tæmınertıd/",
+    "phonetic": "/kənˈtæmɪneɪtɪd/",
     "pos": "adj.",
     "meaning": "被感染的",
     "part": "第四部分：核心分类专题群",
@@ -81357,7 +80172,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "digital",
-    "phonetic": "/dıdzıt(ə)l/",
+    "phonetic": "/ˈdɪdʒɪtl/",
     "pos": "adj.",
     "meaning": "数字的",
     "part": "第四部分：核心分类专题群",
@@ -81370,7 +80185,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "immunization",
-    "phonetic": "/ımjunǝ'zeıfn/",
+    "phonetic": "/ˌɪmjunaɪˈzeɪʃn/",
     "pos": "n.",
     "meaning": "免疫",
     "part": "第四部分：核心分类专题群",
@@ -81383,7 +80198,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "mortality",
-    "phonetic": "/mə:r'tæləti/",
+    "phonetic": "/mɔːˈtæləti/",
     "pos": "n.",
     "meaning": "死亡，死亡率",
     "part": "第四部分：核心分类专题群",
@@ -81396,7 +80211,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "ward",
-    "phonetic": "/wɔ:rd/",
+    "phonetic": "/wɔːd/",
     "pos": "n.",
     "meaning": "病房",
     "part": "第四部分：核心分类专题群",
@@ -81409,9 +80224,9 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "overspeed",
-    "phonetic": "/ouvǝr spi:d/",
-    "pos": "n.",
-    "meaning": "超速； v. 超速",
+    "phonetic": "/ˌəʊvəˈspiːd/",
+    "pos": "n./v.",
+    "meaning": "超速；超速",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81435,7 +80250,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   },
   {
     "word": "underground",
-    "phonetic": "/Andər graond/",
+    "phonetic": "/ˌʌndəˈɡraʊnd/",
     "pos": "n.",
     "meaning": "地铁",
     "part": "第四部分：核心分类专题群",
@@ -81486,7 +80301,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "force",
     "phonetic": "/fɔːs/",
     "pos": "n./vt.",
-    "meaning": "n. 力量，武力；军队，劳动力队伍（labor force）； vt. 强迫，迫使",
+    "meaning": "力量，武力；军队，劳动力队伍（labor force）；强迫，迫使",
     "part": "第二部分：高频专业词根族",
     "group": "【43. val / vail / fort 强壮/力量/价值】",
     "analysis_type": "构词",
@@ -81516,10 +80331,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "compel",
             "meaning": "强迫/迫使"
-          },
-          {
-            "word": "impose",
-            "meaning": "把…强加于/征税"
           }
         ]
       }
@@ -81556,10 +80367,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
       {
         "sense": "贫困/匮乏",
         "items": [
-          {
-            "word": "deficit",
-            "meaning": "赤字/亏损"
-          },
           {
             "word": "poverty",
             "meaning": "贫困/贫穷"
@@ -81612,10 +80419,6 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
           {
             "word": "credit",
             "meaning": "信用/信贷"
-          },
-          {
-            "word": "wealth",
-            "meaning": "财富/财产"
           }
         ]
       }
@@ -81639,7 +80442,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "photograph",
     "phonetic": "/ˈfəʊtəɡrɑːf/",
     "pos": "n./vt.",
-    "meaning": "n. 照片； vt. 给…拍照",
+    "meaning": "照片；给…拍照",
     "part": "第一部分：超级核心母词族",
     "group": "【27. scrib / script / graph / gram 写/画/记录】",
     "analysis_type": "构词",
@@ -81704,7 +80507,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "program",
     "phonetic": "/ˈprəʊɡræm/",
     "pos": "n./vt.",
-    "meaning": "n. 节目；程序；规划； vt. 编写程序",
+    "meaning": "节目；程序；规划；编写程序",
     "part": "第一部分：超级核心母词族",
     "group": "【27. scrib / script / graph / gram 写/画/记录】",
     "analysis_type": "构词",
@@ -81766,7 +80569,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "fragment",
     "phonetic": "/ˈfræɡmənt/",
     "pos": "n./v.",
-    "meaning": "碎片，残片；片段； v. 使成碎片，分裂",
+    "meaning": "碎片，残片；片段；使成碎片，分裂",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81805,7 +80608,7 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
     "word": "function",
     "phonetic": "/ˈfʌŋkʃn/",
     "pos": "n./vi.",
-    "meaning": "功能，作用；职务；函数； vi. 运转，发挥作用",
+    "meaning": "功能，作用；职务；函数；运转，发挥作用",
     "part": "第四部分：核心分类专题群",
     "group": "【86. 场景专题 2：教育学术、校园与科技探索】",
     "analysis_type": "构词",
@@ -81928,6 +80731,13 @@ if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
   const filterByGroup = (kw) => all.filter(w => w.group && w.group.includes(kw));
 
   g.VOCABULARY_PACKS = {
+    all_3137: {
+      id: "all_3137",
+      category: "全书总库",
+      title: "【全书总库】CET-4 核心全阶词典 (3137 核心词)",
+      description: "以四级核心高频词库为绝对底座，包含超级核心母词族、高频词根族、前缀族与六大核心场景专题群。",
+      words: all
+    },
     all_2257: {
       id: "all_2257",
       category: "全书总库",
