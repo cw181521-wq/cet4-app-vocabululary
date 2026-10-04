@@ -16324,6 +16324,59 @@ const App = (function() {
             wordsByBox[box].push(w);
           });
 
+          // ★ 全局总控：统计全库当前所有非冷却的到期词
+          const allDueCandidates = pool.filter(w => {
+            const st = stDict[w.word];
+            return st && Algorithms.Leitner.isWordDue(st, now) && !recentLocked.includes(w.word);
+          });
+
+          // 若全库无未学新词（即生词已开荒完毕）：
+          if (unlearnedInBox1.length === 0) {
+            if (allDueCandidates.length > 0) {
+              // 阶段一：100% 绝对强制清空所有到期词 (按到期紧迫度升序排队)
+              allDueCandidates.sort((a, b) => {
+                const dueA = stDict[a.word]?.nextReviewDate || 0;
+                const dueB = stDict[b.word]?.nextReviewDate || 0;
+                return dueA - dueB;
+              });
+              const chosenWord = allDueCandidates[0];
+              const chosenSt = stDict[chosenWord.word] || {};
+              const chosenBox = chosenSt.box || 5;
+              const chosenType = `盒${chosenBox}到期`;
+              const targetIndex = pool.indexOf(chosenWord);
+              const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
+              if (progEl) {
+                progEl.innerText = `🎯 [${chosenType}] ${targetIndex + 1} / ${pool.length}`;
+                progEl.title = `【当前状态: 到期消灭中】\n· 策略: 优先消灭全库临界到期词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 剩余到期词: ${allDueCandidates.length} 词`;
+              }
+              return chosenWord;
+            } else {
+              // 阶段二：全库今日到期词已全部清零，100% 自动接管为【底部顺推】！
+              const todayStart = new Date().setHours(0, 0, 0, 0);
+              const nonLockedPool = pool.filter(w => !recentLocked.includes(w.word));
+              let unreviewedToday = nonLockedPool.filter(w => {
+                const st = stDict[w.word];
+                return !st || !st.lastReviewed || st.lastReviewed < todayStart;
+              });
+              const streamPool = unreviewedToday.length > 0 ? unreviewedToday : nonLockedPool;
+              streamPool.sort((a, b) => {
+                const tA = stDict[a.word]?.lastReviewed || 0;
+                const tB = stDict[b.word]?.lastReviewed || 0;
+                return tA - tB;
+              });
+              const chosenWord = streamPool.length > 0 ? streamPool[0] : pool[0];
+              const chosenSt = stDict[chosenWord.word] || {};
+              const daysAgo = chosenSt.lastReviewed ? Math.floor((now - chosenSt.lastReviewed) / 86400000) : '未测';
+              const targetIndex = pool.indexOf(chosenWord);
+              const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
+              if (progEl) {
+                progEl.innerText = `🌊 [底部顺推] ${targetIndex + 1} / ${pool.length}`;
+                progEl.title = `【当前状态: 底部顺推】\n· 策略: 今日到期词已全清，由远及近打捞词库底层沉睡熟词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 该词上次测试: ${daysAgo} 天前\n· 掌握度: ${chosenSt.masteryScore ?? 90}%`;
+              }
+              return chosenWord;
+            }
+          }
+
           // 2. 统计各盒内非冷却的可用单词
           const availableByBox = {};
           for (let b = 1; b <= 5; b++) {
@@ -17466,15 +17519,19 @@ const App = (function() {
         });
 
         const badge = document.getElementById('top-due-btn');
-        const countEl = document.getElementById('top-due-count');
-        if (badge && countEl) {
-          countEl.innerText = dueCount;
+        if (badge) {
           if (dueCount > 0) {
             badge.style.display = 'inline-flex';
             badge.style.background = '#ef4444';
+            badge.innerHTML = `<span>⚡ 今日抗遗忘:</span> <span id="top-due-count">${dueCount}</span> <span>词</span>`;
+            badge.title = `根据艾宾浩斯曲线，今日有 ${dueCount} 个单词达到临界遗忘点！点击开启抗遗忘冲刺`;
+            badge.onclick = () => window.startLeitnerDueReview();
           } else {
             badge.style.display = 'inline-flex';
-            badge.style.background = '#10b981';
+            badge.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            badge.innerHTML = `<span>🌊 开启底部顺推</span>`;
+            badge.title = `🎉 今日到期词已全部清零！点击立即开启【底部顺推】，由远及近打捞词库底层沉睡熟词`;
+            badge.onclick = () => App.startOverlearningSession();
           }
         }
 
