@@ -2975,13 +2975,6 @@
         <select id="daily-target-select" class="theme-select" onchange="changeDailyTarget(this.value)" title="每日学习目标">
           <option value="20">目标 20 词</option><option value="30">目标 30 词</option><option value="50" selected>目标 50 词</option><option value="100">目标 100 词</option>
         </select>
-        <select id="daily-new-limit-select" class="theme-select" onchange="changeDailyNewLimit(this.value)" title="每日新词配额">
-          <option value="10">新词 10 词</option>
-          <option value="20" selected>新词 20 词</option>
-          <option value="30">新词 30 词</option>
-          <option value="50">新词 50 词</option>
-          <option value="9999">新词不设上限</option>
-        </select>
         <button class="utility-toggle-btn mobile-only-btn" id="mobile-tools-btn" onclick="toggleMobileToolsSheet(true)">🛠️ 快捷工具箱</button>
       </div>
     </div>
@@ -3154,27 +3147,15 @@
         </div>
 
         <div style="background:var(--card-subtle); border:1px solid var(--border); border-radius:12px; padding:12px 14px;">
-          <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px;">🎯 学习目标与配额</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div>
-              <label style="font-size:0.72rem; color:var(--muted); display:block; margin-bottom:4px;">每日刷题量</label>
-              <select id="sheet-daily-target-select" class="theme-select" style="width:100%;" onchange="changeDailyTarget(this.value); syncSheetControls();">
-                <option value="20">目标 20 词</option>
-                <option value="30">目标 30 词</option>
-                <option value="50" selected>目标 50 词</option>
-                <option value="100">目标 100 词</option>
-              </select>
-            </div>
-            <div>
-              <label style="font-size:0.72rem; color:var(--muted); display:block; margin-bottom:4px;">每日新词上限</label>
-              <select id="sheet-daily-new-limit-select" class="theme-select" style="width:100%;" onchange="changeDailyNewLimit(this.value); syncSheetControls();">
-                <option value="10">新词 10 词</option>
-                <option value="20" selected>新词 20 词</option>
-                <option value="30">新词 30 词</option>
-                <option value="50">新词 50 词</option>
-                <option value="9999">新词不设上限</option>
-              </select>
-            </div>
+          <div style="font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:8px;">🎯 学习目标</div>
+          <div>
+            <label style="font-size:0.72rem; color:var(--muted); display:block; margin-bottom:4px;">每日刷题量</label>
+            <select id="sheet-daily-target-select" class="theme-select" style="width:100%;" onchange="changeDailyTarget(this.value); syncSheetControls();">
+              <option value="20">目标 20 词</option>
+              <option value="30">目标 30 词</option>
+              <option value="50" selected>目标 50 词</option>
+              <option value="100">目标 100 词</option>
+            </select>
           </div>
         </div>
 
@@ -3406,6 +3387,7 @@
               <div class="card-meta-risk-row" style="display:inline-flex; align-items:center; gap:4px;">
                 <span class="risk-pill" id="risk-pill" title="基于艾宾浩斯半衰期负指数遗忘模型预测的当期遗忘概率">遗忘风险: 20%</span>
                 <span class="unexpected-badge" id="unexpected-badge" style="display:none;" title="四级核心真题高频熟词生义考点">⚠️ 熟词生义</span>
+                <span class="badge-mini" id="overlearning-retest-pill" style="display:none; background:#f59e0b; color:#fff; font-weight:800; font-size:0.72rem; padding:2px 8px; border-radius:10px; animation:pulseDue 2s infinite;">🔄 当堂复测</span>
               </div>
             </div>
             <div class="card-meta-slot-right" id="card-meta-slot-right">
@@ -5633,10 +5615,16 @@
         isActive: false,
         scopeBoxId: null,
         scopeName: '',
+        isUnlimited: false,
+        primaryQueue: [],
+        retestPool: [],
         queue: [],
+        questionIndex: 0,
+        lastRetestQuestionIndex: -999,
         totalInitial: 0,
         passedWords: new Set(),
         mistakeWords: new Set(),
+        consolidatedWords: new Set(),
         roundStartTime: 0,
         backupContext: null
       },
@@ -5862,9 +5850,19 @@
 
       BayesianRoot: {
         PRIOR: { alpha: 2.0, beta: 8.0 },
+        posteriorCache: new Map(),
+        isCacheDirty: true,
+
+        markCacheDirty() {
+          this.isCacheDirty = true;
+          this.posteriorCache.clear();
+        },
 
         computeFamilyPosterior(group, packWords, packStats) {
           if (!group) return 0.20;
+          if (!this.isCacheDirty && this.posteriorCache.has(group)) {
+            return this.posteriorCache.get(group);
+          }
           let totalTested = 0;
           let totalMistakes = 0;
 
@@ -5881,7 +5879,9 @@
             }
           }
 
-          return (totalMistakes + this.PRIOR.alpha) / (totalTested + this.PRIOR.alpha + this.PRIOR.beta);
+          const res = (totalMistakes + this.PRIOR.alpha) / (totalTested + this.PRIOR.alpha + this.PRIOR.beta);
+          this.posteriorCache.set(group, res);
+          return res;
         },
 
         calculatePercolationBoost(group, wordTested, posteriorRate, isHighFrequency = false) {
@@ -5940,10 +5940,8 @@
           const leitnerMode = context.leitnerMode || 'instant';
           const now = Date.now();
 
-          let effectiveRt = rawRtMs;
-          if (mode === 'flashcard') {
-            effectiveRt = Math.max(200, rawRtMs * 0.45);
-          }
+          // 消除闪卡潜伏期二次打折：直接采用纯净提取时间 rawRtMs (保留 200ms 下限)
+          let effectiveRt = Math.max(200, rawRtMs);
 
           const cogTime = AdaptiveEngine.MotorProfiling.extractCognitiveTime(effectiveRt, mode, wordLen, isTouch);
           const fluency = AdaptiveEngine.MotorProfiling.calculateFluencyFactor(cogTime, mode, isTouch, sessionCount);
@@ -5993,14 +5991,19 @@
             s = Math.max(0.5, s * 0.50);
             isPromoted = false;
 
-            targetBox = (currentBox >= 3) ? (currentBox - 1) : 1;
+            // 方案A：3盒黄金中枢守底准则 (盒3/4/5错题统一锁定3盒稳固，绝不跌入2盒；低阶生词退回1盒)
+            targetBox = (currentBox >= 3) ? 3 : 1;
             s = Math.min(s, Math.max(this.boxStabilityFloor(targetBox), 0.5));
           }
 
           const boxCfg = Algorithms.Leitner.getConfig(targetBox);
-          const intervalMs = boxCfg ? boxCfg.ms : Math.round(s * 86400000);
-          const jitter = 0.95 + Math.random() * 0.10;
-          const nextReviewDate = now + Math.round(intervalMs * jitter);
+          const boxDays = boxCfg ? (boxCfg.ms / 86400000) : s;
+          // 认知科学混合模型：40% 莱特纳阶梯基线 + 60% CRSE 连续记忆稳定性
+          const hybridIntervalDays = Math.max(0.5, 0.4 * boxDays + 0.6 * s);
+          // 引入 ±8% 离散抖动，防止同一批单词在同一天/同一小时共振扎堆
+          const jitter = 0.92 + Math.random() * 0.16;
+          const intervalMs = Math.round(hybridIntervalDays * 86400000 * jitter);
+          const nextReviewDate = now + intervalMs;
 
           const masteryScore = Math.min(100, Math.max(10, Math.round((Math.atan(s / 3.5) / (Math.PI / 2)) * 100)));
 
@@ -6105,6 +6108,9 @@
         markFamilyCacheDirty() {
           this.isCacheDirty = true;
           this.familyStatsCache.clear();
+          if (AdaptiveEngine?.BayesianRoot) {
+            AdaptiveEngine.BayesianRoot.markCacheDirty();
+          }
         },
 
         getFamilyStats(words, packStats, packId = 'current') {
@@ -6309,8 +6315,22 @@
           // 5. 反应时提取潜伏期迟疑惩罚
           const pHesitation = (lambda > 1.0) ? Math.min(10.0, (lambda - 1.0) * 10.0) : 0.0;
 
+          // ★ 优化6：超期记忆紧迫度倍数 (Overdue Multiplier)
+          // 若单词已到期超期，随着超期时间拉长，遗忘概率呈对数放大，乘入 1.4 ~ 4.0 超期救急系数
+          let overdueMultiplier = 1.0;
+          if (wordStat && wordStat.nextReviewDate && wordStat.nextReviewDate > 0) {
+            const delta = now - wordStat.nextReviewDate;
+            if (delta > 0) {
+              const s = (typeof wordStat.stability === 'number' && wordStat.stability > 0)
+                ? wordStat.stability
+                : (Algorithms?.AdaptiveEngine?.CRSE ? Algorithms.AdaptiveEngine.CRSE.boxStabilityFloor(box) : 1.0);
+              const overdueRatio = delta / (s * 86400000);
+              overdueMultiplier = 1.4 + Math.min(2.6, overdueRatio * 1.5);
+            }
+          }
+
           // ★ 统一自适应综合得分 P(w)
-          let P = (risk * 0.50) + (gap * 0.40) + mistakeBonus + isFlagged + rootBoost + pHesitation;
+          let P = ((risk * 0.50) + (gap * 0.40) + mistakeBonus + isFlagged + rootBoost + pHesitation) * overdueMultiplier;
 
           // 6. 防短程连续考硬冷却 (Recency Lockout)
           let recencyPenalty = 0.0;
@@ -6337,6 +6357,7 @@
               mastery: Math.round(mastery),
               gap: Math.round(gap),
               risk: Math.round(risk),
+              overdueMultiplier: Math.round(overdueMultiplier * 100) / 100,
               mistakes,
               rootBoost: Math.round(rootBoost * 10) / 10,
               pHesitation: Math.round(pHesitation * 10) / 10,
@@ -6373,9 +6394,8 @@
             const cfg = LEITNER_BOX_CONFIG[newBox - 1];
             return { box: newBox, nextReviewDate: now + cfg.ms, streakDelta: 1, isPromoted: newBox > currentBox };
           } else {
-            if (currentBox >= 4) newBox = currentBox - 2;
-            else if (currentBox >= 2) newBox = currentBox - 1;
-            else newBox = 1;
+            // 方案A：3盒黄金中枢守底准则 (盒3/4/5错题统一锁定3盒，盒1/2退回1盒)
+            newBox = (currentBox >= 3) ? 3 : 1;
             const cfg = LEITNER_BOX_CONFIG[newBox - 1];
             return { box: newBox, nextReviewDate: now + cfg.ms, streakDelta: 0, isPromoted: false };
           }
@@ -6469,8 +6489,9 @@
         },
 
         calculateDemotedBox(currBox) {
-          if (currBox >= 4) return currBox - 2;
-          return Math.max(1, currBox - 1);
+          // 方案A：3盒黄金中枢守底准则 (盒3/4/5错题统一锁定3盒稳固，绝不跌入2盒；低阶生词退回1盒)
+          if (currBox >= 3) return 3;
+          return 1;
         },
 
         calculateScheduledDate(initialBox, finalBox, oldNextReviewDate, sessionMistakes) {
@@ -8646,9 +8667,8 @@
                   if (ev.d?.box) {
                     st.box = ev.d.box;
                   } else {
-                    if (st.box >= 4) st.box = st.box - 2;
-                    else if (st.box >= 2) st.box = st.box - 1;
-                    else st.box = 1;
+                    // 方案A：3盒黄金中枢守底准则 (盒3/4/5错题统一锁定3盒，盒1/2退回1盒)
+                    st.box = ((st.box || 1) >= 3) ? 3 : 1;
                   }
                   st.streak = 0;
                   st.mistakes = (st.mistakes || 0) + 1;
@@ -9373,10 +9393,25 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
             } else {
               App.recordAnswer(isCorrect);
-              if (isCorrect) {
-                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+              if (word && word._isOverlearningRetest) {
+                if (isCorrect) {
+                  const stage = word._retestStage || 1;
+                  if (feedbackEl) {
+                    feedbackEl.innerHTML = stage === 2
+                      ? `<span style="color:var(--success); font-weight:800;">✓ 当堂双阶稳固达标！</span>`
+                      : `<span style="color:var(--success); font-weight:800;">✓ 阶段1巩固成功！</span>`;
+                  }
+                } else {
+                  if (feedbackEl) {
+                    feedbackEl.innerHTML = `<span style="color:var(--error); font-weight:800;">✗ 尚未稳固！已重排入待测池强化</span> <span style="font-size:0.78rem; color:var(--text);">正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                  }
+                }
               } else {
-                if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                if (isCorrect) {
+                  if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--success);">✓ 回答正确！</span> <span style="font-size:0.8rem; color:var(--muted);">(点击选项可查看解析)</span>`;
+                } else {
+                  if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 回答错误，正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
+                }
               }
             }
 
@@ -15386,9 +15421,6 @@ const App = (function() {
         const dailySel = document.getElementById('daily-target-select');
         if (dailySel) dailySel.value = localStorage.getItem('morpho_daily_target') || '50';
 
-        const dailyNewLimitSel = document.getElementById('daily-new-limit-select');
-        if (dailyNewLimitSel) dailyNewLimitSel.value = String(AppState.get('dailyNewLimit') || 20);
-
         const autoAdvChk = document.getElementById('auto-advance-chk');
         if (autoAdvChk) autoAdvChk.checked = AppState.get('autoAdvanceEnabled');
 
@@ -15924,10 +15956,17 @@ const App = (function() {
           return false;
         }
 
-        // 2. 严格按上次复习时间 lastReviewed 从小到大排序 (从词库最底部开始抽)
+        // 2. 升维排序：结合遗忘衰减时间与个体稳定性 S，按遗忘紧迫度降序打捞沉底词
         pool.sort((a, b) => {
-          const tA = stDict[a.word]?.lastReviewed || 0;
-          const tB = stDict[b.word]?.lastReviewed || 0;
+          const stA = stDict[a.word] || {};
+          const stB = stDict[b.word] || {};
+          const tA = stA.lastReviewed || 0;
+          const tB = stB.lastReviewed || 0;
+          const sA = Math.max(0.5, stA.stability || 1.0);
+          const sB = Math.max(0.5, stB.stability || 1.0);
+          const urgencyA = (now - tA) / (sA * 86400000);
+          const urgencyB = (now - tB) / (sB * 86400000);
+          if (urgencyB !== urgencyA) return urgencyB - urgencyA;
           return tA - tB;
         });
 
@@ -15961,10 +16000,15 @@ const App = (function() {
           scopeBoxId: targetBoxId,
           scopeName: targetName,
           isUnlimited: isUnlimited,
+          primaryQueue: [...selectedWords],
+          retestPool: [],
           queue: [...selectedWords],
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
           totalInitial: selectedWords.length,
           passedWords: new Set(),
           mistakeWords: new Set(),
+          consolidatedWords: new Set(),
           roundStartTime: now,
           backupContext: backupContext
         };
@@ -15990,6 +16034,8 @@ const App = (function() {
         const session = AppState.get('overlearningSession');
         if (!session || !session.isActive) return;
 
+        const retestCount = session.retestPool ? session.retestPool.length : 0;
+
         if (restore && session.backupContext) {
           AppState.batchUpdate({
             activePool: session.backupContext.activePool,
@@ -16006,10 +16052,16 @@ const App = (function() {
           isActive: false,
           scopeBoxId: null,
           scopeName: '',
+          isUnlimited: false,
+          primaryQueue: [],
+          retestPool: [],
           queue: [],
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
           totalInitial: 0,
           passedWords: new Set(),
           mistakeWords: new Set(),
+          consolidatedWords: new Set(),
           roundStartTime: 0,
           backupContext: null
         });
@@ -16017,7 +16069,10 @@ const App = (function() {
         this.updateOverlearningUI();
         this.updateDueBadge();
         this.renderCurrentView();
-        Services.Sync.showToast('已退出底部顺推，返回主线学习', 'info', 1500);
+        const exitMsg = retestCount > 0
+          ? `已退出底部顺推，${retestCount} 个强化词已安全留存 3 盒`
+          : '已退出底部顺推，返回主线学习';
+        Services.Sync.showToast(exitMsg, 'info', 2000);
       },
 
       updateOverlearningUI() {
@@ -16036,23 +16091,43 @@ const App = (function() {
         if (bar) bar.style.display = 'flex';
         const isUnlimited = Boolean(session.isUnlimited);
         if (title) title.innerText = `${session.scopeName || '底部顺推'}`;
+
+        const primaryRemain = session.primaryQueue ? session.primaryQueue.length : (session.queue ? session.queue.length : 0);
+        const retestCount = session.retestPool ? session.retestPool.length : 0;
+        const curQ = session.questionIndex || 0;
+        const readyRetestCount = (session.retestPool || []).filter(item => curQ >= item.eligibleIndex).length;
+        const coolingCount = Math.max(0, retestCount - readyRetestCount);
+        const passedCount = session.passedWords ? session.passedWords.size : 0;
+        const cycledCount = session.mistakeWords ? session.mistakeWords.size : 0;
+        const consolidatedCount = session.consolidatedWords ? session.consolidatedWords.size : 0;
+
         if (desc) {
+          let poolStatus = '';
+          if (retestCount > 0) {
+            poolStatus = ` · 待测池 ${retestCount} 词 · ${coolingCount} 冷却`;
+          } else if (cycledCount > 0) {
+            poolStatus = ` · 待测池已清空 · ${consolidatedCount} 稳固`;
+          }
           desc.innerText = isUnlimited
-            ? `(已翻新 ${session.passedWords.size} 词 · 回环错题 ${session.mistakeWords.size} 词 · 随练随退)`
-            : `(已翻新 ${session.passedWords.size} / 初始 ${session.totalInitial} 词 · 回环错题 ${session.mistakeWords.size} 词)`;
+            ? `主线翻新 ${passedCount} 词${poolStatus} · 随练随退`
+            : `主线 ${passedCount}/${session.totalInitial} 词${poolStatus}`;
         }
         if (badge) {
-          badge.innerText = isUnlimited
-            ? `已翻新 ${session.passedWords.size} 词 / 剩余 ${session.queue.length} 词`
-            : `剩余 ${session.queue.length} 词`;
+          if (retestCount > 0) {
+            badge.innerText = `主线余 ${primaryRemain} 词 | 待测池 ${retestCount} 词`;
+            badge.style.background = '#f59e0b';
+          } else {
+            badge.innerText = isUnlimited
+              ? `已翻新 ${passedCount} 词 / 主线余 ${primaryRemain} 词`
+              : `主线余 ${primaryRemain} 词`;
+            badge.style.background = '#10b981';
+          }
         }
 
         if (progEl) {
-          const passed = session.passedWords.size;
-          const total = session.totalInitial;
           progEl.innerText = isUnlimited
-            ? `🌊 [底部顺推] 已翻新 ${passed} 词 · 剩余 ${session.queue.length} 词`
-            : `🌊 [底部顺推] 剩余 ${session.queue.length} / 共 ${total} 词 (已翻新 ${passed} 词)`;
+            ? `🌊 [底部顺推] 主线已学 ${passedCount} 词 · 待测池 ${retestCount} 词`
+            : `🌊 [底部顺推] 主线余 ${primaryRemain}/${session.totalInitial} 词 · 待测池 ${retestCount} 词`;
         }
       },
 
@@ -16067,8 +16142,10 @@ const App = (function() {
         const s = String(elapsedSec % 60).padStart(2, '0');
 
         const total = session.totalInitial;
-        const cycledCount = session.mistakeWords.size;
-        const perfectCount = Math.max(0, total - cycledCount);
+        const passedCount = session.passedWords ? session.passedWords.size : 0;
+        const cycledCount = session.mistakeWords ? session.mistakeWords.size : 0;
+        const consolidatedCount = session.consolidatedWords ? session.consolidatedWords.size : 0;
+        const perfectCount = Math.max(0, passedCount);
 
         const timeEl = document.getElementById('overlearning-tm-time');
         const wordsEl = document.getElementById('overlearning-tm-words');
@@ -16077,10 +16154,10 @@ const App = (function() {
         const remainEl = document.getElementById('overlearning-tm-remain');
 
         if (timeEl) timeEl.innerText = `${m}:${s}`;
-        if (wordsEl) wordsEl.innerText = `${total} 词`;
+        if (wordsEl) wordsEl.innerText = `${passedCount + cycledCount} 词`;
         if (perfectEl) perfectEl.innerText = `${perfectCount} 词`;
-        if (cycledEl) cycledEl.innerText = `${cycledCount} 词`;
-        if (remainEl) remainEl.innerText = cycledCount > 0 ? `${cycledCount} 词已降入盒3 (明日迎战)` : `0 错题 全面稳固`;
+        if (cycledEl) cycledEl.innerText = cycledCount > 0 ? `${cycledCount} 词 · 稳固 ${consolidatedCount} 词` : '0 词';
+        if (remainEl) remainEl.innerText = cycledCount > 0 ? `${cycledCount} 词已落入 3 盒` : `0 错题 全面稳固`;
 
         if (session.backupContext) {
           AppState.batchUpdate({
@@ -16098,10 +16175,16 @@ const App = (function() {
           isActive: false,
           scopeBoxId: null,
           scopeName: '',
+          isUnlimited: false,
+          primaryQueue: [],
+          retestPool: [],
           queue: [],
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
           totalInitial: 0,
           passedWords: new Set(),
           mistakeWords: new Set(),
+          consolidatedWords: new Set(),
           roundStartTime: 0,
           backupContext: null
         });
@@ -16238,8 +16321,6 @@ const App = (function() {
 
         if (mode === 'adaptive') {
           const mistakeOnly = (typeof document !== 'undefined' ? document.getElementById('mistake-only-chk')?.checked : false) || false;
-          const dailyNewLimit = AppState.get('dailyNewLimit') ?? 20;
-          const todayNewCount = this.getTodayNewLearnedCount(curPack);
           const now = Date.now();
           const recentBuf = AppState.get('recentQuestionBuffer') || [];
           const recentLocked = recentBuf.slice(-4); // 4 题硬冷却
@@ -16330,51 +16411,58 @@ const App = (function() {
             return st && Algorithms.Leitner.isWordDue(st, now) && !recentLocked.includes(w.word);
           });
 
-          // 若全库无未学新词（即生词已开荒完毕）：
-          if (unlearnedInBox1.length === 0) {
-            if (allDueCandidates.length > 0) {
-              // 阶段一：100% 绝对强制清空所有到期词 (按到期紧迫度升序排队)
-              allDueCandidates.sort((a, b) => {
-                const dueA = stDict[a.word]?.nextReviewDate || 0;
-                const dueB = stDict[b.word]?.nextReviewDate || 0;
-                return dueA - dueB;
-              });
-              const chosenWord = allDueCandidates[0];
-              const chosenSt = stDict[chosenWord.word] || {};
-              const chosenBox = chosenSt.box || 5;
-              const chosenType = `盒${chosenBox}到期`;
-              const targetIndex = pool.indexOf(chosenWord);
-              const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
-              if (progEl) {
-                progEl.innerText = `🎯 [${chosenType}] ${targetIndex + 1} / ${pool.length}`;
-                progEl.title = `【当前状态: 到期消灭中】\n· 策略: 优先消灭全库临界到期词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 剩余到期词: ${allDueCandidates.length} 词`;
-              }
-              return chosenWord;
-            } else {
-              // 阶段二：全库今日到期词已全部清零，100% 自动接管为【底部顺推】！
-              const todayStart = new Date().setHours(0, 0, 0, 0);
-              const nonLockedPool = pool.filter(w => !recentLocked.includes(w.word));
-              let unreviewedToday = nonLockedPool.filter(w => {
-                const st = stDict[w.word];
-                return !st || !st.lastReviewed || st.lastReviewed < todayStart;
-              });
-              const streamPool = unreviewedToday.length > 0 ? unreviewedToday : nonLockedPool;
-              streamPool.sort((a, b) => {
-                const tA = stDict[a.word]?.lastReviewed || 0;
-                const tB = stDict[b.word]?.lastReviewed || 0;
-                return tA - tB;
-              });
-              const chosenWord = streamPool.length > 0 ? streamPool[0] : pool[0];
-              const chosenSt = stDict[chosenWord.word] || {};
-              const daysAgo = chosenSt.lastReviewed ? Math.floor((now - chosenSt.lastReviewed) / 86400000) : '未测';
-              const targetIndex = pool.indexOf(chosenWord);
-              const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
-              if (progEl) {
-                progEl.innerText = `🌊 [底部顺推] ${targetIndex + 1} / ${pool.length}`;
-                progEl.title = `【当前状态: 底部顺推】\n· 策略: 今日到期词已全清，由远及近打捞词库底层沉睡熟词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 该词上次测试: ${daysAgo} 天前\n· 掌握度: ${chosenSt.masteryScore ?? 90}%`;
-              }
-              return chosenWord;
+          // ★ 优化1：到期词绝对优先抢救机制 (Review Before New)
+          // 只要全库存在到期词，100% 优先消灭到期词，阻断记忆悬崖！
+          if (allDueCandidates.length > 0) {
+            allDueCandidates.sort((a, b) => {
+              const dueA = stDict[a.word]?.nextReviewDate || 0;
+              const dueB = stDict[b.word]?.nextReviewDate || 0;
+              return dueA - dueB;
+            });
+            const chosenWord = allDueCandidates[0];
+            const chosenSt = stDict[chosenWord.word] || {};
+            const chosenBox = chosenSt.box || 1;
+            const chosenType = `盒${chosenBox}到期`;
+            const targetIndex = pool.indexOf(chosenWord);
+            const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
+            if (progEl) {
+              progEl.innerText = `🎯 [${chosenType}] ${targetIndex + 1} / ${pool.length}`;
+              progEl.title = `【当前状态: 到期消灭中】\n· 策略: 优先消灭全库临界到期词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 剩余到期词: ${allDueCandidates.length} 词`;
             }
+            return chosenWord;
+          }
+
+          // ★ 优化2：当全库已无到期词时，若生词也已全部开荒完毕，100% 自动接管为【底部顺推】！
+          if (unlearnedInBox1.length === 0) {
+            const todayStart = new Date().setHours(0, 0, 0, 0);
+            const nonLockedPool = pool.filter(w => !recentLocked.includes(w.word));
+            let unreviewedToday = nonLockedPool.filter(w => {
+              const st = stDict[w.word];
+              return !st || !st.lastReviewed || st.lastReviewed < todayStart;
+            });
+            const streamPool = unreviewedToday.length > 0 ? unreviewedToday : nonLockedPool;
+            streamPool.sort((a, b) => {
+              const stA = stDict[a.word] || {};
+              const stB = stDict[b.word] || {};
+              const tA = stA.lastReviewed || 0;
+              const tB = stB.lastReviewed || 0;
+              const sA = Math.max(0.5, stA.stability || 1.0);
+              const sB = Math.max(0.5, stB.stability || 1.0);
+              const urgencyA = (now - tA) / (sA * 86400000);
+              const urgencyB = (now - tB) / (sB * 86400000);
+              if (urgencyB !== urgencyA) return urgencyB - urgencyA;
+              return tA - tB;
+            });
+            const chosenWord = streamPool.length > 0 ? streamPool[0] : pool[0];
+            const chosenSt = stDict[chosenWord.word] || {};
+            const daysAgo = chosenSt.lastReviewed ? Math.floor((now - chosenSt.lastReviewed) / 86400000) : '未测';
+            const targetIndex = pool.indexOf(chosenWord);
+            const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
+            if (progEl) {
+              progEl.innerText = `🌊 [底部顺推] ${targetIndex + 1} / ${pool.length}`;
+              progEl.title = `【当前状态: 底部顺推】\n· 策略: 今日到期词已全清，由远及近打捞词库底层沉睡熟词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 该词上次测试: ${daysAgo} 天前\n· 掌握度: ${chosenSt.masteryScore ?? 90}%`;
+            }
+            return chosenWord;
           }
 
           // 2. 统计各盒内非冷却的可用单词
@@ -16478,8 +16566,15 @@ const App = (function() {
               });
               const overlearningPool = unreviewedToday.length > 0 ? unreviewedToday : targetPool;
               overlearningPool.sort((a, b) => {
-                const tA = stDict[a.word]?.lastReviewed || 0;
-                const tB = stDict[b.word]?.lastReviewed || 0;
+                const stA = stDict[a.word] || {};
+                const stB = stDict[b.word] || {};
+                const tA = stA.lastReviewed || 0;
+                const tB = stB.lastReviewed || 0;
+                const sA = Math.max(0.5, stA.stability || 1.0);
+                const sB = Math.max(0.5, stB.stability || 1.0);
+                const urgencyA = (now - tA) / (sA * 86400000);
+                const urgencyB = (now - tB) / (sB * 86400000);
+                if (urgencyB !== urgencyA) return urgencyB - urgencyA;
                 return tA - tB;
               });
               chosenWord = overlearningPool[0];
@@ -16757,11 +16852,51 @@ const App = (function() {
 
         const overSession = AppState.get('overlearningSession');
         if (overSession && overSession.isActive) {
-          if (overSession.queue.length === 0) {
+          overSession.questionIndex = (overSession.questionIndex || 0) + 1;
+          const curQ = overSession.questionIndex;
+          const lastRetestQ = overSession.lastRetestQuestionIndex ?? -999;
+          const hasPrimary = (overSession.primaryQueue && overSession.primaryQueue.length > 0);
+
+          // 防扎堆保护约束：若主轨还有词，则要求距离上一道复测题至少间隔 2 题
+          const allowRetest = !hasPrimary || (curQ - lastRetestQ >= 2);
+
+          let readyRetestIdx = -1;
+          if (allowRetest && overSession.retestPool && overSession.retestPool.length > 0) {
+            readyRetestIdx = overSession.retestPool.findIndex(item => curQ >= item.eligibleIndex);
+          }
+
+          let nextWord = null;
+          if (readyRetestIdx !== -1) {
+            // 从待测池调取冷却完毕的成熟词 (进入复测/核验出题)
+            const retestItem = overSession.retestPool[readyRetestIdx];
+            nextWord = { ...retestItem.wordObj };
+            nextWord._isOverlearningRetest = true;
+            nextWord._retestStage = retestItem.stage || 1;
+            nextWord._retestItemRef = retestItem;
+            overSession.lastRetestQuestionIndex = curQ;
+          } else if (hasPrimary) {
+            // 从主轨抽取顺推词
+            nextWord = { ...overSession.primaryQueue[0] };
+            nextWord._isOverlearningRetest = false;
+          } else if (overSession.retestPool && overSession.retestPool.length > 0) {
+            // 主轨已空，待测池尚有冷却中的词：进入扫尾清盘期（按最早冷却时间抽取）
+            overSession.retestPool.sort((a, b) => (a.eligibleIndex || 0) - (b.eligibleIndex || 0));
+            const retestItem = overSession.retestPool[0];
+            nextWord = { ...retestItem.wordObj };
+            nextWord._isOverlearningRetest = true;
+            nextWord._retestStage = retestItem.stage || 1;
+            nextWord._retestItemRef = retestItem;
+            overSession.lastRetestQuestionIndex = curQ;
+          } else {
+            // 主轨与待测池均已空，顺推圆满通关！
             this.showOverlearningMilestoneModal();
             return;
           }
-          const nextWord = overSession.queue[0];
+
+          // 同步 queue 供其它计算感知
+          overSession.queue = [...(overSession.primaryQueue || [])];
+          AppState.update('overlearningSession', overSession);
+
           let history = AppState.get('questionHistory');
           history.push(nextWord.word);
           if (history.length > 100) history.shift();
@@ -17029,6 +17164,19 @@ const App = (function() {
           riskEl.className = `risk-pill ${riskData.risk > 50 ? 'danger' : (riskData.risk > 25 ? 'warning' : 'safe')}`;
         }
 
+        const retestPill = typeof document !== 'undefined' ? document.getElementById('overlearning-retest-pill') : null;
+        if (retestPill) {
+          if (word && word._isOverlearningRetest) {
+            retestPill.style.display = 'inline-block';
+            const stage = word._retestStage || 1;
+            retestPill.innerText = stage === 2 ? '🔄 延时核验' : '🔄 当堂复测';
+            retestPill.style.background = stage === 2 ? '#0284c7' : '#f59e0b';
+            retestPill.title = stage === 2 ? '延时核验：答对完成当堂双阶稳固' : '当堂复测：答对进入延时核验';
+          } else {
+            retestPill.style.display = 'none';
+          }
+        }
+
         const prevBtn = typeof document !== 'undefined' ? document.getElementById('prev-btn') : null;
         if (prevBtn) prevBtn.style.display = (AppState.get('historyCursor') > 0) ? 'block' : 'none';
 
@@ -17291,25 +17439,93 @@ const App = (function() {
         }
 
         const overSession = AppState.get('overlearningSession');
-        if (overSession && overSession.isActive && overSession.queue.length > 0) {
-          const head = overSession.queue[0];
-          if (head && head.word === wordName) {
-            if (isCorrect) {
-              overSession.passedWords.add(wordName);
-              overSession.queue.shift();
-            } else {
-              overSession.mistakeWords.add(wordName);
-              const failed = overSession.queue.shift();
-              // 回环重测：隔 3 题或塞入队尾，确保当堂巩固
-              if (overSession.queue.length >= 3) {
-                overSession.queue.splice(3, 0, failed);
-              } else {
-                overSession.queue.push(failed);
+        let isOverlearningRetest = false;
+        if (overSession && overSession.isActive) {
+          const curQ = overSession.questionIndex || 1;
+          const currentWordObj = AppState.get('currentWord');
+          isOverlearningRetest = Boolean(currentWordObj && currentWordObj._isOverlearningRetest);
+
+          if (!isOverlearningRetest) {
+            // 主轨顺推词：从顺推队列移除该题
+            if (overSession.primaryQueue && overSession.primaryQueue.length > 0) {
+              const headIdx = overSession.primaryQueue.findIndex(w => w.word === wordName);
+              if (headIdx !== -1) {
+                overSession.primaryQueue.splice(headIdx, 1);
+              }
+            } else if (overSession.queue && overSession.queue.length > 0) {
+              const headIdx = overSession.queue.findIndex(w => w.word === wordName);
+              if (headIdx !== -1) {
+                overSession.queue.splice(headIdx, 1);
               }
             }
-            AppState.update('overlearningSession', overSession);
-            this.updateOverlearningUI();
+
+            if (isCorrect) {
+              overSession.passedWords.add(wordName);
+            } else {
+              overSession.mistakeWords.add(wordName);
+              // ★ 模式 B 阶段 1：首测巩固，动态冷却间隔 5 ~ 7 题（消除短时工作记忆残留）
+              const dynamicGap1 = 5 + Math.floor(Math.random() * 3); // 5, 6, 7 题随机抖动
+              if (!overSession.retestPool) overSession.retestPool = [];
+              // 防止重复推入
+              const existIdx = overSession.retestPool.findIndex(item => item.wordObj.word === wordName);
+              if (existIdx !== -1) {
+                overSession.retestPool.splice(existIdx, 1);
+              }
+              const retestWordObj = currentWordObj || { word: wordName };
+              overSession.retestPool.push({
+                wordObj: retestWordObj,
+                stage: 1, // 阶段 1：初次巩固复测
+                enterIndex: curQ,
+                eligibleIndex: curQ + dynamicGap1,
+                failCount: 1
+              });
+              Services.Sync.showToast('⚠️ 未掌握词已转入 3 盒强化，排入待测池等待巩固！', 'warning', 2500);
+            }
+          } else {
+            // 副轨待测池抽调的复测词
+            if (!overSession.retestPool) overSession.retestPool = [];
+            const poolIdx = overSession.retestPool.findIndex(item => item.wordObj.word === wordName);
+            let retestItem = null;
+            if (poolIdx !== -1) {
+              retestItem = overSession.retestPool.splice(poolIdx, 1)[0];
+            } else {
+              retestItem = currentWordObj?._retestItemRef || {
+                wordObj: currentWordObj || { word: wordName },
+                stage: currentWordObj?._retestStage || 1,
+                failCount: 1
+              };
+            }
+
+            if (isCorrect) {
+              if (retestItem.stage === 1) {
+                // ★ 阶段 1 答对 -> 晋升至阶段 2 延时核验，动态间隔 10 ~ 14 题
+                const dynamicGap2 = 10 + Math.floor(Math.random() * 5); // 10, 11, 12, 13, 14 题
+                retestItem.stage = 2;
+                retestItem.enterIndex = curQ;
+                retestItem.eligibleIndex = curQ + dynamicGap2;
+                overSession.retestPool.push(retestItem);
+                Services.Sync.showToast('✓ 阶段1巩固通过！已排入阶段2延时核验', 'info', 1800);
+              } else {
+                // ★ 阶段 2 答对 -> 双阶稳固通过！彻底移出待测池
+                if (!overSession.consolidatedWords) overSession.consolidatedWords = new Set();
+                overSession.consolidatedWords.add(wordName);
+                Services.Sync.showToast('🎉 当堂双阶稳固完成！记忆锁定明日迎战', 'success', 2000);
+              }
+            } else {
+              // 复测答错：打回阶段 1，缩短冷却至 3 ~ 4 题再次攻坚
+              const retryGap = 3 + Math.floor(Math.random() * 2); // 3 或 4 题
+              retestItem.stage = 1;
+              retestItem.failCount = (retestItem.failCount || 1) + 1;
+              retestItem.enterIndex = curQ;
+              retestItem.eligibleIndex = curQ + retryGap;
+              overSession.retestPool.push(retestItem);
+              Services.Sync.showToast('❌ 尚未稳固，已重新排入待测池强化！', 'warning', 1800);
+            }
           }
+
+          overSession.queue = [...(overSession.primaryQueue || [])];
+          AppState.update('overlearningSession', overSession);
+          this.updateOverlearningUI();
         }
 
         AppState.update('roundTotal', r => r + 1);
@@ -17350,16 +17566,29 @@ const App = (function() {
         let newMastery = transition.masteryScore;
         let newLevel = Algorithms.Scoring.getMasteryLevel(newMastery);
 
-        // ★ 核心规则：针对 5 盒错题降级，降入 3 盒 (中期强化盒)，且下次复习锁定在明天！
-        if (!isCorrect && oldBox === 5) {
+        const todayDateStr = new Date().toDateString();
+        const wasLockedInBox3Today = (baseStat?.demotedToBox3Date === todayDateStr) || Boolean(baseStat?.lockedInBox3Today);
+
+        // ★ 核心规则 1：方案A（3盒黄金中枢守底准则）
+        // 凡是：顺推模式下未掌握词、或 3 盒及以上错题（盒3、盒4、盒5），统一锁定降入/保持在 3 盒，锁定明日到期抗遗忘必复！
+        if (!isCorrect && (overSession?.isActive || oldBox >= 3)) {
           newBox = 3;
           newNextReviewDate = now + 1 * 86400000; // 锁定明日到期必复！
           transition.stability = 4.0;
-          Services.Sync.showToast('⚠️ 5 盒错题已转入 3 盒强化，锁定明日【到期复习】首批迎战！', 'warning', 2500);
-        } else if (!isCorrect && oldBox === 4) {
-          newBox = 2;
+        } else if (!isCorrect && oldBox <= 2) {
+          // 盒 1、盒 2 错题：统一退回 1 盒强化开荒
+          newBox = 1;
           newNextReviewDate = now + 1 * 86400000;
-          transition.stability = 2.0;
+          transition.stability = 0.8;
+        }
+
+        // ★ 核心规则 2：未掌握词今日进入三盒中不再考虑升级，只进行复测加强记忆！
+        // 凡是：(1) 当前是顺推复测题 (isOverlearningRetest)，或 (2) 今日已降入三盒锁定的词 (wasLockedInBox3Today)
+        // 哪怕今日后续复测答对任意次，盒号绝对封顶锁定在 3 盒，下次复习日期绝对锁定在明日！
+        if (isOverlearningRetest || wasLockedInBox3Today) {
+          newBox = 3;
+          newNextReviewDate = now + 1 * 86400000; // 坚决锁定明日到期！
+          transition.stability = Math.min(transition.stability || 4.0, 4.5);
         }
 
         // ★ 核心拦截：检测本次作答是否已被手动保送 (若已手动保送，自动升降盒强制彻底作废！)
@@ -17397,6 +17626,15 @@ const App = (function() {
           if (!isCorrect && (st.exemptUntilDue || st.isGraduated)) {
             st.exemptUntilDue = false;
             st.isGraduated = false;
+          }
+          // 今日降入三盒免升锁定标记 (方案A：顺推模式错题 或 3 盒及以上错题，今日全量锁定 3 盒免升)
+          if (!isCorrect && (overSession?.isActive || oldBox >= 3)) {
+            st.lockedInBox3Today = true;
+            st.demotedToBox3Date = todayDateStr;
+          }
+          if (st.demotedToBox3Date === todayDateStr) {
+            st.box = 3;
+            st.nextReviewDate = Math.min(st.nextReviewDate, now + 1 * 86400000);
           }
         });
 
@@ -18386,10 +18624,6 @@ const App = (function() {
       const sheetTargetSel = document.getElementById('sheet-daily-target-select');
       if (targetSel && sheetTargetSel) sheetTargetSel.value = targetSel.value;
 
-      const newLimitSel = document.getElementById('daily-new-limit-select');
-      const sheetNewLimitSel = document.getElementById('sheet-daily-new-limit-select');
-      if (newLimitSel && sheetNewLimitSel) sheetNewLimitSel.value = newLimitSel.value;
-
       const themeSel = document.getElementById('theme-select');
       const sheetThemeSel = document.getElementById('sheet-theme-select');
       if (themeSel && sheetThemeSel) sheetThemeSel.value = themeSel.value;
@@ -18706,15 +18940,7 @@ const App = (function() {
       App.initDailyActivity();
     };
 
-    window.changeDailyNewLimit = (v) => {
-      const val = parseInt(v, 10) || 20;
-      AppState.update('dailyNewLimit', val);
-      localStorage.setItem('morpho_daily_new_limit', String(val));
-      const sel = document.getElementById('daily-new-limit-select');
-      if (sel && sel.value !== String(val)) sel.value = String(val);
-      Services.Sync.showToast(`每日新词配额已设为: ${val >= 9999 ? '不设上限' : val + ' 词/日'}`, 'info', 1500);
-      App.nextQuestion();
-    };
+    window.changeDailyNewLimit = () => {};
 
     window.changeOrderMode = (m) => {
       AppState.update('orderMode', m);
