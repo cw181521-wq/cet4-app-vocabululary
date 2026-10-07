@@ -1,4 +1,4 @@
-const CACHE_NAME = 'morpho-pwa-v3.95';
+const CACHE_NAME = 'morpho-pwa-v3.96';
 const ASSETS = [
   './manifest.json',
   './icon-192.png'
