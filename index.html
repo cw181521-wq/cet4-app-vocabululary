@@ -1275,7 +1275,9 @@
 
     .modal-overlay.open,
     .ui-modal-overlay.open,
-    .typing-milestone-overlay.open {
+    .typing-milestone-overlay.open,
+    .typing-milestone-overlay[style*="display: flex"],
+    .typing-milestone-overlay[style*="display:flex"] {
       display: flex !important;
       opacity: 1 !important;
       pointer-events: auto !important;
@@ -4249,22 +4251,42 @@
 
   async function resilientFetch(url, options = {}, maxRetries = 2) {
     let lastErr = null;
+    const initialTimeoutMs = options.timeoutMs || 18000;
+
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       const controller = new AbortController();
-      const timeoutMs = options.timeoutMs || 16000;
+      const currentTimeoutMs = initialTimeoutMs + (attempt * 4000);
       let timer = null;
+      let isLocalTimeout = false;
 
       try {
         const timeoutPromise = new Promise((_, reject) => {
           timer = setTimeout(() => {
-            controller.abort();
-            reject(new Error(`网络连接超时 (${Math.round(timeoutMs / 1000)}s)`));
-          }, timeoutMs);
+            isLocalTimeout = true;
+            const tErr = new Error(`连接 GitHub API 超时 (${Math.round(currentTimeoutMs / 1000)}s)，国内直连存在高延迟或丢包`);
+            tErr.name = 'TimeoutError';
+            try { controller.abort(tErr); } catch (_) { controller.abort(); }
+            reject(tErr);
+          }, currentTimeoutMs);
         });
 
-        const reqSignal = options.signal || controller.signal;
-        const fetchOpts = { ...options, signal: reqSignal };
+        if (options.signal) {
+          options.signal.addEventListener('abort', () => {
+            try { controller.abort(options.signal.reason); } catch (_) { controller.abort(); }
+          }, { once: true });
+        }
+
+        const fetchOpts = { ...options, signal: controller.signal };
         delete fetchOpts.timeoutMs;
+
+        const methodUpper = String(fetchOpts.method || 'GET').toUpperCase();
+        if (methodUpper === 'GET' || methodUpper === 'HEAD') {
+          delete fetchOpts.body;
+          if (fetchOpts.headers && typeof fetchOpts.headers === 'object') {
+            delete fetchOpts.headers['Content-Type'];
+            delete fetchOpts.headers['content-type'];
+          }
+        }
 
         const resp = await Promise.race([
           fetch(url, fetchOpts),
@@ -4283,12 +4305,19 @@
         return resp;
       } catch (err) {
         if (timer) clearTimeout(timer);
-        lastErr = err;
-        if (options.signal && options.signal.aborted) {
+        if (options.signal && options.signal.aborted && !isLocalTimeout) {
           throw err;
         }
-        if (attempt < maxRetries && err.name !== 'AbortError') {
-          const backoffDelay = 1000 * Math.pow(2, attempt) + Math.random() * 400;
+
+        let cleanErr = err;
+        if (err && (err.name === 'AbortError' || String(err.message).includes('without reason') || isLocalTimeout)) {
+          cleanErr = new Error(`连接 GitHub API 超时 (${Math.round(currentTimeoutMs / 1000)}s)，国内直连丢包或延迟过高`);
+          cleanErr.name = 'TimeoutError';
+        }
+        lastErr = cleanErr;
+
+        if (attempt < maxRetries) {
+          const backoffDelay = 1200 * Math.pow(2, attempt) + Math.random() * 300;
           await new Promise(r => setTimeout(r, backoffDelay));
           continue;
         }
@@ -5408,14 +5437,24 @@
           const title = options.title || '系统提示';
           const message = options.message || '';
           const confirmText = options.confirmText || '我知道了';
+          const isHtml = Boolean(options.isHtml);
+          const hideConfirm = Boolean(options.hideConfirm);
+
+          const bodyContent = isHtml
+            ? `<div style="margin:0; font-size:0.92rem; color:var(--text); line-height:1.5;">${message}</div>`
+            : `<p style="margin:0; font-size:0.92rem; color:var(--muted); line-height:1.5; white-space:pre-line;">${Utils.escapeHTML(message)}</p>`;
+
+          const footerHtml = hideConfirm
+            ? ''
+            : `<div style="display:flex; justify-content:flex-end; margin-top:8px;">
+                <button class="btn btn-primary" data-role="confirm" style="padding:8px 20px;">${Utils.escapeHTML(confirmText)}</button>
+              </div>`;
 
           overlay.innerHTML = `
-            <div class="ui-modal-card" role="dialog" aria-modal="true">
+            <div class="ui-modal-card" role="dialog" aria-modal="true" style="${isHtml ? 'max-width:560px;' : ''}">
               <h3 style="margin:0; font-size:1.15rem; font-weight:800; color:var(--text);">${Utils.escapeHTML(title)}</h3>
-              <p style="margin:0; font-size:0.92rem; color:var(--muted); line-height:1.5; white-space:pre-line;">${Utils.escapeHTML(message)}</p>
-              <div style="display:flex; justify-content:flex-end; margin-top:8px;">
-                <button class="btn btn-primary" data-role="confirm" style="padding:8px 20px;">${Utils.escapeHTML(confirmText)}</button>
-              </div>
+              ${bodyContent}
+              ${footerHtml}
             </div>
           `;
 
@@ -5430,11 +5469,13 @@
             overlay.style.display = 'none';
             KeyRouter.popModal(overlay);
             ModalStackManager.dismissModal('ui_alert', { triggerHistoryBack: !isPopState });
+            const container = document.querySelector('.container');
+            if (container) container.removeAttribute('inert');
             resolve();
           };
 
           const confirmBtn = overlay.querySelector('[data-role="confirm"]');
-          confirmBtn.onclick = () => settle(false);
+          if (confirmBtn) confirmBtn.onclick = () => settle(false);
           overlay.onclick = (e) => { if (e.target === overlay) settle(false); };
 
           ModalStackManager.openModal('ui_alert', (isPop) => settle(isPop), overlay);
@@ -5444,6 +5485,24 @@
             onEnter: () => settle(false)
           });
         });
+      },
+
+      close() {
+        const alertOverlay = document.getElementById('ui-modal-alert-overlay');
+        if (alertOverlay && alertOverlay.classList.contains('open')) {
+          alertOverlay.classList.remove('open');
+          alertOverlay.style.display = 'none';
+          KeyRouter.popModal(alertOverlay);
+          ModalStackManager.dismissModal('ui_alert', { triggerHistoryBack: false });
+        }
+        const confirmOverlay = document.getElementById('ui-modal-confirm-overlay');
+        if (confirmOverlay && confirmOverlay.classList.contains('open')) {
+          confirmOverlay.classList.remove('open');
+          confirmOverlay.style.display = 'none';
+          KeyRouter.popModal(confirmOverlay);
+          ModalStackManager.dismissModal('ui_confirm', { triggerHistoryBack: false });
+        }
+        this.unwind();
       },
 
       unwind() {
@@ -5610,6 +5669,8 @@
         roundStartTime: 0,
         backupContext: null
       },
+      dailyDueMilestoneShownDate: null,
+      hadDueWordsInRun: false,
 
       overlearningSession: {
         isActive: false,
@@ -6376,10 +6437,9 @@
           return LEITNER_BOX_CONFIG[safeId - 1];
         },
         isWordDue(st, now = Date.now()) {
-          if (!st) return true; // 未测试单词默认归属于盒 1，天然处于待背诵状态
-          const box = st.box || 1;
+          if (!st) return false; // 未测试单词为待开荒生词，不属于到期复习范畴
           const lastReviewed = (typeof st.lastReviewed === 'number') ? st.lastReviewed : 0;
-          if (lastReviewed <= 0) return true; // 盒 1 尚未学习过的生词，允许随时到期巩固
+          if (lastReviewed <= 0) return false; // 盒 1 尚未学习过的生词，由生词开荒机制调度，不属于到期复习
           const nextReview = (typeof st.nextReviewDate === 'number') ? st.nextReviewDate : 0;
           return now >= nextReview;
         },
@@ -8353,7 +8413,103 @@
       let syncDebounceTimer = null;
       let isSyncing = false;
       let lastErrorMessage = '';
+      let lastDiagnosis = null;
       const hasNativeCompression = (typeof CompressionStream !== 'undefined') && (typeof DecompressionStream !== 'undefined');
+
+      function diagnoseSyncError(err, context = {}) {
+        const rawMsg = (err && (err.message || String(err))) || '未知通信异常';
+        const status = context.status || (err && err.status) || null;
+        const nowStr = new Date().toLocaleTimeString();
+
+        let type = 'unknown';
+        let title = '❌ 云端同步异常';
+        let shortBadge = '❌ 同步失败';
+        let message = rawMsg;
+        let suggestion = '请检查网络连接及 GitHub Token 设置。';
+
+        const lowMsg = rawMsg.toLowerCase();
+
+        if (status === 401 || lowMsg.includes('bad credentials') || lowMsg.includes('401')) {
+          type = 'auth_error';
+          title = '❌ 鉴权失败：Token 无效或已过期';
+          shortBadge = '❌ 鉴权失败(401)';
+          message = 'GitHub 拒绝了请求：提供的 Token 不正确、已被撤销或已过期。';
+          suggestion = '请前往 GitHub Settings -> Developer settings -> Personal access tokens 重新生成 Token 并填入。';
+        } else if (status === 403 || lowMsg.includes('403') || lowMsg.includes('rate limit') || lowMsg.includes('scope')) {
+          if (lowMsg.includes('rate limit') || lowMsg.includes('secondary rate limit') || lowMsg.includes('api rate limit exceeded')) {
+            type = 'rate_limit';
+            title = '⏳ 触发限流：GitHub API 调用频次超限';
+            shortBadge = '⏳ 频次限流(403)';
+            message = '已达到 GitHub API 的访问频率限制。';
+            suggestion = 'GitHub 对个人 API 设有每小时请求限额，请稍候 5~15 分钟后系统将自动恢复同步。';
+          } else {
+            type = 'scope_error';
+            title = '❌ 权限不足：Token 缺少 gist 权限';
+            shortBadge = '❌ 缺gist权限(403)';
+            message = '当前 Token 存在但缺少写入权限，通常是生成 Token 时未勾选 [x] gist 选项。';
+            suggestion = '创建 Classic Token 时必须勾选 "gist" 权限；若使用 Fine-grained Token，需确保赋予 "Gists" 的 Read and Write 权限。';
+          }
+        } else if (status === 404 || lowMsg.includes('not found') || lowMsg.includes('404')) {
+          type = 'not_found';
+          title = '❌ 目标 Gist 不存在或无访问权限';
+          shortBadge = '❌ Gist不存在(404)';
+          message = '未在 GitHub 上找到对应的 Gist 仓库，可能是 Gist ID 填写有误，或该 Gist 已被删除，或属于他人账号。';
+          suggestion = '建议点击下方的【🆕 清空 ID 自动新建】，系统将自动为您创建一个属于您自己账号的全新云端存档！';
+        } else if (status === 415 || lowMsg.includes('415') || lowMsg.includes('unsupported media type')) {
+          type = 'media_type_error';
+          title = '❌ 数据格式不受支持 (415 Unsupported Media Type)';
+          shortBadge = '❌ 格式不支持(415)';
+          message = 'GitHub API 拒绝了请求头或载荷格式：通常由于请求缺少正确的 Content-Type: application/json，或 GET 请求误传了实体内容。';
+          suggestion = '底层已内置过滤自愈机制，建议重新点击重试或【清空 ID 自动新建】。';
+        } else if (status === 422 || lowMsg.includes('422') || lowMsg.includes('unprocessable')) {
+          type = 'payload_error';
+          title = '📦 数据格式或超限校验异常';
+          shortBadge = '📦 数据校验(422)';
+          message = 'GitHub API 拒绝了存档数据载荷，可能是单个文件过大或结构验证不符。';
+          suggestion = '建议先在管理面板导出一次本地 JSON 备份，然后点击【清空 ID 自动新建】进行全新存盘。';
+        } else if (lowMsg.includes('failed to fetch') || lowMsg.includes('networkerror') || lowMsg.includes('load failed') || lowMsg.includes('connection refused')) {
+          type = 'network_blocked';
+          title = '🌐 通信受阻：无法连接到 api.github.com';
+          shortBadge = '🌐 网络受阻';
+          message = '浏览器无法连接到 GitHub API 服务器。通常由网络不稳定、防火墙或代理/VPN 节点未放行 api.github.com 引起。';
+          suggestion = '1. 检查电脑或手机的网络连接；\n2. 若开启了代理/科学上网工具，请开启 TUN/全局代理模式，或确保将 api.github.com 加入白名单规则；\n3. 尝试在浏览器直接打开 https://api.github.com 测试连通性。';
+        } else if (err.name === 'AbortError' || lowMsg.includes('超时') || lowMsg.includes('timeout')) {
+          type = 'timeout';
+          title = '⏱️ 同步超时：连接超过 16 秒未响应';
+          shortBadge = '⏱️ 连接超时';
+          message = '连接 GitHub API 超时，网络往返延迟过大或当前路由丢包严重。';
+          suggestion = '请检查网络带宽或切换至更通畅的网络节点后重试。';
+        } else if (lowMsg.includes('json') || lowMsg.includes('decompress') || lowMsg.includes('解压')) {
+          type = 'parse_error';
+          title = '⚠️ 数据解析或解压失败';
+          shortBadge = '⚠️ 格式解析异常';
+          message = rawMsg;
+          suggestion = '云端存档可能损坏或被外部修改，可尝试使用【从上一版本云端镜像回滚】恢复。';
+        }
+
+        lastDiagnosis = {
+          type,
+          title,
+          shortBadge,
+          message,
+          suggestion,
+          rawError: rawMsg,
+          status,
+          timestamp: nowStr,
+          gistId: context.gistId || (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_gist_id') : '') || ''
+        };
+
+        lastErrorMessage = `${title}: ${message}`;
+        return lastDiagnosis;
+      }
+
+      if (typeof window !== 'undefined') {
+        window.addEventListener('online', () => {
+          if (Sync.hasUnsyncedChanges && Sync.hasUnsyncedChanges()) {
+            Sync.upload('network_online_restored');
+          }
+        });
+      }
 
       async function compress(str) {
         if (!hasNativeCompression) return null;
@@ -8384,6 +8540,8 @@
       return {
         getLastErrorMessage() { return lastErrorMessage; },
         get lastErrorMessage() { return lastErrorMessage; },
+        getLastDiagnosis() { return lastDiagnosis; },
+        diagnoseSyncError(err, context) { return diagnoseSyncError(err, context); },
         hasUnsyncedChanges() {
           if (typeof localStorage === 'undefined') return false;
           const lastMod = parseInt(localStorage.getItem('morpho_last_modified_time') || '0', 10);
@@ -8486,17 +8644,13 @@
             typingSession: typingSession,
             typingPoolLimit: typingPoolLimit,
             payload: isCompressed ? compressedB64 : null,
-            snapshot: internalState.snapshot,
+            snapshot: isCompressed ? null : internalState.snapshot,
             recentEvents: isCompressed ? null : internalState.recentEvents
           };
 
-          const prevBackup = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_previous_cloud_backup') : null);
           const files = {
-            [SYNC_FILE]: { content: JSON.stringify(envelope, null, 2) }
+            [SYNC_FILE]: { content: JSON.stringify(envelope) }
           };
-          if (prevBackup) {
-            files['morpho_sync_backup.json'] = { content: prevBackup };
-          }
 
           const payload = {
             description: 'MorphoSyntax Terminal Progress Backup (v4 Gzip+EventLog)',
@@ -8886,9 +9040,6 @@
           lastErrorMessage = '';
           this.setBadge('syncing', '☁️ 同步中...');
 
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 16000);
-
           try {
             let targetId = cleanGistId;
             let currentRev = parseInt(localStorage.getItem('morpho_sync_revision') || '0', 10) || 0;
@@ -8911,10 +9062,24 @@
             }, 2);
 
             if (!resp.ok) {
+              if (resp.status === 409 && triggerReason !== 'rebase_convergence') {
+                console.warn('[AutoSync] Revision conflict (409) detected, auto-rebasing...');
+                await this.autoPullOnLaunch();
+                return await this.upload('rebase_convergence');
+              }
               let msg = '';
-              try { const errJson = await resp.json(); msg = errJson.message || ''; } catch (_) {}
-              lastErrorMessage = `[HTTP ${resp.status}] ${msg || 'GitHub 通信受阻'}`;
-              throw new Error(lastErrorMessage);
+              let errorDetails = '';
+              try {
+                const errJson = await resp.json();
+                msg = errJson.message || '';
+                if (errJson.errors && Array.isArray(errJson.errors)) {
+                  errorDetails = errJson.errors.map(e => e.message || JSON.stringify(e)).join('; ');
+                }
+              } catch (_) {}
+              const combinedMsg = [msg, errorDetails].filter(Boolean).join(' - ') || resp.statusText;
+              const err = new Error(combinedMsg);
+              err.status = resp.status;
+              throw err;
             }
 
             const resData = await resp.json();
@@ -8953,16 +9118,14 @@
             }, 3500);
             return true;
           } catch (err) {
-            if (err.name === 'AbortError') {
-              lastErrorMessage = '同步超时 (15s)，请检查网络或代理连接';
-            } else {
-              lastErrorMessage = err.message || '网络请求受阻';
+            const diag = diagnoseSyncError(err, { status: err.status, gistId: cleanGistId });
+            console.warn('[AutoSync] Upload exception:', diag);
+            this.setBadge('error', diag.shortBadge);
+            if (triggerReason === 'manual' || triggerReason === 'force_create_new') {
+              this.showToast(`❌ 上传失败: ${diag.title}`, 'error', 4500);
             }
-            console.warn('[AutoSync] Upload exception:', lastErrorMessage);
-            this.setBadge('error', '❌ 同步失败: 点击查看原因');
             return false;
           } finally {
-            clearTimeout(timeoutId);
             isSyncing = false;
           }
         },
@@ -8981,9 +9144,6 @@
 
           this.setBadge('syncing', '☁️ 检查云端进度...');
 
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 15000);
-
           try {
             const cachedETag = localStorage.getItem('morpho_gist_etag') || '';
             const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' };
@@ -8991,10 +9151,12 @@
               headers['If-None-Match'] = cachedETag;
             }
 
-            const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+            const resp = await resilientFetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+              method: 'GET',
               headers,
-              signal: controller.signal
-            });
+              timeoutMs: 18000
+            }, 2);
+
             if (resp.status === 304) {
               if (this.hasUnsyncedChanges()) {
                 await this.upload('launch_push_pending');
@@ -9005,7 +9167,22 @@
               return;
             }
 
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            if (!resp.ok) {
+              let msg = '';
+              let errorDetails = '';
+              try {
+                const errJson = await resp.json();
+                msg = errJson.message || '';
+                if (errJson.errors && Array.isArray(errJson.errors)) {
+                  errorDetails = errJson.errors.map(e => e.message || JSON.stringify(e)).join('; ');
+                }
+              } catch (_) {}
+              const combinedMsg = [msg, errorDetails].filter(Boolean).join(' - ') || resp.statusText;
+              const err = new Error(combinedMsg);
+              err.status = resp.status;
+              throw err;
+            }
+
             const newETag = resp.headers.get('ETag') || '';
             if (newETag) localStorage.setItem('morpho_gist_etag', newETag);
 
@@ -9033,14 +9210,15 @@
               setTimeout(() => this.setBadge('', '☁️ 自动同步就绪'), 2500);
             }
           } catch (err) {
-            console.warn('[AutoSync] Launch pull error:', err.message);
-            if (this.hasUnsyncedChanges()) {
+            console.warn('[AutoSync] Launch pull error:', err);
+            const diag = diagnoseSyncError(err, { status: err.status, gistId });
+            if (err.status === 401 || err.status === 403 || err.status === 404) {
+              this.setBadge('error', diag.shortBadge);
+            } else if (this.hasUnsyncedChanges()) {
               this.setBadge('dirty', `☁️ 等待同步 (${Storage.getPendingEvents().length} 变动)`);
             } else {
               this.setBadge('', '☁️ 自动同步就绪');
             }
-          } finally {
-            clearTimeout(timeoutId);
           }
         },
 
@@ -9052,24 +9230,192 @@
           badge.innerText = text;
 
           if (state === 'error') {
-            badge.title = `❌ 同步异常: ${lastErrorMessage || '网络请求受阻'} (点击查看排查建议)`;
-            badge.onclick = () => {
-              UIModal.alert({
-                title: '❌ 同步失败排查建议',
-                message: `失败原因：
-${lastErrorMessage || '网络连接超时或凭证失效'}
-
-建议步骤：
-1. 检查 GitHub Token 是否有效并具备 gist 权限；
-2. 检查当前网络或代理配置是否允许访问 api.github.com；
-3. 点击进入“打卡与备份”面板重新核对 Gist ID。`
-              });
-              if (window.switchMode) window.switchMode('manage');
+            const diag = lastDiagnosis;
+            const errSummary = diag ? `${diag.title}\n原因: ${diag.message}` : (lastErrorMessage || '网络请求受阻');
+            badge.title = `❌ 同步异常: ${errSummary}\n(点击查看完整诊断报告与一键自愈建议)`;
+            badge.onclick = (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              this.showSyncDiagnosisModal();
             };
           } else {
             badge.title = 'GitHub Gist 自动云同步状态 (点击进入配置与日志)';
             badge.onclick = () => { if (window.switchMode) window.switchMode('manage'); };
           }
+        },
+
+        showSyncDiagnosisModal() {
+          const diag = lastDiagnosis || {
+            type: 'unknown',
+            title: '❌ 未知云同步异常',
+            shortBadge: '❌ 同步失败',
+            message: lastErrorMessage || '尚未产生具体报错日志或当前网络受限',
+            suggestion: '请检查网络连接及 GitHub Token 设置。',
+            rawError: lastErrorMessage || '无详细技术堆栈',
+            status: null,
+            timestamp: new Date().toLocaleTimeString(),
+            gistId: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_gist_id') : '') || ''
+          };
+
+          const rawToken = (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_gist_token') : '') || '';
+          const maskedToken = rawToken ? (rawToken.slice(0, 6) + '...' + rawToken.slice(-4)) : '未设置';
+          const gistId = diag.gistId || (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_gist_id') : '') || '未设置';
+
+          const fullLogText = `[云同步诊断报告]
+时间: ${new Date().toLocaleString()}
+错误类型: ${diag.type}
+HTTP状态: ${diag.status || '无/网络层阻断'}
+诊断结论: ${diag.title}
+详细原因: ${diag.message}
+排查建议: ${diag.suggestion}
+Token掩码: ${maskedToken}
+Gist ID: ${gistId}
+原始日志: ${diag.rawError}
+浏览器内核: ${typeof navigator !== 'undefined' ? navigator.userAgent : '未知'}`;
+
+          this._cachedDiagnosisLog = fullLogText;
+
+          const contentHtml = `
+            <div style="text-align:left; font-size:0.9rem; line-height:1.6; color:var(--text);">
+              <div style="background:var(--error-light, rgba(239,68,68,0.1)); border:1.5px solid var(--error, #ef4444); border-radius:10px; padding:12px 14px; margin-bottom:12px;">
+                <div style="font-weight:800; font-size:1.02rem; color:var(--error, #ef4444); display:flex; align-items:center; gap:6px;">
+                  ${Utils.escapeHTML(diag.title)}
+                </div>
+                <div style="margin-top:6px; font-size:0.85rem; color:var(--text);">
+                  <strong>核心原因：</strong>${Utils.escapeHTML(diag.message)}
+                </div>
+                ${diag.status ? `<div style="font-size:0.75rem; color:var(--muted); margin-top:4px;">HTTP 响应状态码: <code style="background:rgba(0,0,0,0.06); padding:2px 5px; border-radius:4px;">${diag.status}</code> · 发生时间: ${diag.timestamp}</div>` : `<div style="font-size:0.75rem; color:var(--muted); margin-top:4px;">网络层阻断 · 发生时间: ${diag.timestamp}</div>`}
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <strong style="color:var(--primary); font-size:0.88rem;">💡 排查与自愈建议：</strong>
+                <div style="background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px 12px; margin-top:4px; font-size:0.82rem; white-space:pre-wrap;">${Utils.escapeHTML(diag.suggestion)}</div>
+                <div id="sync-conn-test-result" style="display:none; margin-top:8px; padding:8px 12px; border-radius:8px; font-size:0.82rem; background:var(--bg); border:1px solid var(--border);"></div>
+              </div>
+
+              <div style="margin-bottom:14px;">
+                <strong style="color:var(--muted); font-size:0.8rem;">📋 原始技术日志 (Raw Error):</strong>
+                <pre style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:0.75rem; color:var(--muted); max-height:85px; overflow-y:auto; margin-top:4px; font-family:monospace; white-space:pre-wrap;">${Utils.escapeHTML(diag.rawError)}</pre>
+              </div>
+
+              <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; border-top:1px dashed var(--border); padding-top:12px;">
+                <button class="btn btn-sm" id="btn-test-sync-conn" style="background:var(--bg); border:1px solid var(--border); font-size:0.8rem; cursor:pointer;" onclick="Services.Sync.testConnection()">
+                  🌐 测试网络连通性
+                </button>
+                <button class="btn btn-sm" style="background:var(--bg); border:1px solid var(--border); font-size:0.8rem; cursor:pointer;" onclick="Services.Sync.copyDiagnosisLog()">
+                  📋 复制完整诊断日志
+                </button>
+                <button class="btn btn-sm" style="background:#f59e0b; color:#fff; border:none; font-weight:700; font-size:0.8rem; cursor:pointer;" onclick="UIModal.close(); Services.Sync.clearGistIdAndCreateNew();" title="遇到 404 或 Gist ID 无效时，一键清除无效 ID 并全新创建">
+                  🆕 清空 ID 自动新建
+                </button>
+                <button class="btn btn-sm btn-primary" style="font-size:0.8rem; font-weight:700; cursor:pointer;" onclick="UIModal.close(); Services.Sync.upload('manual_retry');">
+                  🔄 立即重试同步
+                </button>
+                <button class="btn btn-sm" style="background:var(--bg); border:1px solid var(--border); font-size:0.8rem; cursor:pointer;" onclick="UIModal.close(); if(window.switchMode) window.switchMode('manage'); document.getElementById('gist-token')?.focus();">
+                  ⚙️ 前往修改 Token
+                </button>
+              </div>
+            </div>
+          `;
+
+          UIModal.alert({
+            title: '🛠️ 云同步故障深度诊断与自愈',
+            message: contentHtml,
+            isHtml: true,
+            hideConfirm: true
+          });
+        },
+
+        async testConnection() {
+          const btn = document.getElementById('btn-test-sync-conn');
+          if (btn) {
+            btn.disabled = true;
+            btn.innerText = '🌐 测速探测中...';
+          }
+          this.showToast('🌐 正在探测与 api.github.com 的实时连通性...', 'info', 2000);
+          const t0 = Date.now();
+          const infoEl = document.getElementById('sync-conn-test-result');
+          try {
+            const resp = await resilientFetch('https://api.github.com/zen', {
+              method: 'GET',
+              headers: { 'Accept': 'text/plain' },
+              timeoutMs: 10000
+            }, 1);
+            const latency = Date.now() - t0;
+            if (resp.ok) {
+              const text = await resp.text();
+              this.showToast(`✅ 网络通畅！延迟: ${latency}ms`, 'success', 3000);
+              if (infoEl) {
+                infoEl.style.display = 'block';
+                infoEl.style.borderColor = 'var(--success, #10b981)';
+                infoEl.style.color = 'var(--success, #10b981)';
+                infoEl.innerHTML = `✅ 网络连通正常！往返延迟: <strong>${latency}ms</strong> · 状态: HTTP ${resp.status} (GitHub: "${Utils.escapeHTML(text.trim())}")`;
+              }
+            } else {
+              this.showToast(`⚠️ API 连通但响应异常 (HTTP ${resp.status})`, 'warning', 3000);
+              if (infoEl) {
+                infoEl.style.display = 'block';
+                infoEl.style.borderColor = 'var(--warning, #f59e0b)';
+                infoEl.style.color = 'var(--warning, #f59e0b)';
+                infoEl.innerHTML = `⚠️ 能够连接到服务器，但返回 HTTP ${resp.status}。`;
+              }
+            }
+          } catch (e) {
+            const latency = Date.now() - t0;
+            this.showToast(`❌ 连通失败 (${latency}ms): ${e.message}`, 'error', 4000);
+            if (infoEl) {
+              infoEl.style.display = 'block';
+              infoEl.style.borderColor = 'var(--error, #ef4444)';
+              infoEl.style.color = 'var(--error, #ef4444)';
+              infoEl.innerHTML = `❌ 浏览器直连受阻！耗时: <strong>${latency}ms</strong><br>原因: 无法顺畅连接到 api.github.com。国内直连常被限速或丢包，建议开启代理/梯子全局模式或更换节点！`;
+            }
+          } finally {
+            if (btn) {
+              btn.disabled = false;
+              btn.innerText = '🌐 测试网络连通性';
+            }
+          }
+        },
+
+        copyDiagnosisLog() {
+          const text = this._cachedDiagnosisLog || lastErrorMessage || '无可用日志';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+              this.showToast('📋 诊断日志已成功复制到剪贴板！', 'success', 2000);
+            }).catch(() => {
+              this._fallbackCopy(text);
+            });
+          } else {
+            this._fallbackCopy(text);
+          }
+        },
+
+        _fallbackCopy(text) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            this.showToast('📋 诊断日志已复制到剪贴板！', 'success', 2000);
+          } catch (_) {
+            this.showToast('复制失败，请手动在弹窗中选中复制', 'warning', 2500);
+          }
+          document.body.removeChild(ta);
+        },
+
+        async clearGistIdAndCreateNew() {
+          if (typeof localStorage !== 'undefined') {
+            localStorage.removeItem('morpho_gist_id');
+            localStorage.removeItem('morpho_gist_etag');
+            localStorage.setItem('morpho_sync_revision', '0');
+          }
+          const gistInput = document.getElementById('gist-id');
+          if (gistInput) gistInput.value = '';
+          this.showToast('🧹 已清除旧 Gist ID，正在为您创建全新云端存档...', 'info', 2500);
+          return await this.upload('force_create_new');
         },
 
         showToast(message, type = 'info', duration = 2000) {
@@ -9393,7 +9739,7 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
 
             } else {
               App.recordAnswer(isCorrect);
-              if (word && word._isOverlearningRetest) {
+              if (word && (word._isOverlearningRetest || word._isDueRetest)) {
                 if (isCorrect) {
                   const stage = word._retestStage || 1;
                   if (feedbackEl) {
@@ -9405,6 +9751,12 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
                   if (feedbackEl) {
                     feedbackEl.innerHTML = `<span style="color:var(--error); font-weight:800;">✗ 尚未稳固！已重排入待测池强化</span> <span style="font-size:0.78rem; color:var(--text);">正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
                   }
+                }
+              } else if (word && word._isDueDistractor) {
+                if (isCorrect) {
+                  if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--primary); font-weight:700;">✓ 缓冲巩固成功！</span> <span style="font-size:0.8rem; color:var(--muted);">(即将切回待测复测)</span>`;
+                } else {
+                  if (feedbackEl) feedbackEl.innerHTML = `<span style="color:var(--error);">✗ 注意辨析！正确答案：${Utils.escapeHTML(isReverse ? word.word : word.meaning)}</span>`;
                 }
               } else {
                 if (isCorrect) {
@@ -9424,6 +9776,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
             }
 
             if (isCorrect && AppState.get('autoAdvanceEnabled')) {
+              // ★ 关键防卡死：若已触发通关仪式弹窗，严禁启动自动切题，交由用户点击弹窗按钮
+              if (AppState.get('isSessionFinishing')) {
+                return;
+              }
               const currentIntermission = document.getElementById('smart-intermission-card');
               const isIntermissionVisible = currentIntermission && currentIntermission.style.display !== 'none';
               if (!isIntermissionVisible) {
@@ -10456,6 +10812,10 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
         if (correctedEl) correctedEl.innerText = `${correctedCount} 词`;
 
         overlay.style.display = 'flex';
+        overlay.classList.add('open');
+        overlay.style.opacity = '1';
+        overlay.style.visibility = 'visible';
+        overlay.style.pointerEvents = 'auto';
         ModalStackManager.openModal('typing_milestone', (isPop) => this.hideMilestoneModal(isPop), overlay);
         KeyRouter.pushModal({
           element: overlay,
@@ -10484,10 +10844,16 @@ ${lastErrorMessage || '网络连接超时或凭证失效'}
       hideMilestoneModal(isPopState = false) {
         const overlay = document.getElementById('typing-milestone-overlay');
         if (overlay) {
+          overlay.classList.remove('open');
           overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
           KeyRouter.popModal(overlay);
           ModalStackManager.dismissModal('typing_milestone', { triggerHistoryBack: !isPopState });
         }
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
       },
 
       startNewRound() {
@@ -13193,18 +13559,7 @@ Gist ID: ${curId}
           });
           this.updateSyncTimeUI();
         } else {
-          const errDetail = (typeof Services !== 'undefined' && Services.Sync && (Services.Sync.lastErrorMessage || (Services.Sync.getLastErrorMessage && Services.Sync.getLastErrorMessage()))) || '连接 GitHub 超时或凭证受限';
-          Services.Sync.showToast(`❌ 上传失败: ${errDetail}`, 'error', 4000);
-          UIModal.alert({
-            title: '❌ 上传备份失败',
-            message: `云端同步未能完成：
-${errDetail}
-
-排查建议：
-1. 请检查 GitHub Token 是否具备 'gist' 读写勾选权限；
-2. 请确认当前网络环境或代理节点能够顺畅访问 api.github.com；
-3. 若填入了 Gist ID，请确保该 Gist 为您当前 Token 账户名下的有效仓库，或将其清空后重新点击上传以自动新建。`
-          });
+          Services.Sync.showSyncDiagnosisModal();
         }
       },
 
@@ -13245,7 +13600,9 @@ ${errDetail}
             let errorMsg = `HTTP ${resp.status}`;
             if (resp.status === 404) errorMsg = '未找到对应的 Gist，请确认 Gist ID 是否准确';
             if (resp.status === 401 || resp.status === 403) errorMsg = 'Token 鉴权失败或权限不足，若为私密 Gist 请确认 Token 是否勾选 gist 权限';
-            throw new Error(errorMsg);
+            const err = new Error(errorMsg);
+            err.status = resp.status;
+            throw err;
           }
 
           const data = await resp.json();
@@ -13264,8 +13621,10 @@ ${errDetail}
           this.updateSyncTimeUI();
         } catch (err) {
           console.error('[Sync Pull Error]', err);
-          Services.Sync.setBadge('error', '❌ 同步失败');
-          Services.Sync.showToast(`❌ 拉取失败: ${err.message}`, 'error', 4000);
+          const diag = Services.Sync.diagnoseSyncError(err, { status: err.status, gistId });
+          Services.Sync.setBadge('error', diag.shortBadge);
+          Services.Sync.showToast(`❌ 拉取失败: ${diag.title}`, 'error', 4000);
+          Services.Sync.showSyncDiagnosisModal();
         }
       },
 
@@ -13285,18 +13644,20 @@ ${errDetail}
         Services.Sync.showToast('☁️ 正在拉取上一版本备份镜像...', 'info');
         Services.Sync.setBadge('syncing', '☁️ 正在回滚...');
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
-
         try {
-          const resp = await fetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+          const resp = await resilientFetch(`https://api.github.com/gists/${encodeURIComponent(gistId)}`, {
+            method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
               'Accept': 'application/vnd.github+json'
             },
-            signal: controller.signal
-          });
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            timeoutMs: 16000
+          }, 2);
+          if (!resp.ok) {
+            const err = new Error(`HTTP ${resp.status}`);
+            err.status = resp.status;
+            throw err;
+          }
           const data = await resp.json();
           const backupFile = data.files && (data.files['morpho_sync_backup.json'] || data.files['morpho_sync_data.json.bak']);
           if (!backupFile) throw new Error('未在 Gist 中找到上一版本备份镜像');
@@ -13311,10 +13672,10 @@ ${errDetail}
           Services.Sync.showToast('🎉 成功从云端上一版本备份镜像回滚！', 'success', 2500);
         } catch (e) {
           console.error('[Sync Rollback Error]', e);
-          Services.Sync.setBadge('error', '❌ 回滚失败');
-          Services.Sync.showToast('回滚失败: ' + e.message, 'error', 3000);
-        } finally {
-          clearTimeout(timeoutId);
+          const diag = Services.Sync.diagnoseSyncError(e, { status: e.status, gistId });
+          Services.Sync.setBadge('error', diag.shortBadge);
+          Services.Sync.showToast('回滚失败: ' + diag.title, 'error', 3500);
+          Services.Sync.showSyncDiagnosisModal();
         }
       },
 
@@ -15047,6 +15408,10 @@ const App = (function() {
         if (rtEl) rtEl.innerText = data.avgRTStr;
 
         overlay.style.display = 'flex';
+        overlay.classList.add('open');
+        overlay.style.opacity = '1';
+        overlay.style.visibility = 'visible';
+        overlay.style.pointerEvents = 'auto';
         ModalStackManager.openModal('box_reinforce_retro', () => this.finishBoxReinforceSessionCommit(), overlay);
         KeyRouter.pushModal({
           element: overlay,
@@ -15062,10 +15427,16 @@ const App = (function() {
       finishBoxReinforceSessionCommit() {
         const overlay = document.getElementById('box-reinforce-retrospective-overlay');
         if (overlay) {
+          overlay.classList.remove('open');
           overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
           KeyRouter.popModal(overlay);
           ModalStackManager.dismissModal('box_reinforce_retro', { triggerHistoryBack: false });
         }
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
 
         const session = AppState.get('boxReinforceSession');
         if (session && session.backupContext) {
@@ -15765,10 +16136,15 @@ const App = (function() {
           isActive: true,
           scopeBoxId: boxId,
           scopeName: boxName,
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
+          primaryQueue: [...dueWords],
           queue: [...dueWords],
+          retestPool: [],
           totalInitial: dueWords.length,
           passedWords: new Set(),
           mistakeWords: new Set(),
+          consolidatedWords: new Set(),
           roundStartTime: now,
           backupContext: backupContext
         };
@@ -15791,6 +16167,10 @@ const App = (function() {
         const session = AppState.get('dueReviewSession');
         if (!session || !session.isActive) return;
 
+        const passedCount = session.passedWords ? session.passedWords.size : 0;
+        const mistakeCount = session.mistakeWords ? session.mistakeWords.size : 0;
+        const retestCount = session.retestPool ? session.retestPool.length : 0;
+
         if (restore && session.backupContext) {
           AppState.batchUpdate({
             activePool: session.backupContext.activePool,
@@ -15807,10 +16187,15 @@ const App = (function() {
           isActive: false,
           scopeBoxId: null,
           scopeName: '',
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
+          primaryQueue: [],
           queue: [],
+          retestPool: [],
           totalInitial: 0,
           passedWords: new Set(),
           mistakeWords: new Set(),
+          consolidatedWords: new Set(),
           roundStartTime: 0,
           backupContext: null
         });
@@ -15818,7 +16203,12 @@ const App = (function() {
         this.updateDueSprintUI();
         this.updateDueBadge();
         this.renderCurrentView();
-        Services.Sync.showToast('已退出抗遗忘冲刺，返回主线学习', 'info', 1500);
+
+        let exitMsg = '已退出抗遗忘冲刺，返回主线学习';
+        if (passedCount > 0 || mistakeCount > 0) {
+          exitMsg = `已退出抗遗忘冲刺：消灭 ${passedCount} 词，${retestCount} 个待测词已安全留存 3 盒明日复测`;
+        }
+        Services.Sync.showToast(exitMsg, 'info', 2000);
       },
 
       updateDueSprintUI() {
@@ -15836,28 +16226,59 @@ const App = (function() {
 
         if (bar) bar.style.display = 'flex';
         if (title) title.innerText = `${session.scopeName || '抗遗忘冲刺'}`;
-        if (desc) desc.innerText = `(已消灭 ${session.passedWords.size} / 初始 ${session.totalInitial} 词)`;
-        if (badge) badge.innerText = `剩余 ${session.queue.length} 词`;
+
+        const primaryRemain = session.primaryQueue ? session.primaryQueue.length : (session.queue ? session.queue.length : 0);
+        const retestCount = session.retestPool ? session.retestPool.length : 0;
+        const curQ = session.questionIndex || 0;
+        const readyRetestCount = (session.retestPool || []).filter(item => curQ >= item.eligibleIndex).length;
+        const coolingCount = Math.max(0, retestCount - readyRetestCount);
+        const passedCount = session.passedWords ? session.passedWords.size : 0;
+        const cycledCount = session.mistakeWords ? session.mistakeWords.size : 0;
+        const consolidatedCount = session.consolidatedWords ? session.consolidatedWords.size : 0;
+
+        if (desc) {
+          let poolStatus = '';
+          if (retestCount > 0) {
+            poolStatus = ` · 待测池 ${retestCount} 词 · ${coolingCount} 冷却`;
+          } else if (cycledCount > 0) {
+            poolStatus = ` · 待测池已清空 · ${consolidatedCount} 稳固`;
+          }
+          desc.innerText = `主线 ${passedCount}/${session.totalInitial} 词${poolStatus}`;
+        }
+        if (badge) {
+          if (retestCount > 0) {
+            badge.innerText = `主线余 ${primaryRemain} 词 | 待测池 ${retestCount} 词`;
+            badge.style.background = '#f59e0b';
+          } else {
+            badge.innerText = `主线余 ${primaryRemain} 词`;
+            badge.style.background = '#ef4444';
+          }
+        }
 
         if (progEl) {
-          const passed = session.passedWords.size;
-          const total = session.totalInitial;
-          progEl.innerText = `⚡ [抗遗忘] 剩余 ${session.queue.length} / 共 ${total} 词 (已消灭 ${passed} 词)`;
+          progEl.innerText = `⚡ [抗遗忘] 主线余 ${primaryRemain}/${session.totalInitial} 词 · 待测池 ${retestCount} 词 (已消灭 ${passedCount} 词)`;
         }
       },
 
-      showDueMilestoneModal() {
+      showDueMilestoneModal(customStats = null) {
         const session = AppState.get('dueReviewSession');
-        if (!session) return;
+        if (!session && !customStats) return;
 
         const overlay = document.getElementById('due-milestone-overlay');
-        const elapsedMs = Math.max(1000, Date.now() - (session.roundStartTime || Date.now()));
+        const todayDateStr = new Date().toDateString();
+        AppState.update('dailyDueMilestoneShownDate', todayDateStr);
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('morpho_daily_due_milestone_date', todayDateStr);
+        }
+
+        const isFromSession = Boolean(session && session.isActive);
+        const elapsedMs = customStats?.elapsedMs || (session?.roundStartTime ? Math.max(1000, Date.now() - session.roundStartTime) : 60000);
         const elapsedSec = Math.floor(elapsedMs / 1000);
         const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
         const s = String(elapsedSec % 60).padStart(2, '0');
 
-        const total = session.totalInitial;
-        const cycledCount = session.mistakeWords.size;
+        const total = customStats ? customStats.total : (session?.totalInitial || 1);
+        const cycledCount = customStats ? customStats.cycledCount : (session?.mistakeWords ? session.mistakeWords.size : 0);
         const perfectCount = Math.max(0, total - cycledCount);
 
         const timeEl = document.getElementById('due-tm-time');
@@ -15872,29 +16293,36 @@ const App = (function() {
         if (cycledEl) cycledEl.innerText = `${cycledCount} 词`;
         if (remainEl) remainEl.innerText = `0 词`;
 
-        if (session.backupContext) {
-          AppState.batchUpdate({
-            activePool: session.backupContext.activePool,
-            orderMode: session.backupContext.orderMode,
-            questionHistory: session.backupContext.questionHistory,
-            historyCursor: session.backupContext.historyCursor,
-            sequentialIndex: session.backupContext.sequentialIndex,
-            shuffleQueue: session.backupContext.shuffleQueue,
-            shufflePointer: session.backupContext.shufflePointer
+        if (isFromSession) {
+          if (session.backupContext) {
+            AppState.batchUpdate({
+              activePool: session.backupContext.activePool,
+              orderMode: session.backupContext.orderMode,
+              questionHistory: session.backupContext.questionHistory,
+              historyCursor: session.backupContext.historyCursor,
+              sequentialIndex: session.backupContext.sequentialIndex,
+              shuffleQueue: session.backupContext.shuffleQueue,
+              shufflePointer: session.backupContext.shufflePointer
+            });
+          }
+
+          AppState.update('dueReviewSession', {
+            isActive: false,
+            scopeBoxId: null,
+            scopeName: '',
+            questionIndex: 0,
+            lastRetestQuestionIndex: -999,
+            primaryQueue: [],
+            queue: [],
+            retestPool: [],
+            totalInitial: 0,
+            passedWords: new Set(),
+            mistakeWords: new Set(),
+            consolidatedWords: new Set(),
+            roundStartTime: 0,
+            backupContext: null
           });
         }
-
-        AppState.update('dueReviewSession', {
-          isActive: false,
-          scopeBoxId: null,
-          scopeName: '',
-          queue: [],
-          totalInitial: 0,
-          passedWords: new Set(),
-          mistakeWords: new Set(),
-          roundStartTime: 0,
-          backupContext: null
-        });
 
         this.updateDueSprintUI();
         this.updateDueBadge();
@@ -15904,6 +16332,10 @@ const App = (function() {
 
         if (overlay) {
           overlay.style.display = 'flex';
+          overlay.classList.add('open');
+          overlay.style.opacity = '1';
+          overlay.style.visibility = 'visible';
+          overlay.style.pointerEvents = 'auto';
           ModalStackManager.openModal('due_milestone', (isPop) => this.dismissDueMilestone(isPop), overlay);
           KeyRouter.pushModal({
             element: overlay,
@@ -15920,10 +16352,17 @@ const App = (function() {
       dismissDueMilestone(isPopState = false) {
         const overlay = document.getElementById('due-milestone-overlay');
         if (overlay) {
+          overlay.classList.remove('open');
           overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
           KeyRouter.popModal(overlay);
           ModalStackManager.dismissModal('due_milestone', { triggerHistoryBack: !isPopState });
         }
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
+        AppState.update('isSessionFinishing', false);
         this.nextQuestion();
       },
 
@@ -16197,6 +16636,10 @@ const App = (function() {
 
         if (overlay) {
           overlay.style.display = 'flex';
+          overlay.classList.add('open');
+          overlay.style.opacity = '1';
+          overlay.style.visibility = 'visible';
+          overlay.style.pointerEvents = 'auto';
           ModalStackManager.openModal('overlearning_milestone', (isPop) => this.dismissOverlearningMilestone(isPop), overlay);
           KeyRouter.pushModal({
             element: overlay,
@@ -16213,10 +16656,17 @@ const App = (function() {
       dismissOverlearningMilestone(isPopState = false) {
         const overlay = document.getElementById('overlearning-milestone-overlay');
         if (overlay) {
+          overlay.classList.remove('open');
           overlay.style.display = 'none';
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
           KeyRouter.popModal(overlay);
           ModalStackManager.dismissModal('overlearning_milestone', { triggerHistoryBack: !isPopState });
         }
+        const container = document.querySelector('.container');
+        if (container) container.removeAttribute('inert');
+        AppState.update('isSessionFinishing', false);
         this.nextQuestion();
       },
 
@@ -16429,8 +16879,10 @@ const App = (function() {
               progEl.innerText = `🎯 [${chosenType}] ${targetIndex + 1} / ${pool.length}`;
               progEl.title = `【当前状态: 到期消灭中】\n· 策略: 优先消灭全库临界到期词\n· 进度: ${targetIndex + 1} / ${pool.length}\n· 剩余到期词: ${allDueCandidates.length} 词`;
             }
+            AppState.update('hadDueWordsInRun', true);
             return chosenWord;
           }
+
 
           // ★ 优化2：当全库已无到期词时，若生词也已全部开荒完毕，100% 自动接管为【底部顺推】！
           if (unlearnedInBox1.length === 0) {
@@ -16829,11 +17281,70 @@ const App = (function() {
 
         const dueSession = AppState.get('dueReviewSession');
         if (dueSession && dueSession.isActive) {
-          if (dueSession.queue.length === 0) {
+          dueSession.questionIndex = (dueSession.questionIndex || 0) + 1;
+          const curQ = dueSession.questionIndex;
+          const lastRetestQ = dueSession.lastRetestQuestionIndex ?? -999;
+          const hasPrimary = (dueSession.primaryQueue && dueSession.primaryQueue.length > 0);
+
+          // 防扎堆保护约束：若主轨还有词，则要求距离上一道复测题至少间隔 2 题
+          const allowRetest = !hasPrimary || (curQ - lastRetestQ >= 2);
+
+          let readyRetestIdx = -1;
+          if (allowRetest && dueSession.retestPool && dueSession.retestPool.length > 0) {
+            readyRetestIdx = dueSession.retestPool.findIndex(item => curQ >= item.eligibleIndex);
+          }
+
+          let nextWord = null;
+          if (readyRetestIdx !== -1) {
+            // 从待测池调取冷却完毕的成熟词 (进入复测/核验出题)
+            const retestItem = dueSession.retestPool[readyRetestIdx];
+            nextWord = { ...retestItem.wordObj };
+            nextWord._isDueRetest = true;
+            nextWord._isOverlearningRetest = true;
+            nextWord._retestStage = retestItem.stage || 1;
+            nextWord._retestItemRef = retestItem;
+            dueSession.lastRetestQuestionIndex = curQ;
+          } else if (hasPrimary) {
+            // 从主轨抽取到期词
+            nextWord = { ...dueSession.primaryQueue[0] };
+            nextWord._isDueRetest = false;
+            nextWord._isOverlearningRetest = false;
+          } else if (dueSession.retestPool && dueSession.retestPool.length > 0) {
+            // 主轨已空，待测池尚有词（进入扫尾清盘攻坚期）：
+            // ★ 尾期防背靠背保护：如果待测池最早词还在冷却中，尝试穿插一道已学熟词作为认知缓冲
+            const minEligible = Math.min(...dueSession.retestPool.map(it => it.eligibleIndex || 0));
+            const recentBuf = AppState.get('recentQuestionBuffer') || [];
+            const poolWords = AppState.get('allPacks')[AppState.get('currentPackId')]?.words || [];
+            const stDict = AppState.get('packStats')[AppState.get('currentPackId')] || {};
+            const availableBuffers = poolWords.filter(w => {
+              const st = stDict[w.word];
+              return st && (st.box >= 3 || st.masteryScore >= 70) && !recentBuf.slice(-4).includes(w.word) && !dueSession.retestPool.some(it => it.wordObj.word === w.word);
+            });
+
+            if (curQ < minEligible && availableBuffers.length > 0) {
+              const bufferWord = availableBuffers[Math.floor(Math.random() * availableBuffers.length)];
+              nextWord = { ...bufferWord };
+              nextWord._isDueDistractor = true;
+              nextWord._isOverlearningRetest = false;
+            } else {
+              dueSession.retestPool.sort((a, b) => (a.eligibleIndex || 0) - (b.eligibleIndex || 0));
+              const retestItem = dueSession.retestPool[0];
+              nextWord = { ...retestItem.wordObj };
+              nextWord._isDueRetest = true;
+              nextWord._isOverlearningRetest = true;
+              nextWord._retestStage = retestItem.stage || 1;
+              nextWord._retestItemRef = retestItem;
+              dueSession.lastRetestQuestionIndex = curQ;
+            }
+          } else {
+            // 主轨与待测池均已空，到期复习圆满通关！
             this.showDueMilestoneModal();
             return;
           }
-          const nextWord = dueSession.queue[0];
+
+          dueSession.queue = [...(dueSession.primaryQueue || [])];
+          AppState.update('dueReviewSession', dueSession);
+
           let history = AppState.get('questionHistory');
           history.push(nextWord.word);
           if (history.length > 100) history.shift();
@@ -17166,12 +17677,17 @@ const App = (function() {
 
         const retestPill = typeof document !== 'undefined' ? document.getElementById('overlearning-retest-pill') : null;
         if (retestPill) {
-          if (word && word._isOverlearningRetest) {
+          if (word && (word._isOverlearningRetest || word._isDueRetest)) {
             retestPill.style.display = 'inline-block';
             const stage = word._retestStage || 1;
             retestPill.innerText = stage === 2 ? '🔄 延时核验' : '🔄 当堂复测';
             retestPill.style.background = stage === 2 ? '#0284c7' : '#f59e0b';
             retestPill.title = stage === 2 ? '延时核验：答对完成当堂双阶稳固' : '当堂复测：答对进入延时核验';
+          } else if (word && word._isDueDistractor) {
+            retestPill.style.display = 'inline-block';
+            retestPill.innerText = '🧩 记忆缓冲';
+            retestPill.style.background = '#64748b';
+            retestPill.title = '记忆缓冲词：过渡短时记忆残留，答题不影响主线进度';
           } else {
             retestPill.style.display = 'none';
           }
@@ -17401,6 +17917,8 @@ const App = (function() {
           }
         }
 
+        const wasDueWordBeforeAnswer = Algorithms.Leitner.isWordDue(baseStat, now);
+
         const previousStatsMap = {};
         for (const pId of candidatePacks) {
           if (pStats[pId]?.[wordName]) {
@@ -17422,19 +17940,106 @@ const App = (function() {
         };
 
         const dueSession = AppState.get('dueReviewSession');
-        if (dueSession && dueSession.isActive && dueSession.queue.length > 0) {
-          const head = dueSession.queue[0];
-          if (head && head.word === wordName) {
+        let isDueRetest = false;
+        if (dueSession && dueSession.isActive) {
+          const curQ = dueSession.questionIndex || 1;
+          const currentWordObj = AppState.get('currentWord');
+          const isDistractor = Boolean(currentWordObj && currentWordObj._isDueDistractor);
+          isDueRetest = Boolean(currentWordObj && currentWordObj._isDueRetest);
+
+          if (isDistractor) {
+            // 穿插缓冲词作答：仅作为认知冷却过渡题，正常计入常规统计，不改动到期主队列
+            Services.Sync.showToast(isCorrect ? '✓ 缓冲巩固通过' : '⚠️ 记忆辨析强化', 'info', 1000);
+          } else if (!isDueRetest) {
+            // 主轨到期词首测
+            if (dueSession.primaryQueue && dueSession.primaryQueue.length > 0) {
+              const headIdx = dueSession.primaryQueue.findIndex(w => w.word === wordName);
+              if (headIdx !== -1) {
+                dueSession.primaryQueue.splice(headIdx, 1);
+              }
+            } else if (dueSession.queue && dueSession.queue.length > 0) {
+              const headIdx = dueSession.queue.findIndex(w => w.word === wordName);
+              if (headIdx !== -1) {
+                dueSession.queue.splice(headIdx, 1);
+              }
+            }
+
             if (isCorrect) {
               dueSession.passedWords.add(wordName);
-              dueSession.queue.shift();
             } else {
               dueSession.mistakeWords.add(wordName);
-              const failed = dueSession.queue.shift();
-              dueSession.queue.push(failed);
+              // 阶段 1：首测未稳，动态冷却 4~6 题排入待测池
+              const dynamicGap1 = 4 + Math.floor(Math.random() * 3);
+              if (!dueSession.retestPool) dueSession.retestPool = [];
+              const existIdx = dueSession.retestPool.findIndex(item => item.wordObj.word === wordName);
+              if (existIdx !== -1) {
+                dueSession.retestPool.splice(existIdx, 1);
+              }
+              const retestWordObj = currentWordObj || { word: wordName };
+              dueSession.retestPool.push({
+                wordObj: retestWordObj,
+                stage: 1,
+                enterIndex: curQ,
+                eligibleIndex: curQ + dynamicGap1,
+                failCount: 1
+              });
+              Services.Sync.showToast('⚠️ 未稳固到期词已进入 3 盒，排入待测池强化！', 'warning', 2500);
             }
-            AppState.update('dueReviewSession', dueSession);
-            this.updateDueSprintUI();
+          } else {
+            // 副轨待测池抽调的复测词
+            if (!dueSession.retestPool) dueSession.retestPool = [];
+            const poolIdx = dueSession.retestPool.findIndex(item => item.wordObj.word === wordName);
+            let retestItem = null;
+            if (poolIdx !== -1) {
+              retestItem = dueSession.retestPool.splice(poolIdx, 1)[0];
+            } else {
+              retestItem = currentWordObj?._retestItemRef || {
+                wordObj: currentWordObj || { word: wordName },
+                stage: currentWordObj?._retestStage || 1,
+                failCount: 1
+              };
+            }
+
+            if (isCorrect) {
+              if (retestItem.stage === 1) {
+                // 阶段 1 答对 -> 晋升至阶段 2 延时核验，动态间隔 8 ~ 12 题
+                const dynamicGap2 = 8 + Math.floor(Math.random() * 5);
+                retestItem.stage = 2;
+                retestItem.enterIndex = curQ;
+                retestItem.eligibleIndex = curQ + dynamicGap2;
+                dueSession.retestPool.push(retestItem);
+                Services.Sync.showToast('✓ 阶段1巩固通过！已排入阶段2延时核验', 'info', 1800);
+              } else {
+                // 阶段 2 答对 -> 双阶稳固通过！彻底移出待测池
+                if (!dueSession.consolidatedWords) dueSession.consolidatedWords = new Set();
+                dueSession.consolidatedWords.add(wordName);
+                Services.Sync.showToast('🎉 当堂双阶稳固完成！记忆锁定明日迎战', 'success', 2000);
+              }
+            } else {
+              // 复测答错：打回阶段 1，缩短冷却至 3 ~ 4 题再次攻坚
+              const retryGap = 3 + Math.floor(Math.random() * 2);
+              retestItem.stage = 1;
+              retestItem.failCount = (retestItem.failCount || 1) + 1;
+              retestItem.enterIndex = curQ;
+              retestItem.eligibleIndex = curQ + retryGap;
+              dueSession.retestPool.push(retestItem);
+              Services.Sync.showToast('❌ 尚未稳固，已重新排入待测池强化！', 'warning', 1800);
+            }
+          }
+
+          dueSession.queue = [...(dueSession.primaryQueue || [])];
+          AppState.update('dueReviewSession', dueSession);
+          this.updateDueSprintUI();
+
+          // ★ 核心修复：专项到期冲刺中，最后一题完成时即时触发通关弹窗
+          if (dueSession.primaryQueue.length === 0 && dueSession.retestPool.length === 0) {
+            AppState.update('isSessionFinishing', true);
+            if (typeof Views !== 'undefined' && Views.Choice && typeof Views.Choice.cancelAutoAdvance === 'function') {
+              Views.Choice.cancelAutoAdvance();
+            }
+            LifecycleScheduler.setTimeout(() => {
+              this.showDueMilestoneModal();
+            }, 300);
           }
         }
 
@@ -17526,6 +18131,17 @@ const App = (function() {
           overSession.queue = [...(overSession.primaryQueue || [])];
           AppState.update('overlearningSession', overSession);
           this.updateOverlearningUI();
+
+          // ★ 核心修复：专项顺推冲刺中，最后一题完成时即时触发通关弹窗
+          if (overSession.primaryQueue.length === 0 && overSession.retestPool.length === 0) {
+            AppState.update('isSessionFinishing', true);
+            if (typeof Views !== 'undefined' && Views.Choice && typeof Views.Choice.cancelAutoAdvance === 'function') {
+              Views.Choice.cancelAutoAdvance();
+            }
+            LifecycleScheduler.setTimeout(() => {
+              this.showOverlearningMilestoneModal();
+            }, 300);
+          }
         }
 
         AppState.update('roundTotal', r => r + 1);
@@ -17570,8 +18186,8 @@ const App = (function() {
         const wasLockedInBox3Today = (baseStat?.demotedToBox3Date === todayDateStr) || Boolean(baseStat?.lockedInBox3Today);
 
         // ★ 核心规则 1：方案A（3盒黄金中枢守底准则）
-        // 凡是：顺推模式下未掌握词、或 3 盒及以上错题（盒3、盒4、盒5），统一锁定降入/保持在 3 盒，锁定明日到期抗遗忘必复！
-        if (!isCorrect && (overSession?.isActive || oldBox >= 3)) {
+        // 凡是：顺推模式下未掌握词、到期冲刺错题、或 3 盒及以上错题（盒3、盒4、盒5），统一锁定降入/保持在 3 盒，锁定明日到期抗遗忘必复！
+        if (!isCorrect && (overSession?.isActive || dueSession?.isActive || oldBox >= 3)) {
           newBox = 3;
           newNextReviewDate = now + 1 * 86400000; // 锁定明日到期必复！
           transition.stability = 4.0;
@@ -17583,9 +18199,10 @@ const App = (function() {
         }
 
         // ★ 核心规则 2：未掌握词今日进入三盒中不再考虑升级，只进行复测加强记忆！
-        // 凡是：(1) 当前是顺推复测题 (isOverlearningRetest)，或 (2) 今日已降入三盒锁定的词 (wasLockedInBox3Today)
+        // 凡是：(1) 当前是顺推/到期复测题 (isOverlearningRetest || isDueRetest)，或 (2) 今日已降入三盒锁定的词 (wasLockedInBox3Today)
         // 哪怕今日后续复测答对任意次，盒号绝对封顶锁定在 3 盒，下次复习日期绝对锁定在明日！
-        if (isOverlearningRetest || wasLockedInBox3Today) {
+        const isRetestQuestion = Boolean(isOverlearningRetest || isDueRetest);
+        if (isRetestQuestion || wasLockedInBox3Today) {
           newBox = 3;
           newNextReviewDate = now + 1 * 86400000; // 坚决锁定明日到期！
           transition.stability = Math.min(transition.stability || 4.0, 4.5);
@@ -17627,8 +18244,8 @@ const App = (function() {
             st.exemptUntilDue = false;
             st.isGraduated = false;
           }
-          // 今日降入三盒免升锁定标记 (方案A：顺推模式错题 或 3 盒及以上错题，今日全量锁定 3 盒免升)
-          if (!isCorrect && (overSession?.isActive || oldBox >= 3)) {
+          // 今日降入三盒免升锁定标记 (方案A：顺推模式错题、到期冲刺错题 或 3 盒及以上错题，今日全量锁定 3 盒免升)
+          if (!isCorrect && (overSession?.isActive || dueSession?.isActive || oldBox >= 3)) {
             st.lockedInBox3Today = true;
             st.demotedToBox3Date = todayDateStr;
           }
@@ -17690,6 +18307,54 @@ const App = (function() {
         this.statUndoStack.push(undoSnapshot);
         if (this.statUndoStack.length > 50) {
           this.statUndoStack.shift();
+        }
+
+        // ★ 核心修复：日常主线消灭完今日所有到期词的一瞬间，即时唤起通关仪式卡片
+        if (!dueSession?.isActive && !overSession?.isActive) {
+          const curPack = currentPackId;
+          const packWords = AppState.get('allPacks')[curPack]?.words || [];
+          const curStDict = AppState.get('packStats')[curPack] || {};
+          let currentDueCount = 0;
+          for (const w of packWords) {
+            if (Algorithms.Leitner.isWordDue(curStDict[w.word], now)) {
+              currentDueCount++;
+            }
+          }
+          const hadDueInRun = AppState.get('hadDueWordsInRun') || false;
+          const hasShownForClear = AppState.get('hasShownDueClearModal') || false;
+
+          if (currentDueCount === 0 && (hadDueInRun || wasDueWordBeforeAnswer) && !hasShownForClear) {
+            AppState.update('hasShownDueClearModal', true);
+            AppState.update('hadDueWordsInRun', false);
+            AppState.update('isSessionFinishing', true);
+            if (typeof Views !== 'undefined' && Views.Choice && typeof Views.Choice.cancelAutoAdvance === 'function') {
+              Views.Choice.cancelAutoAdvance();
+            }
+            const todayStart = new Date().setHours(0, 0, 0, 0);
+            const todayDateStr = new Date().toDateString();
+            let reviewedTodayCount = 0;
+            let mistakeTodayCount = 0;
+            packWords.forEach(w => {
+              const st = curStDict[w.word];
+              if (st && st.lastReviewed && st.lastReviewed >= todayStart) {
+                reviewedTodayCount++;
+                if (st.demotedToBox3Date === todayDateStr || (st.mistakes && st.mistakes > 0)) {
+                  mistakeTodayCount++;
+                }
+              }
+            });
+            const customStats = {
+              total: Math.max(1, reviewedTodayCount),
+              cycledCount: mistakeTodayCount,
+              elapsedMs: Math.max(1000, Date.now() - (AppState.get('sessionStartTime') || Date.now()))
+            };
+            LifecycleScheduler.setTimeout(() => {
+              this.showDueMilestoneModal(customStats);
+            }, 300);
+          } else if (currentDueCount > 0) {
+            AppState.update('hasShownDueClearModal', false);
+            AppState.update('hadDueWordsInRun', true);
+          }
         }
 
         this.onQuestionAnswered(1);
