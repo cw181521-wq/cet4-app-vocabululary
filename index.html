@@ -3012,6 +3012,9 @@
       <label class="ctrl-label" style="margin-left: 8px;" title="仅刷考察第二/第三高阶生僻义的四级常考单词">
         <input type="checkbox" id="unexpected-only-chk" onchange="toggleUnexpectedMode()"> 仅练熟词生义
       </label>
+      <label class="ctrl-label" style="margin-left: 8px;" title="生词或标记未掌握的单词，自动在 3~5 题后穿插重现进行即时巩固复测">
+        <input type="checkbox" id="session-retest-chk" onchange="toggleSessionRetest(this.checked)" checked> ⚡ 穿插复测
+      </label>
 
       <div class="ctrl-group" style="display:inline-flex; align-items:center; gap:4px; margin-left:8px;" title="答题反馈提示音效与音色风格">
         <label class="ctrl-label">
@@ -4113,8 +4116,8 @@
   </div>
 </div>
 
-<!-- 抗遗忘冲刺通关 Milestone 仪式卡片弹窗 -->
-<div class="typing-milestone-overlay" id="due-milestone-overlay" style="display:none;">
+<!-- 抗遗忘冲刺通关 Milestone 仪式卡片弹窗 (已禁用阻断弹窗，保障做题心流) -->
+<div class="typing-milestone-overlay" id="due-milestone-overlay" style="display:none !important; pointer-events:none !important;">
   <div class="typing-milestone-card" role="dialog" aria-modal="true">
     <div class="tm-trophy">⚡</div>
     <h3 class="tm-title">恭喜完成今日抗遗忘冲刺！</h3>
@@ -5769,7 +5772,11 @@
 
 
 
-      recentQuestionBuffer: []
+      recentQuestionBuffer: [],
+      sessionRetestPool: [],
+      sessionRetestEnabled: (typeof localStorage !== 'undefined' ? localStorage.getItem('morpho_session_retest_enabled') !== '0' : true),
+      mainQuestionIndex: 0,
+      lastSessionRetestIndex: -999
     };
 
     const listeners = {};
@@ -15886,6 +15893,9 @@ const App = (function() {
           document.body.classList.add('focus-mode');
         }
 
+        const sessionRetestChk = document.getElementById('session-retest-chk');
+        if (sessionRetestChk) sessionRetestChk.checked = (AppState.get('sessionRetestEnabled') !== false);
+
         if (localStorage.getItem('morpho_companion_collapsed') === '1') {
           const panel = document.getElementById('desktop-companion-panel');
           const layout = document.querySelector('.workspace-layout');
@@ -15961,6 +15971,9 @@ const App = (function() {
         AppState.update('currentPackId', packId);
         this.statUndoStack = [];
         AppState.update('recentPerformanceWindow', []);
+        AppState.update('sessionRetestPool', []);
+        AppState.update('mainQuestionIndex', 0);
+        AppState.update('lastSessionRetestIndex', -999);
         this.adaptiveStepCounter = 0;
         Algorithms.RootAnalytics.markFamilyCacheDirty();
         const packDropdown = typeof document !== 'undefined' ? document.getElementById('pack-dropdown') : null;
@@ -16328,25 +16341,25 @@ const App = (function() {
         this.updateDueBadge();
         Views.Compass.markBoxesDirty();
         Views.Compass.markMatrixDirty();
-        Views.Compass.renderBoxes();
-
         if (overlay) {
-          overlay.style.display = 'flex';
-          overlay.classList.add('open');
-          overlay.style.opacity = '1';
-          overlay.style.visibility = 'visible';
-          overlay.style.pointerEvents = 'auto';
-          ModalStackManager.openModal('due_milestone', (isPop) => this.dismissDueMilestone(isPop), overlay);
-          KeyRouter.pushModal({
-            element: overlay,
-            onEscape: () => this.dismissDueMilestone(),
-            onEnter: () => this.dismissDueMilestone()
-          });
+          overlay.style.display = 'none';
+          overlay.classList.remove('open');
+          overlay.style.opacity = '0';
+          overlay.style.visibility = 'hidden';
+          overlay.style.pointerEvents = 'none';
+        }
+
+        AppState.update('isSessionFinishing', false);
+
+        if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+          Services.Sync.showToast('🎉 今日抗遗忘冲刺已圆满完成！', 'success', 2500);
         }
 
         if (AppState.get('soundEffectsEnabled')) {
           Services.Sfx.playFeedbackSound(true, 'arcade');
         }
+
+        this.nextQuestion();
       },
 
       dismissDueMilestone(isPopState = false) {
@@ -17488,8 +17501,81 @@ const App = (function() {
           }
         }
 
-        const nextWord = this.pickNextWord(1);
-        if (!nextWord) return;
+        let curMainQ = (AppState.get('mainQuestionIndex') || 0) + 1;
+        AppState.update('mainQuestionIndex', curMainQ);
+
+        const retestEnabled = (AppState.get('sessionRetestEnabled') !== false);
+        const retestPool = AppState.get('sessionRetestPool') || [];
+        const lastRetestQ = AppState.get('lastSessionRetestIndex') ?? -999;
+        const lastWordName = AppState.get('currentWord')?.word;
+
+        // ★ 优化1：防背靠背保护，过滤刚刚答过的同一个词
+        const readyCandidates = retestPool.filter(item => curMainQ >= item.eligibleIndex && item.wordObj?.word !== lastWordName);
+
+        // ★ 优化2：动态自适应穿插流速
+        // 就绪词积压较多 (≥ 3) 时，允许间隔 1 题加快消化；较少时维持间隔 1 道主轨题 (curMainQ - lastRetestQ >= 2)
+        const requiredGap = (readyCandidates.length >= 3 ? 1 : 2);
+        const allowRetest = (readyCandidates.length > 0) && (curMainQ - lastRetestQ >= requiredGap);
+
+        let nextWord = null;
+        if (retestEnabled && allowRetest && readyCandidates.length > 0) {
+          // ★ 优化3：多就绪词加权智能仲裁
+          // 优先级评分：阶段1初测救急 (25分) > 阶段2延时终验 (10分) + 顽固错误加权 (failCount * 4分) + 逾期深度惩罚
+          readyCandidates.sort((a, b) => {
+            const urgencyA = ((a.stage === 1 ? 25 : 10) + Math.min(5, a.failCount || 1) * 4 + (curMainQ - (a.eligibleIndex || curMainQ)));
+            const urgencyB = ((b.stage === 1 ? 25 : 10) + Math.min(5, b.failCount || 1) * 4 + (curMainQ - (b.eligibleIndex || curMainQ)));
+            return urgencyB - urgencyA;
+          });
+
+          const chosenItem = readyCandidates[0];
+          nextWord = { ...chosenItem.wordObj };
+          nextWord._isSessionRetest = true;
+          nextWord._retestStage = chosenItem.stage || 1;
+          nextWord._retestFailCount = chosenItem.failCount || 1;
+          nextWord._sessionRetestRef = chosenItem;
+          AppState.update('lastSessionRetestIndex', curMainQ);
+        } else {
+          // 正常从主线抽取
+          nextWord = this.pickNextWord(1);
+        }
+
+        if (!nextWord) {
+          // ★ 优化4：主线题库已到底，进入复测池扫尾清盘期
+          if (retestEnabled && retestPool.length > 0) {
+            const nonCurrentPool = retestPool.filter(it => it.wordObj?.word !== lastWordName);
+            const targetPool = nonCurrentPool.length > 0 ? nonCurrentPool : retestPool;
+            const minEligible = Math.min(...targetPool.map(it => it.eligibleIndex || 0));
+
+            // 尾期缓冲机制：如果冷却最早词还在等待中，调取一道已学熟词作为认知缓冲过渡题
+            const recentBuf = AppState.get('recentQuestionBuffer') || [];
+            const poolWords = AppState.get('allPacks')[AppState.get('currentPackId')]?.words || [];
+            const stDict = AppState.get('packStats')[AppState.get('currentPackId')] || {};
+            const availableBuffers = poolWords.filter(w => {
+              const st = stDict[w.word];
+              return st && (st.box >= 2 || (st.masteryScore || 0) >= 60) &&
+                !recentBuf.slice(-4).includes(w.word) &&
+                !retestPool.some(it => it.wordObj?.word === w.word);
+            });
+
+            if (curMainQ < minEligible && availableBuffers.length > 0) {
+              const bufferWord = availableBuffers[Math.floor(Math.random() * availableBuffers.length)];
+              nextWord = { ...bufferWord };
+              nextWord._isDueDistractor = true;
+              nextWord._isSessionRetest = false;
+            } else {
+              targetPool.sort((a, b) => (a.eligibleIndex || 0) - (b.eligibleIndex || 0));
+              const chosenItem = targetPool[0];
+              nextWord = { ...chosenItem.wordObj };
+              nextWord._isSessionRetest = true;
+              nextWord._retestStage = chosenItem.stage || 1;
+              nextWord._retestFailCount = chosenItem.failCount || 1;
+              nextWord._sessionRetestRef = chosenItem;
+              AppState.update('lastSessionRetestIndex', curMainQ);
+            }
+          } else {
+            return;
+          }
+        }
 
         history.push(nextWord.word);
         if (history.length > 100) history.shift();
@@ -17584,6 +17670,18 @@ const App = (function() {
                 const pending = Services.Storage.getPendingEvents();
                 const filteredPending = pending.filter(e => e.id !== top.eventId);
                 Services.Storage.savePendingEvents(filteredPending);
+              }
+
+              // 撤销作答时，精准回滚当堂复测池状态
+              if (top.sessionRetestSnapshot) {
+                AppState.update('sessionRetestPool', top.sessionRetestSnapshot);
+              } else {
+                const sRetestPool = AppState.get('sessionRetestPool') || [];
+                const rIdx = sRetestPool.findIndex(item => item.wordObj?.word === top.wordName);
+                if (rIdx !== -1) {
+                  sRetestPool.splice(rIdx, 1);
+                  AppState.update('sessionRetestPool', sRetestPool);
+                }
               }
 
               if (typeof localStorage !== 'undefined') {
@@ -17688,9 +17786,35 @@ const App = (function() {
             retestPill.innerText = '🧩 记忆缓冲';
             retestPill.style.background = '#64748b';
             retestPill.title = '记忆缓冲词：过渡短时记忆残留，答题不影响主线进度';
+          } else if (word && word._isSessionRetest) {
+            retestPill.style.display = 'inline-block';
+            const stage = word._retestStage || 1;
+            const failCnt = word._retestFailCount || 1;
+            if (stage === 2) {
+              retestPill.innerText = '⚡ 延时终验 (2/2)';
+              retestPill.style.background = '#0284c7';
+              retestPill.title = '严格模式·阶段2延时终验：答对完成当堂双阶稳固，锁定明日抗遗忘复习！';
+            } else if (failCnt > 1) {
+              retestPill.innerText = `⚠️ 顽固攻坚 (${failCnt}阶)`;
+              retestPill.style.background = '#ea580c';
+              retestPill.title = `顽固错词：已历经 ${failCnt} 次攻坚，请强化辨析并答对以晋级核验！`;
+            } else {
+              retestPill.innerText = '🔄 当堂复测 (1/2)';
+              retestPill.style.background = '#f59e0b';
+              retestPill.title = '严格模式·阶段1初测：答对晋级至阶段2延时终验！';
+            }
           } else {
             retestPill.style.display = 'none';
           }
+        }
+
+        const progEl = typeof document !== 'undefined' ? document.getElementById('order-progress') : null;
+        if (progEl && word && word._isSessionRetest) {
+          const retestPool = AppState.get('sessionRetestPool') || [];
+          const s1Count = retestPool.filter(it => (it.stage || 1) === 1).length;
+          const s2Count = retestPool.filter(it => it.stage === 2).length;
+          progEl.innerText = `⚡ [严格双阶] 待稳固: ${retestPool.length} 词 (初测:${s1Count} | 终验:${s2Count})`;
+          progEl.title = `【双阶严格复测】\n· 阶段1初测: ${s1Count} 词 (答对进入阶段2)\n· 阶段2延时终验: ${s2Count} 词 (答对彻底稳固)\n· 当前待稳固总数: ${retestPool.length} 词`;
         }
 
         const prevBtn = typeof document !== 'undefined' ? document.getElementById('prev-btn') : null;
@@ -17930,6 +18054,7 @@ const App = (function() {
           wordName: wordName,
           mode: mode,
           previousStatsMap: previousStatsMap,
+          sessionRetestSnapshot: JSON.parse(JSON.stringify(AppState.get('sessionRetestPool') || [])),
           isCorrect: isCorrect,
           roundTotalDelta: 1,
           roundCorrectDelta: isCorrect ? 1 : 0,
@@ -18144,6 +18269,96 @@ const App = (function() {
           }
         }
 
+        // ★ 核心机制：日常主线双轨穿插复测引擎 (Interleaved Active Retest Pipeline)
+        const reinforceSession = AppState.get('boxReinforceSession');
+        const isReinforceActive = Boolean(reinforceSession && reinforceSession.isActive);
+        const isSpecialSessionActive = Boolean(dueSession?.isActive || overSession?.isActive || isReinforceActive);
+
+        let isMainRetestQuestion = false;
+        if (!isSpecialSessionActive) {
+          const currentWordObj = AppState.get('currentWord');
+          isMainRetestQuestion = Boolean(currentWordObj && currentWordObj._isSessionRetest);
+          const retestEnabled = (AppState.get('sessionRetestEnabled') !== false);
+
+          let retestPool = AppState.get('sessionRetestPool') || [];
+          const curMainQ = AppState.get('mainQuestionIndex') || 1;
+
+          if (isMainRetestQuestion) {
+            // 本题为穿插复测题作答（严格双阶模式：必须连续通过阶段1初测 + 阶段2延时终验）
+            const poolIdx = retestPool.findIndex(item => item.wordObj?.word === wordName);
+            let rItem = poolIdx !== -1 ? retestPool[poolIdx] : null;
+            if (!rItem) {
+              rItem = currentWordObj?._sessionRetestRef || {
+                wordObj: currentWordObj || { word: wordName },
+                stage: currentWordObj?._retestStage || 1,
+                failCount: 1
+              };
+            }
+
+            const currentStage = rItem.stage || 1;
+
+            if (isCorrect) {
+              if (currentStage === 1) {
+                // ★ 阶段 1 答对 -> 晋升至阶段 2 (延时终极核验)！
+                // 动态拉长认知间隔为 8 ~ 12 题，真正检验记忆在工作干扰后的长时稳定度
+                const delayedGap = 8 + Math.floor(Math.random() * 5); // 8, 9, 10, 11, 12 题
+                rItem.stage = 2;
+                rItem.enterIndex = curMainQ;
+                rItem.eligibleIndex = curMainQ + delayedGap;
+                if (poolIdx === -1) retestPool.push(rItem);
+                AppState.update('sessionRetestPool', retestPool);
+                Services.Sync.showToast(`✓ 阶段1巩固通过！已排入阶段2延时终验 (约 ${delayedGap} 题后)`, 'info', 2200);
+              } else {
+                // ★ 阶段 2 答对 -> 双阶严格稳固通过！彻底移出复测队列
+                if (poolIdx !== -1) {
+                  retestPool.splice(poolIdx, 1);
+                }
+                AppState.update('sessionRetestPool', retestPool);
+                Services.Sync.showToast('🎉 当堂双阶严格稳固完成！记忆锁定明日迎战', 'success', 2500);
+              }
+            } else {
+              // ★ 复测答错：无论当前是阶段 1 还是阶段 2，统一打回阶段 1 重修！
+              // 缩短冷却至 2 ~ 3 题，加大攻坚频次
+              const retryGap = 2 + Math.floor(Math.random() * 2);
+              rItem.stage = 1;
+              rItem.failCount = (rItem.failCount || 1) + 1;
+              rItem.enterIndex = curMainQ;
+              rItem.eligibleIndex = curMainQ + retryGap;
+              if (poolIdx === -1) retestPool.push(rItem);
+              AppState.update('sessionRetestPool', retestPool);
+              if (currentStage === 2) {
+                Services.Sync.showToast('❌ 延时终验未稳固，已打回阶段1重新巩固！', 'warning', 2000);
+              } else {
+                Services.Sync.showToast('❌ 阶段1尚未稳固，已重新排入强化攻坚！', 'warning', 1800);
+              }
+            }
+          } else if (!isCorrect && retestEnabled) {
+            // 常规主线题目首次答错或选择不熟悉 -> 阶段 1 动态冷却 3~5 题排入当堂复测池！
+            const dynamicGap = 3 + Math.floor(Math.random() * 3);
+            const existIdx = retestPool.findIndex(item => item.wordObj?.word === wordName);
+            if (existIdx !== -1) {
+              retestPool.splice(existIdx, 1);
+            }
+            retestPool.push({
+              wordObj: currentWordObj || { word: wordName },
+              stage: 1,
+              failCount: 1,
+              enterIndex: curMainQ,
+              eligibleIndex: curMainQ + dynamicGap,
+              sourceMode: mode
+            });
+            AppState.update('sessionRetestPool', retestPool);
+            Services.Sync.showToast(`⚠️ 已排入双阶严格复测 (阶段1初测将在 ${dynamicGap} 题后出题)`, 'warning', 2200);
+          } else if (isCorrect) {
+            // 常规题目答对：若此前池中已处于该词，顺手清理
+            const poolIdx = retestPool.findIndex(item => item.wordObj?.word === wordName);
+            if (poolIdx !== -1) {
+              retestPool.splice(poolIdx, 1);
+              AppState.update('sessionRetestPool', retestPool);
+            }
+          }
+        }
+
         AppState.update('roundTotal', r => r + 1);
         if (isCorrect) AppState.update('roundCorrect', r => r + 1);
         AppState.update('sessionAnswered', s => s + 1);
@@ -18199,9 +18414,9 @@ const App = (function() {
         }
 
         // ★ 核心规则 2：未掌握词今日进入三盒中不再考虑升级，只进行复测加强记忆！
-        // 凡是：(1) 当前是顺推/到期复测题 (isOverlearningRetest || isDueRetest)，或 (2) 今日已降入三盒锁定的词 (wasLockedInBox3Today)
+        // 凡是：(1) 当前是顺推/到期复测题 (isOverlearningRetest || isDueRetest || isMainRetestQuestion)，或 (2) 今日已降入三盒锁定的词 (wasLockedInBox3Today)
         // 哪怕今日后续复测答对任意次，盒号绝对封顶锁定在 3 盒，下次复习日期绝对锁定在明日！
-        const isRetestQuestion = Boolean(isOverlearningRetest || isDueRetest);
+        const isRetestQuestion = Boolean(isOverlearningRetest || isDueRetest || isMainRetestQuestion);
         if (isRetestQuestion || wasLockedInBox3Today) {
           newBox = 3;
           newNextReviewDate = now + 1 * 86400000; // 坚决锁定明日到期！
@@ -18309,7 +18524,7 @@ const App = (function() {
           this.statUndoStack.shift();
         }
 
-        // ★ 核心修复：日常主线消灭完今日所有到期词的一瞬间，即时唤起通关仪式卡片
+        // 日常主线消灭完今日到期词时静默保持状态，不弹出阻断性弹窗打断刷题节奏
         if (!dueSession?.isActive && !overSession?.isActive) {
           const curPack = currentPackId;
           const packWords = AppState.get('allPacks')[curPack]?.words || [];
@@ -18320,37 +18535,12 @@ const App = (function() {
               currentDueCount++;
             }
           }
-          const hadDueInRun = AppState.get('hadDueWordsInRun') || false;
-          const hasShownForClear = AppState.get('hasShownDueClearModal') || false;
-
-          if (currentDueCount === 0 && (hadDueInRun || wasDueWordBeforeAnswer) && !hasShownForClear) {
+          if (currentDueCount === 0 && (AppState.get('hadDueWordsInRun') || wasDueWordBeforeAnswer) && !AppState.get('hasShownDueClearModal')) {
             AppState.update('hasShownDueClearModal', true);
             AppState.update('hadDueWordsInRun', false);
-            AppState.update('isSessionFinishing', true);
-            if (typeof Views !== 'undefined' && Views.Choice && typeof Views.Choice.cancelAutoAdvance === 'function') {
-              Views.Choice.cancelAutoAdvance();
+            if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+              Services.Sync.showToast('🎉 今日临界到期词已全部清零，可继续巩固或开启顺推！', 'success', 2000);
             }
-            const todayStart = new Date().setHours(0, 0, 0, 0);
-            const todayDateStr = new Date().toDateString();
-            let reviewedTodayCount = 0;
-            let mistakeTodayCount = 0;
-            packWords.forEach(w => {
-              const st = curStDict[w.word];
-              if (st && st.lastReviewed && st.lastReviewed >= todayStart) {
-                reviewedTodayCount++;
-                if (st.demotedToBox3Date === todayDateStr || (st.mistakes && st.mistakes > 0)) {
-                  mistakeTodayCount++;
-                }
-              }
-            });
-            const customStats = {
-              total: Math.max(1, reviewedTodayCount),
-              cycledCount: mistakeTodayCount,
-              elapsedMs: Math.max(1000, Date.now() - (AppState.get('sessionStartTime') || Date.now()))
-            };
-            LifecycleScheduler.setTimeout(() => {
-              this.showDueMilestoneModal(customStats);
-            }, 300);
           } else if (currentDueCount > 0) {
             AppState.update('hasShownDueClearModal', false);
             AppState.update('hadDueWordsInRun', true);
@@ -19635,6 +19825,13 @@ const App = (function() {
       AppState.update('questionHistory', []);
       AppState.update('historyCursor', -1);
       App.nextQuestion();
+    };
+    window.toggleSessionRetest = (checked) => {
+      AppState.update('sessionRetestEnabled', checked);
+      localStorage.setItem('morpho_session_retest_enabled', checked ? '1' : '0');
+      if (typeof Services !== 'undefined' && Services.Sync && Services.Sync.showToast) {
+        Services.Sync.showToast(checked ? '⚡ 已开启生词当堂穿插复测！' : '已关闭生词当堂穿插复测', 'info', 1500);
+      }
     };
 
     window.toggleSoundEffects = (checked) => {
