@@ -577,6 +577,72 @@
     .drawer-word-tag:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
     .drawer-word-tag.due-word { border-color: #ef4444; background: #fef2f2; color: #b91c1c; font-weight: 600; }
 
+    /* === 终身学习大数据全景看板 (Lifetime Analytics) === */
+    .lifetime-analytics-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+    .lifetime-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+    .lifetime-kpi-card {
+      background: var(--card-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease;
+      will-change: transform;
+    }
+    .lifetime-kpi-card:hover {
+      transform: translate3d(0, -2px, 0);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-border);
+    }
+    .hardest-word-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 11px 15px;
+      gap: 12px;
+      transition: all 0.18s ease;
+    }
+    .hardest-word-row:hover {
+      background: var(--card-bg);
+      border-color: var(--primary-border);
+      transform: translate3d(0, -1px, 0);
+      box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 600px) {
+      .lifetime-kpi-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+      .hardest-word-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+      .hardest-word-row > div:last-child {
+        width: 100%;
+        justify-content: space-between !important;
+      }
+    }
+    @media (max-width: 420px) {
+      .lifetime-kpi-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     /* === 盲打错误排行榜 === */
     .typing-mistakes-panel {
       width: 100%;
@@ -3911,6 +3977,106 @@
         <div class="report-metric"><strong id="session-accuracy">0%</strong><span>本次正确率</span></div>
         <div class="report-metric"><strong id="session-minutes">0</strong><span>学习分钟</span></div>
         <div class="report-metric"><strong id="session-due">0</strong><span>当前到期</span></div>
+      </div>
+    </div>
+
+    <!-- 🏆 终身学习大数据全景看板 (维度一：作战大盘 + 维度四：硬骨头攻坚榜) -->
+    <div id="manage-lifetime-analytics-card" class="lifetime-analytics-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+        <div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <h3 style="margin:0; color:var(--text); font-size:1.15rem; display:flex; align-items:center; gap:6px;">
+              <span>🏆</span> 终身学习大数据全景看板
+            </h3>
+            <span class="badge-mini" style="background:var(--primary-light); color:var(--primary); font-size:0.72rem; padding:2px 8px; border-radius:12px; border:1px solid var(--primary-border); font-weight:700;">全域聚合解析</span>
+          </div>
+          <p style="color:var(--muted); font-size:0.82rem; margin:4px 0 0 0;">自启用以来的宏观作战战报与顽固生词攻坚诊断 · 数据全本地安全解析</p>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-mini" style="background:var(--card-subtle); border:1px solid var(--border); color:var(--text); font-size:0.75rem; padding:4px 10px; border-radius:6px; cursor:pointer;" onclick="Views.Manage.refreshLifetimeAnalytics(true)" title="重新全量扫描本地词库与刷题数据">🔄 刷新分析</button>
+        </div>
+      </div>
+
+      <!-- 维度一：终身作战大盘 (Lifetime KPIs) -->
+      <div style="margin-bottom:22px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+          <h4 style="margin:0; font-size:0.95rem; color:var(--text); display:flex; align-items:center; gap:6px;">
+            <span>🎯</span> 维度一：终身作战大盘 (Lifetime KPIs)
+          </h4>
+          <span style="font-size:0.78rem; color:var(--muted); font-weight:600;" id="lifetime-active-days-summary">累计打卡 0 天</span>
+        </div>
+
+        <div class="lifetime-kpi-grid">
+          <!-- KPI 1: 练习总数 -->
+          <div class="lifetime-kpi-card">
+            <div style="font-size:0.78rem; color:var(--muted); font-weight:600; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
+              <span>终身累计练习</span>
+              <span style="font-size:1rem;">🎯</span>
+            </div>
+            <div style="font-size:1.55rem; font-weight:800; color:var(--text); line-height:1.2;" id="kpi-lifetime-tested">0 次</div>
+            <div style="font-size:0.74rem; color:var(--muted); margin-top:6px;" id="kpi-lifetime-tested-sub">测验与盲打全量累加</div>
+          </div>
+
+          <!-- KPI 2: 综合正确率 -->
+          <div class="lifetime-kpi-card">
+            <div style="font-size:0.78rem; color:var(--muted); font-weight:600; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
+              <span>终身综合正确率</span>
+              <span style="font-size:1rem;">⚡</span>
+            </div>
+            <div style="font-size:1.55rem; font-weight:800; color:var(--primary); line-height:1.2;" id="kpi-lifetime-accuracy">0.0%</div>
+            <div style="font-size:0.74rem; color:var(--muted); margin-top:6px;" id="kpi-lifetime-accuracy-sub">正确 0 次 · 产生错误 0 次</div>
+          </div>
+
+          <!-- KPI 3: 词库点亮覆盖率 -->
+          <div class="lifetime-kpi-card">
+            <div style="font-size:0.78rem; color:var(--muted); font-weight:600; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
+              <span>词库点亮覆盖率</span>
+              <span style="font-size:1rem;">📚</span>
+            </div>
+            <div style="font-size:1.55rem; font-weight:800; color:var(--text); line-height:1.2;" id="kpi-lifetime-coverage">0 / 0</div>
+            <div style="margin-top:6px;">
+              <div style="height:5px; background:var(--border); border-radius:3px; overflow:hidden; margin-bottom:4px;">
+                <div id="kpi-lifetime-coverage-bar" style="height:100%; width:0%; background:var(--primary); transition:width 0.4s ease;"></div>
+              </div>
+              <div style="font-size:0.74rem; color:var(--muted);" id="kpi-lifetime-coverage-sub">覆盖率 0.0%</div>
+            </div>
+          </div>
+
+          <!-- KPI 4: 熟词永久内化 -->
+          <div class="lifetime-kpi-card">
+            <div style="font-size:0.78rem; color:var(--muted); font-weight:600; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
+              <span>熟词永久内化</span>
+              <span style="font-size:1rem;">👑</span>
+            </div>
+            <div style="font-size:1.55rem; font-weight:800; color:var(--success); line-height:1.2;" id="kpi-lifetime-mastered">0 词</div>
+            <div style="font-size:0.74rem; color:var(--muted); margin-top:6px;" id="kpi-lifetime-mastered-sub">盒4+盒5占比 0.0%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 维度四：终身顽固词“硬骨头”攻坚榜 (Hardest Words Leaderboard) -->
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+          <div>
+            <h4 style="margin:0; font-size:0.95rem; color:var(--text); display:flex; align-items:center; gap:6px;">
+              <span>🩸</span> 维度四：终身顽固词“硬骨头”攻坚榜
+            </h4>
+            <span style="font-size:0.76rem; color:var(--muted);" id="hardest-words-summary">历史错题转化诊断与最难词突击突破</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div class="rehab-pill" style="background:var(--card-subtle); border:1px solid var(--border); padding:4px 10px; border-radius:20px; font-size:0.78rem; color:var(--text); font-weight:600;">
+              🛡️ 错题化解率: <span id="hardest-rehab-rate" style="color:var(--primary); font-weight:800;">100%</span>
+            </div>
+            <button id="btn-drill-hardest-words" class="btn btn-primary" style="padding:6px 14px; font-size:0.8rem; border-radius:8px; display:inline-flex; align-items:center; gap:5px; cursor:pointer;" onclick="Views.Manage.startHardestWordsDrill()">
+              <span>⚡</span> 立即专练这批硬骨头
+            </button>
+          </div>
+        </div>
+
+        <!-- 顽固词排行榜清单容器 -->
+        <div id="hardest-words-list" style="display:flex; flex-direction:column; gap:8px;">
+          <!-- JS 动态填入 Top 5 顽固词卡片 -->
+        </div>
       </div>
     </div>
     <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:20px;">
@@ -13559,6 +13725,295 @@ Gist ID: ${gistId}
       render() {
         this.renderHeatmap();
         this.updateSyncTimeUI();
+        this.renderLifetimeAnalytics();
+      },
+
+      calculateActivityStreaks(activityData) {
+        if (!activityData || typeof activityData !== 'object') {
+          return { totalDays: 0, longestStreak: 0, currentStreak: 0 };
+        }
+        const dates = Object.keys(activityData).filter(d => (activityData[d] || 0) > 0).sort();
+        const totalDays = dates.length;
+        if (totalDays === 0) {
+          return { totalDays: 0, longestStreak: 0, currentStreak: 0 };
+        }
+
+        let longestStreak = 0;
+        let currentRun = 0;
+        let prevDate = null;
+
+        for (let i = 0; i < dates.length; i++) {
+          const parts = dates[i].split('-').map(Number);
+          if (parts.length < 3 || isNaN(parts[0])) continue;
+          const curD = new Date(parts[0], parts[1] - 1, parts[2]);
+
+          if (!prevDate) {
+            currentRun = 1;
+          } else {
+            const diffDays = Math.round((curD.getTime() - prevDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+              currentRun++;
+            } else if (diffDays > 1) {
+              currentRun = 1;
+            }
+          }
+          if (currentRun > longestStreak) longestStreak = currentRun;
+          prevDate = curD;
+        }
+
+        const now = new Date();
+        const todayStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr(now) : new Date().toISOString().slice(0, 10);
+        const yest = new Date(now);
+        yest.setDate(yest.getDate() - 1);
+        const yestStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr(yest) : yest.toISOString().slice(0, 10);
+
+        let currentStreak = 0;
+        if ((activityData[todayStr] || 0) > 0 || (activityData[yestStr] || 0) > 0) {
+          let checkD = (activityData[todayStr] || 0) > 0 ? new Date(now) : new Date(yest);
+          while (true) {
+            const dStr = (typeof Utils !== 'undefined' && Utils.getLocalDateStr) ? Utils.getLocalDateStr(checkD) : checkD.toISOString().slice(0, 10);
+            if ((activityData[dStr] || 0) > 0) {
+              currentStreak++;
+              checkD.setDate(checkD.getDate() - 1);
+            } else {
+              break;
+            }
+          }
+        }
+
+        return { totalDays, longestStreak, currentStreak };
+      },
+
+      refreshLifetimeAnalytics(toast = false) {
+        this.renderLifetimeAnalytics(toast);
+      },
+
+      renderLifetimeAnalytics(showToast = false) {
+        const container = document.getElementById('manage-lifetime-analytics-card');
+        if (!container) return;
+
+        const allWords = (typeof App !== 'undefined' && App.getAllVocabularyWords)
+          ? App.getAllVocabularyWords()
+          : ((typeof window !== 'undefined' && Array.isArray(window.WORDS_DATA)) ? window.WORDS_DATA : []);
+        const totalWordCount = allWords.length || 3137;
+
+        const stDict = (typeof App !== 'undefined' && App.getAggregatedStatsForTotal)
+          ? App.getAggregatedStatsForTotal()
+          : (AppState.get('packStats')['all_2257'] || Services.Storage.getStats('all_2257') || {});
+
+        const activityData = Services.Storage.getActivity() || {};
+
+        let totalTested = 0;
+        let totalMistakes = 0;
+        let exploredWords = 0;
+        let masteredWords = 0;
+
+        allWords.forEach(w => {
+          const st = stDict[w.word];
+          if (st) {
+            const tested = Math.max(0, st.tested || 0);
+            const mistakes = Math.max(0, (st.mistakes || 0) + (st.typingMistakes || 0));
+            totalTested += tested;
+            totalMistakes += mistakes;
+            if (tested > 0) {
+              exploredWords++;
+            }
+            if ((st.box === 4 || st.box === 5) || (st.masteryScore || 0) >= 80) {
+              masteredWords++;
+            }
+          }
+        });
+
+        let activitySum = 0;
+        for (const cnt of Object.values(activityData)) {
+          activitySum += (cnt || 0);
+        }
+        const effectiveTested = Math.max(totalTested, activitySum);
+        const correctCount = Math.max(0, effectiveTested - totalMistakes);
+        const lifetimeAccuracy = effectiveTested > 0
+          ? Math.max(0, Math.min(100, Math.round(((effectiveTested - totalMistakes) / effectiveTested) * 1000) / 10))
+          : 0.0;
+
+        const coveragePct = totalWordCount > 0
+          ? ((exploredWords / totalWordCount) * 100).toFixed(1)
+          : '0.0';
+
+        const masteredPct = totalWordCount > 0
+          ? ((masteredWords / totalWordCount) * 100).toFixed(1)
+          : '0.0';
+
+        const streakInfo = this.calculateActivityStreaks(activityData);
+
+        const elTested = document.getElementById('kpi-lifetime-tested');
+        const elTestedSub = document.getElementById('kpi-lifetime-tested-sub');
+        const elAcc = document.getElementById('kpi-lifetime-accuracy');
+        const elAccSub = document.getElementById('kpi-lifetime-accuracy-sub');
+        const elCov = document.getElementById('kpi-lifetime-coverage');
+        const elCovSub = document.getElementById('kpi-lifetime-coverage-sub');
+        const elCovBar = document.getElementById('kpi-lifetime-coverage-bar');
+        const elMast = document.getElementById('kpi-lifetime-mastered');
+        const elMastSub = document.getElementById('kpi-lifetime-mastered-sub');
+        const elStreakSummary = document.getElementById('lifetime-active-days-summary');
+
+        if (elTested) elTested.innerText = `${effectiveTested.toLocaleString()} 次`;
+        if (elTestedSub) elTestedSub.innerText = `测验与盲打全量累加`;
+        if (elAcc) elAcc.innerText = effectiveTested > 0 ? `${lifetimeAccuracy.toFixed(1)}%` : '0.0%';
+        if (elAccSub) elAccSub.innerText = `正确 ${correctCount.toLocaleString()} 次 · 产生错误 ${totalMistakes.toLocaleString()} 次`;
+        if (elCov) elCov.innerText = `${exploredWords.toLocaleString()} / ${totalWordCount.toLocaleString()} 词`;
+        if (elCovSub) elCovSub.innerText = `覆盖率 ${coveragePct}% · 未点亮 ${(totalWordCount - exploredWords).toLocaleString()} 词`;
+        if (elCovBar) elCovBar.style.width = `${coveragePct}%`;
+        if (elMast) elMast.innerText = `${masteredWords.toLocaleString()} 词`;
+        if (elMastSub) elMastSub.innerText = `盒4+盒5占比 ${masteredPct}%`;
+        if (elStreakSummary) {
+          elStreakSummary.innerText = `累计打卡 ${streakInfo.totalDays} 天 · 历史最高连续 ${streakInfo.longestStreak} 天 · 当前连续 ${streakInfo.currentStreak} 天`;
+        }
+
+        const mistakeEntries = [];
+        let conqueredCount = 0;
+
+        allWords.forEach(w => {
+          const st = stDict[w.word];
+          if (st) {
+            const m = Math.max(0, (st.mistakes || 0) + (st.typingMistakes || 0));
+            if (m > 0) {
+              const t = Math.max(m, st.tested || 0);
+              const errRate = t > 0 ? (m / t) : 0;
+              const isConquered = (st.box >= 3) || ((st.masteryScore || 0) >= 70);
+              if (isConquered) conqueredCount++;
+
+              mistakeEntries.push({
+                word: w.word,
+                wordObj: w,
+                phonetic: w.phonetic || '',
+                meaning: w.meaning || (Array.isArray(w.trans) ? w.trans.join('; ') : ''),
+                mistakes: m,
+                tested: t,
+                errorRate: Math.round(errRate * 100),
+                box: st.box || 1,
+                masteryScore: st.masteryScore ?? 35,
+                isConquered
+              });
+            }
+          }
+        });
+
+        mistakeEntries.sort((a, b) => {
+          if (b.mistakes !== a.mistakes) return b.mistakes - a.mistakes;
+          if (b.errorRate !== a.errorRate) return b.errorRate - a.errorRate;
+          return b.tested - a.tested;
+        });
+
+        this._hardestWords = mistakeEntries;
+
+        const totalMistakeWords = mistakeEntries.length;
+        const rehabRate = totalMistakeWords > 0
+          ? Math.round((conqueredCount / totalMistakeWords) * 1000) / 10
+          : 100;
+
+        const elRehab = document.getElementById('hardest-rehab-rate');
+        const elSummary = document.getElementById('hardest-words-summary');
+        if (elRehab) elRehab.innerText = `${rehabRate.toFixed(1)}%`;
+        if (elSummary) {
+          if (totalMistakeWords > 0) {
+            elSummary.innerText = `历史曾错 ${totalMistakeWords} 词中，已有 ${conqueredCount} 词晋级盒 3 及以上稳固状态`;
+          } else {
+            elSummary.innerText = `历史错题转化诊断与最难词突击突破`;
+          }
+        }
+
+        const listEl = document.getElementById('hardest-words-list');
+        if (listEl) {
+          if (totalMistakeWords === 0) {
+            listEl.innerHTML = `
+              <div style="text-align:center; padding:24px 16px; background:var(--card-subtle); border:1px dashed var(--border); border-radius:10px; color:var(--muted);">
+                <div style="font-size:1.6rem; margin-bottom:6px;">🎉</div>
+                <div style="font-weight:700; color:var(--text); font-size:0.95rem; margin-bottom:4px;">零顽固错题！当前词库掌握极其稳固</div>
+                <div style="font-size:0.8rem;">在日常测验与盲打中产生的错题，会自动在此处汇集为诊断与攻坚清单</div>
+              </div>
+            `;
+          } else {
+            const top5 = mistakeEntries.slice(0, 5);
+            const rankBgs = [
+              'linear-gradient(135deg, #ef4444, #dc2626)',
+              'linear-gradient(135deg, #f97316, #ea580c)',
+              'linear-gradient(135deg, #f59e0b, #d97706)',
+              'var(--card-bg)',
+              'var(--card-bg)'
+            ];
+            const rankColors = ['#ffffff', '#ffffff', '#ffffff', 'var(--text)', 'var(--text)'];
+            const rankBorders = ['none', 'none', 'none', '1px solid var(--border)', '1px solid var(--border)'];
+
+            listEl.innerHTML = top5.map((item, idx) => {
+              const boxBadgeColors = [
+                '',
+                'background:rgba(239,68,68,0.12); color:#ef4444; border:1px solid rgba(239,68,68,0.3);',
+                'background:rgba(245,158,11,0.12); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);',
+                'background:rgba(59,130,246,0.12); color:#3b82f6; border:1px solid rgba(59,130,246,0.3);',
+                'background:rgba(16,185,129,0.12); color:#10b981; border:1px solid rgba(16,185,129,0.3);',
+                'background:rgba(5,150,105,0.12); color:#059669; border:1px solid rgba(5,150,105,0.3);'
+              ];
+              const boxStyle = boxBadgeColors[item.box] || boxBadgeColors[1];
+
+              return `
+                <div class="hardest-word-row">
+                  <div style="display:flex; align-items:center; gap:12px; min-width:0; flex:1;">
+                    <span style="font-family:monospace; font-weight:800; font-size:0.85rem; padding:3px 8px; border-radius:6px; background:${rankBgs[idx]}; color:${rankColors[idx]}; border:${rankBorders[idx]}; min-width:32px; text-align:center; box-shadow:var(--shadow-sm);">
+                      #${idx + 1}
+                    </span>
+                    <div style="min-width:0; flex:1;">
+                      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                        <strong style="font-size:1.02rem; color:var(--text); cursor:pointer;" onclick="App.jumpToWord('${Utils.escapeHTML(item.word)}')" title="点击查看单词构词与例句">${Utils.escapeHTML(item.word)}</strong>
+                        ${item.phonetic ? `<span style="font-family:serif; color:var(--muted); font-size:0.82rem;">${Utils.escapeHTML(item.phonetic)}</span>` : ''}
+                        <button class="btn btn-mini" style="background:transparent; border:none; cursor:pointer; padding:2px 4px; font-size:0.85rem;" onclick="Services.Audio.playWord('${Utils.escapeHTML(item.word)}')" title="点击朗读发音">🔊</button>
+                        <span class="badge-mini" style="font-size:0.7rem; padding:1px 6px; border-radius:4px; font-weight:700; ${boxStyle}">盒 ${item.box}</span>
+                        ${item.isConquered ? '<span class="badge-mini" style="background:var(--success-light); color:var(--success); font-size:0.68rem; padding:1px 6px; border-radius:4px; font-weight:700;">✓ 已攻克</span>' : '<span class="badge-mini" style="background:var(--error-light); color:var(--error); font-size:0.68rem; padding:1px 6px; border-radius:4px; font-weight:700;">待突破</span>'}
+                      </div>
+                      <div style="font-size:0.82rem; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:3px;" title="${Utils.escapeHTML(item.meaning)}">
+                        ${Utils.escapeHTML(item.meaning)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
+                    <div style="text-align:right;">
+                      <div style="font-size:0.85rem; font-weight:700; color:var(--error);">错 ${item.mistakes} 次</div>
+                      <div style="font-size:0.72rem; color:var(--muted);">测 ${item.tested} 次 · 错率 ${item.errorRate}%</div>
+                    </div>
+                    <button class="btn btn-mini" style="background:var(--card-bg); border:1px solid var(--border); color:var(--primary); font-size:0.75rem; padding:4px 9px; border-radius:6px; cursor:pointer; font-weight:600;" onclick="App.jumpToWord('${Utils.escapeHTML(item.word)}')" title="查看完整词根构词与例句详情">
+                      🔍 详情
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+
+        if (showToast && typeof Services !== 'undefined' && Services.Sync) {
+          Services.Sync.showToast('📊 终身历史学习数据与顽固词榜单已刷新！', 'success', 2000);
+        }
+      },
+
+      startHardestWordsDrill() {
+        const hardest = this._hardestWords || [];
+        if (hardest.length === 0) {
+          if (typeof Services !== 'undefined' && Services.Sync) {
+            Services.Sync.showToast('🎉 太棒了！当前没有任何历史顽固错题需要突击攻坚！', 'success', 2500);
+          }
+          return;
+        }
+
+        const targetWords = hardest.slice(0, 20).map(item => item.wordObj).filter(Boolean);
+        if (targetWords.length === 0) {
+          if (typeof Services !== 'undefined' && Services.Sync) {
+            Services.Sync.showToast('未找到对应的单词词目，请稍后重试', 'error', 2000);
+          }
+          return;
+        }
+
+        if (typeof App !== 'undefined' && App.startCustomReviewSession) {
+          App.startCustomReviewSession(targetWords, '⚡ 终身顽固词专项攻坚');
+        }
       },
 
       renderHeatmap() {
@@ -14560,6 +15015,87 @@ const App = (function() {
           this.buildWordPackMapping();
         }
         return this.wordPackMapping[key] || [];
+      },
+
+      getAllVocabularyWords() {
+        const allPacks = AppState.get('allPacks') || {};
+        for (const [pId, p] of Object.entries(allPacks)) {
+          if (isTotalPack(pId) && Array.isArray(p.words) && p.words.length > 0) {
+            return p.words;
+          }
+        }
+        const map = new Map();
+        for (const pack of Object.values(allPacks)) {
+          if (Array.isArray(pack.words)) {
+            for (const w of pack.words) {
+              if (w && w.word && !map.has(w.word)) map.set(w.word, w);
+            }
+          }
+        }
+        if (map.size > 0) return Array.from(map.values());
+        if (typeof window !== 'undefined' && Array.isArray(window.WORDS_DATA)) {
+          return window.WORDS_DATA;
+        }
+        return [];
+      },
+
+      startCustomReviewSession(targetWords, sessionTitle = '⚡ 专项突破复习') {
+        if (!Array.isArray(targetWords) || targetWords.length === 0) {
+          if (typeof Services !== 'undefined' && Services.Sync) {
+            Services.Sync.showToast('待复习词单为空！', 'info', 2000);
+          }
+          return false;
+        }
+
+        if (AppState.get('boxReinforceSession')?.isActive) {
+          this.finishBoxReinforceSessionCommit();
+        }
+        if (AppState.get('dueReviewSession')?.isActive) {
+          this.exitDueReviewSession(false);
+        }
+
+        const backupContext = {
+          activePool: [...AppState.get('activePool')],
+          orderMode: AppState.get('orderMode'),
+          questionHistory: [...AppState.get('questionHistory')],
+          historyCursor: AppState.get('historyCursor'),
+          sequentialIndex: AppState.get('sequentialIndex'),
+          shuffleQueue: [...(AppState.get('shuffleQueue') || [])],
+          shufflePointer: AppState.get('shufflePointer'),
+          currentMode: AppState.get('currentMode')
+        };
+
+        const session = {
+          isActive: true,
+          scopeBoxId: null,
+          scopeName: sessionTitle,
+          questionIndex: 0,
+          lastRetestQuestionIndex: -999,
+          primaryQueue: [...targetWords],
+          queue: [...targetWords],
+          retestPool: [],
+          totalInitial: targetWords.length,
+          passedWords: new Set(),
+          mistakeWords: new Set(),
+          consolidatedWords: new Set(),
+          roundStartTime: Date.now(),
+          backupContext: backupContext
+        };
+
+        AppState.update('dueReviewSession', session);
+
+        const curMode = AppState.get('currentMode');
+        const isQuestionMode = ['choice', 'flashcard', 'spell', 'confusables'].includes(curMode);
+        if (!isQuestionMode) {
+          this.switchMode('choice');
+        }
+
+        this.updateDueSprintUI();
+        this.nextQuestion();
+        if (typeof Services !== 'undefined' && Services.Sync) {
+          Services.Sync.showToast(`⚡ 已开启【${sessionTitle}】，共 ${targetWords.length} 词待突破！`, 'info', 2500);
+        }
+        return true;
       },
 
       getAggregatedStatsForTotal() {
@@ -20374,6 +20910,8 @@ const App = (function() {
 
     window.uploadToGitHubGist = () => Views.Manage.upload();
     window.pullFromGitHubGist = () => Views.Manage.pull();
+    window.refreshLifetimeAnalytics = (toast = true) => Views.Manage.refreshLifetimeAnalytics(toast);
+    window.startHardestWordsDrill = () => Views.Manage.startHardestWordsDrill();
     window.rollbackToPreviousGistBackup = () => Views.Manage.rollback();
 
     window.triggerPwaInstall = () => {
