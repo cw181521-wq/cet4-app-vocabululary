@@ -3162,18 +3162,17 @@
   <div class="mode-nav-accordion is-collapsed" id="mode-nav-accordion">
     <div class="mode-nav-capsule-bar" id="mode-nav-capsule-bar" onclick="toggleModeNavAccordion()" title="点击收起/展开完整模式导航栏">
       <div class="mode-nav-capsule-pill">
-        <span>当前模式:</span> <strong id="capsule-mode-name">🎯 四选一测试</strong>
+        <span>当前模式:</span> <strong id="capsule-mode-name">🎯 四选一辨析</strong>
       </div>
       <span class="capsule-chevron" id="capsule-chevron">▾ 点击展开其他模式</span>
     </div>
     <div class="nav-tabs" id="utility-nav-panel">
       <span class="mode-group-label">核心练习</span>
-      <button class="tab-btn active" onclick="switchMode('choice')">四选一测试</button>
+      <button class="tab-btn active" onclick="switchMode('choice')">🎯 四选一辨析</button>
       <button class="tab-btn" onclick="switchMode('typing')">⌨️ 键盘极速盲打</button>
       <button class="tab-btn" onclick="switchMode('spell')">拼写填空</button>
       <button class="tab-btn" onclick="switchMode('flashcard')">智能闪卡</button>
       <span class="mode-group-label">专项突破</span>
-      <button class="tab-btn" onclick="switchMode('confusables')">⚔️ 同根易混对决</button>
       <button class="tab-btn" onclick="switchMode('match_game')">🧩 短语消消乐</button>
       <button class="tab-btn" onclick="switchMode('phrases_drill')">📚 词组专练</button>
       <button class="tab-btn" onclick="switchMode('root_dict')">🔍 词根逆向字典</button>
@@ -3190,11 +3189,11 @@
   <div class="mobile-mode-bar" id="mobile-mode-bar">
     <button class="mobile-mode-main-btn" onclick="openMobileModeSheet()" title="点击切换学习与训练模式">
       <span id="mobile-cur-icon">🎯</span>
-      <span id="mobile-cur-name">四选一测试</span>
+      <span id="mobile-cur-name">四选一辨析</span>
       <span class="mobile-mode-badge">切换 ▾</span>
     </button>
     <div class="mobile-mode-pills">
-      <button class="mobile-pill-btn active" id="mpill-choice" onclick="switchMode('choice')">测试</button>
+      <button class="mobile-pill-btn active" id="mpill-choice" onclick="switchMode('choice')">辨析</button>
       <button class="mobile-pill-btn" id="mpill-flashcard" onclick="switchMode('flashcard')">闪卡</button>
       <button class="mobile-pill-btn" id="mpill-typing" onclick="switchMode('typing')">盲打</button>
       <button class="mobile-pill-btn" id="mpill-phrases_drill" onclick="switchMode('phrases_drill')">词组</button>
@@ -3301,8 +3300,8 @@
         <div class="sheet-group-title">🎯 核心词汇专项训练</div>
         <div class="sheet-grid">
           <div class="sheet-item active" id="sheet-item-choice" onclick="selectModeFromSheet('choice')">
-            <span class="sheet-item-icon">📝</span>
-            <div class="sheet-item-text"><strong>四选一测试</strong><span>4选项全解构速测</span></div>
+            <span class="sheet-item-icon">🎯</span>
+            <div class="sheet-item-text"><strong>四选一辨析</strong><span>同根高辨析智能速测</span></div>
           </div>
           <div class="sheet-item" id="sheet-item-typing" onclick="selectModeFromSheet('typing')">
             <span class="sheet-item-icon">⌨️</span>
@@ -3320,10 +3319,6 @@
 
         <div class="sheet-group-title">⚡ 专项训练与对决</div>
         <div class="sheet-grid">
-          <div class="sheet-item" id="sheet-item-confusables" onclick="selectModeFromSheet('confusables')">
-            <span class="sheet-item-icon">⚔️</span>
-            <div class="sheet-item-text"><strong>同根易混对决</strong><span>形近同族真题PK</span></div>
-          </div>
           <div class="sheet-item" id="sheet-item-match_game" onclick="selectModeFromSheet('match_game')">
             <span class="sheet-item-icon">🧩</span>
             <div class="sheet-item-text"><strong>短语消消乐</strong><span>高频介词搭配配对</span></div>
@@ -9756,34 +9751,85 @@ Gist ID: ${gistId}
         if (analysisCard) analysisCard.style.display = 'none';
       },
 
-      pickQuickDistractors(pool, targetWordName, count = 3) {
+      pickIntelligentDistractors(pool, targetWordOrName, count = 3) {
+        if (!pool || pool.length === 0) return [];
+        const targetWord = (typeof targetWordOrName === 'string')
+          ? (pool.find(w => w.word === targetWordOrName) || { word: targetWordOrName })
+          : (targetWordOrName || {});
+        const targetWordName = targetWord.word || '';
+        const chosenNames = new Set([targetWordName]);
         const result = [];
-        const len = pool ? pool.length : 0;
-        if (!len) return result;
-        if (len <= count + 1) {
-          return pool.filter(w => w && w.word !== targetWordName).slice(0, count);
-        }
-        const chosen = new Set([targetWordName]);
-        let attempts = 0;
-        while (result.length < count && attempts < 40) {
-          attempts++;
-          const randIdx = (Math.random() * len) | 0;
-          const candidate = pool[randIdx];
-          if (candidate && candidate.word && !chosen.has(candidate.word)) {
-            chosen.add(candidate.word);
-            result.push(candidate);
+
+        const tryAdd = (w) => {
+          if (w && w.word && !chosenNames.has(w.word)) {
+            chosenNames.add(w.word);
+            result.push(w);
+            return true;
+          }
+          return false;
+        };
+
+        // 1. 第一梯队：同词根族词汇（最高优先级同根派生，极高迷惑辨析度）
+        if (targetWord.group) {
+          const sameGroupWords = pool.filter(w => w.group === targetWord.group && w.word !== targetWordName);
+          const shuffledSameGroup = sameGroupWords.sort(() => 0.5 - Math.random());
+          for (const w of shuffledSameGroup) {
+            if (result.length >= count) break;
+            tryAdd(w);
           }
         }
+
+        // 2. 第二梯队：反义词 / 同大单元主题专题词汇（高频易混）
         if (result.length < count) {
-          for (let i = 0; i < len && result.length < count; i++) {
-            const c = pool[i];
-            if (c && c.word && !chosen.has(c.word)) {
-              chosen.add(c.word);
-              result.push(c);
+          if (Array.isArray(targetWord.antonyms)) {
+            for (const antGroup of targetWord.antonyms) {
+              if (Array.isArray(antGroup.items)) {
+                for (const item of antGroup.items) {
+                  if (result.length >= count) break;
+                  const matchInPool = pool.find(w => w.word === item.word);
+                  if (matchInPool) tryAdd(matchInPool);
+                }
+              }
+            }
+          }
+          if (result.length < count && targetWord.part) {
+            const samePartWords = pool.filter(w => w.part === targetWord.part && !chosenNames.has(w.word))
+                                      .sort(() => 0.5 - Math.random());
+            for (const w of samePartWords) {
+              if (result.length >= count) break;
+              tryAdd(w);
             }
           }
         }
-        return result;
+
+        // 3. 第三梯队：同词性语法干扰项（相同 POS，语法干扰）
+        if (result.length < count && targetWord.pos) {
+          const cleanPos = targetWord.pos.split('/')[0].trim();
+          if (cleanPos) {
+            const samePosWords = pool.filter(w => w.pos && w.pos.includes(cleanPos) && !chosenNames.has(w.word))
+                                     .sort(() => 0.5 - Math.random());
+            for (const w of samePosWords) {
+              if (result.length >= count) break;
+              tryAdd(w);
+            }
+          }
+        }
+
+        // 4. 第四梯队：全库随机兜底补齐（保证永不缺项）
+        if (result.length < count) {
+          const remainingWords = pool.filter(w => !chosenNames.has(w.word))
+                                     .sort(() => 0.5 - Math.random());
+          for (const w of remainingWords) {
+            if (result.length >= count) break;
+            tryAdd(w);
+          }
+        }
+
+        return result.slice(0, count);
+      },
+
+      pickQuickDistractors(pool, targetWordName, count = 3) {
+        return this.pickIntelligentDistractors(pool, targetWordName, count);
       },
 
       render(word, optionsOverride = null) {
@@ -9852,7 +9898,7 @@ Gist ID: ${gistId}
 
             options = [word, ...chosenDistractors.slice(0, 3)].sort(() => 0.5 - Math.random());
           } else {
-            const distractors = this.pickQuickDistractors(currentPackWords, word.word, 3);
+            const distractors = this.pickIntelligentDistractors(currentPackWords, word, 3);
             options = [word, ...distractors].sort(() => 0.5 - Math.random());
           }
         }
@@ -9865,6 +9911,11 @@ Gist ID: ${gistId}
           btn.id = `opt-btn-${idx}`;
 
           const mainLabel = isReverse ? opt.word : `${opt.pos || ''} ${opt.meaning}`;
+          const isSameRoot = Boolean(opt.group && word.group && opt.group === word.group && opt.word !== word.word);
+          const sameRootBadge = isSameRoot
+            ? `<span class="opt-badge" style="background:rgba(245,158,11,0.15); color:#d97706; border:1px solid rgba(245,158,11,0.3); font-weight:700;">同根辨析</span>`
+            : '';
+
           let analysisBadge = '';
           let analysisText = '';
           if (opt.analysis) {
@@ -9891,9 +9942,9 @@ Gist ID: ${gistId}
             <div class="opt-detail-box" id="opt-detail-${idx}">
               <div class="opt-detail-head">
                 <span>${wordHeader}</span>
-                ${opt.word === word.word ? '<span style="color:var(--success); font-size:0.75rem; font-weight:800;">[正确选项]</span>' : ''}
+                ${opt.word === word.word ? '<span style="color:var(--success); font-size:0.75rem; font-weight:800;">[正确选项]</span>' : (isSameRoot ? '<span style="color:#d97706; font-size:0.75rem; font-weight:700;">[同族易混项]</span>' : '')}
               </div>
-              <div>${analysisBadge} <span>${analysisText}</span></div>
+              <div>${analysisBadge} ${sameRootBadge} <span>${analysisText}</span></div>
             </div>
           `;
 
@@ -12174,27 +12225,10 @@ Gist ID: ${gistId}
     };
 
     const Confusables = {
-      enter(prevMode) {},
-      leave(nextMode) { Choice.cleanup(); },
-      render(word) {
-        this.cleanup();
-        const currentPackId = AppState.get('currentPackId');
-        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
-
-        let sameGroup = packWords.filter(w => w.group === word.group && w.word !== word.word);
-        if (sameGroup.length < 3) {
-          sameGroup = packWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
-        } else {
-          sameGroup = sameGroup.sort(() => 0.5 - Math.random()).slice(0, 3);
-        }
-
-        const options = [word, ...sameGroup].sort(() => 0.5 - Math.random());
-        Choice.render(word, options);
-      },
-
-      cleanup() {
-        Choice.cleanup();
-      }
+      enter(prevMode) { Choice.enter(prevMode); },
+      leave(nextMode) { Choice.leave(nextMode); },
+      render(word) { Choice.render(word); },
+      cleanup() { Choice.cleanup(); }
     };
 
     const MatchGame = {
@@ -15427,8 +15461,8 @@ const App = (function() {
         const modeToggleBtn = document.getElementById('capsule-mode-toggle-btn');
         if (modeToggleBtn) {
           const curMode = AppState.get('currentMode');
-          modeToggleBtn.innerText = (curMode === 'flashcard') ? '📝 切四选一' : '🎴 切智能闪卡';
-          modeToggleBtn.title = `当前处于【${curMode === 'flashcard' ? '智能闪卡' : '四选一选择题'}】强化模式，点击切换交互形态`;
+          modeToggleBtn.innerText = (curMode === 'flashcard') ? '🎯 切四选一辨析' : '🎴 切智能闪卡';
+          modeToggleBtn.title = `当前处于【${curMode === 'flashcard' ? '智能闪卡' : '四选一辨析'}】强化模式，点击切换交互形态`;
         }
 
         const titleEl = document.getElementById('capsule-title');
@@ -15519,7 +15553,7 @@ const App = (function() {
         this.switchMode(nextMode, { skipHistoryPush: true });
         this.renderCurrentView();
         this.updateBoxReinforceCapsuleUI();
-        Services.Sync.showToast(`已切换至【${nextMode === 'flashcard' ? '智能闪卡' : '四选一测试'}】强化`, 'info', 1500);
+        Services.Sync.showToast(`已切换至【${nextMode === 'flashcard' ? '智能闪卡' : '四选一辨析'}】强化`, 'info', 1500);
       },
 
       recordBoxReinforceAnswer(wordName, isCorrect, rtMs) {
@@ -19438,7 +19472,8 @@ const App = (function() {
         return Boolean(this._isModeTransitioning);
       },
 
-      switchMode(mode, options = {}) {
+      switchMode(rawMode, options = {}) {
+        const mode = (rawMode === 'confusables') ? 'choice' : rawMode;
         if (this._isModeTransitioning && !options.forceUnlock) {
           console.warn('[FSM] Mode transition locked. Ignoring re-entrant request for:', mode);
           return false;
@@ -19534,11 +19569,11 @@ const App = (function() {
         }
 
         const MODE_NAME_MAP = {
-          choice: { name: '四选一测试', icon: '🎯' },
+          choice: { name: '四选一辨析', icon: '🎯' },
           typing: { name: '键盘极速盲打', icon: '⌨️' },
           spell: { name: '拼写填空', icon: '✍️' },
           flashcard: { name: '智能闪卡', icon: '🎴' },
-          confusables: { name: '同根易混对决', icon: '⚔️' },
+          confusables: { name: '四选一辨析', icon: '🎯' },
           match_game: { name: '短语消消乐', icon: '🧩' },
           phrases_drill: { name: '词组专练', icon: '📚' },
           root_dict: { name: '词根逆向字典', icon: '🔍' },
