@@ -6805,9 +6805,13 @@
         },
 
         async saveStatsToDB(packId, statsDict) {
-          // 同步双写核心总库到 localStorage，确保词库脚本在加载第一毫秒即能无缝对齐五盒进度
+          // 异步闲时双写核心总库到 localStorage，杜绝答题与动画关键帧主线程阻塞
           if (isTotalPack(packId)) {
-            safeSetItem(`morpho_stats_${packId}`, statsDict);
+            if (typeof requestIdleCallback === 'function') {
+              requestIdleCallback(() => safeSetItem(`morpho_stats_${packId}`, statsDict), { timeout: 1000 });
+            } else {
+              setTimeout(() => safeSetItem(`morpho_stats_${packId}`, statsDict), 40);
+            }
           }
           const db = await this.initDB();
           if (!db || !packId || !statsDict) return false;
@@ -7191,7 +7195,7 @@
         savePendingEvents(events) {
           if (typeof localStorage === 'undefined') return;
           const trimmed = events.slice(-500);
-          safeSetItem('morpho_pending_events', trimmed);
+          this.debounceSave('morpho_pending_events', trimmed, 400);
         },
 
         logEvent(type, word, packId, data = {}) {
@@ -9586,6 +9590,36 @@ Gist ID: ${gistId}
         if (analysisCard) analysisCard.style.display = 'none';
       },
 
+      pickQuickDistractors(pool, targetWordName, count = 3) {
+        const result = [];
+        const len = pool ? pool.length : 0;
+        if (!len) return result;
+        if (len <= count + 1) {
+          return pool.filter(w => w && w.word !== targetWordName).slice(0, count);
+        }
+        const chosen = new Set([targetWordName]);
+        let attempts = 0;
+        while (result.length < count && attempts < 40) {
+          attempts++;
+          const randIdx = (Math.random() * len) | 0;
+          const candidate = pool[randIdx];
+          if (candidate && candidate.word && !chosen.has(candidate.word)) {
+            chosen.add(candidate.word);
+            result.push(candidate);
+          }
+        }
+        if (result.length < count) {
+          for (let i = 0; i < len && result.length < count; i++) {
+            const c = pool[i];
+            if (c && c.word && !chosen.has(c.word)) {
+              chosen.add(c.word);
+              result.push(c);
+            }
+          }
+        }
+        return result;
+      },
+
       render(word, optionsOverride = null) {
         this.cleanup();
         AppState.update('hasAnsweredChoice', false);
@@ -9625,7 +9659,7 @@ Gist ID: ${gistId}
             const boxId = reinforceSession.boxId || 1;
 
             const sameBoxWords = currentPackWords.filter(w => (stDict[w.word]?.box ?? 1) === boxId && w.word !== word.word);
-            const boxDistractors = sameBoxWords.sort(() => 0.5 - Math.random()).slice(0, 2);
+            const boxDistractors = this.pickQuickDistractors(sameBoxWords, word.word, 2);
 
             const highBoxWords = currentPackWords.filter(w => {
               const b = stDict[w.word]?.box ?? 1;
@@ -9646,13 +9680,13 @@ Gist ID: ${gistId}
 
             if (chosenDistractors.length < 3) {
               const existingSet = new Set([word.word, ...chosenDistractors.map(d => d.word)]);
-              const fills = currentPackWords.filter(w => !existingSet.has(w.word)).sort(() => 0.5 - Math.random()).slice(0, 3 - chosenDistractors.length);
-              chosenDistractors.push(...fills);
+              const fillPool = currentPackWords.filter(w => !existingSet.has(w.word));
+              chosenDistractors.push(...this.pickQuickDistractors(fillPool, word.word, 3 - chosenDistractors.length));
             }
 
             options = [word, ...chosenDistractors.slice(0, 3)].sort(() => 0.5 - Math.random());
           } else {
-            const distractors = currentPackWords.filter(w => w.word !== word.word).sort(() => 0.5 - Math.random()).slice(0, 3);
+            const distractors = this.pickQuickDistractors(currentPackWords, word.word, 3);
             options = [word, ...distractors].sort(() => 0.5 - Math.random());
           }
         }
@@ -13845,8 +13879,11 @@ Gist ID: ${curId}
         const card = document.getElementById('main-card');
         if (card) {
           card.classList.remove('edge-glow-success', 'edge-glow-warning');
-          void card.offsetWidth;
-          card.classList.add(isCorrect ? 'edge-glow-success' : 'edge-glow-warning');
+          requestAnimationFrame(() => {
+            if (card) {
+              card.classList.add(isCorrect ? 'edge-glow-success' : 'edge-glow-warning');
+            }
+          });
           LifecycleScheduler.setTimeout(() => {
             if (card) card.classList.remove('edge-glow-success', 'edge-glow-warning');
           }, 500);
@@ -14259,8 +14296,20 @@ Gist ID: ${curId}
     };
 
     const Companion = {
+      _pendingWord: null,
+
       render(word) {
         if (!word) return;
+        this._pendingWord = word;
+
+        const panel = document.getElementById('desktop-companion-panel');
+        if (panel) {
+          const isHidden = (window.innerWidth <= 768) || panel.classList.contains('is-collapsed') || panel.style.display === 'none';
+          if (isHidden) {
+            return; // 手机端或折叠状态下彻底跳过全库过滤与 DOM 节点重构
+          }
+        }
+
         const treeList = document.getElementById('root-family-tree-list');
         const badge = document.getElementById('family-count-badge');
         const noteArea = document.getElementById('sidebar-word-note');
@@ -14713,7 +14762,7 @@ const App = (function() {
             st.typingKeyErrors = Math.max(0, st.typingKeyErrors);
           }
 
-          Services.Storage.saveStats(pId, pStats[pId], true);
+          Services.Storage.saveStats(pId, pStats[pId], false);
         });
 
         AppState.update('packStats', pStats);
@@ -16107,6 +16156,7 @@ const App = (function() {
         }
 
         AppState.update('currentPackId', packId);
+        this.markStatsCacheDirty();
         this.statUndoStack = [];
         AppState.update('recentPerformanceWindow', []);
         AppState.update('sessionRetestPool', []);
@@ -16989,28 +17039,28 @@ const App = (function() {
             5: higherWeight * 0.08
           };
 
-          // 1. 全库分盒建组
+          // 1. 全库单次统一扫描分盒与到期收集 (单循环 O(N) 一步到位，消除重复全量 filter)
           const wordsByBox = { 1: [], 2: [], 3: [], 4: [], 5: [] };
           const unlearnedInBox1 = [];
           const learnedInBox1 = [];
+          const allDueCandidates = [];
 
-          pool.forEach(w => {
+          for (let i = 0; i < pool.length; i++) {
+            const w = pool[i];
             const st = stDict[w.word];
             const isUnlearned = (!st || !st.lastReviewed || st.lastReviewed === 0 || (st.tested || 0) === 0);
             const box = (st && typeof st.box === 'number' && st.box >= 1 && st.box <= 5) ? st.box : 1;
-            
+
             if (box === 1) {
               if (isUnlearned) unlearnedInBox1.push(w);
               else learnedInBox1.push(w);
             }
             wordsByBox[box].push(w);
-          });
 
-          // ★ 全局总控：统计全库当前所有非冷却的到期词
-          const allDueCandidates = pool.filter(w => {
-            const st = stDict[w.word];
-            return st && Algorithms.Leitner.isWordDue(st, now) && !recentLocked.includes(w.word);
-          });
+            if (st && !recentLocked.includes(w.word) && Algorithms.Leitner.isWordDue(st, now)) {
+              allDueCandidates.push(w);
+            }
+          }
 
           // ★ 优化1：到期词绝对优先抢救机制 (Review Before New)
           // 只要全库存在到期词，100% 优先消灭到期词，阻断记忆悬崖！
@@ -18031,6 +18081,7 @@ const App = (function() {
       },
 
       onDataMerged(options = { refreshStage: true, silentAudio: true }) {
+        this.markStatsCacheDirty();
         Views.Compass.markBoxesDirty();
         Views.Compass.markMatrixDirty();
         Views.Compass.renderBoxes(false);
@@ -18724,11 +18775,55 @@ const App = (function() {
         }
       },
 
+      _dueStatsCache: {
+        packId: null,
+        timestamp: 0,
+        dueCount: 0,
+        mistakesCount: 0,
+        dirty: true
+      },
+
+      markStatsCacheDirty() {
+        if (this._dueStatsCache) this._dueStatsCache.dirty = true;
+      },
+
+      getDueAndMistakesCount(curPack) {
+        const now = Date.now();
+        const cache = this._dueStatsCache;
+        if (cache && !cache.dirty && cache.packId === curPack && (now - cache.timestamp < 1200)) {
+          return { dueCount: cache.dueCount, mistakesCount: cache.mistakesCount };
+        }
+        const packWords = AppState.get('allPacks')[curPack]?.words || [];
+        const stDict = AppState.get('packStats')[curPack] || {};
+
+        let dueCount = 0;
+        let mistakesCount = 0;
+
+        for (let i = 0; i < packWords.length; i++) {
+          const w = packWords[i];
+          const st = stDict[w.word];
+          if (st) {
+            if (Algorithms.Leitner.isWordDue(st, now)) dueCount++;
+            if ((st.mistakes > 0) || (st.level <= 1) || Boolean(st.isFlagged)) mistakesCount++;
+          }
+        }
+
+        if (cache) {
+          cache.packId = curPack;
+          cache.timestamp = now;
+          cache.dueCount = dueCount;
+          cache.mistakesCount = mistakesCount;
+          cache.dirty = false;
+        }
+
+        return { dueCount, mistakesCount };
+      },
+
       updateStats() {
         if (typeof document === 'undefined') return;
         const curPack = AppState.get('currentPackId');
-        const stDict = AppState.get('packStats')[curPack] || {};
-        const mistakesCount = Object.keys(stDict).filter(k => (stDict[k].mistakes > 0) || (stDict[k].level <= 1) || Boolean(stDict[k].isFlagged)).length;
+        const { dueCount, mistakesCount } = this.getDueAndMistakesCount(curPack);
+
         const badge = document.getElementById('mistakes-summary-badge');
         if (badge) badge.innerText = `共 ${mistakesCount} 词`;
 
@@ -18746,29 +18841,14 @@ const App = (function() {
         if (sMinutes) sMinutes.innerText = Math.max(0, Math.floor((Date.now() - started) / 60000));
 
         if (sDue) {
-          const now = Date.now();
-          const words = AppState.get('allPacks')[curPack]?.words || [];
-          sDue.innerText = words.filter(w => {
-            const st = stDict[w.word];
-            return Algorithms.Leitner.isWordDue(st, now);
-          }).length;
+          sDue.innerText = dueCount;
         }
       },
 
       updateDueBadge() {
         if (typeof document === 'undefined') return;
         const curPack = AppState.get('currentPackId');
-        const packWords = AppState.get('allPacks')[curPack]?.words || [];
-        const stDict = AppState.get('packStats')[curPack] || {};
-        const now = Date.now();
-
-        let dueCount = 0;
-        packWords.forEach(w => {
-          const st = stDict[w.word];
-          if (Algorithms.Leitner.isWordDue(st, now)) {
-            dueCount++;
-          }
-        });
+        const { dueCount } = this.getDueAndMistakesCount(curPack);
 
         const badge = document.getElementById('top-due-btn');
         if (badge) {
@@ -19590,6 +19670,10 @@ const App = (function() {
         btn.setAttribute('aria-expanded', String(!isCollapsed));
         btn.innerText = isCollapsed ? '▣ 展开辅助栏' : '▣ 收起辅助栏';
       });
+      if (!isCollapsed && typeof Views !== 'undefined' && Views.Companion) {
+        const curW = AppState.get('currentWord') || Views.Companion._pendingWord;
+        if (curW) Views.Companion.render(curW);
+      }
       localStorage.setItem('morpho_companion_collapsed', isCollapsed ? '1' : '0');
     };
 
