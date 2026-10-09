@@ -6448,7 +6448,15 @@
           const lastReviewed = (typeof st.lastReviewed === 'number') ? st.lastReviewed : 0;
           if (lastReviewed <= 0) return false; // 盒 1 尚未学习过的生词，由生词开荒机制调度，不属于到期复习
           const nextReview = (typeof st.nextReviewDate === 'number') ? st.nextReviewDate : 0;
-          return now >= nextReview;
+          if (nextReview <= 0) return false;
+
+          // 1. 标准时间戳判定：当前时间已达或超过预约时间戳
+          if (now >= nextReview) return true;
+
+          // 2. 自然日跨天保底判定：只要当前自然日 (00:00:00) 已经到达或超过目标预约日，即判定为今日到期
+          const todayStart = new Date(now).setHours(0, 0, 0, 0);
+          const reviewDayStart = new Date(nextReview).setHours(0, 0, 0, 0);
+          return todayStart >= reviewDayStart;
         },
         calculateAdvance(oldBox, isCorrect, leitnerMode = 'instant', lastReviewed = 0, nextReviewDate = 0) {
           const now = Date.now();
@@ -6463,8 +6471,8 @@
           } else {
             // 方案A：3盒黄金中枢守底准则 (盒3/4/5错题统一锁定3盒，盒1/2退回1盒)
             newBox = (currentBox >= 3) ? 3 : 1;
-            const cfg = LEITNER_BOX_CONFIG[newBox - 1];
-            return { box: newBox, nextReviewDate: now + cfg.ms, streakDelta: 0, isPromoted: false };
+            const startOfTomorrow = new Date(now).setHours(0, 0, 0, 0) + 86400000;
+            return { box: newBox, nextReviewDate: startOfTomorrow, streakDelta: 0, isPromoted: false };
           }
         }
       },
@@ -6568,8 +6576,8 @@
             const jitter = 0.9 + Math.random() * 0.2;
             return Math.round(now + cfg.ms * jitter);
           } else if (finalBox < initialBox || sessionMistakes > 0) {
-            const cfg = Algorithms.Leitner.getConfig(finalBox);
-            return Math.round(now + cfg.ms * 0.5);
+            const startOfTomorrow = new Date(now).setHours(0, 0, 0, 0) + 86400000;
+            return startOfTomorrow;
           } else {
             const cfg = Algorithms.Leitner.getConfig(initialBox);
             const safeOldDate = (oldNextReviewDate && oldNextReviewDate > 0) ? oldNextReviewDate : now;
@@ -18402,14 +18410,16 @@ const App = (function() {
 
         // ★ 核心规则 1：方案A（3盒黄金中枢守底准则）
         // 凡是：顺推模式下未掌握词、到期冲刺错题、或 3 盒及以上错题（盒3、盒4、盒5），统一锁定降入/保持在 3 盒，锁定明日到期抗遗忘必复！
+        // 采用自然日次日 00:00:00 对齐结算，确保次日无论是早晨还是晚上打开，过了夜间 0 点必定作为到期词推送到前台！
+        const startOfTomorrow = new Date(now).setHours(0, 0, 0, 0) + 86400000;
         if (!isCorrect && (overSession?.isActive || dueSession?.isActive || oldBox >= 3)) {
           newBox = 3;
-          newNextReviewDate = now + 1 * 86400000; // 锁定明日到期必复！
+          newNextReviewDate = startOfTomorrow; // 锁定次日0点到期必复！
           transition.stability = 4.0;
         } else if (!isCorrect && oldBox <= 2) {
           // 盒 1、盒 2 错题：统一退回 1 盒强化开荒
           newBox = 1;
-          newNextReviewDate = now + 1 * 86400000;
+          newNextReviewDate = startOfTomorrow; // 锁定次日0点到期必复！
           transition.stability = 0.8;
         }
 
@@ -18419,7 +18429,7 @@ const App = (function() {
         const isRetestQuestion = Boolean(isOverlearningRetest || isDueRetest || isMainRetestQuestion);
         if (isRetestQuestion || wasLockedInBox3Today) {
           newBox = 3;
-          newNextReviewDate = now + 1 * 86400000; // 坚决锁定明日到期！
+          newNextReviewDate = startOfTomorrow; // 坚决锁定明日到期！
           transition.stability = Math.min(transition.stability || 4.0, 4.5);
         }
 
@@ -18466,7 +18476,7 @@ const App = (function() {
           }
           if (st.demotedToBox3Date === todayDateStr) {
             st.box = 3;
-            st.nextReviewDate = Math.min(st.nextReviewDate, now + 1 * 86400000);
+            st.nextReviewDate = Math.min(st.nextReviewDate, startOfTomorrow);
           }
         });
 
