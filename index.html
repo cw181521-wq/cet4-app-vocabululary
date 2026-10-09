@@ -1317,6 +1317,14 @@
     .tested-history-pill.is-new { background: #ecfdf5; color: #047857; border-color: rgba(16, 185, 129, 0.25); }
     .tested-history-pill.has-mistakes { background: #fff7ed; color: #c2410c; border-color: rgba(249, 115, 22, 0.25); }
     .tested-history-pill.clean-pass { background: #eff6ff; color: #1d4ed8; border-color: rgba(59, 130, 246, 0.25); }
+    .mastery-pill, .risk-pill, .tested-history-pill { cursor: pointer; user-select: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .mastery-pill:active, .risk-pill:active, .tested-history-pill:active { transform: scale(0.94); }
+    .pill-desktop { display: inline; }
+    .pill-mobile { display: none; }
+    @media (max-width: 480px) {
+      .pill-desktop { display: none !important; }
+      .pill-mobile { display: inline !important; }
+    }
     .sync-badge { font-size: 0.76rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); display: inline-flex; align-items: center; gap: 5px; transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1); user-select: none; }
     .sync-badge.syncing { border-color: var(--primary); color: var(--primary); background: var(--primary-light); animation: syncBadgePulse 1.2s infinite ease-in-out; }
     .sync-badge.synced { border-color: var(--success); color: var(--success); background: var(--success-light); }
@@ -2170,23 +2178,28 @@
       }
       .card-meta-slot-left {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-        gap: 3px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 4px !important;
         flex-shrink: 0 !important;
+        max-width: calc(100% - 95px) !important;
         min-width: 0 !important;
         overflow: visible !important;
       }
       .card-meta-slot-left .mastery-pill,
       .card-meta-slot-left .risk-pill,
       .card-meta-slot-left .tested-history-pill {
-        font-size: 0.70rem !important;
-        padding: 1px 6px !important;
+        font-size: 0.67rem !important;
+        padding: 1px 5px !important;
         white-space: nowrap !important;
         flex-shrink: 0 !important;
         border-radius: 4px !important;
-        display: inline-block !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        line-height: 1.35 !important;
+        cursor: pointer !important;
       }
       .card-meta-slot-right {
         display: flex !important;
@@ -3395,10 +3408,10 @@
                 <span class="micro-dot" data-box="4" title="Box 4 周度稳固"></span>
                 <span class="micro-dot" data-box="5" title="Box 5 永久毕业"></span>
               </div>
-              <span class="mastery-pill" id="mastery-pill" title="基于作答反应时与记忆稳定度的 0~100 自适应掌握度">掌握度: 35%</span>
-              <span class="tested-history-pill is-new" id="tested-history-pill" title="该单词历史累计测试总次数与错题记录">🌱 首学新词</span>
+              <span class="mastery-pill" id="mastery-pill" onclick="showCurrentWordProfile()" title="点击查看单词专属学习档案">掌握度: 35%</span>
+              <span class="tested-history-pill is-new" id="tested-history-pill" onclick="showCurrentWordProfile()" title="点击查看单词专属学习档案"><span class="pill-desktop">🌱 首学新词</span><span class="pill-mobile">🌱 新词</span></span>
               <div class="card-meta-risk-row" style="display:inline-flex; align-items:center; gap:4px;">
-                <span class="risk-pill" id="risk-pill" title="基于艾宾浩斯半衰期负指数遗忘模型预测的当期遗忘概率">遗忘风险: 20%</span>
+                <span class="risk-pill" id="risk-pill" onclick="showCurrentWordProfile()" title="点击查看单词专属学习档案">遗忘风险: 20%</span>
                 <span class="unexpected-badge" id="unexpected-badge" style="display:none;" title="四级核心真题高频熟词生义考点">⚠️ 熟词生义</span>
                 <span class="badge-mini" id="overlearning-retest-pill" style="display:none; background:#f59e0b; color:#fff; font-weight:800; font-size:0.72rem; padding:2px 8px; border-radius:10px; animation:pulseDue 2s infinite;">🔄 当堂复测</span>
               </div>
@@ -13800,16 +13813,16 @@ Gist ID: ${curId}
           const sCount = st.streak || 0;
           if (tCount === 0) {
             testedPill.className = 'tested-history-pill is-new';
-            testedPill.innerHTML = '🌱 首学新词';
-            testedPill.title = '【初见生词】\n· 尚未进行过任何历史测试\n· 答题后正式记录学习轨迹';
+            testedPill.innerHTML = '<span class="pill-desktop">🌱 首学新词</span><span class="pill-mobile">🌱 新词</span>';
+            testedPill.title = '【初见生词】点击查看该词详细学习档案';
           } else if (mCount > 0) {
             testedPill.className = 'tested-history-pill has-mistakes';
-            testedPill.innerHTML = `📊 测 ${tCount} · 错 ${mCount}`;
-            testedPill.title = `【历史测试数据】\n· 累计测试: ${tCount} 次\n· 历史做错: ${mCount} 次\n· 当前连对: ${sCount} 次\n· 正确率: ${Math.round((tCount - mCount) / tCount * 100)}%`;
+            testedPill.innerHTML = `<span class="pill-desktop">📊 测 ${tCount} · 错 ${mCount}</span><span class="pill-mobile">测${tCount}·错${mCount}</span>`;
+            testedPill.title = `【历史测试数据】点击查看学习档案\n· 累计测试: ${tCount} 次\n· 历史做错: ${mCount} 次\n· 当前连对: ${sCount} 次\n· 正确率: ${Math.round((tCount - mCount) / tCount * 100)}%`;
           } else {
             testedPill.className = 'tested-history-pill clean-pass';
-            testedPill.innerHTML = `📊 测 ${tCount} · 0错`;
-            testedPill.title = `【历史测试数据】\n· 累计测试: ${tCount} 次\n· 保持全对 (0 错题)\n· 当前连对: ${sCount} 次\n· 正确率: 100%`;
+            testedPill.innerHTML = `<span class="pill-desktop">📊 测 ${tCount} · 0错</span><span class="pill-mobile">测${tCount}·0错</span>`;
+            testedPill.title = `【历史测试数据】点击查看学习档案\n· 累计测试: ${tCount} 次\n· 保持全对 (0 错题)\n· 当前连对: ${sCount} 次\n· 正确率: 100%`;
           }
         }
 
@@ -14566,6 +14579,89 @@ const App = (function() {
         Services.Storage.saveStats('all_2257', aggregated, true);
         Services.Storage.saveStats('all_2800', aggregated, true);
         return aggregated;
+      },
+
+      showWordProfileModal(wordObj = null) {
+        const word = wordObj || AppState.get('currentWord');
+        if (!word) return;
+
+        const currentPackId = AppState.get('currentPackId');
+        const st = AppState.get('packStats')[currentPackId]?.[word.word] || {};
+        const boxId = st.box || 1;
+        const cfg = Algorithms.Leitner.getConfig(boxId);
+        const mScore = st.masteryScore ?? 35;
+        const riskData = Algorithms.Ebbinghaus.calculateMemoryRisk(st);
+        const testedCount = st.tested || 0;
+        const mistakesCount = st.mistakes || 0;
+        const correctCount = Math.max(0, testedCount - mistakesCount);
+        const accuracy = testedCount > 0 ? Math.round((correctCount / testedCount) * 100) : 100;
+        const firstLearnDate = st.firstLearnedAt ? new Date(st.firstLearnedAt).toLocaleDateString('zh-CN') : '尚未正式学习';
+        const lastReviewDate = st.lastReviewed ? new Date(st.lastReviewed).toLocaleString('zh-CN', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '尚未测试';
+        const responseTimeText = st.lastResponseTime ? `${(st.lastResponseTime / 1000).toFixed(1)} 秒` : '无记录';
+
+        let dueStatus = '🌱 初始生词';
+        if (st.lastReviewed) {
+          const diffMs = (st.nextReviewDate || 0) - Date.now();
+          if (diffMs <= 0) {
+            dueStatus = '<span style="color:#ef4444; font-weight:700;">⚡ 今日已到期！急需复习</span>';
+          } else {
+            const days = Math.ceil(diffMs / 86400000);
+            dueStatus = `<span style="color:var(--primary); font-weight:600;">约 ${days} 天后到期 (${new Date(st.nextReviewDate).toLocaleDateString('zh-CN')})</span>`;
+          }
+        }
+
+        const html = `
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:1.3rem; font-weight:900; color:var(--text);">${Utils.escapeHTML(word.word)}</div>
+                <div style="font-size:0.85rem; color:var(--muted); margin-top:2px;">${Utils.escapeHTML(word.phonetic || '')} · <b>${Utils.escapeHTML(word.pos || '')}</b> ${Utils.escapeHTML(word.meaning || '')}</div>
+              </div>
+              <button class="btn" style="padding:6px 10px; font-size:0.85rem;" onclick="Services.Audio.playWord('${Utils.escapeHTML(word.word)}')">🔊</button>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">累计测试</div>
+                <div style="font-size:1.1rem; font-weight:900; color:var(--primary); margin-top:2px;">${testedCount} <span style="font-size:0.7rem; font-weight:500;">次</span></div>
+              </div>
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">做错次数</div>
+                <div style="font-size:1.1rem; font-weight:900; color:${mistakesCount > 0 ? '#ef4444' : 'var(--success)'}; margin-top:2px;">${mistakesCount} <span style="font-size:0.7rem; font-weight:500;">次</span></div>
+              </div>
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">当前连对</div>
+                <div style="font-size:1.1rem; font-weight:900; color:#3b82f6; margin-top:2px;">${st.streak || 0} <span style="font-size:0.7rem; font-weight:500;">次</span></div>
+              </div>
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">综合掌握度</div>
+                <div style="font-size:1.1rem; font-weight:900; color:var(--success); margin-top:2px;">${mScore}%</div>
+              </div>
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">遗忘风险</div>
+                <div style="font-size:1.1rem; font-weight:900; color:${riskData.risk > 50 ? '#ef4444' : '#f59e0b'}; margin-top:2px;">${riskData.risk}%</div>
+              </div>
+              <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:8px 10px; text-align:center;">
+                <div style="font-size:0.7rem; color:var(--muted);">最近耗时</div>
+                <div style="font-size:1.1rem; font-weight:900; color:var(--text); margin-top:2px;">${responseTimeText}</div>
+              </div>
+            </div>
+
+            <div style="background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:10px 12px; font-size:0.8rem; line-height:1.6; display:flex; flex-direction:column; gap:4px;">
+              <div>📦 <b>所属盒位:</b> ${Utils.escapeHTML(cfg.name)} (复习周期: ${cfg.days} 天)</div>
+              <div>🗓️ <b>首次学习:</b> ${firstLearnDate}</div>
+              <div>🕒 <b>最近作答:</b> ${lastReviewDate}</div>
+              <div>⏰ <b>到期状态:</b> ${dueStatus}</div>
+            </div>
+          </div>
+        `;
+
+        UIModal.alert({
+          title: '📊 单词专属学习档案',
+          message: html,
+          isHtml: true,
+          confirmText: '关闭'
+        });
       },
 
       broadcastWordStatUpdate(originPackId, wordName, updaterFn) {
@@ -17807,7 +17903,7 @@ const App = (function() {
         const riskEl = typeof document !== 'undefined' ? document.getElementById('risk-pill') : null;
         const testedEl = typeof document !== 'undefined' ? document.getElementById('tested-history-pill') : null;
         if (masteryEl) {
-          masteryEl.innerText = `掌握度: ${mScore}%`;
+          masteryEl.innerHTML = `<span class="pill-desktop">掌握度: ${mScore}%</span><span class="pill-mobile">${mScore}%掌握</span>`;
           masteryEl.style.color = mScore >= 80 ? 'var(--success)' : (mScore >= 50 ? 'var(--primary)' : 'var(--muted)');
         }
         if (testedEl) {
@@ -17816,21 +17912,21 @@ const App = (function() {
           const sCount = stWord.streak || 0;
           if (tCount === 0) {
             testedEl.className = 'tested-history-pill is-new';
-            testedEl.innerHTML = '🌱 首学新词';
-            testedEl.title = '【初见生词】\n· 尚未进行过任何历史测试\n· 答题后正式记录学习轨迹';
+            testedEl.innerHTML = '<span class="pill-desktop">🌱 首学新词</span><span class="pill-mobile">🌱 新词</span>';
+            testedEl.title = '【初见生词】点击查看该词详细学习档案';
           } else if (mCount > 0) {
             testedEl.className = 'tested-history-pill has-mistakes';
-            testedEl.innerHTML = `📊 测 ${tCount} · 错 ${mCount}`;
-            testedEl.title = `【历史测试数据】\n· 累计测试: ${tCount} 次\n· 历史做错: ${mCount} 次\n· 当前连对: ${sCount} 次\n· 正确率: ${Math.round((tCount - mCount) / tCount * 100)}%`;
+            testedEl.innerHTML = `<span class="pill-desktop">📊 测 ${tCount} · 错 ${mCount}</span><span class="pill-mobile">测${tCount}·错${mCount}</span>`;
+            testedEl.title = `【历史测试数据】点击查看学习档案\n· 累计测试: ${tCount} 次\n· 历史做错: ${mCount} 次\n· 当前连对: ${sCount} 次\n· 正确率: ${Math.round((tCount - mCount) / tCount * 100)}%`;
           } else {
             testedEl.className = 'tested-history-pill clean-pass';
-            testedEl.innerHTML = `📊 测 ${tCount} · 0错`;
-            testedEl.title = `【历史测试数据】\n· 累计测试: ${tCount} 次\n· 保持全对 (0 错题)\n· 当前连对: ${sCount} 次\n· 正确率: 100%`;
+            testedEl.innerHTML = `<span class="pill-desktop">📊 测 ${tCount} · 0错</span><span class="pill-mobile">测${tCount}·0错</span>`;
+            testedEl.title = `【历史测试数据】点击查看学习档案\n· 累计测试: ${tCount} 次\n· 保持全对 (0 错题)\n· 当前连对: ${sCount} 次\n· 正确率: 100%`;
           }
         }
         if (riskEl) {
-          riskEl.innerText = `风险: ${riskData.risk}%`;
-          riskEl.title = `基于艾宾浩斯负指数模型预测的当期遗忘概率: ${riskData.risk}%`;
+          riskEl.innerHTML = `<span class="pill-desktop">风险: ${riskData.risk}%</span><span class="pill-mobile">${riskData.risk}%险</span>`;
+          riskEl.title = `基于艾宾浩斯负指数模型预测的当期遗忘概率: ${riskData.risk}%\n点击查看学习档案`;
           riskEl.className = `risk-pill ${riskData.risk > 50 ? 'danger' : (riskData.risk > 25 ? 'warning' : 'safe')}`;
         }
 
@@ -19423,6 +19519,7 @@ const App = (function() {
     window.dismissDueMilestone = () => App.dismissDueMilestone();
     window.closeLeitnerDrawer = () => Views.Compass.closeDrawer();
     window.jumpBoxFromCompass = (b) => Views.Compass.jumpBox(b);
+    window.showCurrentWordProfile = () => App.showWordProfileModal();
 
     window.startOverlearningSession = (count, boxId, boxName) => App.startOverlearningSession(count, boxId, boxName);
     window.exitOverlearningSession = (restore = true) => App.exitOverlearningSession(restore);
