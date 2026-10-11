@@ -393,8 +393,8 @@
       text-align: center;
       font-size: 0.74rem;
       color: var(--muted);
-      margin-top: 12px;
-      padding-top: 8px;
+      margin-top: 10px;
+      padding-top: 6px;
       border-top: 1px dashed var(--border);
       letter-spacing: 0.04em;
       opacity: 0.85;
@@ -403,8 +403,103 @@
     }
     @media (max-width: 768px) {
       .flashcard-swipe-hint-mobile {
-        display: block;
+        display: none !important;
       }
+      .flashcard-tap-ribbon-mobile {
+        display: flex !important;
+      }
+    }
+
+    /* === 智能闪卡：手机端非对称双区分割极速点按栏 === */
+    .flashcard-tap-ribbon-mobile {
+      display: none;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 5px;
+      background: var(--card-subtle);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+      position: relative;
+      overflow: hidden;
+    }
+    .tap-ribbon-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      touch-action: manipulation;
+    }
+    .tap-ribbon-left {
+      flex: 38;
+      background: rgba(239, 68, 68, 0.06);
+      border: 1.5px solid rgba(239, 68, 68, 0.22);
+      color: var(--error);
+    }
+    .tap-ribbon-left:active {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: var(--error);
+      transform: scale(0.97);
+    }
+    .tap-ribbon-separator {
+      width: 1px;
+      background: var(--border);
+      margin: 4px 0;
+      opacity: 0.7;
+    }
+    .tap-ribbon-right {
+      flex: 54;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1.5px solid rgba(16, 185, 129, 0.26);
+      color: var(--success);
+    }
+    .tap-ribbon-right:active {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--success);
+      transform: scale(0.97);
+    }
+    .tap-ribbon-icon {
+      font-size: 0.92rem;
+      line-height: 1;
+    }
+    .tap-ribbon-sub {
+      font-size: 0.68rem;
+      opacity: 0.82;
+      font-weight: 600;
+      margin-left: 2px;
+    }
+    .card-tap-ripple {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      margin-left: -65px;
+      margin-top: -65px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 15;
+      animation: cardTapRippleAnim 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+    }
+    .card-tap-ripple.ripple-left {
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.32) 0%, rgba(239, 68, 68, 0) 70%);
+    }
+    .card-tap-ripple.ripple-right {
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.32) 0%, rgba(16, 185, 129, 0) 70%);
+    }
+    @keyframes cardTapRippleAnim {
+      0% { transform: scale(0.35); opacity: 0.85; }
+      100% { transform: scale(2.2); opacity: 0; }
     }
     .flashcard-hint {
       margin-top: 12px;
@@ -3522,6 +3617,19 @@
                 <span class="flashcard-analysis-tag tag-gouci" id="flashcard-analysis-tag">形态学构词精解</span>
                 <div class="flashcard-analysis-text" id="flashcard-analysis-text"></div>
                 <div class="flashcard-collocation-text" id="flashcard-collocation-text" style="display:none;"></div>
+              </div>
+              <div class="flashcard-tap-ribbon-mobile" id="flashcard-tap-ribbon-mobile" role="group" aria-label="单手极速点按决策栏">
+                <div class="tap-ribbon-item tap-ribbon-left" data-action="fail">
+                  <span class="tap-ribbon-icon">⚠️</span>
+                  <span class="tap-ribbon-label">生疏重背</span>
+                  <span class="tap-ribbon-sub">‹ 左点/左滑</span>
+                </div>
+                <div class="tap-ribbon-separator"></div>
+                <div class="tap-ribbon-item tap-ribbon-right" data-action="pass">
+                  <span class="tap-ribbon-label">掌握通过</span>
+                  <span class="tap-ribbon-icon">✓</span>
+                  <span class="tap-ribbon-sub">右点/右滑 ›</span>
+                </div>
               </div>
               <div class="flashcard-swipe-hint-mobile">‹ 左滑生疏 · 右滑掌握 ›</div>
             </div>
@@ -10106,18 +10214,49 @@ Gist ID: ${gistId}
       pinnedScrollY: null,
       cardRenderStartTime: 0,
       cardRecallLatency: 0,
+      flipTimestamp: 0,
+      zoneCooldownMs: 260,
 
       touch: {
         startX: 0,
         startY: 0,
         currentX: 0,
+        currentY: 0,
         startTime: 0,
+        targetEl: null,
         isDragging: false,
         directionDetermined: false,
         isHorizontalSwipe: false,
         hasVibrated: false,
         badgeLeft: null,
         badgeRight: null
+      },
+
+      showTapRipple(card, side, x, y) {
+        if (!card) return;
+        const ripple = document.createElement('div');
+        ripple.className = `card-tap-ripple ripple-${side}`;
+        ripple.style.left = `${Math.round(x)}px`;
+        ripple.style.top = `${Math.round(y)}px`;
+        card.appendChild(ripple);
+        setTimeout(() => { if (ripple && ripple.parentNode) ripple.remove(); }, 340);
+      },
+
+      triggerTapDecision(card, known, clientX, clientY) {
+        if (this.isTransitioning) return;
+        const rect = card.getBoundingClientRect();
+        const rx = (clientX !== undefined && clientX !== null) ? (clientX - rect.left) : (known ? rect.width * 0.72 : rect.width * 0.28);
+        const ry = (clientY !== undefined && clientY !== null) ? (clientY - rect.top) : (rect.height * 0.78);
+        this.showTapRipple(card, known ? 'right' : 'left', rx, ry);
+
+        card.classList.add(known ? 'liquid-glow-right' : 'liquid-glow-left');
+        const badge = known ? this.touch.badgeRight : this.touch.badgeLeft;
+        if (badge) {
+          badge.style.opacity = '0.9';
+          setTimeout(() => { if (badge) badge.style.opacity = '0'; }, 160);
+        }
+
+        this.handleSwipeDecision(known, false);
       },
 
       isTouchDevice() {
@@ -10264,6 +10403,19 @@ Gist ID: ${gistId}
             <div class="flashcard-back-inner">
               <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word.pos || '')} ${Utils.escapeHTML(word.meaning || '')}</div>
               ${embeddedInitHtml}
+              <div class="flashcard-tap-ribbon-mobile" id="flashcard-tap-ribbon-mobile" role="group" aria-label="单手极速点按决策栏">
+                <div class="tap-ribbon-item tap-ribbon-left" data-action="fail">
+                  <span class="tap-ribbon-icon">⚠️</span>
+                  <span class="tap-ribbon-label">生疏重背</span>
+                  <span class="tap-ribbon-sub">‹ 左点/左滑</span>
+                </div>
+                <div class="tap-ribbon-separator"></div>
+                <div class="tap-ribbon-item tap-ribbon-right" data-action="pass">
+                  <span class="tap-ribbon-label">掌握通过</span>
+                  <span class="tap-ribbon-icon">✓</span>
+                  <span class="tap-ribbon-sub">右点/右滑 ›</span>
+                </div>
+              </div>
               <div class="flashcard-swipe-hint-mobile">‹ 左滑生疏 · 右滑掌握 ›</div>
             </div>
           `;
@@ -10295,13 +10447,13 @@ Gist ID: ${gistId}
 
             hintEl.innerHTML = `
               <div style="display:inline-flex; flex-direction:column; gap:3px; align-items:center;">
-                <span>${isMobile ? '轻触卡片展开释义 ｜ J 掌握 / K 不熟悉' : 'Space / Enter / 点击展开释义 ｜ J 掌握 / K 不熟悉'}</span>
+                <span>${isMobile ? '轻触展开释义 ｜ 左右分区点按或滑动' : 'Space / Enter / 点击展开释义 ｜ J 掌握 / K 不熟悉'}</span>
                 ${subHintHtml}
               </div>
             `;
           } else {
             hintEl.innerText = isMobile
-              ? '轻触卡片展开释义 ｜ 左右滑动手势快速掌握'
+              ? '轻触卡片展开释义 ｜ 左右分区点按/滑动极速掌握'
               : 'Space / Enter / 点击卡片展开释义 ｜ J 掌握 / K 不熟悉';
           }
         }
@@ -10393,6 +10545,7 @@ Gist ID: ${gistId}
 
       flip() {
         if (AppState.get('isCardFlipped') || this.isTransitioning) return;
+        this.flipTimestamp = performance.now();
         AppState.update('isCardFlipped', true);
 
         const backEl = document.getElementById('flashcard-back');
@@ -10481,6 +10634,19 @@ Gist ID: ${gistId}
               ${reinforceChipHtml}
               <div class="flashcard-meaning" id="flash-meaning">${Utils.escapeHTML(word ? (word.pos || '') : '')} ${Utils.escapeHTML(word ? (word.meaning || '') : '')}</div>
               ${embeddedAnalysisHtml}
+              <div class="flashcard-tap-ribbon-mobile" id="flashcard-tap-ribbon-mobile" role="group" aria-label="单手极速点按决策栏">
+                <div class="tap-ribbon-item tap-ribbon-left" data-action="fail">
+                  <span class="tap-ribbon-icon">⚠️</span>
+                  <span class="tap-ribbon-label">生疏重背</span>
+                  <span class="tap-ribbon-sub">‹ 左点/左滑</span>
+                </div>
+                <div class="tap-ribbon-separator"></div>
+                <div class="tap-ribbon-item tap-ribbon-right" data-action="pass">
+                  <span class="tap-ribbon-label">掌握通过</span>
+                  <span class="tap-ribbon-icon">✓</span>
+                  <span class="tap-ribbon-sub">右点/右滑 ›</span>
+                </div>
+              </div>
               <div class="flashcard-swipe-hint-mobile">‹ 左滑生疏 · 右滑掌握 ›</div>
             </div>
           `;
@@ -10646,9 +10812,11 @@ Gist ID: ${gistId}
           const t = e.touches[0];
           if (t.clientX < 18 || t.clientX > window.innerWidth - 18) return;
 
+          this.touch.targetEl = e.target;
           this.touch.startX = t.clientX;
           this.touch.startY = t.clientY;
           this.touch.currentX = t.clientX;
+          this.touch.currentY = t.clientY;
           this.touch.startTime = Date.now();
           this.touch.isDragging = false;
           this.touch.directionDetermined = false;
@@ -10661,6 +10829,8 @@ Gist ID: ${gistId}
         card.addEventListener('touchmove', (e) => {
           if (!this.touch.startTime || this.isTransitioning) return;
           const t = e.touches[0];
+          this.touch.currentX = t.clientX;
+          this.touch.currentY = t.clientY;
           const deltaX = t.clientX - this.touch.startX;
           const deltaY = t.clientY - this.touch.startY;
 
@@ -10687,7 +10857,6 @@ Gist ID: ${gistId}
           if (this.touch.isHorizontalSwipe) {
             if (e.cancelable) e.preventDefault();
             this.touch.isDragging = true;
-            this.touch.currentX = t.clientX;
 
             const rotate = deltaX * 0.055;
             card.style.transform = `translate3d(${deltaX}px, 0, 0) rotate(${rotate}deg)`;
@@ -10716,22 +10885,88 @@ Gist ID: ${gistId}
           }
         }, { passive: false, signal });
 
-        const handleTouchEnd = () => {
+        const handleTouchEnd = (e) => {
           if (!this.touch.startTime) return;
-          const deltaX = this.touch.currentX - this.touch.startX;
+          const endX = (e && e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : (this.touch.currentX || this.touch.startX);
+          const endY = (e && e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : (this.touch.currentY || this.touch.startY);
+          const deltaX = endX - this.touch.startX;
+          const deltaY = endY - this.touch.startY;
           const deltaTime = Date.now() - this.touch.startTime;
           const isFlipped = AppState.get('isCardFlipped');
           const wasDragging = this.touch.isDragging;
+          const targetEl = this.touch.targetEl || (e && e.target);
 
           this.touch.startTime = 0;
           this.touch.isDragging = false;
+          this.touch.targetEl = null;
 
           card.classList.remove('liquid-glow-left', 'liquid-glow-right');
           if (this.touch.badgeLeft) this.touch.badgeLeft.style.opacity = '0';
           if (this.touch.badgeRight) this.touch.badgeRight.style.opacity = '0';
 
-          if (!wasDragging && Math.abs(deltaX) < 10 && deltaTime < 300) {
-            if (!isFlipped) this.flip();
+          if (!wasDragging && Math.abs(deltaX) < 14 && Math.abs(deltaY) < 14 && deltaTime < 350) {
+            if (!isFlipped) {
+              this.flip();
+              return;
+            }
+
+            // === 方案 B 优化版 2.0: 屏幕非对称分区点按与防盲切流控 ===
+            // 1. 防盲切冷却门禁 (260ms): 避免双击连击导致未看释义即跳题
+            if (performance.now() - (this.flipTimestamp || 0) < (this.zoneCooldownMs || 260)) {
+              return;
+            }
+
+            // 2. 长文本构词分析滚动区豁免 (若在嵌入分析框内点击，不误切卡片)
+            if (targetEl && targetEl.closest('.flashcard-embedded-analysis, #flashcard-embedded-analysis')) {
+              return;
+            }
+
+            // 3. 直接命中底部导航微动按钮
+            const ribbonBtn = targetEl ? targetEl.closest('.tap-ribbon-item') : null;
+            if (ribbonBtn) {
+              const action = ribbonBtn.getAttribute('data-action');
+              if (action === 'fail') {
+                this.triggerTapDecision(card, false, endX, endY);
+              } else if (action === 'pass') {
+                this.triggerTapDecision(card, true, endX, endY);
+              }
+              return;
+            }
+
+            // 4. 计算卡片内水平与垂直点击坐标百分比 (支持全卡片盲操分区点按)
+            const rect = card.getBoundingClientRect();
+            const clickRelX = endX - rect.left;
+            const clickRelY = endY - rect.top;
+            const ratioX = clickRelX / Math.max(1, rect.width);
+            const ratioY = clickRelY / Math.max(1, rect.height);
+
+            // 顶部发音/词头安全区 (上部 24% 点击重播发音，避免误判)
+            if (ratioY < 0.24) {
+              const curWord = AppState.get('currentWord');
+              if (curWord && typeof Services !== 'undefined' && Services.Audio) {
+                Services.Audio.playWord(curWord.word);
+              }
+              return;
+            }
+
+            // 非对称人体工程学分区：左 38% (生疏) : 中间 10% (防误触中立死区) : 右 52% (掌握)
+            const isLeftHand = Boolean(AppState.get('flashcardLeftHanded'));
+            const failLimit = isLeftHand ? 0.62 : 0.38;
+            const passLimit = isLeftHand ? 0.72 : 0.48;
+
+            if (isLeftHand) {
+              if (ratioX >= passLimit) {
+                this.triggerTapDecision(card, false, endX, endY);
+              } else if (ratioX <= failLimit) {
+                this.triggerTapDecision(card, true, endX, endY);
+              }
+            } else {
+              if (ratioX <= failLimit) {
+                this.triggerTapDecision(card, false, endX, endY);
+              } else if (ratioX >= passLimit) {
+                this.triggerTapDecision(card, true, endX, endY);
+              }
+            }
             return;
           }
 
@@ -10796,8 +11031,12 @@ Gist ID: ${gistId}
 
         this.isTransitioning = false;
         this.isSwiping = false;
+        this.flipTimestamp = 0;
         this.touch.startTime = 0;
         this.touch.isDragging = false;
+        this.touch.targetEl = null;
+        const ripples = document.querySelectorAll('.card-tap-ripple');
+        ripples.forEach(r => r.remove());
         AppState.update('isCardFlipped', false);
 
         const mainCard = document.getElementById('main-card');
