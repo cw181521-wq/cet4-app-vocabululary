@@ -11116,16 +11116,10 @@ Gist ID: ${gistId}
 
       exportSession() {
         const currentPackId = AppState.get('currentPackId');
-        const allPacks = AppState.get('allPacks') || {};
-        const packWords = allPacks[currentPackId]?.words || [];
         const poolLimit = AppState.get('typingPoolLimit') || 60;
-        const isFull = (this.totalTargetCount >= 9999 || this.totalTargetCount >= (packWords.length || 0));
         return {
           packId: currentPackId,
           poolLimit: poolLimit,
-          isFullPack: isFull,
-          shuffleSeed: this.shuffleSeed || Date.now(),
-          targetQueue: isFull ? [] : (this.typingTargetQueue || []).map(w => w.word),
           completedWords: Array.from(this.completedUniqueWords || []),
           perfectWords: Array.from(this.perfectFirstPassWords || []),
           correctedWords: Array.from(this.correctedMistakeWords || []),
@@ -11141,33 +11135,16 @@ Gist ID: ${gistId}
         if (session.packId && session.packId !== currentPackId) return false;
 
         const allWords = AppState.get('allPacks')[currentPackId]?.words || [];
-        const wordMap = new Map(allWords.map(w => [w.word, w]));
+        if (allWords.length === 0) return false;
 
-        let restoredQueue = [];
-        if (session.isFullPack) {
-          restoredQueue = Algorithms.Shuffle.deterministicShuffle([...allWords], session.shuffleSeed || 1757664800);
-        } else {
-          restoredQueue = (session.targetQueue || []).map(name => wordMap.get(name)).filter(Boolean);
-          const targetLimit = session.poolLimit || 60;
-          if (restoredQueue.length < targetLimit && allWords.length > restoredQueue.length) {
-            const existingSet = new Set(restoredQueue.map(w => w.word));
-            const missing = allWords.filter(w => !existingSet.has(w.word));
-            restoredQueue = restoredQueue.concat(missing.slice(0, targetLimit - restoredQueue.length));
-          }
-        }
-        if (restoredQueue.length === 0) return false;
-
-        this.typingMasterQueue = [...restoredQueue];
-        this.typingTargetQueue = restoredQueue;
-        this.totalTargetCount = session.isFullPack ? allWords.length : Math.min(session.poolLimit || restoredQueue.length, allWords.length);
-        this.shuffleSeed = session.shuffleSeed || Date.now();
+        const limit = session.poolLimit || 60;
+        this.totalTargetCount = (limit >= 9999) ? (allWords.length || 9999) : Math.min(limit, allWords.length || limit);
 
         const cloudCompleted = new Set(session.completedWords || []);
         const cloudCorrected = new Set(session.correctedWords || []);
 
-        this.completedUniqueWords = new Set([...(this.completedUniqueWords || []), ...cloudCompleted]);
-        this.correctedMistakeWords = new Set([...(this.correctedMistakeWords || []), ...cloudCorrected]);
-
+        this.completedUniqueWords = new Set(cloudCompleted);
+        this.correctedMistakeWords = new Set(cloudCorrected);
         this.perfectFirstPassWords = new Set(
           [...this.completedUniqueWords].filter(w => !this.correctedMistakeWords.has(w))
         );
@@ -11184,14 +11161,11 @@ Gist ID: ${gistId}
 
         this.updateHUD();
 
-        const nextWord = this.typingTargetQueue.find(w => !this.completedUniqueWords.has(w.word));
-        if (nextWord) {
-          AppState.update('currentWord', nextWord);
-          if (AppState.get('currentMode') === 'typing') {
-            this.render(nextWord);
-          }
-        } else if (this.completedUniqueWords.size >= this.totalTargetCount) {
-          this.checkRoundCompletion();
+        const curWord = AppState.get('currentWord');
+        if (curWord && AppState.get('currentMode') === 'typing') {
+          this.render(curWord);
+        } else {
+          App.nextQuestion();
         }
 
         this.saveLocalSession();
@@ -11207,18 +11181,13 @@ Gist ID: ${gistId}
       },
 
       initRound(pool = null) {
-        const currentPool = pool || AppState.get('activePool') || [];
         const currentPackId = AppState.get('currentPackId');
         const allPacks = AppState.get('allPacks') || {};
         const packWords = allPacks[currentPackId]?.words || [];
         const limit = AppState.get('typingPoolLimit') || 60;
 
-        this.shuffleSeed = this.shuffleSeed || Date.now();
+        const effectiveTotal = (limit >= 9999) ? (packWords.length || 9999) : Math.min(limit, packWords.length || limit);
 
-        const effectiveTotal = Math.min(limit, packWords.length || currentPool.length || limit);
-
-        this.typingMasterQueue = [...currentPool];
-        this.typingTargetQueue = [...currentPool].slice(0, effectiveTotal);
         this.completedUniqueWords = new Set();
         this.perfectFirstPassWords = new Set();
         this.correctedMistakeWords = new Set();
@@ -11386,16 +11355,7 @@ Gist ID: ${gistId}
         this.hideMilestoneModal(false);
         AppState.update('isTypingCompleted', false);
 
-        this.shuffleSeed = Date.now();
-        const limitedPool = buildLimitedTypingPool(this.shuffleSeed);
-        AppState.update('activePool', limitedPool);
-        AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(limitedPool.length));
-        AppState.update('shufflePointer', 0);
-        AppState.update('sequentialIndex', -1);
-        AppState.update('questionHistory', []);
-        AppState.update('historyCursor', -1);
-
-        this.initRound(limitedPool);
+        this.initRound();
         App.nextQuestion();
         if (typeof Services !== 'undefined' && Services.Sync) {
           Services.Sync.showToast(`🎯 已开启新一轮盲打 (${this.totalTargetCount} 词)`, 'success', 1800);
@@ -11498,6 +11458,17 @@ Gist ID: ${gistId}
             reviewBadge.innerText = '⚡ 刚才敲错，立即快速复习 (不记数据)';
             reviewBadge.style.background = 'var(--accent-light)';
             reviewBadge.style.color = 'var(--accent)';
+          } else if (word._isSessionRetest) {
+            reviewBadge.style.display = 'inline-block';
+            const stageText = word._retestStage === 2 ? '阶段2 延时终验' : '阶段1 初测救急';
+            reviewBadge.innerText = `⚡ 智能穿插复验 (${stageText})`;
+            reviewBadge.style.background = 'rgba(245, 158, 11, 0.15)';
+            reviewBadge.style.color = 'var(--warning, #f59e0b)';
+          } else if (word._isDueRetest) {
+            reviewBadge.style.display = 'inline-block';
+            reviewBadge.innerText = '⚡ 到期抗遗忘复测';
+            reviewBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+            reviewBadge.style.color = 'var(--danger, #ef4444)';
           } else {
             reviewBadge.style.display = 'none';
           }
@@ -12314,20 +12285,17 @@ Gist ID: ${gistId}
         const reviewBadge = document.getElementById('typing-review-badge');
         if (reviewBadge) reviewBadge.style.display = 'none';
         const currentPackId = AppState.get('currentPackId');
-        const fullPool = buildLimitedTypingPool();
-        AppState.update('activePool', fullPool);
-        AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(fullPool.length));
+        const packWords = AppState.get('allPacks')[currentPackId]?.words || [];
+        AppState.update('activePool', [...packWords]);
+        AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(packWords.length));
         AppState.update('shufflePointer', 0);
         AppState.update('sequentialIndex', -1);
-        AppState.update('questionHistory', []);
-        AppState.update('historyCursor', -1);
 
         const resetBtn = document.getElementById('typing-reset-pool-btn');
         if (resetBtn) resetBtn.style.display = 'none';
-        this.initRound(fullPool);
+        this.initRound();
         App.nextQuestion();
-        const limit = AppState.get('typingPoolLimit') || 60;
-        Services.Sync.showToast(`已恢复盲打词池 (${Math.min(limit, fullPool.length)} 词)`, 'info', 1800);
+        Services.Sync.showToast('已恢复常规背词词池', 'info', 1800);
       },
 
       async clearAll() {
@@ -17018,12 +16986,8 @@ const App = (function() {
 
         const pStats = AppState.get('packStats');
         pStats[packId] = savedStats;
-        let activeWords = pool;
-        if (AppState.get('currentMode') === 'typing' && !AppState.get('isTypingDrillActive')) {
-          activeWords = buildLimitedTypingPool();
-        }
         AppState.batchUpdate({
-          activePool: activeWords,
+          activePool: pool,
           packStats: pStats,
           roundTotal: 0,
           roundCorrect: 0,
@@ -18458,25 +18422,7 @@ const App = (function() {
           return;
         }
 
-        if (AppState.get('currentMode') === 'typing' && typeof Views !== 'undefined' && Views.Typing && Views.Typing.typingTargetQueue) {
-          const targetQueue = Views.Typing.typingTargetQueue;
-          const completedSet = Views.Typing.completedUniqueWords || new Set();
 
-          const nextTarget = targetQueue.find(w => !completedSet.has(w.word));
-          if (nextTarget) {
-            let history = AppState.get('questionHistory');
-            history.push(nextTarget.word);
-            if (history.length > 100) history.shift();
-            AppState.update('questionHistory', history);
-            AppState.update('historyCursor', history.length - 1);
-            AppState.update('currentWord', nextTarget);
-            this.renderCurrentView();
-            return;
-          } else if (completedSet.size >= Views.Typing.totalTargetCount) {
-            Views.Typing.showMilestoneModal();
-            return;
-          }
-        }
 
         let history = AppState.get('questionHistory');
         let cursor = AppState.get('historyCursor');
@@ -19908,7 +19854,9 @@ const App = (function() {
             document.body.classList.add('typing-mode-active');
             if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') window.toggleModeNavAccordion(true);
             const ctrlPanel = document.getElementById('utility-control-panel');
-            if (ctrlPanel) ctrlPanel.classList.add('is-collapsed');
+            if (ctrlPanel && localStorage.getItem('morpho_utility_collapsed') === '1') {
+              ctrlPanel.classList.add('is-collapsed');
+            }
 
             const el = document.getElementById('view-typing');
             const th = document.getElementById('typing-history-panel');
@@ -19917,9 +19865,7 @@ const App = (function() {
 
             if (!AppState.get('isTypingDrillActive')) {
               let canResume = false;
-              if (Views.Typing.typingTargetQueue && Views.Typing.typingTargetQueue.length > 0 && !Views.Typing.isRoundComplete && Views.Typing.completedUniqueWords && Views.Typing.completedUniqueWords.size < Views.Typing.totalTargetCount) {
-                canResume = true;
-              } else if (typeof localStorage !== 'undefined') {
+              if (typeof localStorage !== 'undefined') {
                 const saved = localStorage.getItem('morpho_typing_session');
                 if (saved) {
                   try {
@@ -19931,24 +19877,16 @@ const App = (function() {
                 }
               }
 
-              if (canResume) {
-                const curW = Views.Typing.typingTargetQueue.find(w => !Views.Typing.completedUniqueWords.has(w.word)) || Views.Typing.typingTargetQueue[0];
-                if (curW) {
-                  AppState.update('currentWord', curW);
-                  Views.Typing.render(curW);
-                }
-              } else {
-                const limitedPool = buildLimitedTypingPool();
-                AppState.update('activePool', limitedPool);
-                AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(limitedPool.length));
-                AppState.update('shufflePointer', 0);
-                AppState.update('sequentialIndex', -1);
-                AppState.update('questionHistory', []);
-                AppState.update('historyCursor', -1);
+              if (!canResume) {
                 if (typeof Views !== 'undefined' && Views.Typing && Views.Typing.initRound) {
-                  Views.Typing.initRound(limitedPool);
+                  Views.Typing.initRound();
                 }
-                this.nextQuestion();
+                const curW = AppState.get('currentWord');
+                if (curW) {
+                  Views.Typing.render(curW);
+                } else {
+                  this.nextQuestion();
+                }
               }
             } else {
               const w = AppState.get('currentWord');
@@ -19956,16 +19894,6 @@ const App = (function() {
             }
             LifecycleScheduler.setTimeout(() => Views.Typing.focusInput(), 50);
           } else {
-            if (prevMode === 'typing' && !AppState.get('isTypingDrillActive')) {
-              const currentPackId = AppState.get('currentPackId');
-              const fullPackWords = AppState.get('allPacks')[currentPackId]?.words || [];
-              AppState.update('activePool', [...fullPackWords]);
-              AppState.update('shuffleQueue', Algorithms.Shuffle.buildQueue(fullPackWords.length));
-              AppState.update('shufflePointer', 0);
-              AppState.update('sequentialIndex', -1);
-              AppState.update('questionHistory', []);
-              AppState.update('historyCursor', -1);
-            }
             document.body.classList.remove('typing-mode-active');
             if (typeof window !== 'undefined' && typeof window.toggleModeNavAccordion === 'function') {
               window.toggleModeNavAccordion(mode === 'flashcard');
@@ -21038,57 +20966,8 @@ const App = (function() {
           : 0;
 
         if (typeof Views !== 'undefined' && Views.Typing) {
-          if (!Views.Typing.typingMasterQueue || Views.Typing.typingMasterQueue.length === 0) {
-            Views.Typing.typingMasterQueue = [...(Views.Typing.typingTargetQueue || [])];
-          }
-
           if (completedCount < effectiveLimit) {
             Views.Typing.totalTargetCount = effectiveLimit;
-
-            let targetQueue = Views.Typing.typingTargetQueue || [];
-            const completedSet = Views.Typing.completedUniqueWords || new Set();
-            const currentWord = AppState.get('currentWord');
-
-            if (targetQueue.length < effectiveLimit) {
-              const currentSet = new Set(targetQueue.map(w => w.word));
-              const available = packWords.filter(w => !currentSet.has(w.word));
-
-              let additional = [];
-              if (isFullPack) {
-                const seed = Views.Typing.shuffleSeed || Date.now();
-                Views.Typing.shuffleSeed = seed;
-                additional = Algorithms.Shuffle.deterministicShuffle(available, seed);
-              } else {
-                let stDict = {};
-                if (isTotalPack(currentPackId) && typeof App.getAggregatedStatsForTotal === 'function') {
-                  stDict = App.getAggregatedStatsForTotal();
-                } else {
-                  stDict = AppState.get('packStats')[currentPackId] || (typeof Services !== 'undefined' && Services.Storage ? Services.Storage.getStats(currentPackId) : {}) || {};
-                }
-
-                const mistakes = available.filter(w => (stDict[w.word]?.typingMistakes > 0) || (stDict[w.word]?.mistakes > 0));
-                const reviewDue = available.filter(w => !mistakes.includes(w) && ((stDict[w.word]?.level <= 1) || (stDict[w.word]?.nextReviewDate && stDict[w.word]?.nextReviewDate <= Date.now())));
-                const normals = available.filter(w => !mistakes.includes(w) && !reviewDue.includes(w));
-
-                const needed = effectiveLimit - targetQueue.length;
-                const prioritized = [
-                  ...mistakes.sort(() => 0.5 - Math.random()),
-                  ...reviewDue.sort(() => 0.5 - Math.random()),
-                  ...normals.sort(() => 0.5 - Math.random())
-                ];
-                additional = prioritized.slice(0, needed);
-              }
-
-              targetQueue = targetQueue.concat(additional);
-              Views.Typing.typingMasterQueue = [...targetQueue];
-            } else if (targetQueue.length > effectiveLimit) {
-              const preserved = targetQueue.filter(w => completedSet.has(w.word) || (currentWord && w.word === currentWord.word));
-              const remaining = targetQueue.filter(w => !completedSet.has(w.word) && (!currentWord || w.word !== currentWord.word));
-              const needed = Math.max(0, effectiveLimit - preserved.length);
-              targetQueue = preserved.concat(remaining.slice(0, needed));
-            }
-
-            Views.Typing.typingTargetQueue = targetQueue;
             Views.Typing.saveLocalSession();
             Views.Typing.updateHUD();
 
