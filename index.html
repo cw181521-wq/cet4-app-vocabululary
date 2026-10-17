@@ -890,6 +890,106 @@
     .tvi-badge-btn { transition: transform 0.15s ease, box-shadow 0.15s ease; display: inline-block; will-change: transform; }
     .tvi-badge-btn:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); }
 
+    .typing-card-meta-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border, rgba(148, 163, 184, 0.2));
+      margin-bottom: 4px;
+      box-sizing: border-box;
+    }
+    .typing-meta-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .typing-meta-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .typing-meta-pill {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 8px;
+      background: var(--bg-alt, #f1f5f9);
+      color: var(--text, #334155);
+      border: 1px solid var(--border, rgba(148, 163, 184, 0.25));
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.16s ease;
+    }
+    .typing-meta-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .typing-meta-pill:active {
+      transform: scale(0.96);
+    }
+    .typing-meta-pill.is-new {
+      background: #ecfdf5;
+      color: #047857;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .typing-meta-pill.clean-pass {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+    .typing-meta-pill.has-mistakes {
+      background: #fff7ed;
+      color: #c2410c;
+      border-color: rgba(249, 115, 22, 0.35);
+    }
+    .typing-meta-pill.box-pill {
+      background: var(--card-bg, #ffffff);
+      color: var(--text-muted, #64748b);
+      border-color: var(--border, rgba(148, 163, 184, 0.3));
+    }
+    .typing-meta-pill.mastery-pill {
+      background: var(--card-bg, #ffffff);
+      border-color: var(--border, rgba(148, 163, 184, 0.3));
+    }
+    :root[data-theme="dark"] .typing-meta-pill.is-new {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    :root[data-theme="dark"] .typing-meta-pill.clean-pass {
+      background: rgba(59, 130, 246, 0.18);
+      color: #60a5fa;
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    :root[data-theme="dark"] .typing-meta-pill.has-mistakes {
+      background: rgba(249, 115, 22, 0.18);
+      color: #fb923c;
+      border-color: rgba(249, 115, 22, 0.4);
+    }
+    :root[data-theme="dark"] .typing-meta-pill.box-pill,
+    :root[data-theme="dark"] .typing-meta-pill.mastery-pill {
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    @media (max-width: 600px) {
+      .typing-card-meta-bar {
+        justify-content: center;
+      }
+      .typing-meta-left, .typing-meta-right {
+        justify-content: center;
+      }
+    }
+
     .typing-review-badge {
       display: inline-block;
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
@@ -4244,7 +4344,27 @@
     <div class="typing-workspace">
       <div class="typing-main-column">
         <div class="typing-card" onclick="Views.Typing.focusInput()" title="点击卡片任意位置可恢复打字输入焦点">
-          <div class="typing-review-badge" id="typing-review-badge" style="display:none;">⚡ 最终直觉复核</div>
+          <!-- 盲打模式卡片顶部元数据与复习轮次状态栏 -->
+          <div class="typing-card-meta-bar" id="typing-card-meta-bar">
+            <div class="typing-meta-left">
+              <span class="typing-meta-pill is-new" id="typing-review-count-pill" onclick="event.stopPropagation(); (typeof App !== 'undefined' && App.showWordProfileModal) ? App.showWordProfileModal(AppState.get('currentWord')) : showCurrentWordProfile();" title="点击查看单词专属学习档案">
+                <span class="pill-desktop">🌱 首学新词</span>
+                <span class="pill-mobile">🌱 新词</span>
+              </span>
+              <span class="typing-meta-pill box-pill" id="typing-box-pill" onclick="event.stopPropagation(); App.switchMode('leitner_box');" title="艾宾浩斯五盒当前掌握盒位 (点击打开五盒看板)">
+                <span class="pill-desktop">📦 盒 1 · 每日巩固</span>
+                <span class="pill-mobile">盒 1</span>
+              </span>
+              <span class="typing-meta-pill mastery-pill" id="typing-mastery-pill" onclick="event.stopPropagation(); (typeof App !== 'undefined' && App.showWordProfileModal) ? App.showWordProfileModal(AppState.get('currentWord')) : showCurrentWordProfile();" title="掌握度与记忆留存率 (点击查看学习档案)">
+                <span class="pill-desktop">🎯 掌握度: 35%</span>
+                <span class="pill-mobile">35%</span>
+              </span>
+            </div>
+            <div class="typing-meta-right">
+              <div class="typing-review-badge" id="typing-review-badge" style="display:none;">⚡ 智能穿插复验</div>
+            </div>
+          </div>
+
           <div class="typing-countdown-overlay" id="typing-countdown-overlay" style="display:none;"></div>
           <div class="typing-root-tip" id="typing-root-tip">词根线索加载中...</div>
           <div class="typing-phonetic" id="typing-phonetic">/ˈæn.tɪ.sɪ.peɪt/</div>
@@ -11425,6 +11545,59 @@ Gist ID: ${gistId}
           hintDesc.classList.remove('revealed-hint');
         }
 
+        // 渲染卡片顶部学习与复习轮次元数据 (首学新词 / 第 N 次复习 / 莱特纳盒位 / 掌握度)
+        try {
+          const curPack = AppState.get('currentPackId');
+          const packStats = AppState.get('packStats') || {};
+          const stWord = (curPack && packStats[curPack]) ? (packStats[curPack][word.word] || {}) : {};
+          const tCount = stWord.tested || 0;
+          const mCount = stWord.mistakes || 0;
+          const sCount = stWord.streak || 0;
+          const boxId = Math.max(1, Math.min(5, stWord.box || 1));
+          const mScore = Math.max(0, Math.min(100, Math.round(stWord.masteryScore ?? 35)));
+          const boxCfg = (typeof Algorithms !== 'undefined' && Algorithms.Leitner && Algorithms.Leitner.getConfig)
+            ? Algorithms.Leitner.getConfig(boxId)
+            : { name: `盒 ${boxId}` };
+
+          const reviewCountPill = document.getElementById('typing-review-count-pill');
+          if (reviewCountPill) {
+            if (tCount === 0) {
+              if (mCount > 0) {
+                reviewCountPill.className = 'typing-meta-pill has-mistakes';
+                reviewCountPill.innerHTML = '<span class="pill-desktop">⚠️ 错词待巩固</span><span class="pill-mobile">错词待巩固</span>';
+                reviewCountPill.title = `【错题攻坚】历史做错: ${mCount} 次\n点击查看专属单词档案`;
+              } else {
+                reviewCountPill.className = 'typing-meta-pill is-new';
+                reviewCountPill.innerHTML = '<span class="pill-desktop">🌱 首学新词</span><span class="pill-mobile">🌱 新词</span>';
+                reviewCountPill.title = '【初见生词】当前为首次学习测试\n点击查看专属单词档案';
+              }
+            } else if (mCount > 0) {
+              reviewCountPill.className = 'typing-meta-pill has-mistakes';
+              reviewCountPill.innerHTML = `<span class="pill-desktop">🔄 第 ${tCount} 次复习 · 错 ${mCount}</span><span class="pill-mobile">第${tCount}次·错${mCount}</span>`;
+              reviewCountPill.title = `【复习测试数据】点击查看专属学习档案\n· 累计复习测试: ${tCount} 次\n· 历史做错: ${mCount} 次\n· 当前连对: ${sCount} 次\n· 正确率: ${Math.round((tCount - mCount) / tCount * 100)}%`;
+            } else {
+              reviewCountPill.className = 'typing-meta-pill clean-pass';
+              reviewCountPill.innerHTML = `<span class="pill-desktop">🔄 第 ${tCount} 次复习 · 0错</span><span class="pill-mobile">第${tCount}次·0错</span>`;
+              reviewCountPill.title = `【复习测试数据】点击查看专属学习档案\n· 累计复习测试: ${tCount} 次\n· 保持全对 (0 错题)\n· 当前连对: ${sCount} 次\n· 正确率: 100%`;
+            }
+          }
+
+          const boxPill = document.getElementById('typing-box-pill');
+          if (boxPill) {
+            boxPill.innerHTML = `<span class="pill-desktop">📦 盒 ${boxId} · ${boxCfg.name}</span><span class="pill-mobile">盒 ${boxId}</span>`;
+            boxPill.title = `【艾宾浩斯五盒】当前掌握处于 盒 ${boxId} (${boxCfg.name})\n点击打开五盒看板`;
+          }
+
+          const masteryPill = document.getElementById('typing-mastery-pill');
+          if (masteryPill) {
+            masteryPill.innerHTML = `<span class="pill-desktop">🎯 掌握度: ${mScore}%</span><span class="pill-mobile">${mScore}%</span>`;
+            masteryPill.style.color = mScore >= 80 ? 'var(--success)' : (mScore >= 50 ? 'var(--primary)' : 'var(--muted)');
+            masteryPill.title = `当前认知掌握度估值: ${mScore}%\n点击查看单词档案`;
+          }
+        } catch (e) {
+          console.warn('[Typing.render] Meta bar render warning:', e);
+        }
+
         const reviewBadge = document.getElementById('typing-review-badge');
         if (reviewBadge) {
           if (word.isGhost) {
@@ -11432,17 +11605,39 @@ Gist ID: ${gistId}
             reviewBadge.innerText = '⚡ 刚才敲错，立即快速复习 (不记数据)';
             reviewBadge.style.background = 'var(--accent-light)';
             reviewBadge.style.color = 'var(--accent)';
+            reviewBadge.title = '刚才输入有误，当前为防遗忘快速重练';
           } else if (word._isSessionRetest) {
             reviewBadge.style.display = 'inline-block';
-            const stageText = word._retestStage === 2 ? '阶段2 延时终验' : '阶段1 初测救急';
-            reviewBadge.innerText = `⚡ 智能穿插复验 (${stageText})`;
-            reviewBadge.style.background = 'rgba(245, 158, 11, 0.15)';
-            reviewBadge.style.color = 'var(--warning, #f59e0b)';
+            const stage = word._retestStage || 1;
+            const failCnt = word._retestFailCount || 1;
+            if (stage === 2) {
+              reviewBadge.innerText = '⚡ 延时终验 (2/2)';
+              reviewBadge.style.background = '#0284c7';
+              reviewBadge.style.color = '#ffffff';
+              reviewBadge.title = '严格模式·阶段2延时终验：敲对完成当堂双阶稳固，锁定明日抗遗忘复习！';
+            } else if (failCnt > 1) {
+              reviewBadge.innerText = `⚠️ 顽固攻坚 (${failCnt}阶)`;
+              reviewBadge.style.background = '#ea580c';
+              reviewBadge.style.color = '#ffffff';
+              reviewBadge.title = `顽固错词：已历经 ${failCnt} 次攻坚，请强化辨析并敲对以晋级核验！`;
+            } else {
+              reviewBadge.innerText = '🔄 当堂复测 (1/2)';
+              reviewBadge.style.background = '#f59e0b';
+              reviewBadge.style.color = '#ffffff';
+              reviewBadge.title = '严格模式·阶段1初测：敲对晋级至阶段2延时终验！';
+            }
           } else if (word._isDueRetest) {
             reviewBadge.style.display = 'inline-block';
-            reviewBadge.innerText = '⚡ 到期抗遗忘复测';
+            reviewBadge.innerText = '⏰ 到期抗遗忘复测';
             reviewBadge.style.background = 'rgba(239, 68, 68, 0.15)';
             reviewBadge.style.color = 'var(--danger, #ef4444)';
+            reviewBadge.title = '艾宾浩斯记忆曲线到期巩固复测';
+          } else if (AppState.get('isTypingDrillActive')) {
+            reviewBadge.style.display = 'inline-block';
+            reviewBadge.innerText = '🎯 错词强化消灭';
+            reviewBadge.style.background = 'rgba(239, 68, 68, 0.15)';
+            reviewBadge.style.color = 'var(--danger, #ef4444)';
+            reviewBadge.title = '当前处于盲打易错词专属强化专练模式';
           } else {
             reviewBadge.style.display = 'none';
           }
