@@ -11212,6 +11212,45 @@ Gist ID: ${gistId}
       firstKeyLatency: null,
       drillPassTracker: new Map(),
 
+      // QWERTY 物理键盘 26 键上下左右及斜向邻接拓扑矩阵
+      QWERTY_ADJACENT: {
+        q: ['w', 'a', 's', '1', '2'],
+        w: ['q', 'e', 'a', 's', 'd', '2', '3'],
+        e: ['w', 'r', 's', 'd', 'f', '3', '4'],
+        r: ['e', 't', 'd', 'f', 'g', '4', '5'],
+        t: ['r', 'y', 'f', 'g', 'h', '5', '6'],
+        y: ['t', 'u', 'g', 'h', 'j', '6', '7'],
+        u: ['y', 'i', 'h', 'j', 'k', '7', '8'],
+        i: ['u', 'o', 'j', 'k', 'l', '8', '9'],
+        o: ['i', 'p', 'k', 'l', '9', '0'],
+        p: ['o', 'l', '0', '-'],
+        a: ['q', 'w', 's', 'z'],
+        s: ['w', 'e', 'a', 'd', 'z', 'x'],
+        d: ['e', 'r', 's', 'f', 'x', 'c'],
+        f: ['r', 't', 'd', 'g', 'c', 'v'],
+        g: ['t', 'y', 'f', 'h', 'v', 'b'],
+        h: ['y', 'u', 'g', 'j', 'b', 'n'],
+        j: ['u', 'i', 'h', 'k', 'n', 'm'],
+        k: ['i', 'o', 'j', 'l', 'm'],
+        l: ['o', 'p', 'k'],
+        z: ['a', 's', 'x'],
+        x: ['z', 's', 'd', 'c'],
+        c: ['x', 'd', 'f', 'v', ' '],
+        v: ['c', 'f', 'g', 'b', ' '],
+        b: ['v', 'g', 'h', 'n', ' '],
+        n: ['b', 'h', 'j', 'm', ' '],
+        m: ['n', 'j', 'k', ' '],
+        '-': ['0', 'p', '=']
+      },
+
+      isAdjacentKey(char, targetChar) {
+        if (!char || !targetChar) return false;
+        const c = String(char).toLowerCase();
+        const t = String(targetChar).toLowerCase();
+        const neighbors = this.QWERTY_ADJACENT[t];
+        return Boolean(neighbors && neighbors.includes(c));
+      },
+
       typingMasterQueue: [],
       typingTargetQueue: [],
       completedUniqueWords: new Set(),
@@ -11539,6 +11578,8 @@ Gist ID: ${gistId}
 
         AppState.update('typingCurrentInput', '');
         AppState.update('currentWordKeystrokeErrors', 0);
+        AppState.update('currentWordAdjacentSlips', 0);
+        AppState.update('currentWordGenuineMistakes', 0);
         this.mistakeHintRevealed = false;
         this.isAnswerRevealed = false;
         this.revealTimestamp = 0;
@@ -11548,7 +11589,7 @@ Gist ID: ${gistId}
         const hintDesc = document.querySelector('.typing-hint-text');
         if (hintDesc) {
           const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || ((word.word || '').length || 1);
-          hintDesc.innerHTML = `直接在键盘敲击英文字母盲打 (本词享 <b>${letterCount}</b> 次防误触容差，误触不破连击 🔥)；按 <kbd class="typing-kbd">Backspace</kbd> 修正`;
+          hintDesc.innerHTML = `直接在键盘敲击英文字母盲打 (本词享 <b>${letterCount}</b> 次邻键防误触保护，物理滑键不破连击 🔥)；按 <kbd class="typing-kbd">Backspace</kbd> 修正`;
           hintDesc.classList.remove('revealed-hint');
         }
 
@@ -12012,9 +12053,13 @@ Gist ID: ${gistId}
             Services.Audio.playWord(word.word);
 
             const errors = AppState.get('currentWordKeystrokeErrors') || 0;
+            const genuineMistakes = AppState.get('currentWordGenuineMistakes') || 0;
+            const adjacentSlips = AppState.get('currentWordAdjacentSlips') || 0;
             const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || (targetWord.length || 1);
-            // 核心机制：单词有几个字母就有几次容差次数，误触不超过字母数时不判为做错！
-            const isMistake = errors > letterCount;
+
+            // 严密裁决：只要发生了非相邻做错，或者相邻误触超出了字母数容差，才判定为做错！
+            // 纯物理相邻误触且在容差范围内：完全判定为答对过关！
+            const isMistake = (genuineMistakes > 0) || (adjacentSlips > letterCount);
             const cPack = AppState.get('currentPackId');
             const latency = (this.firstKeyLatency !== null)
               ? this.firstKeyLatency
@@ -12043,7 +12088,7 @@ Gist ID: ${gistId}
               });
 
               App.recordAnswer(false);
-              this.pushHistory(word, errors, letterCount);
+              this.pushHistory(word, errors, letterCount, genuineMistakes);
               this.renderMistakesBoard();
 
               if (AppState.get('isTypingDrillActive')) {
@@ -12070,7 +12115,7 @@ Gist ID: ${gistId}
               });
 
               App.recordAnswer(true);
-              this.pushHistory(word, errors, letterCount);
+              this.pushHistory(word, errors, letterCount, 0);
 
               if (AppState.get('isTypingDrillActive')) {
                 let tracker = this.drillPassTracker.get(word.word);
@@ -12109,12 +12154,82 @@ Gist ID: ${gistId}
             }, 400);
           }
         } else {
-          const errCountNow = AppState.update('currentWordKeystrokeErrors', e => e + 1);
+          const inputChar = (char || '').toLowerCase();
+          const targetChar = (expectedChar || '').toLowerCase();
+          const isAdjacent = this.isAdjacentKey(inputChar, targetChar);
+          const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || (targetWord.length || 1);
+
+          AppState.update('currentWordKeystrokeErrors', e => (e || 0) + 1);
           Services.Sfx.playKeyClick(AppState.get('typingSfxMode'), false, 'char');
 
-          const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || (targetWord.length || 1);
-          const isWithinTolerance = errCountNow <= letterCount;
+          if (isAdjacent) {
+            // === 真正的 QWERTY 物理相邻按键误触 ===
+            const slipCount = AppState.update('currentWordAdjacentSlips', c => (c || 0) + 1);
+            const isWithinTolerance = slipCount <= letterCount;
 
+            if (!isWithinTolerance) {
+              // 物理相邻误触累计超过该词字母数：中断连击，标记真做错
+              AppState.update('currentWordGenuineMistakes', m => (m || 0) + 1);
+              AppState.update('typingCombo', 0);
+              const comboEl = document.getElementById('typing-combo');
+              if (comboEl) {
+                comboEl.innerText = '0';
+                comboEl.classList.remove('combo-heat-1', 'combo-heat-2', 'combo-heat-3');
+              }
+            }
+            // 若在容差内，连击完全不打断！保持现有 combo！
+
+            const wrap = document.getElementById('typing-slots-wrap');
+            if (wrap) {
+              wrap.classList.add(isWithinTolerance ? 'shake-mild' : 'shake');
+              LifecycleScheduler.setTimeout(() => wrap.classList.remove('shake', 'shake-mild'), 300);
+            }
+
+            const curSlot = wrap?.querySelector('.typing-char-slot.active');
+            if (curSlot) {
+              curSlot.classList.add(isWithinTolerance ? 'slot-slip' : 'error');
+              LifecycleScheduler.setTimeout(() => curSlot.classList.remove('error', 'slot-slip'), 250);
+            }
+
+            const hintDesc = document.querySelector('.typing-hint-text');
+            if (hintDesc && !this.isAnswerRevealed) {
+              if (isWithinTolerance) {
+                hintDesc.innerHTML = `🛡️ 邻键误触已吸收 [按键: <b style="color:var(--warning, #f59e0b);">${inputChar}</b> 邻近 <b>${targetChar}</b>] (容差 <b>${slipCount}/${letterCount}</b> · 连击保持 🔥)；按正确字母继续`;
+              } else {
+                hintDesc.innerHTML = `<span style="color:var(--danger, #ef4444); font-weight:700;">⚠️ 邻键误触超过本词字母容差上限 (${slipCount}/${letterCount})，连击已重置！请仔细拼写</span>`;
+              }
+            }
+          } else {
+            // === 非物理相邻按键！拼写做错或盲打乱按 ===
+            AppState.update('currentWordGenuineMistakes', m => (m || 0) + 1);
+
+            // 立即打断并重置连击！
+            AppState.update('typingCombo', 0);
+            const comboEl = document.getElementById('typing-combo');
+            if (comboEl) {
+              comboEl.innerText = '0';
+              comboEl.classList.remove('combo-heat-1', 'combo-heat-2', 'combo-heat-3');
+            }
+
+            const wrap = document.getElementById('typing-slots-wrap');
+            if (wrap) {
+              wrap.classList.add('shake');
+              LifecycleScheduler.setTimeout(() => wrap.classList.remove('shake'), 300);
+            }
+
+            const curSlot = wrap?.querySelector('.typing-char-slot.active');
+            if (curSlot) {
+              curSlot.classList.add('error');
+              LifecycleScheduler.setTimeout(() => curSlot.classList.remove('error'), 250);
+            }
+
+            const hintDesc = document.querySelector('.typing-hint-text');
+            if (hintDesc && !this.isAnswerRevealed) {
+              hintDesc.innerHTML = `<span style="color:var(--danger, #ef4444); font-weight:700;">⚠️ 非物理相邻键做错 [输入: ${inputChar} · 期望: ${targetChar}]，连击已中断！按正确字母继续</span>`;
+            }
+          }
+
+          const errCountNow = AppState.get('currentWordKeystrokeErrors') || 0;
           const isRevealEnabled = AppState.get('typingRevealEnabled');
           const baseRevealThreshold = AppState.get('typingRevealThreshold') || 6;
           const revealThreshold = Math.max(baseRevealThreshold, letterCount + 2);
@@ -12130,39 +12245,6 @@ Gist ID: ${gistId}
           if (isHintEnabled && errCountNow >= hintThreshold && !this.mistakeHintRevealed) {
             this.mistakeHintRevealed = true;
             this.updateRootTipVisibility();
-          }
-
-          // 核心机制：在字母数容差范围内的误触，绝不打断或重置连击！
-          if (!isWithinTolerance) {
-            AppState.update('typingCombo', 0);
-            const comboEl = document.getElementById('typing-combo');
-            if (comboEl) {
-              comboEl.innerText = '0';
-              comboEl.classList.remove('combo-heat-1', 'combo-heat-2', 'combo-heat-3');
-            }
-          }
-
-          const wrap = document.getElementById('typing-slots-wrap');
-          if (wrap) {
-            wrap.classList.add(isWithinTolerance ? 'shake-mild' : 'shake');
-            LifecycleScheduler.setTimeout(() => wrap.classList.remove('shake', 'shake-mild'), 300);
-          }
-
-          const curSlot = wrap?.querySelector('.typing-char-slot.active');
-          if (curSlot) {
-            curSlot.classList.add(isWithinTolerance ? 'slot-slip' : 'error');
-            LifecycleScheduler.setTimeout(() => curSlot.classList.remove('error', 'slot-slip'), 250);
-          }
-
-          // 动态提示栏展示当前误触容差状态
-          const hintDesc = document.querySelector('.typing-hint-text');
-          if (hintDesc && !this.isAnswerRevealed) {
-            if (isWithinTolerance) {
-              const left = letterCount - errCountNow;
-              hintDesc.innerHTML = `🛡️ 误触已由容差吸收 (<b style="color:var(--warning, #f59e0b);">${errCountNow}/${letterCount}</b> 保护中，连击保持 🔥)；按正确字母继续输入`;
-            } else {
-              hintDesc.innerHTML = `<span style="color:var(--danger, #ef4444); font-weight:700;">⚠️ 误触超过本词字母容差门槛 (${errCountNow}/${letterCount})，请仔细拼写！按 <kbd class="typing-kbd">Backspace</kbd> 修正</span>`;
-            }
           }
         }
       },
@@ -12244,7 +12326,7 @@ Gist ID: ${gistId}
         }, { passive: false });
       },
 
-      pushHistory(wordObj, mistakeCount = 0, toleranceLimit = 0) {
+      pushHistory(wordObj, mistakeCount = 0, toleranceLimit = 0, genuineMistakes = 0) {
         const track = document.getElementById('typing-history-track');
         if (!track || !wordObj) return;
 
@@ -12252,17 +12334,17 @@ Gist ID: ${gistId}
         if (placeholder) placeholder.remove();
 
         const isClean = (mistakeCount === 0);
-        const isTolerated = (mistakeCount > 0 && toleranceLimit > 0 && mistakeCount <= toleranceLimit);
+        const isTolerated = (mistakeCount > 0 && genuineMistakes === 0 && toleranceLimit > 0 && mistakeCount <= toleranceLimit);
         const chip = document.createElement('div');
         chip.className = `typing-history-chip ${isClean ? 'chip-perfect' : (isTolerated ? 'chip-tolerated' : 'chip-error')}`;
         const titleDesc = isClean
           ? '✨ 完美全对 (100%)'
-          : (isTolerated ? `🛡️ 误触 ${mistakeCount} 次 (在 ${toleranceLimit} 字母容差保护内过关 · 连击保持)` : `⚠️ 敲错 ${mistakeCount} 次后纠偏过关`);
+          : (isTolerated ? `🛡️ 物理邻键误触 ${mistakeCount} 次 (在 ${toleranceLimit} 字母容差保护内过关 · 连击保持)` : `⚠️ 敲错 ${mistakeCount} 次后纠偏过关`);
         chip.title = `【${wordObj.word}】${titleDesc} · 点击复听母语发音`;
 
         const badgeHtml = isClean
           ? '<span class="chip-badge badge-perfect">100%</span>'
-          : (isTolerated ? `<span class="chip-badge badge-tolerated">🛡️ ${mistakeCount}误触</span>` : `<span class="chip-badge badge-error">错${mistakeCount}次</span>`);
+          : (isTolerated ? `<span class="chip-badge badge-tolerated">🛡️ ${mistakeCount}邻触</span>` : `<span class="chip-badge badge-error">错${mistakeCount}次</span>`);
 
         chip.innerHTML = `
           <div class="chip-top">
