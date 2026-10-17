@@ -880,6 +880,10 @@
     .typing-history-chip.chip-review { background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.4); }
     .typing-history-chip.chip-review .chip-status-icon { color: #f59e0b; }
     .typing-history-chip.chip-review .badge-review { background: rgba(245, 158, 11, 0.2); color: #d97706; }
+    .typing-history-chip.chip-tolerated { background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.35); }
+    .typing-history-chip.chip-tolerated .chip-status-icon { color: #10b981; font-weight: 900; }
+    .typing-history-chip.chip-tolerated .badge-tolerated { background: rgba(245, 158, 11, 0.18); color: #d97706; font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.3); }
+    :root[data-theme="dark"] .typing-history-chip.chip-tolerated .badge-tolerated { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border-color: rgba(245, 158, 11, 0.45); }
 
     .tvi-mistake-row { transition: background 0.15s ease; cursor: pointer; }
     .tvi-mistake-row:hover { background: var(--primary-light); }
@@ -1127,6 +1131,8 @@
     @keyframes cursorBlink { 0%, 100% { border-bottom-color: var(--primary); opacity: 1; } 50% { border-bottom-color: transparent; opacity: 0.7; } }
     .typing-char-slot.correct, .typing-char-slot.slot-correct { color: var(--success); border-bottom-color: var(--success) !important; background: var(--success-light); transform: translate3d(0, -2px, 0); }
     .typing-char-slot.error, .typing-char-slot.slot-wrong { color: var(--error); border-bottom-color: var(--error) !important; background: var(--error-light); animation: slotShake 0.22s ease; }
+    .typing-char-slot.slot-slip { color: #f59e0b !important; border-bottom-color: #f59e0b !important; background: rgba(245, 158, 11, 0.12) !important; animation: slotShake 0.18s ease; }
+    .shake-mild { animation: slotShake 0.18s ease; }
     @keyframes slotShake { 0%, 100% { transform: translate3d(0, 0, 0); } 25% { transform: translate3d(-5px, 0, 0); } 75% { transform: translate3d(5px, 0, 0); } }
 
     .typing-capture { position: absolute; width: 1px; height: 1px; opacity: 0.001; border: none; outline: none; background: transparent; color: transparent; padding: 0; margin: 0; pointer-events: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); }
@@ -11541,7 +11547,8 @@ Gist ID: ${gistId}
 
         const hintDesc = document.querySelector('.typing-hint-text');
         if (hintDesc) {
-          hintDesc.innerHTML = '直接在键盘敲击英文字母进行盲打，按 <kbd class="typing-kbd">Backspace</kbd> 回退修正；点击卡片任意位置可恢复输入焦点';
+          const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || ((word.word || '').length || 1);
+          hintDesc.innerHTML = `直接在键盘敲击英文字母盲打 (本词享 <b>${letterCount}</b> 次防误触容差，误触不破连击 🔥)；按 <kbd class="typing-kbd">Backspace</kbd> 修正`;
           hintDesc.classList.remove('revealed-hint');
         }
 
@@ -12005,7 +12012,9 @@ Gist ID: ${gistId}
             Services.Audio.playWord(word.word);
 
             const errors = AppState.get('currentWordKeystrokeErrors') || 0;
-            const isMistake = errors > 0;
+            const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || (targetWord.length || 1);
+            // 核心机制：单词有几个字母就有几次容差次数，误触不超过字母数时不判为做错！
+            const isMistake = errors > letterCount;
             const cPack = AppState.get('currentPackId');
             const latency = (this.firstKeyLatency !== null)
               ? this.firstKeyLatency
@@ -12034,7 +12043,7 @@ Gist ID: ${gistId}
               });
 
               App.recordAnswer(false);
-              this.pushHistory(word, errors);
+              this.pushHistory(word, errors, letterCount);
               this.renderMistakesBoard();
 
               if (AppState.get('isTypingDrillActive')) {
@@ -12061,7 +12070,7 @@ Gist ID: ${gistId}
               });
 
               App.recordAnswer(true);
-              this.pushHistory(word, 0);
+              this.pushHistory(word, errors, letterCount);
 
               if (AppState.get('isTypingDrillActive')) {
                 let tracker = this.drillPassTracker.get(word.word);
@@ -12103,8 +12112,12 @@ Gist ID: ${gistId}
           const errCountNow = AppState.update('currentWordKeystrokeErrors', e => e + 1);
           Services.Sfx.playKeyClick(AppState.get('typingSfxMode'), false, 'char');
 
+          const letterCount = (word.word || '').replace(/[^a-zA-Z]/g, '').length || (targetWord.length || 1);
+          const isWithinTolerance = errCountNow <= letterCount;
+
           const isRevealEnabled = AppState.get('typingRevealEnabled');
-          const revealThreshold = AppState.get('typingRevealThreshold') || 6;
+          const baseRevealThreshold = AppState.get('typingRevealThreshold') || 6;
+          const revealThreshold = Math.max(baseRevealThreshold, letterCount + 2);
 
           if (isRevealEnabled && errCountNow >= revealThreshold) {
             this.revealFullAnswer(word, revealThreshold);
@@ -12119,20 +12132,37 @@ Gist ID: ${gistId}
             this.updateRootTipVisibility();
           }
 
-          AppState.update('typingCombo', 0);
-          const comboEl = document.getElementById('typing-combo');
-          if (comboEl) comboEl.innerText = '0';
+          // 核心机制：在字母数容差范围内的误触，绝不打断或重置连击！
+          if (!isWithinTolerance) {
+            AppState.update('typingCombo', 0);
+            const comboEl = document.getElementById('typing-combo');
+            if (comboEl) {
+              comboEl.innerText = '0';
+              comboEl.classList.remove('combo-heat-1', 'combo-heat-2', 'combo-heat-3');
+            }
+          }
 
           const wrap = document.getElementById('typing-slots-wrap');
           if (wrap) {
-            wrap.classList.add('shake');
-            LifecycleScheduler.setTimeout(() => wrap.classList.remove('shake'), 300);
+            wrap.classList.add(isWithinTolerance ? 'shake-mild' : 'shake');
+            LifecycleScheduler.setTimeout(() => wrap.classList.remove('shake', 'shake-mild'), 300);
           }
 
           const curSlot = wrap?.querySelector('.typing-char-slot.active');
           if (curSlot) {
-            curSlot.classList.add('error');
-            LifecycleScheduler.setTimeout(() => curSlot.classList.remove('error'), 250);
+            curSlot.classList.add(isWithinTolerance ? 'slot-slip' : 'error');
+            LifecycleScheduler.setTimeout(() => curSlot.classList.remove('error', 'slot-slip'), 250);
+          }
+
+          // 动态提示栏展示当前误触容差状态
+          const hintDesc = document.querySelector('.typing-hint-text');
+          if (hintDesc && !this.isAnswerRevealed) {
+            if (isWithinTolerance) {
+              const left = letterCount - errCountNow;
+              hintDesc.innerHTML = `🛡️ 误触已由容差吸收 (<b style="color:var(--warning, #f59e0b);">${errCountNow}/${letterCount}</b> 保护中，连击保持 🔥)；按正确字母继续输入`;
+            } else {
+              hintDesc.innerHTML = `<span style="color:var(--danger, #ef4444); font-weight:700;">⚠️ 误触超过本词字母容差门槛 (${errCountNow}/${letterCount})，请仔细拼写！按 <kbd class="typing-kbd">Backspace</kbd> 修正</span>`;
+            }
           }
         }
       },
@@ -12214,23 +12244,31 @@ Gist ID: ${gistId}
         }, { passive: false });
       },
 
-      pushHistory(wordObj, mistakeCount = 0) {
+      pushHistory(wordObj, mistakeCount = 0, toleranceLimit = 0) {
         const track = document.getElementById('typing-history-track');
         if (!track || !wordObj) return;
 
         const placeholder = track.querySelector('.th-placeholder');
         if (placeholder) placeholder.remove();
 
-        const isPerfect = (mistakeCount === 0);
+        const isClean = (mistakeCount === 0);
+        const isTolerated = (mistakeCount > 0 && toleranceLimit > 0 && mistakeCount <= toleranceLimit);
         const chip = document.createElement('div');
-        chip.className = `typing-history-chip ${isPerfect ? 'chip-perfect' : 'chip-error'}`;
-        chip.title = `【${wordObj.word}】${isPerfect ? '✨ 完美全对 (100%)' : `⚠️ 敲错 ${mistakeCount} 次后纠偏过关`} · 点击复听母语发音`;
+        chip.className = `typing-history-chip ${isClean ? 'chip-perfect' : (isTolerated ? 'chip-tolerated' : 'chip-error')}`;
+        const titleDesc = isClean
+          ? '✨ 完美全对 (100%)'
+          : (isTolerated ? `🛡️ 误触 ${mistakeCount} 次 (在 ${toleranceLimit} 字母容差保护内过关 · 连击保持)` : `⚠️ 敲错 ${mistakeCount} 次后纠偏过关`);
+        chip.title = `【${wordObj.word}】${titleDesc} · 点击复听母语发音`;
+
+        const badgeHtml = isClean
+          ? '<span class="chip-badge badge-perfect">100%</span>'
+          : (isTolerated ? `<span class="chip-badge badge-tolerated">🛡️ ${mistakeCount}误触</span>` : `<span class="chip-badge badge-error">错${mistakeCount}次</span>`);
 
         chip.innerHTML = `
           <div class="chip-top">
-            <span class="chip-status-icon">${isPerfect ? '✓' : '✗'}</span>
+            <span class="chip-status-icon">${(isClean || isTolerated) ? '✓' : '✗'}</span>
             <strong class="chip-word">${wordObj.word}</strong>
-            <span class="chip-badge ${isPerfect ? 'badge-perfect' : 'badge-error'}">${isPerfect ? '100%' : `错${mistakeCount}次`}</span>
+            ${badgeHtml}
           </div>
           <div class="chip-bottom">
             <span class="chip-phonetic">${wordObj.phonetic || ''}</span>
