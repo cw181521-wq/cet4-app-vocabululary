@@ -11160,14 +11160,6 @@ Gist ID: ${gistId}
         }
 
         this.updateHUD();
-
-        const curWord = AppState.get('currentWord');
-        if (curWord && AppState.get('currentMode') === 'typing') {
-          this.render(curWord);
-        } else {
-          App.nextQuestion();
-        }
-
         this.saveLocalSession();
         return true;
       },
@@ -11418,24 +11410,6 @@ Gist ID: ${gistId}
 
         this.initVisualViewportLock();
         this.initIMEListeners();
-
-        if (!this.typingTargetQueue || this.typingTargetQueue.length === 0) {
-          let restored = false;
-          if (typeof localStorage !== 'undefined') {
-            const saved = localStorage.getItem('morpho_typing_session');
-            if (saved) {
-              try {
-                const parsed = JSON.parse(saved);
-                if (parsed && !parsed.isRoundComplete && parsed.packId === AppState.get('currentPackId')) {
-                  restored = this.restoreSession(parsed);
-                }
-              } catch (_) {}
-            }
-          }
-          if (!restored) {
-            this.initRound();
-          }
-        }
 
         AppState.update('typingCurrentInput', '');
         AppState.update('currentWordKeystrokeErrors', 0);
@@ -19881,12 +19855,13 @@ const App = (function() {
                 if (typeof Views !== 'undefined' && Views.Typing && Views.Typing.initRound) {
                   Views.Typing.initRound();
                 }
-                const curW = AppState.get('currentWord');
-                if (curW) {
-                  Views.Typing.render(curW);
-                } else {
-                  this.nextQuestion();
-                }
+              }
+
+              const curW = AppState.get('currentWord');
+              if (curW) {
+                Views.Typing.render(curW);
+              } else {
+                this.nextQuestion();
               }
             } else {
               const w = AppState.get('currentWord');
